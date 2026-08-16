@@ -441,6 +441,64 @@ Proof.
   rewrite (val2_scale_odd 3 1); [lia | lia | exists 0%Z; ring].
 Qed.
 
+(** A prime [≡ 1 (mod 2^d)] has [v₂(p−1) ≥ d].  Sampling *both*
+    primes from that progression is the live matched-deep defect
+    ([cas/21_matched_deep.gp]): ordinary nextprime / independent
+    draws sit on the heuristic and do not inflate it. *)
+
+Lemma val2_ge_of_mod_pow2 :
+  forall n d,
+    1 < n ->
+    (1 <= d)%nat ->
+    n mod (2 ^ Z.of_nat d) = 1 ->
+    (d <= val2 (n - 1))%nat.
+Proof.
+  intros n d Hn Hd Hm.
+  pose proof (Z.pow_pos_nonneg 2 (Z.of_nat d) ltac:(lia) ltac:(lia)).
+  pose proof (Z.div_mod n (2 ^ Z.of_nat d) ltac:(lia)) as Hdm.
+  rewrite Hm in Hdm.
+  set (k := n / 2 ^ Z.of_nat d).
+  assert (n - 1 = k * 2 ^ Z.of_nat d) as Hform.
+  { replace n with (2 ^ Z.of_nat d * k + 1) by (unfold k; symmetry; exact Hdm).
+    ring. }
+  assert (0 < k) as Hk.
+  { unfold k. apply Z.div_str_pos. split; [lia|].
+    destruct (Z.lt_ge_cases n (2 ^ Z.of_nat d)) as [Hlt | Hge]; [| exact Hge].
+    rewrite Z.mod_small in Hm by lia. lia. }
+  rewrite Hform, Z.mul_comm, val2_mul by lia.
+  replace (2 ^ Z.of_nat d) with (2 ^ Z.of_nat d * 1) by ring.
+  rewrite (val2_scale_odd d 1); [lia | lia | exists 0%Z; ring].
+Qed.
+
+Definition kg_2adic_both_deep (d : nat) (p q : Z) : Prop :=
+  (d <= val2 (p - 1))%nat /\ (d <= val2 (q - 1))%nat.
+
+Definition dist_forced_2adic (d : nat) (p q : Z) : Prop :=
+  Z.prime p /\ Z.prime q /\
+  p mod (2 ^ Z.of_nat d) = 1 /\
+  q mod (2 ^ Z.of_nat d) = 1.
+
+Theorem dist_forced_2adic_both_deep :
+  forall d p q,
+    (1 <= d)%nat ->
+    dist_forced_2adic d p q ->
+    kg_2adic_both_deep d p q.
+Proof.
+  intros d p q Hd [Hp [Hq [Hpm Hqm]]].
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  split.
+  - apply val2_ge_of_mod_pow2; [lia | exact Hd | exact Hpm].
+  - apply val2_ge_of_mod_pow2; [lia | exact Hd | exact Hqm].
+Qed.
+
+Theorem matched_deep_is_both_deep :
+  forall d p q,
+    kg_2adic_matched_deep d p q ->
+    kg_2adic_both_deep d p q.
+Proof.
+  intros d p q [Heq Hle]. split; [exact Hle|]. rewrite <- Heq. exact Hle.
+Qed.
+
 (** ** Existence of a 2-height
 
     If [a^{t · 2^s} ≡ 1], a least such exponent exists: walk down
