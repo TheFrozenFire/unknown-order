@@ -101,3 +101,65 @@ Qed.
     conservative stand-in).  Not claimed equivalent to [d < ⅓ N^{1/4}]. *)
 Definition wiener_small_d (d N : Z) : Prop :=
   0 < d /\ 18 * d * d * d < N.
+
+(** If [e < φ] then the cofactor is smaller than [d] itself — the
+    usual case ([e] reduced modulo [φ]). *)
+Lemma k_lt_d_of_e_lt_phi :
+  forall e d phi k,
+    0 < d -> 0 < phi -> e < phi ->
+    e * d = 1 + k * phi ->
+    k < d.
+Proof.
+  intros e d phi k Hd Hphi Helt Heq.
+  assert (k * phi = e * d - 1) by lia.
+  nia.
+Qed.
+
+(** Classical Wiener sufficient condition, integer form.
+    Balanced primes give [p+q−1 ≤ 3 √N].  Combined with [k ≤ d]
+    and [36 d⁴ < N] (i.e. [6 d² < √N]), the pair lands in the
+    continued-fraction basin.  Not claimed equivalent to
+    [d < ⅓ N^{1/4}]; it is a proved sufficient criterion. *)
+Theorem wiener_classical_sufficient :
+  forall e d k p q,
+    0 < d -> 0 < k -> k <= d ->
+    2 <= p -> 2 <= q ->
+    e * d = 1 + k * phi_semiprime p q ->
+    p + q - 1 <= 3 * Z.sqrt (p * q) ->
+    36 * d * d * d * d < p * q ->
+    in_wiener_basin e d k (p * q).
+Proof.
+  intros e d k p q Hd Hk Hkd Hp Hq Heq Hsum Htrig.
+  assert (0 <= p * q) as HNnn by nia.
+  pose proof (Z.sqrt_nonneg (p * q)) as Hsn.
+  pose proof (Z.sqrt_spec (p * q) HNnn) as Hsp. cbn in Hsp.
+  assert (6 * d * d <= Z.sqrt (p * q)) as H6.
+  { destruct (Z.lt_ge_cases (Z.sqrt (p * q)) (6 * d * d)) as [Hlt | Hge];
+      [| exact Hge].
+    assert (Z.sqrt (p * q) + 1 <= 6 * d * d) by lia.
+    assert ((Z.sqrt (p * q) + 1) * (Z.sqrt (p * q) + 1)
+              <= (6 * d * d) * (6 * d * d)) by nia.
+    assert ((6 * d * d) * (6 * d * d) = 36 * d * d * d * d) by ring.
+    nia. }
+  apply (wiener_basin_from_gap e d k p q (3 * Z.sqrt (p * q)));
+    try assumption.
+  - split; [nia | exact Hsum].
+  - assert (k * (3 * Z.sqrt (p * q)) * (2 * d)
+              <= 6 * d * d * Z.sqrt (p * q)) by nia.
+    assert (6 * d * d * Z.sqrt (p * q)
+              <= Z.sqrt (p * q) * Z.sqrt (p * q)) by nia.
+    nia.
+Qed.
+
+(** Boneh–Durfee (Crypto 1999) hypotheses, recorded not proved.
+
+    They attack the bilinear [ed = 1 + k (N − (p+q) + 1)] by
+    Coppersmith / LLL, under balanced primes and [e ≈ N], and claim
+    [d < N^δ] for [δ < 1 − 1/√2 ≈ 0.292].  LLL is not formalized.
+
+    [bd_past_wiener] only says "[d] is larger than the Wiener trigger
+    and still [o(N^{1/3})]".  It is *not* the 0.292 bound. *)
+Definition bd_past_wiener (d N : Z) : Prop :=
+  0 < d /\ ~ (18 * d * d * d < N) /\ d * d * d < N.
+
+Definition boneh_durfee_delta_milli : Z := 292.

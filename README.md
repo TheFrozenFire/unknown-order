@@ -66,6 +66,11 @@ context unless a skip is named.
 | CRT-RSA: `e d_p − 1` annihilates the `p`-side | `CRTRSA.crt_dp_annihilates` | `cas/10_pollard_p1.gp` | proven for `p ≥ 3` |
 | Bit-leak / ROCA shape | `BitLeak` | — | shape only; Coppersmith / LLL skipped |
 | Keygen intent-spec and refusal lemmas | `KeyGen.satisfies_keygen` | `cas/08`–`12` | each obligation blocks one leak; no hardness claim |
+| Cyclotomic periods `Φ_n(p)` for `n ∈ {1,2,3,4,6}` | `Cyclotomic` | `cas/14_cyclotomic.gp` (`p=653` leaks `Φ_3` while strong at 20) | identities proven; Lucas evaluation skipped |
+| Batch order: one `M` splits two coprime moduli | `BatchOrder.batch_p1_splits_pair` | `cas/15_batch_order.gp` | proven; shared `r \| gcd(p−1,p'−1)` recorded as Type A |
+| Classical Wiener sufficient `36 d⁴ < N` | `Wiener.wiener_classical_sufficient` | `cas/16_wiener_frontier.gp` | sufficient, not equivalent to `d < ⅓ N^{1/4}`; BD 0.292 is interface |
+| Shared-prefix / increment-window / twins | `KeyGenGeom` | `cas/17_keygen_geom.gp` | each bounds `\|p−q\|` and fails `kg_far` |
+| Named keygen distributions vs rulers | `KeyGenSampler` | `cas/13_keygen_sampler.gp` | refusal theorems; frequencies are CAS |
 
 ## Run it
 

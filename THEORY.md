@@ -428,6 +428,16 @@ Machine-checked, and CAS-pinned:
   `p`-side (`CRTRSA`; `cas/10`).
 - Keygen intent-spec and the refusal lemmas (`KeyGen`).
 - Bit-leak / ROCA *shape* (`BitLeak`).
+- Cyclotomic product identities `p^k−1 = ∏ Φ_d(p)` for `k ∈ {2,3,4,6}`
+  (`Cyclotomic`; `cas/14`).
+- Batch order: one public `M` splits two coprime moduli
+  (`BatchOrder.batch_p1_splits_pair`; `cas/15`).
+- Classical Wiener sufficient criterion `36 d⁴ < N` plus `k ≤ d`
+  (`Wiener.wiener_classical_sufficient`; `cas/16`).
+- Shared-high-bits / increment-window / adjacent-odd geometries
+  (`KeyGenGeom`; `cas/17`).
+- Named distributions fail the matching ruler (`KeyGenSampler`;
+  `cas/13`).
 
 Not proved, and not claimed:
 
@@ -443,3 +453,103 @@ Not proved, and not claimed:
 
 φ vs λ is still distinguished: Wiener is proved in the φ-form
 (`ed ≡ 1 (mod φ)`); CRT-RSA and the RSA instance itself use λ.
+
+## 8. What the five avenues actually showed
+
+The catalog in §6 is a list of *known* handles. The work in this
+section is the first pass at using those handles as rulers on
+generation distributions that honest-looking code still uses, and
+at filling the four gaps named in §6.11.
+
+### 8.1 Sampler — distributions vs rulers
+
+`cas/13` draws 16-bit primes from several procedures and scores
+them against `kg_far`, `kg_balanced`, smoothness, and batch GCD.
+
+| Distribution | Far-gap `n−4` | Balanced | What failed |
+|---|---|---|---|
+| Independent random 16-bit | 29/40 pass | 40/40 | — (the baseline) |
+| `q = nextprime(p+1)` | 0/20 | yes | Type A: twins |
+| Shared top half | 0/20 | — | Type A: prefix |
+| Increment window `2^{n/2}` | 0/20 | — | Type A: short walk |
+| Tiny 3-prime pool | — | — | Type D: `gcd = p` |
+| Independent 16-bit moduli | — | — | 0/20 gcd hits |
+
+Bit-balanced independent sampling *does* pass the geometric
+rulers at this size. The failures are all procedures that look
+like “pick a random prime” and are not: nextprime-adjacent,
+shared prefix, a common increment start, a recycled prime pool.
+`KeyGenSampler.v` names each distribution and proves the ruler
+it fails. Frequencies are CAS, not theorems.
+
+### 8.2 Type B beyond `p±1`
+
+`Φ_1(p) = p−1`, `Φ_2(p) = p+1`, `Φ_3(p) = p²+p+1`,
+`Φ_4(p) = p²+1`, `Φ_6(p) = p²−p+1`, with the product identities
+`p^k − 1 = ∏_{d\|k} Φ_d(p)` for `k ∈ {2,3,4,6}`.
+
+Two concrete misses of “safe / strong”:
+
+- `p = 47` is safe (`Φ_1 = 46 = 2·23`) and `Φ_2 = 48` is
+  3-smooth. Safe primes refuse Pollard and *invite* Williams.
+- `p = 653`: `Φ_1` has prime factor 163, `Φ_2` has 109, and
+  `Φ_3 = 427063 = 7 · 13² · 19²` is 19-smooth. A generator that
+  checks “strong at `B = 20`” still leaks the cubic handle.
+
+`cyc_strong` is the generation obligation that closes this gap.
+Lucas / extension-field evaluation is still not formalized; the
+handle is the period, which is.
+
+### 8.3 Type D without a shared prime
+
+Two moduli `N₁ = p q`, `N₂ = p' q'` with four distinct primes
+have `gcd(N₁, N₂) = 1`. If `p−1 | M` and `p'−1 | M` for a public
+`M` (both `B`-smooth), the same `M` splits both. Batch GCD
+returns 1; batch Pollard returns `{p, p'}`.
+
+A shared prime factor `r | gcd(p−1, p'−1)` that is itself large
+is a different handle: both primes sit on the AP `X ≡ 1 (mod r)`.
+Once `r` is known this is Type A, not Type D. `cas/15` pins both
+stories (`r = 101`).
+
+### 8.4 Type C past Wiener
+
+Proved: if `e < φ` then `k < d`; if also the primes are balanced
+and `36 d⁴ < N`, the pair is in the integer CF basin
+(`wiener_classical_sufficient`). That is a sufficient criterion,
+not the slogan `d < ⅓ N^{1/4}`.
+
+CAS on `N = 587·823`, exact continued fractions (no `t_REAL`
+rounding): the marker `18 d³ < N` recovered 5/9 instances (it is
+*not* sufficient); `d = 7` satisfies `36 d⁴ < N` and is in the
+basin; past-Wiener (`18 d³ ≥ N` but `d³ < N`) recovered 0/16 by
+CF. Boneh–Durfee’s `0.292` remains an LLL claim, recorded as
+`bd_past_wiener` / `boneh_durfee_delta_milli = 292`, not a
+theorem.
+
+### 8.5 Type A geometries modern keygens commit
+
+Three generation-side bounds, each implying `~ kg_far`:
+
+- Shared high bits: `|p − q| < 2^s`.
+- Increment window `[x, x+W)`: `|p − q| < W`.
+- Adjacent odds: `|fermat_diff| = 1`.
+
+On 20-bit constructed pairs (`cas/17`): shared-prefix Fermat
+steps `= 0`, independent pair `= 2687`. The geometry is not
+“Fermat is clever”; it is that a shared prefix or a short
+increment walk places `p+q` next to `⌈√N⌉`.
+
+### 8.6 What this changes about smaller honest `N`
+
+A generator that already discharges `satisfies_keygen` should
+also refuse `cyc_strong` (Φ₃, Φ₄, Φ₆) and the three Type-A
+geometries above. Those are not new *types*. They are listed
+leaks that common code still commits. Extra bits of `N` spent
+as margin against them can be returned once the generator
+refuses them by construction.
+
+A genuinely new weakness is still one of the five shapes in
+§6.11 that is *not* a row of this list. The sampler is the
+place to look for one: any distribution that passes every
+named ruler and still has a cheap handle is the object.

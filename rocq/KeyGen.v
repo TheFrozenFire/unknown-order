@@ -200,3 +200,20 @@ Theorem tiny_e_is_degree :
   forall R, rsa_e R = 3 ->
     forall m, rsa_enc R m = powm m 3 (rsa_N R).
 Proof. intros R He m. unfold rsa_enc. rewrite He. reflexivity. Qed.
+
+(** Balanced primes plug into the classical Wiener sufficient
+    criterion: [p+q ≤ 3 √N]. *)
+Theorem balanced_wiener_sufficient :
+  forall e d k p q,
+    kg_balanced p q ->
+    0 < d -> 0 < k -> k <= d ->
+    2 <= p -> 2 <= q ->
+    e * d = 1 + k * phi_semiprime p q ->
+    36 * d * d * d * d < p * q ->
+    in_wiener_basin e d k (p * q).
+Proof.
+  intros e d k p q Hbal Hd Hk Hkd Hp Hq Heq Htrig.
+  apply (wiener_classical_sufficient e d k p q); try assumption.
+  pose proof (balanced_sum_vs_sqrt p q Hbal) as Hs.
+  lia.
+Qed.

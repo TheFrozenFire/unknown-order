@@ -45,3 +45,13 @@ than `p±1`); a new Type-C relation (a low-degree identity with a short
 unknown other than `(k,d)`); a new Type-D collision (shared algebraic
 structure without a shared prime); or a new Type-E key-side small root
 (a hidden polynomial the keygen implicitly satisfies).
+
+**Avenues in `THEORY.md` §8 (this wave).**
+
+| Avenue | What it added | Headline witness |
+|---|---|---|
+| Sampler | `KeyGenSampler` + `cas/13` | nextprime twins / shared prefix / increment window all fail `kg_far`; independent 16-bit mostly pass |
+| Type B beyond `p±1` | `Cyclotomic` + `cas/14` | `p=653` is strong at `B=20` and `Φ_3` is 19-smooth |
+| Type D, no shared prime | `BatchOrder` + `cas/15` | one `M` splits two coprime moduli; `r=101` is a shared AP |
+| Type C past Wiener | `wiener_classical_sufficient` + `cas/16` | `36 d⁴ < N` is sufficient; `18 d³ < N` recovered only 5/9 |
+| Type A geometries | `KeyGenGeom` + `cas/17` | shared-prefix Fermat steps 0 vs 2687 independent |

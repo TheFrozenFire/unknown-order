@@ -39,7 +39,12 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ✅ Unbalanced primes (`p ≤ √N`) — `KeyGen.small_prime_le_sqrt`, `cas/08`
 - ✅ Keygen intent-spec + refusal lemmas — `KeyGen`
 - ⬜ Bit leaks / ROCA as Coppersmith (`BitLeak` records the shape)
-- ⬜ A new Type-A/B/C/D/E leak that current keygens actually commit (the cryptanalysis goal)
+- ✅ Sampler of real-looking distributions vs the rulers — `KeyGenSampler`, `cas/13`
+- ✅ Type B beyond `p±1` — `Cyclotomic`, `cas/14` (`p=653` is a strong-prime miss on `Φ_3`)
+- ✅ Type D without a shared prime — `BatchOrder`, `cas/15`
+- ✅ Type C past Wiener (sufficient `36 d⁴ < N`, CF frontier) — `Wiener`, `cas/16`; BD / LLL ⬜
+- ✅ Type A geometries modern keygens commit — `KeyGenGeom`, `cas/17`
+- ⬜ A new Type-A/B/C/D/E leak that current keygens actually commit *and that is not a row above* (the remaining cryptanalysis goal)
 
 ## 3. Other unknown-order problems ⬜
 
