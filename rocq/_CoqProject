@@ -26,3 +26,5 @@ KeyGenSampler.v
 QuadResidue.v
 RabinWilliams.v
 TwoPrimary.v
+MillerHeight.v
+CyclicCount.v
