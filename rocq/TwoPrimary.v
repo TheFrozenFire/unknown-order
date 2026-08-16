@@ -382,3 +382,260 @@ Theorem unbalanced_not_matched :
 Proof.
   intros p q d Hne [Heq _]. congruence.
 Qed.
+
+(** ** [v₂(λ)] is the max, and the residue table mod 8 *)
+
+Theorem lambda_val2_is_max :
+  forall p q,
+    Z.prime p -> Z.prime q ->
+    val2 (lambda_semiprime p q) = Nat.max (val2 (p - 1)) (val2 (q - 1)).
+Proof. intros. apply val2_lambda_semiprime; assumption. Qed.
+
+Theorem mod8_3_val2_is_1 :
+  forall p, Z.prime p -> p mod 8 = 3 -> val2 (p - 1) = 1%nat.
+Proof.
+  intros p Hp Hm.
+  apply blum_val2_is_1; [exact Hp | apply mod8_3_is_mod4_3; exact Hm].
+Qed.
+
+Theorem mod8_7_val2_is_1 :
+  forall p, Z.prime p -> p mod 8 = 7 -> val2 (p - 1) = 1%nat.
+Proof.
+  intros p Hp Hm.
+  apply blum_val2_is_1; [exact Hp | apply mod8_7_is_mod4_3; exact Hm].
+Qed.
+
+(** [p ≡ 5 (mod 8)] ⇒ [p−1 = 4 · odd], so [v₂ = 2]. *)
+Theorem mod8_5_val2_is_2 :
+  forall p, Z.prime p -> p mod 8 = 5 -> val2 (p - 1) = 2%nat.
+Proof.
+  intros p Hp Hm.
+  pose proof (p_mod8_decomp p 5 Hm) as Hd.
+  set (k := p / 8).
+  assert (p - 1 = 4 * (2 * k + 1)) as Hform.
+  { replace p with (8 * k + 5) by (unfold k; symmetry; exact Hd). ring. }
+  assert (Z.Odd (2 * k + 1)) as Hodd.
+  { exists k. ring. }
+  rewrite Hform.
+  replace 4 with (2 ^ Z.of_nat 2) by (vm_compute; reflexivity).
+  apply val2_scale_odd; [| exact Hodd].
+  pose proof (Z.prime_ge_2 p Hp). nia.
+Qed.
+
+(** [p ≡ 1 (mod 8)] ⇒ [8 | p−1], so [v₂ ≥ 3]. *)
+Theorem mod8_1_val2_ge3 :
+  forall p, Z.prime p -> p <> 2 -> p mod 8 = 1 -> (3 <= val2 (p - 1))%nat.
+Proof.
+  intros p Hp Hne Hm.
+  pose proof (p_mod8_decomp p 1 Hm) as Hd.
+  set (k := p / 8).
+  assert (8 <= p) as Hge.
+  { pose proof (Z.prime_ge_2 p Hp).
+    destruct (Z.lt_ge_cases p 8) as [Hlt | Hge]; [| exact Hge].
+    rewrite Z.mod_small in Hm by lia. lia. }
+  assert (p - 1 = 8 * k) as Hform.
+  { replace p with (8 * k + 1) by (unfold k; symmetry; exact Hd). ring. }
+  assert (0 < k) by (unfold k; apply Z.div_str_pos; lia).
+  rewrite Hform, val2_mul by lia.
+  replace 8 with (2 ^ Z.of_nat 3 * 1) by (vm_compute; reflexivity).
+  rewrite (val2_scale_odd 3 1); [lia | lia | exists 0%Z; ring].
+Qed.
+
+(** ** Existence of a 2-height
+
+    If [a^{t · 2^s} ≡ 1], a least such exponent exists: walk down
+    from [s].  Used for Miller-from-[d] ([a^M ≡ 1] with
+    [M = t · 2^s]) and for Fermat ([a^{p−1} ≡ 1]). *)
+
+Fixpoint find_least (P : nat -> bool) (s : nat) : nat :=
+  match s with
+  | O => O
+  | S s' =>
+      let k := find_least P s' in
+      if P k then k else S s'
+  end.
+
+Lemma find_least_spec :
+  forall P s,
+    (find_least P s <= s)%nat /\
+    (forall j, (j < find_least P s)%nat -> P j = false) /\
+    (P (find_least P s) = true \/
+     forall j, (j <= s)%nat -> P j = false).
+Proof.
+  intros P s. induction s as [| s IH].
+  - simpl. split; [lia|]. split.
+    + intros j Hj. lia.
+    + destruct (P 0%nat) eqn:Hz; [left; reflexivity|].
+      right. intros j Hj. assert (j = 0%nat) by lia. subst. exact Hz.
+  - destruct IH as [Hle [Hmin Hor]].
+    simpl. destruct (P (find_least P s)) eqn:Hk.
+    + split; [lia|]. split.
+      * exact Hmin.
+      * left. exact Hk.
+    + split; [lia|]. split.
+      * intros j Hj.
+        destruct Hor as [Htrue | Hall]; [congruence|].
+        apply Hall. apply Nat.lt_succ_r. exact Hj.
+      * destruct (P (S s)) eqn:HPs.
+        -- left. reflexivity.
+        -- right. intros j Hjle.
+           destruct (Nat.eq_dec j (S s)) as [Heq | Hneq].
+           ++ subst. exact HPs.
+           ++ destruct Hor as [Htrue | Hall]; [congruence|].
+              apply Hall. lia.
+Qed.
+
+Lemma find_least_le :
+  forall P s, (find_least P s <= s)%nat.
+Proof. intros. apply find_least_spec. Qed.
+
+Lemma find_least_min :
+  forall P s j,
+    (j < find_least P s)%nat -> P j = false.
+Proof. intros P s j. apply find_least_spec. Qed.
+
+Lemma find_least_hits :
+  forall P s,
+    P s = true ->
+    P (find_least P s) = true.
+Proof.
+  intros P s Hs.
+  pose proof (find_least_spec P s) as [_ [_ Hor]].
+  destruct Hor as [Htrue | Hall]; [exact Htrue|].
+  specialize (Hall s (Nat.le_refl _)). congruence.
+Qed.
+
+Definition height_pred (a t n : Z) (k : nat) : bool :=
+  Z.eqb (powm a (t * pow2n k) n) 1.
+
+Theorem two_height_exists :
+  forall a t n s,
+    1 < n ->
+    0 <= t ->
+    powm a (t * pow2n s) n = 1 ->
+    exists k, (k <= s)%nat /\ two_height a t n k.
+Proof.
+  intros a t n s Hn Ht Hpow.
+  set (P := height_pred a t n).
+  set (k := find_least P s).
+  exists k.
+  assert (P s = true) as Hs.
+  { unfold P, height_pred. apply Z.eqb_eq. exact Hpow. }
+  split; [apply find_least_le|].
+  unfold two_height. split.
+  - unfold k. pose proof (find_least_hits P s Hs) as Hk.
+    unfold P, height_pred in Hk. apply Z.eqb_eq in Hk. exact Hk.
+  - intros j Hj. unfold k in Hj.
+    pose proof (find_least_min P s j Hj) as Hfalse.
+    unfold P, height_pred in Hfalse.
+    apply Z.eqb_neq in Hfalse. exact Hfalse.
+Qed.
+
+Theorem two_height_exists_fermat :
+  forall p a,
+    Z.prime p ->
+    Z.coprime a p ->
+    exists k,
+      (k <= val2 (p - 1))%nat /\
+      two_height a (odd_part (p - 1)) p k.
+Proof.
+  intros p a Hp Hcop.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (fermat_coprime p a Hp Hcop) as Hf.
+  assert (0 < p - 1) by lia.
+  pose proof (split2_of_reconstructs (p - 1) ltac:(lia)) as Hsplit.
+  rewrite Hsplit, (Z.mul_comm (2 ^ Z.of_nat (val2 (p - 1)))) in Hf.
+  apply two_height_exists.
+  - lia.
+  - pose proof (odd_part_nonneg (p - 1) ltac:(lia)). lia.
+  - exact Hf.
+Qed.
+
+(** Multiplying the odd [t] by another positive odd [u] preserves
+    the *upper* bound on height ([a^{t u 2^k} ≡ 1] if
+    [a^{t 2^k} ≡ 1]).  The matching lower bound — that no smaller
+    exponent works — is [height_stable_under], which holds when
+    [t] already kills the odd part of the order.  Cyclicity of
+    [(Z/pZ)*] is the named hypothesis that supplies stability
+    once [odd_part(p−1) | t]. *)
+
+Definition height_stable_under (a t t' n : Z) : Prop :=
+  forall j : nat,
+    powm a (t' * pow2n j) n = 1 ->
+    powm a (t * pow2n j) n = 1.
+
+Lemma two_height_scale_forward :
+  forall a t u n k,
+    1 < n ->
+    0 <= t ->
+    0 <= u ->
+    two_height a t n k ->
+    powm a (t * u * pow2n k) n = 1.
+Proof.
+  intros a t u n k Hn Ht Hu [Hpow _].
+  replace (t * u * pow2n k) with ((t * pow2n k) * u) by ring.
+  pose proof (powm_one_mul a (t * pow2n k) u n
+                ltac:(lia)
+                ltac:(apply Z.mul_nonneg_nonneg; [exact Ht | pose proof (pow2n_pos k); lia])
+                Hu Hpow) as H1.
+  rewrite Z.mod_1_l in H1 by lia. exact H1.
+Qed.
+
+Theorem two_height_of_odd_multiple :
+  forall a t u n k,
+    1 < n ->
+    0 <= t ->
+    0 < u ->
+    two_height a t n k ->
+    height_stable_under a t (t * u) n ->
+    two_height a (t * u) n k.
+Proof.
+  intros a t u n k Hn Ht Hu Hht Hst.
+  split.
+  - apply two_height_scale_forward; [exact Hn | exact Ht | lia | exact Hht].
+  - intros j Hj Hpow.
+    apply Hst in Hpow.
+    destruct Hht as [_ Hmin].
+    apply (Hmin j Hj). exact Hpow.
+Qed.
+
+(** Cyclicity of [(Z/pZ)*], as used here: once [t] is an odd
+    multiple of [odd_part(p−1)], heights at [t] agree with heights
+    at [odd_part(p−1)].  Not proved. *)
+Definition cyclic_units (p : Z) : Prop :=
+  forall a t,
+    Z.coprime a p ->
+    0 < t ->
+    Z.Odd t ->
+    Z.divide (odd_part (p - 1)) t ->
+    height_stable_under a (odd_part (p - 1)) t p.
+
+Theorem cyclic_same_t :
+  forall p a t k,
+    Z.prime p ->
+    cyclic_units p ->
+    Z.coprime a p ->
+    0 < t ->
+    Z.Odd t ->
+    Z.divide (odd_part (p - 1)) t ->
+    two_height a (odd_part (p - 1)) p k ->
+    two_height a t p k.
+Proof.
+  intros p a t k Hp Hcyc Hcop Ht Hot Hdiv Hht.
+  destruct Hdiv as [u Hu].
+  assert (0 < odd_part (p - 1)).
+  { pose proof (Z.prime_ge_2 p Hp). apply odd_part_pos. lia. }
+  assert (0 < u) as Hu0.
+  { destruct (Z.le_gt_cases u 0) as [Hle | Hgt]; [| exact Hgt].
+    nia. }
+  rewrite Hu, Z.mul_comm.
+  apply two_height_of_odd_multiple.
+  - pose proof (Z.prime_ge_2 p Hp). lia.
+  - lia.
+  - exact Hu0.
+  - exact Hht.
+  - unfold height_stable_under.
+    rewrite (Z.mul_comm (odd_part (p - 1)) u), <- Hu.
+    apply Hcyc; try assumption.
+    exists u. exact Hu.
+Qed.
