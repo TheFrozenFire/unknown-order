@@ -67,15 +67,24 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ⬜ `(2/p)` as a theorem (Gauss); Euler QNR direction
 - ⬜ Principal-root convention, hash wrapper, signature game
 
-## 2.8 2-primary structure of `(ℤ/Nℤ)*` ✅ (counting under cyclicity is CAS)
+## 2.8 2-primary structure of `(ℤ/Nℤ)*` ✅ (cyclicity named, not proved)
 
-- ✅ `v₂(p−1)` in the Blum / `≡1 (mod 4)` cases; Williams ⇒ `(1,1)`
+- ✅ `v₂(p−1)` including the mod-8 table; `v₂(λ) = max`; `v₂` is a valuation
 - ✅ Four constructed square roots of 1; mixed roots split `N`
-- ✅ 2-height; mismatched heights split `N` (Miller’s success condition)
-- ✅ KeyGen rulers: Blum, unbalanced, matched-deep
-- ✅ CAS mismatch counts match the cyclic formula on `(1,4)`, `(1,1)`, `(3,3)`
-- ⬜ Cyclicity of `(ℤ/pℤ)*` as a Rocq hypothesis; `val2(lcm)=max` in general
-- ⬜ Existence of a 2-height for every unit, packaged; Rocq density theorem
+- ✅ 2-height exists; same-`t` under `cyclic_units`; mismatch splits `N`
+- ✅ Miller-from-`d` is that corollary (`MillerHeight`)
+- ✅ Cyclic-model mismatch rates, including 150/158 (`CyclicCount`)
+- ✅ KeyGen rulers: Blum, unbalanced, matched-deep, both-deep
+- ✅ CAS mismatch counts match the formula on `(1,4)`, `(1,1)`, `(3,3)`
+- ⬜ Cyclicity of `(ℤ/pℤ)*` itself; `height_stable_under` without it
+
+## 2.9 Shape of `λ`, Type B vs adaptive root ✅ (with named skips)
+
+- ✅ Forced `1 (mod 2^d)` is both-deep; independent / nextprime / safe are not (`cas/21`)
+- ✅ Lucas `V` recurrence + doubling table; Williams handle is `cyc2`
+- ✅ Adaptive root = sRSA; `λ+1` trivializes it on `(ℤ/Nℤ)*`; no `discriminant_to_lambda`
+- ⬜ Lucas addition formula; QNR ⇒ `V_{p+1} ≡ 2` as a theorem (CAS only)
+- ⬜ Class-group arithmetic (not a target without a named presentation)
 
 ## 3. Other unknown-order problems ⬜
 

@@ -14,7 +14,7 @@ the same algebra: the 2-Sylow, read off `(v₂(p−1), v₂(q−1))`.
 | 5 | 2 |
 | 1 | ≥ 3 |
 
-Williams ⇒ `(1,1)`. `v₂(λ) = max(v₂(p−1), v₂(q−1))` (CAS; form of `lcm`).
+Williams ⇒ `(1,1)`. `v₂(λ) = max(v₂(p−1), v₂(q−1))` (`val2_lcm_max`).
 
 ## Four square roots of 1
 
@@ -45,4 +45,20 @@ is a KeyGen choice that `satisfies_keygen` does not refuse.
 
 - `kg_blum_2adic` — Williams
 - `kg_2adic_unbalanced` — Miller-friendly
-- `kg_2adic_matched_deep d` — Miller-hostile, not an annihilator leak
+- `kg_2adic_matched_deep d` — equal and ≥ `d` (Miller-hostile, not an annihilator)
+- `kg_2adic_both_deep d` — both ≥ `d`; forced `1 (mod 2^d)` lands here
+
+`cas/21`: independent / nextprime sit on the heuristic; the live
+defect is sampling *both* primes from `1 (mod 2^d)`. Safe primes
+are Blum.
+
+## Miller-from-`d`
+
+`miller_t` is an odd multiple of `odd_part(λ)`. Heights exist
+from `a^M ≡ 1`. A mismatch splits `N` (`MillerHeight.v`).
+
+## 150/158
+
+Cyclic-model theorem (`CyclicCount.miller_150_of_158`): 150
+mismatches among 160 units, ±1 always match so 158 in `{2,…,N−2}`.
+Cyclicity is named (`cyclic_units`), not proved.

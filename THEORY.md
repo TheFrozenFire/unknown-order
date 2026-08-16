@@ -1164,8 +1164,10 @@ and `rw_pair_val2_11` (Williams ⇒ `(1,1)`). CAS: `v₂(10)=1`,
 `v₂(12)=2`, `v₂(16)=4`, `v₂(40)=3`, `v₂(λ(11·17)) = max(1,4) = 4`.
 
 `v₂(λ) = max(v₂(p−1), v₂(q−1))` is the form of `lcm` on
-`2^{s}·odd` and `2^{r}·odd`. CAS pins it; a general
-`val2(lcm) = max` is not yet a Rocq lemma.
+`2^{s}·odd` and `2^{r}·odd`. Proved: `val2_lcm_max`,
+`val2_lambda_semiprime`, `lambda_val2_is_max`. The residue
+table mod 8 is `mod8_3_val2_is_1`, `mod8_7_val2_is_1`,
+`mod8_5_val2_is_2`, `mod8_1_val2_ge3`.
 
 ### 11.2 Four square roots of 1
 
@@ -1191,8 +1193,12 @@ is at most `v₂(p−1)`.
 If the heights at `p` and at `q` (same `t`) differ, some prefix
 of the Miller chain is `1` on one CRT component and not the
 other (`height_mismatch_splits`, via
-`one_sided_low_order_factors`). That is the success condition
-stated in `Miller.v` as a comment, now a theorem.
+`one_sided_low_order_factors`). Miller-from-`d` is the
+corollary: `miller_t` is an odd multiple of `odd_part(λ)`
+(`miller_t_multiple_of_lambda_odd`, because `v₂` is a
+valuation), heights exist from `a^M ≡ 1`
+(`miller_height_exists`), and a mismatch splits `N`
+(`miller_from_d`).
 
 The same-`t` discipline matters: `t` should be a common multiple
 of the two odd parts (e.g. `odd_part(λ)`). Multiplying an odd
@@ -1200,7 +1206,7 @@ order by an odd integer does not change the 2-height. Using
 `odd_part(p−1)` on one side and `odd_part(q−1)` on the other
 is a different pair of heights; the theorem requires one `t`.
 
-### 11.4 Counting, under cyclicity (CAS, not Rocq)
+### 11.4 Counting, under cyclicity (formula in Rocq, realization CAS)
 
 If `(ℤ/pℤ)*` is cyclic of order `2^{s} t` with `t` odd, then
 
@@ -1215,6 +1221,13 @@ Independence across `p` and `q` gives
 P(match)     = Σ_i P_p(i) P_q(i)
 P(mismatch)  = 1 − P(match)
 ```
+
+The frequencies and the three mismatch rates are theorems about
+the *model* (`CyclicCount.v`: `cyclic_mismatch_11_17`,
+`miller_150_of_158`, `blum_mismatch_is_half`,
+`cyclic_mismatch_33_is_21_32`). Realization that `(ℤ/pℤ)*`
+attains those counts is the named hypothesis `cyclic_units`
+plus CAS exhaustion. Cyclicity of `(ℤ/pℤ)*` is not proved.
 
 Checked exhaustively:
 
@@ -1268,15 +1281,64 @@ annihilator you already have (`ed−1`) of disagreeing 2-heights.
 
 ### 11.6 Honest scope
 
-Machine-checked: valuations of `p−1` in the Blum / `≡1 (mod 4)`
-cases; Williams ⇒ `(1,1)`; four constructed square roots of 1;
-mixed roots split `N`; 2-height uniqueness; height mismatch
-splits `N`; the three 2-adic KeyGen predicates.
+Machine-checked: `v₂(lcm) = max` and `v₂` is a valuation;
+`v₂(λ) = max`; the mod-8 table; 2-height existence from
+`a^{t 2^s} ≡ 1` and from Fermat; same-`t` under the named
+hypothesis `cyclic_units`; Miller-from-`d` as height mismatch
+on `odd_part(M)`; the cyclic-model counts including 150/158;
+forced `p ≡ q ≡ 1 (mod 2^d)` is `both_deep`.
 
-CAS-pinned: `v₂(λ) = max`; four roots on 187; mismatch counts
-against the cyclic formula for `(1,4)`, `(1,1)`, `(3,3)`.
+CAS-pinned: four roots on 187; exhaustive mismatch counts
+against the formula; independent / nextprime / forced /
+safe-prime frequencies (`cas/21`).
 
-Not proved: cyclicity of `(ℤ/pℤ)*` (the counting model);
-`val2(lcm) = max` in general; existence of a 2-height for every
-unit (it follows from Fermat + well-foundedness; not packaged);
-a density theorem for Miller bases in Rocq (the formula is CAS).
+Not proved: cyclicity of `(ℤ/pℤ)*`; `height_stable_under`
+without that hypothesis; a general density theorem for Miller
+bases beyond the cyclic *model*.
+
+## 12. Is matched-deep a live generation defect?
+
+`kg_2adic_matched_deep` is a *shape* of `λ`, not an annihilator.
+`cas/21_matched_deep.gp` measures three honest-looking samplers
+against it.
+
+- Independent 24-bit primes sit on the heuristic
+  `P(v₂ ≥ d) ≈ 2^{1−d}`: both-deep-3 about 1/16, matched-deep-3
+  about 1/48. Not a live defect.
+- `nextprime` twins do **not** inflate deep matching. Consecutive
+  odd integers have opposite residues mod 4, so one is often
+  Blum. The opposite of a defect.
+- Sampling both primes from the progression `1 (mod 2^d)`
+  *is* the defect: every pair is `both_deep d`
+  (`dist_forced_2adic_both_deep`). `nextprime` of a random
+  start **leaves** that progression — the walk has to stay in
+  it. Safe primes are the opposite choice: `v₂ = 1` always.
+
+Ordinary RSA KeyGen (independent primes, nextprime-adjacent,
+safe/strong) does not commit this. A generator that wants
+NTT-friendly `p−1`, or that takes both primes `≡ 1 (mod 2^d)`
+for some other reason, does. `satisfies_keygen` still does not
+refuse it.
+
+## 13. Type B is a presentation, adaptive root is a relation
+
+Adaptive root and strong RSA are the same winning condition
+(`adaptive_root_is_strong_RSA`). On `(ℤ/Nℤ)*` the condition is
+trivial given `λ` (`lambda_solves_strong_RSA`,
+`adaptive_root_trivial_from_lambda`). Type B is how a *period*
+(`p−1`, `p+1`, `Φ_n(p)`) becomes a public `M`.
+
+Williams `p+1` is Type B at `n = 2`, evaluated with a Lucas
+`V` sequence so the arithmetic stays in `ℤ/Nℤ`. `Lucas.v`
+defines `V` and checks doubling at `Q = 1` on a table; the
+addition formula is a design target. CAS: when `P²−4` is a QNR
+mod `p`, `V_{p+1} ≡ 2 (mod p)` and `V_{p−1} ≢ 2` — the period
+is `+1`, not `−1`. A safe prime (`p = 23 = 2·11+1`) refuses a
+smooth `p−1` and still has `p+1 = 24` 3-smooth.
+
+A class group of an imaginary quadratic order is given by a
+discriminant, not by `N = pq`. There is no
+`discriminant_to_lambda`. Type B and adaptive root therefore
+stop being aliases: same relation, different presentation.
+Not an axiom that class groups are hard. Formal:
+`ClassGroupWall.v`. CAS: `cas/22_lucas.gp`.

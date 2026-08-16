@@ -39,7 +39,8 @@ rather than assumed (the lesson `ciphering` learned on wide-trail bounds).
 ## What's proven so far
 
 Reusable algebra lives in `rocq-proofs/NumberTheory.v` (`powm`, Euler/Carmichael for
-semiprimes, CRT, the sum/product quadratic, non-trivial square roots of 1, 2-adic split).
+semiprimes, CRT, the sum/product quadratic, non-trivial square roots of 1, 2-adic split,
+`v₂(lcm)=max`, `v₂` a valuation).
 Domain files instantiate it. All headline Rocq theorems below close under the global
 context unless a skip is named.
 
@@ -61,20 +62,24 @@ context unless a skip is named.
 | Fermat identity; close primes recover from `⌈√N⌉`; far-apart gap | `FermatFactor` | `cas/08_fermat.gp` | proven (recovery + gap); Fermat *runtime* as `O(\|p−q\|² / √N)` is the identity, not a complexity claim |
 | Shared prime: `gcd(N₁,N₂) = p` | `SharedPrime` | `cas/09_shared_prime.gp` | proven (unique factorization) |
 | Pollard `p−1`: one-sided annihilator splits `N` | `PollardP1.pollard_p1_splits` | `cas/10_pollard_p1.gp` | proven (criterion); `M = lcm(1..B)` is the CAS handle, not a formal construction |
-| Safe / strong primes refuse a `B`-smooth `p−1` | `StrongPrimes.safe_prime_resists_p1` | `cas/10_pollard_p1.gp` | proven for `p−1`; Williams `p+1` is definition-only |
+| Safe / strong primes refuse a `B`-smooth `p−1` | `StrongPrimes.safe_prime_resists_p1` | `cas/10_pollard_p1.gp` | proven for `p−1`; Williams `p+1` is Lucas / `cyc2` |
 | Wiener: `ed = 1+kφ`, basin, `d<φ ⇒ k<e` | `Wiener` | `cas/11_wiener.gp` (CF recovers `k/d`) | identities + basin proven; CF algorithm itself is CAS-only; Boneh–Durfee / LLL skipped |
 | Hastad broadcast: CRT lift of three cubes *is* `m³` | `SmallExponent.hastad_cube_if_small` | `cas/12_small_e.gp` | proven when `m³` fits; Franklin–Reiter gcd **not** proved |
 | CRT-RSA: `e d_p − 1` annihilates the `p`-side | `CRTRSA.crt_dp_annihilates` | `cas/10_pollard_p1.gp` | proven for `p ≥ 3` |
 | Bit-leak / ROCA shape | `BitLeak` | — | shape only; Coppersmith / LLL skipped |
 | Keygen intent-spec and refusal lemmas | `KeyGen.satisfies_keygen` | `cas/08`–`12` | each obligation blocks one leak; no hardness claim |
-| Cyclotomic periods `Φ_n(p)` for `n ∈ {1,2,3,4,6}` | `Cyclotomic` | `cas/14_cyclotomic.gp` (`p=653` leaks `Φ_3` while strong at 20) | identities proven; Lucas evaluation skipped |
+| Cyclotomic periods `Φ_n(p)` for `n ∈ {1,2,3,4,6}` | `Cyclotomic` | `cas/14_cyclotomic.gp` (`p=653` leaks `Φ_3` while strong at 20) | identities proven; Lucas `V` is `Lucas.v` / `cas/22` |
 | Batch order: one `M` splits two coprime moduli | `BatchOrder.batch_p1_splits_pair` | `cas/15_batch_order.gp` | proven; shared `r \| gcd(p−1,p'−1)` recorded as Type A |
 | Classical Wiener sufficient `36 d⁴ < N` | `Wiener.wiener_classical_sufficient` | `cas/16_wiener_frontier.gp` | sufficient, not equivalent to `d < ⅓ N^{1/4}`; BD 0.292 is interface |
 | Shared-prefix / increment-window / twins | `KeyGenGeom` | `cas/17_keygen_geom.gp` | each bounds `\|p−q\|` and fails `kg_far` |
 | Named keygen distributions vs rulers | `KeyGenSampler` | `cas/13_keygen_sampler.gp` | refusal theorems; frequencies are CAS |
 | Quadratic residues; `p≡3 (mod 4)` root; Euler for `−1` | `QuadResidue` | `cas/19_rabin_williams.gp` | QR-direction of Euler; QNR direction and `(2/p)` skipped (Gauss) |
 | Rabin–Williams: `e=2` not RSA; Williams tweak; Rabin reduction | `RabinWilliams` | `cas/19` (`N=11·23`, unique QR tweak on every unit) | combinatorics of `{±a,±2a}` proved; `(2/p)` generation-side; no signature game |
-| 2-primary structure: `v₂(p−1)`, four `√1`, height mismatch splits | `TwoPrimary` | `cas/20_two_primary.gp` (mismatch `15/16`, `1/2`, `21/32`) | cyclicity used only in the CAS count; `val2(lcm)=max` CAS-only |
+| 2-primary structure: `v₂(λ)=max`, mod-8 table, height exists | `TwoPrimary` | `cas/20_two_primary.gp` | `val2_lcm_max` in `rocq-proofs`; cyclicity named, not proved |
+| Miller-from-`d` is a height mismatch on `odd_part(M)` | `MillerHeight.miller_from_d` | `cas/04`, `cas/20` | corollary of 2-heights; textbook `2` at `11×17` is `(1,3)` |
+| Cyclic-model mismatch, including 150/158 | `CyclicCount` | `cas/20` | formula proved; realization is CAS + `cyclic_units` |
+| Forced `1 (mod 2^d)` is both-deep; nextprime/safe are not | `TwoPrimary.dist_forced_2adic_both_deep` | `cas/21_matched_deep.gp` | live defect is the *progression*, not ordinary KeyGen |
+| Lucas `V`; Type B is a presentation, adaptive root a relation | `Lucas`, `ClassGroupWall` | `cas/22_lucas.gp` | doubling table; QNR ⇒ `V_{p+1}≡2` is CAS; no `discriminant_to_lambda` |
 
 ## Run it
 
