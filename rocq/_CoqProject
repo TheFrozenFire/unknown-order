@@ -3,3 +3,18 @@
 -arg -native-compiler -arg no
 
 RSA.v
+FactorEnum.v
+Miller.v
+MillerRabin.v
+Lattice.v
+Pratt.v
+UnknownOrder.v
+FermatFactor.v
+SharedPrime.v
+PollardP1.v
+Wiener.v
+SmallExponent.v
+StrongPrimes.v
+CRTRSA.v
+BitLeak.v
+KeyGen.v

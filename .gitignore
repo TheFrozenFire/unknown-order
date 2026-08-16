@@ -14,3 +14,9 @@ Makefile.coq*
 # editor / OS
 *~
 .DS_Store
+
+# rocq-mcp scratch (session-local)
+rocq/rocq_mcp_cache_*.v
+
+# local MCP pin (absolute paths)
+.grok/

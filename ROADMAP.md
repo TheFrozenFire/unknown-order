@@ -7,24 +7,49 @@ Status legend: ✅ done · ⬜ planned · 🔧 in progress · ⏸ blocked on ana
 Dedicated theory repo, ciphering-shaped: Rocq SIM + CAS, sibling `rocq-proofs` dependency, EVM
 tiers skipped-by-construction.
 
-## 1. RSA problem, private exponent, factoring from `(e, d)` ⏸
+## 1. RSA problem, private exponent, factoring from `(e, d)` ✅ (with named skips)
 
-The first content. Paused until the prior-conversation seed is in.
+- ✅ RSA instance `(N = pq, e, d)` — `d ≡ e⁻¹ (mod λ(N))`; `φ` inverse is a separate hypothesis
+- ✅ RSA problem as a proposition; enc/dec on units
+- ✅ `M = ed − 1` annihilates `(ℤ/Nℤ)*`
+- ✅ Multiplier enumeration / quadratic from `φ` or `p+q`
+- ✅ Miller successive-squaring (witness ⇒ factor); density CAS-only on 187
+- ✅ Sequential-base Miller defined + witnessed; ERH poly-time **not** claimed
+- ⬜ Coron–May / LLL (interface only — `Lattice.v`)
+- ✅ Miller–Rabin polarity (same engine)
+- ✅ Pratt 2-torsion duality; full Pratt completeness ⬜
+- ✅ CAS witnesses `01`–`07`
 
-- ⬜ RSA instance `(N = pq, e, d)` — including the definition of `d`
-- ⬜ RSA problem (invert `x ↦ x^e (mod N)`)
-- ⬜ Deterministic algorithms that output `{p, q}` given `(N, e, d)`
-- ⬜ Randomized algorithms that output `{p, q}` given `(N, e, d)`
-- ⬜ CAS witnesses that pin each algorithm on concrete `(N, e, d)`
-- ⬜ Crosswalk row per algorithm: Rocq theorem + CAS file, with honest success statement
+## 2. Lift what recurs into `rocq-proofs` ✅
 
-## 2. Lift what recurs into `rocq-proofs` ⬜
+`NumberTheory.v` holds `powm`, Euler/Carmichael for semiprimes, CRT, the quadratic, `√1` splitting, 2-adic split.
 
-gcd / totient / Carmichael / splitting facts used by a second problem get lifted. Not before they
-are used twice.
+## 2.5 Key-generation leaks (the annihilator, without `d`) ✅ (with named skips)
+
+Known weaknesses catalogued in `THEORY.md` §6–§7 and `notes/keygen-weaknesses.md`.
+Each row is a generation choice that makes a *partial* or *short* annihilator public.
+
+- ✅ Fermat / close primes — `FermatFactor`, `cas/08`
+- ✅ Shared primes / batch GCD — `SharedPrime`, `cas/09`
+- ✅ Pollard `p−1` as a one-sided annihilator — `PollardP1`, `cas/10`
+- ✅ Safe primes refuse that annihilator — `StrongPrimes`; Williams `p+1` ⬜ (definition only)
+- ✅ Wiener identities + basin — `Wiener`, `cas/11`; Boneh–Durfee / LLL ⬜
+- ✅ Hastad cube / small `e` — `SmallExponent`, `cas/12`; Franklin–Reiter gcd ⬜
+- ✅ CRT-RSA small `d_p` — `CRTRSA`, `cas/10`
+- ✅ Unbalanced primes (`p ≤ √N`) — `KeyGen.small_prime_le_sqrt`, `cas/08`
+- ✅ Keygen intent-spec + refusal lemmas — `KeyGen`
+- ⬜ Bit leaks / ROCA as Coppersmith (`BitLeak` records the shape)
+- ⬜ A new Type-A/B/C/D/E leak that current keygens actually commit (the cryptanalysis goal)
 
 ## 3. Other unknown-order problems ⬜
 
 Only after RSA is a worked example and the shared skeleton is visible. Candidates (not a
 commitment): strong RSA, adaptive root, order / low-order, class-group analogues. Each either
 instantiates the existing abstraction or forces us to generalize it.
+
+## 4. Cryptanalysis direction (from this foundation)
+
+The rulers in `rocq/` say when a generation distribution has leaked. The hunt is for a
+distribution that honest-looking keygens still use, that is *not* a row of the catalog, and
+that still produces a Type A–E handle cheap enough that a smaller `N` would feel it. See
+`THEORY.md` §6.11.

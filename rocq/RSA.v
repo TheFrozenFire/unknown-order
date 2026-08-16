@@ -1,25 +1,196 @@
 From Stdlib Require Import ZArith.
+From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
+
+Require Import RocqProofs.NumberTheory.
 
 Open Scope Z_scope.
 
-Set Default Proof Using "Type".
+(** * RSA: instance, private exponent [d], and the RSA problem
 
-(** * RSA: the RSA problem in [(Z/NZ)*]
+    An RSA modulus is [N = p*q] for distinct primes.  The public exponent
+    [e] is coprime to [λ(N)]; the private exponent [d] is its inverse
+    modulo [λ(N)] (the [φ(N)] variant is recorded separately and not
+    blurred).  Exponentiation by [d] is the [e]-th-root map on units of
+    [(Z/NZ)*] — [d] itself is not "a cube root".
 
-    Scaffold. Definitions and algorithms land after the analysis seed.
+    Cross-confirmed by [cas/01_rsa_instance.gp] and [cas/02_annihilator.gp]. *)
 
-    Intended contents (not yet defined):
+Record RSAInstance : Type := {
+  rsa_p : Z;
+  rsa_q : Z;
+  rsa_e : Z;
+  rsa_d : Z;
+  rsa_p_prime : Z.prime rsa_p;
+  rsa_q_prime : Z.prime rsa_q;
+  rsa_distinct : rsa_p <> rsa_q;
+  rsa_e_coprime : Z.coprime rsa_e (lambda_semiprime rsa_p rsa_q);
+  rsa_d_inv : (rsa_e * rsa_d) mod (lambda_semiprime rsa_p rsa_q) = 1;
+  rsa_d_pos : 0 < rsa_d;
+  rsa_e_pos : 1 < rsa_e
+}.
 
-    - An RSA instance: primes [p], [q], modulus [N = p * q], public exponent [e]
-      coprime to [λ(N)] (and the [φ(N)] variant), private exponent [d] with
-      [e * d ≡ 1 (mod λ(N))].
-    - The RSA *problem*: given [(N, e, y)], find [x] such that [x^e ≡ y (mod N)].
-    - The algorithms that, given [(N, e, d)], recover [{p, q}] — some
-      deterministic, some randomized — each as a Gallina definition with a
-      precise success statement.
+Definition rsa_N (R : RSAInstance) : Z := rsa_p R * rsa_q R.
+Definition rsa_phi (R : RSAInstance) : Z := phi_semiprime (rsa_p R) (rsa_q R).
+Definition rsa_lambda (R : RSAInstance) : Z := lambda_semiprime (rsa_p R) (rsa_q R).
 
-    Cross-confirmation: every headline theorem here will have a PARI/GP witness
-    in [cas/NN_*.gp]. Reusable number-theoretic facts (gcd, totient, Carmichael,
-    splitting) that a second unknown-order problem would also need belong in
-    [rocq-proofs], not here. *)
+Lemma rsa_N_gt_1 : forall R, 1 < rsa_N R.
+Proof.
+  intros R. unfold rsa_N.
+  pose proof (Z.prime_ge_2 _ (rsa_p_prime R)).
+  pose proof (Z.prime_ge_2 _ (rsa_q_prime R)). nia.
+Qed.
+
+Lemma rsa_lambda_pos : forall R, 0 < rsa_lambda R.
+Proof.
+  intros R. unfold rsa_lambda.
+  apply lambda_semiprime_pos; [apply rsa_p_prime | apply rsa_q_prime].
+Qed.
+
+Lemma rsa_lambda_gt_1 : forall R, 1 < rsa_lambda R.
+Proof.
+  intros R.
+  pose proof (Z.prime_ge_2 _ (rsa_p_prime R)).
+  pose proof (Z.prime_ge_2 _ (rsa_q_prime R)).
+  pose proof (rsa_distinct R).
+  unfold rsa_lambda, lambda_semiprime.
+  assert (Hge : 2 <= Z.lcm (rsa_p R - 1) (rsa_q R - 1)).
+  { destruct (Z.eq_dec (rsa_p R) 2) as [Hp2 | Hp2].
+    - rewrite Hp2. change (2 - 1) with 1. rewrite Z.lcm_1_l_nonneg by lia. lia.
+    - apply Z.le_trans with (rsa_p R - 1); [lia|].
+      apply Z.divide_pos_le.
+      + pose proof (lambda_semiprime_pos (rsa_p R) (rsa_q R)
+                      (rsa_p_prime R) (rsa_q_prime R)).
+        unfold lambda_semiprime in H2. lia.
+      + apply Z.divide_lcm_l. }
+  lia.
+Qed.
+
+Lemma rsa_phi_pos : forall R, 0 < rsa_phi R.
+Proof.
+  intros R. unfold rsa_phi.
+  apply phi_semiprime_pos; [apply rsa_p_prime | apply rsa_q_prime].
+Qed.
+
+Lemma rsa_lambda_divides_phi : forall R, (rsa_lambda R | rsa_phi R).
+Proof. intros R. unfold rsa_lambda, rsa_phi. apply lambda_divides_phi. Qed.
+
+Lemma rsa_ed_minus_1_divides :
+  forall R, (rsa_lambda R | rsa_e R * rsa_d R - 1).
+Proof.
+  intros R.
+  pose proof (rsa_lambda_gt_1 R).
+  apply mods_eq_iff_divides; [lia|].
+  rewrite rsa_d_inv. symmetry. apply Z.mod_small; lia.
+Qed.
+
+Lemma rsa_ed_gt_1 : forall R, 1 < rsa_e R * rsa_d R.
+Proof.
+  intros R. pose proof (rsa_e_pos R). pose proof (rsa_d_pos R). nia.
+Qed.
+
+Definition rsa_enc (R : RSAInstance) (m : Z) : Z := powm m (rsa_e R) (rsa_N R).
+Definition rsa_dec (R : RSAInstance) (c : Z) : Z := powm c (rsa_d R) (rsa_N R).
+
+Definition rsa_problem (N e y x : Z) : Prop := powm x e N = y.
+
+Definition rsa_inverter (N e : Z) : Type :=
+  forall y, { x : Z | rsa_problem N e y x }.
+
+Theorem rsa_dec_enc_units :
+  forall R m,
+    Z.coprime m (rsa_N R) ->
+    rsa_dec R (rsa_enc R m) = m mod rsa_N R.
+Proof.
+  intros R m Hcop.
+  unfold rsa_dec, rsa_enc, rsa_N in *.
+  pose proof (rsa_N_gt_1 R).
+  unfold rsa_N in *.
+  pose proof (rsa_e_pos R). pose proof (rsa_d_pos R).
+  rewrite <- powm_mul_r; [| lia | lia | lia].
+  replace (rsa_e R * rsa_d R) with ((rsa_e R * rsa_d R - 1) + 1) by ring.
+  rewrite powm_add_r; [| lia | lia | lia].
+  rewrite powm_1_r by lia.
+  rewrite (annihilates_units (rsa_p R) (rsa_q R) m (rsa_e R * rsa_d R - 1)).
+  - rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
+  - apply rsa_p_prime.
+  - apply rsa_q_prime.
+  - apply rsa_distinct.
+  - exact Hcop.
+  - pose proof (rsa_ed_gt_1 R). lia.
+  - apply rsa_ed_minus_1_divides.
+Qed.
+
+Definition is_cube_root (N c m : Z) : Prop := powm m 3 N = c.
+
+Lemma rsa_d_is_cube_root_map :
+  forall R c,
+    rsa_e R = 3 ->
+    is_cube_root (rsa_N R) (rsa_enc R (rsa_dec R c)) (rsa_dec R c).
+Proof.
+  intros R c He. unfold is_cube_root, rsa_enc. rewrite He. reflexivity.
+Qed.
+
+(** Textbook instance [p = 11], [q = 17], [e = 3], [d = 27]. *)
+
+Lemma prime_11 : Z.prime 11.
+Proof.
+  apply prime_alt. apply prime_intro; [lia|].
+  intros n Hn. apply rel_prime_iff_coprime. unfold Z.coprime.
+  assert (n = 1 \/ n = 2 \/ n = 3 \/ n = 4 \/ n = 5 \/
+          n = 6 \/ n = 7 \/ n = 8 \/ n = 9 \/ n = 10) by lia.
+  intuition subst; reflexivity.
+Qed.
+
+Lemma prime_17 : Z.prime 17.
+Proof.
+  apply prime_alt. apply prime_intro; [lia|].
+  intros n Hn. apply rel_prime_iff_coprime. unfold Z.coprime.
+  assert (n = 1 \/ n = 2 \/ n = 3 \/ n = 4 \/ n = 5 \/
+          n = 6 \/ n = 7 \/ n = 8 \/ n = 9 \/ n = 10 \/
+          n = 11 \/ n = 12 \/ n = 13 \/ n = 14 \/ n = 15 \/ n = 16) by lia.
+  intuition subst; reflexivity.
+Qed.
+
+Lemma rsa_test_lambda : lambda_semiprime 11 17 = 80.
+Proof. vm_compute. reflexivity. Qed.
+
+Lemma rsa_test_phi : phi_semiprime 11 17 = 160.
+Proof. vm_compute. reflexivity. Qed.
+
+Lemma rsa_test_inv : (3 * 27) mod 80 = 1.
+Proof. reflexivity. Qed.
+
+Lemma rsa_test_coprime_e : Z.coprime 3 80.
+Proof. unfold Z.coprime. vm_compute. reflexivity. Qed.
+
+Definition rsa_test : RSAInstance.
+Proof.
+  refine {|
+    rsa_p := 11; rsa_q := 17; rsa_e := 3; rsa_d := 27;
+    rsa_p_prime := prime_11; rsa_q_prime := prime_17;
+    rsa_distinct := ltac:(discriminate);
+    rsa_e_coprime := ltac:(rewrite rsa_test_lambda; exact rsa_test_coprime_e);
+    rsa_d_inv := ltac:(rewrite rsa_test_lambda; exact rsa_test_inv);
+    rsa_d_pos := ltac:(lia); rsa_e_pos := ltac:(lia)
+  |}.
+Defined.
+
+Theorem rsa_test_N : rsa_N rsa_test = 187.
+Proof. reflexivity. Qed.
+
+Theorem rsa_test_vector :
+  rsa_enc rsa_test 42 = 36 /\ rsa_dec rsa_test 36 = 42.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem rsa_test_roundtrip :
+  rsa_dec rsa_test (rsa_enc rsa_test 42) = 42.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem rsa_test_annihilator :
+  forall a, Z.coprime a 187 -> powm a 80 187 = 1.
+Proof.
+  intros a Hcop.
+  rewrite <- rsa_test_lambda.
+  apply carmichael_semiprime; [exact prime_11 | exact prime_17 | discriminate | exact Hcop].
+Qed.

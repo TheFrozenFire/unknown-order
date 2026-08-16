@@ -38,15 +38,34 @@ rather than assumed (the lesson `ciphering` learned on wide-trail bounds).
 
 ## What's proven so far
 
-Nothing yet. The tree is a scaffold: `rocq/RSA.v` is a documented empty module, `cas/` has no
-witnesses, the runners are wired and green. The claim → tools matrix will be filled as definitions
-land. Planned first row, status empty:
+Reusable algebra lives in `rocq-proofs/NumberTheory.v` (`powm`, Euler/Carmichael for
+semiprimes, CRT, the sum/product quadratic, non-trivial square roots of 1, 2-adic split).
+Domain files instantiate it. All headline Rocq theorems below close under the global
+context unless a skip is named.
 
 | Property | Rocq | CAS | Status |
 |----------|------|-----|--------|
-| RSA instance `(N, e, d)` and the private exponent `d` | `rocq/RSA.v` | `cas/01_*.gp` | scaffolded |
-| Factoring `N = pq` given `(e, d)` — deterministic algorithms | `rocq/RSA.v` | `cas/NN_*.gp` | scaffolded |
-| Factoring `N = pq` given `(e, d)` — randomized algorithms | `rocq/RSA.v` | `cas/NN_*.gp` | scaffolded |
+| Fermat / Euler / Carmichael on `N = pq`; `λ \| φ`; annihilator of units | `NumberTheory.annihilates_units` | `cas/02_annihilator.gp` (exhaustive on 187 and 65) | proven |
+| `p+q = N−φ+1`; quadratic recovers `{p,q}` | `factors_from_phi_correct` | `cas/03_enum_factor.gp` | proven |
+| Non-trivial `√1` splits `N`; unique `√1 = ±1` on a prime | `nontrivial_sqrt1_splits`, `Pratt.duality_unique_order_2_on_prime` | `cas/06_sqrt1.gp` | proven |
+| RSA instance, `d ≡ e⁻¹ (mod λ)`, enc/dec on units | `RSA.rsa_dec_enc_units` | `cas/01_rsa_instance.gp` | proven |
+| Textbook vector `p=11,q=17,e=3,d=27`: `enc(42)=36` | `rsa_test_vector` (`vm_compute`) | `cas/01_rsa_instance.gp` | proven |
+| Multiplier enumeration / `φ`-cofactor | `FactorEnum` | `cas/03_enum_factor.gp` | proven (recovery from `φ`; `k < e` only when `d` is the `φ`-inverse) |
+| Miller successive-squaring; witness ⇒ factor | `Miller.miller_witness_factors` | `cas/04_miller_factor.gp` (150/158 units split 187) | proven (criterion); density is CAS-exhaustive on 187, not a general count |
+| Sequential-base Miller | `Miller.first_n_bases` | `cas/05_seq_miller.gp` | defined + witnessed; ERH poly-time **not** claimed |
+| Coron–May / Coppersmith | `Lattice.lattice_phi_factors` | `cas/03_enum_factor.gp` | **interface only** — LLL/Howgrave–Graham skipped; once `φ` or `p+q` is known, factors follow |
+| Miller–Rabin polarity | `MillerRabin` | `cas/07_miller_rabin.gp` | same engine, two exponents |
+| Pratt certificate type + 2-torsion duality | `Pratt` | `cas/06_sqrt1.gp` | soundness of the 2-primary fact; completeness (every prime has a Pratt tree) **not** proved |
+| RSA / strong RSA / order / low-order / adaptive-root as propositions | `UnknownOrder` | — | definitions; no hardness claim |
+| Fermat identity; close primes recover from `⌈√N⌉`; far-apart gap | `FermatFactor` | `cas/08_fermat.gp` | proven (recovery + gap); Fermat *runtime* as `O(\|p−q\|² / √N)` is the identity, not a complexity claim |
+| Shared prime: `gcd(N₁,N₂) = p` | `SharedPrime` | `cas/09_shared_prime.gp` | proven (unique factorization) |
+| Pollard `p−1`: one-sided annihilator splits `N` | `PollardP1.pollard_p1_splits` | `cas/10_pollard_p1.gp` | proven (criterion); `M = lcm(1..B)` is the CAS handle, not a formal construction |
+| Safe / strong primes refuse a `B`-smooth `p−1` | `StrongPrimes.safe_prime_resists_p1` | `cas/10_pollard_p1.gp` | proven for `p−1`; Williams `p+1` is definition-only |
+| Wiener: `ed = 1+kφ`, basin, `d<φ ⇒ k<e` | `Wiener` | `cas/11_wiener.gp` (CF recovers `k/d`) | identities + basin proven; CF algorithm itself is CAS-only; Boneh–Durfee / LLL skipped |
+| Hastad broadcast: CRT lift of three cubes *is* `m³` | `SmallExponent.hastad_cube_if_small` | `cas/12_small_e.gp` | proven when `m³` fits; Franklin–Reiter gcd **not** proved |
+| CRT-RSA: `e d_p − 1` annihilates the `p`-side | `CRTRSA.crt_dp_annihilates` | `cas/10_pollard_p1.gp` | proven for `p ≥ 3` |
+| Bit-leak / ROCA shape | `BitLeak` | — | shape only; Coppersmith / LLL skipped |
+| Keygen intent-spec and refusal lemmas | `KeyGen.satisfies_keygen` | `cas/08`–`12` | each obligation blocks one leak; no hardness claim |
 
 ## Run it
 

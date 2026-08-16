@@ -72,6 +72,10 @@ The one local Rocq toolchain is the opam `rocq-lsp` switch (same one `rocq-mcp` 
 readable by the interactive server. Do not invoke a bare PATH `coqc` (the pacman build clobbers
 pet's `.vo`).
 
+`rocq-mcp` is launched with `ROCQ_WORKSPACE=/home/jmart/git/TheFrozenFire` so this repo,
+`ciphering`, and `rocq-proofs` all sit inside the sandbox (`-R ../../rocq-proofs` stays legal).
+Pass `workspace=` as this directory's `rocq/` (the `_CoqProject` dir), not the harness.
+
 ## Rocq style (matches rocq-proofs/PROOF_STYLE.md)
 
 - `From Stdlib Require Import`; open `Z_scope`; `(** * *)` / `(** ** *)` section headers.
