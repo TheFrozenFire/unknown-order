@@ -74,6 +74,7 @@ context unless a skip is named.
 | Named keygen distributions vs rulers | `KeyGenSampler` | `cas/13_keygen_sampler.gp` | refusal theorems; frequencies are CAS |
 | Quadratic residues; `p≡3 (mod 4)` root; Euler for `−1` | `QuadResidue` | `cas/19_rabin_williams.gp` | QR-direction of Euler; QNR direction and `(2/p)` skipped (Gauss) |
 | Rabin–Williams: `e=2` not RSA; Williams tweak; Rabin reduction | `RabinWilliams` | `cas/19` (`N=11·23`, unique QR tweak on every unit) | combinatorics of `{±a,±2a}` proved; `(2/p)` generation-side; no signature game |
+| 2-primary structure: `v₂(p−1)`, four `√1`, height mismatch splits | `TwoPrimary` | `cas/20_two_primary.gp` (mismatch `15/16`, `1/2`, `21/32`) | cyclicity used only in the CAS count; `val2(lcm)=max` CAS-only |
 
 ## Run it
 

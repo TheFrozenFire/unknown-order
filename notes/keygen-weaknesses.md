@@ -21,6 +21,7 @@ a weakness of this problem.
 | 11 | `p` in a thin AP (ROCA form) | A/E | same, with a public progression | ROCA | `BitLeak.roca_form` | — |
 | 12 | small CRT exponents `d_p`, `d_q` | B+C | short one-sided annihilator | May / BDF | `CRTRSA.crt_dp_annihilates` | `10` |
 | 13 | shared RNG / tiny prime pool | D | collision on `p` ⇒ row 2 | Debian RNG, etc. | `SharedPrime` | `09` |
+| 14 | matched deep `v₂(p−1)=v₂(q−1)≥d` | shape of `λ` | thins Miller bases; not a public annihilator | — | `TwoPrimary.kg_2adic_matched_deep` | `20` |
 
 **Not listed as keygen defects:** a correctly generated 2048-bit key with
 `e = 65537`, safe-ish primes, and full-size `d`. That is the baseline the

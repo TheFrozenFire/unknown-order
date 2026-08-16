@@ -1131,3 +1131,152 @@ order group, same catalog of KeyGen leaks, a map that is a
 4-to-1 predicate rather than a permutation, a reduction to
 Factoring that RSA does not have, and a mod-8 condition on
 `{p, q}` whose only job is to make one of `{±H, ±2H}` a square.
+
+## 11. The 2-primary part of `(ℤ/Nℤ)*`
+
+The pieces in §§3–4, 9–10 — four square roots of 1, Pratt’s unique
+order-2 element on a prime, Miller’s square-chain, Blum
+`v₂(p−1) = 1`, Williams’ mod-8 split — are one object: the
+2-Sylow of the unit group, read off the pair
+
+```
+(s, r)  :=  (v₂(p−1), v₂(q−1)).
+```
+
+This section is that object. Formal: `TwoPrimary.v`. CAS:
+`cas/20_two_primary.gp`. Cyclicity of `(ℤ/pℤ)*` is used in the
+*counting* model (CAS) and is not a Rocq hypothesis.
+
+### 11.1 Valuations
+
+An odd prime has `v₂(p−1) ≥ 1`. The residue of `p` mod 4 and 8
+fixes the first few values:
+
+| `p mod 8` | `v₂(p−1)` | Name |
+|---|---|---|
+| 3 | `= 1` | Blum / Williams `p` |
+| 7 | `= 1` | Blum / Williams `q` |
+| 5 | `= 2` | |
+| 1 | `≥ 3` | |
+
+Proved: `odd_prime_val2_ge1`, `blum_val2_is_1`, `mod4_1_val2_ge2`,
+and `rw_pair_val2_11` (Williams ⇒ `(1,1)`). CAS: `v₂(10)=1`,
+`v₂(12)=2`, `v₂(16)=4`, `v₂(40)=3`, `v₂(λ(11·17)) = max(1,4) = 4`.
+
+`v₂(λ) = max(v₂(p−1), v₂(q−1))` is the form of `lcm` on
+`2^{s}·odd` and `2^{r}·odd`. CAS pins it; a general
+`val2(lcm) = max` is not yet a Rocq lemma.
+
+### 11.2 Four square roots of 1
+
+On a prime, `x² ≡ 1` iff `x ≡ ±1` (`duality_unique_order_2_on_prime`).
+On `N = pq` the CRT product is four combinations. They are
+constructed (`sqrt1_pp = 1`, `sqrt1_mm = −1`, `sqrt1_pm` ≡ `(1,−1)`,
+`sqrt1_mp` ≡ `(−1,1)`) and each squares to 1 (`four_sqrt1`). The
+mixed ones are not `±1` (once `p, q ≠ 2`) and so split `N`
+(`mixed_sqrt1_splits`).
+
+This is Rabin inversion in miniature: a random square root of 1
+that is not `±1` *is* a factor. Blum / Williams make the 2-torsion
+*exactly* these four elements — there is no element of order 4 —
+so Miller-from-`λ` has `s = 1`.
+
+### 11.3 2-height and Miller mismatch
+
+Write an odd `t` (the odd part of `p−1`, or of `λ`). The
+**2-height** of a unit `a` at `p` is the least `k` with
+`a^{t · 2^k} ≡ 1 (mod p)`. That `k` is `v₂(ord_p(a))`, and it
+is at most `v₂(p−1)`.
+
+If the heights at `p` and at `q` (same `t`) differ, some prefix
+of the Miller chain is `1` on one CRT component and not the
+other (`height_mismatch_splits`, via
+`one_sided_low_order_factors`). That is the success condition
+stated in `Miller.v` as a comment, now a theorem.
+
+The same-`t` discipline matters: `t` should be a common multiple
+of the two odd parts (e.g. `odd_part(λ)`). Multiplying an odd
+order by an odd integer does not change the 2-height. Using
+`odd_part(p−1)` on one side and `odd_part(q−1)` on the other
+is a different pair of heights; the theorem requires one `t`.
+
+### 11.4 Counting, under cyclicity (CAS, not Rocq)
+
+If `(ℤ/pℤ)*` is cyclic of order `2^{s} t` with `t` odd, then
+
+```
+P(v₂(ord) = 0)     = 2^{-s}
+P(v₂(ord) = i)     = 2^{i−1−s}    (1 ≤ i ≤ s)
+```
+
+Independence across `p` and `q` gives
+
+```
+P(match)     = Σ_i P_p(i) P_q(i)
+P(mismatch)  = 1 − P(match)
+```
+
+Checked exhaustively:
+
+| Pair | `(s,r)` | Units | Mismatch | Formula |
+|---|---|---|---|---|
+| `11 × 17` | `(1,4)` | 160 | 150 | `15/16` |
+| `11 × 19` | `(1,1)` Blum | 180 | 90 | `1/2` |
+| `41 × 73` | `(3,3)` matched | 2880 | 1890 | `21/32` |
+
+`±1` are always matches (`ord=1` and `ord=2`). The 150/158 figure
+from `cas/04` is the 150 mismatches among the 158 units in
+`{2,…,N−2}`: the same 150, excluding `±1`.
+
+Blum / Williams `(1,1)` is the *minimum* mismatch among equal
+valuations: `1/2`. Matching at depth 3 already drops to `21/32`.
+Matching at depth `s` gives `P(mismatch) = 1 − (2^{-2s} + Σ_{i=1}^{s} 2^{2i−2−2s})`
+which tends to `2/3` from below as `s → ∞` — never as high as
+an unbalanced pair such as `(1,4)` at `15/16`.
+
+### 11.5 A KeyGen obligation that was not in the catalog
+
+Type A–E leaks give a *public* handle on `λ` or on a CRT
+component. Matching deep 2-valuations does not. It *thins* the
+set of Miller bases: more of the unit group has the same
+2-height on both sides, so more bases are Miller liars. That is
+a generation choice that shapes `λ`’s 2-part so that a public
+map (the Miller square-chain, or Rabin squaring) is less likely
+to land in a CRT disagreement.
+
+Rulers:
+
+```
+kg_blum_2adic p q          :=  v₂(p−1) = v₂(q−1) = 1     (RW)
+kg_2adic_unbalanced p q    :=  v₂(p−1) ≠ v₂(q−1)         (Miller-friendly)
+kg_2adic_matched_deep d    :=  v₂(p−1) = v₂(q−1) ≥ d     (Miller-hostile)
+```
+
+Williams *chooses* Blum `(1,1)` on purpose: cheap roots, a
+tight Factoring reduction, and a 2-torsion that is exactly four
+elements. Ordinary RSA KeyGen does not mention `(s, r)` at all.
+A generator that samples both primes `≡ 1 (mod 2^d)` for large
+`d` is making the opposite choice, and `satisfies_keygen` does
+not refuse it.
+
+This is the first catalog row that is not a short or one-sided
+annihilator. It is a *shape* of `λ`. The novel-weakness bet of
+§6.11 item 2 (a Type-B module that is not a cyclotomic period
+of `p`) now has a concrete neighbour: a generation choice that
+does not produce a new annihilator, but that *starves* the
+annihilator you already have (`ed−1`) of disagreeing 2-heights.
+
+### 11.6 Honest scope
+
+Machine-checked: valuations of `p−1` in the Blum / `≡1 (mod 4)`
+cases; Williams ⇒ `(1,1)`; four constructed square roots of 1;
+mixed roots split `N`; 2-height uniqueness; height mismatch
+splits `N`; the three 2-adic KeyGen predicates.
+
+CAS-pinned: `v₂(λ) = max`; four roots on 187; mismatch counts
+against the cyclic formula for `(1,4)`, `(1,1)`, `(3,3)`.
+
+Not proved: cyclicity of `(ℤ/pℤ)*` (the counting model);
+`val2(lcm) = max` in general; existence of a 2-height for every
+unit (it follows from Fermat + well-foundedness; not packaged);
+a density theorem for Miller bases in Rocq (the formula is CAS).

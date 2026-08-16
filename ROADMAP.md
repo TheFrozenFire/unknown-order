@@ -67,6 +67,16 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ⬜ `(2/p)` as a theorem (Gauss); Euler QNR direction
 - ⬜ Principal-root convention, hash wrapper, signature game
 
+## 2.8 2-primary structure of `(ℤ/Nℤ)*` ✅ (counting under cyclicity is CAS)
+
+- ✅ `v₂(p−1)` in the Blum / `≡1 (mod 4)` cases; Williams ⇒ `(1,1)`
+- ✅ Four constructed square roots of 1; mixed roots split `N`
+- ✅ 2-height; mismatched heights split `N` (Miller’s success condition)
+- ✅ KeyGen rulers: Blum, unbalanced, matched-deep
+- ✅ CAS mismatch counts match the cyclic formula on `(1,4)`, `(1,1)`, `(3,3)`
+- ⬜ Cyclicity of `(ℤ/pℤ)*` as a Rocq hypothesis; `val2(lcm)=max` in general
+- ⬜ Existence of a 2-height for every unit, packaged; Rocq density theorem
+
 ## 3. Other unknown-order problems ⬜
 
 Only after RSA is a worked example and the shared skeleton is visible. Candidates (not a
