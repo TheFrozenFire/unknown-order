@@ -121,6 +121,31 @@ Proof.
   - apply rsa_ed_minus_1_divides.
 Qed.
 
+Theorem rsa_enc_dec_units :
+  forall R c,
+    Z.coprime c (rsa_N R) ->
+    rsa_enc R (rsa_dec R c) = c mod rsa_N R.
+Proof.
+  intros R c Hcop.
+  unfold rsa_dec, rsa_enc, rsa_N in *.
+  pose proof (rsa_N_gt_1 R).
+  unfold rsa_N in *.
+  pose proof (rsa_e_pos R). pose proof (rsa_d_pos R).
+  rewrite <- powm_mul_r; [| lia | lia | lia].
+  rewrite (Z.mul_comm (rsa_d R) (rsa_e R)).
+  replace (rsa_e R * rsa_d R) with ((rsa_e R * rsa_d R - 1) + 1) by ring.
+  rewrite powm_add_r; [| lia | lia | lia].
+  rewrite powm_1_r by lia.
+  rewrite (annihilates_units (rsa_p R) (rsa_q R) c (rsa_e R * rsa_d R - 1)).
+  - rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
+  - apply rsa_p_prime.
+  - apply rsa_q_prime.
+  - apply rsa_distinct.
+  - exact Hcop.
+  - pose proof (rsa_ed_gt_1 R). lia.
+  - apply rsa_ed_minus_1_divides.
+Qed.
+
 Definition is_cube_root (N c m : Z) : Prop := powm m 3 N = c.
 
 Lemma rsa_d_is_cube_root_map :

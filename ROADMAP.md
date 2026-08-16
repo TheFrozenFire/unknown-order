@@ -46,6 +46,27 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ✅ Type A geometries modern keygens commit — `KeyGenGeom`, `cas/17`
 - ⬜ A new Type-A/B/C/D/E leak that current keygens actually commit *and that is not a row above* (the remaining cryptanalysis goal)
 
+## 2.6 Hardness claims as theory, not axioms ✅ (relations only)
+
+- ✅ Search problem ≠ assumption; four ingredients of a claim (`THEORY.md` §9)
+- ✅ `e`-power map is a permutation of units (`Hardness.rsa_units_are_eth_powers`; `cas/18`)
+- ✅ Trapdoor inverts RSA; RSA solution is sRSA at that `e`; `λ` trivializes sRSA
+- ✅ Order divides `λ`; one-sided low-order factors; two-sided does not
+- ✅ Decision neighbours (QR, Φ-hiding, DCR) recorded as *not* RSA
+- ⬜ Probability / PPT / advantage (not a design target without a named `KG`)
+- ⬜ Factoring ≤ RSA (open; not a target)
+- ❌ Global axiom `RSA_hard` — refused (§9.10)
+
+## 2.7 Rabin–Williams (same group, different map) ✅ (with named skips)
+
+- ✅ `e = 2` is not an RSA exponent (`two_not_rsa_exponent`); squaring is 4-to-1
+- ✅ Blum / Williams prime shapes; `v₂(p−1) = 1`; `p≡3 (mod 4)` root formula
+- ✅ Williams combinatorics: unique QR among `{±a, ±2a}` given the mod-8 symbols
+- ✅ Rabin reduction: non-associated square roots split `N`
+- ✅ Overlap written in `THEORY.md` §10; `rsa_test` primes are *not* a Williams pair
+- ⬜ `(2/p)` as a theorem (Gauss); Euler QNR direction
+- ⬜ Principal-root convention, hash wrapper, signature game
+
 ## 3. Other unknown-order problems ⬜
 
 Only after RSA is a worked example and the shared skeleton is visible. Candidates (not a

@@ -16,7 +16,10 @@ Open Scope Z_scope.
 
     Later problems (strong RSA, order, adaptive root) are stated here
     as propositions so they share one vocabulary.  None is assumed
-    hard — we only write down what the problem *asks*. *)
+    hard — we only write down what the problem *asks*.  Relation-level
+    arrows (trapdoor, RSA vs strong RSA, order divides [λ], one-sided
+    split) live in [Hardness.v].  A hardness *claim* is a sentence
+    about a KeyGen distribution; see [THEORY.md] §9. *)
 
 (** The hidden-order group attached to an RSA instance. *)
 Definition hidden_order_N (R : RSAInstance) : Z := rsa_N R.

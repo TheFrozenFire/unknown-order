@@ -114,7 +114,7 @@ enc/dec on units, Miller witness ⇒ factor, Miller–Rabin polarity of the engi
 
 Not proved, and not claimed: general ≥1/2 density of Miller bases (CAS-exhaustive on 187:
 150/158); ERH-conditional polynomial bound for sequential Miller; Coppersmith/LLL;
-completeness of Pratt certificates; any hardness of RSA / strong RSA / order.
+completeness of Pratt certificates; any hardness of RSA / strong RSA / order (see §9).
 
 `φ` vs `λ` is distinguished in the statements: `d` is the inverse modulo `λ`; enumeration
 via `φ` requires the stronger `φ | ed−1`.
@@ -553,3 +553,581 @@ A genuinely new weakness is still one of the five shapes in
 §6.11 that is *not* a row of this list. The sampler is the
 place to look for one: any distribution that passes every
 named ruler and still has a cheap handle is the object.
+
+## 9. Hardness claims
+
+The rest of this document is about *algebra*: annihilators, leaks,
+and the winning conditions of named problems. A hardness claim is a
+different kind of object. This section says what one is, which
+named claims exist in this domain, which arrows between them are
+theorems, which are open, and which are false on a given KeyGen.
+Nothing here is an axiom that “RSA is hard.”
+
+Companion: [`notes/hardness.md`](notes/hardness.md). Relation-level
+arrows are in `rocq/Hardness.v`, pinned by `cas/18_hardness.gp`.
+
+### 9.1 A search problem is not an assumption
+
+`Problem_RSA N e y x` is the proposition `x^e ≡ y (mod N)`. It is a
+*winning condition*. For `gcd(e, λ(N)) = 1` and `y` a unit, a
+witness `x` *exists*: the `e`-power map is a permutation of
+`(ℤ/Nℤ)*`, and `x ≡ y^d (mod N)` is one (`rsa_units_are_eth_powers`).
+Existence is Euler/Carmichael, not cryptography.
+
+The same is true, more sharply, of strong RSA. The pair `(x, e) = (1, 2)`
+wins on the challenge `y = 1` for every `N > 1`
+(`strong_RSA_trivial_at_one`). The bare relation is inhabited at
+trivial points.
+
+A **hardness assumption** is a statement about *algorithms* and a
+*distribution*:
+
+```
+Pr[ A wins on (N, e, y)  |  (N, e) ← KG(1^n),  y ← D_{N,e} ]  ≤  negl(n)
+```
+
+for every algorithm `A` in a named class (PPT, circuits of size
+`T(n)`, …). Until `KG`, `D`, the class, and the winning condition
+are in the sentence, “RSA is hard” is a slogan.
+
+`UnknownOrder.v` writes down winning conditions. It does not
+assume they are hard. That is deliberate (rule 5). An axiom
+`RSA_hard : Prop` that is never discharged is how a development
+starts proving things about the wrong object.
+
+### 9.2 Four ingredients of a claim
+
+1. **The KeyGen distribution `KG`.** Samples `(N, e)` and discards
+   `{p, q, d}`. “RSA is hard” is a claim about *one* `KG`. It is
+   false for nextprime twins, a shared prime pool, `d < N^{1/4}`,
+   a `B`-smooth `p−1`, or `p = 653` against a cubic method at
+   `B = 20`. Section 6 is the catalog of `KG` on which the claim
+   is *refuted*, not merely unproven. `satisfies_keygen` (plus
+   `cyc_strong` and the Type-A geometries of §8.5) is the closest
+   thing in this repo to a description of a `KG` that the catalog
+   does not immediately kill.
+
+2. **The algorithm class.** Polynomial time in `n = |N|`, or
+   “cheaper than GNFS on `N`”, or a concrete circuit bound. This
+   repo has no complexity theory and does not introduce one by
+   axiom.
+
+3. **The winning condition.** Search (output a root / a factor /
+   an order) versus decision (distinguish two distributions).
+   For RSA with `gcd(e, λ) = 1` the decision problem on units is
+   vacuous — see §9.3. Search is the content.
+
+4. **The challenge distribution `D`.** Uniform in `(ℤ/Nℤ)*` is
+   the usual RSA challenge. Uniform in `{0, …, N−1}` is
+   different: a non-unit leaks a factor by `gcd`. Textbook
+   encryption of a small or stereotyped `m` is a *different*
+   `D` (Type E). A claim that underwrites OAEP is not a claim
+   that underwrites raw RSA of ASCII.
+
+Omit any one of the four and the sentence no longer has a truth
+value that this project can use.
+
+### 9.3 The `e`-power map is a one-way permutation, not a predicate
+
+Let `G = (ℤ/Nℤ)*` and `gcd(e, λ(N)) = 1`. Then
+
+```
+x ↦ x^e   :  G → G
+```
+
+is a group automorphism. Every unit is an `e`-th power of a
+unique unit. Consequently:
+
+- “Is `y ∈ G` an `e`-th residue?” is always yes. There is no
+  decisional RSA problem on units analogous to quadratic
+  residuosity.
+- If `x` is uniform in `G` then `x^e` is uniform in `G`. The
+  pair `(N, e, x^e)` is distributed identically to `(N, e, y)`
+  for uniform `y ∈ G`. Distinguishing them is impossible
+  information-theoretically.
+- The assumption, when it is made, is **one-wayness of a
+  trapdoor permutation**: given `y`, find the unique `x ∈ G`
+  with `x^e = y`.
+
+Decision becomes a real problem only when the map is *not* a
+permutation, i.e. when `gcd(e, λ) > 1`:
+
+- **Quadratic residuosity (QR).** `e = 2` always divides `φ(N)`
+  for odd `N`. Squaring is 4-to-1 on `(ℤ/Nℤ)*` for distinct odd
+  primes. “Is `y` a square?” is a predicate, and the Goldwasser–
+  Micali assumption is that it is hard to evaluate without the
+  factors.
+- **Φ-hiding.** A prime `e` is chosen to *divide* `φ(N)` (or
+  not). The hiding assumption is that these two cases are
+  indistinguishable given `(N, e)`. The `e`-power map is then
+  `e`-to-1, and `e`-th residuosity is a predicate. This is
+  incompatible with a standard RSA instance, which *requires*
+  `gcd(e, λ) = 1`.
+- **DCR (Paillier).** Decisional composite residuosity in
+  `(ℤ/N²ℤ)*`: `e = N`, a different group. Not an RSA-in-`G`
+  assumption.
+
+These decision assumptions are neighbouring, not instances of
+`Problem_RSA`. They are recorded so that “decisional RSA” is
+not silently introduced later as if it were the search problem
+with a bit of output.
+
+### 9.4 The named search problems
+
+All are relations. A solver is given the input and must produce
+the output. Hardness, if claimed, is over `KG` and a challenge
+as in §9.2.
+
+| Problem | Input | Output | Winning condition |
+|---|---|---|---|
+| **Factoring** | `N` | `f` | `1 < f < N` and `f \| N` |
+| **RSA** | `(N, e, y)` | `x` | `x^e ≡ y (mod N)` |
+| **Strong RSA** | `(N, y)` | `(x, e)` | `e > 1` and `x^e ≡ y (mod N)` |
+| **Adaptive root** | `(N, y)` | `(x, e)` | same relation as strong RSA |
+| **Order** | `(N, a)` | `k` | `k = ord_G(a)` |
+| **Low-order** | `(N, B)` | `(a, k)` | `ord_G(a) = k ≤ B` and `a ≠ 1` |
+| **One-sided low-order** | `(N, B)` | `(a, k)` | `a^k ≡ 1 (mod p)` and not `(mod q)`, `k ≤ B` |
+
+The last row is not a standard *named* assumption; it is the
+winning condition of Type B / Pollard, and it is the one that
+*factors* `N`. Low-order *in `G`* does not: `a^k ≡ 1 (mod N)`
+is two-sided (`Hardness.one_sided_low_order_factors`).
+
+Adaptive root and strong RSA are the same relation
+(`adaptive_root_is_strong_RSA`). The name changes with the
+*group*. On `(ℤ/Nℤ)*` there is a trapdoor `λ`. In a class group
+there is no known `λ`, and the same relation is an assumption
+about a group with no setup. Wesolowski VDFs, unknown-order
+accumulators, and Pietrzak-style proofs use that second
+reading. Writing `Problem_AdaptiveRoot` as an alias is honest
+about the relation and silent about the group; a later class-
+group file must not inherit a trapdoor that is not there.
+
+### 9.5 Arrows that are theorems (relations)
+
+No running times. These are implications between winning
+conditions, in `Hardness.v`.
+
+```
+{p, q}
+  │
+  │  construct λ = lcm(p−1, q−1), d ≡ e⁻¹ (mod λ)
+  ▼
+λ  or  d  or  φ
+  │
+  ├──────────────────────────────────────────────┐
+  │  y ↦ y^d                                     │  (y, λ+1)
+  ▼                                              ▼
+RSA roots on units                    strong RSA on every unit
+  │
+  │  rsa_solution_is_strong_RSA
+  ▼
+strong RSA for that fixed e
+
+
+order k of a unit
+  │
+  │  order_divides_lambda
+  ▼
+k | λ
+
+
+one-sided a^k ≡ 1 (mod p), not (mod q)
+  │
+  │  one_sided_low_order_factors
+  ▼
+Problem_Factor N p
+```
+
+Commentary, so the diagram is not over-read:
+
+- **RSA ≤ Factoring**, in the usual reduction language: an
+  algorithm that factors (or that is given `λ` or `d`) solves
+  RSA on units. We have the algebra
+  (`trapdoor_inverts_RSA`, `rsa_dec_enc_units`). We do not have
+  a cost bound, because we do not have a cost model.
+- **Strong RSA is trivial given `λ`:** `(y, λ+1)` wins for every
+  unit `y` (`lambda_solves_strong_RSA`). That is why adaptive
+  root is only an assumption in a group whose order is hidden
+  *and* has no trapdoor construction of `λ`.
+- **An RSA root is a strong-RSA witness** for the prescribed
+  `e`. Solvability of RSA implies solvability of strong RSA *at
+  that `e`*. Hardness runs backwards: if no algorithm solves
+  strong RSA, then no algorithm solves RSA (same `KG`, same
+  `y`). The converse hardness implication is false, and is the
+  reason strong RSA is called *stronger* (harder to believe,
+  easier to use in proofs).
+- **Order of a unit divides `λ`.** Sampling orders and taking
+  lcms is the usual way to *learn* `λ` from an order oracle.
+  Completeness of that procedure (enough random `a` generate
+  the 2-primary and odd parts of `λ`) is a density statement
+  and is not proved.
+- **One-sided small exponent factors; two-sided small order
+  does not.** Confusing `Problem_LowOrder` with Pollard is how
+  a “low-order assumption” gets stated as if it were Type B.
+  Low-order in `G` leaks a divisor of `λ`. One-sided low-order
+  leaks a factor of `N`.
+
+### 9.6 Arrows that are not theorems
+
+```
+RSA inverter (random y, no d)
+        ─ ─ ─ ─ ? ─ ─ ─ ─ ►     Factoring
+
+straight-line reduction, small e
+        ─ ─ ─ ─ unlikely ─ ►     Factoring
+        (Boneh–Venkatesan)
+
+knowing (e, d)
+        ────── yes ────── ►     Factoring
+        (Miller / Coron–May; algebra in this repo)
+```
+
+- **Factoring ≤ RSA is open.** An oracle that inverts `x ↦ x^e`
+  on random challenges is not known to yield `{p, q}`. Boneh–
+  Venkatesan indicate that a *straight-line* reduction from
+  factoring to low-exponent RSA would collapse in ways we do
+  not expect. This repo will not treat “RSA-hard ⇒ Factoring-
+  hard” as a design target.
+- **Coron–May is not that converse.** Given the *secret* `(e, d)`,
+  not an inversion oracle, one factors. That is the annihilator
+  of §3, and it is already formalized. Mixing the two is the
+  most common way to overclaim the trapdoor theorems.
+- **RSA ≤ Strong RSA as hardness** is the informal reading of
+  `rsa_solution_is_strong_RSA` and is *not* a reduction in the
+  other direction. A strong-RSA solver may return an `e` other
+  than the prescribed one and so need not invert the RSA map.
+- **Order ≈ Factoring on `N = pq`.** A multiple of `λ` is a
+  Miller annihilator, so an algorithm that outputs `λ` (or a
+  small multiple) factors. An algorithm that outputs
+  `ord(a)` for enough `a` *should* give `λ` by lcm; that
+  “enough” is unproved here. In a class group the same order
+  problem is not known to yield a public factorization, which
+  is the point of moving the assumption.
+- **GNFS is not an assumption and not a reduction.** It is the
+  best general *attack* on Factoring, with heuristic complexity
+  `L_N[1/3, (64/9)^{1/3}]`. The sentence “the remaining attack
+  is GNFS on `N`” (§6.10, §8.6) is a report on the state of
+  cryptanalysis for a `KG` that refuses the catalog. It is not
+  a theorem, and discharging `satisfies_keygen` does not make a
+  bit length “enough”.
+
+### 9.7 Neighbouring assumptions, kept out of the RSA file
+
+Recorded so they are not later smuggled in as corollaries of
+`Problem_RSA`.
+
+| Assumption | Object | Why it is not RSA |
+|---|---|---|
+| QR / Rabin | squares in `(ℤ/Nℤ)*` | `e = 2` is not coprime to `λ`; see §10 |
+| Φ-hiding | `e \| φ(N)` vs not, given `(N, e)` | standard RSA *forbids* `e \| λ` |
+| DCR | `N`-th powers in `(ℤ/N²ℤ)*` | different group |
+| Partial-domain RSA | invert on a small interval | different `D`, Coppersmith-adjacent |
+| RSA-FDH / RSA-PSS / OAEP | inversion in a hash wrapper | a *scheme* assumption; the game includes the hash |
+
+Textbook RSA encryption of a message from a low-entropy set is
+not the RSA assumption of §9.2. It is Type E. Hastad, Coppersmith
+stereotyped messages, and Franklin–Reiter live there. A hardness
+claim that samples `y` uniformly in `G` is silent about them; a
+hardness claim that is supposed to underwrite raw RSA of a PIN
+is already false at `e = 3`.
+
+### 9.8 Hardness is relative to KeyGen: leaks are refutations
+
+Fix a winning condition, say `Problem_RSA` or `Problem_Factor`.
+A **refutation** of the corresponding assumption on `KG` is an
+algorithm that wins with non-negligible probability on samples
+from that `KG`. Every row of the §6 catalog is such a
+refutation, with an explicit algorithm:
+
+| `KG` does this | Algorithm | What it refutes |
+|---|---|---|
+| close / shared-prefix / increment-window primes | Fermat | Factoring, RSA, Order |
+| shared prime pool | `gcd` | Factoring, RSA, Order |
+| smooth `p−1` / `Φ_n(p)` | Pollard / cyclotomic | Factoring, RSA, Low-order (one-sided), Order |
+| short `d` | Wiener (CF); BD if one grants LLL | Factoring, RSA |
+| tiny `e`, stereotyped `m` | Hastad / Coppersmith | RSA on *that* `D`; not Factoring |
+| unbalanced `p` | ECM / trial | Factoring, RSA |
+| thin AP / leaked bits of `p` | Coppersmith | Factoring, RSA |
+
+Type E is the only row that can kill RSA-the-search-problem on
+a restricted `D` without factoring `N`. That is why it does not
+sit on the same arrow as the others, and why `e` is a generation
+choice even though it does not, by itself, produce an annihilator
+of `G`.
+
+The residual claim, written so it has a truth value:
+
+> If `KG` refuses every named leak, then every attack formalized
+> in this repo fails on samples from `KG`, and the cheapest
+> *published* attack on the resulting `(N, e)` is general-purpose
+> factoring of `N`.
+
+That is not “RSA is hard”. It is “we have not refuted RSA on
+this `KG` with the rulers we have.” Extra bits of `N` above the
+GNFS cost of that baseline are insurance against an unclassified
+leak. The point of the catalog is to make that insurance
+accountable (§6.10, §8.6).
+
+### 9.9 What “stronger keys with smaller parameters” is allowed to mean
+
+A smaller `N` is a claim that the *min cost* of the cheapest
+applicable attack has not dropped. That min is taken over:
+
+- general Factoring (GNFS, ECM on the smaller prime, …),
+- every Type A–E algorithm that `KG` does not refuse,
+- scheme-level attacks if `D` is not uniform in `G`.
+
+If `KG` leaks, extra bits of `N` do not raise that min. If `KG`
+refuses the catalog, the min is the Factoring cost of `N`, and
+bits of `N` are the right parameter. Returning bits that were
+being spent as margin against a *refused* leak is then honest.
+Returning bits against an *unrefused* leak, or against an
+unclassified one, is not a hardness theorem — it is a bet that
+§6.11 is empty.
+
+No bit-length recommendation in this repo is a theorem.
+
+### 9.10 What must not be axiomatized
+
+- `RSA_hard`, `Factoring_hard`, `sRSA_hard` as global `Prop`s.
+  A later protocol file that needs an assumption should take
+  `KG` as a parameter and hypothesize that `KG` does not leak
+  the catalog (and, if it wishes, that Factoring is hard on the
+  induced `N`-distribution). The hypothesis is then *about a
+  named `KG`*, and a leak in that `KG` is a broken hypothesis,
+  not a mysterious axiom failure.
+- “Decisional RSA” on units with `gcd(e, λ) = 1`.
+- “Low-order is Pollard” (two-sided vs one-sided, §9.5).
+- “RSA-hard ⇒ Factoring-hard.”
+- “Discharging `satisfies_keygen` makes `n`-bit `N` enough.”
+- ERH, LLL, GNFS cost, Miller density ≥ 1/2 as ingredients of a
+  hardness claim. They may appear as *named skips* in an attack
+  cost, not as axioms that close a proof of security.
+
+### 9.11 Honest scope of the hardness development
+
+Machine-checked, and CAS-pinned (`Hardness.v`, `cas/18`):
+
+- Every unit is an `e`-th power under an RSA instance
+  (`rsa_units_are_eth_powers`); `enc ∘ dec = id` on units.
+- Trapdoor inverts RSA on units (`trapdoor_inverts_RSA`).
+- An RSA solution is a strong-RSA solution for that `e`.
+- `λ` yields the trivial strong-RSA witness `(y, λ+1)` on units.
+- Strong RSA / RSA relations are inhabited at `y = 1`.
+- The order of a unit divides `λ`.
+- One-sided `a^k ≡ 1 (mod p)` splits `N`; this is
+  `Problem_Factor`.
+- Adaptive root and strong RSA are the same relation.
+
+Not proved, and not claimed:
+
+- Any PPT bound, any negligible function, any advantage.
+- Factoring ≤ RSA; completeness of lcm-of-orders → `λ`.
+- Hardness of RSA, strong RSA, adaptive root, order, QR, DCR,
+  Φ-hiding, or Factoring, on any `KG`.
+- GNFS complexity; that a leak-free `KG` leaves only GNFS.
+- Decision problems (QR, Φ-hiding, DCR) as formal objects.
+- A probability-space formalization of §9.2.
+
+φ vs λ remains distinguished: trapdoor inversion uses the
+`λ`-inverse that the instance already carries. Strong RSA via
+`λ+1` uses Carmichael, also `λ`. Wiener (Type C) remains the
+`φ`-form, and is an attack, not an assumption.
+
+## 10. Rabin–Williams: the same group, a different map
+
+RSA at a unit exponent and Rabin–Williams (Rabin signatures with
+Williams’ 1980 tweak) are the two standard *trapdoor* problems
+in `(ℤ/Nℤ)*`. They share the group and the modulus; they do not
+share the map, the KeyGen congruences, or the reduction to
+Factoring. This section is the overlap, and the reason `p` and
+`q` are chosen the way they are. Companion:
+[`notes/rabin-williams.md`](notes/rabin-williams.md). Formal
+objects: `QuadResidue.v`, `RabinWilliams.v`, `cas/19`.
+
+### 10.1 The same group, a forbidden exponent
+
+Both problems take `N = p q` and work in `G = (ℤ/Nℤ)*`, whose
+order `φ(N)` and exponent `λ(N)` are hidden. Rabin is the map
+
+```
+x  ↦  x²   (mod N).
+```
+
+That is RSA at `e = 2`, except `e = 2` is *excluded* from an
+`RSAInstance`: `λ` is even for odd primes, so
+`gcd(2, λ) = 2 ≠ 1` (`two_not_rsa_exponent`). The `e`-power
+map of §9.3 is a permutation only when `gcd(e, λ) = 1`.
+Squaring is 4-to-1 on units of a distinct-odd-prime product
+(CRT: two square roots mod `p`, two mod `q`). The kernel of
+squaring is exactly the 2-torsion `{±1} × {±1}` — four square
+roots of 1, of which two are the non-trivial ones that split
+`N` (`nontrivial_sqrt1_splits`).
+
+So Rabin is not “RSA with a small `e`.” It is the neighbouring
+problem that §9.3 said becomes a *predicate* (quadratic
+residuosity) the moment `e` shares a factor with `λ`. Search
+Rabin is: given a square `y`, find a preimage. Decision Rabin
+is QR, which RSA-with-coprime-`e` does not have.
+
+### 10.2 Why inversion is equivalent to Factoring here
+
+Pick a random unit `r`, publish `y = r²`, ask an inversion
+oracle for a square root `s` of `y`. The four roots are
+`±r, ±w` with `w ≢ ±r`. With probability 1/2 the oracle
+returns a representative of `±w`, and then
+
+```
+x² ≡ y² (mod N),   x ≢ ± y (mod N)
+  ⇒  1 < gcd(x − y, N) < N
+```
+
+(`rabin_roots_split`). This is a *random-self-reduction* of
+Factoring to Rabin inversion, tight up to a factor of two.
+RSA has no such theorem: an oracle that inverts `x ↦ x^e` on
+random challenges is not known to yield `{p, q}` (§9.6).
+Possession of `d` factors (Miller / Coron–May); possession of
+an inversion oracle does not, so far as anyone has proved.
+
+That is the hardness-theoretic overlap, stated so it cannot be
+blurred: both problems are easy given `{p, q}`; only Rabin is
+known to be *as hard as* Factoring.
+
+### 10.3 Williams primes: `p ≡ 3 (mod 8)`, `q ≡ 7 (mod 8)`
+
+A square root mod `p` is cheap when `p ≡ 3 (mod 4)`: if
+`a^{(p−1)/2} ≡ 1` then `a^{(p+1)/4}` squares to `a`
+(`sqrt_mod4_3_correct`). Integers with both primes
+`≡ 3 (mod 4)` are *Blum integers*. Williams (1980) refines
+Blum by a further condition mod 8, so that a *public* choice
+among four obvious associates of the message is a square:
+
+```
+p ≡ 3 (mod 8)     (hence p ≡ 3 (mod 4);  (−1/p) = −1,  (2/p) = −1)
+q ≡ 7 (mod 8)     (hence q ≡ 3 (mod 4);  (−1/q) = −1,  (2/q) = +1)
+```
+
+(or the two primes swapped). The symbols for `−1` are Euler
+and are proved (`neg1_euler_mod4_3`). The symbols for `2` are
+the classical `(2/p) = (−1)^{(p²−1)/8}`; they are the reason
+for the mod-8 split, and they are not proved here (Gauss’s
+lemma). CAS pins them on the working pair `11, 23`.
+
+Let `(a/p) = α`, `(a/q) = β` with `α, β ∈ {±1}`. The four
+tweaks have Legendre pairs
+
+```
+ a    :  ( α,  β)
+−a    :  (−α, −β)      because (−1/p)=(−1/q)=−1
+ 2a   :  (−α,  β)      because (2/p)=−1, (2/q)=+1
+−2a   :  ( α, −β)
+```
+
+These four pairs are a permutation of `{±1}²`. Exactly one of
+them is `(+1, +1)` (`williams_tweak_exists`,
+`williams_tweak_unique`). That unique representative is a
+square mod `p` *and* mod `q`, hence a square in `G`. The
+signer computes the two prime-side roots by the
+`(p+1)/4` formula and combines them by CRT. The verifier
+checks that `s²` is one of `{±H, ±2H}` (`rw_verify`).
+
+Without the mod-8 split the four pairs are not a permutation
+of `{±1}²` and uniqueness fails. The textbook RSA primes
+`p = 11`, `q = 17` are not a Williams pair: `17 ≡ 1 (mod 8)`
+and `17 ≡ 1 (mod 4)`, so `−1` is a residue mod `q` and the
+sign-tweak does not flip both Legendres. RW KeyGen is *not*
+“RSA KeyGen with `e = 2`.”
+
+### 10.4 What the congruences force on `p−1` and `q−1`
+
+`p ≡ 3 (mod 4)` means `p − 1 = 2 · (odd)` (`blum_prime_pminus1_form`).
+The 2-adic valuation `v₂(p−1)` is exactly 1; same for `q`.
+Thus `v₂(λ) = 1`. The 2-Sylow of `(ℤ/pℤ)*` is just `{1, −1}` —
+the simplest possible 2-structure. Miller-from-`λ` then has
+`s = 1`: a single squaring, and a non-trivial square root of 1
+is already a factor. Pratt’s unique-order-2 check on a prime
+(`duality_unique_order_2_on_prime`) is the same fact.
+
+Safe primes are compatible. A safe prime is `p = 2r + 1` with
+`r` odd, hence automatically `p ≡ 3 (mod 4)`. It is a Williams
+`p` iff `r ≡ 1 (mod 4)` (so `p ≡ 3 (mod 8)`), and a Williams
+`q` iff `r ≡ 3 (mod 4)` (so `p ≡ 7 (mod 8)`). The Type-B
+obligation on the *odd* part of `p−1` is unchanged: `r` itself
+must be a large prime, or at least not `B`-smooth.
+
+`p+1` is complementary: `p ≡ 3 (mod 8)` gives `p+1 ≡ 4 (mod 8)`,
+so `v₂(p+1) = 2`; `q ≡ 7 (mod 8)` gives `q+1 ≡ 0 (mod 8)`, so
+`v₂(q+1) ≥ 3`. Williams `p+1` (Lucas) still applies if the
+odd part of `p+1` is smooth. `cyc_strong` is not implied by
+the mod-8 condition.
+
+### 10.5 KeyGen: the RSA rulers plus a congruence
+
+Every Type A–D leak of §6 still applies. Close Williams primes
+are Fermat-food; a shared Williams prime is a batch-GCD;
+smooth odd part of `p−1` is Pollard; short CRT exponents are
+still one-sided annihilators. The extra obligation is
+
+```
+kg_rw p q  :=  p ≡ 3 (mod 8)  and  q ≡ 7 (mod 8)
+```
+
+(`rw_pair`). There is no public `e` to choose, so
+`kg_e_not_tiny` is meaningless; the map *is* tiny (`e = 2`).
+Type E is therefore *more* dangerous, not less: Coppersmith /
+stereotyped messages see a degree-2 polynomial. Rabin
+*encryption* of a raw message is the cautionary tale; RW as
+used for *signatures* hashes first, so the challenge is a
+digest, not a PIN. A hardness claim for RW signatures is a
+claim about inversion on hash outputs, not about QR of ASCII.
+
+### 10.6 Scheme shape, honestly scoped
+
+Signing, reduced to the algebra we have:
+
+1. Hash to a unit `H`.
+2. Select the unique tweak `t ∈ {1, −1, 2, −2}` for which
+   `t H` is a square mod `p` and mod `q` (the Legendre test;
+   uniqueness is the combinatorics of §10.3).
+3. Extract roots by `x ↦ x^{(p+1)/4}` and CRT.
+4. Publish one of the four roots (a “principal” convention —
+   e.g. even and in `(0, N/2)` — is a scheme choice, not
+   proved here).
+
+Verification: `s² mod N` is one of `{±H, ±2H}`. Completeness
+follows from the sqrt formula plus CRT; uniqueness of the
+tweak is the Williams lemma. We do not formalize a principal-
+root convention, a hash wrapper, or a signature game.
+
+### 10.7 Honest scope of the RW development
+
+Machine-checked, and CAS-pinned (`QuadResidue`, `RabinWilliams`,
+`cas/19` on `N = 11 · 23`):
+
+- Blum form `p ≡ 3 (mod 4)` ⇒ `v₂(p−1) = 1`; mod-8 implies Blum.
+- `λ` even; `e = 2` is not an RSA exponent.
+- Euler QR direction; `p ≡ 3 (mod 4)` square-root formula.
+- Euler for `−1` (mod-4).
+- Williams combinatorics: exactly one of the four Legendre
+  pairs is `(+1,+1)`.
+- Two non-associated square roots split `N`.
+- `rw_verify`: `s²` is a tweak of `H`.
+- Exhaustive uniqueness of the QR tweak on every unit of 253;
+  four roots; Rabin reduction recovers a factor.
+
+Not proved, and not claimed:
+
+- `(2/p)` as a theorem (Gauss); taken as the generation-side
+  value that the mod-8 condition is there to force.
+- Euler QNR direction (`a^{(p−1)/2} ≡ −1`).
+- A principal-root convention; a hash; a signature game.
+- PPT tightness of the 1/2 in the Rabin reduction (the
+  splitting lemma is proved; the probability is not).
+- That RW KeyGen without the §6 rulers is safe. It is not.
+
+The residual comparison with RSA, in one sentence: same hidden-
+order group, same catalog of KeyGen leaks, a map that is a
+4-to-1 predicate rather than a permutation, a reduction to
+Factoring that RSA does not have, and a mod-8 condition on
+`{p, q}` whose only job is to make one of `{±H, ±2H}` a square.

@@ -56,7 +56,8 @@ context unless a skip is named.
 | Coron–May / Coppersmith | `Lattice.lattice_phi_factors` | `cas/03_enum_factor.gp` | **interface only** — LLL/Howgrave–Graham skipped; once `φ` or `p+q` is known, factors follow |
 | Miller–Rabin polarity | `MillerRabin` | `cas/07_miller_rabin.gp` | same engine, two exponents |
 | Pratt certificate type + 2-torsion duality | `Pratt` | `cas/06_sqrt1.gp` | soundness of the 2-primary fact; completeness (every prime has a Pratt tree) **not** proved |
-| RSA / strong RSA / order / low-order / adaptive-root as propositions | `UnknownOrder` | — | definitions; no hardness claim |
+| RSA / strong RSA / order / low-order / adaptive-root as propositions | `UnknownOrder` | — | winning conditions; no hardness claim (§9) |
+| Relation arrows (trapdoor ⇒ roots; RSA ⇒ sRSA at `e`; `λ` ⇒ `(y,λ+1)`; order `\| λ`; one-sided split) | `Hardness` | `cas/18_hardness.gp` | relations only; no PPT, no “RSA is hard”; `e`-power is a permutation of units when `gcd(e,λ)=1` |
 | Fermat identity; close primes recover from `⌈√N⌉`; far-apart gap | `FermatFactor` | `cas/08_fermat.gp` | proven (recovery + gap); Fermat *runtime* as `O(\|p−q\|² / √N)` is the identity, not a complexity claim |
 | Shared prime: `gcd(N₁,N₂) = p` | `SharedPrime` | `cas/09_shared_prime.gp` | proven (unique factorization) |
 | Pollard `p−1`: one-sided annihilator splits `N` | `PollardP1.pollard_p1_splits` | `cas/10_pollard_p1.gp` | proven (criterion); `M = lcm(1..B)` is the CAS handle, not a formal construction |
@@ -71,6 +72,8 @@ context unless a skip is named.
 | Classical Wiener sufficient `36 d⁴ < N` | `Wiener.wiener_classical_sufficient` | `cas/16_wiener_frontier.gp` | sufficient, not equivalent to `d < ⅓ N^{1/4}`; BD 0.292 is interface |
 | Shared-prefix / increment-window / twins | `KeyGenGeom` | `cas/17_keygen_geom.gp` | each bounds `\|p−q\|` and fails `kg_far` |
 | Named keygen distributions vs rulers | `KeyGenSampler` | `cas/13_keygen_sampler.gp` | refusal theorems; frequencies are CAS |
+| Quadratic residues; `p≡3 (mod 4)` root; Euler for `−1` | `QuadResidue` | `cas/19_rabin_williams.gp` | QR-direction of Euler; QNR direction and `(2/p)` skipped (Gauss) |
+| Rabin–Williams: `e=2` not RSA; Williams tweak; Rabin reduction | `RabinWilliams` | `cas/19` (`N=11·23`, unique QR tweak on every unit) | combinatorics of `{±a,±2a}` proved; `(2/p)` generation-side; no signature game |
 
 ## Run it
 

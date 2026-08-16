@@ -12,6 +12,7 @@ UnknownOrder.v
 FermatFactor.v
 SharedPrime.v
 PollardP1.v
+Hardness.v
 Wiener.v
 SmallExponent.v
 StrongPrimes.v
@@ -22,3 +23,5 @@ Cyclotomic.v
 BatchOrder.v
 KeyGenGeom.v
 KeyGenSampler.v
+QuadResidue.v
+RabinWilliams.v
