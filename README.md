@@ -79,7 +79,11 @@ context unless a skip is named.
 | Miller-from-`d` is a height mismatch on `odd_part(M)` | `MillerHeight.miller_from_d` | `cas/04`, `cas/20` | corollary of 2-heights; textbook `2` at `11×17` is `(1,3)` |
 | Cyclic-model mismatch, including 150/158 | `CyclicCount` | `cas/20` | formula proved; realization is CAS + `cyclic_units` |
 | Forced `1 (mod 2^d)` is both-deep; nextprime/safe are not | `TwoPrimary.dist_forced_2adic_both_deep` | `cas/21_matched_deep.gp` | live defect is the *progression*, not ordinary KeyGen |
-| Lucas `V`; Type B is a presentation, adaptive root a relation | `Lucas`, `ClassGroupWall` | `cas/22_lucas.gp` | doubling table; QNR ⇒ `V_{p+1}≡2` is CAS; no `discriminant_to_lambda` |
+| Lucas `V`; Type B is a presentation, adaptive root a relation | `Lucas`, `ClassGroupWall` | `cas/22_lucas.gp` | addition proved; QNR ⇒ `V_{p+1}≡2` is CAS; no `discriminant_to_lambda` |
+| Primitive forms, identity composition, public order-2 classes | `BinForms` | `cas/23_class_group.gp` | `id ∘ f = f`; ambiguous forms win unrestricted LowOrder at `B=2` |
+| Restricted low-order; presentations of RSA and `Cl(Δ)` | `ClassGroupWall`, `Presentation` | `cas/23` | `H={±1}` vs `H=Cl[2]`; public annihilator is `None` / `Some 2` |
+| Wesolowski is an `ℓ`-th root; Pietrzak forgery is low-order | `ExpProof` | `cas/24_exp_proof.gp` | restricted LowOrder ignores constructible `Cl[2]` |
+| Accumulator membership is a root | `Accumulator` | `cas/24` | forged witness is adaptive root; no `λ` to update `Cl` |
 
 ## Run it
 
@@ -96,6 +100,7 @@ git clone https://github.com/TheFrozenFire/rocq-proofs   # beside unknown-order/
 
 ## Where this is going
 
-See [`ROADMAP.md`](ROADMAP.md). First: RSA's definition, `d`, and the factoring algorithms that
-take `(e, d)` as input. After that, the other standard problems in groups of unknown order, under
-one abstraction where they share one.
+See [`ROADMAP.md`](ROADMAP.md). RSA is a worked example. The same winning conditions are
+instantiated on `Cl(Δ)` (`Presentation.v`); a Wesolowski proof is an `ℓ`-th root and a Pietrzak
+forgery is low-order (`ExpProof.v`). The remaining hunt is §6.11 — a named sampler, not another
+incarnation.

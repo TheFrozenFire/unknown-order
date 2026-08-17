@@ -1330,8 +1330,8 @@ trivial given `λ` (`lambda_solves_strong_RSA`,
 
 Williams `p+1` is Type B at `n = 2`, evaluated with a Lucas
 `V` sequence so the arithmetic stays in `ℤ/Nℤ`. `Lucas.v`
-defines `V` and checks doubling at `Q = 1` on a table; the
-addition formula is a design target. CAS: when `P²−4` is a QNR
+proves the addition formula `V_{m+n} = V_m V_n − Q^n V_{m−n}`
+and doubling as a corollary. CAS: when `P²−4` is a QNR
 mod `p`, `V_{p+1} ≡ 2 (mod p)` and `V_{p−1} ≢ 2` — the period
 is `+1`, not `−1`. A safe prime (`p = 23 = 2·11+1`) refuses a
 smooth `p−1` and still has `p+1 = 24` 3-smooth.
@@ -1341,4 +1341,118 @@ discriminant, not by `N = pq`. There is no
 `discriminant_to_lambda`. Type B and adaptive root therefore
 stop being aliases: same relation, different presentation.
 Not an axiom that class groups are hard. Formal:
-`ClassGroupWall.v`. CAS: `cas/22_lucas.gp`.
+`ClassGroupWall.v`. CAS: `cas/22_lucas.gp`. The second
+incarnation is written out in §14–16.
+
+## 14. Presentations
+
+A **presentation** (`Presentation.v`) is a carrier, a
+multiplication, an identity, an exponentiation, a named
+constructible-torsion predicate, and an optional *public*
+annihilator.
+
+| | `(ℤ/Nℤ)*` public | `(ℤ/Nℤ)*` trapdoor | `Cl(Δ)` |
+|---|---|---|---|
+| Carrier | units of `ℤ/Nℤ` | same | primitive forms of `Δ` |
+| Constructible torsion | `{±1}` | `{±1}` | ambiguous forms (`Cl[2]`) |
+| Public annihilator | `None` | `Some λ` | `Some 2` |
+
+RSA's public view has no annihilator. The trapdoor view
+carries `λ`, and `λ+1` is an adaptive-root witness
+(`rsa_lambda_solves_adaptive_root`). `Cl(Δ)` carries `2`:
+every ambiguous form is SL2-equivalent to its inverse
+(`ambiguous_equiv_inv`). There is no odd public period.
+`cl_has_no_lambda_plus_one`: the public option is not `D+1`.
+
+The named problems — `Root e y`, `AdaptiveRoot y`, `Order a`,
+`LowOrder B`, `LowOrderOutside B` — are the same winning
+conditions on either carrier.
+
+## 15. Constructible torsion, and which arrows die
+
+Unrestricted `Problem_LowOrder` for `B = 2` is a *public
+construction* on `Cl(Δ)`. From a divisor of `Δ` one writes
+down an ambiguous form (`amb_from_div`). On the catalog
+`Δ ∈ {−87, −403, −455}` those forms are reduced (or reduce
+to a form with `a = c`), have `a > 1`, and are therefore not
+principal (`reduced_a_gt_1_not_principal`). They win
+`Problem_LowOrder_Cl` (`catalog_wins_LowOrder_B2`).
+
+Prime discriminants (`−23`, `−47`) have 2-rank 0: the only
+order-dividing-2 class is the identity. The 2-rank on a
+fundamental `Δ ≡ 1 (mod 4)` is `t−1` with `t = ω(|Δ|)`.
+CAS `23_class_group.gp`.
+
+The restricted problem `Problem_LowOrderOutside H` excludes
+the constructible set. On RSA, `H = {±1}`. On `Cl`,
+`H = Cl[2]`. A Pietrzak forgery that lands in `Cl[2]` is
+then *not* a break of the restricted assumption
+(`pietrzak_restricted_ignores_Cl2`).
+
+Arrows that die when the presentation is a discriminant:
+
+- `lambda_solves_strong_RSA` — no `discriminant_to_lambda`.
+- One-sided low-order / CRT splitting — there is no pair of
+  rings whose idempotents are factors of a public `N`
+  (`no_crt_split_from_disc`: `Δ < 0` is not a modulus).
+- Adaptive root from public data — `Cl` publishes `2`, not
+  an odd `e`.
+
+`D+1` annihilates `Cl(−403)` in CAS, but only because
+`h(−403) = 2` and `D+1` is even: it is the public
+2-annihilator, not a `λ+1` analogue. Odd `D` does not
+annihilate any catalog class group. `|D| = 87` does not
+annihilate an order-6 class of `Cl(−87)`.
+
+## 16. Proof of exponentiation, and the incarnation table
+
+Wesolowski, algebra only (`ExpProof.v`, `cas/24_exp_proof.gp`):
+a correct `π = x^q` for `y = x^{q·ℓ+r}` is an `ℓ`-th root of
+`x^{q·ℓ}` (`wesolowski_correct_is_root`). On `(ℤ/Nℤ)*` with
+known `λ`, the same `y` has the trivial adaptive-root witness
+`(y, λ+1)`.
+
+Pietrzak at `T = 2`: a midpoint `μ` with `μ² = x⁴` is a square
+root of `y`. The quotient by the true midpoint squares to 1.
+On `(ℤ/Nℤ)*` that element is `±1` or a mixed CRT root (the
+Rabin split). On `Cl(Δ)` it may be constructible 2-torsion,
+which unrestricted `LowOrder` already counts as a win and
+the restricted problem excludes.
+
+An accumulator (`Accumulator.v`) is the map `A ↦ A^x`. A
+membership witness is a root. A forged witness for a random
+base is adaptive root. Instantiated on `rsa_presentation`;
+stated on `cl_presentation`, which has no trapdoor to update
+with `λ`. Hash-to-prime is a named skip.
+
+`Print Assumptions` on the headline theorems of this wave
+(`compose_id_left`, `ambiguous_equiv_inv`,
+`reduced_a_gt_1_not_principal`, `form_a_one_equiv_id`,
+`catalog_wins_LowOrder_B2`, `unrestricted_LowOrder_won_by_Cl2`,
+`restricted_LowOrder_excludes_Cl2`, `wesolowski_correct_is_root`,
+`pietrzak_restricted_ignores_Cl2`, `membership_witness_is_root`,
+`forged_mem_is_adaptive_root`, `cl_has_no_lambda_plus_one`,
+`rsa_lambda_solves_adaptive_root`) is **Closed under the global
+context**. Remaining named hypotheses, not used by those
+theorems: cyclicity of `(ℤ/pℤ)*` (counts only), QNR evaluation
+of Lucas `V_{p+1}` (CAS-pinned), and
+`compose_preserves_disc` for the general Dirichlet branch
+(identity composition is a theorem; `f ∘ f⁻¹` has leading
+coefficient 1 and is equivalent to the identity once it lands
+back on `Δ`).
+
+### 16.1 Incarnations × winning conditions
+
+| Sentence | `(ℤ/Nℤ)*` | `Cl(Δ)` |
+|---|---|---|
+| Units have an order, which divides every annihilator | `order_divides_lambda` | constructible torsion has order ∣ 2 |
+| Low-order for `B = 2` is a public construction | no (needs factors, except `−1`) | yes — ambiguous forms from `factor(Δ)` |
+| Adaptive root is trivial from public data | yes (`λ+1`), if `λ` is public | no (`Some 2`, not an odd `e`) |
+| A Wesolowski proof is an `ℓ`-th root | `wesolowski_correct_is_root` | same relation, `Pexp` = composition |
+| A Pietrzak forgery is low-order | may be `±1` | may be *constructible* 2-torsion |
+
+The last row is the edge that was not dry: Pietrzak stated on
+`Cl(Δ)` without excluding `Cl[2]` is a break of unrestricted
+`Problem_LowOrder` using only the discriminant. The restricted
+problem is the one the protocol actually needs.
+

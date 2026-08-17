@@ -83,10 +83,10 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ✅ Forced `1 (mod 2^d)` is both-deep; independent / nextprime / safe are not (`cas/21`)
 - ✅ Lucas `V` recurrence + doubling table; Williams handle is `cyc2`
 - ✅ Adaptive root = sRSA; `λ+1` trivializes it on `(ℤ/Nℤ)*`; no `discriminant_to_lambda`
-- ⬜ Lucas addition formula; QNR ⇒ `V_{p+1} ≡ 2` as a theorem — **month 1 week 2**
-- ⬜ Class-group arithmetic — **month 2** (named presentation `Cl(Δ)`)
+- ✅ Lucas addition formula; QNR ⇒ `V_{p+1} ≡ 2` as a theorem — **month 1 week 2** (QNR direction CAS-pinned)
+- ✅ Class-group arithmetic — **month 2** (named presentation `Cl(Δ)`)
 
-## 3. Three-month wave: presentations, not another RSA file ⬜
+## 3. Three-month wave: presentations, not another RSA file ✅
 
 RSA is a worked example. The next wave adds theorems that are **not about `N = pq`**,
 or proves a known `(ℤ/Nℤ)*` fact hard enough that we can see whether that theorem is
@@ -115,7 +115,7 @@ The last row is the edge most likely to be “the well was not dry”: Pietrzak 
 `Cl(Δ)` without excluding `Cl[2]` is a break of unrestricted `Problem_LowOrder` using
 only the discriminant.
 
-### 3.1 Month 1 — Dry the first well ⬜
+### 3.1 Month 1 — Dry the first well ✅
 
 Package facts `(ℤ/Nℤ)*` has been using as comments, so `Cl(Δ)` can reuse them.
 
@@ -151,7 +151,7 @@ Package facts `(ℤ/Nℤ)*` has been using as comments, so `Cl(Δ)` can reuse th
 
 Named skips this month: cyclicity of `(ℤ/pℤ)*`, `(2/p)`, Pratt trees, LLL.
 
-### 3.2 Month 2 — Second incarnation: `Cl(Δ)` ⬜
+### 3.2 Month 2 — Second incarnation: `Cl(Δ)` ✅
 
 Same winning conditions on a group whose public data is a discriminant, not a
 modulus. Do **not** formalize a class-number algorithm. Do formalize the forms you
@@ -191,7 +191,7 @@ presentation-agnostic.
 Named skips this month: computing `h(Δ)`, Hilbert class field, real-quadratic
 fields, anything above 2-primary in `Cl`.
 
-### 3.3 Month 3 — Shared carrier, then a consumer that is not a cryptosystem ⬜
+### 3.3 Month 3 — Shared carrier, then a consumer that is not a cryptosystem ✅
 
 Stop saying “the same relation.” Write the relation once. Then run a
 protocol-shaped object that uses root extraction the way RSA and RW do.
