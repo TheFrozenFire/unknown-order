@@ -1537,21 +1537,35 @@ non-unit non-inverse forms; Gauss `(2/p)`; cyclicity of
 
 `satisfies_keygen` says whether a pair is allowed. `KeyGenCtor.v`
 emits primes that are already allowed. A slot is a residue
-`a (mod 4rs)` with `a ≡ 1 (mod r)`, `a ≡ −1 (mod s)`,
-`a ≡ 3 (mod 4)`. Then `p = a + k·4rs`. By construction
-`r | p−1`, `s | p+1`, and `p` is Blum. If `B < r` and `B < s`
-and `p` is prime, `p` is strong at `B`. The walk is in `k`.
-Smoothness is not tested after drawing a random prime.
+`a (mod 4 r s u v w)` with
 
-Placement (balanced, far, bit length) is a choice of
-`(k_p, k_q)`. The CRT walk does not force it. `d` and `e` sit
-outside the prime walk. `Φ_3, Φ_4, Φ_6` are not forced.
+- `a ≡ 1 (mod r)`, `a ≡ −1 (mod s)`, `a ≡ 3 (mod 4)`
+- `a² + a + 1 ≡ 0 (mod u)` so `u | Φ₃(a)`
+- `a² + 1 ≡ 0 (mod v)` so `v | Φ₄(a)`
+- `a² − a + 1 ≡ 0 (mod w)` so `w | Φ₆(a)`
+
+Then `p = a + k·M` with `M = 4 r s u v w`. By construction
+`r | p−1`, `s | p+1`, `p` is Blum, and the same auxiliaries
+divide `Φ₃(p)`, `Φ₄(p)`, `Φ₆(p)`. If each auxiliary exceeds
+`B` and `p` is prime, `p` is `cyc_strong` at `B`. The walk
+is in `k`. Smoothness is not tested after drawing a random
+prime.
+
+A raw `CtorPair` is only the CRT walk. A `PlacedCtorPair`
+adds balanced / far / bit-length, and `B <` each auxiliary,
+as record fields — not a post-hoc filter on a random draw.
+The CRT walk does not force placement: two hits in the same
+slot can be far and unbalanced. `CtorKey` adds `(e, d)` with
+coprimality and `d ≡ e⁻¹ (mod λ)`. `ctor_to_rsa` is an
+`RSAInstance`. `ctor_key_satisfies` discharges
+`satisfies_keygen_full` (the original filter, plus tiny-`e`
+/ tiny-`d_p` / `kg_cyc_strong` including `Φ₄`).
 
 Two discriminators:
 
-- Secret auxiliaries: `r | p−1` and `s | p+1`. Needs `p` or
-  `(r,s)`.
-- Public `M = 4rs`: `p ≡ a (mod M)` is `roca_form`. That is a
+- Secret auxiliaries: `r | p−1`, `s | p+1`, and the three
+  cyclotomic tests. Needs `p` or `(r,s,u,v,w)`.
+- Public `M`: `p ≡ a (mod M)` is `roca_form`. That is a
   Type-A handle. Anyone who knows the slot can enumerate `k`.
 
 Bits against public-AP enumeration, not NFS: if `2^κ ≤ M` then
@@ -1560,8 +1574,14 @@ a `b`-bit interval holds at most `2^{b−κ}+1` candidates
 primes (`regime_1024`). Catalog attacks contribute 0 bits of
 handle. The remaining generic cost is factoring `N`, minus this
 AP discount when `M` is public. If `M` is per-key secret, that
-discount is not free.
+discount is not free. NFS is not proved.
 
-CAS `28`: slot `(r,s,a) = (3,5,19)`, `M = 60`; `k = 0,1` give
-19 and 79, both Blum and strong at `B = 2`.
+There is no running sampler. Existence of a residue is CRT;
+existence of a prime in the progression is not proved here.
+
+CAS `28`: slot `(r,s,u,v,w) = (3,5,7,13,19)`, `M = 103740`,
+`a = 13099`. `k = 0,2` give 13099 and 220579, both Blum and
+strong at `B = 2` on `p±1` and `Φ₃,Φ₄,Φ₆`. Same-slot pair
+is not balanced. Cross-slot `21611` (auxiliaries `5,3,7,13,19`)
+is balanced with 13099 and far at gap 13.
 

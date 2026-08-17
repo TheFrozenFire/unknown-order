@@ -122,15 +122,21 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 27 witnesses, `cas/01`–`27`.
+CAS is 28 witnesses, `cas/01`–`28`.
 
 ## Constructor (not a filter)
 
-`KeyGenCtor.v` emits `p = a + k·4rs` with `r | p−1`, `s | p+1`,
-and `p ≡ 3 (mod 4)`. Smoothness is forced by the auxiliaries.
-If the modulus `4rs` is public, the image is a thin AP (ROCA
-shape) and AP-search bits are `bitlen(p) − bitlen(M)`. If the
-auxiliaries are per-key secrets, that test is not free. CAS `28`.
+`KeyGenCtor.v` emits `p = a + k·M` with `M = 4 r s u v w`, so
+`r | p−1`, `s | p+1`, `p ≡ 3 (mod 4)`, and `u,v,w` divide
+`Φ₃(p)`, `Φ₄(p)`, `Φ₆(p)`. A `PlacedCtorPair` carries
+balanced / far / bits as fields. A `CtorKey` adds `(e,d)` and
+`ctor_to_rsa` is an `RSAInstance` that discharges
+`satisfies_keygen_full`. The CRT walk does not force placement.
+If `M` is public, the image is a thin AP (ROCA shape) and
+AP-search bits are `bitlen(p) − bitlen(M)`. If the auxiliaries
+are per-key secrets, that test is not free. Catalog handle
+bits are 0; NFS is not proved. There is no running sampler.
+CAS `28`.
 
 ## What is left
 

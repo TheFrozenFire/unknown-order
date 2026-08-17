@@ -166,8 +166,9 @@ Theorem dist_independent_passes_geom :
     kg_balanced p q /\ kg_far p q gap.
 Proof. intros p q gap [_ [_ H]]. exact H. Qed.
 
-(** Generation obligation beyond "strong primes": refuse [Φ_3]
-    and [Φ_6] too. *)
+(** Generation obligation beyond "strong primes": refuse [Φ_3],
+    [Φ_4], and [Φ_6] too. *)
 Definition kg_cyc_strong (p q B : Z) : Prop :=
   p3_resistant p B /\ p3_resistant q B /\
+  p4_resistant p B /\ p4_resistant q B /\
   p6_resistant p B /\ p6_resistant q B.
