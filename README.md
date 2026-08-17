@@ -124,6 +124,14 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
 CAS is 27 witnesses, `cas/01`–`27`.
 
+## Constructor (not a filter)
+
+`KeyGenCtor.v` emits `p = a + k·4rs` with `r | p−1`, `s | p+1`,
+and `p ≡ 3 (mod 4)`. Smoothness is forced by the auxiliaries.
+If the modulus `4rs` is public, the image is a thin AP (ROCA
+shape) and AP-search bits are `bitlen(p) − bitlen(M)`. If the
+auxiliaries are per-key secrets, that test is not free. CAS `28`.
+
 ## What is left
 
 [`ROADMAP.md`](ROADMAP.md) §5 is done. The remaining cryptanalysis hunt is

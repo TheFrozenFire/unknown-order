@@ -24,6 +24,7 @@ BatchOrder.v
 KeyGenGeom.v
 KeyGenSampler.v
 QuadResidue.v
+KeyGenCtor.v
 RabinWilliams.v
 TwoPrimary.v
 Order.v

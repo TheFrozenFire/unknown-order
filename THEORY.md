@@ -1533,3 +1533,35 @@ should be closed or list only the named QNR hyp inside
 non-unit non-inverse forms; Gauss `(2/p)`; cyclicity of
 `(ℤ/pℤ)*`.
 
+## 20. A constructor, not a filter
+
+`satisfies_keygen` says whether a pair is allowed. `KeyGenCtor.v`
+emits primes that are already allowed. A slot is a residue
+`a (mod 4rs)` with `a ≡ 1 (mod r)`, `a ≡ −1 (mod s)`,
+`a ≡ 3 (mod 4)`. Then `p = a + k·4rs`. By construction
+`r | p−1`, `s | p+1`, and `p` is Blum. If `B < r` and `B < s`
+and `p` is prime, `p` is strong at `B`. The walk is in `k`.
+Smoothness is not tested after drawing a random prime.
+
+Placement (balanced, far, bit length) is a choice of
+`(k_p, k_q)`. The CRT walk does not force it. `d` and `e` sit
+outside the prime walk. `Φ_3, Φ_4, Φ_6` are not forced.
+
+Two discriminators:
+
+- Secret auxiliaries: `r | p−1` and `s | p+1`. Needs `p` or
+  `(r,s)`.
+- Public `M = 4rs`: `p ≡ a (mod M)` is `roca_form`. That is a
+  Type-A handle. Anyone who knows the slot can enumerate `k`.
+
+Bits against public-AP enumeration, not NFS: if `2^κ ≤ M` then
+a `b`-bit interval holds at most `2^{b−κ}+1` candidates
+(`public_ap_search_bits`). A 1024-bit `N` is two ≥512-bit
+primes (`regime_1024`). Catalog attacks contribute 0 bits of
+handle. The remaining generic cost is factoring `N`, minus this
+AP discount when `M` is public. If `M` is per-key secret, that
+discount is not free.
+
+CAS `28`: slot `(r,s,a) = (3,5,19)`, `M = 60`; `k = 0,1` give
+19 and 79, both Blum and strong at `B = 2`.
+
