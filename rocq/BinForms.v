@@ -611,11 +611,157 @@ Proof.
 Qed.
 
 (** Inverse composition preserves the discriminant as a theorem.
-    The two-form Dirichlet branch still asks for [compose_preserves_disc]
-    when neither leading coefficient is a unit. *)
+    Two-form Dirichlet when a leading coefficient is a unit is
+    [compose_id_left].  Self-composition of a construction-side
+    ambiguous form ([b = 0] or [a = ±b]) has leading coefficient 1
+    and is therefore principal.  The remaining two-form branch
+    (neither leading coefficient a unit, not an inverse pair) is
+    still named. *)
 Definition compose_preserves_disc (f g : bqf) : Prop :=
   bqf_disc (bqf_compose f g) = bqf_disc f /\
   bqf_primitive (bqf_compose f g).
+
+Definition bqf_ambiguous_div (f : bqf) : Prop :=
+  bqf_b f = 0 \/ bqf_a f = bqf_b f \/ bqf_a f = - bqf_b f.
+
+Lemma ambiguous_div_is_ambiguous :
+  forall f, bqf_ambiguous_div f -> bqf_ambiguous f.
+Proof. intros f [H|[H|H]]; unfold bqf_ambiguous; auto. Qed.
+
+Lemma solve_cong_target_0 :
+  forall a m, solve_cong a m 0 = 0.
+Proof.
+  intros a m. unfold solve_cong.
+  destruct (Z.ggcd a m) as [d [u _]].
+  assert (0 / d = 0) as Hz.
+  { destruct (Z.eq_dec d 0) as [Hd|Hd]; [subst; reflexivity|].
+    apply Z.div_0_l. exact Hd. }
+  rewrite Hz. ring.
+Qed.
+
+Lemma compose_self_gcd_div :
+  forall f,
+    bqf_ambiguous_div f ->
+    bqf_comp_gcd f f = Z.abs (bqf_a f).
+Proof.
+  intros [a b c] [Hb0 | [Hab | Hanb]];
+    unfold bqf_comp_gcd; cbn [bqf_a bqf_b] in *.
+  - rewrite Hb0, Z.add_0_l, Z.div_0_l by lia.
+    rewrite Z.gcd_diag, Z.gcd_0_r, Z.abs_idemp. reflexivity.
+  - subst b. replace ((a + a) / 2) with a by (apply Z.div_unique with 0; lia).
+    rewrite Z.gcd_diag, Z.gcd_comm, Z.gcd_abs_r, Z.gcd_diag. reflexivity.
+  - subst a.
+    rewrite Z.gcd_diag.
+    replace ((b + b) / 2) with b by (apply Z.div_unique with 0; lia).
+    rewrite Z.gcd_abs_l, Z.gcd_opp_l, Z.gcd_diag, Z.abs_opp. reflexivity.
+Qed.
+
+Lemma dirichlet_B_self_div :
+  forall f, dirichlet_B f f = bqf_b f.
+Proof.
+  intros f. unfold dirichlet_B.
+  destruct (Z.abs (bqf_a f) =? 1); [reflexivity|].
+  rewrite Z.sub_diag. rewrite Z.div_0_l by lia.
+  rewrite solve_cong_target_0. ring.
+Qed.
+
+Theorem compose_self_leading_one :
+  forall f,
+    bqf_a f <> 0 ->
+    bqf_ambiguous_div f ->
+    bqf_a (bqf_compose f f) = 1.
+Proof.
+  intros f Ha Hdiv.
+  unfold bqf_compose. rewrite compose_self_gcd_div by exact Hdiv.
+  destruct f as [a b c]. cbn [bqf_a] in *.
+  rewrite Z.abs_square. apply Z.div_same. nia.
+Qed.
+
+Lemma compose_self_b :
+  forall f, bqf_b (bqf_compose f f) = bqf_b f.
+Proof.
+  intros f. unfold bqf_compose. apply dirichlet_B_self_div.
+Qed.
+
+Lemma compose_self_c :
+  forall f,
+    bqf_a f <> 0 ->
+    bqf_ambiguous_div f ->
+    bqf_c (bqf_compose f f) =
+      (bqf_b f * bqf_b f - bqf_disc f) / 4.
+Proof.
+  intros f Ha Hdiv.
+  unfold bqf_compose.
+  rewrite compose_self_gcd_div by exact Hdiv.
+  rewrite dirichlet_B_self_div.
+  destruct f as [a b c]. cbn [bqf_a bqf_b bqf_c] in *.
+  rewrite Z.abs_square, Z.div_same by nia.
+  rewrite Z.mul_1_r. reflexivity.
+Qed.
+
+Lemma four_divides_b2_minus_disc :
+  forall f, (4 | bqf_b f * bqf_b f - bqf_disc f).
+Proof.
+  intros f. unfold bqf_disc.
+  exists (bqf_a f * bqf_c f). ring.
+Qed.
+
+Theorem compose_self_of_disc :
+  forall f D,
+    iq_disc D ->
+    of_disc f D ->
+    bqf_ambiguous_div f ->
+    of_disc (bqf_compose f f) D.
+Proof.
+  intros f D Hiq Hof Hdiv.
+  pose proof (of_disc_a_nz f D Hof (proj1 Hiq)) as Ha.
+  destruct Hof as [Hdisc _].
+  split.
+  - unfold bqf_disc.
+    rewrite compose_self_leading_one by assumption.
+    rewrite compose_self_b, compose_self_c by assumption.
+    rewrite Hdisc.
+    apply reconstruct_disc_div4.
+    rewrite <- Hdisc. apply four_divides_b2_minus_disc.
+  - unfold bqf_primitive.
+    rewrite compose_self_leading_one by assumption.
+    rewrite Z.gcd_1_l. apply Z.gcd_1_l.
+Qed.
+
+Theorem compose_self_ambiguous_equiv_id :
+  forall f D,
+    iq_disc D ->
+    of_disc f D ->
+    bqf_ambiguous_div f ->
+    bqf_equiv (bqf_compose f f) (bqf_id D).
+Proof.
+  intros f D Hiq Hof Hdiv.
+  apply form_a_one_equiv_id; [exact Hiq | apply compose_self_of_disc; assumption |].
+  apply compose_self_leading_one;
+    [apply (of_disc_a_nz f D Hof (proj1 Hiq)) | exact Hdiv].
+Qed.
+
+(** Associativity of Dirichlet composition is named, except on
+    the triple [{id, f, f⁻¹}] where the identity laws suffice. *)
+Definition compose_assoc_named (D : Z) : Prop :=
+  forall f g h,
+    of_disc f D -> of_disc g D -> of_disc h D ->
+    bqf_equiv (bqf_compose (bqf_compose f g) h)
+              (bqf_compose f (bqf_compose g h)).
+
+Theorem compose_assoc_id_inv :
+  forall D f,
+    iq_disc D ->
+    of_disc f D ->
+    bqf_compose (bqf_compose (bqf_id D) f) (bqf_inv f) =
+      bqf_compose (bqf_id D) (bqf_compose f (bqf_inv f)).
+Proof.
+  intros D f Hiq Hof.
+  rewrite (compose_id_left D f Hiq Hof).
+  rewrite (compose_id_left D (bqf_compose f (bqf_inv f)) Hiq).
+  - reflexivity.
+  - apply compose_inv_of_disc; assumption.
+Qed.
 
 (** ** Ambiguous forms from a divisor of [Δ] *)
 
@@ -866,6 +1012,28 @@ Lemma bqf_exp_1 :
 Proof.
   intros D f Hiq Hof. simpl.
   apply compose_id_left; assumption.
+Qed.
+
+Lemma bqf_exp_2 :
+  forall D f,
+    iq_disc D ->
+    of_disc f D ->
+    bqf_exp D f 2 = bqf_compose f f.
+Proof.
+  intros D f Hiq Hof. simpl.
+  rewrite compose_id_left by assumption. reflexivity.
+Qed.
+
+Theorem bqf_exp_2_ambiguous_div :
+  forall f D,
+    iq_disc D ->
+    of_disc f D ->
+    bqf_ambiguous_div f ->
+    bqf_equiv (bqf_exp D f 2) (bqf_id D).
+Proof.
+  intros f D Hiq Hof Hdiv.
+  rewrite bqf_exp_2 by assumption.
+  apply compose_self_ambiguous_equiv_id; assumption.
 Qed.
 
 Theorem no_crt_split_on_forms :
