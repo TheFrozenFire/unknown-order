@@ -155,5 +155,69 @@ Theorem lucas_period_is_cyc2 :
 Proof. reflexivity. Qed.
 
 (** Williams evaluation [V_{p+1} ≡ 2 (mod p)] when [P²−4] is a QNR
-    remains named: it needs [V_n(a+a⁻¹) = a^n+a⁻ⁿ] in [F_{p²}].
+    is a named hypothesis: it needs [V_n(a+a⁻¹) = a^n+a⁻ⁿ] in
+    [F_{p²}].  Multiples of the period are a theorem from addition.
     CAS [cas/22] checks the evaluation on Blum and safe primes. *)
+
+Definition williams_eval (P p : Z) : Prop :=
+  2 < p /\ lucasV P 1 (Z.to_nat (p + 1)) mod p = 2.
+
+Lemma lucasV_add_Q1 :
+  forall P m n,
+    (n <= m)%nat ->
+    lucasV P 1 (m + n) =
+      lucasV P 1 m * lucasV P 1 n - lucasV P 1 (m - n).
+Proof.
+  intros P m n H.
+  rewrite (lucasV_add P 1 m n H), Z.pow_1_l by lia. ring.
+Qed.
+
+Theorem williams_eval_k_times :
+  forall P p k,
+    williams_eval P p ->
+    lucasV P 1 (k * Z.to_nat (p + 1)) mod p = 2.
+Proof.
+  intros P p k [Hp Hev].
+  set (t := Z.to_nat (p + 1)) in *.
+  assert (Ht : (0 < t)%nat).
+  { unfold t. apply Nat2Z.inj_lt. rewrite Z2Nat.id; lia. }
+  induction k as [k IH] using (well_founded_ind lt_wf).
+  destruct k as [| k'].
+  - rewrite Nat.mul_0_l, lucasV_0. apply Z.mod_small. lia.
+  - destruct k' as [| k''].
+    + rewrite Nat.mul_1_l. exact Hev.
+    + replace (S (S k'') * t)%nat with (S k'' * t + t)%nat by lia.
+      rewrite lucasV_add_Q1 by (apply Nat.le_trans with (S k'' * t)%nat; nia).
+      replace (S k'' * t - t)%nat with (k'' * t)%nat by lia.
+      rewrite Zminus_mod, Z.mul_mod by lia.
+      rewrite (IH (S k'') ltac:(lia)), (IH k'' ltac:(lia)), Hev.
+      change (2 * 2) with 4.
+      rewrite <- (Z.mod_small 2 p ltac:(lia)) at 1.
+      rewrite <- Zminus_mod.
+      apply Z.mod_small; lia.
+Qed.
+
+Theorem williams_eval_on_multiples :
+  forall P p M,
+    williams_eval P p ->
+    0 <= M ->
+    (p + 1 | M) ->
+    lucasV P 1 (Z.to_nat M) mod p = 2.
+Proof.
+  intros P p M Hev HM [k Hk].
+  pose proof Hev as [Hp _].
+  assert (0 <= k) by nia.
+  rewrite Hk.
+  assert (Z.to_nat (k * (p + 1)) = Z.to_nat k * Z.to_nat (p + 1))%nat.
+  { apply Z2Nat.inj_mul; lia. }
+  rewrite H0.
+  apply williams_eval_k_times. exact Hev.
+Qed.
+
+Theorem pp1_resistant_is_torus_period :
+  forall p B, pp1_resistant p B <-> has_large_prime_factor (p + 1) B.
+Proof. intros. reflexivity. Qed.
+
+Theorem typeB_n2_is_williams_period :
+  forall p M, cyc_handle (cyc2 p) M <-> 0 <= M /\ (p + 1 | M).
+Proof. intros. apply williams_handle_is_cyc2. Qed.
