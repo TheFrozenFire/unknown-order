@@ -67,11 +67,11 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ✅ `(2/p)` as a theorem (`two_supplement`); Euler `±1` and QNR-from-minus (`QuadRecip`)
 - ⬜ Principal-root convention, hash wrapper, signature game
 
-## 2.8 2-primary structure of `(ℤ/Nℤ)*` ✅ (cyclicity named, not proved)
+## 2.8 2-primary structure of `(ℤ/Nℤ)*` ✅ (`cyclic_units_holds`)
 
 - ✅ `v₂(p−1)` including the mod-8 table; `v₂(λ) = max`; `v₂` is a valuation
 - ✅ Four constructed square roots of 1; mixed roots split `N`
-- ✅ 2-height exists; same-`t` under `cyclic_units`; mismatch splits `N`
+- ✅ 2-height exists; same-`t` is `cyclic_same_t` via `cyclic_units_holds`; mismatch splits `N`
 - ✅ Miller-from-`d` is that corollary (`MillerHeight`)
 - ✅ Cyclic-model mismatch rates, including 150/158 (`CyclicCount`)
 - ✅ KeyGen rulers: Blum, unbalanced, matched-deep, both-deep
@@ -280,13 +280,13 @@ becomes public — Type A on a different presentation, already in the catalog.
 **Week 1 — Two-form Dirichlet.** `BinForms.v`; grow `cas/23`.
 - `compose_preserves_disc` when discs match and the existing `n`-formula applies:
   `4 a_new | (B²−Δ)`; primitivity if both inputs are primitive.
-- Associativity named, or proved only for `{id, f, f⁻¹}`. No Bhargava cubes.
+- Associativity still named for two non-unit non-inverse forms, or proved only for `{id, f, f⁻¹}`. No Bhargava cubes.
 - Outcome: `bqf_exp` of an ambiguous form at `2` is equivalent to the identity
   without a catalog `vm_compute`.
 
 **Week 2 — Williams as an evaluation, not a definition.** `Lucas.v`,
 `StrongPrimes.v`; grow `cas/22`.
-- Addition + doubling give `V_{k(p+1)} ≡ 2 (mod p)` from a named QNR/Euler
+- Addition + doubling give `V_{k(p+1)} ≡ 2 (mod p)` from `williams_eval_of_qnr`
   hypothesis (`V_{p+1} ≡ 2`), not a new Gauss development.
 - `pp1_resistant` becomes “the torus period is not `B`-smooth”.
 - Outcome: Type B at `n = 2` is an evaluation theorem. Shrinks the §2.5 skip.

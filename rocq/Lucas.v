@@ -19,7 +19,7 @@ Open Scope Z_scope.
     [V_{m+n} = V_m V_n − Q^n V_{m−n}] ([n ≤ m]) and doubling as
     a corollary.  Whether [P²−4] is a QNR is now a theorem
     ([euler_minus_implies_qnr]).  The evaluation [V_{p+1} ≡ 2]
-    still names the [F_{p²}] identity [V_n(α+α⁻¹)=αⁿ+α⁻ⁿ].
+    is [williams_eval_of_qnr] in [Fp2.v].
     Cross-confirmed by [cas/22_lucas.gp]. *)
 
 Fixpoint lucasV (P Q : Z) (n : nat) : Z :=
@@ -156,9 +156,9 @@ Theorem lucas_period_is_cyc2 :
   forall p, lucas_period p = cyc2 p.
 Proof. reflexivity. Qed.
 
-(** Williams evaluation [V_{p+1} ≡ 2 (mod p)] when [P²−4] is a QNR
-    is a named hypothesis: it needs [V_n(a+a⁻¹) = a^n+a⁻ⁿ] in
-    [F_{p²}].  Multiples of the period are a theorem from addition.
+(** Williams evaluation [V_{p+1} ≡ 2 (mod p)] when [euler_crit
+    (P²−4) p = p−1] is [williams_eval_of_qnr] in [Fp2.v].
+    Multiples of the period are a theorem from addition.
     CAS [cas/22] checks the evaluation on Blum and safe primes. *)
 
 Definition williams_eval (P p : Z) : Prop :=

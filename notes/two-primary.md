@@ -61,4 +61,6 @@ from `a^M ≡ 1`. A mismatch splits `N` (`MillerHeight.v`).
 
 Cyclic-model theorem (`CyclicCount.miller_150_of_158`): 150
 mismatches among 160 units, ±1 always match so 158 in `{2,…,N−2}`.
-Cyclicity is named (`cyclic_units`), not proved.
+Height-stability when `odd_part(p−1) | t` is `cyclic_units_holds`
+(Fermat plus a least positive order; a primitive root is not
+required).

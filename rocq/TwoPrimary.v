@@ -17,10 +17,11 @@ Open Scope Z_scope.
     Rabin–Williams are the same algebra here: the 2-Sylow of the
     unit group, read off [v₂(p−1)] and [v₂(q−1)].
 
-    Cyclicity of [(Z/pZ)*] is not assumed.  What is proved is the
-    valuation arithmetic, the four square roots of 1, a 2-height
-    for a unit, and that mismatched heights split [N].  Blum /
-    Williams is the case [(v₂, v₂) = (1, 1)].
+    Height-stability when [odd_part(p−1) | t] is
+    [cyclic_units_holds] (Fermat plus a least positive order).
+    What else is proved is the valuation arithmetic, the four
+    square roots of 1, a 2-height for a unit, and that mismatched
+    heights split [N].  Blum / Williams is [(v₂, v₂) = (1, 1)].
 
     Cross-confirmed by [cas/20_two_primary.gp]. *)
 
@@ -657,9 +658,10 @@ Proof.
     apply (Hmin j Hj). exact Hpow.
 Qed.
 
-(** Cyclicity of [(Z/pZ)*], as used here: once [t] is an odd
-    multiple of [odd_part(p−1)], heights at [t] agree with heights
-    at [odd_part(p−1)].  Not proved. *)
+(** Height-stability used in-corpus: once [t] is an odd multiple
+    of [odd_part(p−1)], heights at [t] agree with heights at
+    [odd_part(p−1)].  Fermat plus a least positive order suffice;
+    a primitive root is not required. *)
 Definition cyclic_units (p : Z) : Prop :=
   forall a t,
     Z.coprime a p ->
@@ -668,10 +670,224 @@ Definition cyclic_units (p : Z) : Prop :=
     Z.divide (odd_part (p - 1)) t ->
     height_stable_under a (odd_part (p - 1)) t p.
 
+(** The Prop only asks for height-stability when [odd_part(p−1) | t].
+    That follows from Fermat plus existence of a multiplicative
+    order; a primitive root is not required. *)
+
+Lemma unit_pow_pm1 :
+  forall a p,
+    Z.prime p ->
+    Z.coprime a p ->
+    powm a (p - 1) p = 1.
+Proof. intros. apply fermat_coprime; assumption. Qed.
+
+Fixpoint min_from (P : nat -> bool) (fuel start : nat) : nat :=
+  match fuel with
+  | O => start
+  | S fuel' =>
+      if P start then start else min_from P fuel' (S start)
+  end.
+
+Lemma min_from_spec :
+  forall (P : nat -> bool) fuel start n,
+    (start <= n)%nat ->
+    (n < start + fuel)%nat ->
+    P n = true ->
+    let m := min_from P fuel start in
+    P m = true /\ (start <= m <= n)%nat /\
+    (forall k, (start <= k < m)%nat -> P k = false).
+Proof.
+  intros P fuel.
+  induction fuel as [| fuel IH]; intros start n Hle Hlt Hn m.
+  - subst m. simpl. lia.
+  - subst m. simpl.
+    destruct (P start) eqn:Hs.
+    + split; [exact Hs|]. split; [lia|].
+      intros k Hk. lia.
+    + destruct (Nat.eq_dec start n).
+      * subst start. rewrite Hn in Hs. discriminate.
+      * specialize (IH (S start) n).
+        assert (S start <= n)%nat by lia.
+        assert (n < S start + fuel)%nat by lia.
+        destruct (IH H H0 Hn) as [Hm [Hbd Hmin]].
+        split; [exact Hm|]. split; [lia|].
+        intros k Hk.
+        destruct (Nat.eq_dec k start).
+        -- subst k. exact Hs.
+        -- apply Hmin. lia.
+Qed.
+
+Lemma unit_has_min_order :
+  forall a p,
+    Z.prime p ->
+    Z.coprime a p ->
+    exists d : Z,
+      0 < d /\
+      powm a d p = 1 /\
+      (forall j, 0 < j < d -> powm a j p <> 1).
+Proof.
+  intros a p Hp Hcop.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (fermat_coprime p a Hp Hcop) as Hpm1.
+  set (P := fun n : nat =>
+              if powm a (Z.of_nat (S n)) p =? 1 then true else false).
+  assert (HP : P (Z.to_nat (p - 2)) = true).
+  { unfold P.
+    replace (Z.of_nat (S (Z.to_nat (p - 2)))) with (p - 1).
+    2: { rewrite Nat2Z.inj_succ, Z2Nat.id; lia. }
+    rewrite Hpm1. reflexivity. }
+  pose proof (min_from_spec P (S (Z.to_nat (p - 2))) 0%nat
+                (Z.to_nat (p - 2)) ltac:(lia) ltac:(lia) HP)
+    as [Hm [Hbd Hmin]].
+  set (m := min_from P (S (Z.to_nat (p - 2))) 0%nat) in *.
+  exists (Z.of_nat (S m)).
+  split; [lia|].
+  split.
+  - unfold P in Hm.
+    destruct (powm a (Z.of_nat (S m)) p =? 1) eqn:He; [| discriminate].
+    apply Z.eqb_eq in He. exact He.
+  - intros j [Hj0 Hjlt] Habs.
+    assert (Z.to_nat (j - 1) < m)%nat by lia.
+    specialize (Hmin (Z.to_nat (j - 1))).
+    assert (Hbdj : (0 <= Z.to_nat (j - 1) < m)%nat) by lia.
+    specialize (Hmin Hbdj).
+    unfold P in Hmin.
+    replace (Z.of_nat (S (Z.to_nat (j - 1)))) with j in Hmin by lia.
+    rewrite Habs in Hmin. simpl in Hmin. discriminate.
+Qed.
+
+Lemma powm_order_divides :
+  forall a p d N,
+    1 < p ->
+    0 < d ->
+    0 <= N ->
+    powm a d p = 1 ->
+    (forall j, 0 < j < d -> powm a j p <> 1) ->
+    powm a N p = 1 ->
+    (d | N).
+Proof.
+  intros a p d N Hp Hd HN Hord Hmin Hpow.
+  pose proof (Z.div_mod N d ltac:(lia)) as Hdm.
+  set (q := N / d). set (r := N mod d).
+  assert (0 <= r < d) by (apply Z.mod_pos_bound; lia).
+  assert (powm a r p = 1).
+  { rewrite Hdm in Hpow.
+    assert (0 <= q) by (apply Z.div_pos; lia).
+    rewrite powm_add_r in Hpow by lia.
+    rewrite powm_mul_r in Hpow by lia.
+    rewrite Hord, powm_1_pow in Hpow by lia.
+    rewrite Z.mul_mod_idemp_l in Hpow by lia.
+    rewrite Z.mul_1_l in Hpow.
+    unfold powm in Hpow. rewrite Z.mod_mod in Hpow by lia.
+    unfold powm. exact Hpow. }
+  destruct (Z.eq_dec r 0).
+  - exists q. rewrite Hdm. unfold r in e. rewrite e, Z.add_0_r.
+    unfold q. ring.
+  - exfalso. apply (Hmin r); [lia | exact H0].
+Qed.
+
+Lemma odd_part_of_divisor :
+  forall d n,
+    0 < d ->
+    0 < n ->
+    (d | n) ->
+    (odd_part d | odd_part n).
+Proof.
+  intros d n Hd Hn [k Hk].
+  assert (0 < k) by nia.
+  rewrite Hk, odd_part_mul by lia.
+  exists (odd_part k). reflexivity.
+Qed.
+
+Lemma pow2_divides_pow2 :
+  forall h j,
+    (2 ^ Z.of_nat h | 2 ^ Z.of_nat j) ->
+    (h <= j)%nat.
+Proof.
+  intros h j [k Hk].
+  destruct (Nat.le_ge_cases h j) as [Hle | Hge]; [exact Hle|].
+  destruct (Nat.eq_dec h j) as [Heq | Hne]; [lia|].
+  assert (Z.of_nat j < Z.of_nat h) by lia.
+  assert (2 ^ Z.of_nat h =
+            2 ^ Z.of_nat j * 2 ^ (Z.of_nat h - Z.of_nat j)) as Hsplit.
+  { rewrite <- Z.pow_add_r by lia. f_equal. lia. }
+  rewrite Hsplit in Hk.
+  assert (2 ^ Z.of_nat j *
+            (1 - k * 2 ^ (Z.of_nat h - Z.of_nat j)) = 0) by nia.
+  assert (0 < 2 ^ Z.of_nat j) by (apply Z.pow_pos_nonneg; lia).
+  assert (1 < 2 ^ (Z.of_nat h - Z.of_nat j)).
+  { apply Z.pow_gt_1; lia. }
+  assert (1 - k * 2 ^ (Z.of_nat h - Z.of_nat j) = 0) by nia.
+  assert (k * 2 ^ (Z.of_nat h - Z.of_nat j) = 1) as Hprod by lia.
+  destruct (Z.lt_trichotomy k 0) as [Hkneg | [Hk0 | Hkpos]].
+  - assert (k * 2 ^ (Z.of_nat h - Z.of_nat j) < 0).
+    { apply Z.mul_neg_pos; [exact Hkneg | apply Z.pow_pos_nonneg; lia]. }
+    lia.
+  - subst k. lia.
+  - assert (1 <= k) by lia.
+    assert (1 * 2 ^ (Z.of_nat h - Z.of_nat j) <=
+              k * 2 ^ (Z.of_nat h - Z.of_nat j)).
+    { apply Z.mul_le_mono_nonneg_r; [apply Z.lt_le_incl; apply Z.pow_pos_nonneg; lia | lia]. }
+    lia.
+Qed.
+
+Lemma pow2_cancel_odd :
+  forall h t j,
+    0 < t ->
+    Z.Odd t ->
+    (2 ^ Z.of_nat h | t * 2 ^ Z.of_nat j) ->
+    (2 ^ Z.of_nat h | 2 ^ Z.of_nat j).
+Proof.
+  intros h t j Ht Hot [k Hk].
+  apply Z.gauss with t.
+  - exists k. rewrite Z.mul_comm, <- Hk. ring.
+  - rewrite Z.gcd_comm.
+    apply odd_coprime_pow2; [exact Hot | lia].
+Qed.
+
+Theorem cyclic_units_holds :
+  forall p, Z.prime p -> cyclic_units p.
+Proof.
+  intros p Hp a t Hcop Ht Hot [u Hu].
+  unfold height_stable_under.
+  intros j Hpow.
+  pose proof (Z.prime_ge_2 p Hp) as Hp2.
+  destruct (unit_has_min_order a p Hp Hcop) as [d [Hd [Hord Hmin]]].
+  assert (Hdp : (d | p - 1)).
+  { apply (powm_order_divides a p d (p - 1)); try lia; try assumption.
+    apply fermat_coprime; assumption. }
+  assert (Hdt : (d | t * pow2n j)).
+  { apply (powm_order_divides a p d (t * pow2n j)); try lia; try assumption.
+    apply Z.mul_nonneg_nonneg; [lia | pose proof (pow2n_pos j); lia]. }
+  pose proof (split2_of_reconstructs d ltac:(lia)) as Hdr.
+  pose proof (odd_part_pos d Hd) as Hdo.
+  pose proof (odd_part_odd d Hd) as Hdoo.
+  pose proof (odd_part_of_divisor d (p - 1) Hd ltac:(lia) Hdp) as Hodd_div.
+  assert (H2d : (2 ^ Z.of_nat (val2 d) | t * pow2n j)).
+  { destruct Hdt as [k Hk]. exists (k * odd_part d).
+    rewrite Hk. rewrite Hdr at 1. ring. }
+  unfold pow2n in H2d.
+  assert (H2j : (2 ^ Z.of_nat (val2 d) | 2 ^ Z.of_nat j)).
+  { apply (pow2_cancel_odd (val2 d) t j); [lia | exact Hot | exact H2d]. }
+  assert (Hh : (val2 d <= j)%nat) by (apply pow2_divides_pow2; exact H2j).
+  assert (Hwant : (d | odd_part (p - 1) * pow2n j)).
+  { destruct Hodd_div as [s Hs].
+    destruct H2j as [q Hq].
+    exists (s * q). rewrite Hdr. unfold pow2n.
+    rewrite Hs, Hq. ring. }
+  destruct Hwant as [k Hk].
+  rewrite Hk, Z.mul_comm.
+  assert (0 <= k).
+  { assert (0 < odd_part (p - 1)) by (apply odd_part_pos; lia).
+    pose proof (pow2n_pos j). nia. }
+  pose proof (powm_one_mul a d k p ltac:(lia) ltac:(lia) ltac:(lia) Hord)
+    as H1.
+  rewrite Z.mod_1_l in H1 by lia. exact H1.
+Qed.
+
 Theorem cyclic_same_t :
   forall p a t k,
     Z.prime p ->
-    cyclic_units p ->
     Z.coprime a p ->
     0 < t ->
     Z.Odd t ->
@@ -679,7 +895,8 @@ Theorem cyclic_same_t :
     two_height a (odd_part (p - 1)) p k ->
     two_height a t p k.
 Proof.
-  intros p a t k Hp Hcyc Hcop Ht Hot Hdiv Hht.
+  intros p a t k Hp Hcop Ht Hot Hdiv Hht.
+  pose proof (cyclic_units_holds p Hp) as Hcyc.
   destruct Hdiv as [u Hu].
   assert (0 < odd_part (p - 1)).
   { pose proof (Z.prime_ge_2 p Hp). apply odd_part_pos. lia. }

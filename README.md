@@ -43,12 +43,15 @@ track: there is no bytecode.
 ## What is proved
 
 Headline theorems close under the global context unless a skip is named.
-Skips that stay named: cyclicity of `(ℤ/pℤ)*` (used only for counts),
-LLL / Coppersmith, Pratt completeness, Dirichlet associativity of two
-non-unit non-inverse forms, sequentiality, the random oracle, and the
-`F_{p²}` identity inside `williams_eval`. Gauss `(2/p)` and Euler
-`±1` / QNR-from-minus-one are theorems (`QuadRecip.v`). Hash-to-prime
-is two named encodings (`THEORY.md` §21), not a blank skip.
+Skips that stay named: LLL / Coppersmith, Pratt completeness,
+Dirichlet associativity of two non-unit non-inverse forms,
+sequentiality, and the random oracle. Cyclicity of `(ℤ/pℤ)*` as
+used in-corpus (`cyclic_units` / `height_stable`) is
+`cyclic_units_holds`. The Williams evaluation `V_{p+1} ≡ 2` when
+`P²−4` is a QNR is `williams_eval_of_qnr` (`Fp2.v`). Gauss `(2/p)`
+and Euler `±1` / QNR-from-minus-one are theorems (`QuadRecip.v`).
+Hash-to-prime is two named encodings (`THEORY.md` §21), not a blank
+skip.
 
 ### RSA and the annihilator
 

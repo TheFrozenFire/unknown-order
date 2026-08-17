@@ -35,6 +35,7 @@ MultiPrime.v
 MillerHeight.v
 CyclicCount.v
 Lucas.v
+Fp2.v
 BinForms.v
 ClassGroupWall.v
 Presentation.v

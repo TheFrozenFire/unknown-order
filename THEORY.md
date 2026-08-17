@@ -1225,8 +1225,9 @@ The frequencies and the three mismatch rates are theorems about
 the *model* (`CyclicCount.v`: `cyclic_mismatch_11_17`,
 `miller_150_of_158`, `blum_mismatch_is_half`,
 `cyclic_mismatch_33_is_21_32`). Realization that `(ℤ/pℤ)*`
-attains those counts is the named hypothesis `cyclic_units`
-plus CAS exhaustion. Cyclicity of `(ℤ/pℤ)*` is not proved.
+attains those counts is `cyclic_units_holds` (Fermat plus a least
+positive order; a primitive root is not required)
+plus CAS exhaustion. A generator of `(ℤ/pℤ)*` is not constructed.
 
 Checked exhaustively:
 
@@ -1283,7 +1284,7 @@ annihilator you already have (`ed−1`) of disagreeing 2-heights.
 Machine-checked: `v₂(lcm) = max` and `v₂` is a valuation;
 `v₂(λ) = max`; the mod-8 table; 2-height existence from
 `a^{t 2^s} ≡ 1` and from Fermat; same-`t` under the named
-hypothesis `cyclic_units`; Miller-from-`d` as height mismatch
+theorem `cyclic_units_holds`; Miller-from-`d` as height mismatch
 on `odd_part(M)`; the cyclic-model counts including 150/158;
 forced `p ≡ q ≡ 1 (mod 2^d)` is `both_deep`.
 
@@ -1434,10 +1435,9 @@ with `λ`. Hash-to-prime is a named skip.
 `forged_mem_is_adaptive_root`, `cl_has_no_lambda_plus_one`,
 `rsa_lambda_solves_adaptive_root`) is **Closed under the global
 context**. Remaining named hypotheses, not used by those
-theorems: cyclicity of `(ℤ/pℤ)*` (counts only), QNR evaluation
-of Lucas `V_{p+1}` (CAS-pinned), and
-`compose_preserves_disc` for the two-form Dirichlet branch
-when neither leading coefficient is a unit. Identity
+theorems: Dirichlet associativity of two non-unit non-inverse
+forms, and `compose_preserves_disc` for the two-form Dirichlet
+branch when neither leading coefficient is a unit. Identity
 composition is a theorem (`compose_id_left`). Inverse
 composition lands back on `Δ` (`compose_inv_of_disc`) and is
 equivalent to the identity (`compose_inv_equiv_id`) — no extra
@@ -1498,8 +1498,9 @@ CAS: `V_{N+1} ≢ 2 (mod N)`). If Fermat leaks `p+q`, the torus
 period is public (`fermat_leak_is_torus_period`) — Type A on
 this presentation, already in the catalog.
 
-Type B at `n = 2` is native: `williams_eval` (`V_{p+1} ≡ 2`)
-lifts to every multiple (`williams_eval_on_multiples`).
+Type B at `n = 2` is native: `williams_eval_of_qnr` (`V_{p+1} ≡ 2`
+when `euler_crit (P²−4) p = p−1`) lifts to every multiple
+(`williams_eval_on_multiples`).
 One-sided `V_M ≡ 2 (mod p)` and not `(mod q)` means `p` divides
 `V_M−2` and `N` does not (`williams_onesided_gcd`,
 `williams_onesided_not_full_N`). The CRT-split arrow exists
@@ -1527,9 +1528,12 @@ exponents / `(V,U)` pairs (`lucas_pt`, `lp_inv`).
 `three_prime_sqrt1_is_pm1_each`,
 `lucas_eval_annihilator_is_not_N_plus_one`,
 `williams_onesided_gcd`, `fermat_leak_is_torus_period`)
-should be closed or list only the named `F_{p²}` identity inside
-`williams_eval`. Remaining named: Dirichlet associativity of two
-non-unit non-inverse forms; cyclicity of `(ℤ/pℤ)*`. Gauss
+should be closed. `williams_eval` is now a theorem
+(`williams_eval_of_qnr`: `V_{p+1} ≡ 2` when `euler_crit (P²−4) p =
+p−1`, via `F_p[√D]` and Freshman's dream). Cyclicity as used
+in-corpus is `cyclic_units_holds` (Fermat plus a least positive
+order; a primitive root is not required). Remaining named:
+Dirichlet associativity of two non-unit non-inverse forms. Gauss
 `(2/p)` is `two_supplement`.
 
 ## 20. A constructor, not a filter
