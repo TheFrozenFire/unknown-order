@@ -3,6 +3,7 @@ From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
+Require Import RocqProofs.QuadRecip.
 Require Import QuadResidue.
 Require Import Hardness.
 
@@ -102,11 +103,10 @@ Qed.
 (** ** Williams tweak: among [{±a, ±2a}] exactly one Legendre pair
     is [(+1,+1)], once the mod-8 symbols are the Williams ones.
 
-    The symbols themselves for [2] are the classical
-    [(2/p) = (−1)^{(p²−1)/8}] — not proved here (Gauss).  We take
-    them as the generation-side values that [p ≡ 3 (mod 8)] and
-    [q ≡ 7 (mod 8)] are chosen to force, and prove the
-    combinatorics.  [(−1/p) = −1] *is* proved ([neg1_euler_mod4_3]). *)
+    The symbols for [2] are the classical
+    [(2/p) = (−1)^{(p²−1)/8}], now a theorem ([two_supplement],
+    [two_legendre_williams_p], [two_legendre_williams_q]).
+    [(−1/p) = −1] when [p ≡ 3 (mod 4)] is [neg1_euler_mod4_3]. *)
 
 Definition legs_a   (ap aq : Z) : Z * Z := (ap, aq).
 Definition legs_neg (ap aq : Z) : Z * Z := (- ap, - aq).
@@ -182,6 +182,25 @@ Proof.
   unfold williams_which, both_qr, legs_a, legs_neg, legs_2, legs_m2.
   destruct Hap as [Hp | Hp]; destruct Haq as [Hq | Hq]; subst; simpl;
     repeat split; intros; lia.
+Qed.
+
+Theorem williams_two_symbol_p :
+  forall p, Z.prime p -> p mod 8 = 3 -> legendre_two p = -1.
+Proof. apply two_legendre_williams_p. Qed.
+
+Theorem williams_two_symbol_q :
+  forall q, Z.prime q -> q mod 8 = 7 -> legendre_two q = 1.
+Proof. apply two_legendre_williams_q. Qed.
+
+Theorem williams_neg1_on_blum :
+  forall p,
+    Z.prime p ->
+    p mod 8 = 3 \/ p mod 8 = 7 ->
+    euler_crit (-1) p = p - 1.
+Proof.
+  intros p Hp [H | H].
+  - apply neg1_euler_mod4_3; [exact Hp | apply mod8_3_is_mod4_3; exact H].
+  - apply neg1_euler_mod4_3; [exact Hp | apply mod8_7_is_mod4_3; exact H].
 Qed.
 
 (** ** Rabin reduction: two non-associated square roots factor [N]

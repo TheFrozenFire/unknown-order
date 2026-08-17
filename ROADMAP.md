@@ -64,7 +64,7 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ✅ Williams combinatorics: unique QR among `{±a, ±2a}` given the mod-8 symbols
 - ✅ Rabin reduction: non-associated square roots split `N`
 - ✅ Overlap written in `THEORY.md` §10; `rsa_test` primes are *not* a Williams pair
-- ⬜ `(2/p)` as a theorem (Gauss); Euler QNR direction
+- ✅ `(2/p)` as a theorem (`two_supplement`); Euler `±1` and QNR-from-minus (`QuadRecip`)
 - ⬜ Principal-root convention, hash wrapper, signature game
 
 ## 2.8 2-primary structure of `(ℤ/Nℤ)*` ✅ (cyclicity named, not proved)

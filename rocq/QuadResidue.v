@@ -3,15 +3,16 @@ From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
+Require Import RocqProofs.QuadRecip.
 
 Open Scope Z_scope.
 
 (** * Quadratic residues and the [p ≡ 3 (mod 4)] square-root formula
 
     Building blocks for Rabin–Williams.  Euler's criterion is proved
-    in the QR direction ([a] a square ⇒ [a^{(p−1)/2} ≡ 1]).  The QNR
-    direction is not proved (it needs Gauss / a counting argument).
-    Cross-confirmed by [cas/19_rabin_williams.gp]. *)
+    both ways: a square has value [1]; value [p−1] is QNR
+    ([RocqProofs.QuadRecip]).  [(2/p) = (−1)^{(p²−1)/8}] is
+    [two_supplement].  Cross-confirmed by [cas/19_rabin_williams.gp]. *)
 
 Definition is_qr (a p : Z) : Prop :=
   exists x, (x * x) mod p = a mod p.

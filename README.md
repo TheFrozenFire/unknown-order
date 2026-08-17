@@ -43,11 +43,12 @@ track: there is no bytecode.
 ## What is proved
 
 Headline theorems close under the global context unless a skip is named.
-Skips that stay named: cyclicity of `(ℤ/pℤ)*` (used only for counts), Gauss
-`(2/p)` and the QNR direction of Euler, LLL / Coppersmith, Pratt completeness,
-Dirichlet associativity of two non-unit non-inverse forms, sequentiality,
-the random oracle. Hash-to-prime is two named encodings (`THEORY.md` §21),
-not a blank skip.
+Skips that stay named: cyclicity of `(ℤ/pℤ)*` (used only for counts),
+LLL / Coppersmith, Pratt completeness, Dirichlet associativity of two
+non-unit non-inverse forms, sequentiality, the random oracle, and the
+`F_{p²}` identity inside `williams_eval`. Gauss `(2/p)` and Euler
+`±1` / QNR-from-minus-one are theorems (`QuadRecip.v`). Hash-to-prime
+is two named encodings (`THEORY.md` §21), not a blank skip.
 
 ### RSA and the annihilator
 
@@ -125,7 +126,7 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 38 witnesses, `cas/01`–`38`.
+CAS is 39 witnesses, `cas/01`–`39`.
 
 ## Constructor (not a filter)
 

@@ -1011,8 +1011,7 @@ q ≡ 7 (mod 8)     (hence q ≡ 3 (mod 4);  (−1/q) = −1,  (2/q) = +1)
 (or the two primes swapped). The symbols for `−1` are Euler
 and are proved (`neg1_euler_mod4_3`). The symbols for `2` are
 the classical `(2/p) = (−1)^{(p²−1)/8}`; they are the reason
-for the mod-8 split, and they are not proved here (Gauss’s
-lemma). CAS pins them on the working pair `11, 23`.
+for the mod-8 split, and they are a theorem (`two_supplement`). CAS pins them on the working pair `11, 23`.
 
 Let `(a/p) = α`, `(a/q) = β` with `α, β ∈ {±1}`. The four
 tweaks have Legendre pairs
@@ -1528,10 +1527,10 @@ exponents / `(V,U)` pairs (`lucas_pt`, `lp_inv`).
 `three_prime_sqrt1_is_pm1_each`,
 `lucas_eval_annihilator_is_not_N_plus_one`,
 `williams_onesided_gcd`, `fermat_leak_is_torus_period`)
-should be closed or list only the named QNR hyp inside
+should be closed or list only the named `F_{p²}` identity inside
 `williams_eval`. Remaining named: Dirichlet associativity of two
-non-unit non-inverse forms; Gauss `(2/p)`; cyclicity of
-`(ℤ/pℤ)*`.
+non-unit non-inverse forms; cyclicity of `(ℤ/pℤ)*`. Gauss
+`(2/p)` is `two_supplement`.
 
 ## 20. A constructor, not a filter
 

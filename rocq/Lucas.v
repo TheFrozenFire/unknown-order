@@ -17,8 +17,10 @@ Open Scope Z_scope.
 
     This file proves the addition formula
     [V_{m+n} = V_m V_n − Q^n V_{m−n}] ([n ≤ m]) and doubling as
-    a corollary.  The QNR evaluation [V_{p+1} ≡ 2 (mod p)] is
-    named and CAS-pinned.  Cross-confirmed by [cas/22_lucas.gp]. *)
+    a corollary.  Whether [P²−4] is a QNR is now a theorem
+    ([euler_minus_implies_qnr]).  The evaluation [V_{p+1} ≡ 2]
+    still names the [F_{p²}] identity [V_n(α+α⁻¹)=αⁿ+α⁻ⁿ].
+    Cross-confirmed by [cas/22_lucas.gp]. *)
 
 Fixpoint lucasV (P Q : Z) (n : nat) : Z :=
   match n with
