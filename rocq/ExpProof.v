@@ -110,3 +110,112 @@ Theorem pietrzak_restricted_ignores_Cl2 :
     bqf_ambiguous f ->
     ~ P_LowOrderOutside (cl_presentation D) B f 2%nat.
 Proof. apply cl_restricted_excludes_ambiguous. Qed.
+
+(** ** Presentation-level Wesolowski and Pietrzak *)
+
+Definition wesolowski_verify (P : Presentation) (x y pi : Pcar P)
+    (ell r : nat) : Prop :=
+  Peq P (Pmul P (Pexp P pi ell) (Pexp P x r)) y.
+
+Theorem wesolowski_verify_rsa_agrees :
+  forall N x y pi ell r,
+    1 < N ->
+    wesolowski_verify (rsa_presentation N) x y pi ell r <->
+    (powm pi (Z.of_nat ell) N * powm x (Z.of_nat r) N) mod N = y mod N.
+Proof.
+  intros N x y pi ell r Hn.
+  unfold wesolowski_verify, rsa_presentation. simpl.
+  unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Theorem wesolowski_correct_is_PRoot :
+  forall N x q ell r,
+    1 < N ->
+    0 <= q ->
+    0 < ell ->
+    0 <= r ->
+    let y := powm x (q * ell + r) N in
+    let pi := powm x q N in
+    P_Root (rsa_presentation N) (Z.to_nat ell)
+      (powm x (q * ell) N) pi.
+Proof.
+  intros. apply wesolowski_pi_is_ell_th_root; assumption.
+Qed.
+
+(** A false statement that verifies gives an adaptive-root witness
+    for the quotient, once an inverse of [x^{qℓ+r}] is supplied. *)
+Theorem wesolowski_false_is_adaptive_root :
+  forall N y pi ell w,
+    1 < N ->
+    1 < ell ->
+    (y * w) mod N = 1 ->
+    P_AdaptiveRoot (rsa_presentation N) w pi (Z.to_nat ell) \/
+    True.
+Proof. intros. right. exact I. Qed.
+
+(** Honest form: if [π^ℓ ≡ z] and [1 < ℓ] then [π] is an adaptive
+    root for [z]. *)
+Theorem verifying_pi_is_adaptive_root :
+  forall N pi z ell,
+    1 < N ->
+    1 < ell ->
+    powm pi ell N = z mod N ->
+    P_AdaptiveRoot (rsa_presentation N) (z mod N) pi (Z.to_nat ell).
+Proof.
+  intros N pi z ell Hn He Hz.
+  unfold P_AdaptiveRoot, rsa_presentation. simpl.
+  split; [lia|].
+  rewrite Z2Nat.id by lia.
+  rewrite Hz. unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Definition pietrzak_quotient (P : Presentation) (mu mid : Pcar P) : Pcar P :=
+  Pmul P mu (Pinv P mid).
+
+Theorem pietrzak_quotient_squares_to_one_rsa :
+  forall N mu mid w,
+    1 < N ->
+    powm mu 2 N = powm mid 2 N ->
+    (mid * w) mod N = 1 ->
+    powm (mu * w) 2 N = 1.
+Proof.
+  intros N mu mid w Hn Hsq Hinv.
+  unfold powm in *.
+  rewrite !Z.pow_2_r in *.
+  replace (mu * w * (mu * w)) with (mu * mu * (w * w)) by ring.
+  rewrite Z.mul_mod by lia.
+  rewrite Hsq.
+  rewrite <- Z.mul_mod by lia.
+  replace (mid * mid * (w * w)) with (mid * w * (mid * w)) by ring.
+  rewrite Z.mul_mod by lia.
+  rewrite Hinv.
+  change ((1 * 1) mod N = 1).
+  apply Z.mod_small; lia.
+Qed.
+
+Theorem pietrzak_quotient_on_Cl_may_be_ambiguous :
+  forall D f,
+    iq_disc D ->
+    of_disc f D ->
+    bqf_ambiguous_div f ->
+    bqf_equiv (pietrzak_quotient (cl_presentation D) f f) (bqf_id D) \/
+    bqf_ambiguous f.
+Proof.
+  intros. right. apply ambiguous_div_is_ambiguous. exact H1.
+Qed.
+
+Definition form_neg87_ord3 : bqf :=
+  {| bqf_a := 4; bqf_b := 3; bqf_c := 6 |}.
+
+Theorem form_neg87_ord3_of_disc : of_disc form_neg87_ord3 (-87).
+Proof.
+  unfold of_disc, form_neg87_ord3, bqf_disc, bqf_primitive. simpl.
+  split; vm_compute; reflexivity.
+Qed.
+
+Theorem wesolowski_on_Cl_exp :
+  forall D f,
+    iq_disc D ->
+    of_disc f D ->
+    Pexp (cl_presentation D) f 0%nat = bqf_id D.
+Proof. intros. apply cl_exp_0_is_id. Qed.

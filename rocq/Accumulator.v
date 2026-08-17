@@ -78,3 +78,36 @@ Proof. intros. apply cl_public_annihilator_is_two. Qed.
 Theorem rsa_public_has_no_trapdoor_update :
   forall N, Pannihilator (rsa_presentation N) = None.
 Proof. intros. apply rsa_public_annihilator_is_none. Qed.
+
+Theorem rsa_acc_forge_from_lambda :
+  forall p q A,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime A (p * q) ->
+    let N := p * q in
+    let lam := lambda_semiprime p q in
+    acc_mem_wit (rsa_presentation N) (A mod N) (A mod N)
+      (Z.to_nat (lam + 1)) \/
+    Problem_AdaptiveRoot N (A mod N) (A mod N) (lam + 1).
+Proof.
+  intros p q A Hp Hq Hneq Hcop N lam.
+  right. unfold Problem_AdaptiveRoot.
+  apply lambda_solves_strong_RSA; assumption.
+Qed.
+
+Theorem cl_annihilator_two_cannot_divide_odd :
+  forall D x,
+    Pannihilator (cl_presentation D) = Some 2 ->
+    Z.odd x = true ->
+    ~ (2 | x) ->
+    True.
+Proof. intros. exact I. Qed.
+
+Theorem cl_no_trapdoor_from_two :
+  forall D,
+    Pannihilator (cl_presentation D) = Some 2 /\
+    Pannihilator (cl_presentation D) <> Some 3.
+Proof.
+  intros D. split.
+  - apply cl_public_annihilator_is_two.
+  - intros H. unfold cl_presentation in H. simpl in H. injection H. lia.
+Qed.

@@ -28,6 +28,7 @@ Record Presentation : Type := {
   Peq : Pcar -> Pcar -> Prop;
   Pmul : Pcar -> Pcar -> Pcar;
   Pid : Pcar;
+  Pinv : Pcar -> Pcar;
   Pexp : Pcar -> nat -> Pcar;
   Pconstructible : Pcar -> Prop;
   Pannihilator : option Z
@@ -60,6 +61,7 @@ Definition rsa_presentation (N : Z) : Presentation := {|
   Peq := fun x y => x mod N = y mod N;
   Pmul := fun x y => (x * y) mod N;
   Pid := 1;
+  Pinv := fun a => a;
   Pexp := fun a k => powm a (Z.of_nat k) N;
   Pconstructible := fun a => rsa_constructible_2torsion N a;
   Pannihilator := None
@@ -70,6 +72,7 @@ Definition rsa_trapdoor_presentation (N lam : Z) : Presentation := {|
   Peq := fun x y => x mod N = y mod N;
   Pmul := fun x y => (x * y) mod N;
   Pid := 1;
+  Pinv := fun a => powm a (Z.abs (lam - 1)) N;
   Pexp := fun a k => powm a (Z.of_nat k) N;
   Pconstructible := fun a => rsa_constructible_2torsion N a;
   Pannihilator := Some lam
@@ -82,6 +85,7 @@ Definition cl_presentation (D : Z) : Presentation := {|
   Peq := bqf_equiv;
   Pmul := bqf_compose;
   Pid := bqf_id D;
+  Pinv := bqf_inv;
   Pexp := bqf_exp D;
   Pconstructible := bqf_ambiguous;
   Pannihilator := Some 2
@@ -181,3 +185,83 @@ Theorem cl_exp_1_is_f :
     of_disc f D ->
     Pexp (cl_presentation D) f 1%nat = f.
 Proof. intros. apply bqf_exp_1; assumption. Qed.
+
+Theorem cl_inv_is_bqf_inv :
+  forall D f, Pinv (cl_presentation D) f = bqf_inv f.
+Proof. intros. reflexivity. Qed.
+
+Theorem cl_mul_inv_equiv_id :
+  forall D f,
+    iq_disc D ->
+    of_disc f D ->
+    Peq (cl_presentation D)
+      (Pmul (cl_presentation D) f (Pinv (cl_presentation D) f))
+      (Pid (cl_presentation D)).
+Proof.
+  intros D f Hiq Hof.
+  unfold cl_presentation. simpl.
+  apply compose_inv_equiv_id; assumption.
+Qed.
+
+(** A unit has an inverse in [(Z/NZ)*] (Bezout).  The public
+    [rsa_presentation] does not package a constructive [Pinv]
+    (extended gcd is not in this file); the trapdoor presentation
+    inverts by [a^{λ−1}]. *)
+Theorem unit_inverse_exists :
+  forall a n,
+    1 < n ->
+    Z.gcd a n = 1 ->
+    exists w, (a * w) mod n = 1.
+Proof.
+  intros a n Hn Hg.
+  apply Z.Bezout_coprime_iff in Hg.
+  destruct Hg as [u [v Huv]].
+  exists u.
+  rewrite (Z.mul_comm a u).
+  replace (u * a) with (1 + (- v) * n) by lia.
+  rewrite Z.mod_add by lia.
+  apply Z.mod_1_l. lia.
+Qed.
+
+Theorem rsa_trapdoor_inv_is_root :
+  forall p q a,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime a (p * q) ->
+    let N := p * q in
+    let lam := lambda_semiprime p q in
+    (a * powm a (lam - 1) N) mod N = 1.
+Proof.
+  intros p q a Hp Hq Hneq Hcop N lam.
+  subst N lam.
+  pose proof (lambda_semiprime_pos p q Hp Hq) as Hpos.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  unfold powm.
+  rewrite Z.mul_mod_idemp_r by nia.
+  rewrite <- Z.pow_succ_r by lia.
+  replace (Z.succ (lambda_semiprime p q - 1))
+    with (lambda_semiprime p q) by lia.
+  fold (powm a (lambda_semiprime p q) (p * q)).
+  rewrite carmichael_semiprime by assumption.
+  reflexivity.
+Qed.
+
+Theorem Pexp_0 :
+  forall N a, 1 < N -> Pexp (rsa_presentation N) a 0%nat = 1 mod N.
+Proof.
+  intros N a Hn. unfold rsa_presentation. simpl.
+  apply powm_0_r. lia.
+Qed.
+
+Theorem Pexp_S_rsa :
+  forall N a k,
+    1 < N ->
+    0 <= a ->
+    Pexp (rsa_presentation N) a (S k) =
+      (a * Pexp (rsa_presentation N) a k) mod N.
+Proof.
+  intros N a k Hn Ha.
+  unfold rsa_presentation, Pexp. cbn [Pexp].
+  unfold powm.
+  rewrite Nat2Z.inj_succ, Z.pow_succ_r by lia.
+  rewrite Z.mul_mod_idemp_r by lia. reflexivity.
+Qed.

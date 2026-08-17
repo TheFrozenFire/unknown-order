@@ -28,6 +28,7 @@ RabinWilliams.v
 TwoPrimary.v
 Order.v
 TwoSylow.v
+MultiPrime.v
 MillerHeight.v
 CyclicCount.v
 Lucas.v
@@ -36,3 +37,4 @@ ClassGroupWall.v
 Presentation.v
 ExpProof.v
 Accumulator.v
+Torus.v
