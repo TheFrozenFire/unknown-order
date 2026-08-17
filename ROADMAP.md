@@ -381,3 +381,29 @@ The surprise, if any, is whether `N+1` can be twisted into a torus
 annihilator by some public function of `N` other than Fermat’s `p+q`. If
 that function appears, it is a Type A handle and belongs in §6.11 with a
 *name*.
+
+## 6. Encodings whose only reject is primality ✅
+
+Hash-to-prime was a blank skip. It is two maps. Neither is a hash.
+No SHA, ROM, sequentiality, running sampler, or forced placement.
+
+**Week 1 — Slot encoding.** `HashSlot.v`, `cas/29`.
+- `slot_encode S seed = ctor_prime S seed`. Image is the constructor AP.
+- Accept is `Z.prime`. Prime ⇒ `cyc_strong` and Blum if auxiliaries exceed `B`.
+- Off-AP primes can fail a ruler: primality is accept, not membership.
+
+**Week 2 — What the encoding is not.** Grow `HashSlot.v`, `cas/30`.
+- Public encoding is `roca_form`. AP-search bits `b − κ`. Secret `M` is not a public hash.
+- Seeds `0` and `2` on the CAS 28 slot are prime and not balanced.
+- `slot_try` is a filter spec. Dirichlet on APs stays named.
+
+**Week 3 — The other map.** `ChallengePrime.v`, lemmas in `Accumulator.v` /
+`ExpProof.v`, `cas/31`, `THEORY.md` §21.
+- `ch_encode` is odd integers, not the constructor residue.
+- Wesolowski algebra uses `0 < ℓ`, not `Z.prime ℓ`.
+- `rsa_composite_member_splits_witness`: a witness for `ab` is a witness for
+  each factor. That is why members want primes.
+
+Headline `Print Assumptions` closed. CAS `01`–`31`.
+§6.11 is still the hunt. This section only takes the name “hash-to-prime”
+away from it.

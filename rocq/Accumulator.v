@@ -17,8 +17,10 @@ Open Scope Z_scope.
     base, is adaptive root / strong RSA.
 
     Instantiated on [rsa_presentation]; stated on [cl_presentation]
-    (no trapdoor to update with [λ]).  Hash-to-prime is a named
-    skip.  No pairings, no Merkle. *)
+    (no trapdoor to update with [λ]).  A composite member splits
+    the witness ([rsa_composite_member_splits_witness]) — that is
+    why the member map wants primes.  It is not the keygen slot
+    encoding.  No hash, no pairings, no Merkle. *)
 
 Definition acc_add (P : Presentation) (A : Pcar P) (x : nat) : Pcar P :=
   Pexp P A x.
@@ -110,4 +112,34 @@ Proof.
   intros D. split.
   - apply cl_public_annihilator_is_two.
   - intros H. unfold cl_presentation in H. simpl in H. injection H. lia.
+Qed.
+
+(** A membership witness for a composite [x = a·b] is a membership
+    witness for each factor.  Hashing members to primes is so that
+    "[x] is in the set" cannot be rewritten as "a factor of [x] is
+    in the set."  No hash appears. *)
+Theorem rsa_composite_member_splits_witness :
+  forall N A W a b,
+    1 < N ->
+    acc_mem_wit (rsa_presentation N) A W (a * b)%nat ->
+    acc_mem_wit (rsa_presentation N) A
+      (Pexp (rsa_presentation N) W b) a /\
+    acc_mem_wit (rsa_presentation N) A
+      (Pexp (rsa_presentation N) W a) b.
+Proof.
+  intros N A W a b HN Hwit.
+  unfold acc_mem_wit, rsa_presentation, Pexp, Peq in *.
+  cbn in Hwit. cbn.
+  assert (Hnat : Z.of_nat (a * b) = Z.of_nat a * Z.of_nat b).
+  { apply Nat2Z.inj_mul. }
+  rewrite Hnat in Hwit.
+  assert (HN0 : N <> 0) by lia.
+  assert (Ha0 : 0 <= Z.of_nat a) by apply Nat2Z.is_nonneg.
+  assert (Hb0 : 0 <= Z.of_nat b) by apply Nat2Z.is_nonneg.
+  split.
+  - rewrite <- powm_mul_r by (lia || exact Ha0 || exact Hb0).
+    rewrite (Z.mul_comm (Z.of_nat b) (Z.of_nat a)).
+    exact Hwit.
+  - rewrite <- powm_mul_r by (lia || exact Ha0 || exact Hb0).
+    exact Hwit.
 Qed.

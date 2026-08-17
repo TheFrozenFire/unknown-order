@@ -45,8 +45,9 @@ track: there is no bytecode.
 Headline theorems close under the global context unless a skip is named.
 Skips that stay named: cyclicity of `(ℤ/pℤ)*` (used only for counts), Gauss
 `(2/p)` and the QNR direction of Euler, LLL / Coppersmith, Pratt completeness,
-Dirichlet associativity of two non-unit non-inverse forms, hash-to-prime,
-sequentiality.
+Dirichlet associativity of two non-unit non-inverse forms, sequentiality,
+the random oracle. Hash-to-prime is two named encodings (`THEORY.md` §21),
+not a blank skip.
 
 ### RSA and the annihilator
 
@@ -95,7 +96,9 @@ Run on `(ℤ/Nℤ)*` (Wesolowski is trivial given `λ`; Pietrzak hits `{±1}` or
 mixed CRT root) and on toy `Cl(Δ)` (Pietrzak must not count `Cl[2]` as a
 restricted break). CAS `24`, `26`.
 
-`ExpProof.v`, `Accumulator.v`. Sequentiality and hash-to-prime stay named.
+`ExpProof.v`, `Accumulator.v`. Sequentiality and the ROM stay named.
+A composite member splits the witness; Wesolowski algebra does not
+use `Z.prime ℓ`.
 
 ### Third incarnation: the Williams torus
 
@@ -122,7 +125,7 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 28 witnesses, `cas/01`–`28`.
+CAS is 31 witnesses, `cas/01`–`31`.
 
 ## Constructor (not a filter)
 
@@ -138,9 +141,18 @@ are per-key secrets, that test is not free. Catalog handle
 bits are 0; NFS is not proved. There is no running sampler.
 CAS `28`.
 
+## Two encodings (not a hash)
+
+`HashSlot.v` is the constructor walk at `k = seed`. Every output
+is already in the no-handle AP. Accept is primality. If the map
+is public, the image is Type A. Placement is still a choice of
+`k`. `ChallengePrime.v` is the other map: odd integers, not the
+constructor residue. A membership witness for `ab` is a witness
+for `a` and for `b`. Neither map is SHA. CAS `29`–`31`.
+
 ## What is left
 
-[`ROADMAP.md`](ROADMAP.md) §5 is done. The remaining cryptanalysis hunt is
-`THEORY.md` §6.11: a *named* modern sampler that leaks a Type A–E handle not
-already in the catalog. Not another incarnation, and not an undirected
-KeyGen pass.
+[`ROADMAP.md`](ROADMAP.md) §5 and §6 are done. The remaining
+cryptanalysis hunt is `THEORY.md` §6.11: a *named* modern sampler
+that leaks a Type A–E handle not already in the catalog. Not
+another incarnation, and not an undirected KeyGen pass.

@@ -1585,3 +1585,50 @@ strong at `B = 2` on `p±1` and `Φ₃,Φ₄,Φ₆`. Same-slot pair
 is not balanced. Cross-slot `21611` (auxiliaries `5,3,7,13,19`)
 is balanced with 13099 and far at gap 13.
 
+## 21. Two encodings, one primality test
+
+Hash-to-prime is not one object. There are two maps. Neither is
+a cryptographic hash. Sequentiality and the random oracle stay
+named.
+
+**Map A, the slot encoding** (`HashSlot.v`). A seed is an
+integer. `slot_encode S seed = ctor_prime S seed`. Every output
+is in the constructor AP. Generation accept is `Z.prime`. If
+the output is prime and the auxiliaries exceed `B`, it is
+`cyc_strong` and Blum (`slot_encode_rulers`). If an encoding
+output fails the rulers, it is composite (`slot_reject_is_composite`).
+A prime *off* the AP can fail a ruler without being composite:
+primality is the accept test, not a membership test. CAS `29`.
+
+If the encoding is public, the image is `roca_form`
+(`public_slot_encode_is_roca`). Membership is Type A. There is
+no public `slot_encode` free of that handle
+(`public_encode_admits_ap_test`). AP-search bits are still
+`b − κ` (`public_slot_encode_ap_budget`). NFS is not proved.
+
+Placement is not the encoding. Seeds `0` and `2` on the CAS 28
+slot are prime and not `kg_balanced` (`slot_encode_does_not_place`).
+A pair encoding still needs `PlacedCtorPair` fields.
+Try-and-increment is a spec (`slot_try`): sound if a prime is
+returned; complete relative to a window; existence of a prime
+in the window is not proved. Dirichlet on APs stays named.
+CAS `30`.
+
+**Map B, the challenge / member encoding** (`ChallengePrime.v`).
+`ch_encode seed = 2·seed+1` is odd. Accept is primality. There
+is no `p±1` / `Φn` / Blum obligation. The image is not the
+constructor residue (`ch_encode_not_slot_residue`). CAS `31`.
+
+Wesolowski / Pietrzak verification uses `0 < ℓ`, not
+`Z.prime ℓ` (`wesolowski_root_does_not_need_prime_ell`). An
+honest `π` still verifies at composite `ℓ`. Soundness against
+a cooked composite challenge is ROM / extraction and stays
+named.
+
+A membership witness for a composite `x = ab` is a membership
+witness for each factor (`rsa_composite_member_splits_witness`).
+That is why the *member* map wants primes. It is not the keygen
+map. Instantiated on `rsa_presentation`. No hash appears.
+
+CAS `29`–`31`. Headline theorems close under the global context.
+

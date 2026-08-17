@@ -25,6 +25,7 @@ KeyGenGeom.v
 KeyGenSampler.v
 QuadResidue.v
 KeyGenCtor.v
+HashSlot.v
 RabinWilliams.v
 TwoPrimary.v
 Order.v
@@ -38,4 +39,5 @@ ClassGroupWall.v
 Presentation.v
 ExpProof.v
 Accumulator.v
+ChallengePrime.v
 Torus.v

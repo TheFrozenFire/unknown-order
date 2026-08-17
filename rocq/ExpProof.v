@@ -19,7 +19,9 @@ Open Scope Z_scope.
     adaptive root).  On [Cl(Δ)] that 2-torsion may be constructible.
 
     Sequentiality, random oracles, and "this is a VDF" stay named.
-    Cross-confirmed by [cas/24_exp_proof.gp]. *)
+    Prime [ℓ] is a soundness constraint, not an algebra constraint
+    ([wesolowski_root_does_not_need_prime_ell]).
+    Cross-confirmed by [cas/24_exp_proof.gp], [cas/31_challenge_prime.gp]. *)
 
 Definition wesolowski_verify_rsa (N x y pi ell r : Z) : Prop :=
   (powm pi ell N * powm x r N) mod N = y mod N.
@@ -219,3 +221,31 @@ Theorem wesolowski_on_Cl_exp :
     of_disc f D ->
     Pexp (cl_presentation D) f 0%nat = bqf_id D.
 Proof. intros. apply cl_exp_0_is_id. Qed.
+
+(** The existing root theorem never assumes [Z.prime ℓ].  Composite
+    [ℓ] still satisfies the verification equation on an honest [π].
+    Soundness against a cooked composite challenge is ROM /
+    extraction and stays named. *)
+Theorem wesolowski_root_does_not_need_prime_ell :
+  forall N x q ell,
+    1 < N ->
+    0 <= q ->
+    0 < ell ->
+    P_Root (rsa_presentation N) (Z.to_nat ell)
+      (powm x (q * ell) N) (powm x q N).
+Proof. apply wesolowski_pi_is_ell_th_root. Qed.
+
+Theorem wesolowski_verify_does_not_need_prime_ell :
+  forall N x q ell r,
+    1 < N ->
+    0 <= q ->
+    0 < ell ->
+    0 <= r ->
+    let y := powm x (q * ell + r) N in
+    let pi := powm x q N in
+    wesolowski_verify_rsa N x y pi ell r.
+Proof.
+  intros N x q ell r Hn Hq He Hr y pi.
+  pose proof (wesolowski_correct_is_root N x q ell r Hn Hq He Hr) as H.
+  subst y pi. apply H.
+Qed.
