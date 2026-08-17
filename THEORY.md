@@ -1426,7 +1426,8 @@ stated on `cl_presentation`, which has no trapdoor to update
 with `λ`. Hash-to-prime is a named skip.
 
 `Print Assumptions` on the headline theorems of this wave
-(`compose_id_left`, `ambiguous_equiv_inv`,
+(`compose_id_left`, `compose_inv_of_disc`, `compose_inv_equiv_id`,
+`ambiguous_equiv_inv`,
 `reduced_a_gt_1_not_principal`, `form_a_one_equiv_id`,
 `catalog_wins_LowOrder_B2`, `unrestricted_LowOrder_won_by_Cl2`,
 `restricted_LowOrder_excludes_Cl2`, `wesolowski_correct_is_root`,
@@ -1436,10 +1437,12 @@ with `λ`. Hash-to-prime is a named skip.
 context**. Remaining named hypotheses, not used by those
 theorems: cyclicity of `(ℤ/pℤ)*` (counts only), QNR evaluation
 of Lucas `V_{p+1}` (CAS-pinned), and
-`compose_preserves_disc` for the general Dirichlet branch
-(identity composition is a theorem; `f ∘ f⁻¹` has leading
-coefficient 1 and is equivalent to the identity once it lands
-back on `Δ`).
+`compose_preserves_disc` for the two-form Dirichlet branch
+when neither leading coefficient is a unit. Identity
+composition is a theorem (`compose_id_left`). Inverse
+composition lands back on `Δ` (`compose_inv_of_disc`) and is
+equivalent to the identity (`compose_inv_equiv_id`) — no extra
+hypothesis.
 
 ### 16.1 Incarnations × winning conditions
 

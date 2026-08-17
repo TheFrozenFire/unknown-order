@@ -447,6 +447,79 @@ Proof.
   apply Z.div_same. nia.
 Qed.
 
+Lemma dirichlet_B_inv_plus_2 :
+  forall f, exists k, dirichlet_B f (bqf_inv f) = bqf_b f + 2 * k.
+Proof.
+  intros f. unfold dirichlet_B.
+  destruct (Z.eqb_spec (Z.abs (bqf_a f)) 1) as [_ | _].
+  - exists (- bqf_b f). unfold bqf_inv. cbn [bqf_a bqf_b bqf_c]. ring.
+  - set (n := bqf_comp_gcd f (bqf_inv f)).
+    exists ((bqf_a f / n) *
+            solve_cong (bqf_a f / n) (bqf_a (bqf_inv f) / n)
+              ((bqf_b (bqf_inv f) - bqf_b f) / 2)).
+    ring.
+Qed.
+
+Lemma four_divides_B2_minus_disc_inv :
+  forall f,
+    (4 | dirichlet_B f (bqf_inv f) * dirichlet_B f (bqf_inv f) - bqf_disc f).
+Proof.
+  intros f.
+  destruct (dirichlet_B_inv_plus_2 f) as [k Hk].
+  rewrite Hk. unfold bqf_disc.
+  exists (k * bqf_b f + k * k + bqf_a f * bqf_c f). ring.
+Qed.
+
+Lemma reconstruct_disc_div4 :
+  forall B D, (4 | B * B - D) -> B * B - 4 * ((B * B - D) / 4) = D.
+Proof.
+  intros B D [k Hk]. rewrite Hk.
+  rewrite Z.div_mul by lia. lia.
+Qed.
+
+Lemma compose_inv_c :
+  forall f,
+    bqf_a f <> 0 ->
+    bqf_c (bqf_compose f (bqf_inv f)) =
+      (dirichlet_B f (bqf_inv f) * dirichlet_B f (bqf_inv f) - bqf_disc f) / 4.
+Proof.
+  intros f Ha.
+  unfold bqf_compose. rewrite compose_inv_gcd.
+  destruct f as [a b c]. cbn [bqf_a bqf_b bqf_c] in *.
+  rewrite Z.abs_square, Z.div_same by nia.
+  rewrite Z.mul_1_r. reflexivity.
+Qed.
+
+Lemma compose_inv_primitive :
+  forall f,
+    bqf_a f <> 0 ->
+    bqf_primitive (bqf_compose f (bqf_inv f)).
+Proof.
+  intros f Ha.
+  unfold bqf_primitive.
+  rewrite compose_inv_leading_one by exact Ha.
+  rewrite Z.gcd_1_l. apply Z.gcd_1_l.
+Qed.
+
+Theorem compose_inv_of_disc :
+  forall f D,
+    iq_disc D ->
+    of_disc f D ->
+    of_disc (bqf_compose f (bqf_inv f)) D.
+Proof.
+  intros f D Hiq Hof.
+  pose proof (of_disc_a_nz f D Hof (proj1 Hiq)) as Ha.
+  destruct Hof as [Hdisc _].
+  split.
+  - unfold bqf_disc.
+    rewrite compose_inv_leading_one by exact Ha.
+    rewrite compose_inv_c by exact Ha.
+    rewrite Hdisc.
+    apply reconstruct_disc_div4.
+    rewrite <- Hdisc. apply four_divides_B2_minus_disc_inv.
+  - apply compose_inv_primitive. exact Ha.
+Qed.
+
 (** A form of leading coefficient 1 is a translate of the identity. *)
 Theorem form_a_one_equiv_id :
   forall f D,
@@ -529,20 +602,17 @@ Theorem compose_inv_equiv_id :
   forall f D,
     iq_disc D ->
     of_disc f D ->
-    of_disc (bqf_compose f (bqf_inv f)) D ->
     bqf_equiv (bqf_compose f (bqf_inv f)) (bqf_id D).
 Proof.
-  intros f D Hiq Hof Hofc.
-  apply form_a_one_equiv_id; [exact Hiq | exact Hofc |].
+  intros f D Hiq Hof.
+  apply form_a_one_equiv_id; [exact Hiq | apply compose_inv_of_disc; assumption |].
   apply compose_inv_leading_one.
   apply (of_disc_a_nz f D Hof (proj1 Hiq)).
 Qed.
 
-(** The remaining hypothesis in [compose_inv_equiv_id] is that
-    composition lands back on discriminant [D].  That is the
-    integer-division side of Dirichlet's formula; it is discharged
-    on the identity (already a theorem) and on the catalog below
-    by computation.  Named, not axiomatized globally. *)
+(** Inverse composition preserves the discriminant as a theorem.
+    The two-form Dirichlet branch still asks for [compose_preserves_disc]
+    when neither leading coefficient is a unit. *)
 Definition compose_preserves_disc (f g : bqf) : Prop :=
   bqf_disc (bqf_compose f g) = bqf_disc f /\
   bqf_primitive (bqf_compose f g).
@@ -740,6 +810,17 @@ Definition Problem_LowOrder_Cl (D B : Z) (f : bqf) : Prop :=
   bqf_ambiguous f /\
   ~ bqf_equiv f (bqf_id D) /\
   2 <= B.
+
+Theorem catalog_compose_inv_is_principal :
+  bqf_equiv (bqf_compose form_neg87_amb (bqf_inv form_neg87_amb)) (bqf_id (-87)) /\
+  bqf_equiv (bqf_compose form_neg403_amb_red (bqf_inv form_neg403_amb_red)) (bqf_id (-403)) /\
+  bqf_equiv (bqf_compose form_neg455_5 (bqf_inv form_neg455_5)) (bqf_id (-455)).
+Proof.
+  split; [|split].
+  - apply compose_inv_equiv_id; [apply iq_neg87 | apply form_neg87_amb_of_disc].
+  - apply compose_inv_equiv_id; [apply iq_neg403 | apply form_neg403_amb_red_of_disc].
+  - apply compose_inv_equiv_id; [apply iq_neg455 | apply form_neg455_5_of_disc].
+Qed.
 
 Theorem catalog_wins_LowOrder_B2 :
   Problem_LowOrder_Cl (-87) 2 form_neg87_amb /\
