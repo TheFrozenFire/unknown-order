@@ -1,5 +1,6 @@
 From Stdlib Require Import ZArith.
 From Stdlib Require Import Lia.
+From Stdlib Require Import Wf_nat.
 
 Require Import StrongPrimes.
 Require Import Cyclotomic.
@@ -14,10 +15,10 @@ Open Scope Z_scope.
     stays in [Z/NZ].  That is Type B at [n = 2]: the period is
     [Φ₂(p) = p+1], already named [cyc2] / [pp1_resistant].
 
-    This file gives the [V] recurrence and computed doubling
-    identities the CAS engine uses.  The closed addition formula
-    [V_{m+n} = V_m V_n − Q^n V_{|m−n|}] is a design target, not
-    a theorem.  Cross-confirmed by [cas/22_lucas.gp]. *)
+    This file proves the addition formula
+    [V_{m+n} = V_m V_n − Q^n V_{m−n}] ([n ≤ m]) and doubling as
+    a corollary.  The QNR evaluation [V_{p+1} ≡ 2 (mod p)] is
+    named and CAS-pinned.  Cross-confirmed by [cas/22_lucas.gp]. *)
 
 Fixpoint lucasV (P Q : Z) (n : nat) : Z :=
   match n with
@@ -41,16 +42,95 @@ Lemma lucasV_2 :
   forall P Q, lucasV P Q 2%nat = P * P - Q * 2.
 Proof. intros. reflexivity. Qed.
 
-(** Doubling at [Q = 1]: [V_{2n} = V_n² − 2], checked on the
-    first several [n].  The general identity is the addition
-    formula at [m = n], not proved. *)
+Lemma lucasV_succ :
+  forall P Q m,
+    (1 <= m)%nat ->
+    lucasV P Q (S m) = P * lucasV P Q m - Q * lucasV P Q (m - 1).
+Proof.
+  intros P Q m Hm.
+  destruct m as [| m']; [lia|].
+  replace (S m' - 1)%nat with m' by lia.
+  apply lucasV_rec.
+Qed.
+
+(** [V_{m+n} = V_m V_n − Q^n V_{m−n}] when [n ≤ m]. *)
+Theorem lucasV_add :
+  forall P Q m n,
+    (n <= m)%nat ->
+    lucasV P Q (m + n) =
+      lucasV P Q m * lucasV P Q n
+        - Q ^ Z.of_nat n * lucasV P Q (m - n).
+Proof.
+  intros P Q m n.
+  revert m.
+  induction n as [n IH] using (well_founded_ind lt_wf).
+  intros m Hle.
+  destruct n as [| n'].
+  - rewrite Nat.add_0_r, Nat.sub_0_r, lucasV_0, Z.pow_0_r. ring.
+  - destruct n' as [| n''].
+    + destruct m as [| m']; [lia|].
+      rewrite Nat.add_comm. simpl plus.
+      rewrite lucasV_rec, lucasV_1, Z.pow_1_r.
+      replace (S m' - 1)%nat with m' by lia. ring.
+    + assert (n'' < S (S n''))%nat by lia.
+      assert (S n'' < S (S n''))%nat by lia.
+      assert (n'' <= m)%nat by lia.
+      assert (S n'' <= m)%nat by lia.
+      replace (m + S (S n''))%nat with (S (S (m + n''))) by lia.
+      rewrite lucasV_rec.
+      replace (S (m + n'')) with (m + S n'')%nat by lia.
+      rewrite (IH (S n'') ltac:(lia) m ltac:(lia)).
+      rewrite (IH n'' ltac:(lia) m ltac:(lia)).
+      rewrite (lucasV_rec P Q n'').
+      set (k := (m - n'')%nat).
+      assert (2 <= k)%nat by (unfold k; lia).
+      replace (m - S n'')%nat with (k - 1)%nat by (unfold k; lia).
+      replace (m - S (S n''))%nat with (k - 2)%nat by (unfold k; lia).
+      replace (lucasV P Q k)
+        with (P * lucasV P Q (k - 1) - Q * lucasV P Q (k - 2)).
+      * replace (Z.of_nat (S n'')) with (Z.succ (Z.of_nat n'')) by lia.
+        rewrite Z.pow_succ_r by lia.
+        replace (Z.of_nat (S (S n'')))
+          with (Z.succ (Z.succ (Z.of_nat n''))) by lia.
+        rewrite !Z.pow_succ_r by lia. ring.
+      * replace k with (S (S (k - 2))) by lia.
+        rewrite lucasV_rec.
+        replace (S (k - 2)) with (k - 1)%nat by lia.
+        replace (S (k - 1) - 1)%nat with (k - 1)%nat by lia.
+        replace (S (k - 1) - 2)%nat with (k - 2)%nat by lia.
+        reflexivity.
+Qed.
+
+Theorem lucasV_double :
+  forall P Q n,
+    lucasV P Q (n + n) =
+      lucasV P Q n * lucasV P Q n - Q ^ Z.of_nat n * 2.
+Proof.
+  intros P Q n.
+  rewrite (lucasV_add P Q n n ltac:(lia)), Nat.sub_diag, lucasV_0.
+  reflexivity.
+Qed.
+
+Theorem lucasV_double_Q1 :
+  forall P n,
+    lucasV P 1 (n + n) = lucasV P 1 n * lucasV P 1 n - 2.
+Proof.
+  intros P n.
+  rewrite lucasV_double, Z.pow_1_l by lia. ring.
+Qed.
+
+(** The computed table is now a corollary. *)
 Theorem lucasV_double_Q1_table :
   (forall P, lucasV P 1 0%nat = lucasV P 1 0%nat * lucasV P 1 0%nat - 2) /\
   (forall P, lucasV P 1 2%nat = lucasV P 1 1%nat * lucasV P 1 1%nat - 2) /\
   (forall P, lucasV P 1 4%nat = lucasV P 1 2%nat * lucasV P 1 2%nat - 2) /\
   (forall P, lucasV P 1 6%nat = lucasV P 1 3%nat * lucasV P 1 3%nat - 2).
 Proof.
-  repeat split; intros P; unfold lucasV; ring.
+  repeat split; intros P;
+    (replace 2%nat with (1 + 1)%nat by reflexivity; apply lucasV_double_Q1)
+    || (replace 4%nat with (2 + 2)%nat by reflexivity; apply lucasV_double_Q1)
+    || (replace 6%nat with (3 + 3)%nat by reflexivity; apply lucasV_double_Q1)
+    || (replace 0%nat with (0 + 0)%nat by reflexivity; apply lucasV_double_Q1).
 Qed.
 
 (** The Williams handle is exactly the [n=2] cyclotomic handle. *)
@@ -73,3 +153,7 @@ Definition lucas_period (p : Z) : Z := p + 1.
 Theorem lucas_period_is_cyc2 :
   forall p, lucas_period p = cyc2 p.
 Proof. reflexivity. Qed.
+
+(** Williams evaluation [V_{p+1} ≡ 2 (mod p)] when [P²−4] is a QNR
+    remains named: it needs [V_n(a+a⁻¹) = a^n+a⁻ⁿ] in [F_{p²}].
+    CAS [cas/22] checks the evaluation on Blum and safe primes. *)

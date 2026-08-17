@@ -20,6 +20,8 @@ check(V(P,2)==P*P-2,                    "V_2 = P^2-2");
 check(V(P,4)==V(P,2)^2-2,               "V_4 = V_2^2-2  (doubling, Q=1)");
 check(V(P,6)==V(P,3)^2-2,               "V_6 = V_3^2-2");
 check(V(P,8)==V(P,4)^2-2,               "V_8 = V_4^2-2");
+check(V(P,7)==V(P,4)*V(P,3)-V(P,1),     "addition: V_7 = V_4 V_3 - V_1 (Q=1)");
+check(V(P,5)==V(P,3)*V(P,2)-V(P,1),     "addition: V_5 = V_3 V_2 - V_1");
 
 \\ Williams p+1: when D = P^2-4 is QNR mod p, the point lives in
 \\ the p+1 torus and V_{p+1} ≡ 2 (mod p).  P=3 has D=5 QR mod 11
@@ -41,6 +43,10 @@ check(V(P, q-1) % q != 2,               "V_{q-1} is not 2 on 19 either");
 check(isprime(23) && isprime(11),       "23 is safe");
 check(factor(23+1)[,1][matsize(factor(23+1))[1]] <= 3, "p+1 of 23 is 3-smooth");
 check(factor(23-1)[,1][matsize(factor(23-1))[1]] == 11, "p−1 of 23 is 2*11");
+\\ P=5, D=21, (21/23)= (21/23).  Try until QNR.
+P23 = 5;
+check(kronecker(P23^2-4, 23)==-1,       "D=21 is QNR mod 23");
+check(V(P23, 24) % 23 == 2,             "V_{p+1} ≡ 2 on the safe prime 23");
 
 \\ Adaptive root / sRSA on (Z/NZ)* is trivial given λ.
 \\ On a class-group discriminant there is no such λ from D.
