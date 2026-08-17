@@ -84,6 +84,9 @@ context unless a skip is named.
 | Restricted low-order; presentations of RSA and `Cl(Δ)` | `ClassGroupWall`, `Presentation` | `cas/23` | `H={±1}` vs `H=Cl[2]`; public annihilator is `None` / `Some 2` |
 | Wesolowski is an `ℓ`-th root; Pietrzak forgery is low-order | `ExpProof` | `cas/24_exp_proof.gp` | restricted LowOrder ignores constructible `Cl[2]` |
 | Accumulator membership is a root | `Accumulator` | `cas/24` | forged witness is adaptive root; no `λ` to update `Cl` |
+| Multi-prime: eight roots of 1, not four | `MultiPrime` | — | `TwoSylow` is two-prime; arity recorded |
+| Williams torus: order `lcm(p+1,q+1)`, not `N+1` | `Torus` | `cas/27_torus.gp` | one-sided `V_M` splits; Fermat is Type A on the torus |
+| Wesolowski on `Cl(−87)` | `ExpProof` | `cas/26_cl_poe.gp` | `(4,3,6)` has order 3; `π^ℓ x^r ~ y` |
 
 ## Run it
 

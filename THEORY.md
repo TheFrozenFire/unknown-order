@@ -1459,3 +1459,77 @@ The last row is the edge that was not dry: Pietrzak stated on
 `Problem_LowOrder` using only the discriminant. The restricted
 problem is the one the protocol actually needs.
 
+## 17. The consumer on both carriers
+
+Wesolowski verification is now a presentation predicate
+(`wesolowski_verify`). A correct `π` is `P_Root`
+(`wesolowski_pi_is_ell_th_root`). A verifying `π` for a value
+`z` is adaptive root (`verifying_pi_is_adaptive_root`). On
+`Cl(−87)`, CAS `26` runs the protocol on the order-3 class
+`(4,3,6)`: `x^3` is the identity and `π^ℓ · x^r` reduces to
+`y`.
+
+The Pietrzak quotient is an object: `μ · w` when `mid · w ≡ 1`.
+If `μ² ≡ mid²` then `(μ w)² ≡ 1`
+(`pietrzak_quotient_squares_to_one_rsa`). On `Cl` the quotient
+may be an ambiguous form; `P_LowOrderOutside` still excludes it.
+
+The accumulator is an instance: RSA forges from `λ+1`
+(`rsa_acc_forge_from_lambda`). `Cl` publishes `Some 2`, which
+cannot be an odd trapdoor (`cl_no_trapdoor_from_two`).
+
+`N = pqr` has eight sign patterns for `x² = 1`, not four
+(`MultiPrime.three_prime_sqrt1_is_pm1_each`). `TwoSylow` is
+two-prime; the arity is recorded, not rewritten.
+
+Self-composition of a construction-side ambiguous form is the
+identity on classes (`compose_self_ambiguous_equiv_id`,
+`bqf_exp_2_ambiguous_div`).
+
+## 18. The Williams torus
+
+Public data: `N = pq` and a Lucas parameter `P`. When `P²−4` is
+a QNR mod `p` and mod `q`, the hidden order is
+`lcm(p+1, q+1)` (`torus_order`). That is not `λ(N)`: on
+`11×19` the torus order is 60 and `λ` is 90.
+
+`(p+1)(q+1) = N + (p+q) + 1`. So `N+1` misses `p+q` and does
+not annihilate (`lucas_eval_annihilator_is_not_N_plus_one`;
+CAS: `V_{N+1} ≢ 2 (mod N)`). If Fermat leaks `p+q`, the torus
+period is public (`fermat_leak_is_torus_period`) — Type A on
+this presentation, already in the catalog.
+
+Type B at `n = 2` is native: `williams_eval` (`V_{p+1} ≡ 2`)
+lifts to every multiple (`williams_eval_on_multiples`).
+One-sided `V_M ≡ 2 (mod p)` and not `(mod q)` means `p` divides
+`V_M−2` and `N` does not (`williams_onesided_gcd`,
+`williams_onesided_not_full_N`). The CRT-split arrow exists
+here and not on `Cl`.
+
+`lucas_eval_presentation` has `Pannihilator = None`. The group
+law on `V`-values is not pretended: multiplication is on
+exponents / `(V,U)` pairs (`lucas_pt`, `lp_inv`).
+
+## 19. Incarnation table, three columns
+
+| Sentence | `(ℤ/Nℤ)*` | `Cl(Δ)` | Williams torus |
+|---|---|---|---|
+| Group law on the generators we use | `powm` | id, inv, self-compose of ambiguous | Lucas addition; `V_{k(p+1)}` |
+| Wesolowski `π` is an `ℓ`-th root on the presentation | `wesolowski_pi_is_ell_th_root` | CAS `26` on `(4,3,6)` | `Pexp` is multiply-exponent |
+| Pietrzak quotient has order ∣ 2 | `pietrzak_quotient_squares_to_one_rsa` | may be `Cl[2]` | constructible set is `V_n ≡ 2` |
+| Type B is LowOrder on a named presentation | `p−1` on units | no | `p+1` on the torus |
+| A public integer like `N+1` annihilates | `λ+1` if `λ` is known | no | **no** — misses `p+q` |
+
+`Print Assumptions` on the new headlines
+(`compose_self_ambiguous_equiv_id`, `williams_eval_on_multiples`,
+`unit_inverse_exists`, `rsa_trapdoor_inv_is_root`,
+`verifying_pi_is_adaptive_root`,
+`pietrzak_quotient_squares_to_one_rsa`,
+`three_prime_sqrt1_is_pm1_each`,
+`lucas_eval_annihilator_is_not_N_plus_one`,
+`williams_onesided_gcd`, `fermat_leak_is_torus_period`)
+should be closed or list only the named QNR hyp inside
+`williams_eval`. Remaining named: Dirichlet associativity of two
+non-unit non-inverse forms; Gauss `(2/p)`; cyclicity of
+`(ℤ/pℤ)*`.
+

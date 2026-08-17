@@ -249,7 +249,7 @@ distribution that honest-looking keygens still use, that is *not* a row of the c
 that still produces a Type A–E handle cheap enough that a smaller `N` would feel it. See
 `THEORY.md` §6.11. Not a month of §3 or §5 unless a named modern sampler is on the table.
 
-## 5. Next three months: run the consumer, then a third presentation ⬜
+## 5. Next three months: run the consumer, then a third presentation ✅
 
 §3 made RSA a worked example and `Cl(Δ)` a second carrier. What is still thin:
 Dirichlet of two non-unit forms is named; Wesolowski / Pietrzak / the accumulator
@@ -275,7 +275,7 @@ The last row is the edge most likely to not be dry. On the torus the public
 guess `N+1` is *wrong*. If `p ≈ q`, Fermat leaks `p+q` and the torus order
 becomes public — Type A on a different presentation, already in the catalog.
 
-### 5.1 Month 1 — Dry what the consumer is standing on ⬜
+### 5.1 Month 1 — Dry what the consumer is standing on ✅
 
 **Week 1 — Two-form Dirichlet.** `BinForms.v`; grow `cas/23`.
 - `compose_preserves_disc` when discs match and the existing `n`-formula applies:
@@ -308,7 +308,7 @@ becomes public — Type A on a different presentation, already in the catalog.
 Named skips this month: Gauss `(2/p)`, cyclicity of `(ℤ/pℤ)*`, full Dirichlet
 associativity, Pratt trees.
 
-### 5.2 Month 2 — The consumer on both carriers ⬜
+### 5.2 Month 2 — The consumer on both carriers ✅
 
 **Week 5 — Wesolowski on `Cl(Δ)`.** `ExpProof.v`, `cas/26_cl_poe.gp`.
 - `bqf_exp` of a reduced form of odd order (catalog: `(4,3,6)` on `−87`).
@@ -335,7 +335,7 @@ grow `cas/24`.
 Named skips this month: hash-to-prime, VDF sequentiality, `h(Δ)`, anything
 above 2-primary in `Cl`.
 
-### 5.3 Month 3 — Third incarnation: the Williams torus mod `N` ⬜
+### 5.3 Month 3 — Third incarnation: the Williams torus mod `N` ✅
 
 Public data: `N = pq` and a parameter `P` (discriminant `P²−4`). The group
 law is Lucas addition. The hidden order, when `P²−4` is a QNR mod `p` and
