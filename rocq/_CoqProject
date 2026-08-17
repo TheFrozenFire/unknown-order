@@ -27,6 +27,7 @@ QuadResidue.v
 RabinWilliams.v
 TwoPrimary.v
 Order.v
+TwoSylow.v
 MillerHeight.v
 CyclicCount.v
 Lucas.v

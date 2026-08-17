@@ -359,6 +359,24 @@ Proof.
     subst k'. vm_compute in Hk'1. discriminate.
 Qed.
 
+(** Same-[t] without [cyclic_units]: any two odd multiples of
+    [odd_part(ord(a))] give the same 2-height, namely [v₂(ord)]. *)
+Theorem two_height_independent_of_odd_multiple :
+  forall p a d t t' k,
+    Z.prime p ->
+    is_order p a d ->
+    0 < t -> 0 < t' ->
+    Z.Odd t -> Z.Odd t' ->
+    Z.divide (odd_part d) t ->
+    Z.divide (odd_part d) t' ->
+    two_height a t p k <-> two_height a t' p k.
+Proof.
+  intros p a d t t' k Hp Hord Ht Ht' Hot Hot' Hdt Hdt'.
+  rewrite (two_height_is_val2_ord p a d t k) by assumption.
+  rewrite (two_height_is_val2_ord p a d t' k) by assumption.
+  reflexivity.
+Qed.
+
 Theorem height_is_val2_ord_textbook :
   two_height 2 (odd_part 10) 11 (val2 10) /\
   two_height 2 (odd_part 8) 17 (val2 8).
