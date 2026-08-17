@@ -247,4 +247,137 @@ protocol-shaped object that uses root extraction the way RSA and RW do.
 The rulers in `rocq/` say when a generation distribution has leaked. The hunt is for a
 distribution that honest-looking keygens still use, that is *not* a row of the catalog, and
 that still produces a Type A–E handle cheap enough that a smaller `N` would feel it. See
-`THEORY.md` §6.11. Not a month of §3 unless a named modern sampler is on the table.
+`THEORY.md` §6.11. Not a month of §3 or §5 unless a named modern sampler is on the table.
+
+## 5. Next three months: run the consumer, then a third presentation ⬜
+
+§3 made RSA a worked example and `Cl(Δ)` a second carrier. What is still thin:
+Dirichlet of two non-unit forms is named; Wesolowski / Pietrzak / the accumulator
+are proved on `(ℤ/Nℤ)*` and stated on `Cl`; Williams `p+1` is a definition;
+every “four `√1`” theorem is secretly two-prime.
+
+This wave (1) dries the leftovers that block the consumer, (2) runs the consumer
+on both existing carriers, (3) adds a third presentation whose order is
+`lcm(p+1, q+1)`, not `λ`. Same refusals as §3.4 (no ECC, lattices, LLL, PPT,
+`h(Δ)`, RO, sequentiality, Paillier, undirected §6.11).
+
+### 5.0 Success is five sentences, three instantiations
+
+| Sentence | `(ℤ/Nℤ)*` | `Cl(Δ)` | Williams torus mod `N` |
+|---|---|---|---|
+| Group law on the generators we use is a theorem | `powm` | id and inverse are theorems; two-form Dirichlet week 1 | Lucas addition already |
+| A verifying Wesolowski `π` is an `ℓ`-th root *on the presentation* | done | week 5 | week 10 |
+| A Pietrzak quotient is an element of order dividing 2 | week 6 | week 6; may be `Cl[2]` | week 11 |
+| Type B is LowOrder / a one-sided annihilator on a named presentation | `p−1` on units | no | `p+1` on the torus (native) |
+| A public integer built like `N+1` annihilates | `λ+1` does, if `λ` is known | no | **no**: torus order is `N+(p+q)+1` |
+
+The last row is the edge most likely to not be dry. On the torus the public
+guess `N+1` is *wrong*. If `p ≈ q`, Fermat leaks `p+q` and the torus order
+becomes public — Type A on a different presentation, already in the catalog.
+
+### 5.1 Month 1 — Dry what the consumer is standing on ⬜
+
+**Week 1 — Two-form Dirichlet.** `BinForms.v`; grow `cas/23`.
+- `compose_preserves_disc` when discs match and the existing `n`-formula applies:
+  `4 a_new | (B²−Δ)`; primitivity if both inputs are primitive.
+- Associativity named, or proved only for `{id, f, f⁻¹}`. No Bhargava cubes.
+- Outcome: `bqf_exp` of an ambiguous form at `2` is equivalent to the identity
+  without a catalog `vm_compute`.
+
+**Week 2 — Williams as an evaluation, not a definition.** `Lucas.v`,
+`StrongPrimes.v`; grow `cas/22`.
+- Addition + doubling give `V_{k(p+1)} ≡ 2 (mod p)` from a named QNR/Euler
+  hypothesis (`V_{p+1} ≡ 2`), not a new Gauss development.
+- `pp1_resistant` becomes “the torus period is not `B`-smooth”.
+- Outcome: Type B at `n = 2` is an evaluation theorem. Shrinks the §2.5 skip.
+
+**Week 3 — Presentation grows an inverse.** `Presentation.v`; `MultiPrime.v`.
+- Add `Pinv`. RSA: inverse on units. `Cl`: `bqf_inv`.
+- Laws: `Pexp (S n) = Pmul a (Pexp n)`, `Pexp 0 = id`, `Pmul a (Pinv a) ~ id`.
+- Multi-prime stress test: `N = pqr` has `2³` roots of `1`, not four.
+  `sqrt1_is_crt_pm1` is two-prime. Do not rewrite TwoSylow; record the arity.
+- Outcome: Pietrzak’s quotient is writable as `Pmul μ (Pinv mid)`.
+
+**Week 4 — Exponent laws and a false Wesolowski.** `ExpProof.v`.
+- `wesolowski_verify` on `Presentation`, not only `powm`.
+- Correct `π` is `P_Root`. A verifying `π` for a false `y` is
+  `P_AdaptiveRoot` for the quotient, on RSA units. On `Cl`, state it and
+  CAS-pin a toy `Δ`.
+- Named skip: sequentiality, the random oracle that picks `ℓ`.
+
+Named skips this month: Gauss `(2/p)`, cyclicity of `(ℤ/pℤ)*`, full Dirichlet
+associativity, Pratt trees.
+
+### 5.2 Month 2 — The consumer on both carriers ⬜
+
+**Week 5 — Wesolowski on `Cl(Δ)`.** `ExpProof.v`, `cas/26_cl_poe.gp`.
+- `bqf_exp` of a reduced form of odd order (catalog: `(4,3,6)` on `−87`).
+- Verification is `Pmul (Pexp π ℓ) (Pexp x r) ~ y`.
+- Outcome: sentence 2 has a `Cl` theorem, not a comment.
+
+**Week 6 — Pietrzak quotient as an object.**
+- `T = 2`: `μ² ~ y`, `y ~ x⁴`, `q = Pmul μ (Pinv (Pexp x 2))`, then
+  `Pexp q 2 ~ id`.
+- RSA: `q ∈ {±1}` or a mixed CRT root. `Cl`: `q` may be ambiguous;
+  `P_LowOrderOutside` still fails on it.
+- Outcome: the last-wave edge is a constructed element.
+
+**Week 7 — Accumulator as an instance, not a definition.** `Accumulator.v`;
+grow `cas/24`.
+- RSA: unit `A0`, `acc_add` by `e`, witness is `A0`, forge from `λ+1`.
+- `Cl`: no trapdoor update from `Pannihilator = Some 2` (cannot divide by
+  an odd `x`). Hash-to-prime stays named.
+
+**Week 8 — Close month 2.**
+- `THEORY.md` §17: consumer on two carriers; multi-prime arity of `√1`.
+- `Print Assumptions` on the new headlines. CAS gate includes `26`.
+
+Named skips this month: hash-to-prime, VDF sequentiality, `h(Δ)`, anything
+above 2-primary in `Cl`.
+
+### 5.3 Month 3 — Third incarnation: the Williams torus mod `N` ⬜
+
+Public data: `N = pq` and a parameter `P` (discriminant `P²−4`). The group
+law is Lucas addition. The hidden order, when `P²−4` is a QNR mod `p` and
+mod `q`, is `lcm(p+1, q+1)`. That is not `λ(N)`.
+
+**Week 9 — `Torus.v` / `lucas_presentation`.**
+- Carrier: `V_n` with composition via the addition formula. Identity `V_0 = 2`.
+- Constructible torsion: solutions of `V_n = 2` you can write without factors
+  (the identity). No public `Cl[2]` analogue from `N` alone — record the absence.
+- `Pannihilator`: `None`. Not `Some (N+1)`.
+
+**Week 10 — Same winning conditions.**
+- `P_Order`, `P_LowOrder`, `P_AdaptiveRoot`, `P_Root` on
+  `lucas_presentation N P`.
+- Type B at `n = 2` *is* `P_LowOrder` / a one-sided annihilator on this
+  carrier (`p+1 | M` ⇒ `V_M ≡ 2 (mod p)` under the week-2 QNR hyp).
+- Wesolowski on the torus. CAS `27_torus.gp` on `11×19` with `P=5`.
+
+**Week 11 — Which arrows exist here and not elsewhere.**
+- CRT-split *does* exist: one-sided `V_M ≡ 2 (mod p)` and not `(mod q)`
+  splits `N` (Williams analogue of Miller). Unlike `Cl`.
+- `N+1` does **not** annihilate: `(p+1)(q+1) = N+(p+q)+1`. No lemma
+  `N_plus_one_annihilates_torus`. CAS: `V_{N+1} ≢ 2 (mod N)` on the toy.
+- If `p ≈ q`, Fermat gives `p+q`, hence the torus order. Type A, already
+  catalogued — do not claim a new leak.
+- Pietrzak quotient: order `| 2`; constructible set is `{V_0}` unless a
+  public `V_k = 2` appears from `N`.
+
+**Week 12 — Close the loop.**
+- `THEORY.md` §18–19: torus presentation; `N+1` is not `λ+1`; incarnation
+  × arrow table grows a column.
+- `Print Assumptions` on every new headline. QNR hyp and Dirichlet
+  associativity stay listed if still used.
+- One CAS gate over `26`–`27` plus `01`–`25`.
+
+### 5.4 Refused this wave (named)
+
+Same list as §3.4. In particular: no undirected §6.11 sampler; no Gauss
+`(2/p)` unless week 2 is blocked on it; no cyclicity of `(ℤ/pℤ)*` unless a
+count is required as a theorem; no `Problem_UFO` with no construction.
+
+The surprise, if any, is whether `N+1` can be twisted into a torus
+annihilator by some public function of `N` other than Fermat’s `p+q`. If
+that function appears, it is a Type A handle and belongs in §6.11 with a
+*name*.
