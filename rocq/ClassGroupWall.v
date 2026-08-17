@@ -6,6 +6,7 @@ Require Import RocqProofs.NumberTheory.
 Require Import UnknownOrder.
 Require Import Hardness.
 Require Import Cyclotomic.
+Require Import BinForms.
 
 Open Scope Z_scope.
 
@@ -71,3 +72,84 @@ Proof. intros N p q period M [[HN _] _]. exact HN. Qed.
     presentation.  No map from [D] to a [typeB_leak] is defined. *)
 Definition iq_discriminant (D : Z) : Prop :=
   D < 0 /\ (D mod 4 = 0 \/ D mod 4 = 1).
+
+Theorem iq_disc_agrees :
+  forall D, iq_discriminant D <-> iq_disc D.
+Proof. intros D. unfold iq_discriminant, iq_disc. reflexivity. Qed.
+
+(** ** Restricted low-order
+
+    On [(Z/NZ)*], [H = {±1}].  On [Cl(Δ)], [H] is the constructible
+    2-torsion (ambiguous forms).  Unrestricted [Problem_LowOrder]
+    is won on [Cl] by those forms; the restricted problem is not. *)
+
+Definition rsa_constructible_2torsion (N a : Z) : Prop :=
+  a mod N = 1 \/ a mod N = N - 1.
+
+Definition Problem_LowOrderOutside (N B : Z) (H : Z -> Prop) (a k : Z) : Prop :=
+  Problem_LowOrder N B a k /\ ~ H a.
+
+Definition cl_constructible_2torsion (D : Z) (f : bqf) : Prop :=
+  of_disc f D /\ bqf_ambiguous f.
+
+Definition Problem_LowOrderOutside_Cl (D B : Z) (f : bqf) : Prop :=
+  Problem_LowOrder_Cl D B f /\ ~ cl_constructible_2torsion D f.
+
+Theorem rsa_minus1_is_constructible :
+  forall N, 1 < N -> rsa_constructible_2torsion N (N - 1).
+Proof. intros N HN. unfold rsa_constructible_2torsion. right. rewrite Z.mod_small; lia. Qed.
+
+Theorem unrestricted_LowOrder_won_by_Cl2 :
+  Problem_LowOrder_Cl (-87) 2 form_neg87_amb.
+Proof. pose proof catalog_wins_LowOrder_B2 as H. destruct H as [H _]. exact H. Qed.
+
+Theorem restricted_LowOrder_excludes_Cl2 :
+  forall D B f,
+    cl_constructible_2torsion D f ->
+    ~ Problem_LowOrderOutside_Cl D B f.
+Proof.
+  intros D B f Hcon [Hlo Hout]. exact (Hout Hcon).
+Qed.
+
+Theorem catalog_ambiguous_is_constructible :
+  cl_constructible_2torsion (-87) form_neg87_amb /\
+  cl_constructible_2torsion (-403) form_neg403_amb_red /\
+  cl_constructible_2torsion (-455) form_neg455_5.
+Proof.
+  unfold cl_constructible_2torsion.
+  split; [|split].
+  - split; [apply form_neg87_amb_of_disc | apply form_neg87_amb_is_ambiguous].
+  - split; [apply form_neg403_amb_red_of_disc | apply form_neg403_amb_red_is_ambiguous].
+  - split; [apply form_neg455_5_of_disc | apply form_neg455_5_is_ambiguous].
+Qed.
+
+(** The 2-annihilator is public on [Cl(Δ)]: every ambiguous form
+    is equivalent to its inverse.  There is no odd annihilator
+    constructed from [D] — no [discriminant_to_lambda], and no
+    analogue of [λ+1].  The constructor is absent; this is not
+    [~exists]. *)
+
+Definition public_2_annihilator : Z := 2.
+
+Theorem public_2_annihilator_hits_ambiguous :
+  forall f, bqf_ambiguous f -> bqf_equiv f (bqf_inv f).
+Proof. apply ambiguous_equiv_inv. Qed.
+
+Definition no_discriminant_to_lambda : unit := tt.
+
+Theorem disc_mod1_is_odd :
+  forall D, D mod 4 = 1 -> Z.odd D = true.
+Proof.
+  intros D H.
+  pose proof (Z.div_mod D 4 ltac:(lia)) as Hdm.
+  rewrite H in Hdm.
+  apply Z.odd_spec. exists (2 * (D / 4)). lia.
+Qed.
+
+(** Adaptive root keeps the same *relation* on a different carrier.
+    [lambda_solves_strong_RSA] has no analogue: there is no public
+    odd [e] built from [D] that sends every class to itself. *)
+Theorem adaptive_root_relation_is_presentation_blind :
+  forall N y x e,
+    Problem_AdaptiveRoot N y x e <-> Problem_StrongRSA N y x e.
+Proof. intros. apply adaptive_root_is_strong_RSA. Qed.

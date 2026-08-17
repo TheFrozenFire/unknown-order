@@ -31,5 +31,8 @@ TwoSylow.v
 MillerHeight.v
 CyclicCount.v
 Lucas.v
-ClassGroupWall.v
 BinForms.v
+ClassGroupWall.v
+Presentation.v
+ExpProof.v
+Accumulator.v
