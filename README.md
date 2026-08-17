@@ -125,7 +125,7 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 31 witnesses, `cas/01`–`31`.
+CAS is 38 witnesses, `cas/01`–`38`.
 
 ## Constructor (not a filter)
 
@@ -145,14 +145,26 @@ CAS `28`.
 
 `HashSlot.v` is the constructor walk at `k = seed`. Every output
 is already in the no-handle AP. Accept is primality. If the map
-is public, the image is Type A. Placement is still a choice of
-`k`. `ChallengePrime.v` is the other map: odd integers, not the
-constructor residue. A membership witness for `ab` is a witness
-for `a` and for `b`. Neither map is SHA. CAS `29`–`31`.
+is public, the image is Type A. `ChallengePrime.v` is the other
+map: odd integers, not the constructor residue. A membership
+witness for `ab` is a witness for `a` and for `b`. Neither map
+is SHA. CAS `29`–`31`.
+
+## Secure derivation
+
+`Derive.v` turns a seed into a candidate in `S_b` (class ∩ bit
+range). Uniform index ⇒ uniform on `S_b`. `seed mod L` and
+force-residue are biased. Increment is not resample. A public
+map into one AP leaks `M`; reuse of `(a, M)` is publication.
+Placement is an interval on the second index, or empty.
+`derive_key_success` is the key relation (`e = 65537`). Long
+seed is a bijection; short seed plus stretch is a named PRF
+skip. Pocklington is blocked at `B = 160` for 512-bit primes.
+CAS `32`–`38`.
 
 ## What is left
 
-[`ROADMAP.md`](ROADMAP.md) §5 and §6 are done. The remaining
+[`ROADMAP.md`](ROADMAP.md) §5–§7 are done. The remaining
 cryptanalysis hunt is `THEORY.md` §6.11: a *named* modern sampler
 that leaks a Type A–E handle not already in the catalog. Not
 another incarnation, and not an undirected KeyGen pass.

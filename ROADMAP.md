@@ -407,3 +407,23 @@ No SHA, ROM, sequentiality, running sampler, or forced placement.
 Headline `Print Assumptions` closed. CAS `01`–`31`.
 §6.11 is still the hunt. This section only takes the name “hash-to-prime”
 away from it.
+
+## 7. Secure derivation into the no-handle class ✅
+
+Gordon, not a hash. `Derive.v`, CAS `32`–`38`, `THEORY.md` §22–23.
+
+- ✅ `S_b` ↔ `[k_min, k_max]`; empty slice when `M` is huge
+- ✅ Unbiased bijection; `mod L` and force-residue are biased
+- ✅ Increment hits the first prime; resample can hit any
+- ✅ Public AP outputs leak `M`; reuse is publication
+- ✅ Seeded aux / `aux_split_ready`; domain tags; `κ` vs `b`
+- ✅ Placement interval, or empty; same-slot pair is not balanced
+- ✅ `derive_key_success` / CAS `38` toy key from named seed material
+- ✅ Catalog rows: public, reused, increment, force-residue, seeded
+- ✅ Long seed vs short+stretch (PRF named)
+- ✅ Pocklington blocked: `2^{160} ≰ √(2^{511})`
+- ✅ Williams `mod 8 = 3` is Blum
+- ✅ Misuse of this derivation is Type A/D already in the catalog
+
+Refused: SHA/FIPS-in-Rocq, ROM/PPT, Dirichlet, NFS/LLL, public map
+that hides `M`, production keygen.

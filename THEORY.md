@@ -1632,3 +1632,76 @@ map. Instantiated on `rsa_presentation`. No hash appears.
 
 CAS `29`–`31`. Headline theorems close under the global context.
 
+## 22. Secure derivation
+
+A seed is CSPRNG output. Unpredictability of the seed is a named
+hypothesis, not a theorem. The derivation turns the seed into a
+candidate already in a bit range *and* in the constructor class.
+Gordon (1985) is this shape. ROCA is Gordon with a public shared
+`M`. `HashSlot` (`k = seed`) is the walk, not the derivation.
+
+`S_b` is the finite set `{ n : 2^{b−1} ≤ n < 2^b, n ≡ a (mod M) }`.
+It is in bijection with the index interval `[k_min, k_max]`
+(`k_in_slice_of_S_b`). `|S_b| = k_max − k_min + 1` when nonempty.
+`M ≥ 2^{b−1}` can empty the slice (`empty_slice_example`).
+
+`index_of_seed` on a domain of size `|S_b|` is a bijection onto
+that interval (`index_of_seed_in_interval`,
+`index_of_seed_surjective`). That is unbiased: uniform seed, uniform
+candidate on `S_b`. The usual shortcuts are biased:
+`seed mod L` when `L` does not divide the domain (`mod_hits_differ`);
+force-residue after sampling `b` bits can leave the range
+(`force_residue_leaves_range_example`).
+
+Try-and-increment on the AP is not that bijection. It returns the
+*first* prime at or after `k0` (`increment_hits_first`). Resample
+can return any prime in the slice (`resample_includes_every_slice_prime`).
+Dirichlet and existence of a prime in `S_b` stay named.
+
+CAS `32`–`34`.
+
+## 23. Public class, seeded class, the key
+
+Two outputs of a public map into one AP differ by a multiple of
+`M` (`public_map_difference_divides`). The gcd of differences is
+a multiple of `M`. There is no public deterministic derivation
+whose image lies in one AP and whose class is hidden
+(`no_public_hidden_class`). Reuse of `(a, M)` across keys is
+publication (`dist_reused_slot_leaks_M`). Per-key auxiliaries
+are required for unpredictability of the *set*.
+
+Auxiliaries themselves may be sample-then-test: they are `B`-bit,
+not `b`-bit. `aux_split_ready` (`u ≡ 1 (mod 3)`, `v ≡ 1 (mod 4)`,
+`w ≡ 1 (mod 6)`) is the named splitting shape. Existence of a
+cyclotomic CRT residue in general needs Gauss and stays named;
+CAS 28 is a witness that a residue exists for `(3,5,7,13,19)`.
+Domain separation is a tag (`domain_tag`), not a PRF.
+
+Placement is an interval on the second index, or empty. Far
+`2^{gap} > p/2` can empty it (`far_can_empty_placement`). Same-slot
+`13099` and `220579` are not balanced. Cross-slot `21611` is.
+`derive_key_success` is the relation: both prime, `k_p` in `S_b`,
+`k_q` in the placement interval, `e = 65537`, `d ≡ e⁻¹ (mod λ)`,
+balanced, far, bits. Success is an `RSAInstance` meeting the
+numeric spec (CAS `38` on the toy pair).
+
+Catalog rows (`Derive.v`): `dist_public_slot` is `roca_form`;
+`dist_reused_slot` leaks `M`; `dist_increment_slot` is first-prime,
+not unbiased; `dist_force_residue` can leave the range;
+`dist_seeded_slot` is `derive_key_success`.
+
+Entropy. A long seed (domain size `|S_b|`) is the bijection
+regime (`long_seed_hits_every_index`). A short seed plus stretch
+is a named PRF skip; image-in-class remains a theorem. A 256-bit
+seed is not uniform on a 352-bit index space. `regime_1024`:
+catalog handle bits 0; public `M` of `κ` bits leaves `512−κ` AP
+bits; seeded non-reused `M` does not give that discount; NFS is
+not proved.
+
+Pocklington needs a factored part of `p−1` larger than `√p`.
+`r ≤ 2^{160}` is not enough for a 512-bit prime
+(`aux_at_B_not_pocklington_size`). Accept stays `Z.prime`.
+Williams adds `a ≡ 3 (mod 8)` on `p` (`rw_p_is_blum`).
+
+CAS `32`–`38`.
+
