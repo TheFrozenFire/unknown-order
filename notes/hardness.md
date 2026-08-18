@@ -92,4 +92,4 @@ without naming a bad `KG`. The lookup is `notes/paper-overlaps.md`.
 | 6 | BP97-sRSA ≡ modern sRSA | named |
 | 7 | sRSA / AR given public `λ` | `lambda_solves_strong_RSA` |
 | 8 | standard-model RSA ≡ factoring | named (`THEORY.md` §9.6) |
-| 9 | LLX non-membership with `∏S mod φ(N)` public | named (Peng–Bao 2010) |
+| 9 | LLX non-membership with `∏S mod φ(N)` public | `llx_lambda_forges_nonmem`; `peng_bao_member_still_forges` |

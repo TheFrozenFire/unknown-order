@@ -41,5 +41,6 @@ ClassGroupWall.v
 Presentation.v
 ExpProof.v
 Accumulator.v
+GQ.v
 ChallengePrime.v
 Torus.v

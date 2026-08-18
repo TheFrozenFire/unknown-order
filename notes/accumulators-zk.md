@@ -19,20 +19,16 @@ unless noted. What changes is the *member encoding*, the
 | Benaloh–de Mare 1994 | integers | `W^x = A` | informal soundness | **Have:** map, composite split, same-bit-length fail |
 | Barić–Pfitzmann 1997 | primes | same | Strong RSA | **Have** the reason primes are load-bearing |
 | Camenisch–Lysyanskaya 2002 | primes | Shamir update on delete | needs `gcd(x,y)=1` | **Have** `shamir_trick` |
-| Li–Li–Xue 2007 | primes | non-membership `(a,B)` with `A^a B^x = g` | Bézout on `∏S` and `x` | **Yes.** Algebra only. Peng–Bao if `∏S mod λ` leaks |
+| Li–Li–Xue 2007 | primes | non-membership `(a,B)` with `A^a B^x = g` | Bézout on `∏S` and `x` | **Have:** `llx_complete`, `llx_extract_root`. Peng–Bao: `llx_lambda_forges_nonmem`, `peng_bao_member_still_forges` |
 | 2024/505 | odd integers + peel small factors | `(W, s)` | ROM + large prime factor | Algebra have; ROM named |
-| Baldimtsi et al. Braavos / CL-RSA-B | primes | trapdoor add: `w = A^{H(x)^{-1} mod λ}` | acc unchanged on add | **Yes.** `λ` invert then exp. Already `rsa_acc_forge_from_lambda` |
+| Baldimtsi et al. Braavos / CL-RSA-B | primes | trapdoor add: `w = A^{H(x)^{-1} mod λ}` | acc unchanged on add | **Have:** `rsa_trapdoor_add` (no hash; `x` is the exponent). Also `rsa_acc_forge_from_lambda` |
 | Boneh–Bünz–Fisch 2019 | primes | batched via PoE | Wesolowski | **Have** PoE algebra; aggregation is the same root |
 | Lipmaa 2012 | Euclidean ring / DIH | static | class groups, no setup | **Yes** on `cl_presentation`; `H` is the family |
 | Mashatan–Vaudenay 2013 | primes | dynamic non-membership | LLX + updates | After LLX |
 | Camacho–Hevia 2010 | any secure dynamic | — | `Ω(m)` update communication | Interface theorem, not a group problem |
 | Sander / Goodrich–Tamassia–Hasic | RSA + trees | logarithmic | hybrid | Skip trees |
 
-**Do next, in order, if we formalize accumulators:**
-
-1. **LLX non-membership.** Public `g`, `A = g^{∏S}`. Non-member `x` with `gcd(x, ∏S)=1`: Bézout `a·∏S + b·x = 1`, witness `B = g^{-b}`, check `A^a B^x = g`. Completeness is Shamir’s cousin. Soundness is Strong RSA (named). Peng–Bao is “`∏S mod λ` is the discrete log of `A`” — almost `annihilator_plus_one`.
-2. **Trapdoor add (CL-RSA-B / Braavos).** `γ ≡ H(x)^{-1} (mod λ)`, `w = A^γ`. Completeness is `w^{H(x)} = A`. We have the trapdoor; no hash if `x` is already the exponent.
-3. **Lipmaa on `Cl`.** Same map, `H` from the family. Membership is `P_Root`. No `λ` to delete with.
+**Done this sitting.** LLX completeness / extract / Peng–Bao, and trapdoor add. Next, if we keep going on accumulators: Lipmaa on `Cl` (same map, `H` from the family; membership is `P_Root`; no `λ` to delete with). Mashatan–Vaudenay is LLX + updates.
 
 Not RSA accumulators (out of this pivot): Nguyen pairings, Merkle, bilinear Braavos variants.
 
@@ -44,9 +40,9 @@ Three layers. Only the first is this repo’s style.
 
 | Approach | Statement | Extraction / algebra | Formalize? |
 |---|---|---|---|
-| Guillou–Quisquater 1988 | PoK of an `e`-th root: `x^e = z` | two transcripts `(c,r)`, `(c',r')` ⇒ Shamir on `r/r'` and `c−c'` yields an `e`-th root if `gcd(c−c', e)=1` | **Yes.** Completeness + special soundness. ZK simulation named |
+| Guillou–Quisquater 1988 | PoK of an `e`-th root: `x^e = z` | two transcripts `(c,r)`, `(c',r')` ⇒ Shamir on `r/r'` and `c−c'` yields an `e`-th root if `gcd(c−c', e)=1` | **Have:** `gq_complete`, `gq_extract`. ZK simulation named |
 | Fiat–Shamir 1986 (factoring ID) | PoK of a square root | same, `e=2`; a non-trivial `√1` factors | **Yes.** Completeness + Rabin split (have) |
-| “Here is `√1 ≠ ±1`” | “I know the factors” | mixed CRT root *is* the factors | **Have.** This is a proof that is **not** ZK |
+| “Here is `√1 ≠ ±1`” | “I know the factors” | mixed CRT root *is* the factors | **Have:** `publishing_mixed_sqrt1_factors`, `gq_on_one_with_mixed_sqrt_is_factorization`. Proof of knowledge, **not** ZK |
 | FO / DF integer commitment | `C = g^x h^r` in a UO group | binding = Strong RSA (opening two ways ⇒ a root) | **Yes**, binding as a relation. Hiding named |
 | CL-RSA-B / trapdoor membership | `w^x = A` | that *is* `P_Root` | **Have** |
 | Wesolowski / Pietrzak | `v^e = u` | PoE, not ZK (the statement is the result) | **Have** the algebra; do not call it ZK |
@@ -61,7 +57,7 @@ Three layers. Only the first is this repo’s style.
 | GQ with composite `e` and no gcd condition | extract an `e`-th root from two transcripts | Extraction needs `gcd(Δc, e)=1`. If `e` is the RSA public exponent and challenges share a factor with `e`, special soundness fails. That is why GQ wants prime `e` or a prime challenge space — same `C` lesson as Wesolowski |
 | Interactive GQ + “just hash the first message” | NIZK | Fiat–Shamir / ROM. Named skip |
 | “ZK inversion ⇒ factoring in the standard model” | RSA ≡ factoring | Boneh–Venkatesan: algebraic reductions for low `e` collapse. Named refuse |
-| Prove non-membership and publish `∏S mod φ(N)` | universal accumulator + ZK | Peng–Bao: that product *is* the trapdoor |
+| Prove non-membership and publish `∏S mod φ(N)` | universal accumulator + ZK | Peng–Bao: that product *is* the trapdoor (`peng_bao_member_still_forges`) |
 | Statistical ZK for *RSA inversion* (the permutation) | hide `x` given `x^e` | On units the map is a permutation; “`y` is an `e`-th power” is vacuous. There is nothing to prove except knowledge of a preimage. Decision-RSA is not a thing (`THEORY.md` §9.7) |
 
 ### 2.3 Worked, but scheme-heavy (do not grow a ZK stack here)
@@ -78,8 +74,8 @@ Three layers. Only the first is this repo’s style.
 
 ## 3. What to formalize if this pivot is real work
 
-**Accumulators (next sitting):** LLX Bézout non-membership, then trapdoor add. Both are `P_Root` / Shamir / `λ`. Lipmaa-on-`Cl` is the same map on `cl_presentation_H`.
+**Accumulators (this sitting):** `llx_complete`, `llx_extract_root`, `llx_lambda_forges_nonmem`, `peng_bao_member_still_forges`, `rsa_trapdoor_add`. CAS `42`. Lipmaa-on-`Cl` is the same map on `cl_presentation_H` (not started).
 
-**ZK (next sitting):** Guillou–Quisquater completeness + two-transcript extraction (`gcd(Δc,e)=1` ⇒ `e`-th root). That is the RSA-native PoK. Pair it with the already-proved “`√1` factors, so it is not ZK.” Do **not** start FO/DF simulation or Camenisch–Michels in the same sitting.
+**ZK (this sitting):** `gq_complete`, `gq_extract`, `gq_on_one_with_mixed_sqrt_is_factorization`. Simulation / ROM stay named. Do **not** start FO/DF simulation or Camenisch–Michels.
 
 Refuse: ROM NIZK, ZK simulators, pairing accumulators, “prove RSA ≡ factoring.”

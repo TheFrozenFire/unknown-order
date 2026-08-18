@@ -180,6 +180,71 @@ Proof.
   apply Z.mod_1_l; lia.
 Qed.
 
+Lemma inverse_is_coprime :
+  forall a w n,
+    1 < n ->
+    (a * w) mod n = 1 ->
+    Z.gcd a n = 1 /\ Z.gcd w n = 1.
+Proof.
+  intros a w n Hn Hinv.
+  pose proof (Z.div_mod (a * w) n ltac:(lia)) as Hdm.
+  rewrite Hinv in Hdm.
+  split.
+  - apply Z.bezout_1_gcd. exists w, (- (a * w / n)). lia.
+  - apply Z.bezout_1_gcd. exists a, (- (a * w / n)). lia.
+Qed.
+
+Lemma coprime_mod_n :
+  forall a n, n <> 0 -> Z.gcd a n = 1 -> Z.gcd (a mod n) n = 1.
+Proof.
+  intros a n Hn Hg. rewrite Z.gcd_mod_l. exact Hg.
+Qed.
+
+Lemma gcd_base_of_pow :
+  forall a k n,
+    0 < k ->
+    Z.gcd (a ^ k) n = 1 ->
+    Z.gcd a n = 1.
+Proof.
+  intros a k n Hk Hpow.
+  pose proof (Z.gcd_divide_l a n) as Hd.
+  assert (Z.gcd a n | a ^ k) as Hdivk.
+  { apply Z.divide_trans with a; [exact Hd|].
+    apply Z.divide_pow_same_r; lia. }
+  assert (Z.gcd a n | Z.gcd (a ^ k) n) as Hg.
+  { apply Z.gcd_greatest; [exact Hdivk | apply Z.gcd_divide_r]. }
+  rewrite Hpow in Hg. apply Z.divide_1_r in Hg.
+  pose proof (Z.gcd_nonneg a n). lia.
+Qed.
+
+Lemma powm_unit_is_coprime :
+  forall a k n,
+    1 < n ->
+    0 < k ->
+    Z.gcd (powm a k n) n = 1 ->
+    Z.gcd a n = 1.
+Proof.
+  intros a k n Hn Hk Hpow.
+  unfold powm in Hpow. rewrite Z.gcd_mod_l in Hpow.
+  apply gcd_base_of_pow in Hpow; assumption.
+Qed.
+
+Lemma mul_cancel_r_coprime :
+  forall a b u n,
+    1 < n ->
+    Z.gcd u n = 1 ->
+    (a * u) mod n = (b * u) mod n ->
+    a mod n = b mod n.
+Proof.
+  intros a b u n Hn Hu Heq.
+  apply mods_eq_iff_divides; [lia|].
+  apply Z.gauss with (m := u).
+  - replace (u * (a - b)) with (a * u - b * u) by ring.
+    apply Z.mod_divide; [lia|].
+    rewrite Zminus_mod, Heq, Z.sub_diag, Z.mod_0_l; lia.
+  - rewrite Z.gcd_comm. exact Hu.
+Qed.
+
 Lemma mul_pow_mod_cong :
   forall a b c n k,
     n <> 0 ->
@@ -340,4 +405,310 @@ Proof.
   rewrite <- powm_mul_r by nia.
   replace (x2 * y2 * (x1 * y1)) with (x1 * x2 * (y1 * y2)) by ring.
   exact HW.
+Qed.
+
+(** ** Li–Li–Xue non-membership
+
+    [A = g^θ], [θ = ∏S].  A non-membership witness for [x] is
+    [(a, B)] with [A^a B^x ≡ g].  Completeness is Bézout
+    [aθ + bx = 1].  If [gcd(x, 1−aθ)=1] Shamir extracts an
+    [x]-th root of [g].  Knowing [θ] and [λ] forges a witness
+    even when [x] divides [θ] (Peng–Bao). *)
+
+Definition acc_nonmem_wit (N A B a x g : Z) : Prop :=
+  (powm A a N * powm B x N) mod N = g mod N.
+
+Theorem llx_complete_nonneg :
+  forall N g theta a b x,
+    1 < N ->
+    0 <= theta ->
+    0 <= a ->
+    0 <= b ->
+    0 <= x ->
+    a * theta + b * x = 1 ->
+    let A := powm g theta N in
+    let B := powm g b N in
+    acc_nonmem_wit N A B a x g.
+Proof.
+  intros N g theta a b x Hn Ht Ha Hb Hx Hlin A B.
+  subst A B. unfold acc_nonmem_wit.
+  rewrite <- powm_mul_r by lia.
+  rewrite <- powm_mul_r by lia.
+  rewrite <- powm_add_r by nia.
+  replace (theta * a + b * x) with 1 by lia.
+  rewrite powm_1_r by lia.
+  reflexivity.
+Qed.
+
+Theorem llx_complete :
+  forall N g theta a b x,
+    1 < N ->
+    0 <= theta ->
+    0 <= a ->
+    0 <= x ->
+    Z.coprime g N ->
+    a * theta + b * x = 1 ->
+    let A := powm g theta N in
+    exists B, acc_nonmem_wit N A B a x g.
+Proof.
+  intros N g theta a b x Hn Ht Ha Hx Hg Hlin A.
+  subst A.
+  destruct (Z.le_gt_cases 0 b) as [Hb | Hb].
+  - exists (powm g b N).
+    apply llx_complete_nonneg; assumption.
+  - unfold Z.coprime in Hg.
+    destruct (unit_inverse_exists g N Hn Hg) as [ginv Hinv].
+    exists (powm ginv (- b) N).
+    unfold acc_nonmem_wit.
+    set (k := - b).
+    assert (Hk : 0 < k) by (unfold k; lia).
+    rewrite <- powm_mul_r by lia.
+    replace (theta * a) with (1 + k * x) by nia.
+    rewrite powm_add_r by nia.
+    rewrite powm_1_r by lia.
+    rewrite <- powm_mul_r by nia.
+    rewrite Z.mul_mod_idemp_l by lia.
+    rewrite <- Z.mul_assoc.
+    rewrite Z.mul_mod_idemp_l by lia.
+    pose proof (powm_inv_cancels g ginv (k * x) N Hn ltac:(nia) Hinv) as Hc.
+    rewrite <- Z.mul_mod_idemp_r by lia.
+    rewrite Hc, Z.mul_1_r.
+    reflexivity.
+Qed.
+
+Lemma llx_Bx_eq_g_times_inv :
+  forall N g theta a B x ginv,
+    1 < N ->
+    0 <= theta ->
+    0 <= a ->
+    0 <= x ->
+    (g * ginv) mod N = 1 ->
+    acc_nonmem_wit N (powm g theta N) B a x g ->
+    powm B x N = (g * powm ginv (a * theta) N) mod N.
+Proof.
+  intros N g theta a B x ginv Hn Ht Ha Hx Hinv Hwit.
+  unfold acc_nonmem_wit in Hwit.
+  rewrite <- powm_mul_r in Hwit by lia.
+  replace (theta * a) with (a * theta) in Hwit by lia.
+  pose proof (powm_inv_cancels g ginv (a * theta) N Hn ltac:(nia) Hinv)
+    as Hc.
+  assert (Z.gcd (powm g (a * theta) N) N = 1) as Hu.
+  { destruct (inverse_is_coprime (powm g (a * theta) N)
+                 (powm ginv (a * theta) N) N Hn Hc) as [Hu _].
+    exact Hu. }
+  assert (powm B x N = powm B x N mod N) as Hred.
+  { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+  rewrite Hred.
+  apply (mul_cancel_r_coprime (powm B x N)
+           (g * powm ginv (a * theta) N)
+           (powm g (a * theta) N) N Hn Hu).
+  rewrite (Z.mul_comm (powm B x N)).
+  rewrite Hwit.
+  rewrite <- Z.mul_assoc.
+  rewrite (Z.mul_comm (powm ginv (a * theta) N)).
+  rewrite <- Z.mul_mod_idemp_r by lia.
+  rewrite Hc, Z.mul_1_r.
+  reflexivity.
+Qed.
+
+Lemma g_times_inv_succ :
+  forall g ginv k N,
+    1 < N ->
+    0 <= k ->
+    (g * ginv) mod N = 1 ->
+    (g * powm ginv (Z.succ k) N) mod N = powm ginv k N.
+Proof.
+  intros g ginv k N Hn Hk Hinv.
+  unfold powm. rewrite Z.pow_succ_r by lia.
+  rewrite Z.mul_mod_idemp_r by lia.
+  rewrite Z.mul_assoc.
+  rewrite <- Z.mul_mod_idemp_l by lia.
+  rewrite Hinv, Z.mul_1_l.
+  reflexivity.
+Qed.
+
+Theorem llx_extract_root :
+  forall N g theta a B x,
+    1 < N ->
+    0 <= theta ->
+    0 <= a ->
+    0 < x ->
+    Z.coprime g N ->
+    Z.coprime B N ->
+    Z.gcd x (1 - a * theta) = 1 ->
+    acc_nonmem_wit N (powm g theta N) B a x g ->
+    exists w, powm w x N = g mod N.
+Proof.
+  intros N g theta a B x Hn Ht Ha Hx Hg HB Hgcd Hwit.
+  unfold Z.coprime in Hg.
+  destruct (unit_inverse_exists g N Hn Hg) as [ginv Hginv].
+  pose proof (llx_Bx_eq_g_times_inv N g theta a B x ginv
+                Hn Ht Ha ltac:(lia) Hginv Hwit) as HB'.
+  destruct (inverse_is_coprime g ginv N Hn Hginv) as [_ Hginvc].
+  destruct (Z.le_gt_cases 0 (1 - a * theta)) as [Hpos | Hneg].
+  - apply (shamir_trick N x (1 - a * theta) B g);
+      try (assumption || lia).
+    rewrite HB'.
+    assert (a * theta = 0 \/ a * theta = 1) as Hsmall by nia.
+    destruct Hsmall as [Hz | Hone].
+    + rewrite Hz, powm_0_r by lia.
+      rewrite Z.mul_mod_idemp_r, Z.mul_1_r, powm_1_r by lia.
+      reflexivity.
+    + rewrite Hone, powm_1_r by lia.
+      rewrite Z.mul_mod_idemp_r, Hginv by lia.
+      replace (1 - 1) with 0 by lia.
+      rewrite powm_0_r, Z.mod_1_l by lia.
+      reflexivity.
+  - assert (0 <= a * theta - 1) as Hk by lia.
+    assert (Z.gcd x (a * theta - 1) = 1) as Hgcd'.
+    { rewrite <- Z.gcd_opp_r.
+      replace (- (a * theta - 1)) with (1 - a * theta) by lia.
+      exact Hgcd. }
+    assert (powm B x N = powm ginv (a * theta - 1) N) as Hpow.
+    { rewrite HB'.
+      rewrite <- (Z.succ_pred (a * theta)) at 1.
+      change (Z.pred (a * theta)) with (a * theta - 1).
+      apply g_times_inv_succ; [exact Hn | exact Hk | exact Hginv]. }
+    destruct (shamir_trick N x (a * theta - 1) B ginv
+                Hn Hx Hk Hgcd' Hginvc HB Hpow) as [w Hw].
+    assert (Z.gcd w N = 1) as Hwcop.
+    { apply (powm_unit_is_coprime w x N Hn Hx).
+      rewrite Hw. apply coprime_mod_n; [lia | exact Hginvc]. }
+    destruct (unit_inverse_exists w N Hn Hwcop) as [winv Hwinv].
+    exists winv.
+    pose proof (powm_inv_cancels w winv x N Hn ltac:(lia) Hwinv) as Hc.
+    rewrite Hw in Hc.
+    assert (powm winv x N = powm winv x N mod N) as Hred.
+    { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+    rewrite Hred.
+    apply (mul_cancel_r_coprime (powm winv x N) g
+             (ginv mod N) N Hn).
+    + apply coprime_mod_n; [lia | exact Hginvc].
+    + rewrite (Z.mul_comm (powm winv x N)).
+      rewrite Hc.
+      rewrite Z.mul_mod_idemp_r, Hginv by lia.
+      reflexivity.
+Qed.
+
+Lemma bezout3 :
+  forall theta x lam,
+    Z.gcd (Z.gcd theta x) lam = 1 ->
+    exists u v w, u * theta + v * x + w * lam = 1.
+Proof.
+  intros theta x lam Hg.
+  apply Z.Bezout_coprime_iff in Hg.
+  destruct Hg as [p [q Hpq]].
+  pose proof (Z.gcd_bezout theta x (Z.gcd theta x) eq_refl) as Hbz.
+  destruct Hbz as [u [v Huv]].
+  exists (p * u), (p * v), q.
+  rewrite <- Hpq, <- Huv. ring.
+Qed.
+
+Theorem llx_lambda_forges_nonmem :
+  forall p q g theta x,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime g (p * q) ->
+    0 <= theta ->
+    0 <= x ->
+    0 < theta + x ->
+    Z.gcd (Z.gcd theta x) (lambda_semiprime p q) = 1 ->
+    let N := p * q in
+    let A := powm g theta N in
+    exists a B, 0 <= a /\ acc_nonmem_wit N A B a x g.
+Proof.
+  intros p q g theta x Hp Hq Hneq Hg Ht Hx Hsum Hgcd N A.
+  subst N A.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  pose proof (lambda_semiprime_pos p q Hp Hq) as Hlam.
+  destruct (bezout3 theta x (lambda_semiprime p q) Hgcd)
+    as [u [v [w Hlin]]].
+  set (lam := lambda_semiprime p q) in *.
+  set (t := Z.abs u + Z.abs v + Z.abs w + 1).
+  set (a := u + t * lam).
+  set (b := v + t * lam).
+  assert (1 <= lam) as Hlam1 by lia.
+  assert (0 <= t) as Ht0 by (unfold t; lia).
+  assert (Ha : 0 <= a).
+  { unfold a, t. nia. }
+  assert (Hb : 0 <= b).
+  { unfold b, t. nia. }
+  assert (Hm : 0 <= t * (theta + x) - w).
+  { unfold t. nia. }
+  exists a, (powm g b (p * q)).
+  split; [exact Ha|].
+  unfold acc_nonmem_wit.
+  rewrite <- powm_mul_r by nia.
+  rewrite <- powm_mul_r by nia.
+  rewrite <- powm_add_r by nia.
+  replace (theta * a + b * x)
+    with (1 + (t * (theta + x) - w) * lam).
+  2:{ unfold a, b. rewrite <- Hlin. ring. }
+  rewrite powm_add_r by nia.
+  rewrite powm_1_r by nia.
+  rewrite (Z.mul_comm (t * (theta + x) - w) lam).
+  rewrite powm_mul_r by nia.
+  assert (powm g lam (p * q) = 1) as Hlamg.
+  { unfold lam. apply carmichael_semiprime; assumption. }
+  rewrite Hlamg.
+  rewrite powm_1_pow by nia.
+  rewrite <- Z.mul_mod by nia.
+  rewrite Z.mul_1_r. reflexivity.
+Qed.
+
+(** Trapdoor add (CL-RSA-B / Braavos): [w = A^{x^{-1} mod λ}]
+    satisfies [w^x = A] and does not change [A]. *)
+Theorem rsa_trapdoor_add :
+  forall p q A x,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime A (p * q) ->
+    0 < x ->
+    Z.gcd x (lambda_semiprime p q) = 1 ->
+    exists w, powm w x (p * q) = A mod (p * q).
+Proof.
+  intros p q A x Hp Hq Hneq HA Hx Hgcd.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  pose proof (lambda_semiprime_pos p q Hp Hq) as Hlam.
+  apply Z.Bezout_coprime_iff in Hgcd.
+  destruct Hgcd as [d [k Hdk]].
+  set (lam := lambda_semiprime p q) in *.
+  set (t := Z.abs d + Z.abs k + 1).
+  set (e := d + t * lam).
+  assert (0 <= e) as He by (unfold e, t; nia).
+  exists (powm A e (p * q)).
+  rewrite <- powm_mul_r by nia.
+  replace (e * x) with (1 + (t * x - k) * lam).
+  2:{ unfold e. rewrite <- Hdk. ring. }
+  assert (0 <= t * x - k) by (unfold t; nia).
+  rewrite powm_add_r by nia.
+  rewrite powm_1_r by nia.
+  rewrite (Z.mul_comm (t * x - k) lam), powm_mul_r by nia.
+  assert (powm A lam (p * q) = 1) as HlamA.
+  { unfold lam. apply carmichael_semiprime; assumption. }
+  rewrite HlamA.
+  rewrite powm_1_pow by nia.
+  rewrite <- Z.mul_mod by nia.
+  rewrite Z.mul_1_r. reflexivity.
+Qed.
+
+(** Peng–Bao: a member ([x | θ]) still has a non-membership witness
+    once [θ] and [λ] are known and [gcd(x, λ)=1]. *)
+Theorem peng_bao_member_still_forges :
+  forall p q g theta x,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime g (p * q) ->
+    0 <= theta ->
+    0 < x ->
+    (x | theta) ->
+    Z.gcd x (lambda_semiprime p q) = 1 ->
+    let N := p * q in
+    let A := powm g theta N in
+    exists a B, 0 <= a /\ acc_nonmem_wit N A B a x g.
+Proof.
+  intros p q g theta x Hp Hq Hneq Hg Ht Hx Hdiv Hgcd N A.
+  subst N A.
+  apply llx_lambda_forges_nonmem; try assumption; try lia.
+  replace (Z.gcd theta x) with x.
+  - exact Hgcd.
+  - apply Z.divide_gcd_iff in Hdiv; [| lia].
+    rewrite Z.gcd_comm, Hdiv. reflexivity.
 Qed.

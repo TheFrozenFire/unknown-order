@@ -942,8 +942,10 @@ poly-size or smooth adaptive-root `C`
 (`adaptive_root_known_product_breaks`), unrestricted low-order
 on `Cl(Δ)` (`catalog_wins_LowOrder_B2`), public `λ` trivializes
 Strong RSA / adaptive root (`lambda_solves_strong_RSA`). Rows
-that stay named: BP97 vs modern Strong RSA, AM09-as-standard-model,
-Peng–Bao on LLX if `∏S mod φ(N)` is public. Mersenne restricted
+that stay named: BP97 vs modern Strong RSA, AM09-as-standard-model.
+Peng–Bao on LLX if `∏S mod φ(N)` is public is a theorem:
+`llx_lambda_forges_nonmem` / `peng_bao_member_still_forges`.
+Mersenne restricted
 low-order is a theorem: `mersenne31_wins_restricted_LowOrder`
 (`Δ = −31`, form `(2,1,4)`, order 3, not `Cl[2]`). The general
 2020/1310 / Mollin construction stays named.
@@ -1473,6 +1475,20 @@ membership witness is a root. A forged witness for a random
 base is adaptive root. Instantiated on `rsa_presentation`;
 stated on `cl_presentation`, which has no trapdoor to update
 with `λ`. Hash-to-prime is a named skip.
+
+Non-membership (Li–Li–Xue) is a Bézout witness
+`A^a B^x ≡ g` for `A = g^θ` (`llx_complete`). If
+`gcd(x, 1−aθ)=1`, Shamir extracts an `x`-th root of `g`
+(`llx_extract_root`). Knowing `θ` and `λ` forges that
+witness even when `x` divides `θ` (`peng_bao_member_still_forges`).
+Trapdoor add is invert-then-exp (`rsa_trapdoor_add`).
+
+Guillou–Quisquater (`GQ.v`) is a PoK of an `e`-th root:
+completeness is the usual `r^e = t z^c` (`gq_complete`);
+two transcripts with `gcd(c−c', e)=1` extract via Shamir
+(`gq_extract`). Publishing a mixed `√1` factors `N` and is
+not zero-knowledge (`gq_on_one_with_mixed_sqrt_is_factorization`).
+Simulation / ROM stay named. CAS `42`.
 
 `Print Assumptions` on the headline theorems of this wave
 (`compose_id_left`, `compose_inv_of_disc`, `compose_inv_equiv_id`,

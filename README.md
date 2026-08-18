@@ -100,13 +100,18 @@ Run on `(ℤ/Nℤ)*` (Wesolowski is trivial given `λ`; Pietrzak hits `{±1}` or
 mixed CRT root) and on toy `Cl(Δ)` (Pietrzak must not count `Cl[2]` as a
 restricted break). CAS `24`, `26`.
 
-`ExpProof.v`, `Accumulator.v`. Sequentiality and the ROM stay named.
+`ExpProof.v`, `Accumulator.v`, `GQ.v`. Sequentiality and the ROM stay named.
 A composite member splits the witness; same bit length does not restore
 soundness (`bdm_same_bits_still_splits`). Wesolowski algebra does not
 use `Z.prime ℓ`. On raw units an odd challenge accepts `−y` via `π ↦ −π`
 (`wesolowski_soundness_fails_on_units_odd_challenge`). A poly-size or
 smooth adaptive-root challenge space is broken
 (`adaptive_root_known_product_breaks`).
+LLX non-membership is Bézout (`llx_complete`); `θ` and `λ` forge it
+even for a member (`peng_bao_member_still_forges`). Trapdoor add is
+`rsa_trapdoor_add`. GQ completeness and two-transcript extraction
+are `gq_complete` / `gq_extract`; a mixed `√1` factors and is not ZK.
+CAS `42`.
 
 Excluding `Cl[2]` is not enough for restricted low-order: on the
 Mersenne discriminant `Δ = −31` the Shanks form `(2,1,4)` has order 3
@@ -154,7 +159,7 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 41 witnesses, `cas/01`–`41`.
+CAS is 42 witnesses, `cas/01`–`42`.
 
 ## Constructor (not a filter)
 
