@@ -151,14 +151,7 @@ Qed.
 
 (** A false statement that verifies gives an adaptive-root witness
     for the quotient, once an inverse of [x^{qℓ+r}] is supplied. *)
-Theorem wesolowski_false_is_adaptive_root :
-  forall N y pi ell w,
-    1 < N ->
-    1 < ell ->
-    (y * w) mod N = 1 ->
-    P_AdaptiveRoot (rsa_presentation N) w pi (Z.to_nat ell) \/
-    True.
-Proof. intros. right. exact I. Qed.
+
 
 (** Honest form: if [π^ℓ ≡ z] and [1 < ℓ] then [π] is an adaptive
     root for [z]. *)

@@ -602,8 +602,4 @@ Theorem regime_1024_ap_budget :
     regime_bits_against_public_ap 512 M_bits = 512 - M_bits.
 Proof. intros. reflexivity. Qed.
 
-Theorem catalog_handle_bits_are_zero :
-  forall K,
-    satisfies_keygen (pcp_spec (ck_placed K)) (ctor_to_rsa K) ->
-    True.
-Proof. intros. exact I. Qed.
+

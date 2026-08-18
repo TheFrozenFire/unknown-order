@@ -1,6 +1,7 @@
 From Stdlib Require Import ZArith.
 From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
+From Stdlib Require Import Zmod.
 
 Require Import RocqProofs.NumberTheory.
 Require Import RSA.
@@ -140,4 +141,86 @@ Lemma short_dq_short_annihilator :
 Proof.
   intros e d q B He HB Hq Hdq.
   unfold crt_dq in *. nia.
+Qed.
+
+(** ** Garner CRT decrypt equals [c^d]
+
+    [c^{d_p} (mod p)] is [c^d (mod p)] by Fermat.  CRT recombination
+    is then [c^d (mod pq)].  Quisquater–Couvreur is this map. *)
+
+Lemma powm_reduce_pminus1 :
+  forall p a d,
+    Z.prime p ->
+    Z.coprime a p ->
+    0 <= d ->
+    powm a d p = powm a (d mod (p - 1)) p.
+Proof.
+  intros p a d Hp Hcop Hd.
+  pose proof (Z.prime_ge_2 p Hp).
+  assert (0 < p - 1) by lia.
+  pose proof (Z.div_mod d (p - 1) ltac:(lia)) as Hdm.
+  rewrite Hdm at 1.
+  assert (0 <= d mod (p - 1)) by (apply Z.mod_pos_bound; lia).
+  assert (0 <= d / (p - 1)) by (apply Z.div_pos; lia).
+  rewrite powm_add_r by nia.
+  rewrite powm_mul_r by nia.
+  rewrite (fermat_coprime p a Hp Hcop).
+  rewrite powm_1_pow by nia.
+  unfold powm.
+  rewrite Z.mod_1_l by lia.
+  rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
+Qed.
+
+Definition crt_decrypt (R : RSAInstance) (c : Z) : Z :=
+  let mp := powm c (crt_dp (rsa_d R) (rsa_p R)) (rsa_p R) in
+  let mq := powm c (crt_dq (rsa_d R) (rsa_q R)) (rsa_q R) in
+  Z.combinecong (rsa_p R) (rsa_q R) mp mq.
+
+Theorem crt_decrypt_eq_rsa_dec :
+  forall R c,
+    Z.coprime c (rsa_N R) ->
+    3 <= rsa_p R ->
+    3 <= rsa_q R ->
+    crt_decrypt R c mod rsa_N R = rsa_dec R c.
+Proof.
+  intros R c Hcop Hp3 Hq3.
+  pose proof (rsa_p_prime R) as Hp.
+  pose proof (rsa_q_prime R) as Hq.
+  pose proof (rsa_distinct R) as Hneq.
+  pose proof (rsa_d_pos R).
+  pose proof (rsa_N_gt_1 R).
+  pose proof (Z.prime_ge_2 (rsa_p R) Hp).
+  pose proof (Z.prime_ge_2 (rsa_q R) Hq).
+  unfold crt_decrypt, rsa_N.
+  set (mp := powm c (crt_dp (rsa_d R) (rsa_p R)) (rsa_p R)).
+  set (mq := powm c (crt_dq (rsa_d R) (rsa_q R)) (rsa_q R)).
+  set (x := Z.combinecong (rsa_p R) (rsa_q R) mp mq).
+  assert (Z.coprime (rsa_p R) (rsa_q R)) as Hpq
+    by (apply prime_coprime_distinct; assumption).
+  pose proof (Z.combinecong_sound_coprime (rsa_p R) (rsa_q R) mp mq Hpq)
+    as [Hxp Hxq].
+  apply coprime_semiprime in Hcop; [| exact Hp | exact Hq | exact Hneq].
+  destruct Hcop as [Hcp Hcq].
+  assert (rsa_dec R c mod rsa_p R = mp mod rsa_p R) as Hdp.
+  { unfold mp, rsa_dec, crt_dp, rsa_N.
+    rewrite <- (powm_reduce_pminus1 (rsa_p R) c (rsa_d R))
+      by (try assumption; lia).
+    unfold powm.
+    rewrite Z.mod_mod by lia.
+    apply Z.mod_mod_divide. exists (rsa_q R). ring. }
+  assert (rsa_dec R c mod rsa_q R = mq mod rsa_q R) as Hdq.
+  { unfold mq, rsa_dec, crt_dq, rsa_N.
+    rewrite <- (powm_reduce_pminus1 (rsa_q R) c (rsa_d R))
+      by (try assumption; lia).
+    unfold powm.
+    rewrite Z.mod_mod by lia.
+    apply Z.mod_mod_divide. exists (rsa_p R). ring. }
+  unfold x.
+  rewrite <- (Z.combinecong_complete_coprime_nonneg
+                (rsa_dec R c) (rsa_p R) (rsa_q R) mp mq Hpq).
+  - unfold rsa_dec, powm, rsa_N.
+    now rewrite !(Z.mod_mod _ (rsa_p R * rsa_q R)) by nia.
+  - rewrite Hdp. unfold mp. unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+  - rewrite Hdq. unfold mq. unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+  - nia.
 Qed.

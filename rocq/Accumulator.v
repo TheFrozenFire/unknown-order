@@ -99,13 +99,14 @@ Proof.
   apply lambda_solves_strong_RSA; assumption.
 Qed.
 
-Theorem cl_annihilator_two_cannot_divide_odd :
-  forall D x,
-    Pannihilator (cl_presentation D) = Some 2 ->
-    Z.odd x = true ->
-    ~ (2 | x) ->
-    True.
-Proof. intros. exact I. Qed.
+Theorem cl_odd_invertible_mod_two :
+  forall x, Z.odd x = true -> (x * 1) mod 2 = 1.
+Proof.
+  intros x Hodd. rewrite Z.mul_1_r.
+  apply Z.odd_spec in Hodd. destruct Hodd as [k Hk].
+  rewrite Hk, Z.add_comm, (Z.mul_comm 2 k).
+  rewrite Z.mod_add, Z.mod_1_l by lia. reflexivity.
+Qed.
 
 Theorem cl_no_trapdoor_from_two :
   forall D,

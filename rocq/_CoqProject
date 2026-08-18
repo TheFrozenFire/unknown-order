@@ -4,6 +4,8 @@
 
 NamedSkips.v
 RSA.v
+TimeLock.v
+ThresholdRSA.v
 EulerQuotient.v
 FactorEnum.v
 Miller.v
@@ -31,10 +33,12 @@ HashSlot.v
 Derive.v
 RabinWilliams.v
 TranscriptOracle.v
+BlindRSA.v
 TwoPrimary.v
 Order.v
 TwoSylow.v
 MultiPrime.v
+SharedModulus.v
 MillerHeight.v
 CyclicCount.v
 Lucas.v

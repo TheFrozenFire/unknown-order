@@ -6,9 +6,9 @@ in the Rocq tree.  Do not edit by hand.
 ## `Accumulator.v`
 
 - L13: Accumulator membership as the RSA-shaped map
-  - L150: Shamir's trick, and why same-bit-length members do not restore soundness
-  - L345: Li–Li–Xue non-membership
-  - L651: Integer commitment binding (FO/DF relation)
+  - L151: Shamir's trick, and why same-bit-length members do not restore soundness
+  - L346: Li–Li–Xue non-membership
+  - L652: Integer commitment binding (FO/DF relation)
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -20,30 +20,30 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `cl_has_no_trapdoor_update` | 79 |
 | Theorem | `rsa_public_has_no_trapdoor_update` | 83 |
 | Theorem | `rsa_acc_forge_from_lambda` | 87 |
-| Theorem | `cl_annihilator_two_cannot_divide_odd` | 102 |
-| Theorem | `cl_no_trapdoor_from_two` | 110 |
-| Theorem | `rsa_composite_member_splits_witness` | 124 |
-| Lemma | `powm_mul_l_mod` | 157 |
-| Lemma | `powm_inv_cancels` | 167 |
-| Lemma | `mul_pow_mod_cong` | 183 |
-| Lemma | `zmul_nonneg_eq_1` | 199 |
-| Lemma | `shamir_neg_beta` | 206 |
-| Lemma | `shamir_trick` | 247 |
-| Theorem | `bdm_coprime_gives_product_witness` | 303 |
-| Theorem | `bdm_same_bits_still_splits` | 325 |
-| Theorem | `llx_complete_nonneg` | 356 |
-| Theorem | `llx_complete` | 378 |
-| Lemma | `llx_Bx_eq_g_times_inv` | 414 |
-| Lemma | `g_times_inv_succ` | 449 |
-| Theorem | `llx_extract_root` | 465 |
-| Lemma | `bezout3` | 528 |
-| Theorem | `llx_lambda_forges_nonmem` | 542 |
-| Theorem | `rsa_trapdoor_add` | 595 |
-| Theorem | `peng_bao_member_still_forges` | 630 |
-| Theorem | `icomm_cancel_h` | 662 |
-| Theorem | `icomm_binding_is_fractional_root` | 706 |
-| Theorem | `icomm_same_msg_is_annihilator` | 722 |
-| Theorem | `lipmaa_cl_membership_is_P_Root` | 747 |
+| Theorem | `cl_odd_invertible_mod_two` | 102 |
+| Theorem | `cl_no_trapdoor_from_two` | 111 |
+| Theorem | `rsa_composite_member_splits_witness` | 125 |
+| Lemma | `powm_mul_l_mod` | 158 |
+| Lemma | `powm_inv_cancels` | 168 |
+| Lemma | `mul_pow_mod_cong` | 184 |
+| Lemma | `zmul_nonneg_eq_1` | 200 |
+| Lemma | `shamir_neg_beta` | 207 |
+| Lemma | `shamir_trick` | 248 |
+| Theorem | `bdm_coprime_gives_product_witness` | 304 |
+| Theorem | `bdm_same_bits_still_splits` | 326 |
+| Theorem | `llx_complete_nonneg` | 357 |
+| Theorem | `llx_complete` | 379 |
+| Lemma | `llx_Bx_eq_g_times_inv` | 415 |
+| Lemma | `g_times_inv_succ` | 450 |
+| Theorem | `llx_extract_root` | 466 |
+| Lemma | `bezout3` | 529 |
+| Theorem | `llx_lambda_forges_nonmem` | 543 |
+| Theorem | `rsa_trapdoor_add` | 596 |
+| Theorem | `peng_bao_member_still_forges` | 631 |
+| Theorem | `icomm_cancel_h` | 663 |
+| Theorem | `icomm_binding_is_fractional_root` | 707 |
+| Theorem | `icomm_same_msg_is_annihilator` | 723 |
+| Theorem | `lipmaa_cl_membership_is_P_Root` | 748 |
 
 ## `BatchOrder.v`
 
@@ -164,7 +164,6 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `bqf_exp_1` | 1073 |
 | Lemma | `bqf_exp_2` | 1083 |
 | Theorem | `bqf_exp_2_ambiguous_div` | 1093 |
-| Theorem | `no_crt_split_on_forms` | 1105 |
 
 ## `BitLeak.v`
 
@@ -176,20 +175,32 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `roca_unknown_is_k` | 43 |
 | Lemma | `bitleak_poly_divides_N` | 59 |
 
-## `CRTRSA.v`
+## `BlindRSA.v`
 
-- L11: CRT-RSA: a small [d_p] is a short one-sided annihilator
+- L11: Chaum blinded RSA
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `lambda_gt_1_of` | 26 |
-| Lemma | `ed_one_mod_pminus1_of` | 42 |
-| Lemma | `dp_congruent_d` | 63 |
-| Theorem | `crt_dp_annihilates` | 67 |
-| Lemma | `short_dp_short_annihilator` | 104 |
-| Lemma | `lambda_semiprime_comm` | 117 |
-| Theorem | `crt_dq_annihilates` | 121 |
-| Lemma | `short_dq_short_annihilator` | 134 |
+| Theorem | `chaum_sign_blinded_is_raw_times_r` | 25 |
+| Theorem | `chaum_unblind_is_raw_sign` | 46 |
+
+## `CRTRSA.v`
+
+- L12: CRT-RSA: a small [d_p] is a short one-sided annihilator
+  - L146: Garner CRT decrypt equals [c^d]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `lambda_gt_1_of` | 27 |
+| Lemma | `ed_one_mod_pminus1_of` | 43 |
+| Lemma | `dp_congruent_d` | 64 |
+| Theorem | `crt_dp_annihilates` | 68 |
+| Lemma | `short_dp_short_annihilator` | 105 |
+| Lemma | `lambda_semiprime_comm` | 118 |
+| Theorem | `crt_dq_annihilates` | 122 |
+| Lemma | `short_dq_short_annihilator` | 135 |
+| Lemma | `powm_reduce_pminus1` | 151 |
+| Theorem | `crt_decrypt_eq_rsa_dec` | 179 |
 
 ## `ChallengePrime.v`
 
@@ -312,13 +323,13 @@ in the Rocq tree.  Do not edit by hand.
 - L17: Secure derivation into the no-handle class
   - L31: Area 1. The slice [S_b] and the index bijection
   - L171: Area 2. Unbiased index; biased shortcuts
-  - L267: Area 3. Increment is not resample
-  - L305: Area 4. A public map into one AP leaks [M]
-  - L361: Area 5. Seeded auxiliaries: splitting conditions and domain sep
-  - L412: Area 6. Reuse is publication
-  - L443: Area 7. Placement as an interval on the second index
-  - L513: Area 8. [e], [d], and a successful derivation
-  - L602: Area 9. Named distributions
+  - L266: Area 3. Increment is not resample
+  - L304: Area 4. A public map into one AP leaks [M]
+  - L360: Area 5. Seeded auxiliaries: splitting conditions and domain sep
+  - L405: Area 6. Reuse is publication
+  - L436: Area 7. Placement as an interval on the second index
+  - L499: Area 8. [e], [d], and a successful derivation
+  - L588: Area 9. Named distributions
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -338,41 +349,39 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `derive_candidate_in_S_b` | 195 |
 | Theorem | `mod_hits_differ` | 215 |
 | Theorem | `mod_bias_example` | 223 |
-| Lemma | `two_hits_zero_one_hit_five` | 230 |
-| Theorem | `force_residue_leaves_range_example` | 237 |
-| Theorem | `slot_encode_unbounded_not_in_S_b` | 250 |
-| Theorem | `increment_hits_first` | 277 |
-| Theorem | `increment_from_min_skips_later` | 288 |
-| Theorem | `resample_includes_every_slice_prime` | 299 |
-| Theorem | `public_map_difference_divides` | 307 |
-| Theorem | `public_two_outputs_leak_multiple` | 315 |
-| Theorem | `gcd_of_index_diffs_divides_output_gcd` | 323 |
-| Theorem | `no_public_hidden_class` | 335 |
-| Theorem | `public_derive_is_roca` | 348 |
-| Theorem | `domain_tag_separates` | 368 |
-| Theorem | `cas28_aux_split_ready` | 376 |
-| Theorem | `huge_M_can_empty_slice` | 391 |
-| Theorem | `empty_slice_example` | 399 |
-| Theorem | `reuse_gives_public_ap` | 416 |
-| Theorem | `reuse_recovers_residue` | 427 |
-| Theorem | `placement_implies_balanced` | 459 |
-| Theorem | `placement_hi_enforces_far` | 473 |
-| Theorem | `cas28_same_slot_not_placeable` | 488 |
-| Theorem | `far_requires_room` | 492 |
-| Theorem | `far_can_empty_placement` | 499 |
-| Theorem | `derive_e_not_tiny` | 517 |
-| Theorem | `derive_success_has_e` | 541 |
-| Theorem | `large_d_if_not_wiener` | 547 |
-| Theorem | `pocklington_needs_R_gt_sqrt` | 556 |
-| Theorem | `B160_not_sqrt_of_512bit` | 563 |
-| Theorem | `aux_at_B_not_pocklington_size` | 570 |
-| Theorem | `rw_p_is_blum` | 587 |
-| Theorem | `derive_e_fixed` | 599 |
-| Theorem | `dist_public_slot_is_roca` | 607 |
-| Theorem | `dist_reused_slot_leaks_M` | 620 |
-| Theorem | `dist_force_residue_can_leave_range` | 635 |
-| Theorem | `dist_seeded_slot_balanced` | 647 |
-| Theorem | `long_seed_hits_every_index` | 663 |
+| Lemma | `two_hits_zero_one_hit_five` | 229 |
+| Theorem | `force_residue_leaves_range_example` | 236 |
+| Theorem | `slot_encode_unbounded_not_in_S_b` | 249 |
+| Theorem | `increment_hits_first` | 276 |
+| Theorem | `increment_from_min_skips_later` | 287 |
+| Theorem | `resample_includes_every_slice_prime` | 298 |
+| Theorem | `public_map_difference_divides` | 306 |
+| Theorem | `public_two_outputs_leak_multiple` | 314 |
+| Theorem | `gcd_of_index_diffs_divides_output_gcd` | 322 |
+| Theorem | `no_public_hidden_class` | 334 |
+| Theorem | `public_derive_is_roca` | 347 |
+| Theorem | `domain_tag_separates` | 367 |
+| Theorem | `cas28_aux_split_ready` | 375 |
+| Theorem | `empty_slice_example` | 392 |
+| Theorem | `reuse_gives_public_ap` | 409 |
+| Theorem | `reuse_recovers_residue` | 420 |
+| Theorem | `placement_implies_balanced` | 452 |
+| Theorem | `placement_hi_enforces_far` | 466 |
+| Theorem | `cas28_same_slot_not_placeable` | 481 |
+| Theorem | `far_can_empty_placement` | 485 |
+| Theorem | `derive_e_not_tiny` | 503 |
+| Theorem | `derive_success_has_e` | 527 |
+| Theorem | `large_d_if_not_wiener` | 533 |
+| Theorem | `pocklington_needs_R_gt_sqrt` | 542 |
+| Theorem | `B160_not_sqrt_of_512bit` | 549 |
+| Theorem | `aux_at_B_not_pocklington_size` | 556 |
+| Theorem | `rw_p_is_blum` | 573 |
+| Theorem | `derive_e_fixed` | 585 |
+| Theorem | `dist_public_slot_is_roca` | 593 |
+| Theorem | `dist_reused_slot_leaks_M` | 606 |
+| Theorem | `dist_force_residue_can_leave_range` | 621 |
+| Theorem | `dist_seeded_slot_balanced` | 633 |
+| Theorem | `long_seed_hits_every_index` | 649 |
 
 ## `EulerQuotient.v`
 
@@ -419,17 +428,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pietrzak_restricted_ignores_Cl2` | 115 |
 | Theorem | `wesolowski_verify_rsa_agrees` | 127 |
 | Theorem | `wesolowski_correct_is_PRoot` | 138 |
-| Theorem | `wesolowski_false_is_adaptive_root` | 154 |
-| Theorem | `verifying_pi_is_adaptive_root` | 165 |
-| Theorem | `pietrzak_quotient_squares_to_one_rsa` | 182 |
-| Theorem | `pietrzak_quotient_on_Cl_may_be_ambiguous` | 203 |
-| Theorem | `form_neg87_ord3_of_disc` | 217 |
-| Theorem | `wesolowski_on_Cl_exp` | 223 |
-| Theorem | `wesolowski_root_does_not_need_prime_ell` | 234 |
-| Theorem | `wesolowski_verify_does_not_need_prime_ell` | 243 |
-| Lemma | `powm_opp_odd` | 264 |
-| Theorem | `wesolowski_odd_challenge_accepts_negation` | 280 |
-| Theorem | `wesolowski_soundness_fails_on_units_odd_challenge` | 310 |
+| Theorem | `verifying_pi_is_adaptive_root` | 158 |
+| Theorem | `pietrzak_quotient_squares_to_one_rsa` | 175 |
+| Theorem | `pietrzak_quotient_on_Cl_may_be_ambiguous` | 196 |
+| Theorem | `form_neg87_ord3_of_disc` | 210 |
+| Theorem | `wesolowski_on_Cl_exp` | 216 |
+| Theorem | `wesolowski_root_does_not_need_prime_ell` | 227 |
+| Theorem | `wesolowski_verify_does_not_need_prime_ell` | 236 |
+| Lemma | `powm_opp_odd` | 257 |
+| Theorem | `wesolowski_odd_challenge_accepts_negation` | 273 |
+| Theorem | `wesolowski_soundness_fails_on_units_odd_challenge` | 303 |
 
 ## `FactorEnum.v`
 
@@ -708,7 +716,6 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `public_ap_div_le_shift` | 560 |
 | Theorem | `public_ap_search_bits` | 576 |
 | Theorem | `regime_1024_ap_budget` | 599 |
-| Theorem | `catalog_handle_bits_are_zero` | 605 |
 
 ## `KeyGenGeom.v`
 
@@ -1033,6 +1040,18 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `kg_rw_implies_blum` | 315 |
 | Lemma | `kg_rw_pminus1_almost_odd` | 323 |
 
+## `SharedModulus.v`
+
+- L12: Shared-modulus DKG algebra (Boneh–Franklin shape)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `dkg_N_is_product` | 29 |
+| Theorem | `dkg_N_cross_terms` | 34 |
+| Theorem | `published_sum_is_phi_plus_one` | 40 |
+| Theorem | `two_prime_four_roots_triprime_eight` | 45 |
+| Theorem | `triprime_mixed_root_refutes_biprime` | 70 |
+
 ## `SharedPrime.v`
 
 - L9: Shared primes: [gcd(N₁, N₂)] *is* the common CRT component
@@ -1081,6 +1100,8 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `three_moduli_divide` | 49 |
 | Theorem | `hastad_cube_if_small` | 74 |
 | Lemma | `related_message_common_root` | 97 |
+| Theorem | `fr_cube_gap` | 110 |
+| Theorem | `fr_cube_gap_mod` | 116 |
 
 ## `StrongPrimes.v`
 
@@ -1093,10 +1114,32 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `safe_prime_resists_p1` | 60 |
 | Theorem | `large_factor_blocks_smooth_claim` | 78 |
 | Theorem | `safe_prime_blocks_smooth_claim` | 87 |
-| Theorem | `strong_prime_resists_both` | 98 |
-| Lemma | `prime_5` | 109 |
-| Theorem | `five_is_safe` | 117 |
-| Theorem | `five_resists_B1` | 123 |
+| Theorem | `safe_pair_lambda` | 98 |
+| Theorem | `strong_prime_resists_both` | 131 |
+| Lemma | `prime_5` | 142 |
+| Theorem | `five_is_safe` | 150 |
+| Theorem | `five_resists_B1` | 156 |
+
+## `ThresholdRSA.v`
+
+- L10: Threshold / mediated RSA, as exponent algebra
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `additive_share_combines` | 21 |
+| Theorem | `additive_three_shares` | 33 |
+| Theorem | `mediated_rsa_is_two_shares` | 47 |
+| Theorem | `share_refresh_by_zero` | 61 |
+| Lemma | `powm_ed_is_base` | 81 |
+| Theorem | `shoup_extract_from_kd` | 121 |
+
+## `TimeLock.v`
+
+- L10: Rivest–Shamir–Wagner time-lock, trapdoor side
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `timelock_trapdoor_reduces_exp` | 17 |
 
 ## `Torus.v`
 
@@ -1287,4 +1330,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_881 theorems/lemmas/corollaries/examples across 45 files._
+_895 theorems/lemmas/corollaries/examples across 49 files._

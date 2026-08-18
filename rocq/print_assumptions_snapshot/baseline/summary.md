@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 881 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 895 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 881 results across 45 files.
+Captured for 895 results across 49 files.
 
 Counts:
 
@@ -21,30 +21,30 @@ Counts:
 | `cl_has_no_trapdoor_update` | 79 | 0 | 0 | OK |
 | `rsa_public_has_no_trapdoor_update` | 83 | 0 | 0 | OK |
 | `rsa_acc_forge_from_lambda` | 87 | 0 | 0 | OK |
-| `cl_annihilator_two_cannot_divide_odd` | 102 | 0 | 0 | OK |
-| `cl_no_trapdoor_from_two` | 110 | 0 | 0 | OK |
-| `rsa_composite_member_splits_witness` | 124 | 0 | 0 | OK |
-| `powm_mul_l_mod` | 157 | 0 | 0 | OK |
-| `powm_inv_cancels` | 167 | 0 | 0 | OK |
-| `mul_pow_mod_cong` | 183 | 0 | 0 | OK |
-| `zmul_nonneg_eq_1` | 199 | 0 | 0 | OK |
-| `shamir_neg_beta` | 206 | 0 | 0 | OK |
-| `shamir_trick` | 247 | 0 | 0 | OK |
-| `bdm_coprime_gives_product_witness` | 303 | 0 | 0 | OK |
-| `bdm_same_bits_still_splits` | 325 | 0 | 0 | OK |
-| `llx_complete_nonneg` | 356 | 0 | 0 | OK |
-| `llx_complete` | 378 | 0 | 0 | OK |
-| `llx_Bx_eq_g_times_inv` | 414 | 0 | 0 | OK |
-| `g_times_inv_succ` | 449 | 0 | 0 | OK |
-| `llx_extract_root` | 465 | 0 | 0 | OK |
-| `bezout3` | 528 | 0 | 0 | OK |
-| `llx_lambda_forges_nonmem` | 542 | 0 | 0 | OK |
-| `rsa_trapdoor_add` | 595 | 0 | 0 | OK |
-| `peng_bao_member_still_forges` | 630 | 0 | 0 | OK |
-| `icomm_cancel_h` | 662 | 0 | 0 | OK |
-| `icomm_binding_is_fractional_root` | 706 | 0 | 0 | OK |
-| `icomm_same_msg_is_annihilator` | 722 | 0 | 0 | OK |
-| `lipmaa_cl_membership_is_P_Root` | 747 | 0 | 0 | OK |
+| `cl_odd_invertible_mod_two` | 102 | 0 | 0 | OK |
+| `cl_no_trapdoor_from_two` | 111 | 0 | 0 | OK |
+| `rsa_composite_member_splits_witness` | 125 | 0 | 0 | OK |
+| `powm_mul_l_mod` | 158 | 0 | 0 | OK |
+| `powm_inv_cancels` | 168 | 0 | 0 | OK |
+| `mul_pow_mod_cong` | 184 | 0 | 0 | OK |
+| `zmul_nonneg_eq_1` | 200 | 0 | 0 | OK |
+| `shamir_neg_beta` | 207 | 0 | 0 | OK |
+| `shamir_trick` | 248 | 0 | 0 | OK |
+| `bdm_coprime_gives_product_witness` | 304 | 0 | 0 | OK |
+| `bdm_same_bits_still_splits` | 326 | 0 | 0 | OK |
+| `llx_complete_nonneg` | 357 | 0 | 0 | OK |
+| `llx_complete` | 379 | 0 | 0 | OK |
+| `llx_Bx_eq_g_times_inv` | 415 | 0 | 0 | OK |
+| `g_times_inv_succ` | 450 | 0 | 0 | OK |
+| `llx_extract_root` | 466 | 0 | 0 | OK |
+| `bezout3` | 529 | 0 | 0 | OK |
+| `llx_lambda_forges_nonmem` | 543 | 0 | 0 | OK |
+| `rsa_trapdoor_add` | 596 | 0 | 0 | OK |
+| `peng_bao_member_still_forges` | 631 | 0 | 0 | OK |
+| `icomm_cancel_h` | 663 | 0 | 0 | OK |
+| `icomm_binding_is_fractional_root` | 707 | 0 | 0 | OK |
+| `icomm_same_msg_is_annihilator` | 723 | 0 | 0 | OK |
+| `lipmaa_cl_membership_is_P_Root` | 748 | 0 | 0 | OK |
 
 ## BatchOrder.v
 
@@ -156,7 +156,6 @@ Counts:
 | `bqf_exp_1` | 1073 | 0 | 0 | OK |
 | `bqf_exp_2` | 1083 | 0 | 0 | OK |
 | `bqf_exp_2_ambiguous_div` | 1093 | 0 | 0 | OK |
-| `no_crt_split_on_forms` | 1105 | 0 | 0 | OK |
 
 ## BitLeak.v
 
@@ -166,18 +165,27 @@ Counts:
 | `roca_unknown_is_k` | 43 | 0 | 0 | OK |
 | `bitleak_poly_divides_N` | 59 | 0 | 0 | OK |
 
+## BlindRSA.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `chaum_sign_blinded_is_raw_times_r` | 25 | 0 | 0 | OK |
+| `chaum_unblind_is_raw_sign` | 46 | 0 | 0 | OK |
+
 ## CRTRSA.v
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `lambda_gt_1_of` | 26 | 0 | 0 | OK |
-| `ed_one_mod_pminus1_of` | 42 | 0 | 0 | OK |
-| `dp_congruent_d` | 63 | 0 | 0 | OK |
-| `crt_dp_annihilates` | 67 | 0 | 0 | OK |
-| `short_dp_short_annihilator` | 104 | 0 | 0 | OK |
-| `lambda_semiprime_comm` | 117 | 0 | 0 | OK |
-| `crt_dq_annihilates` | 121 | 0 | 0 | OK |
-| `short_dq_short_annihilator` | 134 | 0 | 0 | OK |
+| `lambda_gt_1_of` | 27 | 0 | 0 | OK |
+| `ed_one_mod_pminus1_of` | 43 | 0 | 0 | OK |
+| `dp_congruent_d` | 64 | 0 | 0 | OK |
+| `crt_dp_annihilates` | 68 | 0 | 0 | OK |
+| `short_dp_short_annihilator` | 105 | 0 | 0 | OK |
+| `lambda_semiprime_comm` | 118 | 0 | 0 | OK |
+| `crt_dq_annihilates` | 122 | 0 | 0 | OK |
+| `short_dq_short_annihilator` | 135 | 0 | 0 | OK |
+| `powm_reduce_pminus1` | 151 | 0 | 0 | OK |
+| `crt_decrypt_eq_rsa_dec` | 179 | 0 | 0 | OK |
 
 ## ChallengePrime.v
 
@@ -303,41 +311,39 @@ Counts:
 | `derive_candidate_in_S_b` | 195 | 0 | 0 | OK |
 | `mod_hits_differ` | 215 | 0 | 0 | OK |
 | `mod_bias_example` | 223 | 0 | 0 | OK |
-| `two_hits_zero_one_hit_five` | 230 | 0 | 0 | OK |
-| `force_residue_leaves_range_example` | 237 | 0 | 0 | OK |
-| `slot_encode_unbounded_not_in_S_b` | 250 | 0 | 0 | OK |
-| `increment_hits_first` | 277 | 0 | 0 | OK |
-| `increment_from_min_skips_later` | 288 | 0 | 0 | OK |
-| `resample_includes_every_slice_prime` | 299 | 0 | 0 | OK |
-| `public_map_difference_divides` | 307 | 0 | 0 | OK |
-| `public_two_outputs_leak_multiple` | 315 | 0 | 0 | OK |
-| `gcd_of_index_diffs_divides_output_gcd` | 323 | 0 | 0 | OK |
-| `no_public_hidden_class` | 335 | 0 | 0 | OK |
-| `public_derive_is_roca` | 348 | 0 | 0 | OK |
-| `domain_tag_separates` | 368 | 0 | 0 | OK |
-| `cas28_aux_split_ready` | 376 | 0 | 0 | OK |
-| `huge_M_can_empty_slice` | 391 | 0 | 0 | OK |
-| `empty_slice_example` | 399 | 0 | 0 | OK |
-| `reuse_gives_public_ap` | 416 | 0 | 0 | OK |
-| `reuse_recovers_residue` | 427 | 0 | 0 | OK |
-| `placement_implies_balanced` | 459 | 0 | 0 | OK |
-| `placement_hi_enforces_far` | 473 | 0 | 0 | OK |
-| `cas28_same_slot_not_placeable` | 488 | 0 | 0 | OK |
-| `far_requires_room` | 492 | 0 | 0 | OK |
-| `far_can_empty_placement` | 499 | 0 | 0 | OK |
-| `derive_e_not_tiny` | 517 | 0 | 0 | OK |
-| `derive_success_has_e` | 541 | 0 | 0 | OK |
-| `large_d_if_not_wiener` | 547 | 0 | 0 | OK |
-| `pocklington_needs_R_gt_sqrt` | 556 | 0 | 0 | OK |
-| `B160_not_sqrt_of_512bit` | 563 | 0 | 0 | OK |
-| `aux_at_B_not_pocklington_size` | 570 | 0 | 0 | OK |
-| `rw_p_is_blum` | 587 | 0 | 0 | OK |
-| `derive_e_fixed` | 599 | 0 | 0 | OK |
-| `dist_public_slot_is_roca` | 607 | 0 | 0 | OK |
-| `dist_reused_slot_leaks_M` | 620 | 0 | 0 | OK |
-| `dist_force_residue_can_leave_range` | 635 | 0 | 0 | OK |
-| `dist_seeded_slot_balanced` | 647 | 0 | 0 | OK |
-| `long_seed_hits_every_index` | 663 | 0 | 0 | OK |
+| `two_hits_zero_one_hit_five` | 229 | 0 | 0 | OK |
+| `force_residue_leaves_range_example` | 236 | 0 | 0 | OK |
+| `slot_encode_unbounded_not_in_S_b` | 249 | 0 | 0 | OK |
+| `increment_hits_first` | 276 | 0 | 0 | OK |
+| `increment_from_min_skips_later` | 287 | 0 | 0 | OK |
+| `resample_includes_every_slice_prime` | 298 | 0 | 0 | OK |
+| `public_map_difference_divides` | 306 | 0 | 0 | OK |
+| `public_two_outputs_leak_multiple` | 314 | 0 | 0 | OK |
+| `gcd_of_index_diffs_divides_output_gcd` | 322 | 0 | 0 | OK |
+| `no_public_hidden_class` | 334 | 0 | 0 | OK |
+| `public_derive_is_roca` | 347 | 0 | 0 | OK |
+| `domain_tag_separates` | 367 | 0 | 0 | OK |
+| `cas28_aux_split_ready` | 375 | 0 | 0 | OK |
+| `empty_slice_example` | 392 | 0 | 0 | OK |
+| `reuse_gives_public_ap` | 409 | 0 | 0 | OK |
+| `reuse_recovers_residue` | 420 | 0 | 0 | OK |
+| `placement_implies_balanced` | 452 | 0 | 0 | OK |
+| `placement_hi_enforces_far` | 466 | 0 | 0 | OK |
+| `cas28_same_slot_not_placeable` | 481 | 0 | 0 | OK |
+| `far_can_empty_placement` | 485 | 0 | 0 | OK |
+| `derive_e_not_tiny` | 503 | 0 | 0 | OK |
+| `derive_success_has_e` | 527 | 0 | 0 | OK |
+| `large_d_if_not_wiener` | 533 | 0 | 0 | OK |
+| `pocklington_needs_R_gt_sqrt` | 542 | 0 | 0 | OK |
+| `B160_not_sqrt_of_512bit` | 549 | 0 | 0 | OK |
+| `aux_at_B_not_pocklington_size` | 556 | 0 | 0 | OK |
+| `rw_p_is_blum` | 573 | 0 | 0 | OK |
+| `derive_e_fixed` | 585 | 0 | 0 | OK |
+| `dist_public_slot_is_roca` | 593 | 0 | 0 | OK |
+| `dist_reused_slot_leaks_M` | 606 | 0 | 0 | OK |
+| `dist_force_residue_can_leave_range` | 621 | 0 | 0 | OK |
+| `dist_seeded_slot_balanced` | 633 | 0 | 0 | OK |
+| `long_seed_hits_every_index` | 649 | 0 | 0 | OK |
 
 ## EulerQuotient.v
 
@@ -377,17 +383,16 @@ Counts:
 | `pietrzak_restricted_ignores_Cl2` | 115 | 0 | 0 | OK |
 | `wesolowski_verify_rsa_agrees` | 127 | 0 | 0 | OK |
 | `wesolowski_correct_is_PRoot` | 138 | 0 | 0 | OK |
-| `wesolowski_false_is_adaptive_root` | 154 | 0 | 0 | OK |
-| `verifying_pi_is_adaptive_root` | 165 | 0 | 0 | OK |
-| `pietrzak_quotient_squares_to_one_rsa` | 182 | 0 | 0 | OK |
-| `pietrzak_quotient_on_Cl_may_be_ambiguous` | 203 | 0 | 0 | OK |
-| `form_neg87_ord3_of_disc` | 217 | 0 | 0 | OK |
-| `wesolowski_on_Cl_exp` | 223 | 0 | 0 | OK |
-| `wesolowski_root_does_not_need_prime_ell` | 234 | 0 | 0 | OK |
-| `wesolowski_verify_does_not_need_prime_ell` | 243 | 0 | 0 | OK |
-| `powm_opp_odd` | 264 | 0 | 0 | OK |
-| `wesolowski_odd_challenge_accepts_negation` | 280 | 0 | 0 | OK |
-| `wesolowski_soundness_fails_on_units_odd_challenge` | 310 | 0 | 0 | OK |
+| `verifying_pi_is_adaptive_root` | 158 | 0 | 0 | OK |
+| `pietrzak_quotient_squares_to_one_rsa` | 175 | 0 | 0 | OK |
+| `pietrzak_quotient_on_Cl_may_be_ambiguous` | 196 | 0 | 0 | OK |
+| `form_neg87_ord3_of_disc` | 210 | 0 | 0 | OK |
+| `wesolowski_on_Cl_exp` | 216 | 0 | 0 | OK |
+| `wesolowski_root_does_not_need_prime_ell` | 227 | 0 | 0 | OK |
+| `wesolowski_verify_does_not_need_prime_ell` | 236 | 0 | 0 | OK |
+| `powm_opp_odd` | 257 | 0 | 0 | OK |
+| `wesolowski_odd_challenge_accepts_negation` | 273 | 0 | 0 | OK |
+| `wesolowski_soundness_fails_on_units_odd_challenge` | 303 | 0 | 0 | OK |
 
 ## FactorEnum.v
 
@@ -636,7 +641,6 @@ Counts:
 | `public_ap_div_le_shift` | 560 | 0 | 0 | OK |
 | `public_ap_search_bits` | 576 | 0 | 0 | OK |
 | `regime_1024_ap_budget` | 599 | 0 | 0 | OK |
-| `catalog_handle_bits_are_zero` | 605 | 0 | 0 | OK |
 
 ## KeyGenGeom.v
 
@@ -907,6 +911,16 @@ Counts:
 | `kg_rw_implies_blum` | 315 | 0 | 0 | OK |
 | `kg_rw_pminus1_almost_odd` | 323 | 0 | 0 | OK |
 
+## SharedModulus.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `dkg_N_is_product` | 29 | 0 | 0 | OK |
+| `dkg_N_cross_terms` | 34 | 0 | 0 | OK |
+| `published_sum_is_phi_plus_one` | 40 | 0 | 0 | OK |
+| `two_prime_four_roots_triprime_eight` | 45 | 0 | 0 | OK |
+| `triprime_mixed_root_refutes_biprime` | 70 | 0 | 0 | OK |
+
 ## SharedPrime.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -945,6 +959,8 @@ Counts:
 | `three_moduli_divide` | 49 | 0 | 0 | OK |
 | `hastad_cube_if_small` | 74 | 0 | 0 | OK |
 | `related_message_common_root` | 97 | 0 | 0 | OK |
+| `fr_cube_gap` | 110 | 0 | 0 | OK |
+| `fr_cube_gap_mod` | 116 | 0 | 0 | OK |
 
 ## StrongPrimes.v
 
@@ -955,10 +971,28 @@ Counts:
 | `safe_prime_resists_p1` | 60 | 0 | 0 | OK |
 | `large_factor_blocks_smooth_claim` | 78 | 0 | 0 | OK |
 | `safe_prime_blocks_smooth_claim` | 87 | 0 | 0 | OK |
-| `strong_prime_resists_both` | 98 | 0 | 0 | OK |
-| `prime_5` | 109 | 0 | 0 | OK |
-| `five_is_safe` | 117 | 0 | 0 | OK |
-| `five_resists_B1` | 123 | 0 | 0 | OK |
+| `safe_pair_lambda` | 98 | 0 | 0 | OK |
+| `strong_prime_resists_both` | 131 | 0 | 0 | OK |
+| `prime_5` | 142 | 0 | 0 | OK |
+| `five_is_safe` | 150 | 0 | 0 | OK |
+| `five_resists_B1` | 156 | 0 | 0 | OK |
+
+## ThresholdRSA.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `additive_share_combines` | 21 | 0 | 0 | OK |
+| `additive_three_shares` | 33 | 0 | 0 | OK |
+| `mediated_rsa_is_two_shares` | 47 | 0 | 0 | OK |
+| `share_refresh_by_zero` | 61 | 0 | 0 | OK |
+| `powm_ed_is_base` | 81 | 0 | 0 | OK |
+| `shoup_extract_from_kd` | 121 | 0 | 0 | OK |
+
+## TimeLock.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `timelock_trapdoor_reduces_exp` | 17 | 0 | 0 | OK |
 
 ## Torus.v
 

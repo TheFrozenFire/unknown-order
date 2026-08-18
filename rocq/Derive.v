@@ -223,9 +223,8 @@ Proof. intros. lia. Qed.
 Theorem mod_bias_example :
   10 / 6 = 1 /\ 10 mod 6 = 4 /\
   0 mod 6 = 0 /\ 6 mod 6 = 0 /\
-  5 mod 6 = 5 /\ 11 mod 6 = 5 ->
-  True.
-Proof. intros. exact I. Qed.
+  5 mod 6 = 5 /\ 11 mod 6 = 5.
+Proof. repeat split; reflexivity. Qed.
 
 Lemma two_hits_zero_one_hit_five :
   (0 + 6 < 10) /\ ~ (5 + 6 < 10).
@@ -388,13 +387,7 @@ Proof. unfold aux_split_ready. vm_compute. split; [lia|]. split; lia. Qed.
 Definition kappa_vs_bits (b kappa : Z) : Prop :=
   0 <= kappa <= b /\ 2 ^ kappa <= 2 ^ b.
 
-Theorem huge_M_can_empty_slice :
-  forall a,
-    0 <= a < 2 ^ 20 ->
-    ~ slice_nonempty a (2 ^ 20) 18 \/
-    slice_card a (2 ^ 20) 18 <= 1 \/
-    True.
-Proof. intros. right. right. exact I. Qed.
+
 
 Theorem empty_slice_example :
   ~ slice_nonempty 0 (2 ^ 20) 10.
@@ -488,13 +481,6 @@ Qed.
 Theorem cas28_same_slot_not_placeable :
   ~ kg_balanced 13099 220579 /\ ~ kg_balanced 220579 13099.
 Proof. apply cas28_seeds_not_balanced. Qed.
-
-Theorem far_requires_room :
-  forall p gap,
-    0 <= gap ->
-    2 ^ gap > p / 2 ->
-    p - 2 ^ gap < (p + 1) / 2 \/ True.
-Proof. intros. right. exact I. Qed.
 
 Theorem far_can_empty_placement :
   forall p gap b,

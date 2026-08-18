@@ -50,7 +50,10 @@ Inductive NamedRefuse : Set :=
   | Refuse_RW_signature_scheme
   | Refuse_EN_card_from_N
   | Refuse_Redei_4rank_fund_minus4N
-  | Refuse_UO_GGM.
+  | Refuse_UO_GGM
+  | Refuse_DKG_MPC
+  | Refuse_threshold_robustness
+  | Refuse_OAEP_PSS.
 
 (** Dirichlet: a prime in a coprime AP.  Unused: refuse of
     existence in a constructor window.  Image-in-class of a

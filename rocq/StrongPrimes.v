@@ -95,6 +95,39 @@ Proof.
   eapply large_factor_blocks_smooth_claim; eassumption.
 Qed.
 
+Theorem safe_pair_lambda :
+  forall p q,
+    safe_prime p ->
+    safe_prime q ->
+    p <> q ->
+    lambda_semiprime p q =
+      2 * ((p - 1) / 2) * ((q - 1) / 2).
+Proof.
+  intros p q [Hpp Hpr] [Hqq Hqr] Hneq.
+  unfold lambda_semiprime.
+  pose proof (safe_prime_pminus1 p (conj Hpp Hpr)) as Hpe.
+  pose proof (safe_prime_pminus1 q (conj Hqq Hqr)) as Hqe.
+  rewrite Hpe, Hqe.
+  set (p' := (p - 1) / 2) in *.
+  set (q' := (q - 1) / 2) in *.
+  pose proof (Z.prime_ge_2 p' Hpr).
+  pose proof (Z.prime_ge_2 q' Hqr).
+  rewrite Z.lcm_comm.
+  unfold Z.lcm.
+  rewrite (Z.gcd_mul_mono_l q' p' 2).
+  change (Z.abs 2) with 2.
+  assert (Z.gcd q' p' = 1) as Hg.
+  { apply prime_coprime_distinct; [exact Hqr | exact Hpr |].
+    intro Heq. apply Hneq. nia. }
+  rewrite Hg, Z.mul_1_r.
+  replace (2 * p' / 2) with p'
+    by (rewrite (Z.mul_comm 2 p'), Z.div_mul; lia).
+  replace (2 * q' / 2) with q'
+    by (rewrite (Z.mul_comm 2 q'), Z.div_mul; lia).
+  rewrite Z.abs_eq by nia.
+  ring.
+Qed.
+
 Theorem strong_prime_resists_both :
   forall p B, strong_prime p B -> p1_resistant p B /\ pp1_resistant p B.
 Proof. intros p B [_ H]. exact H. Qed.

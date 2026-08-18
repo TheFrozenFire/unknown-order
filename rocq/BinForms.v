@@ -1102,7 +1102,4 @@ Proof.
   apply compose_self_ambiguous_equiv_id; assumption.
 Qed.
 
-Theorem no_crt_split_on_forms :
-  forall (split_arrow : bqf -> Z -> Prop),
-    True.
-Proof. intros. exact I. Qed.
+

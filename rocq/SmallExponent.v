@@ -101,3 +101,28 @@ Lemma related_message_common_root :
     c2 = powm (m + delta) e N ->
     powm m e N = c1 /\ powm (m + delta) e N = c2.
 Proof. intros. split; congruence. Qed.
+
+(** Franklin–Reiter cube gap.  The [Z/NZ[x]] gcd engine stays
+    [Refuse_polynomial_gcd_over_ZN].  The identity is enough to
+    start the e=3 attack: the difference of the two cubes is
+    linear in [m(m+δ)]. *)
+
+Theorem fr_cube_gap :
+  forall m delta,
+    (m + delta) * (m + delta) * (m + delta) - m * m * m =
+      3 * delta * m * (m + delta) + delta * delta * delta.
+Proof. intros. ring. Qed.
+
+Theorem fr_cube_gap_mod :
+  forall m delta N,
+    N <> 0 ->
+    (powm (m + delta) 3 N - powm m 3 N) mod N =
+      (3 * delta * m * (m + delta) + delta * delta * delta) mod N.
+Proof.
+  intros m delta N HN.
+  rewrite cube_is_powm3 by exact HN.
+  rewrite cube_is_powm3 by exact HN.
+  rewrite <- Zminus_mod.
+  rewrite fr_cube_gap.
+  reflexivity.
+Qed.

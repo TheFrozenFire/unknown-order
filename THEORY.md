@@ -13,6 +13,7 @@ This file is **not** the theory.  The theory is the Rocq tree.
 | Directed sixth-type hunt | [`notes/sixth-type-plan.md`](notes/sixth-type-plan.md) |
 | Transcripts / oracles | [`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md) |
 | Autonomous runway | [`notes/autonomous-runway.md`](notes/autonomous-runway.md) |
+| RSA-land catalog | [`notes/rsa-land.md`](notes/rsa-land.md) |
 
 Regenerate the first three with `bash rocq/gen-coverage.sh` (also run from `run-check.sh`).  The harness emitters are `formal-verification/tooling/{coverage-toc,named-skips,rocq-math-lint}`.
 
