@@ -163,8 +163,48 @@ predictor is proximity of `p+q` to `2√N`.
 
 **Do not.** Discrete log in `(ℤ/Nℤ)*`. That is the problem.
 
-**Artifact.** Rocq lemma next to Euler in `RSA.v` or a small
-`EulerQuotient.v`; `cas/44`.
+**Artifact.** `rocq/EulerQuotient.v`; `cas/43_euler_quotient.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Negative as a sixth type.
+
+Theorems, all Closed under the global context:
+
+- `euler_quotient` / `euler_quotient_rsa`: `a^{N+1} ≡ a^{p+q} (mod N)`
+  for every `a` (units via `N+1 = φ+s`; non-units via Fermat+CRT)
+- `euler_quotient_pred`: `a^{N-1} ≡ a^{p+q-2} (mod N)`
+- `odd_primes_sum_even`: `s` even for odd primes
+- `sum_mod4_of_N`: `N ≡ 1 (mod 4) ⇒ s ≡ 2 (mod 4)`;
+  `N ≡ 3 (mod 4) ⇒ s ≡ 0 (mod 4)`
+
+CAS `43` (honest `kg_far` pairs, chance model recorded in-file):
+
+- identity on the textbook range and on 40 random 12-bit pairs
+  including `a ∈ {0, ±1, p, q}`
+- homomorphism `(ab)^{N+1} ≡ a^{N+1} b^{N+1}` — many bases add
+  nothing
+- 400 samples × 8 bases × 12 bits of `g(a)` vs bits of
+  `s`, `p`, `|p−q|`: max `|rate−1/2| = 0.073` (below 0.16)
+- `sign(g(2)−N/2)`, Hamming parity, Jacobi `(g(2)/N)`,
+  `g(65537)` bit 0: all chance
+- `gcd(2^{N+1}−1, N)` never splits; `x^{N+1}≡x` on 0/1200 probes
+- `g(2) mod 32` does not pin `s mod 8` on `N`-ambiguous samples
+- Fermat-in-the-exponent: 20/20 recoveries on nextprime-close
+  16-bit pairs (`k` in `±2^{10}`); 0/16 on 24-bit `gap=20`
+  (`k` in `±2^{12}`)
+- `(-1)^{N+1} ≡ 1` matches `s` even — constructible torsion
+  gives nothing more
+
+What this is: the public element *is* `p+q` in the exponent.
+What it is not: a cheap reading of bits of `p+q` on `kg_far`
+primes. The only cheap readings are functions of `N` itself
+(`s` even, `s mod 4`) and Fermat-in-the-exponent when
+`p≈q` (Type A). A remaining extractor is a discrete log
+in `(ℤ/Nℤ)*` (the problem) or an unnamed map outside this
+class. That existence claim is `Refuse_PPT_advantage`, not
+a sixth type.
+
+Do not resume Method 2 unless a *named* new reading of
+`{a^{N+1} mod N}` is proposed.
 
 ---
 

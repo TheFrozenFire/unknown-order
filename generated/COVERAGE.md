@@ -357,6 +357,35 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `dist_seeded_slot_balanced` | 647 |
 | Theorem | `long_seed_hits_every_index` | 663 |
 
+## `EulerQuotient.v`
+
+- L10: The Euler quotient: [a^{N+1} ≡ a^{p+q} (mod N)]
+  - L22: Reduction of [powm] along a factor
+  - L238: Bits of [s] that are functions of [N], not of the quotient
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `powm_mod_divisor` | 24 |
+| Lemma | `powm_mod_prime_factor` | 43 |
+| Lemma | `powm_multiple` | 53 |
+| Lemma | `not_coprime_prime_divides` | 69 |
+| Lemma | `fermat_powm` | 82 |
+| Lemma | `powm_Nplus1_mod_p` | 99 |
+| Lemma | `powm_s_mod_p` | 116 |
+| Lemma | `powm_Nplus1_eq_s_mod_p` | 131 |
+| Lemma | `phi_plus_sum` | 140 |
+| Theorem | `euler_quotient_units` | 144 |
+| Theorem | `euler_quotient` | 162 |
+| Lemma | `powm_reduce_to_qminus1` | 178 |
+| Lemma | `powm_Nminus1_mod_p` | 212 |
+| Theorem | `euler_quotient_pred` | 222 |
+| Lemma | `prime_2` | 240 |
+| Lemma | `odd_prime_mod2` | 247 |
+| Theorem | `odd_primes_sum_even` | 258 |
+| Lemma | `odd_prime_mod4` | 269 |
+| Theorem | `sum_mod4_of_N` | 286 |
+| Theorem | `euler_quotient_rsa` | 309 |
+
 ## `ExpProof.v`
 
 - L14: Proof of exponentiation, algebra only
@@ -1114,4 +1143,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_754 theorems/lemmas/corollaries/examples across 42 files._
+_774 theorems/lemmas/corollaries/examples across 43 files._

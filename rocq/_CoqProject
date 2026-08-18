@@ -4,6 +4,7 @@
 
 NamedSkips.v
 RSA.v
+EulerQuotient.v
 FactorEnum.v
 Miller.v
 MillerRabin.v
