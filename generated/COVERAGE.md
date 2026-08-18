@@ -929,6 +929,7 @@ in the Rocq tree.  Do not edit by hand.
 ## `RSA.v`
 
 - L9: RSA: instance, private exponent [d], and the RSA problem
+  - L223: Why a polynomial in [N] cannot be a handle
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -952,6 +953,8 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `rsa_test_vector` | 207 |
 | Theorem | `rsa_test_roundtrip` | 211 |
 | Theorem | `rsa_test_annihilator` | 215 |
+| Theorem | `N_cong_q_mod_pminus1` | 230 |
+| Theorem | `gcd_polyN_pminus1_is_gcd_at_q` | 241 |
 
 ## `RabinWilliams.v`
 
@@ -1143,4 +1146,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_774 theorems/lemmas/corollaries/examples across 43 files._
+_776 theorems/lemmas/corollaries/examples across 43 files._

@@ -219,3 +219,33 @@ Proof.
   rewrite <- rsa_test_lambda.
   apply carmichael_semiprime; [exact prime_11 | exact prime_17 | discriminate | exact Hcop].
 Qed.
+
+(** ** Why a polynomial in [N] cannot be a handle
+
+    [N = (p-1)q + q], so [N ≡ q (mod p−1)].  Any polynomial [f]
+    therefore satisfies [f(N) ≡ f(q) (mod p−1)], and
+    [gcd(f(N), p−1) = gcd(f(q), p−1)].  For independent primes that
+    gcd is chance-sized.  See [cas/45_identity_sweep.gp]. *)
+
+Theorem N_cong_q_mod_pminus1 :
+  forall p q, p <> 1 -> (p * q) mod (p - 1) = q mod (p - 1).
+Proof.
+  intros p q Hp.
+  replace (p * q) with ((p - 1) * q + q) by lia.
+  rewrite Z.add_mod, Z.mul_mod, Z.mod_same by lia.
+  rewrite Z.mul_0_l, Z.mod_0_l by lia.
+  rewrite Z.add_0_l, Z.mod_mod by lia.
+  reflexivity.
+Qed.
+
+Theorem gcd_polyN_pminus1_is_gcd_at_q :
+  forall p fN fq,
+    p <> 1 ->
+    fN mod (p - 1) = fq mod (p - 1) ->
+    Z.gcd fN (p - 1) = Z.gcd fq (p - 1).
+Proof.
+  intros p fN fq Hp Hcong.
+  rewrite (Z.gcd_comm fN (p - 1)), (Z.gcd_comm fq (p - 1)).
+  rewrite <- (Z.gcd_mod fN (p - 1)), <- (Z.gcd_mod fq (p - 1)) by lia.
+  rewrite Hcong. reflexivity.
+Qed.

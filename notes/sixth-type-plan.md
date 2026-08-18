@@ -132,7 +132,38 @@ Record the model next to every CAS probe. `gcd = 2` is not a hit.
 **Death.** Nothing in this language hits ⇒ a sixth type is not
 low-complexity. Hits only on close primes ⇒ Type A.
 
-**Artifact.** `cas/43` (or next free) plus a table in this note.
+**Artifact.** `rocq/RSA.v` (`N_cong_q_mod_pminus1`,
+`gcd_polyN_pminus1_is_gcd_at_q`); `cas/45_identity_sweep.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Negative as a sixth type.
+
+Theorems, Closed:
+
+- `N_cong_q_mod_pminus1`: `N ≡ q (mod p−1)`
+- `gcd_polyN_pminus1_is_gcd_at_q`: congruent values have the
+  same gcd with `p−1`
+
+CAS `45` scores a **hit** only when a secret *divides* public `f`
+on every far pair (or `gcd(f,N)∈{p,q}`, or `4N+f` square). Chance
+gcd of two 16-bit integers is not a handle.
+
+- Named polys `N±1`, `2N±1`, `N²±N+1`, `N²+1`, `4N±1`, `4N±4`:
+  no identity. Rare `|p−q| | (N−1)` / `|p−q| | (4N−4)` at 16-bit
+  (1–2/80); gone as identities at 32-bit.
+- Pairwise gcds: 0 always, 1 sometimes.
+- `Φ_k(N)` for `k=1..12`: none identically a handle.
+- `2^{N+1}−1`, `3^{N+1}−1`, their gcd, `2^N−2` at 8-bit (the
+  largest size at which those integers fit in PARI): not
+  identically handles. Larger exponents are Method 2's
+  `gcd(a^{N+1}−1, N)`.
+- `U_k(N)`, `V_k(N)` for `k=2..16`: `U_12`, `U_15` sometimes
+  divisible by a secret; never always.
+- `kronecker(-4N/5)` vs `s mod 4`: chance (and `s mod 4` is
+  already public from `N`).
+- Close primes: `(p+q)²−4N` is always square (Type A). Named
+  polys stay size `N`, not `2√N`.
+
+A sixth type is not sitting in this low-complexity language.
 
 ---
 
