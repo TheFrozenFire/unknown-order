@@ -39,6 +39,7 @@ CyclicCount.v
 Lucas.v
 Fp2.v
 BinForms.v
+SixthType.v
 ClassGroupWall.v
 Presentation.v
 ExpProof.v

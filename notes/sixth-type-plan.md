@@ -280,8 +280,23 @@ genus theory there only sees `N±2`.
 (`Refuse` adjacent: `h(Δ)` cost stays named). Do not resume
 `compose_assoc_named`.
 
-**Artifact.** Use existing `BinForms.v`; CAS pins; no new
-associativity proof unless a headline is blocked on it.
+**Artifact.** `rocq/SixthType.v`; `cas/46_delta_N.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Collapse to Type A / nothing.
+
+- `(N,0,1)` of disc `−4N` is SL2-equivalent to the principal form
+  (`form_N01_equiv_principal`, Closed). `qfbred` is principal on
+  40/40 far pairs and never splits `N`.
+- `N²−4=(N−2)(N+2)` (`Nsq_minus_4_factors`). `gcd(N−2,N)=1` for
+  odd `N` (`odd_N_gcd_Nminus2`). Genus theory on that Δ sees
+  only `N±2`.
+- Kronecker of `{−4N, 1−4N, 4N−1, N²−4, 5−4N, −N}` at 5 vs bits
+  of `p+q`: max `|rate−1/2|=0.113`.
+- 2-rank of `Cl(−4N)` needs `ω(Δ)`, which needs the factors of
+  `N`. Computing it is factoring.
+
+The only working reduction that factors is CF of `√N` (Type A),
+which this swap does not perform.
 
 ---
 
@@ -306,8 +321,20 @@ as a probe, not as “run ECM.”
 on a new module). `4p = t² − D s²` becoming Cornacchia = Type A.
 Do not grow an ECC corpus.
 
-**Artifact.** One CAS file; a `NamedRefuse` or a theorem, not a
-curve library.
+**Artifact.** `cas/47_curve_N.gp`; `Refuse_EN_card_from_N`.
+
+**Outcome (exhausted, 2026-08-18).** No public multiple of
+`#E_N(𝔽_p)` as a function of `N`.
+
+- `y²=x³+Nx` and `y²=x³+N` are **singular** mod `p` (`N≡0`).
+  Not elliptic curves on the CRT sides.
+- Nonsingular `y²=x³+x+N`: `#E(𝔽_p)` divides neither `N` nor
+  `N±1`, `N²+1`, `4N+1` (30 far 12-bit pairs).
+- Smooth `[k]P` on `E(ℤ/Nℤ)` is ECM (Type B on `p+1−t`).
+- CM Cornacchia recovers `p`, not a function of `N` (Type A).
+
+`Refuse_EN_card_from_N` names the leftover “there is a formula
+in `N` for a multiple of `#E_N(𝔽_p)`.”
 
 ---
 
@@ -331,8 +358,17 @@ that rank is a cheap function of `N`. Jacobi of the discriminant
 **Death.** Period `| p±1` = Williams (Type B). Period `| p+1−t`
 = Method 4.
 
-**Artifact.** Distinct from `Lucas.v` / `Torus.v` (those are `P`
-fixed). New CAS; Rocq only if an identity appears.
+**Artifact.** `cas/48_recurrence_N.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Collapse to Williams (Type B).
+
+- `gcd(U_k(N), N)=1` for `k=2..40` on far pairs (no split).
+- Rank of appearance of `p` in `U_*(N)` existed below 80 on
+  40/40 12-bit pairs and **always divided `p±1`**.
+- `(N²−4/p)` equals `(N²−4/N)` on only 31/60 samples. The
+  public symbol is `(−4/N)`, not the period discriminant.
+
+No cheap period that is not `p±1`.
 
 ---
 
@@ -354,6 +390,15 @@ against `p±1`.
 hit that requires `p−1 | q−1` or `p−1 | Φ_k(q)` is a
 generation condition (Type B), not a function of `N` alone.
 
+**Artifact.** `cas/49_cyclo_smooth.gp` (and Method 1’s `Φ_k`).
+
+**Outcome (exhausted, 2026-08-18).** Negative.
+
+- `gcd(N−1,p−1)=gcd(q−1,p−1)` on 80/80 (theorem already).
+- `gcd(p−1,q−1)≤16` on 73/80. Not identically large.
+- Smooth-`100` kernel of `N−1` (resp. `N+1`) is not
+  identically a factor `>2` of `p−1` (resp. `p+1`).
+
 ---
 
 ## Method 7 — Character families that try to split `(·/p)` from `(·/q)`
@@ -374,6 +419,18 @@ on `kg_far` pairs.
 only when `p≈q` or when `D` is a square mod `N` is Type A
 or nothing.
 
+**Artifact.** `cas/50_characters.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Product-only.
+
+- `(D/N)=(D/p)(D/q)` on 80/80.
+- No single public character among `{5,13,17,−4N,1−4N,−N}`
+  equals `(5/p)` above chance (max `|rate−1/2|=0.125`).
+- Some subset product matched `(5/p)` on 78/80 — look-elsewhere
+  over 63 products, not an identity (2 misses).
+
+Quadratic residuosity remains deciding `(·/p)` given `(·/N)`.
+
 ---
 
 ## Method 8 — Polylog modular symbols / Dedekind sums at `N`
@@ -392,7 +449,31 @@ with the CF of `√N` (to detect collapse).
 **Death.** If `s(·,N)` is a rewrite of CF(`√N`) or of `e/N`,
 it is Type A or C.
 
+**Artifact.** `cas/51_dedekind.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Collapse to a rational
+function of `N` (Method 1) / not CF(`√N`).
+
+- `s(1,N)=(N−1)(N−2)/(12N)` matches the sawtooth definition.
+  The numerator is a polynomial in `N`.
+- `12 N s(1,N)` is not `⌊√N⌋` (0/40).
+- `sign s(2,N)` vs bit 1 of `p+q`: rate 0.45.
+
+The Euclidean algorithm for `s(h,N)` is the CF of the
+*rational* `h/N`, not of `√N`. Type A/C collapse does not
+even fire — there is no leak to collapse.
+
 ---
+
+## Program outcome (Methods 1–8)
+
+No sixth type. Every named public object was either a theorem that
+is not a handle, an incarnation of A–E, or a chance-sized gcd.
+The remaining extractor is a discrete log, a class-number / LLL /
+`h(Δ)` algorithm, or an unnamed polytime map
+(`Refuse_PPT_advantage`, `Refuse_EN_card_from_N`,
+`Refuse_lattice_lll_development`). Those are named skips, not
+unfinished methods.
 
 ## What this plan is not
 

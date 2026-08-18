@@ -207,6 +207,7 @@ modern sampler that leaks a Type A–E handle not already in
 an undirected KeyGen pass. A directed attempt to find a
 *sixth algebraic type* (a public function of `N` that leaks
 for a reason A–E do not name) is
-[`notes/sixth-type-plan.md`](notes/sixth-type-plan.md).
+[`notes/sixth-type-plan.md`](notes/sixth-type-plan.md)
+(Methods 1–8 exhausted: no new letter).
 Everything else that was once a checkbox is either a theorem
 or a `NamedRefuse` / `*_named` in `generated/NAMED_SKIPS.md`.

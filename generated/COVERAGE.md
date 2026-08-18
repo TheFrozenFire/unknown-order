@@ -996,6 +996,21 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `gcd_shared_prime` | 14 |
 | Theorem | `gcd_shared_prime_divides_both` | 29 |
 
+## `SixthType.v`
+
+- L10: Directed sixth-type leftovers (Methods 3–8)
+  - L16: Method 3: [(N, 0, 1)] of disc [−4N] is the principal class
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `form_N01_disc` | 21 |
+| Lemma | `minus4N_mod4` | 27 |
+| Lemma | `minus4N_div4` | 33 |
+| Theorem | `form_N01_equiv_principal` | 42 |
+| Theorem | `Nsq_minus_4_factors` | 63 |
+| Theorem | `gcd_N_minus_2_N` | 67 |
+| Theorem | `odd_N_gcd_Nminus2` | 78 |
+
 ## `SmallExponent.v`
 
 - L10: Small public [e]: the RSA map is a low-degree polynomial
@@ -1146,4 +1161,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_776 theorems/lemmas/corollaries/examples across 43 files._
+_783 theorems/lemmas/corollaries/examples across 44 files._

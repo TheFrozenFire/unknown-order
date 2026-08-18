@@ -47,7 +47,8 @@ Inductive NamedRefuse : Set :=
   | Refuse_Mollin_general_2020_1310
   | Refuse_r_power_hardness
   | Refuse_polynomial_gcd_over_ZN
-  | Refuse_RW_signature_scheme.
+  | Refuse_RW_signature_scheme
+  | Refuse_EN_card_from_N.
 
 (** Dirichlet: a prime in a coprime AP.  Unused: refuse of
     existence in a constructor window.  Image-in-class of a
