@@ -664,6 +664,8 @@ Lifted (Rocq + CAS `56`):
 
 ## What this plan is not
 
+- Transcripts, signatures, or decrypt/sign oracles
+  ([`transcript-oracle-plan.md`](transcript-oracle-plan.md))
 - Another `KeyGenSampler` / increment-window / nextprime pass
 - Boneh–Durfee / LLL development
 - A recurrence that is not `p±1` *without* a public evaluator

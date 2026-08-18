@@ -52,6 +52,11 @@ functions of `N`, chance model, collapse tests — is
 [`sixth-type-plan.md`](sixth-type-plan.md). That plan is not an
 undirected KeyGen pass.
 
+Handles that appear only after the key is *used* (ciphertext,
+signature, decrypt/sign oracle) are a different catalog:
+[`transcript-oracle-plan.md`](transcript-oracle-plan.md). They
+do not add a sixth letter to A–E; they name extra inputs.
+
 **Avenues already closed this wave.**
 
 | Avenue | What it added | Headline witness |

@@ -76,6 +76,9 @@ map is a permutation, so `(N,e,x^e)` and `(N,e,y)` are identical.
 See `notes/keygen-weaknesses.md`. A hardness claim that does not name
 `KG` is already false on every row of that table. Type E (Hastad) can
 refute RSA on a restricted challenge distribution without factoring.
+Predicate oracles that recover `m` (LSB, interval, padding) are
+the same kind of restricted inversion; they are catalogued in
+`notes/transcript-oracle-plan.md`, not as Factoring ≤ RSA.
 
 ## Design overlaps (paper-check)
 
