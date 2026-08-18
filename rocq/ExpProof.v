@@ -18,7 +18,8 @@ Open Scope Z_scope.
     root of [y]; the quotient [μ / x²] squares to 1 (low-order, not
     adaptive root).  On [Cl(Δ)] that 2-torsion may be constructible.
 
-    Sequentiality, random oracles, and "this is a VDF" stay named.
+    Sequentiality, random oracles, and "this is a VDF" are
+    [Refuse_this_is_a_VDF], [Refuse_ROM].
     Prime [ℓ] is a soundness constraint, not an algebra constraint
     ([wesolowski_root_does_not_need_prime_ell]).
     On raw [(Z/NZ)*] an odd challenge is unsound:
@@ -228,8 +229,8 @@ Proof. intros. apply cl_exp_0_is_id. Qed.
 
 (** The existing root theorem never assumes [Z.prime ℓ].  Composite
     [ℓ] still satisfies the verification equation on an honest [π].
-    Soundness against a cooked composite challenge is ROM /
-    extraction and stays named. *)
+    Soundness against a cooked composite challenge is
+    [Refuse_ROM] / extraction. *)
 Theorem wesolowski_root_does_not_need_prime_ell :
   forall N x q ell,
     1 < N ->

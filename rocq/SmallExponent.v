@@ -12,7 +12,7 @@ Open Scope Z_scope.
     [e = 3] is a valid inverse-mod-[λ] choice and does not factor [N].
     It makes encryption [m ↦ m³ (mod N)], so Coppersmith / Hastad apply
     to small or stereotyped [m].  This file records that shape and the
-    broadcast collision.  Lattice recovery is not proved.
+    broadcast collision.  Lattice recovery is [coppersmith_named].
 
     Cross-confirmed by [cas/12_small_e.gp]. *)
 
@@ -93,7 +93,7 @@ Qed.
 (** Franklin–Reiter shape: a known offset [δ] between two messages
     under the same key is a polynomial relation.  [m] is a common
     root of [X^e − c1] and [(X+δ)^e − c2].  Degree-1 recovery of that
-    gcd is not proved (it is a gcd in [(Z/NZ)[X]]). *)
+    gcd is [Refuse_polynomial_gcd_over_ZN]. *)
 Lemma related_message_common_root :
   forall e N m delta c1 c2,
     N <> 0 -> 0 <= e ->

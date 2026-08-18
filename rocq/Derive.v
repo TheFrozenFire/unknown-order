@@ -16,7 +16,8 @@ Open Scope Z_scope.
 
 (** * Secure derivation into the no-handle class
 
-    A seed (CSPRNG output; unpredictability named) is turned into a
+    A seed (CSPRNG output; unpredictability is [Refuse_PPT_advantage])
+    is turned into a
     candidate already in range *and* in the constructor class.
     Unbiased means uniform on that finite set.  The class is secret
     only if it is a function of the seed and is not reused.
@@ -379,9 +380,10 @@ Proof. unfold aux_split_ready. vm_compute. split; [lia|]. split; lia. Qed.
 (** Residue existence for a general aux tuple is a CRT statement
     under [aux_split_ready] plus the odd-prime distinctness already
     on [StrongAux].  Sufficiency of those congruences for a root of
-    [Φ₃, Φ₄, Φ₆] is named (needs [(-3/u)=1] etc., Gauss stays
-    named).  The CAS 28 residue [13099] is a witness that a residue
-    exists for [(3,5,7,13,19)]. *)
+    [Φ₃, Φ₄, Φ₆] is [dirichlet_ap_prime_named] (existence) plus
+    Gauss symbols already proved in [QuadRecip.v].  The CAS 28
+    residue [13099] is a witness that a residue exists for
+    [(3,5,7,13,19)]. *)
 
 Definition kappa_vs_bits (b kappa : Z) : Prop :=
   0 <= kappa <= b /\ 2 ^ kappa <= 2 ^ b.
@@ -654,7 +656,7 @@ Proof.
 Qed.
 
 (** Long seed: domain size equals [slice_card], bijection applies.
-    Short seed + stretch: uniformity named (would need a PRF).
+    Short seed + stretch: uniformity is [Refuse_PRF_stretch].
     Image-in-class is still a theorem of [derive_candidate]. *)
 Definition long_seed (seed L : Z) : Prop := 0 <= seed < L.
 

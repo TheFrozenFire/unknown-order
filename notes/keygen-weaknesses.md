@@ -1,9 +1,9 @@
 # RSA key-generation weaknesses — catalog
 
-Companion to `THEORY.md` §6–§7. Each row is a *generation choice* that leaks a
+Companion to `KeyGen.v` / `KeyGenCtor.v`. Each row is a *generation choice* that leaks a
 handle on `λ(N)` or on one CRT component. Formal objects are in `rocq/`.
 CAS pins the algebra on numbers. Types A–E are the algebraic classification
-in `THEORY.md` §6.10: a novel weakness has to be one of these, or it is not
+in this catalog: a novel weakness has to be one of these, or it is not
 a weakness of this problem.
 
 | # | Generation choice | Type | Why it leaks | Attack | Rocq | CAS |
@@ -39,7 +39,7 @@ itself — out of the public pair `(N, e)`. Generation that refuses every
 row above leaves only GNFS on `N`; extra bits of `N` spent as margin
 against a listed leak are then wasted, and can be returned.
 
-**Where a novel weakness has to sit** (`THEORY.md` §6.11): a new Type-A
+**Where a novel weakness has to sit** (`Refuse_undirected_611_hunt`): a new Type-A
 geometry (a public `f(N,e)` close to `p`, `p+q`, or `p−q`); a new Type-B
 module (a cheap recurrence whose period is a smooth function of `p` other
 than `p±1`); a new Type-C relation (a low-degree identity with a short
@@ -47,7 +47,7 @@ unknown other than `(k,d)`); a new Type-D collision (shared algebraic
 structure without a shared prime); or a new Type-E key-side small root
 (a hidden polynomial the keygen implicitly satisfies).
 
-**Avenues in `THEORY.md` §8 (this wave).**
+**Avenues already closed this wave.**
 
 | Avenue | What it added | Headline witness |
 |---|---|---|

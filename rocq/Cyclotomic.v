@@ -19,8 +19,9 @@ Open Scope Z_scope.
     recurrence.  A generator that only refuses a smooth [p−1] (or only
     a smooth [p+1]) still leaks if [Φ_3(p)] is smooth.
 
-    Identities are proved by [ring].  Lucas / extension-field evaluation
-    is not formalized.  Cross-confirmed by [cas/14_cyclotomic.gp]. *)
+    Identities are proved by [ring].  Lucas / [F_{p²}] evaluation is
+    [Lucas.v] / [Fp2.v] / [williams_eval_of_qnr].  Cross-confirmed by
+    [cas/14_cyclotomic.gp]. *)
 
 Definition cyc1 (p : Z) : Z := p - 1.
 Definition cyc2 (p : Z) : Z := p + 1.

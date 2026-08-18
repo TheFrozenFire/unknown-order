@@ -22,8 +22,9 @@ Open Scope Z_scope.
       2-torsion is larger than a field's; here is the splitting."
 
     We formalize the certificate type, its verifier, and soundness
-    (a verified certificate implies primality).  Completeness (every
-    prime has a certificate) needs primitive roots and is not proved. *)
+    (a verified certificate implies primality).  Completeness is
+    [pratt_complete_named] (unused refuse: needs a primitive root
+    in every [(Z/pZ)*]). *)
 
 Inductive pratt : Z -> Type :=
 | pratt_2 : pratt 2
@@ -103,3 +104,8 @@ Proof.
     rewrite (Z.mod_opp_l_nz 1 p) by (rewrite ?Z.mod_1_l; lia).
     rewrite Z.mod_1_l by lia. reflexivity.
 Qed.
+
+(** Completeness: every prime has a Pratt certificate.  Needs a
+    primitive root.  Unused refuse. *)
+Definition pratt_complete_named : Prop :=
+  forall p, Z.prime p -> inhabited (pratt p).

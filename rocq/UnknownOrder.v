@@ -19,7 +19,8 @@ Open Scope Z_scope.
     hard — we only write down what the problem *asks*.  Relation-level
     arrows (trapdoor, RSA vs strong RSA, order divides [λ], one-sided
     split) live in [Hardness.v].  A hardness *claim* is a sentence
-    about a KeyGen distribution; see [THEORY.md] §9. *)
+    about a KeyGen distribution; see [Hardness.v] and
+    [Refuse_PPT_advantage]. *)
 
 (** The hidden-order group attached to an RSA instance. *)
 Definition hidden_order_N (R : RSAInstance) : Z := rsa_N R.

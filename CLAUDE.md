@@ -60,7 +60,9 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
    live, walk `notes/paper-overlaps.md`. A design that re-uses Wesolowski on raw units,
    unrestricted low-order on `Cl(Δ)`, a smooth adaptive-root challenge, composite
    accumulator members, or “RSA ≡ factoring” in the standard model overlaps a documented
-   weakness. Quote the trigger, the row, and the Rocq name (or `named`).
+   weakness. Quote the trigger, the row, and the Rocq name (or a `NamedRefuse` /
+   `*_named` from `generated/NAMED_SKIPS.md`). Do not cite `THEORY.md` from a `.v` file.
+   Do not grow `THEORY.md` — regenerate `generated/COVERAGE.md`.
 
 ## Toolchain
 
@@ -84,7 +86,10 @@ Pass `workspace=` as this directory's `rocq/` (the `_CoqProject` dir), not the h
 
 ## Rocq style (matches rocq-proofs/PROOF_STYLE.md)
 
-- `From Stdlib Require Import`; open `Z_scope`; `(** * *)` / `(** ** *)` section headers.
+- `From Stdlib Require Import`; open `Z_scope`; `(** * *)` / `(** ** *)` section headers
+  (those comments *are* the coverage TOC).
+- A skip is `Definition foo_named` or a `NamedRefuse` constructor. Unused = refuse;
+  used as a hyp = weakness. Never `Axiom` a refuse.
 - Descriptive hypothesis names (`Hn`, `Hp`, `Hq`, `Hcoprime`, `Hinv`), never `H0`/`H1`.
 - `Set Default Proof Using "Type"` is the library default — but omit it (with a note) in files whose
   sections carry *hypotheses used selectively*, or a blanket setting attaches unused premises to

@@ -151,14 +151,13 @@ Proof.
     nia.
 Qed.
 
-(** Boneh–Durfee (Crypto 1999) hypotheses, recorded not proved.
+(** Boneh–Durfee numeric slogan, unused refuse of the lattice
+    step ([Refuse_lattice_lll_development], [coppersmith_named]).
+    [bd_past_wiener] only says "[d] is larger than the Wiener
+    trigger and still [o(N^{1/3})]".  It is *not* this bound. *)
+Definition boneh_durfee_named (d N : Z) : Prop :=
+  0 < d /\ 0 < N /\ d ^ 1000 < N ^ 292.
 
-    They attack the bilinear [ed = 1 + k (N − (p+q) + 1)] by
-    Coppersmith / LLL, under balanced primes and [e ≈ N], and claim
-    [d < N^δ] for [δ < 1 − 1/√2 ≈ 0.292].  LLL is not formalized.
-
-    [bd_past_wiener] only says "[d] is larger than the Wiener trigger
-    and still [o(N^{1/3})]".  It is *not* the 0.292 bound. *)
 Definition bd_past_wiener (d N : Z) : Prop :=
   0 < d /\ ~ (18 * d * d * d < N) /\ d * d * d < N.
 

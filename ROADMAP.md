@@ -26,7 +26,7 @@ tiers skipped-by-construction.
 
 ## 2.5 Key-generation leaks (the annihilator, without `d`) ✅ (with named skips)
 
-Known weaknesses catalogued in `THEORY.md` §6–§7 and `notes/keygen-weaknesses.md`.
+Known weaknesses catalogued in `notes/keygen-weaknesses.md`.
 Each row is a generation choice that makes a *partial* or *short* annihilator public.
 
 - ✅ Fermat / close primes — `FermatFactor`, `cas/08`
@@ -48,7 +48,7 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 
 ## 2.6 Hardness claims as theory, not axioms ✅ (relations only)
 
-- ✅ Search problem ≠ assumption; four ingredients of a claim (`THEORY.md` §9)
+- ✅ Search problem ≠ assumption; four ingredients of a claim (`Hardness.v`, `Refuse_PPT_advantage`)
 - ✅ `e`-power map is a permutation of units (`Hardness.rsa_units_are_eth_powers`; `cas/18`)
 - ✅ Trapdoor inverts RSA; RSA solution is sRSA at that `e`; `λ` trivializes sRSA
 - ✅ Order divides `λ`; one-sided low-order factors; two-sided does not
@@ -63,7 +63,7 @@ Each row is a generation choice that makes a *partial* or *short* annihilator pu
 - ✅ Blum / Williams prime shapes; `v₂(p−1) = 1`; `p≡3 (mod 4)` root formula
 - ✅ Williams combinatorics: unique QR among `{±a, ±2a}` given the mod-8 symbols
 - ✅ Rabin reduction: non-associated square roots split `N`
-- ✅ Overlap written in `THEORY.md` §10; `rsa_test` primes are *not* a Williams pair
+- ✅ Overlap written in `RabinWilliams.v`; `rsa_test` primes are *not* a Williams pair
 - ✅ `(2/p)` as a theorem (`two_supplement`); Euler `±1` and QNR-from-minus (`QuadRecip`)
 - ⬜ Principal-root convention, hash wrapper, signature game
 
@@ -223,7 +223,7 @@ protocol-shaped object that uses root extraction the way RSA and RW do.
 - Hash-to-prime is a named skip. No pairings, no Merkle.
 
 **Week 12 — Close the loop and write the edges.**
-- `THEORY.md` §14–16: presentations; constructible torsion; PoE algebra.
+- `Presentation.v` / `ExpProof.v`: presentations; constructible torsion; PoE algebra.
 - `Print Assumptions` on every new headline theorem. Anything that still
   mentions `cyclic_units`, QNR, or “forms compose associatively” is listed.
 - This section becomes a table of incarnations × winning conditions × which
@@ -247,7 +247,7 @@ protocol-shaped object that uses root extraction the way RSA and RW do.
 The rulers in `rocq/` say when a generation distribution has leaked. The hunt is for a
 distribution that honest-looking keygens still use, that is *not* a row of the catalog, and
 that still produces a Type A–E handle cheap enough that a smaller `N` would feel it. See
-`THEORY.md` §6.11. Not a month of §3 or §5 unless a named modern sampler is on the table.
+`Refuse_undirected_611_hunt`. Not a month of §3 or §5 unless a named modern sampler is on the table.
 
 ## 5. Next three months: run the consumer, then a third presentation ✅
 
@@ -329,7 +329,7 @@ grow `cas/24`.
   an odd `x`). Hash-to-prime stays named.
 
 **Week 8 — Close month 2.**
-- `THEORY.md` §17: consumer on two carriers; multi-prime arity of `√1`.
+- `Accumulator.v` / `GQ.v`: consumer on two carriers; multi-prime arity of `√1`.
 - `Print Assumptions` on the new headlines. CAS gate includes `26`.
 
 Named skips this month: hash-to-prime, VDF sequentiality, `h(Δ)`, anything
@@ -365,7 +365,7 @@ mod `q`, is `lcm(p+1, q+1)`. That is not `λ(N)`.
   public `V_k = 2` appears from `N`.
 
 **Week 12 — Close the loop.**
-- `THEORY.md` §18–19: torus presentation; `N+1` is not `λ+1`; incarnation
+- `Torus.v`: torus presentation; `N+1` is not `λ+1`; incarnation
   × arrow table grows a column.
 - `Print Assumptions` on every new headline. QNR hyp and Dirichlet
   associativity stay listed if still used.
@@ -398,7 +398,7 @@ No SHA, ROM, sequentiality, running sampler, or forced placement.
 - `slot_try` is a filter spec. Dirichlet on APs stays named.
 
 **Week 3 — The other map.** `ChallengePrime.v`, lemmas in `Accumulator.v` /
-`ExpProof.v`, `cas/31`, `THEORY.md` §21.
+`ExpProof.v`, `cas/31`, `HashSlot.v`.
 - `ch_encode` is odd integers, not the constructor residue.
 - Wesolowski algebra uses `0 < ℓ`, not `Z.prime ℓ`.
 - `rsa_composite_member_splits_witness`: a witness for `ab` is a witness for
@@ -410,7 +410,7 @@ away from it.
 
 ## 7. Secure derivation into the no-handle class ✅
 
-Gordon, not a hash. `Derive.v`, CAS `32`–`38`, `THEORY.md` §22–23.
+Gordon, not a hash. `Derive.v`, CAS `32`–`38`.
 
 - ✅ `S_b` ↔ `[k_min, k_max]`; empty slice when `M` is huge
 - ✅ Unbiased bijection; `mod L` and force-residue are biased

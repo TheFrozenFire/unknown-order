@@ -4,28 +4,24 @@ From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
 Require Import RSA.
+Require Import NamedSkips.
 
 Open Scope Z_scope.
 
 (** * Lattice / Coron–May interface
 
     From [ed − 1 = k · φ(N)] one builds a modular polynomial with a
-    small root related to [k] or to [p+q].  Coppersmith / LLL recovers
-    that root; the quadratic of [NumberTheory.factors_from_phi] then
-    splits [N].
+    small root related to [k] or to [p+q].  The quadratic of
+    [factors_from_phi] then splits [N].
 
-    We do **not** formalize LLL or Howgrave–Graham.  What is proved:
-    once [φ] or [p+q] is in hand, the factors drop out.  The lattice
-    step is an opaque recovery hypothesis — honest closure (rule 5).
+    LLL / Howgrave–Graham / Coppersmith recovery is
+    [coppersmith_named] (unused refuse) and
+    [Refuse_lattice_lll_development].  What is proved: once [φ]
+    or [p+q] is in hand, the factors drop out ([is_phi_of],
+    [lattice_phi_factors], [lattice_sum_factors]). *)
 
-    Conversation-claimed regime ([ed ≤ N²] polynomial, [ed ≤ N^{3/2}]
-    in [O(log² N)]) is recorded as documentation, not a theorem. *)
-
-(** A *φ-oracle* is whatever the lattice step is supposed to return. *)
-Definition recovers_phi (N e d phi : Z) : Prop :=
-  phi = N - ((N - phi + 1)) + 1.  (* tautological shape; see below *)
-
-(** The useful hypothesis: a value that *is* [φ(pq)]. *)
+(** The useful hypothesis: a value that *is* [φ(pq)].  Not an
+    oracle, not a tautology. *)
 Definition is_phi_of (p q phi : Z) : Prop :=
   phi = phi_semiprime p q.
 
@@ -51,7 +47,7 @@ Proof.
   apply factors_from_sum_correct; assumption.
 Qed.
 
-(** If the lattice step returns [k] with [ed−1 = k·φ], we obtain [φ]
+(** If a recovery step returns [k] with [ed−1 = k·φ], we obtain [φ]
     by division and fall back to [lattice_phi_factors]. *)
 Definition phi_from_k (e d k : Z) : Z := (e * d - 1) / k.
 
@@ -65,9 +61,8 @@ Proof.
   rewrite Heq, Z.mul_comm. apply Z.div_mul; exact Hk.
 Qed.
 
-(** Honest skip: Coppersmith's theorem (a small root of a modular
-    polynomial of degree [δ] below [N^{1/δ}] is recoverable in poly
-    time) is not proved here.  The algebraic *use* of that root is. *)
-Definition coppersmith_bound (N delta : Z) : Z :=
-  (* informal; not used in proofs *)
-  N.
+(** Numeric Coppersmith window ([|x|^δ < N]).  Recovery of the
+    root is [Refuse_lattice_lll_development].  Unused as a
+    hypothesis of any recovery theorem. *)
+Definition coppersmith_named (N delta X : Z) : Prop :=
+  0 < delta /\ 0 < N /\ 0 < X /\ X ^ delta < N.

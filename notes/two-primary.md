@@ -1,6 +1,6 @@
 # 2-primary structure of `(ℤ/Nℤ)*`
 
-Companion to `THEORY.md` §11. Formal: `rocq/TwoPrimary.v`. CAS:
+Companion to `rocq/TwoPrimary.v`. CAS:
 `cas/20_two_primary.gp`.
 
 RSA, Miller-from-`λ`, Pratt, Blum integers and Rabin–Williams are

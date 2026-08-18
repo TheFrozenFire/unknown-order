@@ -29,7 +29,7 @@ Open Scope Z_scope.
 
     Public [M] is [roca_form] (Type A).  Secret auxiliaries need
     [p] or [(r,s,u,v,w)].  AP-search bits: [b − κ] when
-    [2^κ ≤ M].  NFS is not proved.  CAS [cas/28_keygen_ctor.gp]. *)
+    [2^κ ≤ M].  NFS cost is [Refuse_NFS_cost].  CAS [cas/28_keygen_ctor.gp]. *)
 
 Record StrongAux : Type := {
   sa_r : Z; sa_s : Z; sa_u : Z; sa_v : Z; sa_w : Z;

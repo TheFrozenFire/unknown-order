@@ -9,8 +9,12 @@ Every claim that matters is checked twice. Rocq (Coq 9.1) proves it for the mode
 PARI/GP pins it on numbers. Agreement is evidence because the tools fail differently:
 a wrong premise still proves cleanly in Rocq; a wrong model still computes in CAS.
 
-The mathematics is in [`THEORY.md`](THEORY.md). The schedule and named skips are in
-[`ROADMAP.md`](ROADMAP.md). Working rules are in [`CLAUDE.md`](CLAUDE.md).
+The map of the theory is generated from the Rocq tree:
+[`generated/COVERAGE.md`](generated/COVERAGE.md) (TOC) and
+[`generated/NAMED_SKIPS.md`](generated/NAMED_SKIPS.md) (refuses).
+Policy (what must not be axiomatized) is in [`THEORY.md`](THEORY.md).
+The schedule is in [`ROADMAP.md`](ROADMAP.md). Working rules are in
+[`CLAUDE.md`](CLAUDE.md).
 
 ## Three presentations
 
@@ -42,16 +46,14 @@ track: there is no bytecode.
 
 ## What is proved
 
-Headline theorems close under the global context unless a skip is named.
-Skips that stay named: LLL / Coppersmith, Pratt completeness,
-Dirichlet associativity of two non-unit non-inverse forms,
-sequentiality, and the random oracle. Cyclicity of `(ℤ/pℤ)*` as
-used in-corpus (`cyclic_units` / `height_stable`) is
-`cyclic_units_holds`. The Williams evaluation `V_{p+1} ≡ 2` when
-`P²−4` is a QNR is `williams_eval_of_qnr` (`Fp2.v`). Gauss `(2/p)`
-and Euler `±1` / QNR-from-minus-one are theorems (`QuadRecip.v`).
-Hash-to-prime is two named encodings (`THEORY.md` §21), not a blank
-skip.
+Headline theorems close under the global context unless the statement
+takes a `*_named` hypothesis. The refuse list is
+`generated/NAMED_SKIPS.md` (`NamedRefuse`, unused `*_named`).
+Cyclicity of `(ℤ/pℤ)*` as used in-corpus is `cyclic_units_holds`.
+Williams evaluation `V_{p+1} ≡ 2` when `P²−4` is a QNR is
+`williams_eval_of_qnr`. Gauss `(2/p)` is a theorem (`QuadRecip.v`).
+Hash-to-prime is two encodings (`HashSlot.v`), not a hash
+(`Refuse_hash_as_oracle`).
 
 ### RSA and the annihilator
 
@@ -65,7 +67,7 @@ the same engine on a different exponent.
 ### Key generation is a leaked annihilator
 
 Each catalog row is a generation choice that makes a *partial* or *short*
-period public (Type A–E in `THEORY.md` §6). Fermat, shared primes, Pollard
+period public (Type A–E in `notes/keygen-weaknesses.md`). Fermat, shared primes, Pollard
 `p−1`, Wiener, small `e`, CRT-RSA `d_p`, unbalanced primes, cyclotomic
 `Φ_n(p)`, batch order, and close-prime geometries have refusal lemmas in
 `KeyGen`. Matched-deep `v₂` is a shape of `λ`, not an annihilator; the live
@@ -100,7 +102,8 @@ Run on `(ℤ/Nℤ)*` (Wesolowski is trivial given `λ`; Pietrzak hits `{±1}` or
 mixed CRT root) and on toy `Cl(Δ)` (Pietrzak must not count `Cl[2]` as a
 restricted break). CAS `24`, `26`.
 
-`ExpProof.v`, `Accumulator.v`, `GQ.v`. Sequentiality and the ROM stay named.
+`ExpProof.v`, `Accumulator.v`, `GQ.v`. Sequentiality and the ROM are
+`Refuse_this_is_a_VDF` / `Refuse_ROM`.
 A composite member splits the witness; same bit length does not restore
 soundness (`bdm_same_bits_still_splits`). Wesolowski algebra does not
 use `Z.prime ℓ`. On raw units an odd challenge accepts `−y` via `π ↦ −π`
@@ -148,7 +151,7 @@ order is public — Type A, already in the catalog.
 `Hardness.v` records arrows: trapdoor inverts RSA; an RSA solution is strong
 RSA at that `e`; `λ+1` solves adaptive root on units; order divides `λ`;
 one-sided low-order factors. There is no global `RSA_hard`. A hardness
-*claim* needs a named KeyGen distribution (`THEORY.md` §9). Factoring ≤ RSA
+*claim* needs a named KeyGen distribution (`Refuse_PPT_advantage`). Factoring ≤ RSA
 and PPT / advantage are out of scope.
 
 ## Run it
@@ -192,13 +195,13 @@ force-residue are biased. Increment is not resample. A public
 map into one AP leaks `M`; reuse of `(a, M)` is publication.
 Placement is an interval on the second index, or empty.
 `derive_key_success` is the key relation (`e = 65537`). Long
-seed is a bijection; short seed plus stretch is a named PRF
-skip. Pocklington is blocked at `B = 160` for 512-bit primes.
+seed is a bijection; short seed plus stretch is `Refuse_PRF_stretch`.
+Pocklington is blocked at `B = 160` for 512-bit primes.
 CAS `32`–`38`.
 
 ## What is left
 
 [`ROADMAP.md`](ROADMAP.md) §5–§7 are done. The remaining
-cryptanalysis hunt is `THEORY.md` §6.11: a *named* modern sampler
+cryptanalysis hunt is `Refuse_undirected_611_hunt`: a *named* modern sampler
 that leaks a Type A–E handle not already in the catalog. Not
 another incarnation, and not an undirected KeyGen pass.

@@ -14,7 +14,8 @@ Open Scope Z_scope.
 (** * Slot encoding: the generator lands only on the constructor AP
 
     A seed is an integer.  [slot_encode S seed] is the constructor
-    walk at [k = seed].  There is no hash and no oracle.  Every
+    walk at [k = seed].  There is no hash and no oracle
+    ([Refuse_hash_as_oracle], [Refuse_SHA_in_Rocq]).  Every
     output is in the slot.  If it is prime and the auxiliaries
     exceed [B], it is [cyc_strong] and Blum.  Generation accept is
     [Z.prime].  If the encoding is public, the image is

@@ -13,7 +13,7 @@ Open Scope Z_scope.
     Then [a^M ≡ 1 (mod p)] while typically [a^M ≢ 1 (mod q)], so
     [gcd(a^M − 1, N) = p].
 
-    This is §3 of THEORY.md run on *one* CRT component.  Cross-confirmed
+    One-sided [p−1] annihilator on a single CRT component.  Cross-confirmed
     by [cas/10_pollard_p1.gp]. *)
 
 (** [n] is [B]-smooth when every prime factor of [n] is [≤ B]. *)

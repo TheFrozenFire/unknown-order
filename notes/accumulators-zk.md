@@ -58,7 +58,7 @@ Three layers. Only the first is this repo’s style.
 | Interactive GQ + “just hash the first message” | NIZK | Fiat–Shamir / ROM. Named skip |
 | “ZK inversion ⇒ factoring in the standard model” | RSA ≡ factoring | Boneh–Venkatesan: algebraic reductions for low `e` collapse. Named refuse |
 | Prove non-membership and publish `∏S mod φ(N)` | universal accumulator + ZK | Peng–Bao: that product *is* the trapdoor (`peng_bao_member_still_forges`) |
-| Statistical ZK for *RSA inversion* (the permutation) | hide `x` given `x^e` | On units the map is a permutation; “`y` is an `e`-th power” is vacuous. There is nothing to prove except knowledge of a preimage. Decision-RSA is not a thing (`THEORY.md` §9.7) |
+| Statistical ZK for *RSA inversion* (the permutation) | hide `x` given `x^e` | On units the map is a permutation; “`y` is an `e`-th power” is vacuous. There is nothing to prove except knowledge of a preimage. Decision-RSA is not a thing (`rsa_units_are_eth_powers`) |
 
 ### 2.3 Worked, but scheme-heavy (do not grow a ZK stack here)
 

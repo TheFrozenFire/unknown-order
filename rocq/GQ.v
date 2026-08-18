@@ -15,7 +15,7 @@ Open Scope Z_scope.
 
     Completeness and two-transcript special soundness.  Extraction
     is Shamir: [gcd(c−c', e)=1] yields an [e]-th root of [z].
-    Simulation / ROM stay named.
+    Simulation is [Refuse_HVZK_simulation] / [Refuse_ROM].
 
     Publishing a mixed [√1] is a proof of factorization that is
     *not* zero-knowledge ([mixed_sqrt1_splits]). *)

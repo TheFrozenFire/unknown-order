@@ -11,8 +11,10 @@ Open Scope Z_scope.
     Knowing the high or low bits of [p], or sampling [p] from a public
     thin AP (ROCA: [p = k M + (65537^a mod M)]), puts a *small*
     unknown in a polynomial that vanishes modulo a factor of [N].
-    Coppersmith recovers the unknown.  LLL is not formalized
-    ([Lattice.v]); this file records the generation-side shape.
+    The unknown is small ([high_bits_unknown_is_x],
+    [roca_unknown_is_k]).  Recovery is [coppersmith_named] /
+    [Refuse_lattice_lll_development] in [Lattice.v] and
+    [NamedSkips].  This file records the generation-side shape.
 
     Cross-confirmed algebra (the hidden unknown really is small, and
     [p] really lies on the AP) is in [cas/08_fermat.gp] for the
@@ -64,7 +66,7 @@ Proof.
   destruct Hform as [Heq Hbd]. subst p. ring.
 Qed.
 
-(** Honest skip: Coppersmith / Howgrave–Graham recover [x] when
-    [X < N^{1/δ}] for a degree-[δ] polynomial.  Not proved. *)
+(** See [coppersmith_named] in [Lattice.v].  Kept as an alias so
+    existing comments that mention the bit-leak window still resolve. *)
 Definition coppersmith_small_root (N delta X : Z) : Prop :=
-  0 < delta /\ 0 < X (* /\ X < N^{1/delta}, not an integer statement *).
+  0 < delta /\ 0 < X.

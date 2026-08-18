@@ -2,6 +2,7 @@
 -R ../../rocq-proofs RocqProofs
 -arg -native-compiler -arg no
 
+NamedSkips.v
 RSA.v
 FactorEnum.v
 Miller.v

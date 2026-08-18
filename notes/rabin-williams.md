@@ -1,6 +1,6 @@
 # Rabin–Williams — overlap with RSA
 
-Companion to `THEORY.md` §10. Formal objects: `rocq/QuadResidue.v`,
+Companion to `rocq/QuadResidue.v`,
 `rocq/RabinWilliams.v`. CAS: `cas/19_rabin_williams.gp` (`N = 11·23`).
 
 ## Same, and not the same

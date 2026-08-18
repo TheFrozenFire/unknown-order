@@ -100,8 +100,8 @@ Theorem strong_prime_resists_both :
 Proof. intros p B [_ H]. exact H. Qed.
 
 (** Williams [p+1] is the Lucas-sequence analogue: a cheap public [M]
-    with [p+1 | M] annihilates a rank-2 recurrence modulo [p].  We do
-    not formalize Lucas sequences.  The generation-side refusal is
+    with [p+1 | M] annihilates a rank-2 recurrence modulo [p]
+    ([Lucas.v], [Torus.v]).  The generation-side refusal is
     [pp1_resistant] — the same shape as [p1_resistant], other side. *)
 Definition williams_handle (p M : Z) : Prop :=
   0 <= M /\ (p + 1 | M).

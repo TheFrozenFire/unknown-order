@@ -14,7 +14,7 @@ Open Scope Z_scope.
 
 (** * Key-generation intent-spec
 
-    Each field refuses one leak from [THEORY.md] §6 / [notes/keygen-weaknesses.md].
+    Each field refuses one leak from [notes/keygen-weaknesses.md].
     A generator that discharges these is allowed to use smaller [N] because
     it is not spending bits to hide a short or one-sided annihilator. *)
 

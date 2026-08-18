@@ -14,7 +14,8 @@ Open Scope Z_scope.
     - [2^{i−1} · t]          if [1 ≤ i ≤ s]
     - [0]                    otherwise
 
-    Cyclicity itself is not proved.  This file proves the *arithmetic*
+    Cyclicity of [(Z/pZ)*] is [cyclic_units_holds] ([TwoPrimary.v]).
+    This file proves the *arithmetic*
     of that model, including the three mismatch rates that CAS
     checks exhaustively ([cas/20_two_primary.gp]):
 

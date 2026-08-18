@@ -367,7 +367,7 @@ Proof. apply form_neg31_ord3_not_ambiguous. Qed.
     On [Cl(−31)], [h = 3] annihilates the three classes; [2] is
     invertible mod [3], so each non-identity class is a square.
     The general implication [y^h ≡ 1 ⇒ y^{h+1} ≡ y] on unreduced
-    Dirichlet representatives stays named (left-compat of compose).
+    representatives is [compose_left_compat_named] (unused refuse).
     CAS [41]. *)
 
 Theorem bqf_exp_id :

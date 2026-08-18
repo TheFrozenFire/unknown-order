@@ -4,7 +4,7 @@ Source: https://grok.com/share/bGVnYWN5LWNvcHk_50720cb1-f620-400a-b3c9-ee69981b5
 Fetched via `GET https://grok.com/rest/app-chat/share_links/{shareLinkId}`  
 `conversationId`: `ca367af3-85a5-429d-9ad3-e4041788747a`
 
-This is the prior grok.com conversation used to seed the first analysis pass. It is **not** a theorem. Claims below are restated in `THEORY.md` and will be machine-checked (or corrected) in `rocq/RSA.v`.
+This is the prior grok.com conversation used to seed the first analysis pass. It is **not** a theorem. Claims below were restated in the Rocq tree (`rocq/RSA.v` and neighbours).
 
 ## What the conversation settled
 

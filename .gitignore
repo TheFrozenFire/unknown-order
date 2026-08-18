@@ -18,5 +18,9 @@ Makefile.coq*
 # rocq-mcp scratch (session-local)
 rocq/rocq_mcp_cache_*.v
 
+# print-assumptions per-theorem dumps (summary.* may be committed)
+rocq/print_assumptions_snapshot/current/*.txt
+rocq/print_assumptions_snapshot/baseline/*.txt
+
 # local MCP pin (absolute paths)
 .grok/

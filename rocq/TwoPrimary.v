@@ -615,8 +615,8 @@ Qed.
     [a^{t 2^k} ≡ 1]).  The matching lower bound — that no smaller
     exponent works — is [height_stable_under], which holds when
     [t] already kills the odd part of the order.  Cyclicity of
-    [(Z/pZ)*] is the named hypothesis that supplies stability
-    once [odd_part(p−1) | t]. *)
+    [(Z/pZ)*] is [cyclic_units], discharged by
+    [cyclic_units_holds]. *)
 
 Definition height_stable_under (a t t' n : Z) : Prop :=
   forall j : nat,

@@ -12,7 +12,7 @@ Open Scope Z_scope.
 (** * Relation-level structure of the named problems
 
     A hardness *claim* is a statement about algorithms and a KeyGen
-    distribution ([THEORY.md] §9).  This file does not make one.  It
+    distribution ([Refuse_PPT_advantage]).  This file does not make one.  It
     records the arrows that hold for the *winning conditions*:
     trapdoor ⇒ roots, RSA-solution ⇒ strong-RSA solution for that
     [e], [λ] ⇒ a trivial strong-RSA witness, order divides [λ],
@@ -62,7 +62,8 @@ Qed.
     A prescribed-[e] root is a strong-RSA witness for that [e].
     The converse is false as a relation: strong RSA may choose [e].
     Hardness therefore runs the other way from solvability:
-    strong-RSA-hard ⇒ RSA-hard (informal, [THEORY.md] §9.6). *)
+    strong-RSA-hard ⇒ RSA-hard is informal PPT
+    ([Refuse_PPT_advantage], [Refuse_RSA_eq_factoring_standard_model]). *)
 
 Theorem rsa_solution_is_strong_RSA :
   forall N e y x,

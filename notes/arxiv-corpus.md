@@ -22,8 +22,8 @@ pass would quote the claim and point at a Rocq name (or add one).
 | Kemmoe–Lysyanskaya 2024/505 | Shamir; Odds-AR; composite members | `shamir_trick`; `bdm_*`; `AdaptiveRoot_C` |
 | Belabas–Kleinjung–Sanso–Wesolowski 2020/1310 (also Math. Cryptology) | Mersenne / Shanks form has odd order | `mersenne31_wins_restricted_LowOrder`; `cl_mersenne_H` |
 | Coron–May JoC 2007 / May CRYPTO 2004 | `(N,e,d)` ⇒ factor, deterministic | in-corpus Miller / Coron–May algebra |
-| Boneh–Venkatesan EUROCRYPT 1998 | algebraic FACT ≤ low-`e` RSA collapses | named refuse, `THEORY.md` §9.6 |
-| Aggarwal–Maurer EUROCRYPT 2009 | RSA ≡ factoring in the *generic ring* | named refuse (GRM ≠ standard model) |
+| Boneh–Venkatesan EUROCRYPT 1998 | algebraic FACT ≤ low-`e` RSA collapses | `Refuse_RSA_eq_factoring_standard_model` |
+| Aggarwal–Maurer EUROCRYPT 2009 | RSA ≡ factoring in the *generic ring* | `Refuse_AM09_generic_ring_as_standard_model` |
 | Barić–Pfitzmann 1997, Camenisch–Lysyanskaya 2002 | prime members; Shamir updates | `rsa_composite_member_splits_witness`; `shamir_trick` |
 
 ## B. New cells we could add (do not have yet)

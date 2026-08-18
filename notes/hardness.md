@@ -1,6 +1,6 @@
 # Hardness claims — catalog
 
-Companion to `THEORY.md` §9. Winning conditions live in `UnknownOrder.v`
+Companion to `Hardness.v` / `Refuse_PPT_advantage`. Winning conditions live in `UnknownOrder.v`
 and `Hardness.v`. None of these rows is an axiom. A claim is a sentence
 about a `KG`, an algorithm class, a winning condition, and a challenge
 distribution; omit one and the sentence has no truth value this project
@@ -89,7 +89,7 @@ without naming a bad `KG`. The lookup is `notes/paper-overlaps.md`.
 | 3 | adaptive-root `C` poly-size or smooth | `adaptive_root_known_product_breaks` |
 | 4 | Pietrzak / LowOrder on `Cl(Δ)` without excluding `Cl[2]` | `catalog_wins_LowOrder_B2` |
 | 5 | low-order in every class group / “excluding `Cl[2]` is enough” | `mersenne31_wins_restricted_LowOrder` |
-| 6 | BP97-sRSA ≡ modern sRSA | named |
+| 6 | BP97-sRSA ≡ modern sRSA | `Refuse_BP97_vs_modern_sRSA` |
 | 7 | sRSA / AR given public `λ` | `lambda_solves_strong_RSA` |
-| 8 | standard-model RSA ≡ factoring | named (`THEORY.md` §9.6) |
+| 8 | standard-model RSA ≡ factoring | `Refuse_RSA_eq_factoring_standard_model` |
 | 9 | LLX non-membership with `∏S mod φ(N)` public | `llx_lambda_forges_nonmem`; `peng_bao_member_still_forges` |
