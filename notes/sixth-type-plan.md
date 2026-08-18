@@ -635,13 +635,15 @@ Named leftovers, not unfinished methods:
 `Refuse_Redei_4rank_fund_minus4N`,
 `Refuse_lattice_lll_development`, `h(Δ)` cost.
 
-## OSCAR lab (not merged)
+## OSCAR lab (discarded)
 
-Worktree `explore/oscar` @ `bb44ce9` independently agreed with
-Methods 3–8 and added four pins lifted here. **Do not merge
-that branch** (`notes/sixth-type-plan.md` would clobber these
-outcomes). PARI stays the gated CAS. Do not add OSCAR / Julia
-to `cas/run-check.sh`. OSCAR is not a third confirming tool.
+An isolated `explore/oscar` worktree independently agreed with
+Methods 3–8 and supplied four pins, lifted here. The worktree and
+branch are gone; do not recreate them and do not add OSCAR / Julia
+to `cas/run-check.sh`. The reusable lesson is which PARI object
+you asked (field of `fund(−4N)` vs form class group of disc
+`−4N`). That lives in the harness
+(`formal-verification/.agents/skills/cas-witness/reference/pari-objects.md`).
 
 Lifted (Rocq + CAS `56`):
 

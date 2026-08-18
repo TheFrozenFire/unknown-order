@@ -73,6 +73,10 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
 - **PARI/GP** (`gp`). Gate witnesses through `tooling/cas-gate.sh` — `gp -q` exits 0 even on
   `error()`, so the gate inspects output, not the exit code. Multi-line `for(...)` loops need
   trailing `\` continuations (this build parses a bare newline inside the loop as end-of-input).
+  Name the object: `qfbclassno(D)` is the order of disc `D`, not automatically `Cl` of the
+  field (`coredisc`). That lesson lives in the harness,
+  `formal-verification/.agents/skills/cas-witness/reference/pari-objects.md`.
+  Do not add OSCAR / Julia to this gate.
 - `bash run-check.sh` runs both; each track SKIPs cleanly if its tool is absent.
 
 The one local Rocq toolchain is the opam `rocq-lsp` switch (same one `rocq-mcp` / pet uses).
