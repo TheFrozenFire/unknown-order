@@ -222,3 +222,42 @@ Lemma adaptive_root_is_strong_RSA :
   forall N y x e,
     Problem_AdaptiveRoot N y x e <-> Problem_StrongRSA N y x e.
 Proof. intros. reflexivity. Qed.
+
+(** Adaptive root with a *known finite* challenge space is broken as
+    a relation: A1 publishes [h^{c·rest}], A2 returns [h^{rest}].
+    This is 2024/505 Remark 9 / BBF24, algebra only — no ROM.  If
+    every challenge is [B]-smooth and the primes up to [B] are
+    public and few, the same construction uses [rest] equal to a
+    high enough power of those primes. *)
+Theorem adaptive_root_known_product_breaks :
+  forall N h c rest,
+    1 < N ->
+    0 <= h ->
+    1 < c ->
+    0 <= rest ->
+    Problem_AdaptiveRoot N (powm h (c * rest) N) (powm h rest N) c.
+Proof.
+  intros N h c rest Hn Hh Hc Hr.
+  unfold Problem_AdaptiveRoot, Problem_StrongRSA.
+  split; [lia|].
+  rewrite <- powm_mul_r by lia.
+  rewrite Z.mul_comm.
+  reflexivity.
+Qed.
+
+Theorem adaptive_root_smooth_power_breaks :
+  forall N h p k,
+    1 < N ->
+    0 <= h ->
+    1 < p ->
+    0 <= k ->
+    Problem_AdaptiveRoot N (powm h (p ^ (k + 1)) N)
+      (powm h (p ^ k) N) p.
+Proof.
+  intros N h p k Hn Hh Hp Hk.
+  rewrite Z.pow_add_r by lia.
+  rewrite Z.pow_1_r.
+  rewrite Z.mul_comm.
+  apply adaptive_root_known_product_breaks; [assumption | assumption | assumption |].
+  apply Z.pow_nonneg; lia.
+Qed.

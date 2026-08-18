@@ -249,3 +249,77 @@ Proof.
   pose proof (wesolowski_correct_is_root N x q ell r Hn Hq He Hr) as H.
   subst y pi. apply H.
 Qed.
+
+(** Wesolowski / SimPoE on [(Z/NZ)*] is not sound when the challenge
+    is odd: [π ↦ −π] turns a true statement [y = x^{qℓ+r}] into an
+    accepting transcript for the false statement [−y].  2024/505
+    §6.1 and BBF19 already record this; the preferred carrier is
+    [QR_N] or the quotient by [{±1}].  Odds-challenges (SimPoE) and
+    prime challenges larger than 2 are both odd. *)
+Lemma powm_opp_odd :
+  forall a ell n,
+    1 < n ->
+    0 < ell ->
+    Z.odd ell = true ->
+    powm (- a) ell n = (- powm a ell n) mod n.
+Proof.
+  intros a ell n Hn He Hodd.
+  unfold powm.
+  rewrite Z.pow_opp_odd by (apply Z.odd_spec; exact Hodd).
+  change (- (a ^ ell)) with (0 - a ^ ell).
+  rewrite Zminus_mod, Z.mod_0_l by lia.
+  change (0 - (a ^ ell) mod n) with (- ((a ^ ell) mod n)).
+  reflexivity.
+Qed.
+
+Theorem wesolowski_odd_challenge_accepts_negation :
+  forall N x q ell r,
+    1 < N ->
+    0 <= q ->
+    0 < ell ->
+    Z.odd ell = true ->
+    0 <= r ->
+    let y := powm x (q * ell + r) N in
+    let pi := (- powm x q N) mod N in
+    (powm pi ell N * powm x r N) mod N = (- y) mod N.
+Proof.
+  intros N x q ell r Hn Hq He Hodd Hr y pi.
+  subst y pi.
+  rewrite powm_mod_base by lia.
+  rewrite powm_opp_odd by (lia || exact Hodd).
+  rewrite <- powm_mul_r by lia.
+  rewrite Z.mul_mod_idemp_l by lia.
+  replace (- powm x (q * ell) N * powm x r N)
+    with (- (powm x (q * ell) N * powm x r N)) by ring.
+  assert (Hneg : forall a, (- a) mod N = (- (a mod N)) mod N).
+  { intros a.
+    replace (- a) with (0 - a) by lia.
+    replace (- (a mod N)) with (0 - a mod N) by lia.
+    rewrite (Zminus_mod 0 a N), Z.mod_0_l by lia.
+    reflexivity. }
+  rewrite (Hneg (powm x (q * ell) N * powm x r N)).
+  rewrite <- powm_add_r by lia.
+  reflexivity.
+Qed.
+
+Theorem wesolowski_soundness_fails_on_units_odd_challenge :
+  forall N x q ell r,
+    1 < N ->
+    0 <= q ->
+    0 < ell ->
+    Z.odd ell = true ->
+    0 <= r ->
+    let y := powm x (q * ell + r) N in
+    let y_false := (- y) mod N in
+    let pi := (- powm x q N) mod N in
+    wesolowski_verify_rsa N x y_false pi ell r.
+Proof.
+  intros N x q ell r Hn Hq He Hodd Hr y y_false pi.
+  subst y y_false pi.
+  unfold wesolowski_verify_rsa.
+  pose proof (wesolowski_odd_challenge_accepts_negation
+                N x q ell r Hn Hq He Hodd Hr) as H.
+  cbn in H.
+  rewrite H.
+  unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
