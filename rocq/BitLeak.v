@@ -66,7 +66,4 @@ Proof.
   destruct Hform as [Heq Hbd]. subst p. ring.
 Qed.
 
-(** See [coppersmith_named] in [Lattice.v].  Kept as an alias so
-    existing comments that mention the bit-leak window still resolve. *)
-Definition coppersmith_small_root (N delta X : Z) : Prop :=
-  0 < delta /\ 0 < X.
+

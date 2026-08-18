@@ -927,33 +927,33 @@ in the Rocq tree.  Do not edit by hand.
 ## `RabinWilliams.v`
 
 - L12: Rabin–Williams: squaring in [(Z/NZ)*] with the Williams tweak
-  - L27: The Rabin problem
-  - L37: Prime shape
-  - L103: Williams tweak: among [{±a, ±2a}] exactly one Legendre pair
-  - L206: Rabin reduction: two non-associated square roots factor [N]
-  - L262: Verification shape: [s²] is one of the four tweaks of [H].
-  - L280: Keygen obligation on top of the RSA rulers: the mod-8 split.
+  - L31: The Rabin problem
+  - L41: Prime shape
+  - L107: Williams tweak: among [{±a, ±2a}] exactly one Legendre pair
+  - L210: Rabin reduction: two non-associated square roots factor [N]
+  - L266: Verification shape: [s²] is one of the four tweaks of [H].
+  - L284: Keygen obligation on top of the RSA rulers: the mod-8 split.
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `rabin_of_square` | 33 |
-| Lemma | `rw_p_is_blum` | 47 |
-| Lemma | `rw_q_is_blum` | 53 |
-| Lemma | `rw_pair_odd` | 59 |
-| Lemma | `lcm_even_of_even_l` | 68 |
-| Theorem | `lambda_even_odd_primes` | 77 |
-| Theorem | `two_not_rsa_exponent` | 88 |
-| Lemma | `pm1_cases` | 119 |
-| Theorem | `williams_tweak_exists` | 125 |
-| Theorem | `williams_tweak_unique` | 139 |
-| Theorem | `williams_which_correct` | 171 |
-| Theorem | `williams_two_symbol_p` | 187 |
-| Theorem | `williams_two_symbol_q` | 191 |
-| Theorem | `williams_neg1_on_blum` | 195 |
-| Theorem | `rabin_roots_split` | 214 |
-| Lemma | `rw_verify_of_root` | 273 |
-| Lemma | `kg_rw_implies_blum` | 284 |
-| Lemma | `kg_rw_pminus1_almost_odd` | 292 |
+| Lemma | `rabin_of_square` | 37 |
+| Lemma | `rw_p_is_blum` | 51 |
+| Lemma | `rw_q_is_blum` | 57 |
+| Lemma | `rw_pair_odd` | 63 |
+| Lemma | `lcm_even_of_even_l` | 72 |
+| Theorem | `lambda_even_odd_primes` | 81 |
+| Theorem | `two_not_rsa_exponent` | 92 |
+| Lemma | `pm1_cases` | 123 |
+| Theorem | `williams_tweak_exists` | 129 |
+| Theorem | `williams_tweak_unique` | 143 |
+| Theorem | `williams_which_correct` | 175 |
+| Theorem | `williams_two_symbol_p` | 191 |
+| Theorem | `williams_two_symbol_q` | 195 |
+| Theorem | `williams_neg1_on_blum` | 199 |
+| Theorem | `rabin_roots_split` | 218 |
+| Lemma | `rw_verify_of_root` | 277 |
+| Lemma | `kg_rw_implies_blum` | 288 |
+| Lemma | `kg_rw_pminus1_almost_odd` | 296 |
 
 ## `SharedPrime.v`
 

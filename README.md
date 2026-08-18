@@ -13,8 +13,7 @@ The map of the theory is generated from the Rocq tree:
 [`generated/COVERAGE.md`](generated/COVERAGE.md) (TOC) and
 [`generated/NAMED_SKIPS.md`](generated/NAMED_SKIPS.md) (refuses).
 Policy (what must not be axiomatized) is in [`THEORY.md`](THEORY.md).
-The schedule is in [`ROADMAP.md`](ROADMAP.md). Working rules are in
-[`CLAUDE.md`](CLAUDE.md).
+Working rules are in [`CLAUDE.md`](CLAUDE.md).
 
 ## Three presentations
 
@@ -158,7 +157,8 @@ and PPT / advantage are out of scope.
 
 ```sh
 git clone https://github.com/TheFrozenFire/rocq-proofs   # sibling of this repo
-bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is absent
+bash run-check.sh                 # CAS + Rocq + generated coverage
+bash rocq/print-assumptions.sh    # 754 results; expect Closed / 0 axioms
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
@@ -201,7 +201,9 @@ CAS `32`–`38`.
 
 ## What is left
 
-[`ROADMAP.md`](ROADMAP.md) §5–§7 are done. The remaining
-cryptanalysis hunt is `Refuse_undirected_611_hunt`: a *named* modern sampler
-that leaks a Type A–E handle not already in the catalog. Not
-another incarnation, and not an undirected KeyGen pass.
+The remaining hunt is `Refuse_undirected_611_hunt`: a *named*
+modern sampler that leaks a Type A–E handle not already in
+`notes/keygen-weaknesses.md`. Not another incarnation, and not
+an undirected KeyGen pass. Everything else that was once a
+checkbox is either a theorem or a `NamedRefuse` /
+`*_named` in `generated/NAMED_SKIPS.md`.

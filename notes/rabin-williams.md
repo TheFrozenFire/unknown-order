@@ -28,8 +28,8 @@ p ≡ 3 (mod 8)  ⇒  p ≡ 3 (mod 4),  (−1/p) = −1,  (2/p) = −1
 q ≡ 7 (mod 8)  ⇒  q ≡ 3 (mod 4),  (−1/q) = −1,  (2/q) = +1
 ```
 
-`(−1/·)` is proved (Euler). `(2/·)` is the reason for mod 8 and is
-CAS-pinned, not proved (Gauss). Among `{±a, ±2a}` the four Legendre
+`(−1/·)` is Euler (`euler_is_pm1`). `(2/·)` is
+`two_supplement`. Among `{±a, ±2a}` the four Legendre
 pairs are a permutation of `{±1}²`, so exactly one is a square mod
 both primes (`williams_tweak_exists` / `_unique`).
 

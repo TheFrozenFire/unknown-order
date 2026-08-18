@@ -15,7 +15,8 @@ Generated.  Do not edit by hand.
 | `compose_assoc_named` | `BinForms.v` | 803 | refuse | — |
 | `compose_left_compat_named` | `BinForms.v` | 812 | refuse | — |
 | `coppersmith_named` | `Lattice.v` | 67 | refuse | — |
-| `dirichlet_ap_prime_named` | `NamedSkips.v` | 54 | refuse | — |
+| `dirichlet_ap_prime_named` | `NamedSkips.v` | 55 | refuse | — |
+| `orders_generate_lambda_named` | `Order.v` | 241 | refuse | — |
 | `pratt_complete_named` | `Pratt.v` | 110 | refuse | — |
 | `boneh_durfee_named` | `Wiener.v` | 158 | refuse | — |
 
@@ -44,5 +45,6 @@ Generated.  Do not edit by hand.
 | `Refuse_Mollin_general_2020_1310` | `NamedSkips.v` | 47 |
 | `Refuse_r_power_hardness` | `NamedSkips.v` | 48 |
 | `Refuse_polynomial_gcd_over_ZN` | `NamedSkips.v` | 49 |
+| `Refuse_RW_signature_scheme` | `NamedSkips.v` | 50 |
 
-_28 refuses, 0 used-as-hypothesis weaknesses._
+_30 refuses, 0 used-as-hypothesis weaknesses._

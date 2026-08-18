@@ -22,6 +22,10 @@ Open Scope Z_scope.
     [(+1,+1)].  That unique representative is a square mod [p] and
     mod [q], and the [p ≡ 3 (mod 4)] formula extracts a root.
 
+    The principal-root convention, hash wrapper, and signature
+    game are [Refuse_RW_signature_scheme].  Algebra of the tweak
+    and the split is what this file proves.
+
     Cross-confirmed by [cas/19_rabin_williams.gp]. *)
 
 (** ** The Rabin problem *)

@@ -19,9 +19,9 @@ Open Scope Z_scope.
     the 2-height at an odd multiple of [odd_part(ord)] *is*
     [v₂(ord)].
 
-    Completeness of sampling orders to recover [λ] is a named
-    density claim, discharged only by CAS on small [N]
-    ([cas/25_order.gp]). *)
+    Completeness of sampling orders to recover [λ] is
+    [orders_generate_lambda_named], discharged only by CAS on
+    small [N] ([cas/25_order.gp]). *)
 
 (** ** Uniqueness and the divide criterion *)
 
@@ -235,10 +235,10 @@ Proof.
 Qed.
 
 (** Completeness — the lcm of *enough* orders is [λ] — is a density
-    statement.  Recorded as a predicate, not an axiom.  CAS
+    statement.  Unused refuse of a general proof; CAS
     [cas/25_order.gp] checks it exhaustively on [11×17], [11×19],
     [41×73]. *)
-Definition orders_generate_lambda (p q : Z) (ks : Z -> Prop) : Prop :=
+Definition orders_generate_lambda_named (p q : Z) (ks : Z -> Prop) : Prop :=
   (forall k, ks k -> (k | lambda_semiprime p q)) /\
   (exists K, ks K /\ K = lambda_semiprime p q).
 
