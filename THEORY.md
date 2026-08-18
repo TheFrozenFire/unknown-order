@@ -9,7 +9,7 @@ This file is **not** the theory.  The theory is the Rocq tree.
 | Math/SIM lint | [`generated/LINT.md`](generated/LINT.md) |
 | Paper-check overlaps | [`notes/paper-overlaps.md`](notes/paper-overlaps.md) |
 | Relation table | [`notes/hardness.md`](notes/hardness.md) |
-| Working rules | [`CLAUDE.md`](CLAUDE.md) |
+| Working rules | [`AGENTS.md`](AGENTS.md) |
 
 Regenerate the first three with `bash rocq/gen-coverage.sh` (also run from `run-check.sh`).  The harness emitters are `formal-verification/tooling/{coverage-toc,named-skips,rocq-math-lint}`.
 

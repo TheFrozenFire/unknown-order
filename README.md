@@ -13,7 +13,7 @@ The map of the theory is generated from the Rocq tree:
 [`generated/COVERAGE.md`](generated/COVERAGE.md) (TOC) and
 [`generated/NAMED_SKIPS.md`](generated/NAMED_SKIPS.md) (refuses).
 Policy (what must not be axiomatized) is in [`THEORY.md`](THEORY.md).
-Working rules are in [`CLAUDE.md`](CLAUDE.md).
+Working rules are in [`AGENTS.md`](AGENTS.md).
 
 ## Three presentations
 

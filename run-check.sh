@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Top-level cross-confirmation gate for the unknown-order project.
-# TWO tracks that FAIL DIFFERENTLY (CLAUDE.md #1): CAS (PARI/GP forward computation) and Rocq
+# TWO tracks that FAIL DIFFERENTLY (AGENTS.md #1): CAS (PARI/GP forward computation) and Rocq
 # (deductive proof). EVM tiers are skipped-by-construction. Each track SKIPs cleanly (exit 0)
 # when its tool is absent; a present tool that FAILS exits non-zero.
 set -uo pipefail
