@@ -158,11 +158,11 @@ and PPT / advantage are out of scope.
 ```sh
 git clone https://github.com/TheFrozenFire/rocq-proofs   # sibling of this repo
 bash run-check.sh                 # CAS + Rocq + generated coverage
-bash rocq/print-assumptions.sh    # 754 results; expect Closed / 0 axioms
+bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot summary
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 42 witnesses, `cas/01`–`42`.
+CAS is 56 witnesses, `cas/01`–`56`. PARI is the gated CAS; do not add OSCAR.
 
 ## Constructor (not a filter)
 

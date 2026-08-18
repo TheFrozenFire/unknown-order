@@ -201,7 +201,7 @@ in the Rocq tree.  Do not edit by hand.
   - L85: Restricted low-order
   - L162: Restricted low-order after excluding [Cl[2]]
   - L328: Families: constructible torsion is not always [Cl[2]]
-  - L364: Class number is an AR-search trapdoor
+  - L428: Class number is an AR-search trapdoor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -240,14 +240,23 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `mersenne31_is_odd_order` | 324 |
 | Theorem | `shanks_disc_2` | 340 |
 | Theorem | `shanks_form_2` | 343 |
-| Theorem | `mersenne31_shanks_in_family_H` | 353 |
-| Theorem | `mersenne31_shanks_not_ordinary_H` | 360 |
-| Theorem | `bqf_exp_id` | 373 |
-| Theorem | `neg31_id_annihilated_by_h` | 384 |
-| Theorem | `form_neg31_inv_exp2` | 391 |
-| Theorem | `form_neg31_inv_sq_equiv_f` | 398 |
-| Theorem | `shanks_inv_square_is_shanks` | 405 |
-| Theorem | `shanks_annihilated_by_h` | 413 |
+| Theorem | `shanks_form_disc` | 346 |
+| Theorem | `shanks_disc_3` | 356 |
+| Theorem | `iq_neg107` | 359 |
+| Theorem | `shanks_u3_of_disc` | 362 |
+| Theorem | `shanks_u3_not_ambiguous` | 369 |
+| Theorem | `shanks_u3_exp3_compute` | 380 |
+| Theorem | `shanks_u3_cube_equiv_id` | 388 |
+| Theorem | `shanks_u3_exp3_equiv_id` | 395 |
+| Theorem | `shanks_family_has_3` | 399 |
+| Theorem | `mersenne31_shanks_in_family_H` | 417 |
+| Theorem | `mersenne31_shanks_not_ordinary_H` | 424 |
+| Theorem | `bqf_exp_id` | 437 |
+| Theorem | `neg31_id_annihilated_by_h` | 448 |
+| Theorem | `form_neg31_inv_exp2` | 455 |
+| Theorem | `form_neg31_inv_sq_equiv_f` | 462 |
+| Theorem | `shanks_inv_square_is_shanks` | 469 |
+| Theorem | `shanks_annihilated_by_h` | 477 |
 
 ## `CyclicCount.v`
 
@@ -1001,6 +1010,8 @@ in the Rocq tree.  Do not edit by hand.
 - L10: Directed sixth-type leftovers (Methods 3–8)
   - L16: Method 3: [(N, 0, 1)] of disc [−4N] is the principal class
   - L96: Method 11: every factorization [4N = αβ] gives
+  - L110: Polynomial characters collapse: [D(N) ≡ D(0) (mod p)]
+  - L142: [Δ=−4N]: non-principal [Cl[2]] *is* the factorization
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1012,6 +1023,14 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `gcd_N_minus_2_N` | 67 |
 | Theorem | `odd_N_gcd_Nminus2` | 78 |
 | Theorem | `factor_4N_gives_square_disc` | 100 |
+| Theorem | `N_plus_one_powm` | 115 |
+| Theorem | `N_plus_one_euler_is_one` | 130 |
+| Theorem | `form_p0q_disc` | 151 |
+| Theorem | `form_p0q_ambiguous` | 157 |
+| Theorem | `form_p0q_reduced_when_ordered` | 161 |
+| Theorem | `williams_N_mod4` | 182 |
+| Theorem | `both_1_mod4_N_mod4` | 190 |
+| Theorem | `mixed_mod4_N_mod4` | 198 |
 
 ## `SmallExponent.v`
 
@@ -1163,4 +1182,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_784 theorems/lemmas/corollaries/examples across 44 files._
+_801 theorems/lemmas/corollaries/examples across 44 files._

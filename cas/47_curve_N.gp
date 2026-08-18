@@ -50,13 +50,12 @@ for(t = 1, ecm_n, \
   for(x = 1, 8, \
     rhs = (x^3 + N*x) % N; \
     if(issquare(Mod(rhs,N))==0 && kronecker(rhs,N)==-1, next); \
-    \\ only try if rhs is square mod N (both sides)
     if(issquare(Mod(rhs,p))==1 && issquare(Mod(rhs,q))==1, \
-      E = ellinit([0,0,0, N, 0], N); \
-      P = [x, lift(sqrt(Mod(rhs,N)))]; \
       iferr( \
+        E = ellinit([0,0,0, N, 0], N); \
+        P = [x, lift(sqrt(Mod(rhs,N)))]; \
         Q = ellmul(E, P, M); \
-        , err, found = found \
+        , err, 0 \
       ) \
     ) \
   ) \

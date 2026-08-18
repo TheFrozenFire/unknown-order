@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 754 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 801 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 754 results across 42 files.
+Captured for 801 results across 44 files.
 
 Counts:
 
@@ -221,14 +221,23 @@ Counts:
 | `mersenne31_is_odd_order` | 324 | 0 | 0 | OK |
 | `shanks_disc_2` | 340 | 0 | 0 | OK |
 | `shanks_form_2` | 343 | 0 | 0 | OK |
-| `mersenne31_shanks_in_family_H` | 353 | 0 | 0 | OK |
-| `mersenne31_shanks_not_ordinary_H` | 360 | 0 | 0 | OK |
-| `bqf_exp_id` | 373 | 0 | 0 | OK |
-| `neg31_id_annihilated_by_h` | 384 | 0 | 0 | OK |
-| `form_neg31_inv_exp2` | 391 | 0 | 0 | OK |
-| `form_neg31_inv_sq_equiv_f` | 398 | 0 | 0 | OK |
-| `shanks_inv_square_is_shanks` | 405 | 0 | 0 | OK |
-| `shanks_annihilated_by_h` | 413 | 0 | 0 | OK |
+| `shanks_form_disc` | 346 | 0 | 0 | OK |
+| `shanks_disc_3` | 356 | 0 | 0 | OK |
+| `iq_neg107` | 359 | 0 | 0 | OK |
+| `shanks_u3_of_disc` | 362 | 0 | 0 | OK |
+| `shanks_u3_not_ambiguous` | 369 | 0 | 0 | OK |
+| `shanks_u3_exp3_compute` | 380 | 0 | 0 | OK |
+| `shanks_u3_cube_equiv_id` | 388 | 0 | 0 | OK |
+| `shanks_u3_exp3_equiv_id` | 395 | 0 | 0 | OK |
+| `shanks_family_has_3` | 399 | 0 | 0 | OK |
+| `mersenne31_shanks_in_family_H` | 417 | 0 | 0 | OK |
+| `mersenne31_shanks_not_ordinary_H` | 424 | 0 | 0 | OK |
+| `bqf_exp_id` | 437 | 0 | 0 | OK |
+| `neg31_id_annihilated_by_h` | 448 | 0 | 0 | OK |
+| `form_neg31_inv_exp2` | 455 | 0 | 0 | OK |
+| `form_neg31_inv_sq_equiv_f` | 462 | 0 | 0 | OK |
+| `shanks_inv_square_is_shanks` | 469 | 0 | 0 | OK |
+| `shanks_annihilated_by_h` | 477 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
@@ -322,6 +331,31 @@ Counts:
 | `dist_force_residue_can_leave_range` | 635 | 0 | 0 | OK |
 | `dist_seeded_slot_balanced` | 647 | 0 | 0 | OK |
 | `long_seed_hits_every_index` | 663 | 0 | 0 | OK |
+
+## EulerQuotient.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `powm_mod_divisor` | 24 | 0 | 0 | OK |
+| `powm_mod_prime_factor` | 43 | 0 | 0 | OK |
+| `powm_multiple` | 53 | 0 | 0 | OK |
+| `not_coprime_prime_divides` | 69 | 0 | 0 | OK |
+| `fermat_powm` | 82 | 0 | 0 | OK |
+| `powm_Nplus1_mod_p` | 99 | 0 | 0 | OK |
+| `powm_s_mod_p` | 116 | 0 | 0 | OK |
+| `powm_Nplus1_eq_s_mod_p` | 131 | 0 | 0 | OK |
+| `phi_plus_sum` | 140 | 0 | 0 | OK |
+| `euler_quotient_units` | 144 | 0 | 0 | OK |
+| `euler_quotient` | 162 | 0 | 0 | OK |
+| `powm_reduce_to_qminus1` | 178 | 0 | 0 | OK |
+| `powm_Nminus1_mod_p` | 212 | 0 | 0 | OK |
+| `euler_quotient_pred` | 222 | 0 | 0 | OK |
+| `prime_2` | 240 | 0 | 0 | OK |
+| `odd_prime_mod2` | 247 | 0 | 0 | OK |
+| `odd_primes_sum_even` | 258 | 0 | 0 | OK |
+| `odd_prime_mod4` | 269 | 0 | 0 | OK |
+| `sum_mod4_of_N` | 286 | 0 | 0 | OK |
+| `euler_quotient_rsa` | 309 | 0 | 0 | OK |
 
 ## ExpProof.v
 
@@ -813,6 +847,8 @@ Counts:
 | `rsa_test_vector` | 207 | 0 | 0 | OK |
 | `rsa_test_roundtrip` | 211 | 0 | 0 | OK |
 | `rsa_test_annihilator` | 215 | 0 | 0 | OK |
+| `N_cong_q_mod_pminus1` | 230 | 0 | 0 | OK |
+| `gcd_polyN_pminus1_is_gcd_at_q` | 241 | 0 | 0 | OK |
 
 ## RabinWilliams.v
 
@@ -843,6 +879,27 @@ Counts:
 |---|---:|---:|---:|---|
 | `gcd_shared_prime` | 14 | 0 | 0 | OK |
 | `gcd_shared_prime_divides_both` | 29 | 0 | 0 | OK |
+
+## SixthType.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `form_N01_disc` | 21 | 0 | 0 | OK |
+| `minus4N_mod4` | 27 | 0 | 0 | OK |
+| `minus4N_div4` | 33 | 0 | 0 | OK |
+| `form_N01_equiv_principal` | 42 | 0 | 0 | OK |
+| `Nsq_minus_4_factors` | 63 | 0 | 0 | OK |
+| `gcd_N_minus_2_N` | 67 | 0 | 0 | OK |
+| `odd_N_gcd_Nminus2` | 78 | 0 | 0 | OK |
+| `factor_4N_gives_square_disc` | 100 | 0 | 0 | OK |
+| `N_plus_one_powm` | 115 | 0 | 0 | OK |
+| `N_plus_one_euler_is_one` | 130 | 0 | 0 | OK |
+| `form_p0q_disc` | 151 | 0 | 0 | OK |
+| `form_p0q_ambiguous` | 157 | 0 | 0 | OK |
+| `form_p0q_reduced_when_ordered` | 161 | 0 | 0 | OK |
+| `williams_N_mod4` | 182 | 0 | 0 | OK |
+| `both_1_mod4_N_mod4` | 190 | 0 | 0 | OK |
+| `mixed_mod4_N_mod4` | 198 | 0 | 0 | OK |
 
 ## SmallExponent.v
 

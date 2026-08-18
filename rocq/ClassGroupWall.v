@@ -343,6 +343,70 @@ Proof. vm_compute. reflexivity. Qed.
 Theorem shanks_form_2 : shanks_form 2 = form_neg31_ord3.
 Proof. reflexivity. Qed.
 
+Theorem shanks_form_disc :
+  forall u, bqf_disc (shanks_form u) = shanks_disc u.
+Proof.
+  intros u. unfold bqf_disc, shanks_form, shanks_disc.
+  cbn [bqf_a bqf_b bqf_c]. ring.
+Qed.
+
+(** [u=3]: disc [−107], form [(3,1,9)].  The family is not a
+    [−31] accident; CAS [56] pins [3 | h(1−4u³)] for [u=2..20]. *)
+
+Theorem shanks_disc_3 : shanks_disc 3 = -107.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem iq_neg107 : iq_disc (-107).
+Proof. unfold iq_disc. split; [lia|]. right. vm_compute. reflexivity. Qed.
+
+Theorem shanks_u3_of_disc : of_disc (shanks_form 3) (-107).
+Proof.
+  unfold of_disc. split.
+  - rewrite shanks_form_disc, shanks_disc_3. reflexivity.
+  - unfold bqf_primitive, shanks_form. cbn. vm_compute. reflexivity.
+Qed.
+
+Theorem shanks_u3_not_ambiguous : ~ bqf_ambiguous (shanks_form 3).
+Proof.
+  unfold bqf_ambiguous, shanks_form. cbn. lia.
+Qed.
+
+Definition shanks_u3_sq : bqf :=
+  bqf_compose (shanks_form 3) (shanks_form 3).
+
+Definition shanks_u3_cube : bqf :=
+  bqf_compose shanks_u3_sq (shanks_form 3).
+
+Theorem shanks_u3_exp3_compute :
+  bqf_exp (-107) (shanks_form 3) 3%nat = shanks_u3_cube.
+Proof.
+  cbn [bqf_exp].
+  rewrite compose_id_left; [| apply iq_neg107 | apply shanks_u3_of_disc].
+  reflexivity.
+Qed.
+
+Theorem shanks_u3_cube_equiv_id :
+  bqf_equiv shanks_u3_cube (bqf_id (-107)).
+Proof.
+  exists sl2_reduce_cube. split; [apply sl2_reduce_cube_ok|].
+  vm_compute. reflexivity.
+Qed.
+
+Theorem shanks_u3_exp3_equiv_id :
+  bqf_equiv (bqf_exp (-107) (shanks_form 3) 3%nat) (bqf_id (-107)).
+Proof. rewrite shanks_u3_exp3_compute. apply shanks_u3_cube_equiv_id. Qed.
+
+Theorem shanks_family_has_3 :
+  bqf_equiv (bqf_exp (shanks_disc 2) (shanks_form 2) 3%nat)
+            (bqf_id (shanks_disc 2)) /\
+  bqf_equiv (bqf_exp (shanks_disc 3) (shanks_form 3) 3%nat)
+            (bqf_id (shanks_disc 3)).
+Proof.
+  split.
+  - rewrite shanks_disc_2, shanks_form_2. apply form_neg31_exp3_equiv_id.
+  - rewrite shanks_disc_3. apply shanks_u3_exp3_equiv_id.
+Qed.
+
 Definition cl_ordinary_H : bqf -> Prop := bqf_ambiguous.
 
 Definition cl_mersenne_H (u : Z) (f : bqf) : Prop :=

@@ -83,10 +83,12 @@ Record the model next to every CAS probe. `gcd = 2` is not a hit.
   a^{N−1} ≡ a^{p+q−2}   (mod N)
   ```
 
-  CRT + Fermat on each side. **Not yet a Rocq theorem** in this
-  tree; pin in CAS, then prove. `N+1` does *not* annihilate the
-  Williams torus (`Torus.v`, `cas/27`). That is a different claim
-  (`V_{N+1} ≡ 2` fails). Do not conflate them.
+  CRT + Fermat on each side. Theorem: `euler_quotient` /
+  `euler_quotient_rsa`. Do **not** resume a 16384-bit pin in
+  `gp` or OSCAR; the identity is already a theorem. `N+1` does
+  *not* annihilate the Williams torus (`Torus.v`, `cas/27`).
+  That is a different claim (`V_{N+1} ≡ 2` fails). Do not
+  conflate them.
 - `λ+1` annihilates units if `λ` is known; `a^λ ≡ 1`.
 - Catalog and avenues already closed: `notes/keygen-weaknesses.md`.
   Nextprime / shared-prefix / increment-window are incarnations.
@@ -292,8 +294,20 @@ genus theory there only sees `N±2`.
   only `N±2`.
 - Kronecker of `{−4N, 1−4N, 4N−1, N²−4, 5−4N, −N}` at 5 vs bits
   of `p+q`: max `|rate−1/2|=0.113`.
-- 2-rank of `Cl(−4N)` needs `ω(Δ)`, which needs the factors of
-  `N`. Computing it is factoring.
+- 2-rank of the *form class group* of the non-fundamental order
+  of disc `−4N` needs `ω(Δ)`, hence the factors of `N`. That is
+  factoring, not a public `B=2` win (the catalog's `Cl[2]` fact
+  assumes `factor(Δ)` is public). Non-principal `Cl[2]` is the
+  form `(p,0,q)` (`form_p0q_*`).
+- 2-rank of the *field* of `fund(−4N)` **is** public: `N ≡ 1
+  (mod 4)` ⇒ `Δ₀ = −4N`, rank 2; else `Δ₀ = −N`, rank 1
+  (`fund_disc_minusN`). Williams (`p,q ≡ 3 (mod 4)`) and both
+  `≡ 1` share the same public bucket (`williams_N_mod4`,
+  `both_1_mod4_N_mod4`). CAS `56`: 30/30.
+- 4-rank of `Cl(fund(−4N))` varies inside every public
+  `(N mod 16, 2-rank)` bucket (Rédei / `(p/q)`). Secret, not
+  cheap. Do not compute `h(−4N)` at crypto size.
+  `Refuse_Redei_4rank_fund_minus4N`.
 
 The only working reduction that factors is CF of `√N` (Type A),
 which this swap does not perform.
@@ -430,6 +444,11 @@ or nothing.
   over 63 products, not an identity (2 misses).
 
 Quadratic residuosity remains deciding `(·/p)` given `(·/N)`.
+
+Polynomial `D(N)` cannot split the product: `N ≡ 0 (mod p)`
+so `(D(N)/p) = (D(0)/p)`. In particular `(N+1/p) ≡ 1`
+(`N_plus_one_euler_is_one`, Closed; CAS `56` 40/40). Same
+Method 1 obstruction, in characters.
 
 ---
 
@@ -613,7 +632,33 @@ or chance.
 
 Named leftovers, not unfinished methods:
 `Refuse_PPT_advantage`, `Refuse_EN_card_from_N`,
+`Refuse_Redei_4rank_fund_minus4N`,
 `Refuse_lattice_lll_development`, `h(Δ)` cost.
+
+## OSCAR lab (not merged)
+
+Worktree `explore/oscar` @ `bb44ce9` independently agreed with
+Methods 3–8 and added four pins lifted here. **Do not merge
+that branch** (`notes/sixth-type-plan.md` would clobber these
+outcomes). PARI stays the gated CAS. Do not add OSCAR / Julia
+to `cas/run-check.sh`. OSCAR is not a third confirming tool.
+
+Lifted (Rocq + CAS `56`):
+
+1. Field 2-rank of `fund(−4N)` is a function of `N mod 4`
+   (public). Form-class 2-rank of non-fundamental `−4N` is
+   still the factorization. See Method 3 outcome.
+2. `(N+1/p) ≡ 1`. See Method 7 outcome.
+3. 4-rank / Rédei is secret. `Refuse_Redei_4rank_fund_minus4N`.
+   CAS `56`: 8/8 public buckets at 12-bit had more than one
+   4-rank. Not a theorem hunt.
+4. Shanks is a family, not a `−31` pin. `shanks_family_has_3`
+   (`u=2,3`); CAS `56` has `3 | h(1−4u³)` and form order 3
+   for every `u=2..20`. Random fund. `Δ` of that size:
+   `3|h` on 29/80. Extra odd torsion is `cl_mersenne_H`, not
+   a sixth type. Rocq still only has
+   `mersenne31_wins_restricted_LowOrder` as the restricted
+   win; the family fact is the missing piece that closed.
 
 ## What this plan is not
 
