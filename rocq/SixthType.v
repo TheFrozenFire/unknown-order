@@ -92,3 +92,17 @@ Proof.
   rewrite <- (Z.gcd_mod N 2) by lia.
   rewrite Hodd. reflexivity.
 Qed.
+
+(** ** Method 11: every factorization [4N = αβ] gives
+    [(α+β)² − 16N = (α−β)²], i.e. a point on [s² − 4N = □]
+    after [s = (α+β)/2].  In [ℤ_ℓ^×] there are many units [α]. *)
+
+Theorem factor_4N_gives_square_disc :
+  forall N a b,
+    a * b = 4 * N ->
+    (a + b) * (a + b) - 16 * N = (a - b) * (a - b).
+Proof.
+  intros N a b Hfac.
+  replace (16 * N) with (4 * (a * b)) by lia.
+  ring.
+Qed.

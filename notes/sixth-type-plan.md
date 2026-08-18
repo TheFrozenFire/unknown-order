@@ -465,15 +465,155 @@ even fire — there is no leak to collapse.
 
 ---
 
-## Program outcome (Methods 1–8)
+## Method 9 — `a_N` of a *fixed* modular form
 
-No sixth type. Every named public object was either a theorem that
-is not a handle, an incarnation of A–E, or a chance-sized gcd.
-The remaining extractor is a discrete log, a class-number / LLL /
-`h(Δ)` algorithm, or an unnamed polytime map
-(`Refuse_PPT_advantage`, `Refuse_EN_card_from_N`,
-`Refuse_lattice_lll_development`). Those are named skips, not
-unfinished methods.
+**Public function.** Fourier coefficient `a_N` of a newform whose
+level and weight do **not** depend on `N`. Weight 2: `a_p` has
+size `≤ 2√p`, so `a_N = a_p a_q` has size `≤ 4√N` and is
+cheap (`ellak`). Ramanujan `τ(N)` is the same shape at weight
+12 (`|τ(p)| ≤ 2 p^{11/2}`) — use only at tiny `N`.
+
+**Why it might be new.** The reason `a_N` exists is Hecke / Galois,
+not the ring `ℤ[N]` or `(ℤ/Nℤ)*`. After factoring `a_N` (easier
+than factoring `N`) one might hold `a_p`.
+
+**Attempt.** Fixed curves `37a1` (`y²+y=x³−x`) and `11a1`. Pin
+`a_N = a_p a_q`. Ask whether a secret divides `a_N` on every far
+pair, whether the factorization of `a_N` is `{a_p, a_q}`, and
+whether `a_p` yields a handle. `τ` only as a tiny-`N` check.
+
+**Death.** Hasse without a split of `a_p` from `a_q`; or `a_p`
+only feeds Cornacchia / CM (Type A).
+
+**Artifact.** `cas/52_modular_aN.gp`.
+
+**Outcome (exhausted, 2026-08-18).** Hasse, not a handle.
+
+- `a_N = a_p a_q` on `37a1` and `11a1` (20/20). `|a_N|=|a_p||a_q|`
+  on 40/40, so factoring `a_N` can yield the pair of traces.
+- No secret divides `a_N(37a1)` on any of 40 far pairs.
+- `a_p=291` occurs for **two** 16-bit primes — the trace does
+  not determine `p`.
+- `#E(𝔽_p)=p+1−a_p` never divided `p−1` with `#E>2` (0/30).
+- `τ(N)` at 8-bit: not identically a multiple of a secret.
+
+Holding `{|a_p|,|a_q|}` is not a Type A–E handle and is not a
+sixth type. It is two Hasse numbers.
+
+---
+
+## Method 10 — Long character vector, linear algebra over `𝔽_2`
+
+**Public function.** `((ℓ/N))_{ℓ≤ℓ_K}` for the first `K` odd
+primes, plus a few `(Δ(N)/ℓ)`, as a vector in `𝔽_2^K`
+(`+1 ↦ 0`, `−1 ↦ 1`). Subset products *are* the linear forms.
+
+**Why it might be new.** Method 7 used six symbols. The actual
+attack is: does a fixed `𝔽_2`-linear form of the public vector
+equal `(5/p)` (or enough bits of `p`) on every far pair?
+
+**Attempt.** `K=16` (`2^{16}` forms) on ≥40 far pairs. A hit is
+a form that matches on every sample.
+
+**Death.** The public vector is the XOR of two secret vectors.
+QR is deciding one given the product. If no form is identically
+`(·/p)`, the span does not isolate a factor.
+
+**Artifact.** `cas/53_char_span.gp`.
+
+**Outcome (exhausted, 2026-08-18).** The span does not isolate
+`(·/p)`.
+
+- `K=16` odd primes, `2^{16}` linear forms, 40 far pairs.
+- Forms identically equal to `(5/p)`: **0**. Best 33/40
+  (look-elsewhere, not an identity).
+- Same vs `(13/p)`: 0 identical forms.
+
+XOR of two secret character vectors is not invertible by a
+fixed public linear form.
+
+---
+
+## Method 11 — Hensel uniqueness of `s² − 4N` being square in `ℤ_ℓ`
+
+**Public function.** The set of `s ∈ ℤ/ℓ^kℤ` such that
+`s² − 4N` is a square. The true `p+q` is one point of that set.
+
+**Why it might be new.** If a *canonical* lift (not “nearest to
+`2√N`”) is the true `s`, that is a new reading of Method 2’s
+secret.
+
+**Attempt.** Count solutions mod `2^k`, `3^k`, `5^k`. Ask
+whether the true `s` is the unique solution, or the unique one
+satisfying the already-public `s mod 4`, other than the Type A
+nearest-`2√N` rule.
+
+**Death.** Many units `α` give `s = (α + 4N/α)/2` in `ℤ_ℓ^×`
+(odd `ℓ ∤ N`). The only distinguished point is nearest `2√N`
+(Type A).
+
+**Artifact.** `cas/54_hensel_s.gp`;
+`factor_4N_gives_square_disc` in `SixthType.v` (Closed).
+
+**Outcome (exhausted, 2026-08-18).** Many lifts; the only
+distinguished point is Type A.
+
+- Theorem: `ab=4N ⇒ (a+b)²−16N=(a−b)²`. Every unit `α` in
+  `ℤ_ℓ^×` (`ℓ ∤ N` odd) gives a point.
+- Counts: 8 solutions mod `81`, 31 mod `125`, 147 mod `343`;
+  4–32 classes mod `8..256`. True `s` is one of them.
+- Restricting to the public `s mod 4` still leaves 3 solutions
+  mod `81`.
+- “Nearest to `2√N` among solutions” matches true `s` on only
+  4/25 (12-bit) and 2/20 (16-bit far). That rule is Fermat,
+  and it already fails when `kg_far`.
+
+---
+
+## Method 12 — Real period of a nonsingular `E_N`
+
+**Public function.** The real AGM period `Ω` of
+`y² = x³ + x + N` (`ellperiods`). A public *real*, not an
+integer in `ℤ[N]`.
+
+**Why it might be new.** Archimedean data from a curve that is
+actually elliptic (Method 4’s `y²=x³+Nx` was singular).
+
+**Attempt.** Bits / ordering of `Ω`, `Ω/π`, `Re(Ω)` vs bits of
+`p`, `p+q`, and `⌊√N⌋`. Collapse if it tracks `√N` (Type A)
+or the nome of `j(i√N)` (`h(Δ)`, refused).
+
+**Death.** `Ω` is a smooth function of `N` (size `N^{−1/6}`
+class). It does not see the factorization.
+
+**Artifact.** `cas/55_period_EN.gp`.
+
+**Outcome (exhausted, 2026-08-18).** `Ω` is a smooth function
+of `N`.
+
+- `Ω>0` on 15/15 far 12-bit `N`.
+- Fitting `c/Ω^6` recovers `N` nearer than `p+q` on **25/25**;
+  never near `p+q` (0/25).
+- Bit 3 of `2^{20} Ω` vs bit 3 of `p+q`: 0.525.
+- Not within 20% of `π/√N` (different scaling), but still
+  determined by `N` alone.
+
+No split. Not Type A (does not track `√N`); not a handle.
+
+---
+
+## Program outcome (Methods 1–12)
+
+No sixth type. Methods 1–8 exhausted the cheap integer language.
+Methods 9–12 exhausted the next structurally different objects
+(Hecke coefficients, the full `𝔽_2`-span of public characters,
+`ℓ`-adic lifts of `s`, the real period of a nonsingular `E_N`).
+Every one was a theorem that is not a handle, an A–E incarnation,
+or chance.
+
+Named leftovers, not unfinished methods:
+`Refuse_PPT_advantage`, `Refuse_EN_card_from_N`,
+`Refuse_lattice_lll_development`, `h(Δ)` cost.
 
 ## What this plan is not
 

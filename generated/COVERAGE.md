@@ -1000,6 +1000,7 @@ in the Rocq tree.  Do not edit by hand.
 
 - L10: Directed sixth-type leftovers (Methods 3–8)
   - L16: Method 3: [(N, 0, 1)] of disc [−4N] is the principal class
+  - L96: Method 11: every factorization [4N = αβ] gives
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1010,6 +1011,7 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `Nsq_minus_4_factors` | 63 |
 | Theorem | `gcd_N_minus_2_N` | 67 |
 | Theorem | `odd_N_gcd_Nminus2` | 78 |
+| Theorem | `factor_4N_gives_square_disc` | 100 |
 
 ## `SmallExponent.v`
 
@@ -1161,4 +1163,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_783 theorems/lemmas/corollaries/examples across 44 files._
+_784 theorems/lemmas/corollaries/examples across 44 files._
