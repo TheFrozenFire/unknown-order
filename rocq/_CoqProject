@@ -30,6 +30,7 @@ KeyGenCtor.v
 HashSlot.v
 Derive.v
 RabinWilliams.v
+TranscriptOracle.v
 TwoPrimary.v
 Order.v
 TwoSylow.v

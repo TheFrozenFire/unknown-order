@@ -1084,6 +1084,56 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `fermat_leak_is_torus_period` | 161 |
 | Theorem | `constructible_torus_is_V_eq_2` | 174 |
 
+## `TranscriptOracle.v`
+
+- L13: Transcripts and oracles (bit leakage after the key is used)
+  - L18: Shared algebra
+  - L104: T5 — [(c/N) = (m/N)] for odd [e]
+  - L171: T24 / T25 — sign homomorphism and decrypt blinding
+  - L246: T12 — LSB of [2m mod N] is the half-interval bit
+  - L299: T11 — a comparison oracle recovers [m] by interval halving
+  - L342: T4 — common modulus, coprime exponents
+  - L413: T29 — Bellcore / CRT-fault signature
+  - L464: K1 — one-sided vanishing predicate factors
+  - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
+  - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `powm_mul_l_mod` | 20 |
+| Lemma | `mod_mod_factor` | 30 |
+| Lemma | `powm_mod_factor` | 43 |
+| Lemma | `powm_exp_mod_factor` | 54 |
+| Lemma | `even_pow_neg1_is_one` | 67 |
+| Lemma | `odd_pow_neg1` | 83 |
+| Theorem | `euler_odd_power` | 110 |
+| Theorem | `rsa_cipher_euler_eq_message` | 132 |
+| Theorem | `rsa_cipher_euler_eq_message_q` | 151 |
+| Theorem | `sign_homomorphism` | 173 |
+| Theorem | `sign_of_one` | 185 |
+| Theorem | `sign_inverse` | 194 |
+| Theorem | `decrypt_blinding` | 212 |
+| Theorem | `decrypt_double_is_double` | 234 |
+| Theorem | `lsb_double_decides_half` | 254 |
+| Theorem | `lsb_double_decides_half_ge` | 284 |
+| Lemma | `pow2_nat_pos` | 301 |
+| Lemma | `pow2_nat_succ` | 304 |
+| Theorem | `recover_interval_correct` | 321 |
+| Theorem | `recover_from_half_tests` | 336 |
+| Theorem | `common_modulus_identity` | 344 |
+| Theorem | `common_modulus_recovers` | 364 |
+| Lemma | `coprime_to_nonneg_bezout` | 385 |
+| Theorem | `bellcore_factors` | 415 |
+| Theorem | `bellcore_is_factor` | 445 |
+| Theorem | `one_sided_congruence_factors` | 466 |
+| Lemma | `prime_5` | 499 |
+| Theorem | `williams_N_mod8` | 507 |
+| Theorem | `non_williams_N_mod8_5` | 517 |
+| Theorem | `williams_two_is_shape` | 521 |
+| Theorem | `non_williams_two_chars` | 535 |
+| Theorem | `sign_neg1_odd` | 547 |
+| Theorem | `odd_exp_preserves_minus1` | 559 |
+
 ## `TwoPrimary.v`
 
 - L14: The 2-primary part of [(Z/NZ)*]
@@ -1182,4 +1232,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_801 theorems/lemmas/corollaries/examples across 44 files._
+_834 theorems/lemmas/corollaries/examples across 45 files._

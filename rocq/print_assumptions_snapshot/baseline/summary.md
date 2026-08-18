@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 801 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 834 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 801 results across 44 files.
+Captured for 834 results across 45 files.
 
 Counts:
 
@@ -946,6 +946,44 @@ Counts:
 | `fermat_gives_torus_order` | 151 | 0 | 0 | OK |
 | `fermat_leak_is_torus_period` | 161 | 0 | 0 | OK |
 | `constructible_torus_is_V_eq_2` | 174 | 0 | 0 | OK |
+
+## TranscriptOracle.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `powm_mul_l_mod` | 20 | 0 | 0 | OK |
+| `mod_mod_factor` | 30 | 0 | 0 | OK |
+| `powm_mod_factor` | 43 | 0 | 0 | OK |
+| `powm_exp_mod_factor` | 54 | 0 | 0 | OK |
+| `even_pow_neg1_is_one` | 67 | 0 | 0 | OK |
+| `odd_pow_neg1` | 83 | 0 | 0 | OK |
+| `euler_odd_power` | 110 | 0 | 0 | OK |
+| `rsa_cipher_euler_eq_message` | 132 | 0 | 0 | OK |
+| `rsa_cipher_euler_eq_message_q` | 151 | 0 | 0 | OK |
+| `sign_homomorphism` | 173 | 0 | 0 | OK |
+| `sign_of_one` | 185 | 0 | 0 | OK |
+| `sign_inverse` | 194 | 0 | 0 | OK |
+| `decrypt_blinding` | 212 | 0 | 0 | OK |
+| `decrypt_double_is_double` | 234 | 0 | 0 | OK |
+| `lsb_double_decides_half` | 254 | 0 | 0 | OK |
+| `lsb_double_decides_half_ge` | 284 | 0 | 0 | OK |
+| `pow2_nat_pos` | 301 | 0 | 0 | OK |
+| `pow2_nat_succ` | 304 | 0 | 0 | OK |
+| `recover_interval_correct` | 321 | 0 | 0 | OK |
+| `recover_from_half_tests` | 336 | 0 | 0 | OK |
+| `common_modulus_identity` | 344 | 0 | 0 | OK |
+| `common_modulus_recovers` | 364 | 0 | 0 | OK |
+| `coprime_to_nonneg_bezout` | 385 | 0 | 0 | OK |
+| `bellcore_factors` | 415 | 0 | 0 | OK |
+| `bellcore_is_factor` | 445 | 0 | 0 | OK |
+| `one_sided_congruence_factors` | 466 | 0 | 0 | OK |
+| `prime_5` | 499 | 0 | 0 | OK |
+| `williams_N_mod8` | 507 | 0 | 0 | OK |
+| `non_williams_N_mod8_5` | 517 | 0 | 0 | OK |
+| `williams_two_is_shape` | 521 | 0 | 0 | OK |
+| `non_williams_two_chars` | 535 | 0 | 0 | OK |
+| `sign_neg1_odd` | 547 | 0 | 0 | OK |
+| `odd_exp_preserves_minus1` | 559 | 0 | 0 | OK |
 
 ## TwoPrimary.v
 

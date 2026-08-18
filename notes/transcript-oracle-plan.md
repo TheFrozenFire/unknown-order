@@ -339,6 +339,27 @@ Do not implement class-number algorithms, a TLS stack, a
 cache model, or ACGS-as-PPT. `Refuse_PPT_advantage` stays
 the leftover on “LSB is as hard as RSA.”
 
+## Outcome (2026-08-18)
+
+`rocq/TranscriptOracle.v` + `cas/57`. Closed.
+
+| # | Theorem | Note |
+|---|---|---|
+| T5 | `euler_odd_power`, `rsa_cipher_euler_eq_message` | odd `e` ⇒ Euler of `c` equals Euler of `m` |
+| T24 | `sign_homomorphism`, `sign_inverse`, `sign_of_one` | raw RSA signing is a group hom |
+| T25 | `decrypt_blinding`, `decrypt_double_is_double` | `dec(c r^e) = r dec(c)` |
+| T12 | `lsb_double_decides_half` | `lsb(2m mod N)=0` iff `m < N/2` |
+| T11 | `recover_interval_correct` | comparison oracle recovers `m` |
+| T4 | `common_modulus_identity`, `common_modulus_recovers`, `coprime_to_nonneg_bezout` | Bézout recover |
+| T29 | `bellcore_factors` | `gcd(σ_bad^e−m, N)=p` |
+| K1 | `one_sided_congruence_factors` | `m≡a (mod p)`, not `(mod q)` ⇒ factor |
+| K5 | `williams_N_mod8`, `non_williams_N_mod8_5`, `williams_two_is_shape` | `(2/p)` is KeyGen shape |
+| K13 | `sign_neg1_odd`, `odd_exp_preserves_minus1` | odd `d` sends `−1` to `−1` |
+
+T10 (Bleichenbacher interval-set) and T18 (Montgomery comparison)
+not started: T11+K1 classify the later rows. ACGS-as-hardness stays
+`Refuse_PPT_advantage`.
+
 ## What this plan is not
 
 - A restart of Methods 1–12 on `N`
