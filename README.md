@@ -108,6 +108,10 @@ use `Z.prime ℓ`. On raw units an odd challenge accepts `−y` via `π ↦ −�
 smooth adaptive-root challenge space is broken
 (`adaptive_root_known_product_breaks`).
 
+Excluding `Cl[2]` is not enough for restricted low-order: on the
+Mersenne discriminant `Δ = −31` the Shanks form `(2,1,4)` has order 3
+(`mersenne31_wins_restricted_LowOrder`). CAS `40`.
+
 When checking another paper against this corpus, start at
 [`notes/paper-overlaps.md`](notes/paper-overlaps.md).
 
@@ -136,7 +140,7 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 39 witnesses, `cas/01`–`39`.
+CAS is 40 witnesses, `cas/01`–`40`.
 
 ## Constructor (not a filter)
 

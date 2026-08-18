@@ -25,7 +25,12 @@ Open Scope Z_scope.
 
     So Type B and adaptive root stop being aliases: they share a
     winning condition and differ by whether the group presents a
-    period.  Not an axiom that class groups are hard. *)
+    period.  Not an axiom that class groups are hard.
+
+    Restricted low-order after excluding [Cl[2]] is still won on
+    the Mersenne discriminant [Δ = −31] by [(2,1,4)] (order 3):
+    [mersenne31_wins_restricted_LowOrder].  Paper-check:
+    [notes/paper-overlaps.md] row 5.  CAS [40]. *)
 
 Theorem adaptive_root_trivial_from_lambda :
   forall p q y,
@@ -153,3 +158,169 @@ Theorem adaptive_root_relation_is_presentation_blind :
   forall N y x e,
     Problem_AdaptiveRoot N y x e <-> Problem_StrongRSA N y x e.
 Proof. intros. apply adaptive_root_is_strong_RSA. Qed.
+
+(** ** Restricted low-order after excluding [Cl[2]]
+
+    [Problem_LowOrder_Cl] is the unrestricted [B = 2] win by
+    ambiguous forms.  Protocols assume the complementary cell:
+    a class of small *odd* order that is not constructible
+    2-torsion.  2020/1310 (Shanks): on the Mersenne discriminant
+    [Δ = 1 − 2^p] the form [(2, 1, 2^{p−3})] has order 3.
+    Here [p = 5], [Δ = −31], form [(2, 1, 4)].  CAS [40]. *)
+
+Definition form_neg31_ord3 : bqf :=
+  {| bqf_a := 2; bqf_b := 1; bqf_c := 4 |}.
+
+Definition form_neg31_sq : bqf :=
+  {| bqf_a := 4; bqf_b := 1; bqf_c := 2 |}.
+
+Definition form_neg31_cube : bqf :=
+  {| bqf_a := 8; bqf_b := 1; bqf_c := 1 |}.
+
+Theorem iq_neg31 : iq_disc (-31).
+Proof. unfold iq_disc. split; [lia|]. right. vm_compute. reflexivity. Qed.
+
+Theorem form_neg31_ord3_of_disc : of_disc form_neg31_ord3 (-31).
+Proof.
+  unfold of_disc, form_neg31_ord3, bqf_disc, bqf_primitive.
+  simpl. split; vm_compute; reflexivity.
+Qed.
+
+Theorem form_neg31_ord3_reduced : bqf_reduced form_neg31_ord3.
+Proof. unfold bqf_reduced, form_neg31_ord3. simpl. split; [lia | intros; lia]. Qed.
+
+Theorem form_neg31_ord3_not_ambiguous : ~ bqf_ambiguous form_neg31_ord3.
+Proof.
+  unfold bqf_ambiguous, form_neg31_ord3. simpl. intros [H|[H|[H|H]]]; lia.
+Qed.
+
+Theorem form_neg31_ord3_not_principal :
+  ~ bqf_equiv form_neg31_ord3 (bqf_id (-31)).
+Proof.
+  apply reduced_a_gt_1_not_principal.
+  - apply form_neg31_ord3_of_disc.
+  - apply form_neg31_ord3_reduced.
+  - unfold form_neg31_ord3. simpl. lia.
+Qed.
+
+Theorem form_neg31_sq_compute :
+  bqf_compose form_neg31_ord3 form_neg31_ord3 = form_neg31_sq.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem form_neg31_cube_compute :
+  bqf_compose form_neg31_sq form_neg31_ord3 = form_neg31_cube.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem form_neg31_exp2 :
+  bqf_exp (-31) form_neg31_ord3 2%nat = form_neg31_sq.
+Proof.
+  rewrite bqf_exp_2; [| apply iq_neg31 | apply form_neg31_ord3_of_disc].
+  apply form_neg31_sq_compute.
+Qed.
+
+Theorem form_neg31_exp3 :
+  bqf_exp (-31) form_neg31_ord3 3%nat = form_neg31_cube.
+Proof.
+  cbn [bqf_exp].
+  rewrite compose_id_left; [| apply iq_neg31 | apply form_neg31_ord3_of_disc].
+  rewrite form_neg31_sq_compute.
+  apply form_neg31_cube_compute.
+Qed.
+
+Theorem form_neg31_sq_equiv_inv :
+  bqf_equiv form_neg31_sq (bqf_inv form_neg31_ord3).
+Proof.
+  exists sl2_S. split; [apply sl2_S_ok|].
+  vm_compute. reflexivity.
+Qed.
+
+Theorem form_neg31_inv_reduced : bqf_reduced (bqf_inv form_neg31_ord3).
+Proof. unfold bqf_reduced, bqf_inv, form_neg31_ord3. simpl. split; [lia | intros; lia]. Qed.
+
+Theorem form_neg31_inv_of_disc : of_disc (bqf_inv form_neg31_ord3) (-31).
+Proof.
+  unfold of_disc. split.
+  - rewrite bqf_inv_disc. apply form_neg31_ord3_of_disc.
+  - apply bqf_inv_primitive. apply form_neg31_ord3_of_disc.
+Qed.
+
+Theorem form_neg31_inv_not_principal :
+  ~ bqf_equiv (bqf_inv form_neg31_ord3) (bqf_id (-31)).
+Proof.
+  apply reduced_a_gt_1_not_principal.
+  - apply form_neg31_inv_of_disc.
+  - apply form_neg31_inv_reduced.
+  - unfold bqf_inv, form_neg31_ord3. simpl. lia.
+Qed.
+
+Theorem form_neg31_actS_inv_is_sq :
+  bqf_act sl2_S (bqf_inv form_neg31_ord3) = form_neg31_sq.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem form_neg31_sq_not_principal :
+  ~ bqf_equiv form_neg31_sq (bqf_id (-31)).
+Proof.
+  intros [m [Hok Hact]].
+  apply form_neg31_inv_not_principal.
+  exists (sl2_mul sl2_S m).
+  split; [apply sl2_mul_ok; [apply sl2_S_ok | exact Hok]|].
+  rewrite <- bqf_act_mul, form_neg31_actS_inv_is_sq.
+  exact Hact.
+Qed.
+
+Definition sl2_reduce_cube : sl2 :=
+  {| sl2_a := 0; sl2_b := -1; sl2_c := 1; sl2_d := 1 |}.
+
+Theorem sl2_reduce_cube_ok : sl2_ok sl2_reduce_cube.
+Proof. unfold sl2_ok, sl2_reduce_cube, sl2_det. cbn. lia. Qed.
+
+Theorem form_neg31_cube_equiv_id :
+  bqf_equiv form_neg31_cube (bqf_id (-31)).
+Proof.
+  exists sl2_reduce_cube. split; [apply sl2_reduce_cube_ok|].
+  vm_compute. reflexivity.
+Qed.
+
+Theorem form_neg31_exp3_equiv_id :
+  bqf_equiv (bqf_exp (-31) form_neg31_ord3 3%nat) (bqf_id (-31)).
+Proof. rewrite form_neg31_exp3. apply form_neg31_cube_equiv_id. Qed.
+
+Theorem form_neg31_exp1 :
+  bqf_exp (-31) form_neg31_ord3 1%nat = form_neg31_ord3.
+Proof. apply bqf_exp_1; [apply iq_neg31 | apply form_neg31_ord3_of_disc]. Qed.
+
+(** Restricted low-order: small odd order, not constructible 2-torsion.
+    This is the cell [P_LowOrderOutside] on [cl_presentation] after
+    excluding [Cl[2]].  The old [Problem_LowOrder_Cl] is only the
+    unrestricted [B = 2] win by ambiguous forms. *)
+Definition Problem_LowOrderRestricted_Cl
+    (D B : Z) (f : bqf) (k : nat) : Prop :=
+  of_disc f D /\
+  ~ bqf_ambiguous f /\
+  ~ bqf_equiv f (bqf_id D) /\
+  bqf_equiv (bqf_exp D f k) (bqf_id D) /\
+  (forall k', (0 < k' < k)%nat ->
+     ~ bqf_equiv (bqf_exp D f k') (bqf_id D)) /\
+  (1 < k)%nat /\
+  Z.of_nat k <= B.
+
+Theorem mersenne31_wins_restricted_LowOrder :
+  Problem_LowOrderRestricted_Cl (-31) 3 form_neg31_ord3 3%nat.
+Proof.
+  unfold Problem_LowOrderRestricted_Cl.
+  split; [apply form_neg31_ord3_of_disc|].
+  split; [apply form_neg31_ord3_not_ambiguous|].
+  split; [apply form_neg31_ord3_not_principal|].
+  split; [apply form_neg31_exp3_equiv_id|].
+  split.
+  - intros k' Hk'.
+    assert (k' = 1%nat \/ k' = 2%nat) as Hkcs by lia.
+    destruct Hkcs as [Hk1 | Hk2].
+    + subst k'. rewrite form_neg31_exp1. apply form_neg31_ord3_not_principal.
+    + subst k'. rewrite form_neg31_exp2. apply form_neg31_sq_not_principal.
+  - split; [lia|lia].
+Qed.
+
+Theorem mersenne31_is_odd_order :
+  (3 > 1)%nat /\ Z.odd 3 = true.
+Proof. split; [lia|]. reflexivity. Qed.

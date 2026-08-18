@@ -76,7 +76,7 @@ without naming a bad `KG`. The lookup is `notes/paper-overlaps.md`.
 | 2 | Wesolowski on raw units, odd challenge | `wesolowski_soundness_fails_on_units_odd_challenge` |
 | 3 | adaptive-root `C` poly-size or smooth | `adaptive_root_known_product_breaks` |
 | 4 | Pietrzak / LowOrder on `Cl(Δ)` without excluding `Cl[2]` | `catalog_wins_LowOrder_B2` |
-| 5 | low-order in every class group | named (ePrint 2020/1310) |
+| 5 | low-order in every class group / “excluding `Cl[2]` is enough” | `mersenne31_wins_restricted_LowOrder` |
 | 6 | BP97-sRSA ≡ modern sRSA | named |
 | 7 | sRSA / AR given public `λ` | `lambda_solves_strong_RSA` |
 | 8 | standard-model RSA ≡ factoring | named (`THEORY.md` §9.6) |

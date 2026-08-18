@@ -918,9 +918,11 @@ poly-size or smooth adaptive-root `C`
 (`adaptive_root_known_product_breaks`), unrestricted low-order
 on `Cl(Δ)` (`catalog_wins_LowOrder_B2`), public `λ` trivializes
 Strong RSA / adaptive root (`lambda_solves_strong_RSA`). Rows
-that stay named: Mersenne class-group low-order (ePrint 2020/1310),
-BP97 vs modern Strong RSA, AM09-as-standard-model, Peng–Bao on
-LLX if `∏S mod φ(N)` is public.
+that stay named: BP97 vs modern Strong RSA, AM09-as-standard-model,
+Peng–Bao on LLX if `∏S mod φ(N)` is public. Mersenne restricted
+low-order is a theorem: `mersenne31_wins_restricted_LowOrder`
+(`Δ = −31`, form `(2,1,4)`, order 3, not `Cl[2]`). The general
+2020/1310 / Mollin construction stays named.
 
 ### 9.11 Honest scope of the hardness development
 
@@ -1479,7 +1481,11 @@ hypothesis.
 The last row is the edge that was not dry: Pietrzak stated on
 `Cl(Δ)` without excluding `Cl[2]` is a break of unrestricted
 `Problem_LowOrder` using only the discriminant. The restricted
-problem is the one the protocol actually needs.
+problem is the one the protocol actually needs. Excluding
+`Cl[2]` is still not enough on every discriminant: 2020/1310
+on the Mersenne `Δ = −31` gives a reduced form `(2,1,4)` of
+order 3 that wins `P_LowOrderOutside` (`mersenne31_wins_restricted_LowOrder`).
+The general Mollin / cubic-field construction stays named.
 
 ## 17. The consumer on both carriers
 

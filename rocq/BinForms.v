@@ -220,6 +220,63 @@ Qed.
 Lemma bqf_equiv_refl : forall f, bqf_equiv f f.
 Proof. intros f. exists sl2_I. split; [apply sl2_I_ok | apply bqf_act_I]. Qed.
 
+Definition sl2_mul (m n : sl2) : sl2 :=
+  {| sl2_a := sl2_a m * sl2_a n + sl2_b m * sl2_c n;
+     sl2_b := sl2_a m * sl2_b n + sl2_b m * sl2_d n;
+     sl2_c := sl2_c m * sl2_a n + sl2_d m * sl2_c n;
+     sl2_d := sl2_c m * sl2_b n + sl2_d m * sl2_d n |}.
+
+Definition sl2_inverse (m : sl2) : sl2 :=
+  {| sl2_a := sl2_d m;
+     sl2_b := - sl2_b m;
+     sl2_c := - sl2_c m;
+     sl2_d := sl2_a m |}.
+
+Lemma sl2_mul_det :
+  forall m n, sl2_det (sl2_mul m n) = sl2_det m * sl2_det n.
+Proof.
+  intros [a b c d] [a' b' c' d'].
+  unfold sl2_mul, sl2_det.
+  cbn [sl2_a sl2_b sl2_c sl2_d]. ring.
+Qed.
+
+Lemma sl2_mul_ok :
+  forall m n, sl2_ok m -> sl2_ok n -> sl2_ok (sl2_mul m n).
+Proof.
+  intros m n Hm Hn. unfold sl2_ok. rewrite sl2_mul_det, Hm, Hn. ring.
+Qed.
+
+Lemma sl2_inverse_ok :
+  forall m, sl2_ok m -> sl2_ok (sl2_inverse m).
+Proof.
+  intros m H. unfold sl2_ok in *.
+  replace (sl2_det (sl2_inverse m)) with (sl2_det m).
+  { exact H. }
+  destruct m as [a b c d].
+  unfold sl2_inverse, sl2_det.
+  cbn [sl2_a sl2_b sl2_c sl2_d].
+  ring.
+Qed.
+
+Lemma bqf_act_mul :
+  forall m n f,
+    bqf_act m (bqf_act n f) = bqf_act (sl2_mul n m) f.
+Proof.
+  intros [a b c d] [a' b' c' d'] [A B C].
+  unfold bqf_act, sl2_mul.
+  cbn [sl2_a sl2_b sl2_c sl2_d bqf_a bqf_b bqf_c].
+  f_equal; ring.
+Qed.
+
+Theorem bqf_equiv_trans :
+  forall f g h,
+    bqf_equiv f g -> bqf_equiv g h -> bqf_equiv f h.
+Proof.
+  intros f g h [m [Hm Hfm]] [n [Hn Hgn]].
+  exists (sl2_mul m n). split; [apply sl2_mul_ok; assumption|].
+  rewrite <- Hgn, <- Hfm, bqf_act_mul. reflexivity.
+Qed.
+
 Lemma bqf_act_disc :
   forall m f,
     bqf_disc (bqf_act m f) = bqf_disc f * sl2_det m * sl2_det m.

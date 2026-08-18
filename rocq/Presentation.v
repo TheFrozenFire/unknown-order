@@ -133,6 +133,24 @@ Proof.
   unfold cl_presentation in Hcon. simpl in Hcon. exact (Hcon Hamb).
 Qed.
 
+Theorem mersenne31_wins_P_LowOrderOutside :
+  P_LowOrderOutside (cl_presentation (-31)) 3 form_neg31_ord3 3%nat.
+Proof.
+  pose proof mersenne31_wins_restricted_LowOrder as H.
+  unfold Problem_LowOrderRestricted_Cl in H.
+  destruct H as [Hof [Hna [Hnp [H3 [Hmin [Hk HB]]]]]].
+  unfold P_LowOrderOutside, P_LowOrder, P_is_order, cl_presentation.
+  simpl.
+  split.
+  - split.
+    + exact Hnp.
+    + split.
+      * split; [lia|]. split; [exact H3|].
+        intros k' Hk'. apply Hmin. exact Hk'.
+      * exact HB.
+  - exact Hna.
+Qed.
+
 (** ** Sentence 3 — adaptive root is trivial from public data on RSA
     with the trapdoor, and is not on [Cl(Δ)] *)
 
