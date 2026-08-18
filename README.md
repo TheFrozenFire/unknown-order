@@ -204,6 +204,9 @@ CAS `32`–`38`.
 The remaining hunt is `Refuse_undirected_611_hunt`: a *named*
 modern sampler that leaks a Type A–E handle not already in
 `notes/keygen-weaknesses.md`. Not another incarnation, and not
-an undirected KeyGen pass. Everything else that was once a
-checkbox is either a theorem or a `NamedRefuse` /
-`*_named` in `generated/NAMED_SKIPS.md`.
+an undirected KeyGen pass. A directed attempt to find a
+*sixth algebraic type* (a public function of `N` that leaks
+for a reason A–E do not name) is
+[`notes/sixth-type-plan.md`](notes/sixth-type-plan.md).
+Everything else that was once a checkbox is either a theorem
+or a `NamedRefuse` / `*_named` in `generated/NAMED_SKIPS.md`.

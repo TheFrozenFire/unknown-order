@@ -47,6 +47,11 @@ unknown other than `(k,d)`); a new Type-D collision (shared algebraic
 structure without a shared prime); or a new Type-E key-side small root
 (a hidden polynomial the keygen implicitly satisfies).
 
+A **directed** attempt to break that partition — named public
+functions of `N`, chance model, collapse tests — is
+[`sixth-type-plan.md`](sixth-type-plan.md). That plan is not an
+undirected KeyGen pass.
+
 **Avenues already closed this wave.**
 
 | Avenue | What it added | Headline witness |
