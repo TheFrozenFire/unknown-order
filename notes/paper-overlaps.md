@@ -7,8 +7,9 @@ the theorem that makes the overlap a fact, not a comment.
 Rows without a theorem are still a refuse: do not treat the
 paper's claim as discharged here.
 
-Companion to `notes/hardness.md` (relations) and `THEORY.md`
-§9 (what a hardness claim is) and §16–17 (PoE / accumulator).
+Companion to `notes/hardness.md` (relations), `THEORY.md`
+§9 (what a hardness claim is), §16–17 (PoE / accumulator),
+and `notes/arxiv-corpus.md` (papers whose claims we could prove).
 
 ## How to use
 
