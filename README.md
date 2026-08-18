@@ -112,6 +112,16 @@ Excluding `Cl[2]` is not enough for restricted low-order: on the
 Mersenne discriminant `Δ = −31` the Shanks form `(2,1,4)` has order 3
 (`mersenne31_wins_restricted_LowOrder`). CAS `40`.
 
+Constructible torsion is a family parameter (`cl_presentation_H`).
+Ordinary `Cl` has `H =` ambiguous forms; a Mersenne family also
+constructs the Shanks order-3 class. The same form wins restricted
+low-order on one sampler and is excluded on the other
+(`ordinary_vs_mersenne_H`). Adaptive root the game is
+`Problem_AdaptiveRoot_C` (challenge space `C`); Strong RSA is the
+search. `λ+1` wins the search and misses prime-`C`
+(`search_lambda_plus_one_misses_prime_AR`). `2 ∈ C` on `Cl` is
+`cl_AR_C_broken_when_two_in_C`.
+
 When checking another paper against this corpus, start at
 [`notes/paper-overlaps.md`](notes/paper-overlaps.md).
 

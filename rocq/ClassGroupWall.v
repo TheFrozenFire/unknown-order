@@ -324,3 +324,39 @@ Qed.
 Theorem mersenne31_is_odd_order :
   (3 > 1)%nat /\ Z.odd 3 = true.
 Proof. split; [lia|]. reflexivity. Qed.
+
+(** ** Families: constructible torsion is not always [Cl[2]]
+
+    An ordinary class-group family has [H =] ambiguous forms.
+    A Mersenne / Shanks family ([D = 4u³ − 1], form [(u,1,u²)])
+    also constructs the order-3 class.  2020/1310 is that family,
+    not a break of ordinary [Cl(Δ)]. *)
+
+Definition shanks_form (u : Z) : bqf :=
+  {| bqf_a := u; bqf_b := 1; bqf_c := u * u |}.
+
+Definition shanks_disc (u : Z) : Z := 1 - 4 * (u * u * u).
+
+Theorem shanks_disc_2 : shanks_disc 2 = -31.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem shanks_form_2 : shanks_form 2 = form_neg31_ord3.
+Proof. reflexivity. Qed.
+
+Definition cl_ordinary_H : bqf -> Prop := bqf_ambiguous.
+
+Definition cl_mersenne_H (u : Z) (f : bqf) : Prop :=
+  bqf_ambiguous f \/
+  bqf_equiv f (shanks_form u) \/
+  bqf_equiv f (bqf_inv (shanks_form u)).
+
+Theorem mersenne31_shanks_in_family_H :
+  cl_mersenne_H 2 form_neg31_ord3.
+Proof.
+  unfold cl_mersenne_H. rewrite shanks_form_2. right. left.
+  apply bqf_equiv_refl.
+Qed.
+
+Theorem mersenne31_shanks_not_ordinary_H :
+  ~ cl_ordinary_H form_neg31_ord3.
+Proof. apply form_neg31_ord3_not_ambiguous. Qed.

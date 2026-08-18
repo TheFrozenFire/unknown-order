@@ -13,13 +13,17 @@ will use.
 | Factoring | `N` | `f` | `1 < f < N`, `f \| N` | `Problem_Factor` |
 | RSA | `(N,e,y)` | `x` | `x^e ≡ y (mod N)` | `Problem_RSA` |
 | Strong RSA | `(N,y)` | `(x,e)` | `e > 1`, `x^e ≡ y` | `Problem_StrongRSA` |
-| Adaptive root | `(N,y)` | `(x,e)` | same as strong RSA | `Problem_AdaptiveRoot` |
+| Adaptive root (search) | `(N,y)` | `(x,e)` | same as strong RSA | `Problem_AdaptiveRoot` |
+| Adaptive root (game) | `(N,y)` then `c ∈ C` | `x` | `C c` and `x^c ≡ y` | `Problem_AdaptiveRoot_C` |
 | Order | `(N,a)` | `k` | `k = ord(a)` in `(ℤ/Nℤ)*` | `is_order` / `Problem_Order` |
 | Low-order (in `G`) | `(N,B)` | `(a,k)` | `ord_G(a) = k ≤ B` | `Problem_LowOrder` |
 | One-sided low-order | `(N,B)` | `(a,k)` | `a^k ≡ 1 (mod p)`, not `(mod q)` | `one_sided_low_order` |
 
-Adaptive root *is* strong RSA as a relation. The name changes with the
-group (class group: no `λ` to discard).
+Adaptive root *as a search* is strong RSA (`e` chosen by the
+attacker). The *game* is `Problem_AdaptiveRoot_C`: `y` first, then
+`c ∈ C`. `λ+1` wins the search and wins the game only if `C (λ+1)`.
+Constructible torsion `H` is a family parameter
+(`cl_presentation_H`, `UOFamily`).
 
 ## Relation arrows that are theorems
 
@@ -28,6 +32,9 @@ group (class group: no `λ` to discard).
 | `{p,q}` / `λ` / `d` | RSA roots on units | `trapdoor_inverts_RSA` | Factoring ≤ RSA |
 | RSA solution at `e` | strong RSA at that `e` | `rsa_solution_is_strong_RSA` | a strong-RSA solver inverts RSA |
 | `λ` | strong RSA on every unit | `lambda_solves_strong_RSA` `(y, λ+1)` | anything in a class group |
+| Strong RSA witness at `e` | AR game at that `e` | `strong_RSA_is_ar_C_iff` | the game unless `C e` |
+| `λ+1` on `11×17` | prime-challenge AR | `search_lambda_plus_one_misses_prime_AR` | `81` is not prime |
+| `2 ∈ C` on ordinary `Cl(−31)` | AR game | `cl_AR_C_broken_when_two_in_C` | A1 publishes `g²` |
 | `y = 1` | RSA / sRSA inhabited | `rsa_trivial_at_one`, `strong_RSA_trivial_at_one` | hardness (it refutes *existence*-hardness) |
 | `ord(a) = k` | `k \| λ` | `order_divides_lambda` | lcm of enough orders *is* `λ` |
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |

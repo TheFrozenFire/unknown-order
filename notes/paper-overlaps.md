@@ -16,9 +16,18 @@ Companion to `notes/hardness.md` (relations) and `THEORY.md`
    signed QR, torus).
 2. Name the winning condition (RSA, Strong RSA, adaptive root,
    low-order, PoE, accumulator membership / non-membership).
-3. Name the challenge space and whether `λ` / `|G|` is public.
-4. Walk the table. A hit is a documented weakness, not an
+3. Name the challenge space `C` and whether `λ` / `|G|` is public.
+4. Name the family / `GGen` and its constructible set `H`
+   (ordinary `Cl` → ambiguous forms; Mersenne `Cl` → those plus
+   the Shanks form; units → `{±1}`; torus → `{V_n ≡ 2}`).
+5. Walk the table. A hit is a documented weakness, not an
    open question.
+
+Adaptive root the *game* is `Problem_AdaptiveRoot_C` /
+`P_AdaptiveRoot_C`. Strong RSA is the *search* (`e` chosen by
+the attacker). `λ+1` wins the search and wins the game only if
+`C (λ+1)`. On `Cl`, `2 ∈ C` lets A1 publish `g²` and return `g`
+(`cl_AR_C_broken_when_two_in_C`).
 
 ## Overlap table
 

@@ -693,15 +693,28 @@ winning condition of Type B / Pollard, and it is the one that
 *factors* `N`. Low-order *in `G`* does not: `a^k ≡ 1 (mod N)`
 is two-sided (`Hardness.one_sided_low_order_factors`).
 
-Adaptive root and strong RSA are the same relation
-(`adaptive_root_is_strong_RSA`). The name changes with the
-*group*. On `(ℤ/Nℤ)*` there is a trapdoor `λ`. In a class group
-there is no known `λ`, and the same relation is an assumption
-about a group with no setup. Wesolowski VDFs, unknown-order
-accumulators, and Pietrzak-style proofs use that second
-reading. Writing `Problem_AdaptiveRoot` as an alias is honest
-about the relation and silent about the group; a later class-
-group file must not inherit a trapdoor that is not there.
+Adaptive root and strong RSA are the same *search relation*
+(`adaptive_root_is_strong_RSA`): the attacker chooses `e`.
+The *game* is different (`Problem_AdaptiveRoot_C`,
+`P_AdaptiveRoot_C`): publish `y`, then receive `c ∈ C`, find a
+`c`-th root. `λ+1` wins the search
+(`lambda_solves_strong_RSA`, `lambda_solves_search_11_17`) and
+misses prime-challenge AR (`search_lambda_plus_one_misses_prime_AR`:
+on `11×17`, `λ+1 = 81` is not prime). On `Cl`, `2 ∈ C` lets A1
+publish `g²` and return `g` (`cl_AR_C_broken_when_two_in_C`).
+
+Constructible torsion `H` is a *family* parameter
+(`cl_presentation_H`). Ordinary `Cl` uses ambiguous forms
+(`cl_presentation`). A Mersenne / Shanks family
+(`cl_mersenne_presentation`, `D = 4u³−1`) also constructs the
+order-3 class. The same form `(2,1,4)` wins
+`LowOrderOutside` on the ordinary sampler and is *excluded* on
+the Mersenne sampler (`ordinary_vs_mersenne_H`). A `UOFamily`
+is an index → presentation (`ordinary_cl_family`,
+`mersenne_cl_family`). The name changes with the group: on
+`(ℤ/Nℤ)*` there is a trapdoor `λ`; a class group has no
+`discriminant_to_lambda`. A later file must not inherit a
+trapdoor that is not there.
 
 ### 9.5 Arrows that are theorems (relations)
 

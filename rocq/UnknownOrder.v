@@ -58,10 +58,9 @@ Definition Problem_Order (N a : Z) (k : Z) : Prop :=
 Definition Problem_LowOrder (N B : Z) (a k : Z) : Prop :=
   Z.coprime a N /\ 1 < a < N /\ is_order N a k /\ k <= B.
 
-(** Adaptive root (informal shape): given a random [y], produce [e > 1]
-    and [x] with [x^e ≡ y (mod N)] — the same shape as strong RSA, used
-    as the named assumption in class groups / unknown-order accumulators.
-    Stated, not assumed. *)
+(** Adaptive root as a *search relation* is Strong RSA: the attacker
+    chooses [e].  The *game* (publish [y], then receive [c ∈ C]) is
+    [Problem_AdaptiveRoot_C] in [Hardness.v].  Stated, not assumed. *)
 Definition Problem_AdaptiveRoot (N y : Z) (x e : Z) : Prop :=
   Problem_StrongRSA N y x e.
 

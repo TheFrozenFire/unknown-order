@@ -19,6 +19,12 @@ Open Scope Z_scope.
     would carry [Some λ].  [Cl(Δ)] carries [Some 2] — the
     2-annihilator is public; no odd period is.
 
+    Constructible torsion [Pconstructible] is a family parameter,
+    not a global [Cl[2]].  Ordinary class groups use ambiguous
+    forms; a Mersenne / Shanks family also constructs the order-3
+    class.  Adaptive root as a game is [P_AdaptiveRoot_C]; the
+    search relation stays [P_AdaptiveRoot] / Strong RSA.
+
     Problems are the same winning conditions as [UnknownOrder],
     stated once.  Sentences 1–3 of the roadmap instantiate on
     both carriers. *)
@@ -54,6 +60,16 @@ Definition P_Root (P : Presentation) (e : nat) (y x : Pcar P) : Prop :=
 Definition P_AdaptiveRoot (P : Presentation) (y x : Pcar P) (e : nat) : Prop :=
   (e > 1)%nat /\ Peq P (Pexp P x e) y.
 
+(** Game: [y] is published first, then [c] is drawn from [C].
+    The attacker does not choose [c].  Exclude [y = 1] as in
+    Wesolowski / 2024/505. *)
+Definition P_AdaptiveRoot_C (P : Presentation) (C : nat -> Prop)
+    (y x : Pcar P) (c : nat) : Prop :=
+  C c /\
+  (c > 1)%nat /\
+  ~ Peq P y (Pid P) /\
+  Peq P (Pexp P x c) y.
+
 (** ** RSA, public view: no annihilator, constructible torsion is [±1] *)
 
 Definition rsa_presentation (N : Z) : Presentation := {|
@@ -80,16 +96,27 @@ Definition rsa_trapdoor_presentation (N lam : Z) : Presentation := {|
 
 (** ** [Cl(Δ)]: public 2-annihilator, constructible torsion is ambiguous forms *)
 
-Definition cl_presentation (D : Z) : Presentation := {|
+Definition cl_presentation_H (D : Z) (H : bqf -> Prop) : Presentation := {|
   Pcar := bqf;
   Peq := bqf_equiv;
   Pmul := bqf_compose;
   Pid := bqf_id D;
   Pinv := bqf_inv;
   Pexp := bqf_exp D;
-  Pconstructible := bqf_ambiguous;
+  Pconstructible := H;
   Pannihilator := Some 2
 |}.
+
+Definition cl_presentation (D : Z) : Presentation :=
+  cl_presentation_H D cl_ordinary_H.
+
+Definition cl_mersenne_presentation (u : Z) : Presentation :=
+  cl_presentation_H (shanks_disc u) (cl_mersenne_H u).
+
+Definition UOFamily := Z -> Presentation.
+
+Definition ordinary_cl_family : UOFamily := cl_presentation.
+Definition mersenne_cl_family : UOFamily := cl_mersenne_presentation.
 
 (** ** Sentence 1 — units have an order, which divides every annihilator *)
 
@@ -149,6 +176,48 @@ Proof.
         intros k' Hk'. apply Hmin. exact Hk'.
       * exact HB.
   - exact Hna.
+Qed.
+
+Theorem mersenne31_family_excludes_shanks :
+  ~ P_LowOrderOutside (cl_mersenne_presentation 2) 3
+      form_neg31_ord3 3%nat.
+Proof.
+  intros [_ Hcon].
+  unfold cl_mersenne_presentation, cl_presentation_H in Hcon.
+  simpl in Hcon.
+  apply Hcon. apply mersenne31_shanks_in_family_H.
+Qed.
+
+Theorem ordinary_vs_mersenne_H :
+  P_LowOrderOutside (cl_presentation (-31)) 3 form_neg31_ord3 3%nat /\
+  ~ P_LowOrderOutside (cl_mersenne_presentation 2) 3
+      form_neg31_ord3 3%nat.
+Proof.
+  split; [apply mersenne31_wins_P_LowOrderOutside
+        | apply mersenne31_family_excludes_shanks].
+Qed.
+
+Theorem mersenne_family_at_2 :
+  mersenne_cl_family 2 = cl_mersenne_presentation 2.
+Proof. reflexivity. Qed.
+
+(** Same form, two families: restricted low-order fires on the
+    ordinary sampler and is excluded on the Mersenne sampler. *)
+
+Theorem cl_AR_C_broken_when_two_in_C :
+  forall C,
+    C 2%nat ->
+    P_AdaptiveRoot_C (cl_presentation (-31)) C
+      form_neg31_sq form_neg31_ord3 2%nat.
+Proof.
+  intros C HC.
+  unfold P_AdaptiveRoot_C, cl_presentation, cl_presentation_H.
+  cbn [Peq Pexp Pid].
+  split; [exact HC|].
+  split; [lia|].
+  split; [apply form_neg31_sq_not_principal|].
+  rewrite form_neg31_exp2.
+  apply bqf_equiv_refl.
 Qed.
 
 (** ** Sentence 3 — adaptive root is trivial from public data on RSA

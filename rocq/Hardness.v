@@ -226,6 +226,80 @@ Lemma adaptive_root_is_strong_RSA :
     Problem_AdaptiveRoot N y x e <-> Problem_StrongRSA N y x e.
 Proof. intros. reflexivity. Qed.
 
+(** Adaptive root *as a game* is not the search relation: [y] is
+    published first, then a challenge [c] is drawn from a named
+    space [C].  Strong RSA lets the attacker choose [e].  [λ+1]
+    wins the search and wins the game only if [C (λ+1)]. *)
+Definition ChallengeSpace := Z -> Prop.
+
+Definition Problem_AdaptiveRoot_C
+    (N : Z) (C : ChallengeSpace) (y x c : Z) : Prop :=
+  C c /\ 1 < c /\ powm x c N = y.
+
+Definition C_primes : ChallengeSpace := Z.prime.
+Definition C_odd : ChallengeSpace :=
+  fun c => Z.odd c = true /\ 1 < c.
+
+Theorem ar_C_implies_strong_RSA :
+  forall N C y x c,
+    Problem_AdaptiveRoot_C N C y x c ->
+    Problem_StrongRSA N y x c.
+Proof.
+  intros N C y x c [HC [He Hpow]].
+  unfold Problem_StrongRSA. split; assumption.
+Qed.
+
+Theorem ar_C_requires_C :
+  forall N C y x c,
+    Problem_AdaptiveRoot_C N C y x c -> C c.
+Proof. intros N C y x c [HC _]. exact HC. Qed.
+
+Theorem strong_RSA_is_ar_C_iff :
+  forall N C y x e,
+    Problem_StrongRSA N y x e ->
+    (Problem_AdaptiveRoot_C N C y x e <-> C e).
+Proof.
+  intros N C y x e [He Hpow]. split.
+  - intros [HC _]. exact HC.
+  - intros HC. unfold Problem_AdaptiveRoot_C. split; [exact HC|].
+    split; assumption.
+Qed.
+
+Theorem lambda_plus_one_11_17 :
+  lambda_semiprime 11 17 = 80.
+Proof. apply rsa_test_lambda. Qed.
+
+Theorem lambda_plus_one_11_17_not_prime :
+  ~ Z.prime (lambda_semiprime 11 17 + 1).
+Proof.
+  rewrite rsa_test_lambda.
+  intros [_ Hdiv].
+  apply (Hdiv 3); [lia|]. exists 27. lia.
+Qed.
+
+Theorem lambda_solves_search_11_17 :
+  forall y,
+    Z.coprime y (11 * 17) ->
+    Problem_StrongRSA (11 * 17) (y mod (11 * 17)) (y mod (11 * 17))
+      (lambda_semiprime 11 17 + 1).
+Proof.
+  intros y Hcop.
+  apply (lambda_solves_strong_RSA 11 17 y prime_11 prime_17);
+    [lia | exact Hcop].
+Qed.
+
+Theorem search_lambda_plus_one_misses_prime_AR :
+  forall y,
+    ~ Problem_AdaptiveRoot_C (11 * 17) C_primes
+        (y mod (11 * 17)) (y mod (11 * 17))
+        (lambda_semiprime 11 17 + 1).
+Proof.
+  intros y Har.
+  apply ar_C_requires_C in Har.
+  unfold C_primes in Har.
+  exact (lambda_plus_one_11_17_not_prime Har).
+Qed.
+
 (** Adaptive root with a *known finite* challenge space is broken as
     a relation: A1 publishes [h^{c·rest}], A2 returns [h^{rest}].
     This is 2024/505 Remark 9 / BBF24, algebra only — no ROM.  If
