@@ -260,6 +260,33 @@ Proof.
   - apply Z.gcd_divide_r.
 Qed.
 
+(** An inversion oracle on [e = 2], queried at a planted square [r²]
+    and returning a non-associate root, factors.  RSA has no such
+    theorem for an [e]-th-root inverter ([rsa_inverter_constructs_factor_named]
+    in [TranscriptOracle]). *)
+
+Theorem rabin_oracle_nonassociate_factors :
+  forall p q r x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    powm x 2 (p * q) = powm r 2 (p * q) ->
+    ~ (p * q | x - r) ->
+    ~ (p * q | x + r) ->
+    let g := Z.gcd (x - r) (p * q) in
+    1 < g < p * q /\ (g | p * q).
+Proof.
+  intros p q r x Hp Hq Hneq Hsq Hny Hnm.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  cbn.
+  assert (Hsq' : (x * x) mod (p * q) = (r * r) mod (p * q)).
+  { rewrite <- !powm_2 by nia. exact Hsq. }
+  pose proof (rabin_roots_split p q x r Hp Hq Hneq Hsq' Hny Hnm) as Hsp.
+  destruct Hsp as [H1 [H2 H3]].
+  repeat split; [exact H1 | exact H2 | exact H3].
+Qed.
+
 (** Specialisation: a non-trivial square root of 1 (already in
     [NumberTheory]) is the [y = 1] case. *)
 

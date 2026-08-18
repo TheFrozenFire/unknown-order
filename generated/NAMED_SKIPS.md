@@ -18,6 +18,7 @@ Generated.  Do not edit by hand.
 | `dirichlet_ap_prime_named` | `NamedSkips.v` | 57 | refuse | — |
 | `orders_generate_lambda_named` | `Order.v` | 241 | refuse | — |
 | `pratt_complete_named` | `Pratt.v` | 110 | refuse | — |
+| `rsa_inverter_constructs_factor_named` | `TranscriptOracle.v` | 582 | refuse | — |
 | `boneh_durfee_named` | `Wiener.v` | 158 | refuse | — |
 
 ## `NamedRefuse` constructors
@@ -49,4 +50,4 @@ Generated.  Do not edit by hand.
 | `Refuse_EN_card_from_N` | `NamedSkips.v` | 51 |
 | `Refuse_Redei_4rank_fund_minus4N` | `NamedSkips.v` | 52 |
 
-_32 refuses, 0 used-as-hypothesis weaknesses._
+_33 refuses, 0 used-as-hypothesis weaknesses._

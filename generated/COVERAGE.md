@@ -972,8 +972,8 @@ in the Rocq tree.  Do not edit by hand.
   - L41: Prime shape
   - L107: Williams tweak: among [{±a, ±2a}] exactly one Legendre pair
   - L210: Rabin reduction: two non-associated square roots factor [N]
-  - L266: Verification shape: [s²] is one of the four tweaks of [H].
-  - L284: Keygen obligation on top of the RSA rulers: the mod-8 split.
+  - L293: Verification shape: [s²] is one of the four tweaks of [H].
+  - L311: Keygen obligation on top of the RSA rulers: the mod-8 split.
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -992,9 +992,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `williams_two_symbol_q` | 195 |
 | Theorem | `williams_neg1_on_blum` | 199 |
 | Theorem | `rabin_roots_split` | 218 |
-| Lemma | `rw_verify_of_root` | 277 |
-| Lemma | `kg_rw_implies_blum` | 288 |
-| Lemma | `kg_rw_pminus1_almost_odd` | 296 |
+| Theorem | `rabin_oracle_nonassociate_factors` | 268 |
+| Lemma | `rw_verify_of_root` | 304 |
+| Lemma | `kg_rw_implies_blum` | 315 |
+| Lemma | `kg_rw_pminus1_almost_odd` | 323 |
 
 ## `SharedPrime.v`
 
@@ -1097,6 +1098,10 @@ in the Rocq tree.  Do not edit by hand.
   - L464: K1 — one-sided vanishing predicate factors
   - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
   - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
+  - L574: RSA inverter vs Rabin inverter
+  - L598: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
+  - L677: Constructor slot vs K1
+  - L715: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1133,6 +1138,15 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `non_williams_two_chars` | 535 |
 | Theorem | `sign_neg1_odd` | 547 |
 | Theorem | `odd_exp_preserves_minus1` | 559 |
+| Theorem | `rsa_inverter_recovers_message` | 586 |
+| Lemma | `euler_sign_of_pm1` | 606 |
+| Lemma | `euler_sign_sq` | 623 |
+| Theorem | `other_legendre_from_product` | 634 |
+| Theorem | `cipher_jacobi_eq_message` | 647 |
+| Theorem | `onesided_plain_one_factors` | 682 |
+| Theorem | `ctor_slot_mod_r_need_not_factor` | 697 |
+| Theorem | `cube_below_N` | 717 |
+| Theorem | `e3_small_cube_verifies` | 732 |
 
 ## `TwoPrimary.v`
 
@@ -1232,4 +1246,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_834 theorems/lemmas/corollaries/examples across 45 files._
+_844 theorems/lemmas/corollaries/examples across 45 files._

@@ -570,3 +570,174 @@ Proof.
   rewrite Ha.
   apply odd_pow_neg1; [lia | lia | exact Hodd].
 Qed.
+
+(** ** RSA inverter vs Rabin inverter
+
+    [rsa_inverter] recovers [m] ([rsa_dec_enc_units]).  It does not
+    construct a factor: that implication is the open converse
+    ([Refuse_RSA_eq_factoring_standard_model]).  Unused = refuse.
+    Rabin [e=2] *does* factor from a non-associate root
+    ([RabinWilliams.rabin_oracle_nonassociate_factors]). *)
+
+Definition rsa_inverter_constructs_factor_named : Prop :=
+  forall (R : RSAInstance) (Inv : rsa_inverter (rsa_N R) (rsa_e R)),
+    exists f, 1 < f < rsa_N R /\ (f | rsa_N R).
+
+Theorem rsa_inverter_recovers_message :
+  forall R (Inv : rsa_inverter (rsa_N R) (rsa_e R)) m,
+    Z.coprime m (rsa_N R) ->
+    powm (proj1_sig (Inv (rsa_enc R m))) (rsa_e R) (rsa_N R) =
+      rsa_enc R m.
+Proof.
+  intros R Inv m Hcop.
+  destruct (Inv (rsa_enc R m)) as [x Hx].
+  cbn.
+  exact Hx.
+Qed.
+
+(** ** T16 — a [(·/p)] oracle plus the public product is [(·/q)] *)
+
+Definition euler_sign (a p : Z) : Z :=
+  if euler_crit a p =? 1 then 1 else -1.
+
+Definition jacobi_odd_semiprime (a p q : Z) : Z :=
+  euler_sign a p * euler_sign a q.
+
+Lemma euler_sign_of_pm1 :
+  forall a p,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime a p ->
+    euler_sign a p = 1 \/ euler_sign a p = -1.
+Proof.
+  intros a p Hp Hne Hcop.
+  unfold euler_sign.
+  destruct (euler_is_pm1 a p Hp Hne Hcop) as [H1 | Hm].
+  - rewrite H1. left. reflexivity.
+  - rewrite Hm.
+    destruct (p - 1 =? 1) eqn:Heq.
+    + apply Z.eqb_eq in Heq. pose proof (Z.prime_ge_2 p Hp). lia.
+    + right. reflexivity.
+Qed.
+
+Lemma euler_sign_sq :
+  forall a p,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime a p ->
+    euler_sign a p * euler_sign a p = 1.
+Proof.
+  intros a p Hp Hne Hcop.
+  destruct (euler_sign_of_pm1 a p Hp Hne Hcop) as [H | H]; rewrite H; reflexivity.
+Qed.
+
+Theorem other_legendre_from_product :
+  forall a p q,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime a p ->
+    euler_sign a q = euler_sign a p * jacobi_odd_semiprime a p q.
+Proof.
+  intros a p q Hp Hp2 Hcop.
+  unfold jacobi_odd_semiprime.
+  rewrite Z.mul_assoc, (euler_sign_sq a p Hp Hp2 Hcop), Z.mul_1_l.
+  reflexivity.
+Qed.
+
+Theorem cipher_jacobi_eq_message :
+  forall p q m e,
+    Z.prime p ->
+    Z.prime q ->
+    p <> 2 ->
+    q <> 2 ->
+    Z.coprime m p ->
+    Z.coprime m q ->
+    0 <= e ->
+    Z.Odd e ->
+    jacobi_odd_semiprime (powm m e (p * q)) p q = jacobi_odd_semiprime m p q.
+Proof.
+  intros p q m e Hp Hq Hp2 Hq2 Hmp Hmq He Hodd.
+  unfold jacobi_odd_semiprime, euler_sign, euler_crit.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  pose proof (half_pm1_nonneg p Hp Hp2).
+  pose proof (half_pm1_nonneg q Hq Hq2).
+  rewrite (powm_exp_mod_factor m e ((p - 1) / 2) p q) by lia.
+  rewrite (Z.mul_comm p q).
+  rewrite (powm_exp_mod_factor m e ((q - 1) / 2) q p) by lia.
+  fold (euler_crit (powm m e p) p).
+  fold (euler_crit m p).
+  fold (euler_crit (powm m e q) q).
+  fold (euler_crit m q).
+  rewrite (euler_odd_power m e p Hp Hp2 Hmp He Hodd).
+  rewrite (euler_odd_power m e q Hq Hq2 Hmq He Hodd).
+  reflexivity.
+Qed.
+
+(** ** Constructor slot vs K1
+
+    [m ≡ 1 (mod p)] one-sided factors.  The weaker check
+    [(m mod p) ≡ 1 (mod r)] with [r | p−1] need not. *)
+
+Theorem onesided_plain_one_factors :
+  forall p q m,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    m mod p = 1 ->
+    m mod q <> 1 ->
+    Z.gcd (m - 1) (p * q) = p.
+Proof.
+  intros p q m Hp Hq Hneq Hp1 Hnq.
+  apply (one_sided_congruence_factors p q m 1); try assumption.
+  - rewrite Z.mod_1_l; [exact Hp1 | pose proof (Z.prime_ge_2 p Hp); lia].
+  - rewrite Z.mod_1_l; [exact Hnq | pose proof (Z.prime_ge_2 q Hq); lia].
+Qed.
+
+Theorem ctor_slot_mod_r_need_not_factor :
+  let p := 11 in
+  let q := 17 in
+  let r := 5 in
+  let m := 138 in
+    (r | p - 1) /\
+    ~ (r | q - 1) /\
+    (m mod p) mod r = 1 /\
+    (m mod q) mod r <> 1 /\
+    Z.gcd (m - 1) (p * q) = 1.
+Proof.
+  split; [exists 2; reflexivity|].
+  split; [intros [k Hk]; cbn in Hk; nia|].
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; discriminate|].
+  vm_compute. reflexivity.
+Qed.
+
+(** ** T8 — [e=3], a cube below [N] *is* a raw signature of that cube *)
+
+Theorem cube_below_N :
+  forall s N,
+    0 <= s ->
+    0 < N ->
+    s * s * s < N ->
+    powm s 3 N = s * s * s.
+Proof.
+  intros s N Hs HN Hcube.
+  unfold powm.
+  change 3 with (Z.succ (Z.succ 1)).
+  rewrite Z.pow_succ_r, Z.pow_succ_r, Z.pow_1_r by lia.
+  rewrite Z.mod_small by lia.
+  ring.
+Qed.
+
+Theorem e3_small_cube_verifies :
+  forall R s,
+    rsa_e R = 3 ->
+    0 <= s ->
+    s * s * s < rsa_N R ->
+    rsa_enc R s = s * s * s.
+Proof.
+  intros R s He Hs Hcube.
+  unfold rsa_enc. rewrite He.
+  apply cube_below_N; [exact Hs | | exact Hcube].
+  pose proof (rsa_N_gt_1 R); lia.
+Qed.

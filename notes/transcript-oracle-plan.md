@@ -360,6 +360,19 @@ T10 (Bleichenbacher interval-set) and T18 (Montgomery comparison)
 not started: T11+K1 classify the later rows. ACGS-as-hardness stays
 `Refuse_PPT_advantage`.
 
+### Follow-up (same day)
+
+| # | Result | Note |
+|---|---|---|
+| T16 | `other_legendre_from_product`, `cipher_jacobi_eq_message` | `(m/q)=(m/p)·(m/N)`; product is public from `c` |
+| T8 | `e3_small_cube_verifies` | `s³ < N` ⇒ `s` is a raw `e=3` signature of `s³` |
+| K1+ctor | `onesided_plain_one_factors`; `ctor_slot_mod_r_need_not_factor` | `m≡1 (mod p)` factors; `m_p≡1 (mod r)` with `r\|p−1` need not |
+| T27 | `rabin_oracle_nonassociate_factors` | inversion of a planted square, non-associate root, factors |
+| — | `rsa_inverter_constructs_factor_named` unused | RSA inverter recovers `m`, does not construct a factor |
+| sweep | `cas/58` | no cheap predicate of `m_p` is a function of `m` or of `(N,c)` (80 far 12-bit samples) |
+
+The sweep is the oracle-world Method 1: `lsb(m_p)`, `m_p < p/2`, `(m/p)`, `m_p mod 3` match neither the recombined payload nor `(c/N)` / `c`. No public CRT-side handle.
+
 ## What this plan is not
 
 - A restart of Methods 1–12 on `N`

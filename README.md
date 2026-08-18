@@ -162,7 +162,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 57 witnesses, `cas/01`–`57`. PARI is the gated CAS; do not add OSCAR.
+CAS is 58 witnesses, `cas/01`–`58`. PARI is the gated CAS; do not add OSCAR.
 
 ## Constructor (not a filter)
 

@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 834 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 844 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 834 results across 45 files.
+Captured for 844 results across 45 files.
 
 Counts:
 
@@ -869,9 +869,10 @@ Counts:
 | `williams_two_symbol_q` | 195 | 0 | 0 | OK |
 | `williams_neg1_on_blum` | 199 | 0 | 0 | OK |
 | `rabin_roots_split` | 218 | 0 | 0 | OK |
-| `rw_verify_of_root` | 277 | 0 | 0 | OK |
-| `kg_rw_implies_blum` | 288 | 0 | 0 | OK |
-| `kg_rw_pminus1_almost_odd` | 296 | 0 | 0 | OK |
+| `rabin_oracle_nonassociate_factors` | 268 | 0 | 0 | OK |
+| `rw_verify_of_root` | 304 | 0 | 0 | OK |
+| `kg_rw_implies_blum` | 315 | 0 | 0 | OK |
+| `kg_rw_pminus1_almost_odd` | 323 | 0 | 0 | OK |
 
 ## SharedPrime.v
 
@@ -984,6 +985,15 @@ Counts:
 | `non_williams_two_chars` | 535 | 0 | 0 | OK |
 | `sign_neg1_odd` | 547 | 0 | 0 | OK |
 | `odd_exp_preserves_minus1` | 559 | 0 | 0 | OK |
+| `rsa_inverter_recovers_message` | 586 | 0 | 0 | OK |
+| `euler_sign_of_pm1` | 606 | 0 | 0 | OK |
+| `euler_sign_sq` | 623 | 0 | 0 | OK |
+| `other_legendre_from_product` | 634 | 0 | 0 | OK |
+| `cipher_jacobi_eq_message` | 647 | 0 | 0 | OK |
+| `onesided_plain_one_factors` | 682 | 0 | 0 | OK |
+| `ctor_slot_mod_r_need_not_factor` | 697 | 0 | 0 | OK |
+| `cube_below_N` | 717 | 0 | 0 | OK |
+| `e3_small_cube_verifies` | 732 | 0 | 0 | OK |
 
 ## TwoPrimary.v
 
