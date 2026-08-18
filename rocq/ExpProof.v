@@ -21,6 +21,10 @@ Open Scope Z_scope.
     Sequentiality, random oracles, and "this is a VDF" stay named.
     Prime [ℓ] is a soundness constraint, not an algebra constraint
     ([wesolowski_root_does_not_need_prime_ell]).
+    On raw [(Z/NZ)*] an odd challenge is unsound:
+    [wesolowski_soundness_fails_on_units_odd_challenge]
+    ([notes/paper-overlaps.md] row 2).  Unrestricted Pietrzak on
+    [Cl(Δ)] is row 4 ([pietrzak_restricted_ignores_Cl2]).
     Cross-confirmed by [cas/24_exp_proof.gp], [cas/31_challenge_prime.gp]. *)
 
 Definition wesolowski_verify_rsa (N x y pi ell r : Z) : Prop :=

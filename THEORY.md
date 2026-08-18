@@ -787,8 +787,11 @@ knowing (e, d)
   on random challenges is not known to yield `{p, q}`. Boneh–
   Venkatesan indicate that a *straight-line* reduction from
   factoring to low-exponent RSA would collapse in ways we do
-  not expect. This repo will not treat “RSA-hard ⇒ Factoring-
-  hard” as a design target.
+  not expect. Aggarwal–Maurer prove equivalence in the
+  *generic ring* model; that is not the standard model.
+  Citing AM09 as “RSA ≡ factoring” is a model mismatch
+  (`notes/paper-overlaps.md` row 8). This repo will not treat
+  “RSA-hard ⇒ Factoring-hard” as a design target.
 - **Coron–May is not that converse.** Given the *secret* `(e, d)`,
   not an inversion oracle, one factors. That is the annihilator
   of §3, and it is already formalized. Mixing the two is the
@@ -904,6 +907,20 @@ No bit-length recommendation in this repo is a theorem.
 - ERH, LLL, GNFS cost, Miller density ≥ 1/2 as ingredients of a
   hardness claim. They may appear as *named skips* in an attack
   cost, not as axioms that close a proof of security.
+
+A later paper can hit a documented weakness without naming a
+bad `KG`. Walk [`notes/paper-overlaps.md`](notes/paper-overlaps.md)
+before treating an unknown-order claim as live. Rows with
+theorems: composite / same-bit-length members
+(`bdm_same_bits_still_splits`), Wesolowski on raw units with an
+odd challenge (`wesolowski_soundness_fails_on_units_odd_challenge`),
+poly-size or smooth adaptive-root `C`
+(`adaptive_root_known_product_breaks`), unrestricted low-order
+on `Cl(Δ)` (`catalog_wins_LowOrder_B2`), public `λ` trivializes
+Strong RSA / adaptive root (`lambda_solves_strong_RSA`). Rows
+that stay named: Mersenne class-group low-order (ePrint 2020/1310),
+BP97 vs modern Strong RSA, AM09-as-standard-model, Peng–Bao on
+LLX if `∏S mod φ(N)` is public.
 
 ### 9.11 Honest scope of the hardness development
 
@@ -1410,7 +1427,13 @@ Wesolowski, algebra only (`ExpProof.v`, `cas/24_exp_proof.gp`):
 a correct `π = x^q` for `y = x^{q·ℓ+r}` is an `ℓ`-th root of
 `x^{q·ℓ}` (`wesolowski_correct_is_root`). On `(ℤ/Nℤ)*` with
 known `λ`, the same `y` has the trivial adaptive-root witness
-`(y, λ+1)`.
+`(y, λ+1)`. On raw units with an *odd* challenge, `π ↦ −π`
+accepts the false statement `−y`
+(`wesolowski_soundness_fails_on_units_odd_challenge`). That is
+why BBF19 / 2024/505 prefer `QR_N` or `ℤ_N^*/{±1}`. A poly-size
+or `B`-smooth challenge space breaks adaptive root as a relation
+(`adaptive_root_known_product_breaks`). Paper-check:
+`notes/paper-overlaps.md`.
 
 Pietrzak at `T = 2`: a midpoint `μ` with `μ² = x⁴` is a square
 root of `y`. The quotient by the true midpoint squares to 1.

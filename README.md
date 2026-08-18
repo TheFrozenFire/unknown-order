@@ -101,8 +101,15 @@ mixed CRT root) and on toy `Cl(Δ)` (Pietrzak must not count `Cl[2]` as a
 restricted break). CAS `24`, `26`.
 
 `ExpProof.v`, `Accumulator.v`. Sequentiality and the ROM stay named.
-A composite member splits the witness; Wesolowski algebra does not
-use `Z.prime ℓ`.
+A composite member splits the witness; same bit length does not restore
+soundness (`bdm_same_bits_still_splits`). Wesolowski algebra does not
+use `Z.prime ℓ`. On raw units an odd challenge accepts `−y` via `π ↦ −π`
+(`wesolowski_soundness_fails_on_units_odd_challenge`). A poly-size or
+smooth adaptive-root challenge space is broken
+(`adaptive_root_known_product_breaks`).
+
+When checking another paper against this corpus, start at
+[`notes/paper-overlaps.md`](notes/paper-overlaps.md).
 
 ### Third incarnation: the Williams torus
 

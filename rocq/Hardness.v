@@ -16,7 +16,10 @@ Open Scope Z_scope.
     records the arrows that hold for the *winning conditions*:
     trapdoor ⇒ roots, RSA-solution ⇒ strong-RSA solution for that
     [e], [λ] ⇒ a trivial strong-RSA witness, order divides [λ],
-    one-sided small exponent splits [N].
+    one-sided small exponent splits [N].  Adaptive root with a
+    known-finite or [B]-smooth challenge space is broken
+    ([adaptive_root_known_product_breaks];
+    [notes/paper-overlaps.md] row 3).  Public [λ] is row 7.
 
     Cross-confirmed by [cas/18_hardness.gp]. *)
 

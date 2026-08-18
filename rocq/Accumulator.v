@@ -19,8 +19,11 @@ Open Scope Z_scope.
     Instantiated on [rsa_presentation]; stated on [cl_presentation]
     (no trapdoor to update with [λ]).  A composite member splits
     the witness ([rsa_composite_member_splits_witness]) — that is
-    why the member map wants primes.  It is not the keygen slot
-    encoding.  No hash, no pairings, no Merkle. *)
+    why the member map wants primes.  Same bit length does not
+    restore soundness ([bdm_same_bits_still_splits], via
+    [shamir_trick]).  Paper-check: [notes/paper-overlaps.md] row 1.
+    It is not the keygen slot encoding.  No hash, no pairings, no
+    Merkle. *)
 
 Definition acc_add (P : Presentation) (A : Pcar P) (x : nat) : Pcar P :=
   Pexp P A x.

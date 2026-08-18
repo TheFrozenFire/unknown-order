@@ -50,12 +50,34 @@ map is a permutation, so `(N,e,x^e)` and `(N,e,y)` are identical.
 
 - Factoring ≤ RSA (oracle inversion ⇒ factors). Boneh–Venkatesan:
   a straight-line reduction for small `e` is unlikely.
+- Aggarwal–Maurer (generic ring) is not that converse in the
+  standard model. Citing it as “RSA ≡ factoring” is a model mismatch
+  (`notes/paper-overlaps.md` row 8).
 - Coron–May / Miller-from-`(e,d)` is *not* that converse.
 - GNFS cost; “leak-free `KG` ⇒ this bit length is enough.”
 - Global axioms `RSA_hard`, `Factoring_hard`.
+- BP97 Strong RSA (prime `e`, ordinary primes) is not the modern
+  game (any `e>1`, safe primes); they are incomparable (row 6).
 
 ## Leaks are refutations of a claim about that `KG`
 
 See `notes/keygen-weaknesses.md`. A hardness claim that does not name
 `KG` is already false on every row of that table. Type E (Hastad) can
 refute RSA on a restricted challenge distribution without factoring.
+
+## Design overlaps (paper-check)
+
+A later paper that re-uses these problems can hit a *known* break
+without naming a bad `KG`. The lookup is `notes/paper-overlaps.md`.
+
+| Row | Trigger | Theorem / status |
+|---|---|---|
+| 1 | composite / same-bit-length accumulator members | `bdm_same_bits_still_splits` |
+| 2 | Wesolowski on raw units, odd challenge | `wesolowski_soundness_fails_on_units_odd_challenge` |
+| 3 | adaptive-root `C` poly-size or smooth | `adaptive_root_known_product_breaks` |
+| 4 | Pietrzak / LowOrder on `Cl(Δ)` without excluding `Cl[2]` | `catalog_wins_LowOrder_B2` |
+| 5 | low-order in every class group | named (ePrint 2020/1310) |
+| 6 | BP97-sRSA ≡ modern sRSA | named |
+| 7 | sRSA / AR given public `λ` | `lambda_solves_strong_RSA` |
+| 8 | standard-model RSA ≡ factoring | named (`THEORY.md` §9.6) |
+| 9 | LLX non-membership with `∏S mod φ(N)` public | named (Peng–Bao 2010) |

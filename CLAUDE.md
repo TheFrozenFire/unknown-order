@@ -56,6 +56,12 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
    tools that satisfy the cross-confirm rule. An SMT track (as in `ciphering`) is optional and
    earned when a proof takes a premise that should be *searched* rather than assumed.
 
+7. **Paper-check against known breaks.** Before treating a paper's unknown-order claim as
+   live, walk `notes/paper-overlaps.md`. A design that re-uses Wesolowski on raw units,
+   unrestricted low-order on `Cl(Δ)`, a smooth adaptive-root challenge, composite
+   accumulator members, or “RSA ≡ factoring” in the standard model overlaps a documented
+   weakness. Quote the trigger, the row, and the Rocq name (or `named`).
+
 ## Toolchain
 
 - **Rocq 9.1** (`rocq compile` / `coqc`), stdlib namespace `From Stdlib Require Import`. Build flag
