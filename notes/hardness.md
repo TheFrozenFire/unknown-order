@@ -15,6 +15,8 @@ will use.
 | Strong RSA | `(N,y)` | `(x,e)` | `e > 1`, `x^e ≡ y` | `Problem_StrongRSA` |
 | Adaptive root (search) | `(N,y)` | `(x,e)` | same as strong RSA | `Problem_AdaptiveRoot` |
 | Adaptive root (game) | `(N,y)` then `c ∈ C` | `x` | `C c` and `x^c ≡ y` | `Problem_AdaptiveRoot_C` |
+| Annihilator (order assump.) | `(N,g)` | `e ≠ 0` | `g^e ≡ 1` | `Problem_Annihilator` |
+| Fractional root | `(N,y)` | `(x,a,b)` | `a>0`, `x^a ≡ y^b` | `Problem_FractionalRoot` |
 | Order | `(N,a)` | `k` | `k = ord(a)` in `(ℤ/Nℤ)*` | `is_order` / `Problem_Order` |
 | Low-order (in `G`) | `(N,B)` | `(a,k)` | `ord_G(a) = k ≤ B` | `Problem_LowOrder` |
 | One-sided low-order | `(N,B)` | `(a,k)` | `a^k ≡ 1 (mod p)`, not `(mod q)` | `one_sided_low_order` |
@@ -35,6 +37,9 @@ Constructible torsion `H` is a family parameter
 | Strong RSA witness at `e` | AR game at that `e` | `strong_RSA_is_ar_C_iff` | the game unless `C e` |
 | `λ+1` on `11×17` | prime-challenge AR | `search_lambda_plus_one_misses_prime_AR` | `81` is not prime |
 | `2 ∈ C` on ordinary `Cl(−31)` | AR game | `cl_AR_C_broken_when_two_in_C` | A1 publishes `g²` |
+| annihilator `M` of `y` | Strong RSA / AR search | `annihilator_plus_one_is_strong_RSA` `(y, M+1)` | class number on `Cl` |
+| `h(−31)=3` | AR search on every written class | `class_number_solves_AR_neg31` | `D+1` is not `h` |
+| RSA / sRSA | fractional root `b=1` | `rsa_is_fractional_root` | DARK `r`-powers |
 | `y = 1` | RSA / sRSA inhabited | `rsa_trivial_at_one`, `strong_RSA_trivial_at_one` | hardness (it refutes *existence*-hardness) |
 | `ord(a) = k` | `k \| λ` | `order_divides_lambda` | lcm of enough orders *is* `λ` |
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |

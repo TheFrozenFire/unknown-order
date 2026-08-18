@@ -120,7 +120,11 @@ low-order on one sampler and is excluded on the other
 `Problem_AdaptiveRoot_C` (challenge space `C`); Strong RSA is the
 search. `λ+1` wins the search and misses prime-`C`
 (`search_lambda_plus_one_misses_prime_AR`). `2 ∈ C` on `Cl` is
-`cl_AR_C_broken_when_two_in_C`.
+`cl_AR_C_broken_when_two_in_C`. Knowing an annihilator `M` of `y`
+gives AR search via `(y, M+1)` (`annihilator_plus_one_is_strong_RSA`);
+on `Cl(−31)` that is the class number (`class_number_solves_AR_neg31`).
+The order assumption and fractional root are named relations
+(`Problem_Annihilator`, `Problem_FractionalRoot`).
 
 When checking another paper against this corpus, start at
 [`notes/paper-overlaps.md`](notes/paper-overlaps.md).
@@ -150,7 +154,7 @@ bash run-check.sh   # CAS (gp) + Rocq (rocq compile); each SKIPs if its tool is 
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 40 witnesses, `cas/01`–`40`.
+CAS is 41 witnesses, `cas/01`–`41`.
 
 ## Constructor (not a filter)
 

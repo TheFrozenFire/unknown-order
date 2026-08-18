@@ -716,6 +716,15 @@ is an index → presentation (`ordinary_cl_family`,
 `discriminant_to_lambda`. A later file must not inherit a
 trapdoor that is not there.
 
+If the *class number* `h(Δ)` is known, AR *search* is trivial
+the same way: an annihilator `M` of `y` yields `(y, M+1)`
+(`annihilator_plus_one_is_strong_RSA`). On `Cl(−31)`, `h=3`
+and every written class has an explicit witness
+(`class_number_solves_AR_neg31`). `D+1` is still not `h`.
+The order assumption (`Problem_Annihilator`: `g^e=1`, `e≠0`)
+and fractional root (`Problem_FractionalRoot`: `x^a=y^b`)
+are named; RSA/sRSA are the case `b=1`.
+
 ### 9.5 Arrows that are theorems (relations)
 
 No running times. These are implications between winning
@@ -803,8 +812,10 @@ knowing (e, d)
   not expect. Aggarwal–Maurer prove equivalence in the
   *generic ring* model; that is not the standard model.
   Citing AM09 as “RSA ≡ factoring” is a model mismatch
-  (`notes/paper-overlaps.md` row 8). This repo will not treat
-  “RSA-hard ⇒ Factoring-hard” as a design target.
+  (`notes/paper-overlaps.md` row 8). Hhan (arXiv:2402.11269)
+  re-proves unknown-order generic-group lower bounds; same
+  refuse — UO-GGM is not the standard model. This repo will
+  not treat “RSA-hard ⇒ Factoring-hard” as a design target.
 - **Coron–May is not that converse.** Given the *secret* `(e, d)`,
   not an inversion oracle, one factors. That is the annihilator
   of §3, and it is already formalized. Mixing the two is the

@@ -360,3 +360,56 @@ Qed.
 Theorem mersenne31_shanks_not_ordinary_H :
   ~ cl_ordinary_H form_neg31_ord3.
 Proof. apply form_neg31_ord3_not_ambiguous. Qed.
+
+(** ** Class number is an AR-search trapdoor
+
+    On units, [λ] annihilates and [(y, λ+1)] wins Strong RSA.
+    On [Cl(−31)], [h = 3] annihilates the three classes; [2] is
+    invertible mod [3], so each non-identity class is a square.
+    The general implication [y^h ≡ 1 ⇒ y^{h+1} ≡ y] on unreduced
+    Dirichlet representatives stays named (left-compat of compose).
+    CAS [41]. *)
+
+Theorem bqf_exp_id :
+  forall D k,
+    iq_disc D ->
+    bqf_exp D (bqf_id D) k = bqf_id D.
+Proof.
+  intros D k Hiq. induction k as [|k IH].
+  - reflexivity.
+  - simpl. rewrite IH. apply compose_id_left; [exact Hiq|].
+    apply bqf_id_of_disc. exact Hiq.
+Qed.
+
+Theorem neg31_id_annihilated_by_h :
+  bqf_exp (-31) (bqf_id (-31)) 3%nat = bqf_id (-31).
+Proof. apply bqf_exp_id. apply iq_neg31. Qed.
+
+Definition form_neg31_inv_sq : bqf :=
+  {| bqf_a := 4; bqf_b := -1; bqf_c := 2 |}.
+
+Theorem form_neg31_inv_exp2 :
+  bqf_exp (-31) (bqf_inv form_neg31_ord3) 2%nat = form_neg31_inv_sq.
+Proof.
+  rewrite bqf_exp_2; [| apply iq_neg31 | apply form_neg31_inv_of_disc].
+  vm_compute. reflexivity.
+Qed.
+
+Theorem form_neg31_inv_sq_equiv_f :
+  bqf_equiv form_neg31_inv_sq form_neg31_ord3.
+Proof.
+  exists sl2_S. split; [apply sl2_S_ok|].
+  vm_compute. reflexivity.
+Qed.
+
+Theorem shanks_inv_square_is_shanks :
+  bqf_equiv
+    (bqf_exp (-31) (bqf_inv form_neg31_ord3) 2%nat)
+    form_neg31_ord3.
+Proof.
+  rewrite form_neg31_inv_exp2. apply form_neg31_inv_sq_equiv_f.
+Qed.
+
+Theorem shanks_annihilated_by_h :
+  bqf_equiv (bqf_exp (-31) form_neg31_ord3 3%nat) (bqf_id (-31)).
+Proof. apply form_neg31_exp3_equiv_id. Qed.

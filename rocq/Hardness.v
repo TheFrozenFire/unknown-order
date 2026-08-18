@@ -226,6 +226,106 @@ Lemma adaptive_root_is_strong_RSA :
     Problem_AdaptiveRoot N y x e <-> Problem_StrongRSA N y x e.
 Proof. intros. reflexivity. Qed.
 
+(** ** Order assumption and fractional root
+
+    An annihilator of [y] is a Strong-RSA / AR-search trapdoor:
+    [(y, M+1)] wins because [y^{M+1} = y].  That is [λ] on units
+    and the class number on [Cl] (pin in [ClassGroupWall]). *)
+
+Theorem order_is_annihilator :
+  forall N a k,
+    is_order N a k ->
+    Problem_Annihilator N a k.
+Proof.
+  intros N a k [Hk [Hank _]].
+  unfold Problem_Annihilator. split; [lia|exact Hank].
+Qed.
+
+Theorem low_order_is_annihilator :
+  forall N B a k,
+    Problem_LowOrder N B a k ->
+    Problem_Annihilator N a k.
+Proof.
+  intros N B a k [_ [_ [Hord _]]].
+  apply order_is_annihilator. exact Hord.
+Qed.
+
+Theorem lambda_is_annihilator_on_units :
+  forall p q y,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime y (p * q) ->
+    Problem_Annihilator (p * q) y (lambda_semiprime p q).
+Proof.
+  intros p q y Hp Hq Hneq Hcop.
+  unfold Problem_Annihilator.
+  pose proof (lambda_semiprime_pos p q Hp Hq).
+  split; [lia|].
+  apply carmichael_semiprime; assumption.
+Qed.
+
+Theorem annihilator_plus_one_is_strong_RSA :
+  forall N y M,
+    1 < N ->
+    0 < M ->
+    Z.coprime y N ->
+    powm y M N = 1 ->
+    Problem_StrongRSA N (y mod N) (y mod N) (M + 1).
+Proof.
+  intros N y M Hn HM Hcop Hank.
+  unfold Problem_StrongRSA.
+  split; [lia|].
+  rewrite powm_mod_base by lia.
+  rewrite powm_add_r by lia.
+  rewrite Hank, powm_1_r by lia.
+  unfold powm. rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
+Qed.
+
+Theorem rsa_is_fractional_root :
+  forall N e y x,
+    1 < N ->
+    0 < e ->
+    Problem_RSA N e y x ->
+    Problem_FractionalRoot N y x e 1.
+Proof.
+  intros N e y x Hn He H.
+  unfold Problem_FractionalRoot, Problem_RSA, rsa_problem, powm in *.
+  split; [lia|].
+  rewrite Z.pow_1_r.
+  rewrite <- H. unfold powm.
+  rewrite Z.mod_mod by lia.
+  reflexivity.
+Qed.
+
+Theorem strong_RSA_is_fractional_root :
+  forall N y x e,
+    1 < N ->
+    Problem_StrongRSA N y x e ->
+    Problem_FractionalRoot N y x e 1.
+Proof.
+  intros N y x e Hn [He Hpow].
+  unfold Problem_FractionalRoot.
+  split; [lia|].
+  unfold powm. rewrite Z.pow_1_r.
+  unfold powm in Hpow. rewrite <- Hpow.
+  rewrite Z.mod_mod by lia.
+  reflexivity.
+Qed.
+
+Theorem annihilator_is_fractional_root_of_one :
+  forall N g e,
+    1 < N ->
+    0 < e ->
+    Problem_Annihilator N g e ->
+    Problem_FractionalRoot N 1 g e 0.
+Proof.
+  intros N g e Hn He [Hnz Hank].
+  unfold Problem_FractionalRoot.
+  split; [lia|].
+  rewrite Hank. unfold powm.
+  rewrite Z.pow_0_r, Z.mod_1_l by lia.
+  reflexivity.
+Qed.
+
 (** Adaptive root *as a game* is not the search relation: [y] is
     published first, then a challenge [c] is drawn from a named
     space [C].  Strong RSA lets the attacker choose [e].  [λ+1]

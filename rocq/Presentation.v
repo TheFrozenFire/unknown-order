@@ -70,6 +70,13 @@ Definition P_AdaptiveRoot_C (P : Presentation) (C : nat -> Prop)
   ~ Peq P y (Pid P) /\
   Peq P (Pexp P x c) y.
 
+Definition P_Annihilator (P : Presentation) (g : Pcar P) (e : nat) : Prop :=
+  (e > 0)%nat /\ Peq P (Pexp P g e) (Pid P).
+
+Definition P_FractionalRoot (P : Presentation) (y x : Pcar P)
+    (a b : nat) : Prop :=
+  (a > 0)%nat /\ Peq P (Pexp P x a) (Pexp P y b).
+
 (** ** RSA, public view: no annihilator, constructible torsion is [±1] *)
 
 Definition rsa_presentation (N : Z) : Presentation := {|
@@ -200,6 +207,75 @@ Qed.
 Theorem mersenne_family_at_2 :
   mersenne_cl_family 2 = cl_mersenne_presentation 2.
 Proof. reflexivity. Qed.
+
+Theorem class_number_solves_AR_neg31_id :
+  P_AdaptiveRoot (cl_presentation (-31))
+    (bqf_id (-31)) (bqf_id (-31)) 4%nat.
+Proof.
+  unfold P_AdaptiveRoot, cl_presentation, cl_presentation_H.
+  cbn [Peq Pexp].
+  split; [lia|].
+  rewrite bqf_exp_id; [| apply iq_neg31].
+  apply bqf_equiv_refl.
+Qed.
+
+Theorem class_number_solves_AR_neg31_f :
+  P_AdaptiveRoot (cl_presentation (-31))
+    form_neg31_ord3 (bqf_inv form_neg31_ord3) 2%nat.
+Proof.
+  unfold P_AdaptiveRoot, cl_presentation, cl_presentation_H.
+  cbn [Peq Pexp].
+  split; [lia|].
+  apply shanks_inv_square_is_shanks.
+Qed.
+
+Theorem class_number_solves_AR_neg31_sq :
+  P_AdaptiveRoot (cl_presentation (-31))
+    form_neg31_sq form_neg31_ord3 2%nat.
+Proof.
+  unfold P_AdaptiveRoot, cl_presentation, cl_presentation_H.
+  cbn [Peq Pexp].
+  split; [lia|].
+  rewrite form_neg31_exp2.
+  apply bqf_equiv_refl.
+Qed.
+
+(** Knowing [h(−31)=3] solves AR *search* on every class we can
+    write down: identity via [e = h+1], the two order-3 classes
+    via [e = 2] ([2] inverse mod [3]).  Same shape as
+    [lambda_solves_strong_RSA]. *)
+Theorem class_number_solves_AR_neg31 :
+  P_AdaptiveRoot (cl_presentation (-31))
+    (bqf_id (-31)) (bqf_id (-31)) 4%nat /\
+  P_AdaptiveRoot (cl_presentation (-31))
+    form_neg31_ord3 (bqf_inv form_neg31_ord3) 2%nat /\
+  P_AdaptiveRoot (cl_presentation (-31))
+    form_neg31_sq form_neg31_ord3 2%nat.
+Proof.
+  split; [apply class_number_solves_AR_neg31_id|].
+  split; [apply class_number_solves_AR_neg31_f
+        | apply class_number_solves_AR_neg31_sq].
+Qed.
+
+Theorem shanks_is_annihilator :
+  P_Annihilator (cl_presentation (-31)) form_neg31_ord3 3%nat.
+Proof.
+  unfold P_Annihilator, cl_presentation, cl_presentation_H.
+  cbn [Peq Pexp Pid].
+  split; [lia|].
+  apply shanks_annihilated_by_h.
+Qed.
+
+Theorem shanks_AR_is_fractional_root :
+  P_FractionalRoot (cl_presentation (-31))
+    form_neg31_ord3 (bqf_inv form_neg31_ord3) 2%nat 1%nat.
+Proof.
+  unfold P_FractionalRoot, cl_presentation, cl_presentation_H.
+  cbn [Peq Pexp].
+  split; [lia|].
+  rewrite bqf_exp_1; [| apply iq_neg31 | apply form_neg31_ord3_of_disc].
+  apply shanks_inv_square_is_shanks.
+Qed.
 
 (** Same form, two families: restricted low-order fires on the
     ordinary sampler and is excluded on the Mersenne sampler. *)

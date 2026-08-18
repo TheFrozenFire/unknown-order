@@ -64,6 +64,17 @@ Definition Problem_LowOrder (N B : Z) (a k : Z) : Prop :=
 Definition Problem_AdaptiveRoot (N y : Z) (x e : Z) : Prop :=
   Problem_StrongRSA N y x e.
 
+(** Order assumption (DARK / BBF): given [g], find [e ≠ 0] with
+    [g^e = 1].  A multiple of the order, not the order itself and
+    not [LowOrder] (no bound, [g] may be [1]). *)
+Definition Problem_Annihilator (N g e : Z) : Prop :=
+  e <> 0 /\ powm g e N = 1.
+
+(** Fractional root (DARK): given [y], find [x,a,b] with [a > 0]
+    and [x^a = y^b].  RSA / Strong RSA is the case [b = 1]. *)
+Definition Problem_FractionalRoot (N y x a b : Z) : Prop :=
+  0 < a /\ powm x a N = powm y b N.
+
 (** ** What the trapdoor actually buys *)
 
 Theorem lambda_solves_RSA_on_units :
