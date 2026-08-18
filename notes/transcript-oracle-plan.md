@@ -373,6 +373,20 @@ not started: T11+K1 classify the later rows. ACGS-as-hardness stays
 
 The sweep is the oracle-world Method 1: `lsb(m_p)`, `m_p < p/2`, `(m/p)`, `m_p mod 3` match neither the recombined payload nor `(c/N)` / `c`. No public CRT-side handle.
 
+| T7 | `sign_hom_3`, `sign_of_msg_product_one`, `sign_weighted_product` | raw signatures multiply; msg-product 1 annihilates |
+
+### Self-review (adversary reading)
+
+Read every `TranscriptOracle` headline as something an adversary could fail.
+
+- **Fixed:** `rsa_inverter_recovers_message` previously restated the inverter spec (`x^e = c`). It now says `x ≡ m (mod N)`, using uniqueness of the `e`-th root on units (`rsa_dec_enc_units`). The old statement constrained nothing.
+- **Kept, scoped:** `recover_interval_correct` is integer binary search, not RSA. It is the *engine* of T11; the RSA content is `lsb_double_decides_half` feeding the comparison. Not vacuous, not a key handle.
+- **Kept, thin:** `sign_homomorphism` is `powm_mul_l`. T7 (`sign_hom_3`, product-one, weighted) is the same algebra stacked; CAS 62 pins a concrete product.
+- **Kept, encoding:** `other_legendre_from_product` is `(p-sign)² = 1`. The load-bearing sibling is `cipher_jacobi_eq_message`.
+- **Honest refuse:** `rsa_inverter_constructs_factor_named` unused; `ctor_slot_mod_r_need_not_factor` is a Closed negative.
+
+No PPT added.
+
 ## What this plan is not
 
 - A restart of Methods 1–12 on `N`

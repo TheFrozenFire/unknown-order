@@ -242,6 +242,46 @@ Definition orders_generate_lambda_named (p q : Z) (ks : Z -> Prop) : Prop :=
   (forall k, ks k -> (k | lambda_semiprime p q)) /\
   (exists K, ks K /\ K = lambda_semiprime p q).
 
+(** Two orders' lcm need not be [λ].  Both [−1] and a mixed [√1]
+    have order 2; [lcm(2,2)=2 ≠ 80] on [rsa_test].  The refuse is
+    the general sampling-completeness claim, not this negative. *)
+
+Lemma is_order_2_of :
+  forall n a,
+    1 < n ->
+    powm a 2 n = 1 ->
+    a mod n <> 1 ->
+    is_order n a 2.
+Proof.
+  intros n a Hn Hsq Hneq.
+  split; [| split]; [lia | exact Hsq |].
+  intros k' Hk.
+  assert (k' = 1) by lia. subst k'.
+  unfold powm. rewrite Z.pow_1_r. exact Hneq.
+Qed.
+
+Theorem minus1_order_2_rsa_test :
+  is_order 187 186 2.
+Proof.
+  apply is_order_2_of; [lia | vm_compute; reflexivity | vm_compute; discriminate].
+Qed.
+
+Theorem mixed67_order_2_rsa_test :
+  is_order 187 67 2.
+Proof.
+  apply is_order_2_of; [lia | vm_compute; reflexivity | vm_compute; discriminate].
+Qed.
+
+Theorem lcm_two_order2_not_lambda :
+  is_order 187 186 2 /\
+  is_order 187 67 2 /\
+  Z.lcm 2 2 <> lambda_semiprime 11 17.
+Proof.
+  split; [apply minus1_order_2_rsa_test|].
+  split; [apply mixed67_order_2_rsa_test|].
+  rewrite rsa_test_lambda. vm_compute. discriminate.
+Qed.
+
 (** ** 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)] *)
 
 Lemma powm_eq_1_iff_order_divides :

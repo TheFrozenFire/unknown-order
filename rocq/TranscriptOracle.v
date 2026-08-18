@@ -586,13 +586,99 @@ Definition rsa_inverter_constructs_factor_named : Prop :=
 Theorem rsa_inverter_recovers_message :
   forall R (Inv : rsa_inverter (rsa_N R) (rsa_e R)) m,
     Z.coprime m (rsa_N R) ->
-    powm (proj1_sig (Inv (rsa_enc R m))) (rsa_e R) (rsa_N R) =
-      rsa_enc R m.
+    proj1_sig (Inv (rsa_enc R m)) mod rsa_N R = m mod rsa_N R.
 Proof.
   intros R Inv m Hcop.
   destruct (Inv (rsa_enc R m)) as [x Hx].
   cbn.
-  exact Hx.
+  pose proof (rsa_N_gt_1 R) as HN.
+  pose proof (rsa_e_pos R) as He.
+  unfold rsa_problem, rsa_enc in Hx.
+  assert (Z.gcd (powm m (rsa_e R) (rsa_N R)) (rsa_N R) = 1) as Hunit.
+  { unfold powm. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Hcop]. }
+  assert (Z.coprime x (rsa_N R)) as Hxcop.
+  { apply (powm_unit_is_coprime x (rsa_e R) (rsa_N R));
+      [exact HN | lia |].
+    rewrite Hx. exact Hunit. }
+  transitivity (rsa_dec R (powm x (rsa_e R) (rsa_N R))).
+  - unfold rsa_dec, rsa_enc.
+    fold (rsa_enc R x). fold (rsa_dec R (rsa_enc R x)).
+    symmetry. apply rsa_dec_enc_units; exact Hxcop.
+  - rewrite Hx. fold (rsa_enc R m).
+    apply rsa_dec_enc_units; exact Hcop.
+Qed.
+
+(** ** T7 — finite products of raw signatures
+
+    [sign(∏ m_i) = ∏ sign(m_i)].  If the message product is [1]
+    then so is the signature product.  Weighted exponents commute
+    with the signing map.  Hash-then-sign stays [Refuse_hash_as_oracle]. *)
+
+Theorem sign_hom_3 :
+  forall R m1 m2 m3,
+    powm (m1 * m2 * m3) (rsa_d R) (rsa_N R) =
+      (powm m1 (rsa_d R) (rsa_N R) *
+       powm m2 (rsa_d R) (rsa_N R) *
+       powm m3 (rsa_d R) (rsa_N R)) mod rsa_N R.
+Proof.
+  intros R m1 m2 m3.
+  pose proof (rsa_N_gt_1 R).
+  pose proof (rsa_d_pos R).
+  rewrite (sign_homomorphism R (m1 * m2) m3).
+  rewrite (sign_homomorphism R m1 m2).
+  rewrite Z.mul_mod_idemp_l by lia.
+  reflexivity.
+Qed.
+
+Theorem sign_of_msg_product_one :
+  forall R m1 m2,
+    (m1 * m2) mod rsa_N R = 1 ->
+    (powm m1 (rsa_d R) (rsa_N R) * powm m2 (rsa_d R) (rsa_N R))
+      mod rsa_N R = 1.
+Proof.
+  intros R m1 m2 Hprod.
+  pose proof (rsa_N_gt_1 R).
+  pose proof (rsa_d_pos R).
+  rewrite <- sign_homomorphism.
+  unfold powm.
+  rewrite <- Z.mod_pow_l by lia.
+  rewrite Hprod.
+  rewrite Z.pow_1_l by lia.
+  apply Z.mod_small; lia.
+Qed.
+
+Theorem sign_weighted_commute :
+  forall R m a,
+    0 <= a ->
+    powm (powm m a (rsa_N R)) (rsa_d R) (rsa_N R) =
+    powm (powm m (rsa_d R) (rsa_N R)) a (rsa_N R).
+Proof.
+  intros R m a Ha.
+  pose proof (rsa_N_gt_1 R).
+  pose proof (rsa_d_pos R).
+  rewrite <- powm_mul_r by lia.
+  rewrite <- powm_mul_r by lia.
+  rewrite Z.mul_comm. reflexivity.
+Qed.
+
+Theorem sign_weighted_product :
+  forall R m1 m2 a1 a2,
+    0 <= a1 ->
+    0 <= a2 ->
+    powm ((powm m1 a1 (rsa_N R) * powm m2 a2 (rsa_N R)) mod rsa_N R)
+         (rsa_d R) (rsa_N R) =
+    (powm (powm m1 (rsa_d R) (rsa_N R)) a1 (rsa_N R) *
+     powm (powm m2 (rsa_d R) (rsa_N R)) a2 (rsa_N R)) mod rsa_N R.
+Proof.
+  intros R m1 m2 a1 a2 Ha1 Ha2.
+  pose proof (rsa_N_gt_1 R).
+  pose proof (rsa_d_pos R).
+  rewrite powm_mod_base by lia.
+  rewrite sign_homomorphism.
+  rewrite sign_weighted_commute by exact Ha1.
+  rewrite sign_weighted_commute by exact Ha2.
+  reflexivity.
 Qed.
 
 (** ** T16 — a [(·/p)] oracle plus the public product is [(·/q)] *)

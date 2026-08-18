@@ -8,6 +8,7 @@ in the Rocq tree.  Do not edit by hand.
 - L13: Accumulator membership as the RSA-shaped map
   - L150: Shamir's trick, and why same-bit-length members do not restore soundness
   - L345: Li–Li–Xue non-membership
+  - L651: Integer commitment binding (FO/DF relation)
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -39,6 +40,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `llx_lambda_forges_nonmem` | 542 |
 | Theorem | `rsa_trapdoor_add` | 595 |
 | Theorem | `peng_bao_member_still_forges` | 630 |
+| Theorem | `icomm_cancel_h` | 662 |
+| Theorem | `icomm_binding_is_fractional_root` | 706 |
+| Theorem | `icomm_same_msg_is_annihilator` | 722 |
+| Theorem | `lipmaa_cl_membership_is_P_Root` | 747 |
 
 ## `BatchOrder.v`
 
@@ -182,6 +187,9 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `dp_congruent_d` | 63 |
 | Theorem | `crt_dp_annihilates` | 67 |
 | Lemma | `short_dp_short_annihilator` | 104 |
+| Lemma | `lambda_semiprime_comm` | 117 |
+| Theorem | `crt_dq_annihilates` | 121 |
+| Lemma | `short_dq_short_annihilator` | 134 |
 
 ## `ChallengePrime.v`
 
@@ -563,6 +571,8 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `gq_extract` | 91 |
 | Theorem | `publishing_mixed_sqrt1_factors` | 123 |
 | Theorem | `gq_on_one_with_mixed_sqrt_is_factorization` | 141 |
+| Theorem | `gq_e2_complete` | 161 |
+| Theorem | `gq_e2_odd_delta_extracts_sqrt` | 173 |
 
 ## `Hardness.v`
 
@@ -810,15 +820,37 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `MultiPrime.v`
 
-- L11: Multi-prime stress test: [N = pqr] has eight roots of [1]
+- L13: Multi-prime stress test: [N = pqr] has eight roots of [1]
+  - L249: Constructive eight roots
+  - L388: [λ(pqr)] annihilates units; a one-sided period still splits
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `two_prime_sqrt1_is_pm1_each` | 21 |
-| Theorem | `three_prime_sqrt1_is_pm1_each` | 29 |
-| Theorem | `eight_pats_length` | 75 |
-| Theorem | `two_prime_arity_is_four` | 78 |
+| Theorem | `two_prime_sqrt1_is_pm1_each` | 25 |
+| Theorem | `three_prime_sqrt1_is_pm1_each` | 33 |
+| Theorem | `eight_pats_length` | 77 |
+| Theorem | `two_prime_arity_is_four` | 80 |
 | Theorem | `two_sylow_is_two_prime` | 88 |
+| Lemma | `prime_gcd_1` | 95 |
+| Lemma | `crt_coprime_exists` | 104 |
+| Lemma | `crt2_exists` | 129 |
+| Lemma | `mod_mod_product` | 143 |
+| Lemma | `three_prime_pq_coprime_r` | 157 |
+| Lemma | `crt3_exists` | 166 |
+| Theorem | `mixed_triple_splits` | 198 |
+| Lemma | `crt3_mod` | 257 |
+| Lemma | `sign_residue_pm1` | 290 |
+| Lemma | `square_mod_one_of_pm1` | 294 |
+| Lemma | `eight_sqrt1_mod` | 310 |
+| Theorem | `eight_sqrt1_squares` | 323 |
+| Theorem | `mixed_pqr_splits` | 364 |
+| Lemma | `lambda_threeprime_divides_pminus1` | 393 |
+| Lemma | `lambda_threeprime_divides_qminus1` | 402 |
+| Lemma | `lambda_threeprime_divides_rminus1` | 411 |
+| Lemma | `lambda_threeprime_pos` | 415 |
+| Lemma | `crt_one_three` | 430 |
+| Theorem | `carmichael_threeprime` | 458 |
+| Theorem | `onesided_period_splits_triple` | 500 |
 
 ## `NamedSkips.v`
 
@@ -831,7 +863,7 @@ in the Rocq tree.  Do not edit by hand.
   - L74: Existence from a positive annihilator
   - L158: [ord(a^k) = ord(a) / gcd(ord(a), k)]
   - L220: [lcm] of orders divides [λ]
-  - L245: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
+  - L285: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -843,13 +875,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `order_exists_semiprime` | 143 |
 | Theorem | `order_of_power` | 160 |
 | Theorem | `lcm_orders_divides_lambda` | 222 |
-| Lemma | `powm_eq_1_iff_order_divides` | 247 |
-| Lemma | `pow2_divides_pow2` | 258 |
-| Theorem | `two_height_is_val2_ord` | 281 |
-| Theorem | `order_2_mod_11` | 340 |
-| Theorem | `order_2_mod_17` | 351 |
-| Theorem | `two_height_independent_of_odd_multiple` | 364 |
-| Theorem | `height_is_val2_ord_textbook` | 380 |
+| Lemma | `is_order_2_of` | 249 |
+| Theorem | `minus1_order_2_rsa_test` | 263 |
+| Theorem | `mixed67_order_2_rsa_test` | 269 |
+| Theorem | `lcm_two_order2_not_lambda` | 275 |
+| Lemma | `powm_eq_1_iff_order_divides` | 287 |
+| Lemma | `pow2_divides_pow2` | 298 |
+| Theorem | `two_height_is_val2_ord` | 321 |
+| Theorem | `order_2_mod_11` | 380 |
+| Theorem | `order_2_mod_17` | 391 |
+| Theorem | `two_height_independent_of_odd_multiple` | 404 |
+| Theorem | `height_is_val2_ord_textbook` | 420 |
 
 ## `PollardP1.v`
 
@@ -1099,9 +1135,10 @@ in the Rocq tree.  Do not edit by hand.
   - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
   - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
   - L574: RSA inverter vs Rabin inverter
-  - L598: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
-  - L677: Constructor slot vs K1
-  - L715: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
+  - L612: T7 — finite products of raw signatures
+  - L684: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
+  - L763: Constructor slot vs K1
+  - L801: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1139,14 +1176,18 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `sign_neg1_odd` | 547 |
 | Theorem | `odd_exp_preserves_minus1` | 559 |
 | Theorem | `rsa_inverter_recovers_message` | 586 |
-| Lemma | `euler_sign_of_pm1` | 606 |
-| Lemma | `euler_sign_sq` | 623 |
-| Theorem | `other_legendre_from_product` | 634 |
-| Theorem | `cipher_jacobi_eq_message` | 647 |
-| Theorem | `onesided_plain_one_factors` | 682 |
-| Theorem | `ctor_slot_mod_r_need_not_factor` | 697 |
-| Theorem | `cube_below_N` | 717 |
-| Theorem | `e3_small_cube_verifies` | 732 |
+| Theorem | `sign_hom_3` | 618 |
+| Theorem | `sign_of_msg_product_one` | 634 |
+| Theorem | `sign_weighted_commute` | 651 |
+| Theorem | `sign_weighted_product` | 665 |
+| Lemma | `euler_sign_of_pm1` | 692 |
+| Lemma | `euler_sign_sq` | 709 |
+| Theorem | `other_legendre_from_product` | 720 |
+| Theorem | `cipher_jacobi_eq_message` | 733 |
+| Theorem | `onesided_plain_one_factors` | 768 |
+| Theorem | `ctor_slot_mod_r_need_not_factor` | 783 |
+| Theorem | `cube_below_N` | 803 |
+| Theorem | `e3_small_cube_verifies` | 818 |
 
 ## `TwoPrimary.v`
 
@@ -1246,4 +1287,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_844 theorems/lemmas/corollaries/examples across 45 files._
+_881 theorems/lemmas/corollaries/examples across 45 files._

@@ -153,3 +153,42 @@ Proof.
   exists (Z.gcd (sqrt1_pm p q - 1) (p * q)).
   split; [lia|exact Hdiv].
 Qed.
+
+(** Fiat–Shamir factoring ID is GQ at [e = 2]: completeness is
+    [gq_complete]; an odd challenge-difference extracts a square
+    root; a mixed [√1] factors.  Simulation stays named. *)
+
+Theorem gq_e2_complete :
+  forall N x z k c,
+    1 < N ->
+    0 <= c ->
+    0 <= k ->
+    0 <= x ->
+    powm x 2 N = z ->
+    gq_verify z 2 (gq_commit k 2 N) c (gq_response k x c N) N.
+Proof.
+  intros. apply gq_complete; lia || assumption.
+Qed.
+
+Theorem gq_e2_odd_delta_extracts_sqrt :
+  forall N z t c c' r r',
+    1 < N ->
+    0 <= c' ->
+    c' < c ->
+    Z.Odd (c - c') ->
+    Z.coprime r N ->
+    Z.coprime r' N ->
+    Z.coprime z N ->
+    gq_verify z 2 t c r N ->
+    gq_verify z 2 t c' r' N ->
+    exists w, powm w 2 N = z mod N.
+Proof.
+  intros N z t c c' r r' Hn Hc' Hcc Hodd Hr Hr' Hz Hv Hv'.
+  apply (gq_extract N 2 z t c c' r r'); try (assumption || lia).
+  unfold Z.coprime.
+  destruct Hodd as [k Hk].
+  rewrite Hk.
+  replace (2 * k + 1) with (1 + k * 2) by ring.
+  rewrite Z.gcd_comm, Z.gcd_add_mult_diag_r, Z.gcd_1_r.
+  reflexivity.
+Qed.

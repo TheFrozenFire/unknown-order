@@ -61,7 +61,9 @@ recovers `{p, q}` from `φ` or `p+q`. Miller successive-squaring turns a height
 mismatch into a factor (`MillerHeight`: heights are `v₂(ord)`). Miller–Rabin is
 the same engine on a different exponent.
 
-`rocq/RSA.v`, `FactorEnum.v`, `Miller.v`, `Order.v`, `TwoSylow.v`. CAS `01`–`07`, `25`.
+`rocq/RSA.v`, `FactorEnum.v`, `Miller.v`, `Order.v`, `TwoSylow.v`.
+Two order-2 units do not generate `λ` (`lcm_two_order2_not_lambda`).
+CAS `01`–`07`, `25`, `64`.
 
 ### Key generation is a leaked annihilator
 
@@ -79,9 +81,11 @@ ROCA, Coron–May) are interfaces only.
 
 `e = 2` is not an RSA exponent. Squaring is 4-to-1. Four `√1` via CRT; mixed
 roots split `N`. Williams primes give a unique QR among `{±a, ±2a}`. Three
-primes give eight roots of 1, not four (`MultiPrime`).
+primes give eight roots of 1, not four (`eight_sqrt1_squares`); a mixed
+pattern splits `N` (`mixed_pqr_splits`). `λ(pqr)` annihilates units
+(`carmichael_threeprime`).
 
-`QuadResidue.v`, `RabinWilliams.v`, `TwoPrimary.v`. CAS `19`–`20`.
+`QuadResidue.v`, `RabinWilliams.v`, `TwoPrimary.v`, `MultiPrime.v`. CAS `19`–`20`, `59`.
 
 ### Second incarnation: `Cl(Δ)`
 
@@ -162,7 +166,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 58 witnesses, `cas/01`–`58`. PARI is the gated CAS; do not add OSCAR.
+CAS is 65 witnesses, `cas/01`–`65`. PARI is the gated CAS; do not add OSCAR.
 
 ## Constructor (not a filter)
 
@@ -201,15 +205,12 @@ CAS `32`–`38`.
 
 ## What is left
 
-The remaining hunt is `Refuse_undirected_611_hunt`: a *named*
-modern sampler that leaks a Type A–E handle not already in
-`notes/keygen-weaknesses.md`. Not another incarnation, and not
-an undirected KeyGen pass. A directed attempt to find a
-*sixth algebraic type* (a public function of `N` that leaks
-for a reason A–E do not name) is
-[`notes/sixth-type-plan.md`](notes/sixth-type-plan.md)
-(Methods 1–12 exhausted: no new letter). Handles from
-ciphertexts, signatures, and decrypt/sign oracles are
-[`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md).
-Everything else that was once a checkbox is either a theorem
-or a `NamedRefuse` / `*_named` in `generated/NAMED_SKIPS.md`.
+The sixth-type hunt on public `N` is exhausted
+([`notes/sixth-type-plan.md`](notes/sixth-type-plan.md)).
+Transcripts and oracles are catalogued and the cheap algebra
+is closed
+([`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md)).
+`Refuse_undirected_611_hunt` still names “wander through
+KeyGen samplers.” Active work is the deepen/widen/refine
+runway: [`notes/autonomous-runway.md`](notes/autonomous-runway.md).
+Gaps that stay named are `generated/NAMED_SKIPS.md`.

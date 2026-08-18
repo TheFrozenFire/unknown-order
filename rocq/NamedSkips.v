@@ -49,7 +49,8 @@ Inductive NamedRefuse : Set :=
   | Refuse_polynomial_gcd_over_ZN
   | Refuse_RW_signature_scheme
   | Refuse_EN_card_from_N
-  | Refuse_Redei_4rank_fund_minus4N.
+  | Refuse_Redei_4rank_fund_minus4N
+  | Refuse_UO_GGM.
 
 (** Dirichlet: a prime in a coprime AP.  Unused: refuse of
     existence in a constructor window.  Image-in-class of a

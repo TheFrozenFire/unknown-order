@@ -32,8 +32,8 @@ pass would quote the claim and point at a Rocq name (or add one).
 |---|---|---|---|
 | Dobson–Galbraith–Smith [arXiv:2211.16128](https://arxiv.org/abs/2211.16128) (eprint 2020/196) | knowing `h(Δ)` trivializes AR *search* on `Cl`, same as `λ+1` on units | `annihilator_plus_one_is_strong_RSA`; `class_number_solves_AR_neg31` (pin `h=3` on `Cl(−31)`). `D+1` is still not `h` (`cl_has_no_lambda_plus_one`). Bit-length / Sutherland cost stays named. |
 | Bünz–Fisch–Szepieniec DARK (eprint 2019/1229; surveyed in [arXiv:2306.11383](https://arxiv.org/abs/2306.11383)) | *order assumption*: given random `g`, find `e ≠ 0` with `g^e = 1`; *r-fractional root*: `x^a = y^b` | `Problem_Annihilator` / `P_Annihilator`; `Problem_FractionalRoot` / `P_FractionalRoot`. RSA/sRSA are fractional root at `b=1`. `r`-powers stay named. |
-| Hhan [arXiv:2402.11269](https://arxiv.org/abs/2402.11269) | unknown-order *generic group* lower bounds for order-finding, root extraction, repeated squaring | Model-relative, like AM09. Record as “UO-GGM ≠ standard model”. The identities (root extraction = AR search) we already have. | Do **not** build a GGM. Name the model mismatch next to AM09. |
-| Jurkiewicz [arXiv:2503.00950](https://arxiv.org/abs/2503.00950) | even-order elements / `√1` factor `N` | Our mixed CRT / Rabin / `TwoSylow` / one-sided vs two-sided | Check overlap only; do not re-derive. |
+| Hhan [arXiv:2402.11269](https://arxiv.org/abs/2402.11269) | unknown-order *generic group* lower bounds for order-finding, root extraction, repeated squaring | Model-relative, like AM09. `Refuse_UO_GGM`. Identities (root extraction = AR search) already have. | Do **not** build a GGM. |
+| Jurkiewicz [arXiv:2503.00950](https://arxiv.org/abs/2503.00950) | even-order elements / `√1` factor `N` | Overlap only: `mixed_sqrt1_splits`, `rabin_roots_split`, `TwoSylow`, `MultiPrime` | Do not re-derive. |
 | Damgård–Koprowski (generic UO groups, 2002; not arXiv-native) | generic-group lower bounds for DL / order in UO groups | Same bucket as Hhan / AM09 | Named refuse, not a formalization. |
 
 ## C. Uses the assumptions; do not treat as hardness theorems

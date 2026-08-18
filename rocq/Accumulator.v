@@ -647,3 +647,106 @@ Proof.
   - apply Z.divide_gcd_iff in Hdiv; [| lia].
     rewrite Z.gcd_comm, Hdiv. reflexivity.
 Qed.
+
+(** ** Integer commitment binding (FO/DF relation)
+
+    [C = g^x h^r].  Two openings with [x > x'] and [r' ≥ r] cancel
+    to [g^{x−x'} = h^{r'−r}], a [Problem_FractionalRoot].  Equal
+    messages and distinct randomness give an annihilator of [h].
+    Hiding stays [Refuse_HVZK_simulation] / [Refuse_PPT_advantage].
+    This is the *binding relation*, not the broken 1997 proof. *)
+
+Definition icomm (N g h x r : Z) : Z :=
+  (powm g x N * powm h r N) mod N.
+
+Theorem icomm_cancel_h :
+  forall N g h x r x' r',
+    1 < N ->
+    Z.coprime g N ->
+    Z.coprime h N ->
+    0 <= x' <= x ->
+    0 <= r <= r' ->
+    icomm N g h x r = icomm N g h x' r' ->
+    powm g (x - x') N = powm h (r' - r) N.
+Proof.
+  intros N g h x r x' r' HN Hg Hh Hx Hr Heq.
+  unfold icomm in Heq.
+  assert (0 <= x - x') as Hdx by lia.
+  assert (0 <= r' - r) as Hdr by lia.
+  assert (powm g x N = (powm g x' N * powm g (x - x') N) mod N) as Hgx.
+  { replace (powm g x N) with (powm g (x' + (x - x')) N) by (f_equal; lia).
+    rewrite powm_add_r by lia. reflexivity. }
+  assert (powm h r' N = (powm h r N * powm h (r' - r) N) mod N) as Hhr.
+  { replace (powm h r' N) with (powm h (r + (r' - r)) N) by (f_equal; lia).
+    rewrite powm_add_r by lia. reflexivity. }
+  rewrite Hgx, Hhr in Heq.
+  rewrite Z.mul_mod_idemp_l, Z.mul_mod_idemp_r in Heq by lia.
+  rewrite <- Z.mul_assoc in Heq.
+  rewrite (Z.mul_comm (powm g (x - x') N) (powm h r N)) in Heq.
+  rewrite Z.mul_assoc in Heq.
+  assert (Z.gcd (powm g x' N * powm h r N) N = 1) as Hu.
+  { apply Z.coprime_mul_l.
+    - unfold Z.coprime, powm. rewrite Z.gcd_mod_l.
+      apply Z.coprime_pow_l; [lia | exact Hg].
+    - unfold Z.coprime, powm. rewrite Z.gcd_mod_l.
+      apply Z.coprime_pow_l; [lia | exact Hh]. }
+  set (u := powm g x' N * powm h r N).
+  transitivity (powm g (x - x') N mod N).
+  - unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+  - transitivity (powm h (r' - r) N mod N).
+    + apply (mul_cancel_r_coprime (powm g (x - x') N) (powm h (r' - r) N)
+               u N HN Hu).
+      unfold u.
+      rewrite (Z.mul_comm (powm g (x - x') N)).
+      rewrite Heq.
+      f_equal. ring.
+    + unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Theorem icomm_binding_is_fractional_root :
+  forall N g h x r x' r',
+    1 < N ->
+    Z.coprime g N ->
+    Z.coprime h N ->
+    0 <= x' < x ->
+    0 <= r <= r' ->
+    icomm N g h x r = icomm N g h x' r' ->
+    Problem_FractionalRoot N h g (x - x') (r' - r).
+Proof.
+  intros N g h x r x' r' HN Hg Hh Hx Hr Heq.
+  unfold Problem_FractionalRoot.
+  split; [lia|].
+  apply icomm_cancel_h; try assumption; lia.
+Qed.
+
+Theorem icomm_same_msg_is_annihilator :
+  forall N g h x r r',
+    1 < N ->
+    Z.coprime g N ->
+    Z.coprime h N ->
+    0 <= x ->
+    0 <= r < r' ->
+    icomm N g h x r = icomm N g h x r' ->
+    Problem_Annihilator N h (r' - r).
+Proof.
+  intros N g h x r r' HN Hg Hh Hx Hr Heq.
+  unfold Problem_Annihilator.
+  split; [lia|].
+  pose proof (icomm_cancel_h N g h x r x r' HN Hg Hh ltac:(lia) ltac:(lia) Heq)
+    as Hcan.
+  rewrite Z.sub_diag in Hcan.
+  unfold powm at 1 in Hcan.
+  rewrite Z.pow_0_r, Z.mod_1_l in Hcan by lia.
+  symmetry. exact Hcan.
+Qed.
+
+(** Lipmaa-style static membership on [Cl] is the same map as
+    [acc_mem_wit]: a witness [W^x = A] is [P_Root].  No class-number
+    algorithm and no [λ] to delete with. *)
+
+Theorem lipmaa_cl_membership_is_P_Root :
+  forall D A W x,
+    (x > 0)%nat ->
+    acc_mem_wit (cl_presentation D) A W x ->
+    P_Root (cl_presentation D) x A W.
+Proof. intros. apply membership_witness_is_root; assumption. Qed.

@@ -62,6 +62,10 @@ map is a permutation, so `(N,e,x^e)` and `(N,e,y)` are identical.
 
 - Factoring ≤ RSA (oracle inversion ⇒ factors). Boneh–Venkatesan:
   a straight-line reduction for small `e` is unlikely.
+  An `rsa_inverter` recovers `m` (`rsa_inverter_recovers_message`)
+  and does not construct a factor
+  (`rsa_inverter_constructs_factor_named`). Rabin inversion of a
+  planted square does (`rabin_oracle_nonassociate_factors`).
 - Aggarwal–Maurer (generic ring) is not that converse in the
   standard model. Citing it as “RSA ≡ factoring” is a model mismatch
   (`notes/paper-overlaps.md` row 8).

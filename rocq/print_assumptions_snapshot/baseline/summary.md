@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 844 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 881 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 844 results across 45 files.
+Captured for 881 results across 45 files.
 
 Counts:
 
@@ -41,6 +41,10 @@ Counts:
 | `llx_lambda_forges_nonmem` | 542 | 0 | 0 | OK |
 | `rsa_trapdoor_add` | 595 | 0 | 0 | OK |
 | `peng_bao_member_still_forges` | 630 | 0 | 0 | OK |
+| `icomm_cancel_h` | 662 | 0 | 0 | OK |
+| `icomm_binding_is_fractional_root` | 706 | 0 | 0 | OK |
+| `icomm_same_msg_is_annihilator` | 722 | 0 | 0 | OK |
+| `lipmaa_cl_membership_is_P_Root` | 747 | 0 | 0 | OK |
 
 ## BatchOrder.v
 
@@ -171,6 +175,9 @@ Counts:
 | `dp_congruent_d` | 63 | 0 | 0 | OK |
 | `crt_dp_annihilates` | 67 | 0 | 0 | OK |
 | `short_dp_short_annihilator` | 104 | 0 | 0 | OK |
+| `lambda_semiprime_comm` | 117 | 0 | 0 | OK |
+| `crt_dq_annihilates` | 121 | 0 | 0 | OK |
+| `short_dq_short_annihilator` | 134 | 0 | 0 | OK |
 
 ## ChallengePrime.v
 
@@ -513,6 +520,8 @@ Counts:
 | `gq_extract` | 91 | 0 | 0 | OK |
 | `publishing_mixed_sqrt1_factors` | 123 | 0 | 0 | OK |
 | `gq_on_one_with_mixed_sqrt_is_factorization` | 141 | 0 | 0 | OK |
+| `gq_e2_complete` | 161 | 0 | 0 | OK |
+| `gq_e2_odd_delta_extracts_sqrt` | 173 | 0 | 0 | OK |
 
 ## Hardness.v
 
@@ -727,11 +736,31 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `two_prime_sqrt1_is_pm1_each` | 21 | 0 | 0 | OK |
-| `three_prime_sqrt1_is_pm1_each` | 29 | 0 | 0 | OK |
-| `eight_pats_length` | 75 | 0 | 0 | OK |
-| `two_prime_arity_is_four` | 78 | 0 | 0 | OK |
+| `two_prime_sqrt1_is_pm1_each` | 25 | 0 | 0 | OK |
+| `three_prime_sqrt1_is_pm1_each` | 33 | 0 | 0 | OK |
+| `eight_pats_length` | 77 | 0 | 0 | OK |
+| `two_prime_arity_is_four` | 80 | 0 | 0 | OK |
 | `two_sylow_is_two_prime` | 88 | 0 | 0 | OK |
+| `prime_gcd_1` | 95 | 0 | 0 | OK |
+| `crt_coprime_exists` | 104 | 0 | 0 | OK |
+| `crt2_exists` | 129 | 0 | 0 | OK |
+| `mod_mod_product` | 143 | 0 | 0 | OK |
+| `three_prime_pq_coprime_r` | 157 | 0 | 0 | OK |
+| `crt3_exists` | 166 | 0 | 0 | OK |
+| `mixed_triple_splits` | 198 | 0 | 0 | OK |
+| `crt3_mod` | 257 | 0 | 0 | OK |
+| `sign_residue_pm1` | 290 | 0 | 0 | OK |
+| `square_mod_one_of_pm1` | 294 | 0 | 0 | OK |
+| `eight_sqrt1_mod` | 310 | 0 | 0 | OK |
+| `eight_sqrt1_squares` | 323 | 0 | 0 | OK |
+| `mixed_pqr_splits` | 364 | 0 | 0 | OK |
+| `lambda_threeprime_divides_pminus1` | 393 | 0 | 0 | OK |
+| `lambda_threeprime_divides_qminus1` | 402 | 0 | 0 | OK |
+| `lambda_threeprime_divides_rminus1` | 411 | 0 | 0 | OK |
+| `lambda_threeprime_pos` | 415 | 0 | 0 | OK |
+| `crt_one_three` | 430 | 0 | 0 | OK |
+| `carmichael_threeprime` | 458 | 0 | 0 | OK |
+| `onesided_period_splits_triple` | 500 | 0 | 0 | OK |
 
 ## Order.v
 
@@ -745,13 +774,17 @@ Counts:
 | `order_exists_semiprime` | 143 | 0 | 0 | OK |
 | `order_of_power` | 160 | 0 | 0 | OK |
 | `lcm_orders_divides_lambda` | 222 | 0 | 0 | OK |
-| `powm_eq_1_iff_order_divides` | 247 | 0 | 0 | OK |
-| `pow2_divides_pow2` | 258 | 0 | 0 | OK |
-| `two_height_is_val2_ord` | 281 | 0 | 0 | OK |
-| `order_2_mod_11` | 340 | 0 | 0 | OK |
-| `order_2_mod_17` | 351 | 0 | 0 | OK |
-| `two_height_independent_of_odd_multiple` | 364 | 0 | 0 | OK |
-| `height_is_val2_ord_textbook` | 380 | 0 | 0 | OK |
+| `is_order_2_of` | 249 | 0 | 0 | OK |
+| `minus1_order_2_rsa_test` | 263 | 0 | 0 | OK |
+| `mixed67_order_2_rsa_test` | 269 | 0 | 0 | OK |
+| `lcm_two_order2_not_lambda` | 275 | 0 | 0 | OK |
+| `powm_eq_1_iff_order_divides` | 287 | 0 | 0 | OK |
+| `pow2_divides_pow2` | 298 | 0 | 0 | OK |
+| `two_height_is_val2_ord` | 321 | 0 | 0 | OK |
+| `order_2_mod_11` | 380 | 0 | 0 | OK |
+| `order_2_mod_17` | 391 | 0 | 0 | OK |
+| `two_height_independent_of_odd_multiple` | 404 | 0 | 0 | OK |
+| `height_is_val2_ord_textbook` | 420 | 0 | 0 | OK |
 
 ## PollardP1.v
 
@@ -986,14 +1019,18 @@ Counts:
 | `sign_neg1_odd` | 547 | 0 | 0 | OK |
 | `odd_exp_preserves_minus1` | 559 | 0 | 0 | OK |
 | `rsa_inverter_recovers_message` | 586 | 0 | 0 | OK |
-| `euler_sign_of_pm1` | 606 | 0 | 0 | OK |
-| `euler_sign_sq` | 623 | 0 | 0 | OK |
-| `other_legendre_from_product` | 634 | 0 | 0 | OK |
-| `cipher_jacobi_eq_message` | 647 | 0 | 0 | OK |
-| `onesided_plain_one_factors` | 682 | 0 | 0 | OK |
-| `ctor_slot_mod_r_need_not_factor` | 697 | 0 | 0 | OK |
-| `cube_below_N` | 717 | 0 | 0 | OK |
-| `e3_small_cube_verifies` | 732 | 0 | 0 | OK |
+| `sign_hom_3` | 618 | 0 | 0 | OK |
+| `sign_of_msg_product_one` | 634 | 0 | 0 | OK |
+| `sign_weighted_commute` | 651 | 0 | 0 | OK |
+| `sign_weighted_product` | 665 | 0 | 0 | OK |
+| `euler_sign_of_pm1` | 692 | 0 | 0 | OK |
+| `euler_sign_sq` | 709 | 0 | 0 | OK |
+| `other_legendre_from_product` | 720 | 0 | 0 | OK |
+| `cipher_jacobi_eq_message` | 733 | 0 | 0 | OK |
+| `onesided_plain_one_factors` | 768 | 0 | 0 | OK |
+| `ctor_slot_mod_r_need_not_factor` | 783 | 0 | 0 | OK |
+| `cube_below_N` | 803 | 0 | 0 | OK |
+| `e3_small_cube_verifies` | 818 | 0 | 0 | OK |
 
 ## TwoPrimary.v
 

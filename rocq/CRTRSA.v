@@ -113,3 +113,31 @@ Proof.
 Qed.
 
 Definition crt_dq (d q : Z) : Z := d mod (q - 1).
+
+Lemma lambda_semiprime_comm :
+  forall p q, lambda_semiprime p q = lambda_semiprime q p.
+Proof. intros p q. unfold lambda_semiprime. apply Z.lcm_comm. Qed.
+
+Theorem crt_dq_annihilates :
+  forall e d p q,
+    Z.prime p -> Z.prime q -> 3 <= q ->
+    0 <= e ->
+    (e * d) mod (lambda_semiprime p q) = 1 ->
+    annihilates_p q (e * crt_dq d q - 1).
+Proof.
+  intros e d p q Hp Hq Hq3 He Hinv.
+  apply (crt_dp_annihilates e d q p Hq Hp Hq3 He).
+  rewrite lambda_semiprime_comm in Hinv.
+  exact Hinv.
+Qed.
+
+Lemma short_dq_short_annihilator :
+  forall e d q B,
+    0 < e -> 0 < B ->
+    0 < q - 1 ->
+    crt_dq d q < B ->
+    e * crt_dq d q - 1 < e * B.
+Proof.
+  intros e d q B He HB Hq Hdq.
+  unfold crt_dq in *. nia.
+Qed.

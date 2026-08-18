@@ -23,7 +23,7 @@ unless noted. What changes is the *member encoding*, the
 | 2024/505 | odd integers + peel small factors | `(W, s)` | ROM + large prime factor | Algebra have; ROM named |
 | Baldimtsi et al. Braavos / CL-RSA-B | primes | trapdoor add: `w = A^{H(x)^{-1} mod λ}` | acc unchanged on add | **Have:** `rsa_trapdoor_add` (no hash; `x` is the exponent). Also `rsa_acc_forge_from_lambda` |
 | Boneh–Bünz–Fisch 2019 | primes | batched via PoE | Wesolowski | **Have** PoE algebra; aggregation is the same root |
-| Lipmaa 2012 | Euclidean ring / DIH | static | class groups, no setup | **Yes** on `cl_presentation`; `H` is the family |
+| Lipmaa 2012 | Euclidean ring / DIH | static | class groups, no setup | **Have:** `lipmaa_cl_membership_is_P_Root`. CAS 65 |
 | Mashatan–Vaudenay 2013 | primes | dynamic non-membership | LLX + updates | After LLX |
 | Camacho–Hevia 2010 | any secure dynamic | — | `Ω(m)` update communication | Interface theorem, not a group problem |
 | Sander / Goodrich–Tamassia–Hasic | RSA + trees | logarithmic | hybrid | Skip trees |
@@ -41,9 +41,9 @@ Three layers. Only the first is this repo’s style.
 | Approach | Statement | Extraction / algebra | Formalize? |
 |---|---|---|---|
 | Guillou–Quisquater 1988 | PoK of an `e`-th root: `x^e = z` | two transcripts `(c,r)`, `(c',r')` ⇒ Shamir on `r/r'` and `c−c'` yields an `e`-th root if `gcd(c−c', e)=1` | **Have:** `gq_complete`, `gq_extract`. ZK simulation named |
-| Fiat–Shamir 1986 (factoring ID) | PoK of a square root | same, `e=2`; a non-trivial `√1` factors | **Yes.** Completeness + Rabin split (have) |
+| Fiat–Shamir 1986 (factoring ID) | PoK of a square root | same, `e=2`; a non-trivial `√1` factors | **Have:** `gq_e2_complete`, `gq_e2_odd_delta_extracts_sqrt`. CAS 60 |
 | “Here is `√1 ≠ ±1`” | “I know the factors” | mixed CRT root *is* the factors | **Have:** `publishing_mixed_sqrt1_factors`, `gq_on_one_with_mixed_sqrt_is_factorization`. Proof of knowledge, **not** ZK |
-| FO / DF integer commitment | `C = g^x h^r` in a UO group | binding = Strong RSA (opening two ways ⇒ a root) | **Yes**, binding as a relation. Hiding named |
+| FO / DF integer commitment | `C = g^x h^r` in a UO group | binding = Strong RSA (opening two ways ⇒ a root) | **Have:** `icomm_binding_is_fractional_root`, `icomm_same_msg_is_annihilator`. Hiding named |
 | CL-RSA-B / trapdoor membership | `w^x = A` | that *is* `P_Root` | **Have** |
 | Wesolowski / Pietrzak | `v^e = u` | PoE, not ZK (the statement is the result) | **Have** the algebra; do not call it ZK |
 
