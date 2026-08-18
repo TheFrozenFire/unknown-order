@@ -206,6 +206,21 @@ a sixth type.
 Do not resume Method 2 unless a *named* new reading of
 `{a^{N+1} mod N}` is proposed.
 
+**Scale supplement (`cas/44_euler_quotient_scale.gp`).** The
+identity is a theorem at every size; bit length cannot produce a
+counterexample. CAS still pinned it with N-derived bases at
+128, 256, 512, 1024, 2048-bit primes, sparsely at 4096, and
+`a=2` at 8192. Imbalanced pins: 32+96, 64+192, 256+1792,
+16+2048. N-derived bases (`2√N`, `√N`, `N/2`, `nextprime(√N)`)
+show no bit leak at 32/64-bit. Imbalanced 32+96 same; Fermat-in-
+exponent fails *harder* off the diagonal (AM-GM). `g(N±1)=1`
+is torsion, not a new bit. **16384-bit pin not run** — PARI
+modular exp at that size is the wrong tool; do not resume it
+in `gp`. A structural leak would have shown at 16–64-bit. A
+bias `ε ~ 2^{-n/2}` is *easier* to see at 16-bit than at
+2048-bit. What 2048-bit statistics cannot add, cheaply, is a
+test of an unnamed polytime extractor (`Refuse_PPT_advantage`).
+
 ---
 
 ## Method 3 — Quadratic forms of `Δ(N)`
