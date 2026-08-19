@@ -72,6 +72,8 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | `N = (p₁+p₂)(q₁+q₂)` | **Have** `dkg_N_is_product` |
 | Published `(N, p+q)` factors | **Have** `FactorEnum` / `sum_from_phi` |
 | `#{x : x²≡1 (mod N)} = 2^{ω(N)}` for odd squarefree `N` | **Have** k=2,3 constructed; mixed split; k=3 ≠ k=2 |
+| Product of two KeyGen keys, CRT of local `d` | **Have** `carmichael_shared`, `d_star_inverts`, `shared_dec_eq_powm`; CAS 78–80 |
+| Arity 3 (triplet of coprime cofactors) | **Have** `carmichael_shared3` |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |
 | Shared `φ` or `λ` from shares of `p+q` | Publishing it factors (above) |

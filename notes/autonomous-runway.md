@@ -140,3 +140,7 @@ Cramer–Shoup verify, T10 wrap + PKCS#1 `[2B,3B)`, Shamir 2-of-3,
 
 RSA-land wave 4: Damgård–Jurik `s=2` binomial on `N³`; Takagi
 `a^{ed} ≡ a (mod p²)`. CAS 77.
+
+Shared-key DKG algebra: product of two KeyGen-valid moduli,
+CRT of local inverses of a common `e`, Garner of local decrypts
+is `c^{d*}`. Arity 3 is the same theorem. CAS 78–80.

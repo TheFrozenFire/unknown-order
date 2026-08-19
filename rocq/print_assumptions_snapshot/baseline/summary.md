@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 927 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 958 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 927 results across 55 files.
+Captured for 958 results across 56 files.
 
 Counts:
 
@@ -955,6 +955,42 @@ Counts:
 | `rw_verify_of_root` | 304 | 0 | 0 | OK |
 | `kg_rw_implies_blum` | 315 | 0 | 0 | OK |
 | `kg_rw_pminus1_almost_odd` | 323 | 0 | 0 | OK |
+
+## SharedKey.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `lambda_A_divides_product` | 44 | 0 | 0 | OK |
+| `lambda_B_divides_product` | 48 | 0 | 0 | OK |
+| `lambda_product_pos` | 52 | 0 | 0 | OK |
+| `lambda_product_gt_1` | 65 | 0 | 0 | OK |
+| `coprime_product_split` | 75 | 0 | 0 | OK |
+| `crt_mod_eq_coprime` | 81 | 0 | 0 | OK |
+| `crt_one_coprime_moduli` | 98 | 0 | 0 | OK |
+| `carmichael_shared` | 119 | 0 | 0 | OK |
+| `gcd_of_divisor` | 146 | 0 | 0 | OK |
+| `inverses_agree_mod_gcd` | 164 | 0 | 0 | OK |
+| `rsa_e_gcd_lambda` | 195 | 0 | 0 | OK |
+| `crt_exists_gcd` | 199 | 0 | 0 | OK |
+| `d_star_exists` | 246 | 0 | 0 | OK |
+| `d_star_exists_nonneg` | 266 | 0 | 0 | OK |
+| `d_star_inverts` | 294 | 0 | 0 | OK |
+| `powm_mod_lambda` | 322 | 0 | 0 | OK |
+| `shared_dec_mod_A` | 350 | 0 | 0 | OK |
+| `shared_dec_mod_B` | 364 | 0 | 0 | OK |
+| `shared_dec_eq_powm` | 376 | 0 | 0 | OK |
+| `prime_5` | 421 | 0 | 0 | OK |
+| `prime_23` | 429 | 0 | 0 | OK |
+| `prime_41` | 441 | 0 | 0 | OK |
+| `rsa_5_23_N` | 481 | 0 | 0 | OK |
+| `rsa_5_41_N` | 484 | 0 | 0 | OK |
+| `d_star_depends_on_both` | 487 | 0 | 0 | OK |
+| `two_partners_two_dstars` | 497 | 0 | 0 | OK |
+| `product_carries_component_keygen` | 520 | 0 | 0 | OK |
+| `product_common_e_inverts` | 526 | 0 | 0 | OK |
+| `product_refuses_shared_prime` | 536 | 0 | 0 | OK |
+| `d_star_gt_lambda_div_e` | 542 | 0 | 0 | OK |
+| `carmichael_shared3` | 580 | 0 | 0 | OK |
 
 ## SharedModulus.v
 

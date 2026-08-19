@@ -1095,6 +1095,50 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `kg_rw_implies_blum` | 315 |
 | Lemma | `kg_rw_pminus1_almost_odd` | 323 |
 
+## `SharedKey.v`
+
+- L15: Shared RSA key from two KeyGen-valid parts
+  - L42: Layer 1 — Carmichael of a coprime product
+  - L144: Layer 2 — CRT of inverses of a common [e]
+  - L320: Layer 3 — local decrypt + CRT = global [c^{d*}]
+  - L419: Layer 4 — one local [d] does not determine [d*]
+  - L512: Layer 5 — lifted KeyGen spec
+  - L568: Layer 6 — arity 3
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `lambda_A_divides_product` | 44 |
+| Lemma | `lambda_B_divides_product` | 48 |
+| Lemma | `lambda_product_pos` | 52 |
+| Lemma | `lambda_product_gt_1` | 65 |
+| Lemma | `coprime_product_split` | 75 |
+| Lemma | `crt_mod_eq_coprime` | 81 |
+| Lemma | `crt_one_coprime_moduli` | 98 |
+| Theorem | `carmichael_shared` | 119 |
+| Lemma | `gcd_of_divisor` | 146 |
+| Lemma | `inverses_agree_mod_gcd` | 164 |
+| Lemma | `rsa_e_gcd_lambda` | 195 |
+| Lemma | `crt_exists_gcd` | 199 |
+| Theorem | `d_star_exists` | 246 |
+| Theorem | `d_star_exists_nonneg` | 266 |
+| Theorem | `d_star_inverts` | 294 |
+| Lemma | `powm_mod_lambda` | 322 |
+| Lemma | `shared_dec_mod_A` | 350 |
+| Lemma | `shared_dec_mod_B` | 364 |
+| Theorem | `shared_dec_eq_powm` | 376 |
+| Lemma | `prime_5` | 421 |
+| Lemma | `prime_23` | 429 |
+| Lemma | `prime_41` | 441 |
+| Theorem | `rsa_5_23_N` | 481 |
+| Theorem | `rsa_5_41_N` | 484 |
+| Theorem | `d_star_depends_on_both` | 487 |
+| Theorem | `two_partners_two_dstars` | 497 |
+| Theorem | `product_carries_component_keygen` | 520 |
+| Theorem | `product_common_e_inverts` | 526 |
+| Theorem | `product_refuses_shared_prime` | 536 |
+| Theorem | `d_star_gt_lambda_div_e` | 542 |
+| Theorem | `carmichael_shared3` | 580 |
+
 ## `SharedModulus.v`
 
 - L12: Shared-modulus DKG algebra (Boneh–Franklin shape)
@@ -1405,4 +1449,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_927 theorems/lemmas/corollaries/examples across 55 files._
+_958 theorems/lemmas/corollaries/examples across 56 files._
