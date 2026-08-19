@@ -70,5 +70,6 @@ TwoPartyPair.v
 Endo.v
 AuxBil.v
 Dark.v
+EvalProduct.v
 PotCl.v
 BGH.v

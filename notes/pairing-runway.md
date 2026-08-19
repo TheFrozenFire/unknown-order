@@ -57,7 +57,12 @@ only with a written death in this file.
    **Have** `aux_self_bil_checks_pot`, `aux_eval_publishes_next`;
    CAS 90. Freezing `aux` recovers `self_bilinear`. If
    `e(aux,g,g) = g`, the map computes `P_{i+1}` — too strong
-   to publish. iO stays deferred.
+   to publish. iO stays deferred. Committed evaluations:
+   `g^{f(τ)h(τ)} = C_f^{h(τ)} = C_{f·h}`; group law adds.
+   Monomials already sit in the CRS (`P_{i+j} = g^{τ^i τ^j}`).
+   **Have** `poly_eval_conv`, `pot_poly_conv_raise`,
+   `monomial_conv_is_later_slot`, `self_bil_committed_product`,
+   `two_wire_commit`; CAS 95.
 
 ### Checkable SRS, pairing optional
 

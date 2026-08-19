@@ -530,6 +530,40 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `mu3_is_mu6` | 182 |
 | Theorem | `eval_pair_mu6` | 197 |
 
+## `EvalProduct.v`
+
+- L12: Product of two committed evaluations at [τ]
+  - L27: Coefficient polynomials, low term first
+  - L104: The encoding [g^{f(τ)}]
+  - L201: Monomials: the CRS already publishes [τ^i · τ^j]
+  - L286: Self-bilinear map is a public product of encodings
+  - L327: Two-wire witness encoding: [∏ U_j^{w_j} = g^{(w0 A0 + w1 A1)(τ)}]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `poly_eval_nonneg` | 39 |
+| Lemma | `poly_eval_map_mul` | 52 |
+| Lemma | `poly_eval_add` | 67 |
+| Lemma | `poly_eval_shift` | 81 |
+| Theorem | `poly_eval_conv` | 92 |
+| Theorem | `pot_poly_is_eval` | 109 |
+| Theorem | `pot_poly_add` | 114 |
+| Theorem | `pot_poly_scale` | 128 |
+| Theorem | `pot_poly_shift` | 143 |
+| Theorem | `pot_poly_conv_raise` | 160 |
+| Theorem | `pot_poly_conv_raise_comm` | 174 |
+| Theorem | `pot_poly_mul_is_add` | 190 |
+| Lemma | `nn_Xn` | 209 |
+| Lemma | `poly_eval_Xn` | 216 |
+| Theorem | `pot_poly_Xn` | 232 |
+| Theorem | `monomial_eval_product` | 244 |
+| Theorem | `monomial_conv_is_later_slot` | 258 |
+| Theorem | `monomial_group_mul_is_sum` | 273 |
+| Theorem | `self_bil_committed_product` | 288 |
+| Theorem | `self_bil_monomial_product` | 310 |
+| Theorem | `two_wire_commit` | 329 |
+| Theorem | `two_wire_product_raise` | 347 |
+
 ## `ExpProof.v`
 
 - L14: Proof of exponentiation, algebra only
@@ -1704,4 +1738,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1109 theorems/lemmas/corollaries/examples across 69 files._
+_1131 theorems/lemmas/corollaries/examples across 70 files._

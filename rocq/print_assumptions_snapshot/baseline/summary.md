@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1109 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1131 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1109 results across 69 files.
+Captured for 1131 results across 70 files.
 
 Counts:
 
@@ -469,6 +469,33 @@ Counts:
 | `mu2_is_mu6` | 167 | 0 | 0 | OK |
 | `mu3_is_mu6` | 182 | 0 | 0 | OK |
 | `eval_pair_mu6` | 197 | 0 | 0 | OK |
+
+## EvalProduct.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `poly_eval_nonneg` | 39 | 0 | 0 | OK |
+| `poly_eval_map_mul` | 52 | 0 | 0 | OK |
+| `poly_eval_add` | 67 | 0 | 0 | OK |
+| `poly_eval_shift` | 81 | 0 | 0 | OK |
+| `poly_eval_conv` | 92 | 0 | 0 | OK |
+| `pot_poly_is_eval` | 109 | 0 | 0 | OK |
+| `pot_poly_add` | 114 | 0 | 0 | OK |
+| `pot_poly_scale` | 128 | 0 | 0 | OK |
+| `pot_poly_shift` | 143 | 0 | 0 | OK |
+| `pot_poly_conv_raise` | 160 | 0 | 0 | OK |
+| `pot_poly_conv_raise_comm` | 174 | 0 | 0 | OK |
+| `pot_poly_mul_is_add` | 190 | 0 | 0 | OK |
+| `nn_Xn` | 209 | 0 | 0 | OK |
+| `poly_eval_Xn` | 216 | 0 | 0 | OK |
+| `pot_poly_Xn` | 232 | 0 | 0 | OK |
+| `monomial_eval_product` | 244 | 0 | 0 | OK |
+| `monomial_conv_is_later_slot` | 258 | 0 | 0 | OK |
+| `monomial_group_mul_is_sum` | 273 | 0 | 0 | OK |
+| `self_bil_committed_product` | 288 | 0 | 0 | OK |
+| `self_bil_monomial_product` | 310 | 0 | 0 | OK |
+| `two_wire_commit` | 329 | 0 | 0 | OK |
+| `two_wire_product_raise` | 347 | 0 | 0 | OK |
 
 ## ExpProof.v
 
