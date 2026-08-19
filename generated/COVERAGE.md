@@ -303,6 +303,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `cs_verify_is_strong_rsa` | 44 |
 | Theorem | `cs_same_e_ratio` | 55 |
 
+## `CubicResidue.v`
+
+- L12: Cubic residuosity when cubing is not a permutation
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `cubing_invertible_on_units` | 27 |
+| Theorem | `cube_root_map_is_cube` | 56 |
+| Theorem | `cube_euler_one_direction` | 70 |
+| Theorem | `three_divides_lambda_forbids_e3` | 109 |
+
 ## `CyclicCount.v`
 
 - L8: Cyclic-model 2-height counts
@@ -975,6 +986,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pollard_p1_splits` | 62 |
 | Theorem | `smooth_implies_public_annihilator` | 101 |
 
+## `PotCheck.v`
+
+- L11: Public check of a [τ]-update, equal-DL algebra
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `contribute_slot_one_is_rho_power` | 22 |
+| Theorem | `update_first_is_old_first_to_rho` | 35 |
+| Theorem | `update_pok_complete` | 50 |
+| Theorem | `extracted_contributor_agrees` | 73 |
+
 ## `PowersOfTau.v`
 
 - L11: Powers of a sampled [τ] in [(Z/NZ)*]
@@ -1064,6 +1086,7 @@ in the Rocq tree.  Do not edit by hand.
 - L15: Quadratic residuosity modulo [N = pq]
   - L465: Jacobi degeneracy: [(g^k/N)] sees [k] only modulo 2
   - L706: Shamir at [(2,3)]: a square root and a cube root yield a sixth root
+  - L743: Obstruction: Jacobi is an additive pairing into [{±1}]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1560,4 +1583,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1037 theorems/lemmas/corollaries/examples across 59 files._
+_1045 theorems/lemmas/corollaries/examples across 61 files._

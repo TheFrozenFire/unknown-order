@@ -216,6 +216,10 @@ CramerShoup.v,powm_mul_base,24,0,0,OK
 CramerShoup.v,cs_verify_is_rsa,34,0,0,OK
 CramerShoup.v,cs_verify_is_strong_rsa,44,0,0,OK
 CramerShoup.v,cs_same_e_ratio,55,0,0,OK
+CubicResidue.v,cubing_invertible_on_units,27,0,0,OK
+CubicResidue.v,cube_root_map_is_cube,56,0,0,OK
+CubicResidue.v,cube_euler_one_direction,70,0,0,OK
+CubicResidue.v,three_divides_lambda_forbids_e3,109,0,0,OK
 CyclicCount.v,sum_up_ext,42,0,0,OK
 CyclicCount.v,cyclic_count_agree_below,54,0,0,OK
 CyclicCount.v,cyclic_count_top,69,0,0,OK
@@ -662,6 +666,10 @@ PollardP1.v,fermat_on_multiple,30,0,0,OK
 PollardP1.v,gcd_onesided_semiprime,46,0,0,OK
 PollardP1.v,pollard_p1_splits,62,0,0,OK
 PollardP1.v,smooth_implies_public_annihilator,101,0,0,OK
+PotCheck.v,contribute_slot_one_is_rho_power,22,0,0,OK
+PotCheck.v,update_first_is_old_first_to_rho,35,0,0,OK
+PotCheck.v,update_pok_complete,50,0,0,OK
+PotCheck.v,extracted_contributor_agrees,73,0,0,OK
 PowersOfTau.v,pot_at_zero,48,0,0,OK
 PowersOfTau.v,pot_at_one,57,0,0,OK
 PowersOfTau.v,pot_succ_is_tau_power,66,0,0,OK

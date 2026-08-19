@@ -91,6 +91,8 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Cubic decision vacuous when `e=3` is RSA | **Have** `cubic_decision_vacuous` |
 | Cocks decrypt: Jacobi`(c+2s)` = Jacobi`(t)` | **Have** `cocks_decrypt_jacobi`, `cocks_carefully_chosen`; CAS 84 |
 | Self-bilinear `e(g^a,g^b)=e(g,g)^{ab}` checks / evaluates the `τ`-string | **Have** `self_bil_checks_pot`, `self_bil_evaluates_pot` (existence is a hyp; iO deferred) |
+| Equal-DL / PoK of a contribution `ρ` | **Have** `update_pok_complete`, `extracted_contributor_agrees`; CAS 85 |
+| Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `three_divides_lambda_forbids_e3`; CAS 86 |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |
 | Shared `φ` or `λ` from shares of `p+q` | Publishing it factors (above) |

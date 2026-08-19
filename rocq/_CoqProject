@@ -62,3 +62,5 @@ SharedKey.v
 PowersOfTau.v
 QRModN.v
 Cocks.v
+PotCheck.v
+CubicResidue.v

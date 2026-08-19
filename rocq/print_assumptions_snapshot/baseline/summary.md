@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1037 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1045 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1037 results across 59 files.
+Captured for 1045 results across 61 files.
 
 Counts:
 
@@ -275,6 +275,15 @@ Counts:
 | `cs_verify_is_rsa` | 34 | 0 | 0 | OK |
 | `cs_verify_is_strong_rsa` | 44 | 0 | 0 | OK |
 | `cs_same_e_ratio` | 55 | 0 | 0 | OK |
+
+## CubicResidue.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `cubing_invertible_on_units` | 27 | 0 | 0 | OK |
+| `cube_root_map_is_cube` | 56 | 0 | 0 | OK |
+| `cube_euler_one_direction` | 70 | 0 | 0 | OK |
+| `three_divides_lambda_forbids_e3` | 109 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
@@ -856,6 +865,15 @@ Counts:
 | `gcd_onesided_semiprime` | 46 | 0 | 0 | OK |
 | `pollard_p1_splits` | 62 | 0 | 0 | OK |
 | `smooth_implies_public_annihilator` | 101 | 0 | 0 | OK |
+
+## PotCheck.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `contribute_slot_one_is_rho_power` | 22 | 0 | 0 | OK |
+| `update_first_is_old_first_to_rho` | 35 | 0 | 0 | OK |
+| `update_pok_complete` | 50 | 0 | 0 | OK |
+| `extracted_contributor_agrees` | 73 | 0 | 0 | OK |
 
 ## PowersOfTau.v
 

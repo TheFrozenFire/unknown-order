@@ -739,3 +739,10 @@ Proof.
   pose proof (rsa_enc_dec_units R y Hcop) as H.
   unfold rsa_enc in H. rewrite He in H. exact H.
 Qed.
+
+(** ** Obstruction: Jacobi is an additive pairing into [{±1}]
+
+    [jacobi_sees_only_parity] and [pot_jacobi_tail_constant] are
+    the theorem: any Jacobi combination of CRS elements is a
+    function of the parities of the exponents.  The target is
+    [{±1}].  That cannot check a sampled-[τ] string. *)

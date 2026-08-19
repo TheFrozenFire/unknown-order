@@ -1,5 +1,9 @@
 # Autonomous runway (deepen / widen / refine)
 
+Pairing / SRS check exploration lives in
+[`notes/pairing-runway.md`](pairing-runway.md). Prefer that roster
+for the next constructive work.
+
 Written so this session can run for hours without a new
 direction. Constraints stay: no SHA/ROM/PPT discharge, no
 LLL/NFS development, no OSCAR, no ECC corpus, no sixth-type
