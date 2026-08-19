@@ -18,7 +18,13 @@ Open Scope Z_scope.
     [gcd(N_A, N_B) = 1].  Shared modulus [N* = N_A N_B].
     Local inverses of [e] CRT-combine to [d*] modulo
     [λ* = lcm(λ_A, λ_B)].  Garner of the two local decryptions
-    is global decryption.  Neither party publishes [λ] or [d].
+    is global decryption.  Neither party *publishes* [λ] or [d].
+    That is not zero-knowledge: producing the integer [d*] is
+    inverting [e] on the other [λ] (factoring the other [N]).
+    Assembled [d*] is toxic waste ([e d* − 1] annihilates [N*]).
+    Iterated [shared_dec] is [g ↦ g^{d*^k}] in [(Z/N*Z)*], not a
+    pairing powers-of-tau CRS ([Refuse_elliptic_curve_branch],
+    [Refuse_pairing_accumulators], [Refuse_HVZK_simulation]).
 
     Multiplying a *single* extra prime onto [N_A] hands that prime
     to Alice ([N*/N_A]).  A triplet is the same theorem at arity 3.
@@ -618,3 +624,213 @@ Proof.
   unfold shared_N3, powm in HAB, HC |- *.
   apply crt_one_coprime_moduli; [nia | lia | exact HgC | exact HAB | exact HC].
 Qed.
+
+(** ** Unassembled [d*] is not ZK; it is a trapdoor
+
+    Alice's view [(N_A, e, d_A, N_B)] determines [d*] uniquely
+    *modulo [λ*]*, but writing that residue requires [λ_B].
+    Anyone who outputs a [d*] that meets [d_star_spec] has inverted
+    [e] on Bob's [λ] and holds a Miller handle [e d* − 1] on [N*].
+    Simulation / "like [τ] in a pairing ceremony" stays named. *)
+
+Definition dstar_is_zk_like_tau_named : Prop :=
+  forall RA RB dstar,
+    d_star_spec RA RB dstar ->
+    False.
+
+Definition pot_bilinear_crs_named : Prop :=
+  forall RA RB dstar,
+    d_star_spec RA RB dstar ->
+    False.
+
+Theorem d_star_unique_mod_lambda :
+  forall RA RB d1 d2,
+    d_star_spec RA RB d1 ->
+    d_star_spec RA RB d2 ->
+    (lambda_product RA RB | d1 - d2).
+Proof.
+  intros RA RB d1 d2 [H1A H1B] [H2A H2B].
+  pose proof (rsa_lambda_gt_1 RA).
+  pose proof (rsa_lambda_gt_1 RB).
+  apply Z.lcm_least.
+  - apply mods_eq_iff_divides; [lia|].
+    rewrite H1A, H2A. reflexivity.
+  - apply mods_eq_iff_divides; [lia|].
+    rewrite H1B, H2B. reflexivity.
+Qed.
+
+Theorem d_star_inverts_on_A :
+  forall RA RB dstar,
+    rsa_e RA = rsa_e RB ->
+    d_star_spec RA RB dstar ->
+    (rsa_e RA * dstar) mod rsa_lambda RA = 1.
+Proof.
+  intros RA RB dstar He [HA _].
+  pose proof (rsa_lambda_gt_1 RA).
+  rewrite <- (Z.mul_mod_idemp_r (rsa_e RA) dstar) by lia.
+  rewrite HA.
+  rewrite Z.mul_mod_idemp_r by lia.
+  apply rsa_d_inv.
+Qed.
+
+Theorem d_star_inverts_on_B :
+  forall RA RB dstar,
+    rsa_e RA = rsa_e RB ->
+    d_star_spec RA RB dstar ->
+    (rsa_e RB * dstar) mod rsa_lambda RB = 1.
+Proof.
+  intros RA RB dstar He [_ HB].
+  pose proof (rsa_lambda_gt_1 RB).
+  rewrite <- (Z.mul_mod_idemp_r (rsa_e RB) dstar) by lia.
+  rewrite HB.
+  rewrite Z.mul_mod_idemp_r by lia.
+  apply rsa_d_inv.
+Qed.
+
+Theorem d_star_ed_minus_1_divides_lambda :
+  forall RA RB dstar,
+    rsa_e RA = rsa_e RB ->
+    d_star_spec RA RB dstar ->
+    (lambda_product RA RB | rsa_e RA * dstar - 1).
+Proof.
+  intros RA RB dstar He Hspec.
+  pose proof (lambda_product_gt_1 RA RB).
+  apply mods_eq_iff_divides; [lia|].
+  rewrite (d_star_inverts RA RB dstar He Hspec), Z.mod_1_l by lia.
+  reflexivity.
+Qed.
+
+Theorem d_star_annihilates_shared :
+  forall RA RB dstar a,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    d_star_spec RA RB dstar ->
+    0 <= rsa_e RA * dstar - 1 ->
+    Z.coprime a (shared_N RA RB) ->
+    powm a (rsa_e RA * dstar - 1) (shared_N RA RB) = 1.
+Proof.
+  intros RA RB dstar a He Hg Hspec Hm Hcop.
+  pose proof (d_star_ed_minus_1_divides_lambda RA RB dstar He Hspec) as Hdiv.
+  destruct Hdiv as [k Hk].
+  pose proof (lambda_product_pos RA RB).
+  assert (0 <= k) by nia.
+  rewrite Hk, Z.mul_comm.
+  rewrite (powm_one_mul a (lambda_product RA RB) k (shared_N RA RB));
+    [apply Z.mod_small; pose proof (rsa_N_gt_1 RA);
+     pose proof (rsa_N_gt_1 RB); unfold shared_N in *; nia
+    | unfold shared_N; pose proof (rsa_N_gt_1 RA);
+      pose proof (rsa_N_gt_1 RB); nia
+    | nia | nia |].
+  apply carmichael_shared; assumption.
+Qed.
+
+Theorem d_star_decrypts_B :
+  forall RA RB c dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.coprime c (rsa_N RB) ->
+    0 <= dstar ->
+    d_star_spec RA RB dstar ->
+    powm c dstar (rsa_N RB) = rsa_dec RB c.
+Proof.
+  intros RA RB c dstar He Hcop Hd [_ HB].
+  unfold rsa_dec.
+  rewrite (powm_mod_lambda RB c dstar Hcop Hd).
+  rewrite HB. symmetry.
+  apply powm_mod_lambda; [exact Hcop | pose proof (rsa_d_pos RB); lia].
+Qed.
+
+Theorem d_star_decrypts_A :
+  forall RA RB c dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.coprime c (rsa_N RA) ->
+    0 <= dstar ->
+    d_star_spec RA RB dstar ->
+    powm c dstar (rsa_N RA) = rsa_dec RA c.
+Proof.
+  intros RA RB c dstar He Hcop Hd [HA _].
+  unfold rsa_dec.
+  rewrite (powm_mod_lambda RA c dstar Hcop Hd).
+  rewrite HA. symmetry.
+  apply powm_mod_lambda; [exact Hcop | pose proof (rsa_d_pos RA); lia].
+Qed.
+
+(** Iterated [shared_dec] is the power map [g ↦ g^{d*^k}] on units.
+    That is a power tower in [(Z/N*Z)*], not [g^{τ^i}] in a pairing
+    group. *)
+
+Fixpoint dstar_power_crs (RA RB : RSAInstance) (g : Z) (k : nat) : Z :=
+  match k with
+  | O => g mod shared_N RA RB
+  | S k' => shared_dec RA RB (dstar_power_crs RA RB g k')
+  end.
+
+Lemma coprime_powm :
+  forall a e n,
+    1 < n ->
+    0 <= e ->
+    Z.coprime a n ->
+    Z.coprime (powm a e n) n.
+Proof.
+  intros a e n Hn He Hcop.
+  unfold powm, Z.coprime.
+  rewrite Z.gcd_mod by lia.
+  unfold Z.coprime in Hcop.
+  destruct (Z.le_gt_cases e 0) as [He0 | Hepos].
+  - assert (e = 0) by lia.
+    subst. rewrite Z.pow_0_r, Z.gcd_1_r. reflexivity.
+  - assert (forall k : nat, Z.gcd (a ^ Z.of_nat k) n = 1) as Hall.
+    { intro k. induction k as [|k IH].
+      - rewrite Z.pow_0_r. apply Z.gcd_1_l.
+      - rewrite Nat2Z.inj_succ, Z.pow_succ_r by lia.
+        rewrite Z.gcd_comm. fold (Z.coprime n (a * a ^ Z.of_nat k)).
+        apply coprime_mul_iff. split.
+        + unfold Z.coprime. rewrite Z.gcd_comm. exact Hcop.
+        + unfold Z.coprime. rewrite Z.gcd_comm. exact IH. }
+    rewrite <- (Z2Nat.id e) by lia.
+    rewrite Z.gcd_comm. apply Hall.
+Qed.
+
+Lemma shared_N_gt_1 :
+  forall RA RB, 1 < shared_N RA RB.
+Proof.
+  intros RA RB.
+  pose proof (rsa_N_gt_1 RA).
+  pose proof (rsa_N_gt_1 RB).
+  unfold shared_N. nia.
+Qed.
+
+Theorem dstar_power_crs_is_powm :
+  forall RA RB g dstar k,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime g (shared_N RA RB) ->
+    0 <= dstar ->
+    d_star_spec RA RB dstar ->
+    dstar_power_crs RA RB g k mod shared_N RA RB =
+      powm g (dstar ^ Z.of_nat k) (shared_N RA RB).
+Proof.
+  intros RA RB g dstar k He Hg Hcop Hd Hspec.
+  pose proof (shared_N_gt_1 RA RB) as Hn.
+  induction k as [|k IH].
+  - simpl dstar_power_crs. unfold powm.
+    change (dstar ^ Z.of_nat 0) with (dstar ^ 0).
+    rewrite Z.pow_0_r, Z.pow_1_r.
+    rewrite Z.mod_mod by lia. reflexivity.
+  - simpl dstar_power_crs.
+    assert (Z.coprime (powm g (dstar ^ Z.of_nat k) (shared_N RA RB))
+                      (shared_N RA RB)) as Hcok.
+    { apply coprime_powm; [exact Hn | apply Z.pow_nonneg; exact Hd | exact Hcop]. }
+    assert (Z.coprime (dstar_power_crs RA RB g k) (shared_N RA RB)) as Hcrs.
+    { unfold Z.coprime in Hcok |- *.
+      rewrite Z.gcd_comm.
+      rewrite <- (Z.gcd_mod (dstar_power_crs RA RB g k)) by lia.
+      rewrite IH. exact Hcok. }
+    rewrite (shared_dec_eq_powm RA RB (dstar_power_crs RA RB g k) dstar
+               He Hg Hcrs Hd Hspec).
+    rewrite Nat2Z.inj_succ, Z.pow_succ_r by lia.
+    rewrite (Z.mul_comm dstar).
+    rewrite powm_mul_r by (try apply Z.pow_nonneg; lia).
+    rewrite <- IH.
+    unfold powm. rewrite <- Z.mod_pow_l by lia. reflexivity.
+Qed.
+

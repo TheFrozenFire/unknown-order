@@ -74,6 +74,9 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | `#{x : x²≡1 (mod N)} = 2^{ω(N)}` for odd squarefree `N` | **Have** k=2,3 constructed; mixed split; k=3 ≠ k=2 |
 | Product of two KeyGen keys, CRT of local `d` | **Have** `carmichael_shared`, `d_star_inverts`, `shared_dec_eq_powm`; CAS 78–80 |
 | Arity 3 (triplet of coprime cofactors) | **Have** `carmichael_shared3` |
+| Assembled `d*` is toxic (`e d*−1` annihilates `N*`) | **Have** `d_star_annihilates_shared`; CAS 81 |
+| Iterated `shared_dec` is `g^{d*^k}` in `(ℤ/N*ℤ)*` | **Have** `dstar_power_crs_is_powm`; not a pairing CRS |
+| “`d*` is ZK / like τ in powers-of-tau” | Named (`dstar_is_zk_like_tau_named`, `pot_bilinear_crs_named`; HVZK / ECC refused) |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |
 | Shared `φ` or `λ` from shares of `p+q` | Publishing it factors (above) |

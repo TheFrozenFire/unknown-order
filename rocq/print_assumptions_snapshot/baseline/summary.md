@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 958 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 968 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 958 results across 56 files.
+Captured for 968 results across 56 files.
 
 Counts:
 
@@ -960,37 +960,47 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `lambda_A_divides_product` | 44 | 0 | 0 | OK |
-| `lambda_B_divides_product` | 48 | 0 | 0 | OK |
-| `lambda_product_pos` | 52 | 0 | 0 | OK |
-| `lambda_product_gt_1` | 65 | 0 | 0 | OK |
-| `coprime_product_split` | 75 | 0 | 0 | OK |
-| `crt_mod_eq_coprime` | 81 | 0 | 0 | OK |
-| `crt_one_coprime_moduli` | 98 | 0 | 0 | OK |
-| `carmichael_shared` | 119 | 0 | 0 | OK |
-| `gcd_of_divisor` | 146 | 0 | 0 | OK |
-| `inverses_agree_mod_gcd` | 164 | 0 | 0 | OK |
-| `rsa_e_gcd_lambda` | 195 | 0 | 0 | OK |
-| `crt_exists_gcd` | 199 | 0 | 0 | OK |
-| `d_star_exists` | 246 | 0 | 0 | OK |
-| `d_star_exists_nonneg` | 266 | 0 | 0 | OK |
-| `d_star_inverts` | 294 | 0 | 0 | OK |
-| `powm_mod_lambda` | 322 | 0 | 0 | OK |
-| `shared_dec_mod_A` | 350 | 0 | 0 | OK |
-| `shared_dec_mod_B` | 364 | 0 | 0 | OK |
-| `shared_dec_eq_powm` | 376 | 0 | 0 | OK |
-| `prime_5` | 421 | 0 | 0 | OK |
-| `prime_23` | 429 | 0 | 0 | OK |
-| `prime_41` | 441 | 0 | 0 | OK |
-| `rsa_5_23_N` | 481 | 0 | 0 | OK |
-| `rsa_5_41_N` | 484 | 0 | 0 | OK |
-| `d_star_depends_on_both` | 487 | 0 | 0 | OK |
-| `two_partners_two_dstars` | 497 | 0 | 0 | OK |
-| `product_carries_component_keygen` | 520 | 0 | 0 | OK |
-| `product_common_e_inverts` | 526 | 0 | 0 | OK |
-| `product_refuses_shared_prime` | 536 | 0 | 0 | OK |
-| `d_star_gt_lambda_div_e` | 542 | 0 | 0 | OK |
-| `carmichael_shared3` | 580 | 0 | 0 | OK |
+| `lambda_A_divides_product` | 50 | 0 | 0 | OK |
+| `lambda_B_divides_product` | 54 | 0 | 0 | OK |
+| `lambda_product_pos` | 58 | 0 | 0 | OK |
+| `lambda_product_gt_1` | 71 | 0 | 0 | OK |
+| `coprime_product_split` | 81 | 0 | 0 | OK |
+| `crt_mod_eq_coprime` | 87 | 0 | 0 | OK |
+| `crt_one_coprime_moduli` | 104 | 0 | 0 | OK |
+| `carmichael_shared` | 125 | 0 | 0 | OK |
+| `gcd_of_divisor` | 152 | 0 | 0 | OK |
+| `inverses_agree_mod_gcd` | 170 | 0 | 0 | OK |
+| `rsa_e_gcd_lambda` | 201 | 0 | 0 | OK |
+| `crt_exists_gcd` | 205 | 0 | 0 | OK |
+| `d_star_exists` | 252 | 0 | 0 | OK |
+| `d_star_exists_nonneg` | 272 | 0 | 0 | OK |
+| `d_star_inverts` | 300 | 0 | 0 | OK |
+| `powm_mod_lambda` | 328 | 0 | 0 | OK |
+| `shared_dec_mod_A` | 356 | 0 | 0 | OK |
+| `shared_dec_mod_B` | 370 | 0 | 0 | OK |
+| `shared_dec_eq_powm` | 382 | 0 | 0 | OK |
+| `prime_5` | 427 | 0 | 0 | OK |
+| `prime_23` | 435 | 0 | 0 | OK |
+| `prime_41` | 447 | 0 | 0 | OK |
+| `rsa_5_23_N` | 487 | 0 | 0 | OK |
+| `rsa_5_41_N` | 490 | 0 | 0 | OK |
+| `d_star_depends_on_both` | 493 | 0 | 0 | OK |
+| `two_partners_two_dstars` | 503 | 0 | 0 | OK |
+| `product_carries_component_keygen` | 526 | 0 | 0 | OK |
+| `product_common_e_inverts` | 532 | 0 | 0 | OK |
+| `product_refuses_shared_prime` | 542 | 0 | 0 | OK |
+| `d_star_gt_lambda_div_e` | 548 | 0 | 0 | OK |
+| `carmichael_shared3` | 586 | 0 | 0 | OK |
+| `d_star_unique_mod_lambda` | 646 | 0 | 0 | OK |
+| `d_star_inverts_on_A` | 662 | 0 | 0 | OK |
+| `d_star_inverts_on_B` | 676 | 0 | 0 | OK |
+| `d_star_ed_minus_1_divides_lambda` | 690 | 0 | 0 | OK |
+| `d_star_annihilates_shared` | 703 | 0 | 0 | OK |
+| `d_star_decrypts_B` | 727 | 0 | 0 | OK |
+| `d_star_decrypts_A` | 742 | 0 | 0 | OK |
+| `coprime_powm` | 767 | 0 | 0 | OK |
+| `shared_N_gt_1` | 793 | 0 | 0 | OK |
+| `dstar_power_crs_is_powm` | 802 | 0 | 0 | OK |
 
 ## SharedModulus.v
 
