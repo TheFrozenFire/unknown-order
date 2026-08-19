@@ -9,6 +9,8 @@ Require Import MultiPrime.
 Require Import Wiener.
 Require Import KeyGen.
 Require Import KeyGenCtor.
+Require Import UnknownOrder.
+Require Import Hardness.
 
 Open Scope Z_scope.
 
@@ -915,6 +917,188 @@ Proof.
   change (dstar_power_crs RA RB g (S k)) with
     (shared_dec RA RB (dstar_power_crs RA RB g k)).
   apply (shared_dec_is_eth_root RA RB _ dstar); assumption.
+Qed.
+
+(** ** Relations: discrete log of the SRS is not strong RSA
+
+    After the ceremony, [s₁^e ≡ g] is already an RSA / strong-RSA
+    witness for *this* [g].  Recovering the integer [d*] from
+    [s₁ = g^{d*}] is discrete log.  A strong-RSA solver may return
+    a different pair (e.g. [(g, λ*+1)]).  [d*] as a trapdoor
+    *does* invert every unit, hence solves RSA and strong RSA on
+    all units.  Factorizations compute [d*] by inverting [e]
+    modulo [λ*].  If [ord(g)=λ*], a discrete log of [s₁] *is* an
+    inverse of [e] and gives the annihilator. *)
+
+Definition Problem_DLog (N g h k : Z) : Prop :=
+  powm g k N = h.
+
+Theorem srs_first_is_rsa :
+  forall RA RB g dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime g (shared_N RA RB) ->
+    0 < dstar ->
+    d_star_spec RA RB dstar ->
+    Problem_RSA (shared_N RA RB) (rsa_e RA) (g mod shared_N RA RB)
+      (dstar_power_crs RA RB g 1).
+Proof.
+  intros RA RB g dstar He Hg Hcop Hd Hspec.
+  unfold Problem_RSA, rsa_problem.
+  apply (srs_first_checks RA RB g dstar); assumption.
+Qed.
+
+Theorem srs_first_is_strong_rsa :
+  forall RA RB g dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime g (shared_N RA RB) ->
+    0 < dstar ->
+    d_star_spec RA RB dstar ->
+    Problem_StrongRSA (shared_N RA RB) (g mod shared_N RA RB)
+      (dstar_power_crs RA RB g 1) (rsa_e RA).
+Proof.
+  intros RA RB g dstar He Hg Hcop Hd Hspec.
+  unfold Problem_StrongRSA.
+  split; [apply rsa_e_pos|].
+  apply (srs_first_checks RA RB g dstar); assumption.
+Qed.
+
+Theorem lambda_plus_one_is_other_strong_rsa :
+  forall RA RB g,
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime g (shared_N RA RB) ->
+    Problem_StrongRSA (shared_N RA RB) (g mod shared_N RA RB)
+      (g mod shared_N RA RB) (lambda_product RA RB + 1).
+Proof.
+  intros RA RB g Hg Hcop.
+  unfold Problem_StrongRSA.
+  pose proof (lambda_product_gt_1 RA RB).
+  pose proof (shared_N_gt_1 RA RB).
+  split; [lia|].
+  rewrite powm_mod_base by lia.
+  rewrite powm_add_r by lia.
+  rewrite (carmichael_shared RA RB g Hg Hcop).
+  rewrite Z.mul_1_l, powm_1_r, Z.mod_mod by lia.
+  reflexivity.
+Qed.
+
+Theorem dstar_inverts_every_unit :
+  forall RA RB y dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime y (shared_N RA RB) ->
+    0 < dstar ->
+    d_star_spec RA RB dstar ->
+    Problem_RSA (shared_N RA RB) (rsa_e RA) (y mod shared_N RA RB)
+      (powm y dstar (shared_N RA RB)).
+Proof.
+  intros RA RB y dstar He Hg Hcop Hd Hspec.
+  unfold Problem_RSA, rsa_problem.
+  pose proof (rsa_e_pos RA).
+  pose proof (shared_N_gt_1 RA RB).
+  rewrite <- powm_mul_r by lia.
+  rewrite (Z.mul_comm dstar).
+  replace (rsa_e RA * dstar) with (rsa_e RA * dstar - 1 + 1) by ring.
+  rewrite powm_add_r by nia.
+  rewrite powm_1_r by lia.
+  rewrite (d_star_annihilates_shared RA RB dstar y He Hg Hspec ltac:(nia) Hcop).
+  rewrite Z.mul_1_l.
+  unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Lemma powm_eq_implies_abs_annihilator :
+  forall N g k d,
+    1 < N ->
+    0 <= k ->
+    0 <= d ->
+    Z.coprime g N ->
+    powm g k N = powm g d N ->
+    powm g (Z.abs (k - d)) N = 1.
+Proof.
+  intros N g k d HN Hk Hd Hcop Heq.
+  destruct (Z.le_ge_cases k d) as [Hle | Hge].
+  - assert (powm g (d - k) N = 1) as Hann.
+    { replace d with (k + (d - k)) in Heq by ring.
+      rewrite powm_add_r in Heq by lia.
+      assert (Z.coprime (powm g k N) N) as Hcok.
+      { apply coprime_powm; [exact HN | exact Hk | exact Hcop]. }
+      assert ((powm g (d - k) N * powm g k N) mod N =
+                (1 * powm g k N) mod N) as Hmul.
+      { rewrite (Z.mul_comm (powm g (d - k) N)), <- Heq.
+        unfold powm. rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity. }
+      unfold Z.coprime in Hcok.
+      pose proof (mul_cancel_r_coprime (powm g (d - k) N) 1
+                    (powm g k N) N HN Hcok Hmul) as Hcan.
+      unfold powm in Hcan |- *.
+      rewrite Z.mod_mod, Z.mod_1_l in Hcan by lia. exact Hcan. }
+    rewrite Z.abs_neq by lia.
+    replace (- (k - d)) with (d - k) by ring. exact Hann.
+  - assert (powm g (k - d) N = 1) as Hann.
+    { replace k with (d + (k - d)) in Heq by ring.
+      rewrite powm_add_r in Heq by lia.
+      assert (Z.coprime (powm g d N) N) as Hcod.
+      { apply coprime_powm; [exact HN | exact Hd | exact Hcop]. }
+      assert ((powm g (k - d) N * powm g d N) mod N =
+                (1 * powm g d N) mod N) as Hmul.
+      { rewrite (Z.mul_comm (powm g (k - d) N)), Heq.
+        unfold powm. rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity. }
+      unfold Z.coprime in Hcod.
+      pose proof (mul_cancel_r_coprime (powm g (k - d) N) 1
+                    (powm g d N) N HN Hcod Hmul) as Hcan.
+      unfold powm in Hcan |- *.
+      rewrite Z.mod_mod, Z.mod_1_l in Hcan by lia. exact Hcan. }
+    rewrite Z.abs_eq by lia. exact Hann.
+Qed.
+
+Theorem dlog_of_srs_agrees_mod_order :
+  forall RA RB g dstar k ord,
+    1 < shared_N RA RB ->
+    0 <= k ->
+    0 <= dstar ->
+    Z.coprime g (shared_N RA RB) ->
+    is_order (shared_N RA RB) g ord ->
+    Problem_DLog (shared_N RA RB) g
+      (powm g dstar (shared_N RA RB)) k ->
+    (ord | k - dstar).
+Proof.
+  intros RA RB g dstar k ord HN Hk Hd Hcop Hord Hdlog.
+  unfold Problem_DLog in Hdlog.
+  pose proof (powm_eq_implies_abs_annihilator (shared_N RA RB) g k dstar
+                HN Hk Hd Hcop Hdlog) as Hann.
+  pose proof (order_divides_annihilator (shared_N RA RB) g ord
+                (Z.abs (k - dstar)) HN (Z.abs_nonneg _) Hord Hann) as Hdiv.
+  destruct (Z.le_ge_cases k dstar) as [Hle | Hge].
+  - rewrite Z.abs_neq in Hdiv by lia.
+    destruct Hdiv as [m Hm]. exists (- m). lia.
+  - rewrite Z.abs_eq in Hdiv by lia. exact Hdiv.
+Qed.
+
+Theorem dlog_at_full_order_inverts_e :
+  forall RA RB g dstar k,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    0 <= k ->
+    0 <= dstar ->
+    Z.coprime g (shared_N RA RB) ->
+    d_star_spec RA RB dstar ->
+    is_order (shared_N RA RB) g (lambda_product RA RB) ->
+    Problem_DLog (shared_N RA RB) g
+      (powm g dstar (shared_N RA RB)) k ->
+    (rsa_e RA * k) mod lambda_product RA RB = 1.
+Proof.
+  intros RA RB g dstar k He HgN Hk Hd Hcop Hspec Hord Hdlog.
+  pose proof (shared_N_gt_1 RA RB).
+  pose proof (dlog_of_srs_agrees_mod_order RA RB g dstar k
+                (lambda_product RA RB) ltac:(lia) Hk Hd Hcop Hord Hdlog)
+    as Hdiv.
+  pose proof (lambda_product_gt_1 RA RB).
+  pose proof (d_star_inverts RA RB dstar He Hspec) as Hinv.
+  apply mods_eq_iff_divides in Hdiv; [| lia].
+  rewrite <- (Z.mul_mod_idemp_r (rsa_e RA) k) by lia.
+  rewrite Hdiv.
+  rewrite Z.mul_mod_idemp_r by lia.
+  exact Hinv.
 Qed.
 
 

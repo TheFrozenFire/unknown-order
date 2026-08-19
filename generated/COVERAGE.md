@@ -1097,62 +1097,70 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `SharedKey.v`
 
-- L15: Shared RSA key from two KeyGen-valid parts
-  - L48: Layer 1 — Carmichael of a coprime product
-  - L150: Layer 2 — CRT of inverses of a common [e]
-  - L326: Layer 3 — local decrypt + CRT = global [c^{d*}]
-  - L425: Layer 4 — one local [d] does not determine [d*]
-  - L518: Layer 5 — lifted KeyGen spec
-  - L574: Layer 6 — arity 3
-  - L628: Unassembled [d*] is not ZK; it is a trapdoor
-  - L837: SRS checks: each next value is the [e]-th root of the last
+- L17: Shared RSA key from two KeyGen-valid parts
+  - L50: Layer 1 — Carmichael of a coprime product
+  - L152: Layer 2 — CRT of inverses of a common [e]
+  - L328: Layer 3 — local decrypt + CRT = global [c^{d*}]
+  - L427: Layer 4 — one local [d] does not determine [d*]
+  - L520: Layer 5 — lifted KeyGen spec
+  - L576: Layer 6 — arity 3
+  - L630: Unassembled [d*] is not ZK; it is a trapdoor
+  - L839: SRS checks: each next value is the [e]-th root of the last
+  - L922: Relations: discrete log of the SRS is not strong RSA
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `lambda_A_divides_product` | 50 |
-| Lemma | `lambda_B_divides_product` | 54 |
-| Lemma | `lambda_product_pos` | 58 |
-| Lemma | `lambda_product_gt_1` | 71 |
-| Lemma | `coprime_product_split` | 81 |
-| Lemma | `crt_mod_eq_coprime` | 87 |
-| Lemma | `crt_one_coprime_moduli` | 104 |
-| Theorem | `carmichael_shared` | 125 |
-| Lemma | `gcd_of_divisor` | 152 |
-| Lemma | `inverses_agree_mod_gcd` | 170 |
-| Lemma | `rsa_e_gcd_lambda` | 201 |
-| Lemma | `crt_exists_gcd` | 205 |
-| Theorem | `d_star_exists` | 252 |
-| Theorem | `d_star_exists_nonneg` | 272 |
-| Theorem | `d_star_inverts` | 300 |
-| Lemma | `powm_mod_lambda` | 328 |
-| Lemma | `shared_dec_mod_A` | 356 |
-| Lemma | `shared_dec_mod_B` | 370 |
-| Theorem | `shared_dec_eq_powm` | 382 |
-| Lemma | `prime_5` | 427 |
-| Lemma | `prime_23` | 435 |
-| Lemma | `prime_41` | 447 |
-| Theorem | `rsa_5_23_N` | 487 |
-| Theorem | `rsa_5_41_N` | 490 |
-| Theorem | `d_star_depends_on_both` | 493 |
-| Theorem | `two_partners_two_dstars` | 503 |
-| Theorem | `product_carries_component_keygen` | 526 |
-| Theorem | `product_common_e_inverts` | 532 |
-| Theorem | `product_refuses_shared_prime` | 542 |
-| Theorem | `d_star_gt_lambda_div_e` | 548 |
-| Theorem | `carmichael_shared3` | 586 |
-| Theorem | `d_star_unique_mod_lambda` | 646 |
-| Theorem | `d_star_inverts_on_A` | 662 |
-| Theorem | `d_star_inverts_on_B` | 676 |
-| Theorem | `d_star_ed_minus_1_divides_lambda` | 690 |
-| Theorem | `d_star_annihilates_shared` | 703 |
-| Theorem | `d_star_decrypts_B` | 727 |
-| Theorem | `d_star_decrypts_A` | 742 |
-| Lemma | `coprime_powm` | 767 |
-| Lemma | `shared_N_gt_1` | 793 |
-| Theorem | `dstar_power_crs_is_powm` | 802 |
-| Theorem | `shared_dec_is_eth_root` | 844 |
-| Theorem | `srs_first_checks` | 871 |
-| Theorem | `srs_step_checks` | 893 |
+| Lemma | `lambda_A_divides_product` | 52 |
+| Lemma | `lambda_B_divides_product` | 56 |
+| Lemma | `lambda_product_pos` | 60 |
+| Lemma | `lambda_product_gt_1` | 73 |
+| Lemma | `coprime_product_split` | 83 |
+| Lemma | `crt_mod_eq_coprime` | 89 |
+| Lemma | `crt_one_coprime_moduli` | 106 |
+| Theorem | `carmichael_shared` | 127 |
+| Lemma | `gcd_of_divisor` | 154 |
+| Lemma | `inverses_agree_mod_gcd` | 172 |
+| Lemma | `rsa_e_gcd_lambda` | 203 |
+| Lemma | `crt_exists_gcd` | 207 |
+| Theorem | `d_star_exists` | 254 |
+| Theorem | `d_star_exists_nonneg` | 274 |
+| Theorem | `d_star_inverts` | 302 |
+| Lemma | `powm_mod_lambda` | 330 |
+| Lemma | `shared_dec_mod_A` | 358 |
+| Lemma | `shared_dec_mod_B` | 372 |
+| Theorem | `shared_dec_eq_powm` | 384 |
+| Lemma | `prime_5` | 429 |
+| Lemma | `prime_23` | 437 |
+| Lemma | `prime_41` | 449 |
+| Theorem | `rsa_5_23_N` | 489 |
+| Theorem | `rsa_5_41_N` | 492 |
+| Theorem | `d_star_depends_on_both` | 495 |
+| Theorem | `two_partners_two_dstars` | 505 |
+| Theorem | `product_carries_component_keygen` | 528 |
+| Theorem | `product_common_e_inverts` | 534 |
+| Theorem | `product_refuses_shared_prime` | 544 |
+| Theorem | `d_star_gt_lambda_div_e` | 550 |
+| Theorem | `carmichael_shared3` | 588 |
+| Theorem | `d_star_unique_mod_lambda` | 648 |
+| Theorem | `d_star_inverts_on_A` | 664 |
+| Theorem | `d_star_inverts_on_B` | 678 |
+| Theorem | `d_star_ed_minus_1_divides_lambda` | 692 |
+| Theorem | `d_star_annihilates_shared` | 705 |
+| Theorem | `d_star_decrypts_B` | 729 |
+| Theorem | `d_star_decrypts_A` | 744 |
+| Lemma | `coprime_powm` | 769 |
+| Lemma | `shared_N_gt_1` | 795 |
+| Theorem | `dstar_power_crs_is_powm` | 804 |
+| Theorem | `shared_dec_is_eth_root` | 846 |
+| Theorem | `srs_first_checks` | 873 |
+| Theorem | `srs_step_checks` | 895 |
+| Theorem | `srs_first_is_rsa` | 936 |
+| Theorem | `srs_first_is_strong_rsa` | 951 |
+| Theorem | `lambda_plus_one_is_other_strong_rsa` | 967 |
+| Theorem | `dstar_inverts_every_unit` | 986 |
+| Lemma | `powm_eq_implies_abs_annihilator` | 1010 |
+| Theorem | `dlog_of_srs_agrees_mod_order` | 1054 |
+| Theorem | `dlog_at_full_order_inverts_e` | 1077 |
 
 ## `SharedModulus.v`
 
@@ -1464,4 +1472,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_971 theorems/lemmas/corollaries/examples across 56 files._
+_978 theorems/lemmas/corollaries/examples across 56 files._

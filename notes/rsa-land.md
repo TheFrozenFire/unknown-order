@@ -77,6 +77,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Assembled `d*` is toxic (`e d*−1` annihilates `N*`) | **Have** `d_star_annihilates_shared`; CAS 81 |
 | Iterated `shared_dec` is `g^{d*^k}` in `(ℤ/N*ℤ)*` | **Have** `dstar_power_crs_is_powm`; not a pairing CRS |
 | Public check: next`^e` = previous | **Have** `shared_dec_is_eth_root`, `srs_first_checks`, `srs_step_checks` |
+| SRS root of `g` is RSA/sRSA at that `g`; DL of `s₁` is not sRSA | **Have** `srs_first_is_rsa`, `lambda_plus_one_is_other_strong_rsa`, `dlog_of_srs_agrees_mod_order` |
 | “`d*` is ZK / like τ in powers-of-tau” | Named (`dstar_is_zk_like_tau_named`, `pot_bilinear_crs_named`; HVZK / ECC refused) |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |

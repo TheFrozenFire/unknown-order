@@ -39,6 +39,10 @@ check(chain_ok, "each next SRS element^e equals the previous");
 \\ uniqueness: two d* differ by a multiple of λ*
 d2 = dstar + ls;
 check((d2 - dstar) % ls == 0, "d* unique modulo λ*");
+s1 = lift(Mod(g, Ns)^dstar);
+check(lift(Mod(s1, Ns)^e) == g % Ns, "s1 is an RSA solution for g at this e");
+check(lift(Mod(g, Ns)^(ls+1)) == g % Ns, "(g, λ*+1) is a different strong-RSA witness");
+check(s1 != g % Ns, "the e-th root is not the λ*+1 witness");
 
 printf("%d ok, %d fail\n", ok, fail);
 if(fail, error("CAS failures"));

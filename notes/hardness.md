@@ -40,6 +40,11 @@ Constructible torsion `H` is a family parameter
 | annihilator `M` of `y` | Strong RSA / AR search | `annihilator_plus_one_is_strong_RSA` `(y, M+1)` | class number on `Cl` |
 | `h(−31)=3` | AR search on every written class | `class_number_solves_AR_neg31` | `D+1` is not `h` |
 | RSA / sRSA | fractional root `b=1` | `rsa_is_fractional_root` | DARK `r`-powers |
+| SRS `s₁ = g^{d*}`, `s₁^e ≡ g` | RSA / sRSA at **this** `g` | `srs_first_is_rsa`, `srs_first_is_strong_rsa` | a general sRSA solver; the root is already published |
+| `λ*+1` on the same `g` | a **different** sRSA pair `(g, λ*+1)` | `lambda_plus_one_is_other_strong_rsa` | that pair is not `d*` |
+| `d*` | RSA / sRSA on **every** unit | `dstar_inverts_every_unit` | extracting `d*` from the SRS |
+| DL of `s₁` base `g` | `k ≡ d* (mod ord(g))` | `dlog_of_srs_agrees_mod_order` | DL ≡ sRSA |
+| that DL when `ord(g)=λ*` | inverse of `e` mod `λ*` | `dlog_at_full_order_inverts_e` | PPT hardness |
 | `y = 1` | RSA / sRSA inhabited | `rsa_trivial_at_one`, `strong_RSA_trivial_at_one` | hardness (it refutes *existence*-hardness) |
 | `ord(a) = k` | `k \| λ` | `order_divides_lambda` | lcm of enough orders *is* `λ` |
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |
