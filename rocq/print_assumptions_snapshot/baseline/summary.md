@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 895 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 922 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 895 results across 49 files.
+Captured for 922 results across 54 files.
 
 Counts:
 
@@ -253,6 +253,15 @@ Counts:
 | `form_neg31_inv_sq_equiv_f` | 462 | 0 | 0 | OK |
 | `shanks_inv_square_is_shanks` | 469 | 0 | 0 | OK |
 | `shanks_annihilated_by_h` | 477 | 0 | 0 | OK |
+
+## CramerShoup.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `powm_mul_base` | 24 | 0 | 0 | OK |
+| `cs_verify_is_rsa` | 34 | 0 | 0 | OK |
+| `cs_verify_is_strong_rsa` | 44 | 0 | 0 | OK |
+| `cs_same_e_ratio` | 55 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
@@ -766,6 +775,16 @@ Counts:
 | `carmichael_threeprime` | 458 | 0 | 0 | OK |
 | `onesided_period_splits_triple` | 500 | 0 | 0 | OK |
 
+## OkamotoUchiyama.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `one_plus_p_pow` | 22 | 0 | 0 | OK |
+| `ou_L_of_plain` | 33 | 0 | 0 | OK |
+| `ou_L_of_scaled` | 48 | 0 | 0 | OK |
+| `ou_L_of_base` | 69 | 0 | 0 | OK |
+| `ou_rand_vanishes` | 81 | 0 | 0 | OK |
+
 ## Order.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -789,6 +808,24 @@ Counts:
 | `order_2_mod_17` | 391 | 0 | 0 | OK |
 | `two_height_independent_of_odd_multiple` | 404 | 0 | 0 | OK |
 | `height_is_val2_ord_textbook` | 420 | 0 | 0 | OK |
+
+## Paillier.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `powm_mul_base` | 23 | 0 | 0 | OK |
+| `one_plus_N_pow` | 33 | 0 | 0 | OK |
+| `paillier_L_of_plain` | 44 | 0 | 0 | OK |
+| `paillier_L_recovers_exp` | 56 | 0 | 0 | OK |
+| `paillier_add` | 68 | 0 | 0 | OK |
+| `one_plus_N_order_N` | 86 | 0 | 0 | OK |
+
+## PhiLambda.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `phi_eq_lambda_times_gcd` | 17 | 0 | 0 | OK |
+| `phi_div_lambda_is_gcd` | 29 | 0 | 0 | OK |
 
 ## PollardP1.v
 
@@ -977,6 +1014,17 @@ Counts:
 | `five_is_safe` | 150 | 0 | 0 | OK |
 | `five_resists_B1` | 156 | 0 | 0 | OK |
 
+## Takagi.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `fermat_minus_one_divides` | 26 | 0 | 0 | OK |
+| `euler_p2` | 41 | 0 | 0 | OK |
+| `sqrt1_mod_p2_is_pm1` | 66 | 0 | 0 | OK |
+| `carmichael_takagi` | 127 | 0 | 0 | OK |
+| `lambda_divides_phi_takagi` | 177 | 0 | 0 | OK |
+| `takagi_mixed_sqrt1_splits` | 187 | 0 | 0 | OK |
+
 ## ThresholdRSA.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -985,8 +1033,9 @@ Counts:
 | `additive_three_shares` | 33 | 0 | 0 | OK |
 | `mediated_rsa_is_two_shares` | 47 | 0 | 0 | OK |
 | `share_refresh_by_zero` | 61 | 0 | 0 | OK |
-| `powm_ed_is_base` | 81 | 0 | 0 | OK |
-| `shoup_extract_from_kd` | 121 | 0 | 0 | OK |
+| `shamir_two_of_three` | 82 | 0 | 0 | OK |
+| `powm_ed_is_base` | 105 | 0 | 0 | OK |
+| `shoup_extract_from_kd` | 145 | 0 | 0 | OK |
 
 ## TimeLock.v
 
@@ -1065,6 +1114,9 @@ Counts:
 | `ctor_slot_mod_r_need_not_factor` | 783 | 0 | 0 | OK |
 | `cube_below_N` | 803 | 0 | 0 | OK |
 | `e3_small_cube_verifies` | 818 | 0 | 0 | OK |
+| `bleiche_wrap_interval` | 833 | 0 | 0 | OK |
+| `pkcs15_prefix_is_type2` | 859 | 0 | 0 | OK |
+| `manger_is_stricter_than_type2` | 869 | 0 | 0 | OK |
 
 ## TwoPrimary.v
 

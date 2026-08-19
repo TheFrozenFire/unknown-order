@@ -88,5 +88,18 @@ check(kronecker(2,11)==-1 && kronecker(2,23)==1, "Williams (2/p),(2/q)");
 check((5*17)%8==5 && 5%8==5 && 17%8==1, "5·17≡5 (mod 8) is not Williams");
 check(kronecker(2,5)==-1 && kronecker(2,17)==1, "non-Williams two-chars");
 
+\\ ---------- T10: wrap interval; PKCS#1 v1.5 is [2B, 3B) ----------
+r = 3; mm = 5; N = 11; B = 5;
+rem = (r*mm) % N;
+check(rem < B, "residue in [0, B)");
+kk = (r*mm) \ N;
+check(kk*N <= r*mm && r*mm < kk*N + B, "k N ≤ r m < k N + B");
+BB = 256;
+rest = 100;
+check(2*BB <= 2*BB + rest && 2*BB + rest < 3*BB, "PKCS#1 type-2 in [2B, 3B)");
+check(0 <= 50 && 50 < BB, "Manger interval [0, B)");
+check(!(2*BB <= 50 && 50 < 3*BB), "Manger cut is not type-2");
+
 printf("%d ok, %d fail\n", ok, fail);
 if(fail, error("CAS failures"));
+

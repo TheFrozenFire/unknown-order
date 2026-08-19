@@ -277,6 +277,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `shanks_inv_square_is_shanks` | 469 |
 | Theorem | `shanks_annihilated_by_h` | 477 |
 
+## `CramerShoup.v`
+
+- L12: Cramer–Shoup 2000 Strong RSA signatures, verification algebra
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `powm_mul_base` | 24 |
+| Theorem | `cs_verify_is_rsa` | 34 |
+| Theorem | `cs_verify_is_strong_rsa` | 44 |
+| Theorem | `cs_same_e_ratio` | 55 |
+
 ## `CyclicCount.v`
 
 - L8: Cyclic-model 2-height counts
@@ -863,6 +874,18 @@ in the Rocq tree.  Do not edit by hand.
 
 - L6: First-class skips
 
+## `OkamotoUchiyama.v`
+
+- L10: Okamoto–Uchiyama, as a neighbour of Takagi
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `one_plus_p_pow` | 22 |
+| Theorem | `ou_L_of_plain` | 33 |
+| Theorem | `ou_L_of_scaled` | 48 |
+| Theorem | `ou_L_of_base` | 69 |
+| Theorem | `ou_rand_vanishes` | 81 |
+
 ## `Order.v`
 
 - L13: Orders of units, as objects
@@ -893,6 +916,28 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `order_2_mod_17` | 391 |
 | Theorem | `two_height_independent_of_odd_multiple` | 404 |
 | Theorem | `height_is_val2_ord_textbook` | 420 |
+
+## `Paillier.v`
+
+- L9: Paillier, as a neighbour of RSA
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `powm_mul_base` | 23 |
+| Theorem | `one_plus_N_pow` | 33 |
+| Theorem | `paillier_L_of_plain` | 44 |
+| Theorem | `paillier_L_recovers_exp` | 56 |
+| Theorem | `paillier_add` | 68 |
+| Theorem | `one_plus_N_order_N` | 86 |
+
+## `PhiLambda.v`
+
+- L9: [φ = λ · gcd] on a semiprime
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `phi_eq_lambda_times_gcd` | 17 |
+| Theorem | `phi_div_lambda_is_gcd` | 29 |
 
 ## `PollardP1.v`
 
@@ -1120,6 +1165,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `five_is_safe` | 150 |
 | Theorem | `five_resists_B1` | 156 |
 
+## `Takagi.v`
+
+- L9: Takagi multi-power RSA: [N = p² q]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `fermat_minus_one_divides` | 26 |
+| Theorem | `euler_p2` | 41 |
+| Theorem | `sqrt1_mod_p2_is_pm1` | 66 |
+| Theorem | `carmichael_takagi` | 127 |
+| Theorem | `lambda_divides_phi_takagi` | 177 |
+| Theorem | `takagi_mixed_sqrt1_splits` | 187 |
+
 ## `ThresholdRSA.v`
 
 - L10: Threshold / mediated RSA, as exponent algebra
@@ -1130,8 +1188,9 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `additive_three_shares` | 33 |
 | Theorem | `mediated_rsa_is_two_shares` | 47 |
 | Theorem | `share_refresh_by_zero` | 61 |
-| Lemma | `powm_ed_is_base` | 81 |
-| Theorem | `shoup_extract_from_kd` | 121 |
+| Theorem | `shamir_two_of_three` | 82 |
+| Lemma | `powm_ed_is_base` | 105 |
+| Theorem | `shoup_extract_from_kd` | 145 |
 
 ## `TimeLock.v`
 
@@ -1182,6 +1241,7 @@ in the Rocq tree.  Do not edit by hand.
   - L684: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
   - L763: Constructor slot vs K1
   - L801: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
+  - L831: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1231,6 +1291,9 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `ctor_slot_mod_r_need_not_factor` | 783 |
 | Theorem | `cube_below_N` | 803 |
 | Theorem | `e3_small_cube_verifies` | 818 |
+| Theorem | `bleiche_wrap_interval` | 833 |
+| Theorem | `pkcs15_prefix_is_type2` | 859 |
+| Theorem | `manger_is_stricter_than_type2` | 869 |
 
 ## `TwoPrimary.v`
 
@@ -1330,4 +1393,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_895 theorems/lemmas/corollaries/examples across 49 files._
+_922 theorems/lemmas/corollaries/examples across 54 files._

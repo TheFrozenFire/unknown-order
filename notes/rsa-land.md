@@ -26,6 +26,7 @@ Do not treat “RSA-FDH is EUF-CMA” as a theorem of this corpus.
 |---|---|
 | `m ↦ m^e`, `c ↦ c^d`, `ed ≡ 1 (mod λ)` | **Have** `RSA.v` |
 | `M = ed−1` annihilates units | **Have** |
+| `φ = λ · gcd(p−1, q−1)` | **Have** `phi_eq_lambda_times_gcd`; CAS 75 |
 | Miller / enum from `(e,d)` | **Have** |
 | `(N,e,d)` ⇒ factor | **Have** (not the converse) |
 | RSA inverter recovers `m`, does not factor | **Have** `rsa_inverter_recovers_message`; refuse converse |
@@ -55,6 +56,7 @@ with Bézout `4Δ²·a + e·b = 1`.
 | `d = d₁+d₂` ⇒ `m^d = m^{d₁} m^{d₂}` | **Have** `additive_share_combines` |
 | Mediated RSA / SEM (`d_u + d_s`) | **Have** (same lemma, two parties) |
 | Shoup extract: `y = x^{k d}`, `k a = 1+e t` ⇒ `y^a x^{-t} = x^d` | **Have** `shoup_extract_from_kd` |
+| Shamir 2-of-3 in the exponent | **Have** `shamir_two_of_three`; CAS 67 |
 | Feldman / Pedersen VSS, complaints, robustness | `Refuse_threshold_robustness` |
 | Proactive refresh (add shares of 0) | **Have** `share_refresh_by_zero` |
 | Desmedt–Frankel / Gennaro–Jarecki–Krawczyk–Rabin | Same algebra; protocol named |
@@ -94,7 +96,7 @@ that admits a mixed triple-root is not an RSA modulus.
 | Object | Status |
 |---|---|
 | Multi-prime `N=pqr`, eight `√1` | **Have** |
-| Multi-power / Takagi `N=p²q` | **Algebra next** (Hensel, different `λ`) |
+| Multi-power / Takagi `N=p²q` | **Have** `carmichael_takagi`, `sqrt1_mod_p2_is_pm1`, `takagi_mixed_sqrt1_splits`; CAS 72 |
 | Safe primes ⇒ `λ=2p'q'` | **Have** `safe_pair_lambda` |
 | Rebalanced RSA (short `d_p`, `d_q`) | **Have** CRTRSA |
 | Multi-prime RSA (PKCS#1) | Same as multi-prime `√1` + CRT |
@@ -111,7 +113,7 @@ Franklin–Reiter for `e=3` is the cube-gap identity
 | Håstad broadcast, `e=3` small cube | **Have** |
 | Franklin–Reiter cube gap | **Have** `fr_cube_gap` |
 | Common modulus, Bézout | **Have** |
-| Bleichenbacher/Manger interval | T11 engine **Have**; T10 set-update still thin |
+| Bleichenbacher/Manger interval | T11 engine **Have**; T10 wrap **Have** `bleiche_wrap_interval`; PKCS#1 type-2 is `[2B,3B)` |
 | Boneh–Durfee / Coppersmith / ROCA lattice | named |
 | NFS | named |
 
@@ -120,7 +122,7 @@ Franklin–Reiter for `e=3` is the cube-gap identity
 | Object | Status |
 |---|---|
 | GQ / FS factoring ID | **Have** |
-| Cramer–Shoup 2000 Strong RSA signatures | verification is a root; scheme named |
+| Cramer–Shoup 2000 Strong RSA signatures | **Have** `cs_verify_is_rsa`, `cs_same_e_ratio`; hash-to-prime / EUF named |
 | Gennaro–Halevi–Rabin | hash-to-prime named; `ChallengePrime` is the other map |
 | CL signatures / anonymous credentials | `Refuse_Camenisch_Michels_protocol` |
 | Undeniable / designated confirmer / proxy | scheme |
@@ -140,8 +142,9 @@ Rivest–Shamir–Wagner: `x^{2^T}`. The trapdoor is
 | Object | Why not here |
 |---|---|
 | Goldwasser–Micali / QR decision | `e=2` is not a permutation |
-| Paillier / Damgård–Jurik / DCR | `(ℤ/N²ℤ)*` |
-| Okamoto–Uchiyama | `N=p²q`, different map |
+| Paillier homomorphism on `(ℤ/N²ℤ)*` | **Have** `one_plus_N_pow`, `paillier_add`; CAS 73. DCR named |
+| Damgård–Jurik / higher `N^{s+1}` | Algebra next (binomial beyond `N²`) |
+| Okamoto–Uchiyama `L` on `p²` | **Have** `ou_L_of_scaled`, `ou_rand_vanishes`; CAS 76 |
 | Naccache–Stern / Benaloh | high residuosity |
 | OAEP / RSA-KEM tightness | ROM + PPT |
 | Quantum / Shor | out of corpus |

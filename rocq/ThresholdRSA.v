@@ -75,6 +75,30 @@ Proof.
   reflexivity.
 Qed.
 
+(** Shamir 2-of-3 on a linear polynomial [f(X) = d + a X]:
+    shares [f(1) = d+a], [f(2) = d+2a]; [2 f(1) − f(2) = d].
+    In the exponent: [s₁² / s₂ = m^d]. *)
+
+Theorem shamir_two_of_three :
+  forall N m d a s2inv,
+    N <> 0 ->
+    0 <= d ->
+    0 <= a ->
+    (powm m (d + 2 * a) N * s2inv) mod N = 1 ->
+    (powm (powm m (d + a) N) 2 N * s2inv) mod N =
+      powm m d N.
+Proof.
+  intros N m d a s2inv HN Hd Ha Hinv.
+  rewrite <- powm_mul_r by lia.
+  replace ((d + a) * 2) with (d + (d + 2 * a)) by ring.
+  rewrite powm_add_r by lia.
+  rewrite Z.mul_mod_idemp_l by lia.
+  rewrite <- Z.mul_assoc.
+  rewrite <- Z.mul_mod_idemp_r by lia.
+  rewrite Hinv, Z.mul_1_r.
+  unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
 (** Shoup extract.  [y = x^{k d}], [k a = 1 + e t], units,
     [e d ≡ 1 (mod λ)].  Then [y^a · x^{-t} = x^d]. *)
 

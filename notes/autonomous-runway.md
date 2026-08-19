@@ -133,3 +133,7 @@ Update in place.
 | J Lipmaa/`P_Root` | done (`lipmaa_cl_membership_is_P_Root`; CAS 65) |
 | K Self-review | done (`rsa_inverter_recovers_message` now returns `m`) |
 | L CAS + gate | done (CAS 59–65 green, 65/65; PA 881 Closed; coverage regenerated) |
+
+RSA-land wave 3 (after L): Takagi `N=p²q`, Paillier `(1+N)^m`,
+Cramer–Shoup verify, T10 wrap + PKCS#1 `[2B,3B)`, Shamir 2-of-3,
+`φ = λ · gcd`, Okamoto–Uchiyama `L`. CAS 72–76.

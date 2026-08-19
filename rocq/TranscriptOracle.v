@@ -827,3 +827,52 @@ Proof.
   apply cube_below_N; [exact Hs | | exact Hcube].
   pose proof (rsa_N_gt_1 R); lia.
 Qed.
+
+(** ** T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval *)
+
+Theorem bleiche_wrap_interval :
+  forall r m N B,
+    0 < r ->
+    0 < N ->
+    0 <= B ->
+    (r * m) mod N < B ->
+    let k := (r * m) / N in
+    k * N <= r * m < k * N + B.
+Proof.
+  intros r m N B Hr HN HB Hrem k.
+  pose proof (Z.div_mod (r * m) N ltac:(lia)) as Hdm.
+  pose proof (Z.mod_pos_bound (r * m) N ltac:(lia)) as Hpos.
+  unfold k.
+  split; lia.
+Qed.
+
+(** PKCS#1 v1.5 type-2 ciphertext lives in [[2B, 3B)].  Manger's
+    leading-zero oracle is the coarser cut [[0, B)]. *)
+Definition pkcs15_B (k : Z) : Z := 2 ^ (8 * (k - 2)).
+
+Definition pkcs15_type2_interval (c B : Z) : Prop :=
+  2 * B <= c < 3 * B.
+
+Definition manger_interval (c B : Z) : Prop :=
+  0 <= c < B.
+
+Theorem pkcs15_prefix_is_type2 :
+  forall B rest,
+    0 < B ->
+    0 <= rest < B ->
+    pkcs15_type2_interval (2 * B + rest) B.
+Proof.
+  intros B rest HB Hrest.
+  unfold pkcs15_type2_interval. nia.
+Qed.
+
+Theorem manger_is_stricter_than_type2 :
+  forall c B,
+    0 < B ->
+    manger_interval c B ->
+    ~ pkcs15_type2_interval c B.
+Proof.
+  intros c B HB Hm Ht.
+  unfold manger_interval, pkcs15_type2_interval in *.
+  lia.
+Qed.
