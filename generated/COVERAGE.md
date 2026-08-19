@@ -277,6 +277,21 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `shanks_inv_square_is_shanks` | 469 |
 | Theorem | `shanks_annihilated_by_h` | 477 |
 
+## `Cocks.v`
+
+- L13: Cocks 2001 IBE — algebra only
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `cocks_carefully_chosen` | 39 |
+| Lemma | `cocks_ct_times_t` | 53 |
+| Lemma | `euler_sign_cong_mod` | 84 |
+| Lemma | `jacobi_cong` | 100 |
+| Lemma | `jacobi_mul` | 124 |
+| Lemma | `jacobi_sq_one` | 143 |
+| Lemma | `jacobi_self_sq` | 163 |
+| Theorem | `cocks_decrypt_jacobi` | 180 |
+
 ## `CramerShoup.v`
 
 - L12: Cramer–Shoup 2000 Strong RSA signatures, verification algebra
@@ -962,31 +977,34 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `PowersOfTau.v`
 
-- L12: Powers of a sampled [τ] in [(Z/NZ)*]
-  - L47: The string is [g^{τ^i}]; the next element is a [τ]-power
-  - L93: Contribution multiplies the secret
-  - L142: One honest contribution changes the string
-  - L262: The only backward walker is [τ⁻¹] modulo the order
-  - L353: Equal discrete logs: completeness and two-transcript extraction
+- L11: Powers of a sampled [τ] in [(Z/NZ)*]
+  - L46: The string is [g^{τ^i}]; the next element is a [τ]-power
+  - L92: Contribution multiplies the secret
+  - L141: One honest contribution changes the string
+  - L261: The only backward walker is [τ⁻¹] modulo the order
+  - L352: Equal discrete logs: completeness and two-transcript extraction
+  - L431: Self-bilinear maps evaluate the sampled-[τ] string
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `pot_at_zero` | 49 |
-| Lemma | `pot_at_one` | 58 |
-| Theorem | `pot_succ_is_tau_power` | 67 |
-| Theorem | `pot_first_is_dlog` | 82 |
-| Theorem | `pot_contribute_multiplies_tau` | 95 |
-| Theorem | `two_contributors_product` | 111 |
-| Theorem | `three_contributors_product` | 124 |
-| Lemma | `coprime_powm` | 144 |
-| Lemma | `powm_eq_implies_abs_annihilator` | 170 |
-| Theorem | `honest_contribution_moves_string` | 214 |
-| Theorem | `honest_tau_one_if_coprime` | 243 |
-| Lemma | `powm_reduce_mod_order` | 264 |
-| Theorem | `tau_inv_walks_backward` | 286 |
-| Theorem | `backward_walker_is_tau_inv` | 315 |
-| Theorem | `eqdl_complete` | 368 |
-| Theorem | `eqdl_extracts_tau` | 393 |
+| Lemma | `pot_at_zero` | 48 |
+| Lemma | `pot_at_one` | 57 |
+| Theorem | `pot_succ_is_tau_power` | 66 |
+| Theorem | `pot_first_is_dlog` | 81 |
+| Theorem | `pot_contribute_multiplies_tau` | 94 |
+| Theorem | `two_contributors_product` | 110 |
+| Theorem | `three_contributors_product` | 123 |
+| Lemma | `coprime_powm` | 143 |
+| Lemma | `powm_eq_implies_abs_annihilator` | 169 |
+| Theorem | `honest_contribution_moves_string` | 213 |
+| Theorem | `honest_tau_one_if_coprime` | 242 |
+| Lemma | `powm_reduce_mod_order` | 263 |
+| Theorem | `tau_inv_walks_backward` | 285 |
+| Theorem | `backward_walker_is_tau_inv` | 314 |
+| Theorem | `eqdl_complete` | 367 |
+| Theorem | `eqdl_extracts_tau` | 392 |
+| Theorem | `self_bil_checks_pot` | 446 |
+| Theorem | `self_bil_evaluates_pot` | 465 |
 
 ## `Pratt.v`
 
@@ -1040,6 +1058,48 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `rsa_trapdoor_inv_is_root` | 389 |
 | Theorem | `Pexp_0` | 411 |
 | Theorem | `Pexp_S_rsa` | 418 |
+
+## `QRModN.v`
+
+- L15: Quadratic residuosity modulo [N = pq]
+  - L465: Jacobi degeneracy: [(g^k/N)] sees [k] only modulo 2
+  - L706: Shamir at [(2,3)]: a square root and a cube root yield a sixth root
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `euler_crit_agree` | 39 |
+| Lemma | `mod_pq_to_p` | 46 |
+| Lemma | `qr_N_implies_local` | 57 |
+| Lemma | `qr_N_of_local` | 77 |
+| Theorem | `qr_N_iff_both` | 102 |
+| Lemma | `euler_sign_of_pm1` | 115 |
+| Lemma | `euler_sign_of_qr` | 132 |
+| Theorem | `jacobi_of_qr_N` | 146 |
+| Theorem | `euler_one_implies_qr_blum` | 166 |
+| Lemma | `euler_sign_one_is_crit_one` | 188 |
+| Lemma | `euler_sign_minus_is_crit_pm1` | 205 |
+| Lemma | `euler_sign_one_implies_qr_blum` | 220 |
+| Lemma | `euler_sign_minus_implies_qnr` | 234 |
+| Lemma | `coprime_neg1` | 247 |
+| Lemma | `coprime_opp` | 255 |
+| Lemma | `euler_sign_neg1_blum` | 259 |
+| Lemma | `euler_crit_mul` | 276 |
+| Lemma | `euler_sign_mul` | 291 |
+| Lemma | `euler_sign_neg_a` | 335 |
+| Theorem | `jacobi_neg1_blum` | 350 |
+| Theorem | `neg1_not_qr_N_blum` | 365 |
+| Theorem | `blum_jacobi_one_exactly_one_pm` | 385 |
+| Theorem | `williams_both_qr_is_qr_N` | 436 |
+| Lemma | `coprime_powm_prime` | 467 |
+| Lemma | `coprime_powm_N_prime` | 483 |
+| Theorem | `jacobi_even_power` | 504 |
+| Theorem | `jacobi_odd_power` | 534 |
+| Theorem | `jacobi_sees_only_parity` | 610 |
+| Lemma | `even_pow_succ` | 635 |
+| Lemma | `odd_pow_pos` | 652 |
+| Theorem | `pot_jacobi_tail_constant` | 674 |
+| Theorem | `sixth_root_from_square_and_cube` | 708 |
+| Theorem | `cubic_decision_vacuous` | 731 |
 
 ## `QuadResidue.v`
 
@@ -1500,4 +1560,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_994 theorems/lemmas/corollaries/examples across 57 files._
+_1037 theorems/lemmas/corollaries/examples across 59 files._

@@ -14,11 +14,13 @@ Generated.  Do not edit by hand.
 | `compose_preserves_disc_named` | `BinForms.v` | 677 | refuse | — |
 | `compose_assoc_named` | `BinForms.v` | 803 | refuse | — |
 | `compose_left_compat_named` | `BinForms.v` | 812 | refuse | — |
+| `cocks_hash_named` | `Cocks.v` | 30 | refuse | — |
+| `cocks_ind_id_cpa_named` | `Cocks.v` | 33 | refuse | — |
 | `coppersmith_named` | `Lattice.v` | 67 | refuse | — |
 | `dirichlet_ap_prime_named` | `NamedSkips.v` | 61 | refuse | — |
 | `orders_generate_lambda_named` | `Order.v` | 241 | refuse | — |
-| `pot_bilinear_verify_named` | `PowersOfTau.v` | 37 | refuse | — |
-| `pot_hvzk_eqdl_named` | `PowersOfTau.v` | 42 | refuse | — |
+| `pot_bilinear_verify_named` | `PowersOfTau.v` | 36 | refuse | — |
+| `pot_hvzk_eqdl_named` | `PowersOfTau.v` | 41 | refuse | — |
 | `pratt_complete_named` | `Pratt.v` | 110 | refuse | — |
 | `dstar_is_zk_like_tau_named` | `SharedKey.v` | 638 | refuse | — |
 | `pot_bilinear_crs_named` | `SharedKey.v` | 643 | refuse | — |
@@ -58,4 +60,4 @@ Generated.  Do not edit by hand.
 | `Refuse_threshold_robustness` | `NamedSkips.v` | 55 |
 | `Refuse_OAEP_PSS` | `NamedSkips.v` | 56 |
 
-_41 refuses, 0 used-as-hypothesis weaknesses._
+_43 refuses, 0 used-as-hypothesis weaknesses._

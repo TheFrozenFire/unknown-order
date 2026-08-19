@@ -427,3 +427,57 @@ Proof.
     destruct Hdiv as [m Hm]. exists (- m). lia.
   - rewrite Z.abs_eq in Hdiv by lia. exact Hdiv.
 Qed.
+
+(** ** Self-bilinear maps evaluate the sampled-[τ] string
+
+    A map [e] with [e(g^a, g^b) = e(g,g)^{ab}] checks consecutive
+    powers: [e(P_i, P_1) = e(P_{i+1}, P_0)].  If additionally
+    [e(g,g) = g], it *computes* [P_{i+1}] from [P_i] and [P_1],
+    so a public self-pairing of that strength would make the
+    string publicly extendable.  Existence is a hypothesis, not
+    an axiom.  iO constructions are deferred, not refused. *)
+
+Definition self_bilinear (e : Z -> Z -> Z) (N g : Z) : Prop :=
+  forall a b,
+    0 <= a ->
+    0 <= b ->
+    e (powm g a N) (powm g b N) = powm (e g g) (a * b) N.
+
+Theorem self_bil_checks_pot :
+  forall e N g tau i,
+    1 < N ->
+    0 <= tau ->
+    0 <= i ->
+    self_bilinear e N g ->
+    e (pot N g tau i) (pot N g tau 1) =
+      e (pot N g tau (i + 1)) (pot N g tau 0).
+Proof.
+  intros e N g tau i Hn Ht Hi He.
+  unfold pot.
+  rewrite Z.pow_1_r, Z.pow_0_r.
+  rewrite (He (tau ^ i) tau ltac:(apply Z.pow_nonneg; lia) Ht).
+  rewrite Z.add_1_r, Z.pow_succ_r by lia.
+  rewrite (He (tau * tau ^ i) 1 ltac:(nia) ltac:(lia)).
+  rewrite Z.mul_1_r, (Z.mul_comm tau).
+  reflexivity.
+Qed.
+
+Theorem self_bil_evaluates_pot :
+  forall e N g tau i,
+    1 < N ->
+    0 <= tau ->
+    0 <= i ->
+    self_bilinear e N g ->
+    e g g = g mod N ->
+    e (pot N g tau i) (pot N g tau 1) = pot N g tau (i + 1).
+Proof.
+  intros e N g tau i Hn Ht Hi He Hgg.
+  unfold pot.
+  rewrite Z.pow_1_r.
+  rewrite (He (tau ^ i) tau ltac:(apply Z.pow_nonneg; lia) Ht).
+  rewrite Hgg.
+  rewrite powm_mod_base by lia.
+  rewrite Z.add_1_r, Z.pow_succ_r by lia.
+  rewrite (Z.mul_comm tau).
+  reflexivity.
+Qed.

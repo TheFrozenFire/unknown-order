@@ -84,6 +84,13 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Honest contribution moves `P_1` | **Have** `honest_contribution_moves_string`, `honest_tau_one_if_coprime` |
 | Equal-DL completeness / extract `τ` | **Have** `eqdl_complete`, `eqdl_extracts_tau`; sim named (`pot_hvzk_eqdl_named`) |
 | Pairing check of a hidden relation | Named (`pot_bilinear_verify_named`; ECC / pairings refused) |
+| Jacobi `(g^k/N)` sees `k` only mod 2 | **Have** `jacobi_sees_only_parity`, `pot_jacobi_tail_constant`; CAS 83 |
+| Blum: Jacobi `+1` ⇒ exactly one of `{a,−a}` is QR mod `N` | **Have** `blum_jacobi_one_exactly_one_pm`; this is Cocks's carefully chosen `a` |
+| Williams `both_qr` ⇔ `is_qr_N` | **Have** `williams_both_qr_is_qr_N` |
+| Shamir at `(2,3)`: square root + cube root ⇒ 6th root | **Have** `sixth_root_from_square_and_cube` |
+| Cubic decision vacuous when `e=3` is RSA | **Have** `cubic_decision_vacuous` |
+| Cocks decrypt: Jacobi`(c+2s)` = Jacobi`(t)` | **Have** `cocks_decrypt_jacobi`, `cocks_carefully_chosen`; CAS 84 |
+| Self-bilinear `e(g^a,g^b)=e(g,g)^{ab}` checks / evaluates the `τ`-string | **Have** `self_bil_checks_pot`, `self_bil_evaluates_pot` (existence is a hyp; iO deferred) |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |
 | Shared `φ` or `λ` from shares of `p+q` | Publishing it factors (above) |

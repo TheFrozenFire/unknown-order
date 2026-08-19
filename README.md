@@ -166,7 +166,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 82 witnesses, `cas/01`–`82`. PARI is the gated CAS; do not add OSCAR.
+CAS is 84 witnesses, `cas/01`–`84`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -174,6 +174,8 @@ time-lock, Takagi `p²q`, Cramer–Shoup verify, Paillier / Okamoto–Uchiyama
 neighbours, sampled-`τ` powers in `(ℤ/Nℤ)*`) are catalogued in
 [`notes/rsa-land.md`](notes/rsa-land.md). Protocol / ROM / PPT stay named.
 The sampled-`τ` string is `rocq/PowersOfTau.v`, CAS `82`.
+QR modulo `N`, Jacobi degeneracy, and Cocks 2001 algebra are
+`rocq/QRModN.v` / `rocq/Cocks.v`, CAS `83`–`84`.
 
 ## Constructor (not a filter)
 

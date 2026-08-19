@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 994 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1037 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 994 results across 57 files.
+Captured for 1037 results across 59 files.
 
 Counts:
 
@@ -253,6 +253,19 @@ Counts:
 | `form_neg31_inv_sq_equiv_f` | 462 | 0 | 0 | OK |
 | `shanks_inv_square_is_shanks` | 469 | 0 | 0 | OK |
 | `shanks_annihilated_by_h` | 477 | 0 | 0 | OK |
+
+## Cocks.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `cocks_carefully_chosen` | 39 | 0 | 0 | OK |
+| `cocks_ct_times_t` | 53 | 0 | 0 | OK |
+| `euler_sign_cong_mod` | 84 | 0 | 0 | OK |
+| `jacobi_cong` | 100 | 0 | 0 | OK |
+| `jacobi_mul` | 124 | 0 | 0 | OK |
+| `jacobi_sq_one` | 143 | 0 | 0 | OK |
+| `jacobi_self_sq` | 163 | 0 | 0 | OK |
+| `cocks_decrypt_jacobi` | 180 | 0 | 0 | OK |
 
 ## CramerShoup.v
 
@@ -848,22 +861,24 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `pot_at_zero` | 49 | 0 | 0 | OK |
-| `pot_at_one` | 58 | 0 | 0 | OK |
-| `pot_succ_is_tau_power` | 67 | 0 | 0 | OK |
-| `pot_first_is_dlog` | 82 | 0 | 0 | OK |
-| `pot_contribute_multiplies_tau` | 95 | 0 | 0 | OK |
-| `two_contributors_product` | 111 | 0 | 0 | OK |
-| `three_contributors_product` | 124 | 0 | 0 | OK |
-| `coprime_powm` | 144 | 0 | 0 | OK |
-| `powm_eq_implies_abs_annihilator` | 170 | 0 | 0 | OK |
-| `honest_contribution_moves_string` | 214 | 0 | 0 | OK |
-| `honest_tau_one_if_coprime` | 243 | 0 | 0 | OK |
-| `powm_reduce_mod_order` | 264 | 0 | 0 | OK |
-| `tau_inv_walks_backward` | 286 | 0 | 0 | OK |
-| `backward_walker_is_tau_inv` | 315 | 0 | 0 | OK |
-| `eqdl_complete` | 368 | 0 | 0 | OK |
-| `eqdl_extracts_tau` | 393 | 0 | 0 | OK |
+| `pot_at_zero` | 48 | 0 | 0 | OK |
+| `pot_at_one` | 57 | 0 | 0 | OK |
+| `pot_succ_is_tau_power` | 66 | 0 | 0 | OK |
+| `pot_first_is_dlog` | 81 | 0 | 0 | OK |
+| `pot_contribute_multiplies_tau` | 94 | 0 | 0 | OK |
+| `two_contributors_product` | 110 | 0 | 0 | OK |
+| `three_contributors_product` | 123 | 0 | 0 | OK |
+| `coprime_powm` | 143 | 0 | 0 | OK |
+| `powm_eq_implies_abs_annihilator` | 169 | 0 | 0 | OK |
+| `honest_contribution_moves_string` | 213 | 0 | 0 | OK |
+| `honest_tau_one_if_coprime` | 242 | 0 | 0 | OK |
+| `powm_reduce_mod_order` | 263 | 0 | 0 | OK |
+| `tau_inv_walks_backward` | 285 | 0 | 0 | OK |
+| `backward_walker_is_tau_inv` | 314 | 0 | 0 | OK |
+| `eqdl_complete` | 367 | 0 | 0 | OK |
+| `eqdl_extracts_tau` | 392 | 0 | 0 | OK |
+| `self_bil_checks_pot` | 446 | 0 | 0 | OK |
+| `self_bil_evaluates_pot` | 465 | 0 | 0 | OK |
 
 ## Pratt.v
 
@@ -907,6 +922,44 @@ Counts:
 | `rsa_trapdoor_inv_is_root` | 389 | 0 | 0 | OK |
 | `Pexp_0` | 411 | 0 | 0 | OK |
 | `Pexp_S_rsa` | 418 | 0 | 0 | OK |
+
+## QRModN.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `euler_crit_agree` | 39 | 0 | 0 | OK |
+| `mod_pq_to_p` | 46 | 0 | 0 | OK |
+| `qr_N_implies_local` | 57 | 0 | 0 | OK |
+| `qr_N_of_local` | 77 | 0 | 0 | OK |
+| `qr_N_iff_both` | 102 | 0 | 0 | OK |
+| `euler_sign_of_pm1` | 115 | 0 | 0 | OK |
+| `euler_sign_of_qr` | 132 | 0 | 0 | OK |
+| `jacobi_of_qr_N` | 146 | 0 | 0 | OK |
+| `euler_one_implies_qr_blum` | 166 | 0 | 0 | OK |
+| `euler_sign_one_is_crit_one` | 188 | 0 | 0 | OK |
+| `euler_sign_minus_is_crit_pm1` | 205 | 0 | 0 | OK |
+| `euler_sign_one_implies_qr_blum` | 220 | 0 | 0 | OK |
+| `euler_sign_minus_implies_qnr` | 234 | 0 | 0 | OK |
+| `coprime_neg1` | 247 | 0 | 0 | OK |
+| `coprime_opp` | 255 | 0 | 0 | OK |
+| `euler_sign_neg1_blum` | 259 | 0 | 0 | OK |
+| `euler_crit_mul` | 276 | 0 | 0 | OK |
+| `euler_sign_mul` | 291 | 0 | 0 | OK |
+| `euler_sign_neg_a` | 335 | 0 | 0 | OK |
+| `jacobi_neg1_blum` | 350 | 0 | 0 | OK |
+| `neg1_not_qr_N_blum` | 365 | 0 | 0 | OK |
+| `blum_jacobi_one_exactly_one_pm` | 385 | 0 | 0 | OK |
+| `williams_both_qr_is_qr_N` | 436 | 0 | 0 | OK |
+| `coprime_powm_prime` | 467 | 0 | 0 | OK |
+| `coprime_powm_N_prime` | 483 | 0 | 0 | OK |
+| `jacobi_even_power` | 504 | 0 | 0 | OK |
+| `jacobi_odd_power` | 534 | 0 | 0 | OK |
+| `jacobi_sees_only_parity` | 610 | 0 | 0 | OK |
+| `even_pow_succ` | 635 | 0 | 0 | OK |
+| `odd_pow_pos` | 652 | 0 | 0 | OK |
+| `pot_jacobi_tail_constant` | 674 | 0 | 0 | OK |
+| `sixth_root_from_square_and_cube` | 708 | 0 | 0 | OK |
+| `cubic_decision_vacuous` | 731 | 0 | 0 | OK |
 
 ## QuadResidue.v
 
