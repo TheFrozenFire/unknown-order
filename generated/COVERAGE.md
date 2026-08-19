@@ -960,6 +960,34 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pollard_p1_splits` | 62 |
 | Theorem | `smooth_implies_public_annihilator` | 101 |
 
+## `PowersOfTau.v`
+
+- L12: Powers of a sampled [τ] in [(Z/NZ)*]
+  - L47: The string is [g^{τ^i}]; the next element is a [τ]-power
+  - L93: Contribution multiplies the secret
+  - L142: One honest contribution changes the string
+  - L262: The only backward walker is [τ⁻¹] modulo the order
+  - L353: Equal discrete logs: completeness and two-transcript extraction
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `pot_at_zero` | 49 |
+| Lemma | `pot_at_one` | 58 |
+| Theorem | `pot_succ_is_tau_power` | 67 |
+| Theorem | `pot_first_is_dlog` | 82 |
+| Theorem | `pot_contribute_multiplies_tau` | 95 |
+| Theorem | `two_contributors_product` | 111 |
+| Theorem | `three_contributors_product` | 124 |
+| Lemma | `coprime_powm` | 144 |
+| Lemma | `powm_eq_implies_abs_annihilator` | 170 |
+| Theorem | `honest_contribution_moves_string` | 214 |
+| Theorem | `honest_tau_one_if_coprime` | 243 |
+| Lemma | `powm_reduce_mod_order` | 264 |
+| Theorem | `tau_inv_walks_backward` | 286 |
+| Theorem | `backward_walker_is_tau_inv` | 315 |
+| Theorem | `eqdl_complete` | 368 |
+| Theorem | `eqdl_extracts_tau` | 393 |
+
 ## `Pratt.v`
 
 - L11: Pratt certificates, dual to Miller-from-[λ]
@@ -1472,4 +1500,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_978 theorems/lemmas/corollaries/examples across 56 files._
+_994 theorems/lemmas/corollaries/examples across 57 files._

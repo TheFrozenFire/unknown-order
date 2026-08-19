@@ -79,6 +79,11 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Public check: next`^e` = previous | **Have** `shared_dec_is_eth_root`, `srs_first_checks`, `srs_step_checks` |
 | SRS root of `g` is RSA/sRSA at that `g`; DL of `s₁` is not sRSA | **Have** `srs_first_is_rsa`, `lambda_plus_one_is_other_strong_rsa`, `dlog_of_srs_agrees_mod_order` |
 | “`d*` is ZK / like τ in powers-of-tau” | Named (`dstar_is_zk_like_tau_named`, `pot_bilinear_crs_named`; HVZK / ECC refused) |
+| Sampled-`τ` string `g^{τ^i}`; contribute multiplies `τ` | **Have** `pot_succ_is_tau_power`, `pot_contribute_multiplies_tau`, `three_contributors_product`; CAS 82 |
+| Only `τ⁻¹` walks the new string backward | **Have** `tau_inv_walks_backward`, `backward_walker_is_tau_inv` |
+| Honest contribution moves `P_1` | **Have** `honest_contribution_moves_string`, `honest_tau_one_if_coprime` |
+| Equal-DL completeness / extract `τ` | **Have** `eqdl_complete`, `eqdl_extracts_tau`; sim named (`pot_hvzk_eqdl_named`) |
+| Pairing check of a hidden relation | Named (`pot_bilinear_verify_named`; ECC / pairings refused) |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |
 | Shared `φ` or `λ` from shares of `p+q` | Publishing it factors (above) |

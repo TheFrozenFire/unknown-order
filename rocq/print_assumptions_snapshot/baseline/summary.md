@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 978 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 994 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 978 results across 56 files.
+Captured for 994 results across 57 files.
 
 Counts:
 
@@ -843,6 +843,27 @@ Counts:
 | `gcd_onesided_semiprime` | 46 | 0 | 0 | OK |
 | `pollard_p1_splits` | 62 | 0 | 0 | OK |
 | `smooth_implies_public_annihilator` | 101 | 0 | 0 | OK |
+
+## PowersOfTau.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `pot_at_zero` | 49 | 0 | 0 | OK |
+| `pot_at_one` | 58 | 0 | 0 | OK |
+| `pot_succ_is_tau_power` | 67 | 0 | 0 | OK |
+| `pot_first_is_dlog` | 82 | 0 | 0 | OK |
+| `pot_contribute_multiplies_tau` | 95 | 0 | 0 | OK |
+| `two_contributors_product` | 111 | 0 | 0 | OK |
+| `three_contributors_product` | 124 | 0 | 0 | OK |
+| `coprime_powm` | 144 | 0 | 0 | OK |
+| `powm_eq_implies_abs_annihilator` | 170 | 0 | 0 | OK |
+| `honest_contribution_moves_string` | 214 | 0 | 0 | OK |
+| `honest_tau_one_if_coprime` | 243 | 0 | 0 | OK |
+| `powm_reduce_mod_order` | 264 | 0 | 0 | OK |
+| `tau_inv_walks_backward` | 286 | 0 | 0 | OK |
+| `backward_walker_is_tau_inv` | 315 | 0 | 0 | OK |
+| `eqdl_complete` | 368 | 0 | 0 | OK |
+| `eqdl_extracts_tau` | 393 | 0 | 0 | OK |
 
 ## Pratt.v
 

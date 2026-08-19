@@ -45,6 +45,10 @@ Constructible torsion `H` is a family parameter
 | `d*` | RSA / sRSA on **every** unit | `dstar_inverts_every_unit` | extracting `d*` from the SRS |
 | DL of `s₁` base `g` | `k ≡ d* (mod ord(g))` | `dlog_of_srs_agrees_mod_order` | DL ≡ sRSA |
 | that DL when `ord(g)=λ*` | inverse of `e` mod `λ*` | `dlog_at_full_order_inverts_e` | PPT hardness |
+| sampled `τ`; `P_i = g^{τ^i}` | `P_{i+1} = P_i^τ`; DL of `P_1` is `τ` | `pot_succ_is_tau_power`, `pot_first_is_dlog` | a pairing check |
+| contribute `ρ` at slot `i` | `P_i^{ρ^i} = g^{(τρ)^i}` | `pot_contribute_multiplies_tau` | HVZK of the update |
+| backward walker `e` on `g^{τ^i}` | `e ≡ τ⁻¹ (mod ord(g))` | `backward_walker_is_tau_inv` | that a public KeyGen `e` walks this string |
+| two eq-DL transcripts | `ord \| (z−z′) − τ(c−c′)` | `eqdl_extracts_tau` | a simulator (`Refuse_HVZK_simulation`) |
 | `y = 1` | RSA / sRSA inhabited | `rsa_trivial_at_one`, `strong_RSA_trivial_at_one` | hardness (it refutes *existence*-hardness) |
 | `ord(a) = k` | `k \| λ` | `order_divides_lambda` | lcm of enough orders *is* `λ` |
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |
