@@ -45,6 +45,31 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `icomm_same_msg_is_annihilator` | 723 |
 | Theorem | `lipmaa_cl_membership_is_P_Root` | 748 |
 
+## `AuxBil.v`
+
+- L10: Self-bilinear with auxiliary public data
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `aux_is_self_bil` | 30 |
+| Theorem | `aux_self_bil_checks_pot` | 40 |
+| Theorem | `aux_self_bil_evaluates_pot` | 54 |
+| Theorem | `aux_eval_publishes_next` | 72 |
+| Theorem | `forget_aux_is_self_bil` | 82 |
+
+## `BGH.v`
+
+- L14: Cocks / Boneh–Gentry–Hamburg — 1-bit pairing catalog
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `jacobi_additive_pairing` | 29 |
+| Theorem | `jacobi_neg1_on_blum` | 58 |
+| Theorem | `jacobi_one_mul_closed` | 73 |
+| Theorem | `cocks_pair_first_decrypts` | 95 |
+| Theorem | `cocks_pair_second_decrypts` | 118 |
+| Theorem | `cocks_pair_covers_blum` | 141 |
+
 ## `BatchOrder.v`
 
 - L11: Type D without a shared prime: a common one-sided annihilator
@@ -365,6 +390,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `one_plus_N_pow_N3_div` | 31 |
 | Theorem | `dj_add` | 47 |
 
+## `Dark.v`
+
+- L9: DARK-style openings in unknown order — exponent identities
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `poly1_factor` | 46 |
+| Lemma | `poly2_factor` | 51 |
+| Theorem | `dark_deg1_open` | 57 |
+| Theorem | `dark_deg2_open` | 79 |
+| Theorem | `dark_deg1_commit_is_powm` | 106 |
+| Theorem | `dark_deg2_commit_is_powm` | 111 |
+
 ## `Derive.v`
 
 - L17: Secure derivation into the no-handle class
@@ -429,6 +467,20 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `dist_force_residue_can_leave_range` | 621 |
 | Theorem | `dist_seeded_slot_balanced` | 633 |
 | Theorem | `long_seed_hits_every_index` | 649 |
+
+## `Endo.v`
+
+- L14: Endomorphisms of [(Z/NZ)*] and of [Cl(Δ)]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `rsa_inverse_is_constructible` | 36 |
+| Theorem | `cl_inverse_is_constructible` | 43 |
+| Theorem | `rsa_gii_search_empty` | 52 |
+| Theorem | `power_endo_hom` | 62 |
+| Theorem | `power_endo_on_dlog` | 77 |
+| Theorem | `power_endo_not_product_of_dlogs` | 90 |
+| Theorem | `power_endo_next_forces_k` | 115 |
 
 ## `EulerQuotient.v`
 
@@ -1015,6 +1067,26 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `update_first_is_old_first_to_rho` | 35 |
 | Theorem | `update_pok_complete` | 50 |
 | Theorem | `extracted_contributor_agrees` | 73 |
+
+## `PotCl.v`
+
+- L13: The same [τ]-string on a presentation
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `potP_rsa_is_pot` | 38 |
+| Theorem | `potP_cl_is_bqf_exp` | 50 |
+| Theorem | `potP_rsa_at_zero` | 56 |
+| Theorem | `potP_rsa_at_one` | 66 |
+| Theorem | `potP_cl_at_zero` | 77 |
+| Theorem | `potP_cl_at_one` | 88 |
+| Theorem | `potP_rsa_contribute_multiplies` | 96 |
+| Theorem | `potP_rsa_succ` | 119 |
+| Theorem | `pot_cl_no_lambda` | 132 |
+| Theorem | `pot_cl_inv_is_public` | 142 |
+| Theorem | `pot_cl_contribute_slot0` | 147 |
+| Theorem | `pot_cl_neg31_at_zero` | 158 |
+| Theorem | `pot_cl_neg31_at_one` | 166 |
 
 ## `PowersOfTau.v`
 
@@ -1613,4 +1685,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1061 theorems/lemmas/corollaries/examples across 63 files._
+_1098 theorems/lemmas/corollaries/examples across 68 files._

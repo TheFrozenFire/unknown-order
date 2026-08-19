@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1061 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1098 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1061 results across 63 files.
+Captured for 1098 results across 68 files.
 
 Counts:
 
@@ -45,6 +45,27 @@ Counts:
 | `icomm_binding_is_fractional_root` | 707 | 0 | 0 | OK |
 | `icomm_same_msg_is_annihilator` | 723 | 0 | 0 | OK |
 | `lipmaa_cl_membership_is_P_Root` | 748 | 0 | 0 | OK |
+
+## AuxBil.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `aux_is_self_bil` | 30 | 0 | 0 | OK |
+| `aux_self_bil_checks_pot` | 40 | 0 | 0 | OK |
+| `aux_self_bil_evaluates_pot` | 54 | 0 | 0 | OK |
+| `aux_eval_publishes_next` | 72 | 0 | 0 | OK |
+| `forget_aux_is_self_bil` | 82 | 0 | 0 | OK |
+
+## BGH.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `jacobi_additive_pairing` | 29 | 0 | 0 | OK |
+| `jacobi_neg1_on_blum` | 58 | 0 | 0 | OK |
+| `jacobi_one_mul_closed` | 73 | 0 | 0 | OK |
+| `cocks_pair_first_decrypts` | 95 | 0 | 0 | OK |
+| `cocks_pair_second_decrypts` | 118 | 0 | 0 | OK |
+| `cocks_pair_covers_blum` | 141 | 0 | 0 | OK |
 
 ## BatchOrder.v
 
@@ -330,6 +351,17 @@ Counts:
 | `one_plus_N_pow_N3_div` | 31 | 0 | 0 | OK |
 | `dj_add` | 47 | 0 | 0 | OK |
 
+## Dark.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `poly1_factor` | 46 | 0 | 0 | OK |
+| `poly2_factor` | 51 | 0 | 0 | OK |
+| `dark_deg1_open` | 57 | 0 | 0 | OK |
+| `dark_deg2_open` | 79 | 0 | 0 | OK |
+| `dark_deg1_commit_is_powm` | 106 | 0 | 0 | OK |
+| `dark_deg2_commit_is_powm` | 111 | 0 | 0 | OK |
+
 ## Derive.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -383,6 +415,18 @@ Counts:
 | `dist_force_residue_can_leave_range` | 621 | 0 | 0 | OK |
 | `dist_seeded_slot_balanced` | 633 | 0 | 0 | OK |
 | `long_seed_hits_every_index` | 649 | 0 | 0 | OK |
+
+## Endo.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `rsa_inverse_is_constructible` | 36 | 0 | 0 | OK |
+| `cl_inverse_is_constructible` | 43 | 0 | 0 | OK |
+| `rsa_gii_search_empty` | 52 | 0 | 0 | OK |
+| `power_endo_hom` | 62 | 0 | 0 | OK |
+| `power_endo_on_dlog` | 77 | 0 | 0 | OK |
+| `power_endo_not_product_of_dlogs` | 90 | 0 | 0 | OK |
+| `power_endo_next_forces_k` | 115 | 0 | 0 | OK |
 
 ## EulerQuotient.v
 
@@ -891,6 +935,24 @@ Counts:
 | `update_first_is_old_first_to_rho` | 35 | 0 | 0 | OK |
 | `update_pok_complete` | 50 | 0 | 0 | OK |
 | `extracted_contributor_agrees` | 73 | 0 | 0 | OK |
+
+## PotCl.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `potP_rsa_is_pot` | 38 | 0 | 0 | OK |
+| `potP_cl_is_bqf_exp` | 50 | 0 | 0 | OK |
+| `potP_rsa_at_zero` | 56 | 0 | 0 | OK |
+| `potP_rsa_at_one` | 66 | 0 | 0 | OK |
+| `potP_cl_at_zero` | 77 | 0 | 0 | OK |
+| `potP_cl_at_one` | 88 | 0 | 0 | OK |
+| `potP_rsa_contribute_multiplies` | 96 | 0 | 0 | OK |
+| `potP_rsa_succ` | 119 | 0 | 0 | OK |
+| `pot_cl_no_lambda` | 132 | 0 | 0 | OK |
+| `pot_cl_inv_is_public` | 142 | 0 | 0 | OK |
+| `pot_cl_contribute_slot0` | 147 | 0 | 0 | OK |
+| `pot_cl_neg31_at_zero` | 158 | 0 | 0 | OK |
+| `pot_cl_neg31_at_one` | 166 | 0 | 0 | OK |
 
 ## PowersOfTau.v
 

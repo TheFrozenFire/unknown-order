@@ -51,6 +51,11 @@ Constructible torsion `H` is a family parameter
 | two eq-DL transcripts | `ord \| (z−z′) − τ(c−c′)` | `eqdl_extracts_tau` | a simulator (`Refuse_HVZK_simulation`) |
 | Jacobi of `g^k` | depends on `k` only mod 2 | `jacobi_sees_only_parity` | a pairing check of the `τ`-string |
 | self-bilinear `e` | `e(P_i,P_1)=e(P_{i+1},P_0)`; evaluates if `e(g,g)=g` | `self_bil_checks_pot`, `self_bil_evaluates_pot` | existence of `e` |
+| power endo `x ↦ x^k` as next CRS power | `ord \| τ^i (k − τ)` | `power_endo_next_forces_k` | a pairing of two hidden dlogs |
+| GII search (unit with no inverse) | empty on `(ℤ/Nℤ)*` | `rsa_gii_search_empty` | computational GII; inversion is Bézout |
+| aux self-bilinear with `e(aux,g,g)=g` | publishes `P_{i+1}` | `aux_eval_publishes_next` | existence; iO deferred |
+| DARK `C = g^{f(s)}`, `π = g^{q(s)}` | `C = π^{s−z} · g^{f(z)}` | `dark_deg1_open`, `dark_deg2_open` | a pairing/PoE check without `s` |
+| Jacobi of `g^a` and `g^b` | product is Jacobi of `g^{a+b}` | `jacobi_additive_pairing` | a large-target pairing |
 | `y = 1` | RSA / sRSA inhabited | `rsa_trivial_at_one`, `strong_RSA_trivial_at_one` | hardness (it refutes *existence*-hardness) |
 | `ord(a) = k` | `k \| λ` | `order_divides_lambda` | lcm of enough orders *is* `λ` |
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |

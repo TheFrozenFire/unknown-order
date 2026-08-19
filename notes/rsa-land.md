@@ -95,6 +95,11 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `three_divides_lambda_forbids_e3`; CAS 86 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |
+| Inversion is public on units and on `Cl`; `x ↦ x^k` is not a pairing | **Have** `rsa_gii_search_empty`, `power_endo_next_forces_k`; CAS 89 |
+| Aux self-bilinear evaluates the string if `e(aux,g,g)=g` | **Have** `aux_eval_publishes_next`; CAS 90 (existence a hyp; iO deferred) |
+| DARK deg 1–2: `C = π^{s−z} · g^{f(z)}` | **Have** `dark_deg1_open`, `dark_deg2_open`; CAS 91; PoE/VDF named |
+| Same `τ`-string on `cl_presentation`; no `λ` trapdoor | **Have** `potP_rsa_is_pot`, `pot_cl_no_lambda`; CAS 92 |
+| Jacobi additive pairing; Cocks pair covers Blum | **Have** `jacobi_additive_pairing`, `cocks_pair_covers_blum`; CAS 93 |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |
 | Shared `φ` or `λ` from shares of `p+q` | Publishing it factors (above) |

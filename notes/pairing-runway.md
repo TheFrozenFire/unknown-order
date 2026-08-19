@@ -47,17 +47,17 @@ only with a written death in this file.
    `eval_pair_mu6`; CAS 87. Target order divides `n` (at most 6).
    One argument is an integer in the clear.
 
-3. **Endomorphisms / infeasible inversion.**
-   Neighbour of Yamakawa’s self-bilinear map: isogenies and
-   groups where inversion is hard, sometimes over an RSA modulus.
-   Done: an algebraic identity, or a named death that this is
-   the elliptic-curve branch (`Refuse_elliptic_curve_branch`).
+3. **Endomorphisms / infeasible inversion.** *(this sitting)*
+   **Have** `rsa_gii_search_empty`, `power_endo_hom`,
+   `power_endo_next_forces_k`; CAS 89. Inversion is Bézout /
+   `bqf_inv`. Using `x ↦ x^k` as “next CRS power” forces
+   `k ≡ τ`. Isogenies stay `Refuse_elliptic_curve_branch`.
 
-4. **Self-bilinear with auxiliary information, algebra only.**
-   Spec is `self_bilinear`. Next object: bilinear only given
-   extra public data, without iO. Done: Gallina relation for
-   that data, and whether it still evaluates the `τ`-string
-   (if it does, it is too strong to publish). iO stays deferred.
+4. **Self-bilinear with auxiliary information, algebra only.** *(this sitting)*
+   **Have** `aux_self_bil_checks_pot`, `aux_eval_publishes_next`;
+   CAS 90. Freezing `aux` recovers `self_bilinear`. If
+   `e(aux,g,g) = g`, the map computes `P_{i+1}` — too strong
+   to publish. iO stays deferred.
 
 ### Checkable SRS, pairing optional
 
@@ -74,15 +74,17 @@ only with a written death in this file.
    `d*`. Using it as “next CRS power” forces `τ ≡ d*` — the old
    public-`e` string. It is not a pairing of two group elements.
 
-7. **DARK-style commitments in unknown order.**
-   Polynomial commitments that use hidden order instead of
-   pairings. Sequentiality stays refused. Done: exponent
-   identities, not a VDF.
+7. **DARK-style commitments in unknown order.** *(this sitting)*
+   **Have** `dark_deg1_open`, `dark_deg2_open`; CAS 91.
+   `C = π^{s−z} · g^{f(z)}` is an exponent identity.
+   Checking it without the integer `s` is a pairing or a
+   PoE (`Refuse_this_is_a_VDF`). Sequentiality is not a theorem.
 
-8. **The same `τ`-string in `Cl(Δ)`.**
-   No factorization trapdoor; toxic waste is only `τ`. Done:
-   contribute/update identities on the class-group presentation
-   we already own.
+8. **The same `τ`-string in `Cl(Δ)`.** *(this sitting)*
+   **Have** `potP_rsa_is_pot`, `potP_cl_at_zero`,
+   `pot_cl_no_lambda`, `pot_cl_contribute_slot0`; CAS 92.
+   Toxic waste is only `τ`. Public annihilator is `Some 2`.
+   General Cl contribute needs `compose_assoc_named` (not taken).
 
 ### Finish what QR/Cocks opened
 
@@ -90,16 +92,16 @@ only with a written death in this file.
    not a permutation.** Companion to QR-mod-`N`. Folded into
    area 1.
 
-10. **Obstruction theorem.** *(partial this sitting)*
+10. **Obstruction theorem.** *(this sitting)*
     `jacobi_sees_only_parity` / `pot_jacobi_tail_constant` are
     the theorem: Jacobi of any CRS word is a function of
-    exponent parities. Target `{±1}`. An explicit
-    `jacobi(g^a)jacobi(g^b)=jacobi(g^{a+b})` lemma is still
-    worth writing as a named pairing.
+    exponent parities. Target `{±1}`. **Have**
+    `jacobi_additive_pairing`; CAS 93.
 
-11. **Cocks / Boneh–Gentry–Hamburg identities only.**
-    More of the 1-bit pairing, not a CRS check. Worth it only
-    for the pairing-shaped protocol catalog.
+11. **Cocks / Boneh–Gentry–Hamburg identities only.** *(this sitting)*
+    **Have** `jacobi_additive_pairing`, `jacobi_neg1_on_blum`,
+    `cocks_pair_covers_blum`; CAS 93. 1-bit pairing catalog,
+    not a CRS check.
 
 ## Attack order this sitting
 

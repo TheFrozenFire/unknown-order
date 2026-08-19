@@ -66,3 +66,8 @@ PotCheck.v
 CubicResidue.v
 EvalPairing.v
 TwoPartyPair.v
+Endo.v
+AuxBil.v
+Dark.v
+PotCl.v
+BGH.v
