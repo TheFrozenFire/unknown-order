@@ -235,6 +235,9 @@ Cyclotomic.v,strong_prime_is_partial_cyc,104,0,0,OK
 Cyclotomic.v,cyc3_pos,110,0,0,OK
 Cyclotomic.v,cyc4_pos,114,0,0,OK
 Cyclotomic.v,cyc6_pos_ge3,118,0,0,OK
+DamgardJurik.v,one_plus_N_pow_N3,19,0,0,OK
+DamgardJurik.v,one_plus_N_pow_N3_div,31,0,0,OK
+DamgardJurik.v,dj_add,47,0,0,OK
 Derive.v,pow_pos_ge1,48,0,0,OK
 Derive.v,range_lo_lt_hi,55,0,0,OK
 Derive.v,in_S_b_is_ap,64,0,0,OK
@@ -784,7 +787,9 @@ Takagi.v,euler_p2,41,0,0,OK
 Takagi.v,sqrt1_mod_p2_is_pm1,66,0,0,OK
 Takagi.v,carmichael_takagi,127,0,0,OK
 Takagi.v,lambda_divides_phi_takagi,177,0,0,OK
-Takagi.v,takagi_mixed_sqrt1_splits,187,0,0,OK
+Takagi.v,lambda_p2_divides_lambda_takagi,186,0,0,OK
+Takagi.v,takagi_ed_is_id_p2,191,0,0,OK
+Takagi.v,takagi_mixed_sqrt1_splits,237,0,0,OK
 ThresholdRSA.v,additive_share_combines,21,0,0,OK
 ThresholdRSA.v,additive_three_shares,33,0,0,OK
 ThresholdRSA.v,mediated_rsa_is_two_shares,47,0,0,OK

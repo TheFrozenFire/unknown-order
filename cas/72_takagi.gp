@@ -37,5 +37,11 @@ check(g > 1 && g < N && N % g == 0, "mixed root splits N");
 check(g % (p*p) == 0, "the split includes p²");
 check(g % q != 0, "the split excludes q");
 
+\\ e d ≡ 1 (mod λ) ⇒ a^{ed} ≡ a (mod p²)
+e = 7; d = lift(1/Mod(e, lam));
+check((e*d) % lam == 1, "e d ≡ 1 (mod λ)");
+check(lift(Mod(a, p*p)^(e*d)) == a % (p*p), "a^{ed} ≡ a (mod p²)");
+
 printf("%d ok, %d fail\n", ok, fail);
 if(fail, error("CAS failures"));
+

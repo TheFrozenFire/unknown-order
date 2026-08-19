@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 922 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 927 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 922 results across 54 files.
+Captured for 927 results across 55 files.
 
 Counts:
 
@@ -299,6 +299,14 @@ Counts:
 | `cyc3_pos` | 110 | 0 | 0 | OK |
 | `cyc4_pos` | 114 | 0 | 0 | OK |
 | `cyc6_pos_ge3` | 118 | 0 | 0 | OK |
+
+## DamgardJurik.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `one_plus_N_pow_N3` | 19 | 0 | 0 | OK |
+| `one_plus_N_pow_N3_div` | 31 | 0 | 0 | OK |
+| `dj_add` | 47 | 0 | 0 | OK |
 
 ## Derive.v
 
@@ -1023,7 +1031,9 @@ Counts:
 | `sqrt1_mod_p2_is_pm1` | 66 | 0 | 0 | OK |
 | `carmichael_takagi` | 127 | 0 | 0 | OK |
 | `lambda_divides_phi_takagi` | 177 | 0 | 0 | OK |
-| `takagi_mixed_sqrt1_splits` | 187 | 0 | 0 | OK |
+| `lambda_p2_divides_lambda_takagi` | 186 | 0 | 0 | OK |
+| `takagi_ed_is_id_p2` | 191 | 0 | 0 | OK |
+| `takagi_mixed_sqrt1_splits` | 237 | 0 | 0 | OK |
 
 ## ThresholdRSA.v
 

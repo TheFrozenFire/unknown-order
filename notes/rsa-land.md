@@ -96,7 +96,7 @@ that admits a mixed triple-root is not an RSA modulus.
 | Object | Status |
 |---|---|
 | Multi-prime `N=pqr`, eight `√1` | **Have** |
-| Multi-power / Takagi `N=p²q` | **Have** `carmichael_takagi`, `sqrt1_mod_p2_is_pm1`, `takagi_mixed_sqrt1_splits`; CAS 72 |
+| Multi-power / Takagi `N=p²q` | **Have** `carmichael_takagi`, `sqrt1_mod_p2_is_pm1`, `takagi_mixed_sqrt1_splits`, `takagi_ed_is_id_p2`; CAS 72 |
 | Safe primes ⇒ `λ=2p'q'` | **Have** `safe_pair_lambda` |
 | Rebalanced RSA (short `d_p`, `d_q`) | **Have** CRTRSA |
 | Multi-prime RSA (PKCS#1) | Same as multi-prime `√1` + CRT |
@@ -143,7 +143,8 @@ Rivest–Shamir–Wagner: `x^{2^T}`. The trapdoor is
 |---|---|
 | Goldwasser–Micali / QR decision | `e=2` is not a permutation |
 | Paillier homomorphism on `(ℤ/N²ℤ)*` | **Have** `one_plus_N_pow`, `paillier_add`; CAS 73. DCR named |
-| Damgård–Jurik / higher `N^{s+1}` | Algebra next (binomial beyond `N²`) |
+| Damgård–Jurik `s=2` on `N³` | **Have** `one_plus_N_pow_N3`, `dj_add`; CAS 77. Higher `s` is the same binomial |
+| Damgård–Jurik `s>2` | Algebra next (one more binomial term per `s`) |
 | Okamoto–Uchiyama `L` on `p²` | **Have** `ou_L_of_scaled`, `ou_rand_vanishes`; CAS 76 |
 | Naccache–Stern / Benaloh | high residuosity |
 | OAEP / RSA-KEM tightness | ROM + PPT |

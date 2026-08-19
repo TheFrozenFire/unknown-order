@@ -329,6 +329,16 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `cyc4_pos` | 114 |
 | Lemma | `cyc6_pos_ge3` | 118 |
 
+## `DamgardJurik.v`
+
+- L10: Damgård–Jurik: the [s = 2] binomial on [N³]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `one_plus_N_pow_N3` | 19 |
+| Theorem | `one_plus_N_pow_N3_div` | 31 |
+| Theorem | `dj_add` | 47 |
+
 ## `Derive.v`
 
 - L17: Secure derivation into the no-handle class
@@ -1176,7 +1186,9 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `sqrt1_mod_p2_is_pm1` | 66 |
 | Theorem | `carmichael_takagi` | 127 |
 | Theorem | `lambda_divides_phi_takagi` | 177 |
-| Theorem | `takagi_mixed_sqrt1_splits` | 187 |
+| Theorem | `lambda_p2_divides_lambda_takagi` | 186 |
+| Theorem | `takagi_ed_is_id_p2` | 191 |
+| Theorem | `takagi_mixed_sqrt1_splits` | 237 |
 
 ## `ThresholdRSA.v`
 
@@ -1393,4 +1405,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_922 theorems/lemmas/corollaries/examples across 54 files._
+_927 theorems/lemmas/corollaries/examples across 55 files._

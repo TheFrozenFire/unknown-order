@@ -183,6 +183,56 @@ Proof.
   - exists (p * (p - 1)). ring.
 Qed.
 
+Theorem lambda_p2_divides_lambda_takagi :
+  forall p q, (lambda_p2 p | lambda_takagi p q).
+Proof. intros. unfold lambda_takagi. apply Z.divide_lcm_l. Qed.
+
+(** [e d ≡ 1 (mod λ(p²q))] implies [a^{e d} ≡ a (mod p²)]. *)
+Theorem takagi_ed_is_id_p2 :
+  forall p q a e d,
+    Z.prime p ->
+    Z.prime q ->
+    p <> 2 ->
+    p <> q ->
+    Z.coprime a p ->
+    0 <= e ->
+    0 <= d ->
+    (e * d) mod (lambda_takagi p q) = 1 ->
+    powm a (e * d) (p * p) = a mod (p * p).
+Proof.
+  intros p q a e d Hp Hq Hp2 Hneq Hcop He Hd Hinv.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (1 < lambda_takagi p q) as Hlam.
+  { unfold lambda_takagi, lambda_p2.
+    pose proof (Z.lcm_nonneg (p * (p - 1)) (q - 1)).
+    assert (Z.lcm (p * (p - 1)) (q - 1) <> 0).
+    { intro Hz. apply Z.lcm_eq_0 in Hz. nia. }
+    pose proof (Z.divide_lcm_l (p * (p - 1)) (q - 1)).
+    pose proof (Z.divide_pos_le (p * (p - 1))
+                  (Z.lcm (p * (p - 1)) (q - 1)) ltac:(lia) ltac:(assumption)).
+    nia. }
+  assert (lambda_takagi p q | e * d - 1) as Hdiv.
+  { apply mods_eq_iff_divides; [lia|].
+    rewrite Hinv, Z.mod_1_l by lia. reflexivity. }
+  destruct Hdiv as [k Hk].
+  assert (e * d = 1 + k * lambda_takagi p q) as Hed by lia.
+  assert (0 <= k) by nia.
+  destruct (lambda_p2_divides_lambda_takagi p q) as [s Hs].
+  rewrite Hed, Hs.
+  replace (1 + k * (s * lambda_p2 p)) with (1 + (k * s) * lambda_p2 p) by ring.
+  rewrite powm_add_r by nia.
+  rewrite powm_1_r by nia.
+  replace (k * s * lambda_p2 p) with (lambda_p2 p * (k * s)) by ring.
+  assert (0 < lambda_p2 p) by (unfold lambda_p2; nia).
+  assert (0 <= s) by nia.
+  rewrite (powm_one_mul a (lambda_p2 p) (k * s) (p * p));
+    [ | nia | nia | nia | apply euler_p2; assumption ].
+  rewrite Z.mod_1_l by nia.
+  rewrite Z.mul_1_r.
+  unfold powm. rewrite Z.mod_mod by nia. reflexivity.
+Qed.
+
 (** A √1 that is [+1] on [p²] and [−1] on [q] splits [N = p²q]. *)
 Theorem takagi_mixed_sqrt1_splits :
   forall p q x,

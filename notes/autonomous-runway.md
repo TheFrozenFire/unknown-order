@@ -137,3 +137,6 @@ Update in place.
 RSA-land wave 3 (after L): Takagi `N=p²q`, Paillier `(1+N)^m`,
 Cramer–Shoup verify, T10 wrap + PKCS#1 `[2B,3B)`, Shamir 2-of-3,
 `φ = λ · gcd`, Okamoto–Uchiyama `L`. CAS 72–76.
+
+RSA-land wave 4: Damgård–Jurik `s=2` binomial on `N³`; Takagi
+`a^{ed} ≡ a (mod p²)`. CAS 77.
