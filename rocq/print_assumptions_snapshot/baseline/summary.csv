@@ -782,6 +782,9 @@ SharedKey.v,d_star_decrypts_A,742,0,0,OK
 SharedKey.v,coprime_powm,767,0,0,OK
 SharedKey.v,shared_N_gt_1,793,0,0,OK
 SharedKey.v,dstar_power_crs_is_powm,802,0,0,OK
+SharedKey.v,shared_dec_is_eth_root,844,0,0,OK
+SharedKey.v,srs_first_checks,871,0,0,OK
+SharedKey.v,srs_step_checks,893,0,0,OK
 SharedModulus.v,dkg_N_is_product,29,0,0,OK
 SharedModulus.v,dkg_N_cross_terms,34,0,0,OK
 SharedModulus.v,published_sum_is_phi_plus_one,40,0,0,OK

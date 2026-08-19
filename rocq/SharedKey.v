@@ -834,3 +834,87 @@ Proof.
     unfold powm. rewrite <- Z.mod_pow_l by lia. reflexivity.
 Qed.
 
+(** ** SRS checks: each next value is the [e]-th root of the last
+
+    [shared_dec g] is the unique unit [s] with [s^e ≡ g].  Anyone
+    checks that by raising to the public [e].  The same check
+    links consecutive CRS elements.  The ceremony *computes* that
+    unique chain; it does not sample a free [τ]. *)
+
+Theorem shared_dec_is_eth_root :
+  forall RA RB s dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime s (shared_N RA RB) ->
+    0 < dstar ->
+    d_star_spec RA RB dstar ->
+    powm (shared_dec RA RB s) (rsa_e RA) (shared_N RA RB) =
+      s mod shared_N RA RB.
+Proof.
+  intros RA RB s dstar He Hg Hcop Hd Hspec.
+  pose proof (rsa_e_pos RA).
+  pose proof (shared_N_gt_1 RA RB).
+  assert (0 <= dstar) by lia.
+  rewrite <- (powm_mod_base (shared_dec RA RB s) (rsa_e RA) (shared_N RA RB))
+    by lia.
+  rewrite (shared_dec_eq_powm RA RB s dstar He Hg Hcop ltac:(lia) Hspec).
+  rewrite <- powm_mul_r by lia.
+  rewrite (Z.mul_comm dstar).
+  replace (rsa_e RA * dstar) with (rsa_e RA * dstar - 1 + 1) by ring.
+  rewrite powm_add_r by nia.
+  rewrite powm_1_r by lia.
+  rewrite (d_star_annihilates_shared RA RB dstar s He Hg Hspec ltac:(nia) Hcop).
+  rewrite Z.mul_1_l.
+  unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Theorem srs_first_checks :
+  forall RA RB g dstar,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime g (shared_N RA RB) ->
+    0 < dstar ->
+    d_star_spec RA RB dstar ->
+    powm (dstar_power_crs RA RB g 1) (rsa_e RA) (shared_N RA RB) =
+      g mod shared_N RA RB.
+Proof.
+  intros RA RB g dstar He Hg Hcop Hd Hspec.
+  change (dstar_power_crs RA RB g 1) with
+    (shared_dec RA RB (g mod shared_N RA RB)).
+  pose proof (shared_N_gt_1 RA RB).
+  assert (Z.coprime (g mod shared_N RA RB) (shared_N RA RB)) as Hc.
+  { unfold Z.coprime in Hcop |- *.
+    rewrite Z.gcd_mod by lia. rewrite Z.gcd_comm. exact Hcop. }
+  rewrite (shared_dec_is_eth_root RA RB (g mod shared_N RA RB) dstar
+             He Hg Hc Hd Hspec).
+  apply Z.mod_mod. lia.
+Qed.
+
+Theorem srs_step_checks :
+  forall RA RB g dstar k,
+    rsa_e RA = rsa_e RB ->
+    Z.gcd (rsa_N RA) (rsa_N RB) = 1 ->
+    Z.coprime g (shared_N RA RB) ->
+    0 < dstar ->
+    d_star_spec RA RB dstar ->
+    powm (dstar_power_crs RA RB g (S k)) (rsa_e RA) (shared_N RA RB) =
+      dstar_power_crs RA RB g k mod shared_N RA RB.
+Proof.
+  intros RA RB g dstar k He Hg Hcop Hd Hspec.
+  pose proof (shared_N_gt_1 RA RB) as Hn.
+  assert (Z.coprime (dstar_power_crs RA RB g k) (shared_N RA RB)) as Hc.
+  { pose proof (dstar_power_crs_is_powm RA RB g dstar k He Hg Hcop
+                  ltac:(lia) Hspec) as Heq.
+    pose proof (coprime_powm g (dstar ^ Z.of_nat k) (shared_N RA RB)
+                  Hn (Z.pow_nonneg dstar (Z.of_nat k) ltac:(lia)) Hcop)
+      as Hp.
+    unfold Z.coprime in Hp |- *.
+    rewrite Z.gcd_comm.
+    rewrite <- (Z.gcd_mod (dstar_power_crs RA RB g k)) by lia.
+    rewrite Heq. exact Hp. }
+  change (dstar_power_crs RA RB g (S k)) with
+    (shared_dec RA RB (dstar_power_crs RA RB g k)).
+  apply (shared_dec_is_eth_root RA RB _ dstar); assumption.
+Qed.
+
+

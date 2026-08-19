@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 968 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 971 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 968 results across 56 files.
+Captured for 971 results across 56 files.
 
 Counts:
 
@@ -1001,6 +1001,9 @@ Counts:
 | `coprime_powm` | 767 | 0 | 0 | OK |
 | `shared_N_gt_1` | 793 | 0 | 0 | OK |
 | `dstar_power_crs_is_powm` | 802 | 0 | 0 | OK |
+| `shared_dec_is_eth_root` | 844 | 0 | 0 | OK |
+| `srs_first_checks` | 871 | 0 | 0 | OK |
+| `srs_step_checks` | 893 | 0 | 0 | OK |
 
 ## SharedModulus.v
 

@@ -76,6 +76,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Arity 3 (triplet of coprime cofactors) | **Have** `carmichael_shared3` |
 | Assembled `d*` is toxic (`e d*−1` annihilates `N*`) | **Have** `d_star_annihilates_shared`; CAS 81 |
 | Iterated `shared_dec` is `g^{d*^k}` in `(ℤ/N*ℤ)*` | **Have** `dstar_power_crs_is_powm`; not a pairing CRS |
+| Public check: next`^e` = previous | **Have** `shared_dec_is_eth_root`, `srs_first_checks`, `srs_step_checks` |
 | “`d*` is ZK / like τ in powers-of-tau” | Named (`dstar_is_zk_like_tau_named`, `pot_bilinear_crs_named`; HVZK / ECC refused) |
 | Boneh–Franklin biprimality *protocol* (OT, proofs) | `Refuse_DKG_MPC` |
 | Damgård–Mikkelsen / Miller–Rabin DKG | Same refuse; MR engine **Have** |

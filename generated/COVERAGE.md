@@ -1105,6 +1105,7 @@ in the Rocq tree.  Do not edit by hand.
   - L518: Layer 5 — lifted KeyGen spec
   - L574: Layer 6 — arity 3
   - L628: Unassembled [d*] is not ZK; it is a trapdoor
+  - L837: SRS checks: each next value is the [e]-th root of the last
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1149,6 +1150,9 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `coprime_powm` | 767 |
 | Lemma | `shared_N_gt_1` | 793 |
 | Theorem | `dstar_power_crs_is_powm` | 802 |
+| Theorem | `shared_dec_is_eth_root` | 844 |
+| Theorem | `srs_first_checks` | 871 |
+| Theorem | `srs_step_checks` | 893 |
 
 ## `SharedModulus.v`
 
@@ -1460,4 +1464,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_968 theorems/lemmas/corollaries/examples across 56 files._
+_971 theorems/lemmas/corollaries/examples across 56 files._

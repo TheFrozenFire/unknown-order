@@ -25,6 +25,16 @@ for(k = 0, 4, \
   acc = dec_loc(acc) \
 );
 check(crs_ok, "iterated shared_dec = g^{d*^k} for k=0..4");
+s1 = dec_loc(g % Ns);
+check(lift(Mod(s1, Ns)^e) == g % Ns, "first SRS element^e = g");
+s0 = g % Ns;
+chain_ok = 1;
+for(k = 0, 3, \
+  nxt = dec_loc(s0); \
+  if(lift(Mod(nxt, Ns)^e) != s0, chain_ok = 0); \
+  s0 = nxt \
+);
+check(chain_ok, "each next SRS element^e equals the previous");
 
 \\ uniqueness: two d* differ by a multiple of λ*
 d2 = dstar + ls;
