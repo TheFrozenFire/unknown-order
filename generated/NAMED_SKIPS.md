@@ -16,6 +16,7 @@ Generated.  Do not edit by hand.
 | `compose_left_compat_named` | `BinForms.v` | 812 | refuse | — |
 | `cocks_hash_named` | `Cocks.v` | 30 | refuse | — |
 | `cocks_ind_id_cpa_named` | `Cocks.v` | 33 | refuse | — |
+| `eval_pair_needs_integer_named` | `EvalPairing.v` | 211 | refuse | — |
 | `coppersmith_named` | `Lattice.v` | 67 | refuse | — |
 | `dirichlet_ap_prime_named` | `NamedSkips.v` | 61 | refuse | — |
 | `orders_generate_lambda_named` | `Order.v` | 241 | refuse | — |
@@ -60,4 +61,4 @@ Generated.  Do not edit by hand.
 | `Refuse_threshold_robustness` | `NamedSkips.v` | 55 |
 | `Refuse_OAEP_PSS` | `NamedSkips.v` | 56 |
 
-_43 refuses, 0 used-as-hypothesis weaknesses._
+_44 refuses, 0 used-as-hypothesis weaknesses._

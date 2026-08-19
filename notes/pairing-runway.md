@@ -41,10 +41,11 @@ only with a written death in this file.
    (Euler `=1` ⇒ cube) still open; needs a primitive root or
    a Blum-style extractor.
 
-2. **Evaluation pairing on `μ_n` for `n=2,3,4,6`.**
-   Explicit torsion we already construct (`√1`, cube roots of 1).
-   The pairing `μ_n × ℤ/nℤ → μ_n` is exponentiation. Done: how
-   large `n` gets before computing the symbol needs `λ` or a curve.
+2. **Evaluation pairing on `μ_n` for `n=2,3,4,6`.** *(this sitting)*
+   **Have** `eval_pair_reduce_mod_n`, `eval_pair_mu2_on_mixed`,
+   `omega_cube_is_one`, `eval_pair_mu3`, `mu2_is_mu6`,
+   `eval_pair_mu6`; CAS 87. Target order divides `n` (at most 6).
+   One argument is an integer in the clear.
 
 3. **Endomorphisms / infeasible inversion.**
    Neighbour of Yamakawa’s self-bilinear map: isogenies and
@@ -67,11 +68,11 @@ only with a written death in this file.
    `update_first_is_old_first_to_rho`, `update_pok_complete`,
    `extracted_contributor_agrees`; CAS 85.
 
-6. **2-of-2 pairing oracle from the old shared trapdoor.**
-   Alice and Bob jointly raise to `d*` without assembling it.
-   Interactive product-of-exponents, not a public `e`. Done:
-   `e(P,Q)` as 2-of-2 evaluation, toxic-waste theorems already
-   owned for `d*`.
+6. **2-of-2 pairing oracle from the old shared trapdoor.** *(this sitting)*
+   **Have** `two_party_root_is_eth`, `two_party_root_hom`,
+   `two_party_next_forces_dstar`; CAS 88. The oracle raises to
+   `d*`. Using it as “next CRS power” forces `τ ≡ d*` — the old
+   public-`e` string. It is not a pairing of two group elements.
 
 7. **DARK-style commitments in unknown order.**
    Polynomial commitments that use hidden order instead of

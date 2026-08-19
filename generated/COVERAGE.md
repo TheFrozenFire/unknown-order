@@ -459,6 +459,25 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `sum_mod4_of_N` | 286 |
 | Theorem | `euler_quotient_rsa` | 309 |
 
+## `EvalPairing.v`
+
+- L10: Evaluation pairing on [μ_n]: [e(x,k) = x^k]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `eval_pair_stays_in_mu` | 26 |
+| Theorem | `eval_pair_add` | 43 |
+| Theorem | `eval_pair_mul_base` | 56 |
+| Theorem | `eval_pair_reduce_mod_n` | 71 |
+| Theorem | `eval_pair_image_divides_n` | 94 |
+| Theorem | `eval_pair_mu2` | 104 |
+| Theorem | `eval_pair_mu2_on_mixed` | 119 |
+| Theorem | `omega_cube_is_one` | 134 |
+| Theorem | `eval_pair_mu3` | 154 |
+| Theorem | `mu2_is_mu6` | 167 |
+| Theorem | `mu3_is_mu6` | 182 |
+| Theorem | `eval_pair_mu6` | 197 |
+
 ## `ExpProof.v`
 
 - L14: Proof of exponentiation, algebra only
@@ -1485,6 +1504,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pkcs15_prefix_is_type2` | 859 |
 | Theorem | `manger_is_stricter_than_type2` | 869 |
 
+## `TwoPartyPair.v`
+
+- L14: 2-of-2 root oracle is not a pairing of two group elements
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `two_party_root_is_eth` | 27 |
+| Theorem | `two_party_root_is_dstar_power` | 42 |
+| Theorem | `two_party_root_hom` | 57 |
+| Theorem | `two_party_next_forces_dstar` | 91 |
+
 ## `TwoPrimary.v`
 
 - L14: The 2-primary part of [(Z/NZ)*]
@@ -1583,4 +1613,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1045 theorems/lemmas/corollaries/examples across 61 files._
+_1061 theorems/lemmas/corollaries/examples across 63 files._

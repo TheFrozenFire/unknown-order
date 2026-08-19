@@ -64,3 +64,5 @@ QRModN.v
 Cocks.v
 PotCheck.v
 CubicResidue.v
+EvalPairing.v
+TwoPartyPair.v

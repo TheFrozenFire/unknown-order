@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1045 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1061 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1045 results across 61 files.
+Captured for 1061 results across 63 files.
 
 Counts:
 
@@ -408,6 +408,23 @@ Counts:
 | `odd_prime_mod4` | 269 | 0 | 0 | OK |
 | `sum_mod4_of_N` | 286 | 0 | 0 | OK |
 | `euler_quotient_rsa` | 309 | 0 | 0 | OK |
+
+## EvalPairing.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `eval_pair_stays_in_mu` | 26 | 0 | 0 | OK |
+| `eval_pair_add` | 43 | 0 | 0 | OK |
+| `eval_pair_mul_base` | 56 | 0 | 0 | OK |
+| `eval_pair_reduce_mod_n` | 71 | 0 | 0 | OK |
+| `eval_pair_image_divides_n` | 94 | 0 | 0 | OK |
+| `eval_pair_mu2` | 104 | 0 | 0 | OK |
+| `eval_pair_mu2_on_mixed` | 119 | 0 | 0 | OK |
+| `omega_cube_is_one` | 134 | 0 | 0 | OK |
+| `eval_pair_mu3` | 154 | 0 | 0 | OK |
+| `mu2_is_mu6` | 167 | 0 | 0 | OK |
+| `mu3_is_mu6` | 182 | 0 | 0 | OK |
+| `eval_pair_mu6` | 197 | 0 | 0 | OK |
 
 ## ExpProof.v
 
@@ -1275,6 +1292,15 @@ Counts:
 | `bleiche_wrap_interval` | 833 | 0 | 0 | OK |
 | `pkcs15_prefix_is_type2` | 859 | 0 | 0 | OK |
 | `manger_is_stricter_than_type2` | 869 | 0 | 0 | OK |
+
+## TwoPartyPair.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `two_party_root_is_eth` | 27 | 0 | 0 | OK |
+| `two_party_root_is_dstar_power` | 42 | 0 | 0 | OK |
+| `two_party_root_hom` | 57 | 0 | 0 | OK |
+| `two_party_next_forces_dstar` | 91 | 0 | 0 | OK |
 
 ## TwoPrimary.v
 
