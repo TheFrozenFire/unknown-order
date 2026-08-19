@@ -719,6 +719,17 @@ PotCl.v,pot_cl_inv_is_public,142,0,0,OK
 PotCl.v,pot_cl_contribute_slot0,147,0,0,OK
 PotCl.v,pot_cl_neg31_at_zero,158,0,0,OK
 PotCl.v,pot_cl_neg31_at_one,166,0,0,OK
+PotLadder.v,rho_ladder_0,30,0,0,OK
+PotLadder.v,rho_ladder_succ,34,0,0,OK
+PotLadder.v,rho_ladder_succ_is_power,39,0,0,OK
+PotLadder.v,ladder_realizes_update,58,0,0,OK
+PotLadder.v,contribution_ladder_step,75,0,0,OK
+PotLadder.v,slot2_aux_is_ladder_one,109,0,0,OK
+PotLadder.v,slot2_new_is_rho_sq,117,0,0,OK
+PotLadder.v,slot2_aux_then_rho,129,0,0,OK
+PotLadder.v,slot2_new_is_ladder_two,144,0,0,OK
+PotLadder.v,slot2_leg1_complete,155,0,0,OK
+PotLadder.v,slot2_leg2_complete,182,0,0,OK
 PowersOfTau.v,pot_at_zero,48,0,0,OK
 PowersOfTau.v,pot_at_one,57,0,0,OK
 PowersOfTau.v,pot_succ_is_tau_power,66,0,0,OK

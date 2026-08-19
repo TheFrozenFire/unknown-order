@@ -63,6 +63,7 @@ PowersOfTau.v
 QRModN.v
 Cocks.v
 PotCheck.v
+PotLadder.v
 CubicResidue.v
 EvalPairing.v
 TwoPartyPair.v

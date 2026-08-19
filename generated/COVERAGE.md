@@ -1088,6 +1088,25 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pot_cl_neg31_at_zero` | 158 |
 | Theorem | `pot_cl_neg31_at_one` | 166 |
 
+## `PotLadder.v`
+
+- L11: Equal-DL ladder: extra CRS powers are a proven [ρ^i]-update
+  - L104: Slot 2 is two ladder steps
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `rho_ladder_0` | 30 |
+| Lemma | `rho_ladder_succ` | 34 |
+| Theorem | `rho_ladder_succ_is_power` | 39 |
+| Theorem | `ladder_realizes_update` | 58 |
+| Theorem | `contribution_ladder_step` | 75 |
+| Theorem | `slot2_aux_is_ladder_one` | 109 |
+| Theorem | `slot2_new_is_rho_sq` | 117 |
+| Theorem | `slot2_aux_then_rho` | 129 |
+| Theorem | `slot2_new_is_ladder_two` | 144 |
+| Theorem | `slot2_leg1_complete` | 155 |
+| Theorem | `slot2_leg2_complete` | 182 |
+
 ## `PowersOfTau.v`
 
 - L11: Powers of a sampled [τ] in [(Z/NZ)*]
@@ -1685,4 +1704,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1098 theorems/lemmas/corollaries/examples across 68 files._
+_1109 theorems/lemmas/corollaries/examples across 69 files._

@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1098 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1109 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1098 results across 68 files.
+Captured for 1109 results across 69 files.
 
 Counts:
 
@@ -953,6 +953,22 @@ Counts:
 | `pot_cl_contribute_slot0` | 147 | 0 | 0 | OK |
 | `pot_cl_neg31_at_zero` | 158 | 0 | 0 | OK |
 | `pot_cl_neg31_at_one` | 166 | 0 | 0 | OK |
+
+## PotLadder.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `rho_ladder_0` | 30 | 0 | 0 | OK |
+| `rho_ladder_succ` | 34 | 0 | 0 | OK |
+| `rho_ladder_succ_is_power` | 39 | 0 | 0 | OK |
+| `ladder_realizes_update` | 58 | 0 | 0 | OK |
+| `contribution_ladder_step` | 75 | 0 | 0 | OK |
+| `slot2_aux_is_ladder_one` | 109 | 0 | 0 | OK |
+| `slot2_new_is_rho_sq` | 117 | 0 | 0 | OK |
+| `slot2_aux_then_rho` | 129 | 0 | 0 | OK |
+| `slot2_new_is_ladder_two` | 144 | 0 | 0 | OK |
+| `slot2_leg1_complete` | 155 | 0 | 0 | OK |
+| `slot2_leg2_complete` | 182 | 0 | 0 | OK |
 
 ## PowersOfTau.v
 

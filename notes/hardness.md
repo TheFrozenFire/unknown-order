@@ -49,6 +49,7 @@ Constructible torsion `H` is a family parameter
 | contribute `ρ` at slot `i` | `P_i^{ρ^i} = g^{(τρ)^i}` | `pot_contribute_multiplies_tau` | HVZK of the update |
 | backward walker `e` on `g^{τ^i}` | `e ≡ τ⁻¹ (mod ord(g))` | `backward_walker_is_tau_inv` | that a public KeyGen `e` walks this string |
 | two eq-DL transcripts | `ord \| (z−z′) − τ(c−c′)` | `eqdl_extracts_tau` | a simulator (`Refuse_HVZK_simulation`) |
+| `i` same-`ρ` equal-DLs on base `P_i` | `P'_i = P_i^{ρ^i} = g^{(τρ)^i}` | `ladder_realizes_update`, `contribution_ladder_step` | a pairing check of the CRS |
 | Jacobi of `g^k` | depends on `k` only mod 2 | `jacobi_sees_only_parity` | a pairing check of the `τ`-string |
 | self-bilinear `e` | `e(P_i,P_1)=e(P_{i+1},P_0)`; evaluates if `e(g,g)=g` | `self_bil_checks_pot`, `self_bil_evaluates_pot` | existence of `e` |
 | power endo `x ↦ x^k` as next CRS power | `ord \| τ^i (k − τ)` | `power_endo_next_forces_k` | a pairing of two hidden dlogs |

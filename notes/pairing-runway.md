@@ -66,7 +66,10 @@ only with a written death in this file.
    each contributor publishes updated powers plus an extractable
    equal-DL proof of the contribution `ρ`. **Have**
    `update_first_is_old_first_to_rho`, `update_pok_complete`,
-   `extracted_contributor_agrees`; CAS 85.
+   `extracted_contributor_agrees`; CAS 85. Extra slots: an
+   `i`-step same-`ρ` ladder on base `P_i` gives `P'_i = P_i^{ρ^i}`.
+   **Have** `ladder_realizes_update`, `contribution_ladder_step`,
+   `slot2_leg1_complete`, `slot2_leg2_complete`; CAS 94.
 
 6. **2-of-2 pairing oracle from the old shared trapdoor.** *(this sitting)*
    **Have** `two_party_root_is_eth`, `two_party_root_hom`,

@@ -166,7 +166,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 93 witnesses, `cas/01`–`93`. PARI is the gated CAS; do not add OSCAR.
+CAS is 94 witnesses, `cas/01`–`94`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -179,7 +179,8 @@ QR modulo `N`, Jacobi degeneracy, and Cocks 2001 algebra are
 Endomorphisms, auxiliary self-bilinear maps, DARK openings,
 the `τ`-string on `Cl(Δ)`, and the Cocks/BGH 1-bit catalog are
 `rocq/Endo.v` / `AuxBil.v` / `Dark.v` / `PotCl.v` / `BGH.v`,
-CAS `89`–`93`.
+CAS `89`–`93`. The equal-DL ladder that makes extra published
+powers a proven `ρ^i`-update is `rocq/PotLadder.v`, CAS `94`.
 
 ## Constructor (not a filter)
 
