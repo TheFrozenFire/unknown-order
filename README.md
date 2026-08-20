@@ -166,7 +166,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 104 witnesses, `cas/01`–`104`. PARI is the gated CAS; do not add OSCAR.
+CAS is 107 witnesses, `cas/01`–`107`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -190,6 +190,8 @@ Witness PoK on a specialized CRS, addition, and bits are
 `rocq/WirePoK.v` / `AddGate.v`, CAS `100`–`101`.
 A two-gate circuit, bit logic, and 2-bit range are
 `rocq/Circuit.v` / `BitLogic.v` / `Range2.v`, CAS `102`–`104`.
+Mux, wire equality, and bit-sum encodings are `rocq/Mux.v` /
+`WireEq.v` / `BitSum.v`, CAS `105`–`107`.
 
 ## Constructor (not a filter)
 

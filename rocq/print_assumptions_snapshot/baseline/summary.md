@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1186 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1201 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1186 results across 79 files.
+Captured for 1201 results across 82 files.
 
 Counts:
 
@@ -206,6 +206,17 @@ Counts:
 | `bit_xor_closed` | 72 | 0 | 0 | OK |
 | `bit_or_from_and` | 79 | 0 | 0 | OK |
 | `bit_xor_from_and` | 84 | 0 | 0 | OK |
+
+## BitSum.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `bit_value_nil` | 28 | 0 | 0 | OK |
+| `bit_value_cons` | 31 | 0 | 0 | OK |
+| `bit_value_nonneg` | 35 | 0 | 0 | OK |
+| `bit_value_cons_encoding` | 50 | 0 | 0 | OK |
+| `bit_value_range2` | 66 | 0 | 0 | OK |
+| `nested_square` | 70 | 0 | 0 | OK |
 
 ## BlindRSA.v
 
@@ -949,6 +960,17 @@ Counts:
 | `carmichael_threeprime` | 458 | 0 | 0 | OK |
 | `onesided_period_splits_triple` | 500 | 0 | 0 | OK |
 
+## Mux.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `mux_on_zero` | 25 | 0 | 0 | OK |
+| `mux_on_one` | 29 | 0 | 0 | OK |
+| `mux_select` | 33 | 0 | 0 | OK |
+| `mux_nonneg` | 44 | 0 | 0 | OK |
+| `mux_gates` | 55 | 0 | 0 | OK |
+| `mux_complete` | 77 | 0 | 0 | OK |
+
 ## OkamotoUchiyama.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -1580,6 +1602,14 @@ Counts:
 | `wiener_basin_from_gap` | 84 | 0 | 0 | OK |
 | `k_lt_d_of_e_lt_phi` | 107 | 0 | 0 | OK |
 | `wiener_classical_sufficient` | 123 | 0 | 0 | OK |
+
+## WireEq.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `wire_eq_sat` | 18 | 0 | 0 | OK |
+| `wire_eq_complete` | 27 | 0 | 0 | OK |
+| `wire_eq_same_encoding` | 41 | 0 | 0 | OK |
 
 ## WirePoK.v
 

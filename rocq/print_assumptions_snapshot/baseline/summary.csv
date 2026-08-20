@@ -157,6 +157,12 @@ BitLogic.v,bit_xor_table,64,0,0,OK
 BitLogic.v,bit_xor_closed,72,0,0,OK
 BitLogic.v,bit_or_from_and,79,0,0,OK
 BitLogic.v,bit_xor_from_and,84,0,0,OK
+BitSum.v,bit_value_nil,28,0,0,OK
+BitSum.v,bit_value_cons,31,0,0,OK
+BitSum.v,bit_value_nonneg,35,0,0,OK
+BitSum.v,bit_value_cons_encoding,50,0,0,OK
+BitSum.v,bit_value_range2,66,0,0,OK
+BitSum.v,nested_square,70,0,0,OK
 BlindRSA.v,chaum_sign_blinded_is_raw_times_r,25,0,0,OK
 BlindRSA.v,chaum_unblind_is_raw_sign,46,0,0,OK
 CRTRSA.v,lambda_gt_1_of,27,0,0,OK
@@ -719,6 +725,12 @@ MultiPrime.v,lambda_threeprime_pos,415,0,0,OK
 MultiPrime.v,crt_one_three,430,0,0,OK
 MultiPrime.v,carmichael_threeprime,458,0,0,OK
 MultiPrime.v,onesided_period_splits_triple,500,0,0,OK
+Mux.v,mux_on_zero,25,0,0,OK
+Mux.v,mux_on_one,29,0,0,OK
+Mux.v,mux_select,33,0,0,OK
+Mux.v,mux_nonneg,44,0,0,OK
+Mux.v,mux_gates,55,0,0,OK
+Mux.v,mux_complete,77,0,0,OK
 OkamotoUchiyama.v,one_plus_p_pow,22,0,0,OK
 OkamotoUchiyama.v,ou_L_of_plain,33,0,0,OK
 OkamotoUchiyama.v,ou_L_of_scaled,48,0,0,OK
@@ -1181,6 +1193,9 @@ Wiener.v,wiener_abs_numerator,72,0,0,OK
 Wiener.v,wiener_basin_from_gap,84,0,0,OK
 Wiener.v,k_lt_d_of_e_lt_phi,107,0,0,OK
 Wiener.v,wiener_classical_sufficient,123,0,0,OK
+WireEq.v,wire_eq_sat,18,0,0,OK
+WireEq.v,wire_eq_complete,27,0,0,OK
+WireEq.v,wire_eq_same_encoding,41,0,0,OK
 WirePoK.v,wire_slots_assemble,36,0,0,OK
 WirePoK.v,wire_slot_eqdl,49,0,0,OK
 WirePoK.v,wire_slot_extracts,71,0,0,OK

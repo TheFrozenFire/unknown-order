@@ -80,5 +80,8 @@ SameW.v
 Circuit.v
 BitLogic.v
 Range2.v
+Mux.v
+WireEq.v
+BitSum.v
 PotCl.v
 BGH.v

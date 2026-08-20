@@ -104,6 +104,9 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Circuit `z = x·y + t` (shared mul wire) | **Have** `prod_add_sat`, `prod_add_complete`, `mul_public_first`; CAS 102 |
 | Bit AND/OR/XOR tables and closure | **Have** `bit_and_is_mul`, `bit_or_closed`, `bit_xor_table`; CAS 103 |
 | Two-bit `v = b0 + 2 b1`; encoding is public | **Have** `range2_bit_qap`, `range2_encoding`; CAS 104 |
+| Mux `s·a+(1−s)·b` on a bit `s` | **Have** `mux_select`, `mux_gates`; CAS 105 |
+| Wire equality `w0=w1` as `w0+0=w1` | **Have** `wire_eq_sat`; CAS 106 |
+| Bit-sum `b0+2 v_rest`; recursive encoding | **Have** `bit_value_cons_encoding`; CAS 107 |
 | Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `three_divides_lambda_forbids_e3`; CAS 86 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |

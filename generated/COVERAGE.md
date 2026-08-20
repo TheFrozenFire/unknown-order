@@ -225,6 +225,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `bit_or_from_and` | 79 |
 | Theorem | `bit_xor_from_and` | 84 |
 
+## `BitSum.v`
+
+- L15: Little-endian bit-sum: [v = b0 + 2 v_rest]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `bit_value_nil` | 28 |
+| Lemma | `bit_value_cons` | 31 |
+| Theorem | `bit_value_nonneg` | 35 |
+| Theorem | `bit_value_cons_encoding` | 50 |
+| Theorem | `bit_value_range2` | 66 |
+| Theorem | `nested_square` | 70 |
+
 ## `BlindRSA.v`
 
 - L11: Chaum blinded RSA
@@ -1077,6 +1090,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `carmichael_threeprime` | 458 |
 | Theorem | `onesided_period_splits_triple` | 500 |
 
+## `Mux.v`
+
+- L16: Select: [mux s a b = s·a + (1−s)·b]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `mux_on_zero` | 25 |
+| Theorem | `mux_on_one` | 29 |
+| Theorem | `mux_select` | 33 |
+| Theorem | `mux_nonneg` | 44 |
+| Theorem | `mux_gates` | 55 |
+| Theorem | `mux_complete` | 77 |
+
 ## `NamedSkips.v`
 
 - L6: First-class skips
@@ -1846,6 +1872,16 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
+## `WireEq.v`
+
+- L14: Wire equality: [w0 = w1] is [w0 + 0 = w1]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `wire_eq_sat` | 18 |
+| Theorem | `wire_eq_complete` | 27 |
+| Theorem | `wire_eq_same_encoding` | 41 |
+
 ## `WirePoK.v`
 
 - L17: Knowledge of a QAP witness against a specialized CRS
@@ -1857,4 +1893,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1186 theorems/lemmas/corollaries/examples across 79 files._
+_1201 theorems/lemmas/corollaries/examples across 82 files._
