@@ -317,6 +317,19 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `jacobi_self_sq` | 163 |
 | Theorem | `cocks_decrypt_jacobi` | 180 |
 
+## `CoeffPoK.v`
+
+- L15: Knowledge of coefficients of a committed evaluation
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `coeff_slot_eval` | 41 |
+| Lemma | `slots_from_i` | 56 |
+| Theorem | `slots_assemble` | 84 |
+| Theorem | `two_coeff_assemble` | 98 |
+| Theorem | `coeff_slot_eqdl` | 118 |
+| Theorem | `coeff_slot_extracts` | 142 |
+
 ## `CramerShoup.v`
 
 - L12: Cramer–Shoup 2000 Strong RSA signatures, verification algebra
@@ -977,6 +990,22 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `mr_nontrivial_sqrt_factors` | 63 |
 | Theorem | `mr_fermat_on_prime` | 84 |
 
+## `MulGate.v`
+
+- L13: One multiplication gate as a QAP
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `mul_Aw` | 39 |
+| Lemma | `mul_Bw` | 47 |
+| Lemma | `mul_Cw` | 55 |
+| Lemma | `mul_eval_Aw` | 63 |
+| Lemma | `mul_eval_Bw` | 68 |
+| Lemma | `mul_eval_Cw` | 73 |
+| Theorem | `mul_gate_sat` | 78 |
+| Theorem | `mul_gate_complete` | 92 |
+| Lemma | `mul_wires_nn` | 115 |
+
 ## `MultiPrime.v`
 
 - L13: Multi-prime stress test: [N = pqr] has eight roots of [1]
@@ -1371,6 +1400,16 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `kg_rw_implies_blum` | 315 |
 | Lemma | `kg_rw_pminus1_almost_odd` | 323 |
 
+## `SameW.v`
+
+- L13: Same witness on two specialized CRSs
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `zip_scale_eval` | 32 |
+| Lemma | `zip_wires_nn` | 55 |
+| Theorem | `same_w_check` | 76 |
+
 ## `SharedKey.v`
 
 - L17: Shared RSA key from two KeyGen-valid parts
@@ -1759,4 +1798,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1144 theorems/lemmas/corollaries/examples across 71 files._
+_1162 theorems/lemmas/corollaries/examples across 74 files._

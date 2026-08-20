@@ -72,5 +72,8 @@ AuxBil.v
 Dark.v
 EvalProduct.v
 QAP.v
+CoeffPoK.v
+MulGate.v
+SameW.v
 PotCl.v
 BGH.v

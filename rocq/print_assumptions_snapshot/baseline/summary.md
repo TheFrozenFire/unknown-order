@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1144 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1162 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1144 results across 71 files.
+Captured for 1162 results across 74 files.
 
 Counts:
 
@@ -287,6 +287,17 @@ Counts:
 | `jacobi_sq_one` | 143 | 0 | 0 | OK |
 | `jacobi_self_sq` | 163 | 0 | 0 | OK |
 | `cocks_decrypt_jacobi` | 180 | 0 | 0 | OK |
+
+## CoeffPoK.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `coeff_slot_eval` | 41 | 0 | 0 | OK |
+| `slots_from_i` | 56 | 0 | 0 | OK |
+| `slots_assemble` | 84 | 0 | 0 | OK |
+| `two_coeff_assemble` | 98 | 0 | 0 | OK |
+| `coeff_slot_eqdl` | 118 | 0 | 0 | OK |
+| `coeff_slot_extracts` | 142 | 0 | 0 | OK |
 
 ## CramerShoup.v
 
@@ -863,6 +874,20 @@ Counts:
 | `mr_nontrivial_sqrt_factors` | 63 | 0 | 0 | OK |
 | `mr_fermat_on_prime` | 84 | 0 | 0 | OK |
 
+## MulGate.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `mul_Aw` | 39 | 0 | 0 | OK |
+| `mul_Bw` | 47 | 0 | 0 | OK |
+| `mul_Cw` | 55 | 0 | 0 | OK |
+| `mul_eval_Aw` | 63 | 0 | 0 | OK |
+| `mul_eval_Bw` | 68 | 0 | 0 | OK |
+| `mul_eval_Cw` | 73 | 0 | 0 | OK |
+| `mul_gate_sat` | 78 | 0 | 0 | OK |
+| `mul_gate_complete` | 92 | 0 | 0 | OK |
+| `mul_wires_nn` | 115 | 0 | 0 | OK |
+
 ## MultiPrime.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -1187,6 +1212,14 @@ Counts:
 | `rw_verify_of_root` | 304 | 0 | 0 | OK |
 | `kg_rw_implies_blum` | 315 | 0 | 0 | OK |
 | `kg_rw_pminus1_almost_odd` | 323 | 0 | 0 | OK |
+
+## SameW.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `zip_scale_eval` | 32 | 0 | 0 | OK |
+| `zip_wires_nn` | 55 | 0 | 0 | OK |
+| `same_w_check` | 76 | 0 | 0 | OK |
 
 ## SharedKey.v
 

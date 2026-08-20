@@ -67,6 +67,9 @@ only with a written death in this file.
    remainder encoding `1` means `τ` is a root or the order
    divides. **Have** `qap_complete_at_tau`, `qap_point_sound`,
    `pot_wires_is_lincomb`, `pot_wires_app`; CAS 96.
+   Coefficient PoK (`slots_assemble`, `coeff_slot_extracts`; CAS 97),
+   one mul gate (`mul_gate_complete`; CAS 98), same-`w` check
+   (`same_w_check`; CAS 99).
 
 ### Checkable SRS, pairing optional
 
