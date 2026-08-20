@@ -34,6 +34,10 @@ Accumulator.v,lipmaa_cl_membership_is_P_Root,748,0,0,OK
 AddGate.v,add_gate_sat,32,0,0,OK
 AddGate.v,add_gate_complete,43,0,0,OK
 AddGate.v,add_is_public_sum,63,0,0,OK
+AllBits.v,all_bits_nn,28,0,0,OK
+AllBits.v,all_bits_value_nonneg,36,0,0,OK
+AllBits.v,all_bits_qap,42,0,0,OK
+AllBits.v,three_bit_encoding,53,0,0,OK
 AuxBil.v,aux_is_self_bil,30,0,0,OK
 AuxBil.v,aux_self_bil_checks_pot,40,0,0,OK
 AuxBil.v,aux_self_bil_evaluates_pot,54,0,0,OK
@@ -157,6 +161,10 @@ BitLogic.v,bit_xor_table,64,0,0,OK
 BitLogic.v,bit_xor_closed,72,0,0,OK
 BitLogic.v,bit_or_from_and,79,0,0,OK
 BitLogic.v,bit_xor_from_and,84,0,0,OK
+BitLt.v,bit_lt_table,24,0,0,OK
+BitLt.v,bit_lt_closed,35,0,0,OK
+BitLt.v,bit_lt_is_and,42,0,0,OK
+BitLt.v,bit_lt_mul,46,0,0,OK
 BitSum.v,bit_value_nil,28,0,0,OK
 BitSum.v,bit_value_cons,31,0,0,OK
 BitSum.v,bit_value_nonneg,35,0,0,OK
@@ -249,6 +257,10 @@ CoeffPoK.v,slots_assemble,84,0,0,OK
 CoeffPoK.v,two_coeff_assemble,98,0,0,OK
 CoeffPoK.v,coeff_slot_eqdl,118,0,0,OK
 CoeffPoK.v,coeff_slot_extracts,142,0,0,OK
+CondSwap.v,cswap_off,24,0,0,OK
+CondSwap.v,cswap_on,32,0,0,OK
+CondSwap.v,cswap_select,40,0,0,OK
+CondSwap.v,cswap_involution,52,0,0,OK
 CramerShoup.v,powm_mul_base,24,0,0,OK
 CramerShoup.v,cs_verify_is_rsa,34,0,0,OK
 CramerShoup.v,cs_verify_is_strong_rsa,44,0,0,OK
@@ -576,6 +588,9 @@ HashSlot.v,slot_encode_does_not_place,129,0,0,OK
 HashSlot.v,pair_encode_does_not_force_balance,144,0,0,OK
 HashSlot.v,slot_try_sound,163,0,0,OK
 HashSlot.v,slot_try_complete,183,0,0,OK
+Inner2.v,inner2_sat,24,0,0,OK
+Inner2.v,inner2_complete,46,0,0,OK
+Inner2.v,inner2_public_sum,67,0,0,OK
 KeyGen.v,balanced_sum_bound,69,0,0,OK
 KeyGen.v,balanced_q_le_sqrt,77,0,0,OK
 KeyGen.v,balanced_sum_vs_sqrt,91,0,0,OK

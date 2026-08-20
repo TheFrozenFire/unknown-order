@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1201 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1216 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1201 results across 82 files.
+Captured for 1216 results across 86 files.
 
 Counts:
 
@@ -53,6 +53,15 @@ Counts:
 | `add_gate_sat` | 32 | 0 | 0 | OK |
 | `add_gate_complete` | 43 | 0 | 0 | OK |
 | `add_is_public_sum` | 63 | 0 | 0 | OK |
+
+## AllBits.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `all_bits_nn` | 28 | 0 | 0 | OK |
+| `all_bits_value_nonneg` | 36 | 0 | 0 | OK |
+| `all_bits_qap` | 42 | 0 | 0 | OK |
+| `three_bit_encoding` | 53 | 0 | 0 | OK |
 
 ## AuxBil.v
 
@@ -207,6 +216,15 @@ Counts:
 | `bit_or_from_and` | 79 | 0 | 0 | OK |
 | `bit_xor_from_and` | 84 | 0 | 0 | OK |
 
+## BitLt.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `bit_lt_table` | 24 | 0 | 0 | OK |
+| `bit_lt_closed` | 35 | 0 | 0 | OK |
+| `bit_lt_is_and` | 42 | 0 | 0 | OK |
+| `bit_lt_mul` | 46 | 0 | 0 | OK |
+
 ## BitSum.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -338,6 +356,15 @@ Counts:
 | `two_coeff_assemble` | 98 | 0 | 0 | OK |
 | `coeff_slot_eqdl` | 118 | 0 | 0 | OK |
 | `coeff_slot_extracts` | 142 | 0 | 0 | OK |
+
+## CondSwap.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `cswap_off` | 24 | 0 | 0 | OK |
+| `cswap_on` | 32 | 0 | 0 | OK |
+| `cswap_select` | 40 | 0 | 0 | OK |
+| `cswap_involution` | 52 | 0 | 0 | OK |
 
 ## CramerShoup.v
 
@@ -755,6 +782,14 @@ Counts:
 | `pair_encode_does_not_force_balance` | 144 | 0 | 0 | OK |
 | `slot_try_sound` | 163 | 0 | 0 | OK |
 | `slot_try_complete` | 183 | 0 | 0 | OK |
+
+## Inner2.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `inner2_sat` | 24 | 0 | 0 | OK |
+| `inner2_complete` | 46 | 0 | 0 | OK |
+| `inner2_public_sum` | 67 | 0 | 0 | OK |
 
 ## KeyGen.v
 

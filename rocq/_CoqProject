@@ -83,5 +83,9 @@ Range2.v
 Mux.v
 WireEq.v
 BitSum.v
+Inner2.v
+BitLt.v
+CondSwap.v
+AllBits.v
 PotCl.v
 BGH.v

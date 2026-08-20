@@ -55,6 +55,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `add_gate_complete` | 43 |
 | Theorem | `add_is_public_sum` | 63 |
 
+## `AllBits.v`
+
+- L16: Every limb is a bit, and the value encoding unfolds
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `all_bits_nn` | 28 |
+| Theorem | `all_bits_value_nonneg` | 36 |
+| Theorem | `all_bits_qap` | 42 |
+| Theorem | `three_bit_encoding` | 53 |
+
 ## `AuxBil.v`
 
 - L10: Self-bilinear with auxiliary public data
@@ -225,6 +236,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `bit_or_from_and` | 79 |
 | Theorem | `bit_xor_from_and` | 84 |
 
+## `BitLt.v`
+
+- L15: Bit less-than: [lt x y = (1−x)·y]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `bit_lt_table` | 24 |
+| Theorem | `bit_lt_closed` | 35 |
+| Theorem | `bit_lt_is_and` | 42 |
+| Theorem | `bit_lt_mul` | 46 |
+
 ## `BitSum.v`
 
 - L15: Little-endian bit-sum: [v = b0 + 2 v_rest]
@@ -377,6 +399,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `two_coeff_assemble` | 98 |
 | Theorem | `coeff_slot_eqdl` | 118 |
 | Theorem | `coeff_slot_extracts` | 142 |
+
+## `CondSwap.v`
+
+- L13: Conditional swap: on bit [s], swap [a] and [b] or not
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `cswap_off` | 24 |
+| Theorem | `cswap_on` | 32 |
+| Theorem | `cswap_select` | 40 |
+| Theorem | `cswap_involution` | 52 |
 
 ## `CramerShoup.v`
 
@@ -856,6 +889,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pair_encode_does_not_force_balance` | 144 |
 | Theorem | `slot_try_sound` | 163 |
 | Theorem | `slot_try_complete` | 183 |
+
+## `Inner2.v`
+
+- L15: Inner product of two pairs: [s = x0·y0 + x1·y1]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `inner2_sat` | 24 |
+| Theorem | `inner2_complete` | 46 |
+| Theorem | `inner2_public_sum` | 67 |
 
 ## `KeyGen.v`
 
@@ -1893,4 +1936,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1201 theorems/lemmas/corollaries/examples across 82 files._
+_1216 theorems/lemmas/corollaries/examples across 86 files._
