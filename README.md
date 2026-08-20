@@ -166,7 +166,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 112 witnesses, `cas/01`–`112`. PARI is the gated CAS; do not add OSCAR.
+CAS is 113 witnesses, `cas/01`–`113`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -197,6 +197,9 @@ unfolding are `rocq/Inner2.v` / `BitLt.v` / `CondSwap.v` /
 `AllBits.v`, CAS `108`–`111`. The public quadratic check of
 two committed evaluations (bounded slot search + CRS bilinear
 combine; not group-mul) is `rocq/PublicQuad.v`, CAS `112`.
+Fiat–Shamir compilation of the public-coin eqdl / slot Sigma
+(`c` from statement + commitment; no verifier coin) is
+`rocq/FiatShamir.v`, CAS `113`. ROM soundness stays named.
 
 ## Constructor (not a filter)
 

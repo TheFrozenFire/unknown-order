@@ -56,7 +56,8 @@ Constructible torsion `H` is a family parameter
 | self-bilinear `e` with `e(g,g)=g` | `e(C_f, C_h) = C_{f·h}` | `self_bil_committed_product` | existence of `e` |
 | QAP identity at `τ` | `C_{A·B} = C_C · C_{H·Z}` | `qap_complete_at_tau`, `qap_witness_complete`, `public_quad_qap` | a hiding check of the same identity |
 | remainder encoding `= 1` | `τ` is a root, or `ord(g)` divides the remainder | `qap_point_sound`, `qap_sound_at_tau` | the identity as polynomials |
-| Schnorr on base `P_i` | `ord(P_i) \| (z−z′) − a_i(c−c′)` | `coeff_slot_extracts` | a hash / NIZK |
+| Schnorr on base `P_i` | `ord(P_i) \| (z−z′) − a_i(c−c′)` | `coeff_slot_extracts` | ROM / forking (`Refuse_NIZK_Fiat_Shamir`) |
+| Fiat–Shamir of eqdl: `c = fs_challenge(stmt, t)` | NI transcript verifies iff Sigma does at that `c` | `fs_eqdl_complete`, `fs_pin_challenge_depends_on_commit` | collision-resistance / ROM |
 | `w0·w1=w2` | QAP identity at every `x` | `mul_gate_sat` | a circuit compiler |
 | same `w`, public `r` | `C_A · C_B^r = C_{A+rB}` | `same_w_check` | extractable `w` on both families |
 | Schnorr on `U_j = g^{A_j(τ)}` | `ord(U_j) \| (z−z′) − w_j(c−c′)` | `wire_slot_extracts` | a hash / NIZK |

@@ -97,6 +97,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Public quadratic check on encodings + CRS slots (bounded slot search + bilinear combine); not group-mul | **Have** `public_quad_complete`, `public_quad_pin_rejects_group_mul`, `quad_combine_is_product`; CAS 112 |
 | QAP: honest witness encodings satisfy `C_{AB}=C_C C_{HZ}`; remainder `1` is a root or annihilator | **Have** `qap_complete_at_tau`, `qap_point_sound`, `pot_wires_is_lincomb`, `pot_wires_app`, `public_quad_qap`; CAS 96, 112 |
 | Per-slot coeff PoK: assemble `∏ P_i^{a_i}`; extract `a_i` | **Have** `slots_assemble`, `coeff_slot_eqdl`, `coeff_slot_extracts`; CAS 97 |
+| Fiat–Shamir compilation of eqdl / slot Sigma: `c = H(statement, t)`; NI verifier recomputes `c` | **Have** `fs_eqdl_complete`, `fs_slot_complete`, `fs_pin_rejects_wrong_challenge`; CAS 113. ROM/PPT NIZK stays named (`Refuse_NIZK_Fiat_Shamir`) |
 | Mul gate `w0·w1=w2` as QAP | **Have** `mul_gate_sat`, `mul_gate_complete`; CAS 98 |
 | Same `w` on two CRSs: `C_A · C_B^r = wires(A_j + r B_j)` | **Have** `same_w_check`; CAS 99 |
 | Wire PoK: assemble `U_j^{w_j}`; extract `w_j` | **Have** `wire_slots_assemble`, `wire_slot_extracts`; CAS 100 |

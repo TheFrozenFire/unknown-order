@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1235 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1250 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1235 results across 87 files.
+Captured for 1250 results across 88 files.
 
 Counts:
 
@@ -626,6 +626,26 @@ Counts:
 | `fermat_diff_abs` | 171 | 0 | 0 | OK |
 | `far_apart_large_diff` | 184 | 0 | 0 | OK |
 | `fermat_square_gap_from_diff` | 195 | 0 | 0 | OK |
+
+## FiatShamir.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `fs_step_nonneg` | 42 | 0 | 0 | OK |
+| `fs_fold_nonneg` | 51 | 0 | 0 | OK |
+| `fs_challenge_nonneg` | 64 | 0 | 0 | OK |
+| `fs_eqdl_challenge_nonneg` | 78 | 0 | 0 | OK |
+| `eqdl_verifyb_iff` | 113 | 0 | 0 | OK |
+| `fs_eqdl_verifyb_iff` | 123 | 0 | 0 | OK |
+| `fs_eqdl_complete` | 132 | 0 | 0 | OK |
+| `fs_eqdl_complete_b` | 147 | 0 | 0 | OK |
+| `fs_slot_complete` | 162 | 0 | 0 | OK |
+| `fs_wire_complete` | 179 | 0 | 0 | OK |
+| `fs_pin_accepts` | 209 | 0 | 0 | OK |
+| `fs_pin_rejects_wrong_challenge` | 213 | 0 | 0 | OK |
+| `fs_pin_challenge_depends_on_commit` | 222 | 0 | 0 | OK |
+| `fs_pin_second_accepts` | 229 | 0 | 0 | OK |
+| `fs_pin_commits_distinct` | 233 | 0 | 0 | OK |
 
 ## Fp2.v
 

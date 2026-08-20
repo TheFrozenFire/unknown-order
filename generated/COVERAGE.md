@@ -717,6 +717,31 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `far_apart_large_diff` | 184 |
 | Theorem | `fermat_square_gap_from_diff` | 195 |
 
+## `FiatShamir.v`
+
+- L16: Fiat–Shamir compilation of the public-coin Sigma
+  - L29: Deterministic challenge map (not a hash oracle)
+  - L160: Slot Sigma of the proving system
+  - L194: Representative pin: challenge depends on the first message
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `fs_step_nonneg` | 42 |
+| Lemma | `fs_fold_nonneg` | 51 |
+| Lemma | `fs_challenge_nonneg` | 64 |
+| Lemma | `fs_eqdl_challenge_nonneg` | 78 |
+| Lemma | `eqdl_verifyb_iff` | 113 |
+| Lemma | `fs_eqdl_verifyb_iff` | 123 |
+| Theorem | `fs_eqdl_complete` | 132 |
+| Theorem | `fs_eqdl_complete_b` | 147 |
+| Theorem | `fs_slot_complete` | 162 |
+| Theorem | `fs_wire_complete` | 179 |
+| Theorem | `fs_pin_accepts` | 209 |
+| Theorem | `fs_pin_rejects_wrong_challenge` | 213 |
+| Theorem | `fs_pin_challenge_depends_on_commit` | 222 |
+| Theorem | `fs_pin_second_accepts` | 229 |
+| Theorem | `fs_pin_commits_distinct` | 233 |
+
 ## `Fp2.v`
 
 - L13: [F_p[√D]] and [V_{p+1} ≡ 2] when [D] is a QNR
@@ -1968,4 +1993,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1235 theorems/lemmas/corollaries/examples across 87 files._
+_1250 theorems/lemmas/corollaries/examples across 88 files._

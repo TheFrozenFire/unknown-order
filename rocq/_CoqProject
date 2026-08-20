@@ -74,6 +74,7 @@ EvalProduct.v
 QAP.v
 CoeffPoK.v
 PublicQuad.v
+FiatShamir.v
 MulGate.v
 AddGate.v
 WirePoK.v
