@@ -19,5 +19,9 @@ check(evalp(Aw, tau)*evalp(Bw, tau) - evalp(Cw, tau) == evalp(H, tau)*evalp(van,
   "QAP at tau for the mul gate");
 check(commit([w0*w1]) == (commit(Cw) * commit([0])) % N, "C_{AB} = C_C C_{HZ}");
 
+check(0*0 == 0 && 1*1 == 1, "bit square");
+check(evalp([0], tau)*evalp([0], tau) - evalp([0], tau) == 0, "bit 0 QAP");
+check(evalp([1], tau)*evalp([1], tau) - evalp([1], tau) == 0, "bit 1 QAP");
+
 printf("%d ok, %d fail\n", ok, fail);
 if(fail, error("CAS failures"));

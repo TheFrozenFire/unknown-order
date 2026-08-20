@@ -45,6 +45,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `icomm_same_msg_is_annihilator` | 723 |
 | Theorem | `lipmaa_cl_membership_is_P_Root` | 748 |
 
+## `AddGate.v`
+
+- L13: Addition as a QAP
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `add_gate_sat` | 32 |
+| Theorem | `add_gate_complete` | 43 |
+| Theorem | `add_is_public_sum` | 63 |
+
 ## `AuxBil.v`
 
 - L10: Self-bilinear with auxiliary public data
@@ -1005,6 +1015,8 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `mul_gate_sat` | 78 |
 | Theorem | `mul_gate_complete` | 92 |
 | Lemma | `mul_wires_nn` | 115 |
+| Theorem | `bit_sat` | 141 |
+| Theorem | `bit_complete` | 154 |
 
 ## `MultiPrime.v`
 
@@ -1798,4 +1810,15 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1162 theorems/lemmas/corollaries/examples across 74 files._
+## `WirePoK.v`
+
+- L17: Knowledge of a QAP witness against a specialized CRS
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `wire_slots_assemble` | 36 |
+| Theorem | `wire_slot_eqdl` | 49 |
+| Theorem | `wire_slot_extracts` | 71 |
+| Theorem | `three_wire_assemble` | 93 |
+
+_1171 theorems/lemmas/corollaries/examples across 76 files._

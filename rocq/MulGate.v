@@ -137,3 +137,35 @@ Proof.
     constructor; [exact H2 | cbn [poly_eval]; nia |].
     constructor.
 Qed.
+
+Theorem bit_sat :
+  forall w x,
+    (w = 0 \/ w = 1) ->
+    qap_at (poly_lincomb (mul_w w w w) mul_As)
+           (poly_lincomb (mul_w w w w) mul_Bs)
+           (poly_lincomb (mul_w w w w) mul_Cs)
+           mul_H mul_van x.
+Proof.
+  intros w x Hw.
+  apply mul_gate_sat.
+  destruct Hw; subst; ring.
+Qed.
+
+Theorem bit_complete :
+  forall N g tau w,
+    1 < N ->
+    0 <= tau ->
+    (w = 0 \/ w = 1) ->
+    pot_poly N g tau
+      (poly_conv (poly_lincomb (mul_w w w w) mul_As)
+                 (poly_lincomb (mul_w w w w) mul_Bs)) =
+      (pot_poly N g tau (poly_lincomb (mul_w w w w) mul_Cs) *
+         pot_poly N g tau (poly_conv mul_H mul_van)) mod N.
+Proof.
+  intros N g tau w Hn Ht Hw.
+  apply mul_gate_complete; try assumption.
+  - destruct Hw; subst; lia.
+  - destruct Hw; subst; lia.
+  - destruct Hw; subst; lia.
+  - destruct Hw; subst; ring.
+Qed.

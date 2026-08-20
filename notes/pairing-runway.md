@@ -70,6 +70,8 @@ only with a written death in this file.
    Coefficient PoK (`slots_assemble`, `coeff_slot_extracts`; CAS 97),
    one mul gate (`mul_gate_complete`; CAS 98), same-`w` check
    (`same_w_check`; CAS 99).
+   Wire PoK (`wire_slot_extracts`; CAS 100), addition
+   (`add_gate_complete`; CAS 101), bits (`bit_complete`).
 
 ### Checkable SRS, pairing optional
 

@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1162 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1171 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1162 results across 74 files.
+Captured for 1171 results across 76 files.
 
 Counts:
 
@@ -45,6 +45,14 @@ Counts:
 | `icomm_binding_is_fractional_root` | 707 | 0 | 0 | OK |
 | `icomm_same_msg_is_annihilator` | 723 | 0 | 0 | OK |
 | `lipmaa_cl_membership_is_P_Root` | 748 | 0 | 0 | OK |
+
+## AddGate.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `add_gate_sat` | 32 | 0 | 0 | OK |
+| `add_gate_complete` | 43 | 0 | 0 | OK |
+| `add_is_public_sum` | 63 | 0 | 0 | OK |
 
 ## AuxBil.v
 
@@ -887,6 +895,8 @@ Counts:
 | `mul_gate_sat` | 78 | 0 | 0 | OK |
 | `mul_gate_complete` | 92 | 0 | 0 | OK |
 | `mul_wires_nn` | 115 | 0 | 0 | OK |
+| `bit_sat` | 141 | 0 | 0 | OK |
+| `bit_complete` | 154 | 0 | 0 | OK |
 
 ## MultiPrime.v
 
@@ -1540,3 +1550,12 @@ Counts:
 | `wiener_basin_from_gap` | 84 | 0 | 0 | OK |
 | `k_lt_d_of_e_lt_phi` | 107 | 0 | 0 | OK |
 | `wiener_classical_sufficient` | 123 | 0 | 0 | OK |
+
+## WirePoK.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `wire_slots_assemble` | 36 | 0 | 0 | OK |
+| `wire_slot_eqdl` | 49 | 0 | 0 | OK |
+| `wire_slot_extracts` | 71 | 0 | 0 | OK |
+| `three_wire_assemble` | 93 | 0 | 0 | OK |

@@ -98,6 +98,9 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Per-slot coeff PoK: assemble `∏ P_i^{a_i}`; extract `a_i` | **Have** `slots_assemble`, `coeff_slot_eqdl`, `coeff_slot_extracts`; CAS 97 |
 | Mul gate `w0·w1=w2` as QAP | **Have** `mul_gate_sat`, `mul_gate_complete`; CAS 98 |
 | Same `w` on two CRSs: `C_A · C_B^r = wires(A_j + r B_j)` | **Have** `same_w_check`; CAS 99 |
+| Wire PoK: assemble `U_j^{w_j}`; extract `w_j` | **Have** `wire_slots_assemble`, `wire_slot_extracts`; CAS 100 |
+| Add gate `w0+w1=w2`; public sum of encodings | **Have** `add_gate_sat`, `add_is_public_sum`; CAS 101 |
+| Bit `w∈{0,1}` is `w·w=w` | **Have** `bit_sat`, `bit_complete` |
 | Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `three_divides_lambda_forbids_e3`; CAS 86 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |

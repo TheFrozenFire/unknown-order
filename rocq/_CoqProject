@@ -74,6 +74,8 @@ EvalProduct.v
 QAP.v
 CoeffPoK.v
 MulGate.v
+AddGate.v
+WirePoK.v
 SameW.v
 PotCl.v
 BGH.v

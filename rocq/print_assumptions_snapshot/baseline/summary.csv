@@ -31,6 +31,9 @@ Accumulator.v,icomm_cancel_h,663,0,0,OK
 Accumulator.v,icomm_binding_is_fractional_root,707,0,0,OK
 Accumulator.v,icomm_same_msg_is_annihilator,723,0,0,OK
 Accumulator.v,lipmaa_cl_membership_is_P_Root,748,0,0,OK
+AddGate.v,add_gate_sat,32,0,0,OK
+AddGate.v,add_gate_complete,43,0,0,OK
+AddGate.v,add_is_public_sum,63,0,0,OK
 AuxBil.v,aux_is_self_bil,30,0,0,OK
 AuxBil.v,aux_self_bil_checks_pot,40,0,0,OK
 AuxBil.v,aux_self_bil_evaluates_pot,54,0,0,OK
@@ -678,6 +681,8 @@ MulGate.v,mul_eval_Cw,73,0,0,OK
 MulGate.v,mul_gate_sat,78,0,0,OK
 MulGate.v,mul_gate_complete,92,0,0,OK
 MulGate.v,mul_wires_nn,115,0,0,OK
+MulGate.v,bit_sat,141,0,0,OK
+MulGate.v,bit_complete,154,0,0,OK
 MultiPrime.v,two_prime_sqrt1_is_pm1_each,25,0,0,OK
 MultiPrime.v,three_prime_sqrt1_is_pm1_each,33,0,0,OK
 MultiPrime.v,eight_pats_length,77,0,0,OK
@@ -1161,3 +1166,7 @@ Wiener.v,wiener_abs_numerator,72,0,0,OK
 Wiener.v,wiener_basin_from_gap,84,0,0,OK
 Wiener.v,k_lt_d_of_e_lt_phi,107,0,0,OK
 Wiener.v,wiener_classical_sufficient,123,0,0,OK
+WirePoK.v,wire_slots_assemble,36,0,0,OK
+WirePoK.v,wire_slot_eqdl,49,0,0,OK
+WirePoK.v,wire_slot_extracts,71,0,0,OK
+WirePoK.v,three_wire_assemble,93,0,0,OK
