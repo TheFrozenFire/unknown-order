@@ -1225,6 +1225,27 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `Pexp_0` | 411 |
 | Theorem | `Pexp_S_rsa` | 418 |
 
+## `QAP.v`
+
+- L15: QAP completeness on committed evaluations
+  - L126: Specialized CRS: [∏ U_j^{w_j} = g^{(Σ w_j A_j)(τ)}]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `poly_eval_sub` | 34 |
+| Theorem | `qap_rem_eval` | 51 |
+| Theorem | `qap_at_iff_rem_zero` | 63 |
+| Theorem | `qap_complete_at_tau` | 70 |
+| Theorem | `qap_point_sound` | 91 |
+| Theorem | `qap_sound_at_tau` | 109 |
+| Lemma | `poly_eval_lincomb` | 151 |
+| Lemma | `wires_nn_lincomb_nonneg` | 166 |
+| Theorem | `pot_wires_is_lincomb` | 178 |
+| Theorem | `same_witness_two_families` | 198 |
+| Theorem | `qap_witness_complete` | 210 |
+| Lemma | `pot_wires_bounded` | 232 |
+| Theorem | `pot_wires_app` | 246 |
+
 ## `QRModN.v`
 
 - L15: Quadratic residuosity modulo [N = pq]
@@ -1738,4 +1759,4 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `k_lt_d_of_e_lt_phi` | 107 |
 | Theorem | `wiener_classical_sufficient` | 123 |
 
-_1131 theorems/lemmas/corollaries/examples across 70 files._
+_1144 theorems/lemmas/corollaries/examples across 71 files._

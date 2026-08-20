@@ -166,7 +166,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 95 witnesses, `cas/01`–`95`. PARI is the gated CAS; do not add OSCAR.
+CAS is 96 witnesses, `cas/01`–`96`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -182,7 +182,8 @@ the `τ`-string on `Cl(Δ)`, and the Cocks/BGH 1-bit catalog are
 CAS `89`–`93`. The equal-DL ladder that makes extra published
 powers a proven `ρ^i`-update is `rocq/PotLadder.v`, CAS `94`.
 Committed evaluations and the product \(f(\tau)h(\tau)\) are
-`rocq/EvalProduct.v`, CAS `95`.
+`rocq/EvalProduct.v`, CAS `95`. QAP completeness on those
+encodings is `rocq/QAP.v`, CAS `96`.
 
 ## Constructor (not a filter)
 

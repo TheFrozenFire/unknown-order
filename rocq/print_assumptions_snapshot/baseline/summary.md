@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1131 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1144 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1131 results across 70 files.
+Captured for 1144 results across 71 files.
 
 Counts:
 
@@ -1062,6 +1062,24 @@ Counts:
 | `rsa_trapdoor_inv_is_root` | 389 | 0 | 0 | OK |
 | `Pexp_0` | 411 | 0 | 0 | OK |
 | `Pexp_S_rsa` | 418 | 0 | 0 | OK |
+
+## QAP.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `poly_eval_sub` | 34 | 0 | 0 | OK |
+| `qap_rem_eval` | 51 | 0 | 0 | OK |
+| `qap_at_iff_rem_zero` | 63 | 0 | 0 | OK |
+| `qap_complete_at_tau` | 70 | 0 | 0 | OK |
+| `qap_point_sound` | 91 | 0 | 0 | OK |
+| `qap_sound_at_tau` | 109 | 0 | 0 | OK |
+| `poly_eval_lincomb` | 151 | 0 | 0 | OK |
+| `wires_nn_lincomb_nonneg` | 166 | 0 | 0 | OK |
+| `pot_wires_is_lincomb` | 178 | 0 | 0 | OK |
+| `same_witness_two_families` | 198 | 0 | 0 | OK |
+| `qap_witness_complete` | 210 | 0 | 0 | OK |
+| `pot_wires_bounded` | 232 | 0 | 0 | OK |
+| `pot_wires_app` | 246 | 0 | 0 | OK |
 
 ## QRModN.v
 

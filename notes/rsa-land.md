@@ -94,6 +94,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Equal-DL / PoK of a contribution `ρ` | **Have** `update_pok_complete`, `extracted_contributor_agrees`; CAS 85 |
 | Equal-DL ladder: slot `i` is `i` same-`ρ` steps, `P'_i = P_i^{ρ^i}` | **Have** `ladder_realizes_update`, `contribution_ladder_step`, `slot2_leg1_complete`, `slot2_leg2_complete`; CAS 94 |
 | Product of committed evaluations: `g^{f(τ)h(τ)} = C_f^{h(τ)}`; group law adds | **Have** `poly_eval_conv`, `pot_poly_conv_raise`, `monomial_conv_is_later_slot`, `self_bil_committed_product`, `two_wire_commit`; CAS 95 |
+| QAP: honest witness encodings satisfy `C_{AB}=C_C C_{HZ}`; remainder `1` is a root or annihilator | **Have** `qap_complete_at_tau`, `qap_point_sound`, `pot_wires_is_lincomb`, `pot_wires_app`; CAS 96 |
 | Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `three_divides_lambda_forbids_e3`; CAS 86 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |

@@ -62,7 +62,11 @@ only with a written death in this file.
    Monomials already sit in the CRS (`P_{i+j} = g^{τ^i τ^j}`).
    **Have** `poly_eval_conv`, `pot_poly_conv_raise`,
    `monomial_conv_is_later_slot`, `self_bil_committed_product`,
-   `two_wire_commit`; CAS 95.
+   `two_wire_commit`; CAS 95. QAP completeness:
+   honest `A_w B_w − C_w = H Z` gives `C_{AB} = C_C · C_{HZ}`;
+   remainder encoding `1` means `τ` is a root or the order
+   divides. **Have** `qap_complete_at_tau`, `qap_point_sound`,
+   `pot_wires_is_lincomb`, `pot_wires_app`; CAS 96.
 
 ### Checkable SRS, pairing optional
 
