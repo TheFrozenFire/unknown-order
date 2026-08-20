@@ -74,10 +74,10 @@ EvalProduct.v
 QAP.v
 CoeffPoK.v
 PublicQuad.v
-FiatShamir.v
 MulGate.v
 AddGate.v
 WirePoK.v
+FiatShamir.v
 SameW.v
 Circuit.v
 BitLogic.v
