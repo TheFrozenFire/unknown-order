@@ -61,6 +61,8 @@ Constructible torsion `H` is a family parameter
 | Schnorr on `U_j = g^{A_j(τ)}` | `ord(U_j) \| (z−z′) − w_j(c−c′)` | `wire_slot_extracts` | a hash / NIZK |
 | `w0+w1=w2` | QAP identity; `g^{w0+w1}=g^{w0}g^{w1}` | `add_gate_sat`, `add_is_public_sum` | a circuit compiler |
 | `w∈{0,1}` | `w·w=w` as a mul gate | `bit_sat` | range beyond a bit |
+| `z = x·y + t` | both gate QAPs at every `u` | `prod_add_sat` | a general compiler |
+| bits `b0,b1` | `g^{b0+2b1} = g^{b0}(g^{b1})²` | `range2_encoding` | larger ranges (same shape) |
 | Jacobi of `g^k` | depends on `k` only mod 2 | `jacobi_sees_only_parity` | a pairing check of the `τ`-string |
 | self-bilinear `e` | `e(P_i,P_1)=e(P_{i+1},P_0)`; evaluates if `e(g,g)=g` | `self_bil_checks_pot`, `self_bil_evaluates_pot` | existence of `e` |
 | power endo `x ↦ x^k` as next CRS power | `ord \| τ^i (k − τ)` | `power_endo_next_forces_k` | a pairing of two hidden dlogs |

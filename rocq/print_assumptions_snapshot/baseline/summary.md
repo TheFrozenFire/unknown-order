@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1171 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1186 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1171 results across 76 files.
+Captured for 1186 results across 79 files.
 
 Counts:
 
@@ -194,6 +194,19 @@ Counts:
 | `roca_unknown_is_k` | 43 | 0 | 0 | OK |
 | `bitleak_poly_divides_N` | 59 | 0 | 0 | OK |
 
+## BitLogic.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `bit_and_is_mul` | 31 | 0 | 0 | OK |
+| `bit_and_closed` | 41 | 0 | 0 | OK |
+| `bit_or_table` | 48 | 0 | 0 | OK |
+| `bit_or_closed` | 57 | 0 | 0 | OK |
+| `bit_xor_table` | 64 | 0 | 0 | OK |
+| `bit_xor_closed` | 72 | 0 | 0 | OK |
+| `bit_or_from_and` | 79 | 0 | 0 | OK |
+| `bit_xor_from_and` | 84 | 0 | 0 | OK |
+
 ## BlindRSA.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -225,6 +238,14 @@ Counts:
 | `ch_encode_not_slot_residue` | 41 | 0 | 0 | OK |
 | `ch_image_is_not_slot_image` | 45 | 0 | 0 | OK |
 | `ch_encode_not_roca_on_cas28` | 56 | 0 | 0 | OK |
+
+## Circuit.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `prod_add_sat` | 24 | 0 | 0 | OK |
+| `prod_add_complete` | 39 | 0 | 0 | OK |
+| `mul_public_first` | 64 | 0 | 0 | OK |
 
 ## ClassGroupWall.v
 
@@ -1222,6 +1243,15 @@ Counts:
 | `rw_verify_of_root` | 304 | 0 | 0 | OK |
 | `kg_rw_implies_blum` | 315 | 0 | 0 | OK |
 | `kg_rw_pminus1_almost_odd` | 323 | 0 | 0 | OK |
+
+## Range2.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `range2_bits` | 24 | 0 | 0 | OK |
+| `range2_bit_qap` | 34 | 0 | 0 | OK |
+| `range2_encoding` | 51 | 0 | 0 | OK |
+| `range2_eval_commit` | 67 | 0 | 0 | OK |
 
 ## SameW.v
 

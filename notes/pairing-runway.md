@@ -72,6 +72,8 @@ only with a written death in this file.
    (`same_w_check`; CAS 99).
    Wire PoK (`wire_slot_extracts`; CAS 100), addition
    (`add_gate_complete`; CAS 101), bits (`bit_complete`).
+   Circuit `z=x·y+t` (CAS 102), bit logic (CAS 103), 2-bit range
+   (CAS 104).
 
 ### Checkable SRS, pairing optional
 

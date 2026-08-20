@@ -77,5 +77,8 @@ MulGate.v
 AddGate.v
 WirePoK.v
 SameW.v
+Circuit.v
+BitLogic.v
+Range2.v
 PotCl.v
 BGH.v

@@ -149,6 +149,14 @@ BinForms.v,bqf_exp_2_ambiguous_div,1093,0,0,OK
 BitLeak.v,high_bits_unknown_is_x,37,0,0,OK
 BitLeak.v,roca_unknown_is_k,43,0,0,OK
 BitLeak.v,bitleak_poly_divides_N,59,0,0,OK
+BitLogic.v,bit_and_is_mul,31,0,0,OK
+BitLogic.v,bit_and_closed,41,0,0,OK
+BitLogic.v,bit_or_table,48,0,0,OK
+BitLogic.v,bit_or_closed,57,0,0,OK
+BitLogic.v,bit_xor_table,64,0,0,OK
+BitLogic.v,bit_xor_closed,72,0,0,OK
+BitLogic.v,bit_or_from_and,79,0,0,OK
+BitLogic.v,bit_xor_from_and,84,0,0,OK
 BlindRSA.v,chaum_sign_blinded_is_raw_times_r,25,0,0,OK
 BlindRSA.v,chaum_unblind_is_raw_sign,46,0,0,OK
 CRTRSA.v,lambda_gt_1_of,27,0,0,OK
@@ -166,6 +174,9 @@ ChallengePrime.v,ch_accept_is_prime,37,0,0,OK
 ChallengePrime.v,ch_encode_not_slot_residue,41,0,0,OK
 ChallengePrime.v,ch_image_is_not_slot_image,45,0,0,OK
 ChallengePrime.v,ch_encode_not_roca_on_cas28,56,0,0,OK
+Circuit.v,prod_add_sat,24,0,0,OK
+Circuit.v,prod_add_complete,39,0,0,OK
+Circuit.v,mul_public_first,64,0,0,OK
 ClassGroupWall.v,adaptive_root_trivial_from_lambda,35,0,0,OK
 ClassGroupWall.v,typeB_pminus1_is_cyc1,48,0,0,OK
 ClassGroupWall.v,typeB_pplus1_is_cyc2,52,0,0,OK
@@ -923,6 +934,10 @@ RabinWilliams.v,rabin_oracle_nonassociate_factors,268,0,0,OK
 RabinWilliams.v,rw_verify_of_root,304,0,0,OK
 RabinWilliams.v,kg_rw_implies_blum,315,0,0,OK
 RabinWilliams.v,kg_rw_pminus1_almost_odd,323,0,0,OK
+Range2.v,range2_bits,24,0,0,OK
+Range2.v,range2_bit_qap,34,0,0,OK
+Range2.v,range2_encoding,51,0,0,OK
+Range2.v,range2_eval_commit,67,0,0,OK
 SameW.v,zip_scale_eval,32,0,0,OK
 SameW.v,zip_wires_nn,55,0,0,OK
 SameW.v,same_w_check,76,0,0,OK

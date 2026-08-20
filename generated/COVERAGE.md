@@ -210,6 +210,21 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `roca_unknown_is_k` | 43 |
 | Lemma | `bitleak_poly_divides_N` | 59 |
 
+## `BitLogic.v`
+
+- L15: Bit operations from the mul and add gates
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `bit_and_is_mul` | 31 |
+| Theorem | `bit_and_closed` | 41 |
+| Theorem | `bit_or_table` | 48 |
+| Theorem | `bit_or_closed` | 57 |
+| Theorem | `bit_xor_table` | 64 |
+| Theorem | `bit_xor_closed` | 72 |
+| Theorem | `bit_or_from_and` | 79 |
+| Theorem | `bit_xor_from_and` | 84 |
+
 ## `BlindRSA.v`
 
 - L11: Chaum blinded RSA
@@ -248,6 +263,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `ch_encode_not_slot_residue` | 41 |
 | Theorem | `ch_image_is_not_slot_image` | 45 |
 | Theorem | `ch_encode_not_roca_on_cas28` | 56 |
+
+## `Circuit.v`
+
+- L15: A two-gate circuit: [z = x·y + t]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `prod_add_sat` | 24 |
+| Theorem | `prod_add_complete` | 39 |
+| Theorem | `mul_public_first` | 64 |
 
 ## `ClassGroupWall.v`
 
@@ -1412,6 +1437,17 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `kg_rw_implies_blum` | 315 |
 | Lemma | `kg_rw_pminus1_almost_odd` | 323 |
 
+## `Range2.v`
+
+- L14: Two-bit value from bits
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `range2_bits` | 24 |
+| Theorem | `range2_bit_qap` | 34 |
+| Theorem | `range2_encoding` | 51 |
+| Theorem | `range2_eval_commit` | 67 |
+
 ## `SameW.v`
 
 - L13: Same witness on two specialized CRSs
@@ -1821,4 +1857,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1171 theorems/lemmas/corollaries/examples across 76 files._
+_1186 theorems/lemmas/corollaries/examples across 79 files._
