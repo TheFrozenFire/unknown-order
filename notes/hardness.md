@@ -50,10 +50,11 @@ Constructible torsion `H` is a family parameter
 | backward walker `e` on `g^{τ^i}` | `e ≡ τ⁻¹ (mod ord(g))` | `backward_walker_is_tau_inv` | that a public KeyGen `e` walks this string |
 | two eq-DL transcripts | `ord \| (z−z′) − τ(c−c′)` | `eqdl_extracts_tau` | a simulator (`Refuse_HVZK_simulation`) |
 | `i` same-`ρ` equal-DLs on base `P_i` | `P'_i = P_i^{ρ^i} = g^{(τρ)^i}` | `ladder_realizes_update`, `contribution_ladder_step` | a pairing check of the CRS |
-| committed `f,h` at `τ` | `g^{f(τ)h(τ)} = C_f^{h(τ)} = C_{f·h}` | `pot_poly_conv_raise`, `poly_eval_conv` | a public check without the integer `h(τ)` |
+| committed `f,h` at `τ` | `g^{f(τ)h(τ)} = C_f^{h(τ)} = C_{f·h}` | `pot_poly_conv_raise`, `poly_eval_conv` | a hiding pairing (this check recovers bounded coeffs) |
+| public product of encodings | `∏ P_{i+j}^{a_i b_j} = C_{a·b}` from slots vs CRS | `public_quad_complete`, `quad_combine_is_product` | a hiding map; NIZK |
 | monomials `X^i, X^j` | `g^{τ^i · τ^j} = P_{i+j}` | `monomial_eval_product`, `monomial_conv_is_later_slot` | `P_i · P_j` (that is the sum) |
 | self-bilinear `e` with `e(g,g)=g` | `e(C_f, C_h) = C_{f·h}` | `self_bil_committed_product` | existence of `e` |
-| QAP identity at `τ` | `C_{A·B} = C_C · C_{H·Z}` | `qap_complete_at_tau`, `qap_witness_complete` | a public check without coefficients |
+| QAP identity at `τ` | `C_{A·B} = C_C · C_{H·Z}` | `qap_complete_at_tau`, `qap_witness_complete`, `public_quad_qap` | a hiding check of the same identity |
 | remainder encoding `= 1` | `τ` is a root, or `ord(g)` divides the remainder | `qap_point_sound`, `qap_sound_at_tau` | the identity as polynomials |
 | Schnorr on base `P_i` | `ord(P_i) \| (z−z′) − a_i(c−c′)` | `coeff_slot_extracts` | a hash / NIZK |
 | `w0·w1=w2` | QAP identity at every `x` | `mul_gate_sat` | a circuit compiler |

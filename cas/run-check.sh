@@ -5,8 +5,9 @@ cd "$(dirname "$0")"
 # (cas-gate.sh is vendored under ../tooling from the formal-verification harness.)
 source "$(cd .. && pwd)/tooling/cas-gate.sh"
 # Glob so new witnesses (NN_<topic>.gp) are picked up automatically, in numeric order.
+# Two- then three-digit prefixes: [0-9][0-9]_*.gp misses 100_*.gp (third char is a digit).
 shopt -s nullglob
-witnesses=( [0-9][0-9]_*.gp )
+witnesses=( [0-9][0-9]_*.gp [0-9][0-9][0-9]_*.gp )
 if [[ ${#witnesses[@]} -eq 0 ]]; then
   echo "cas: no witnesses registered yet"
   exit 0

@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1216 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1235 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1216 results across 86 files.
+Captured for 1235 results across 87 files.
 
 Counts:
 
@@ -1175,6 +1175,30 @@ Counts:
 | `rsa_trapdoor_inv_is_root` | 389 | 0 | 0 | OK |
 | `Pexp_0` | 411 | 0 | 0 | OK |
 | `Pexp_S_rsa` | 418 | 0 | 0 | OK |
+
+## PublicQuad.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `find_exp_from_sound` | 54 | 0 | 0 | OK |
+| `find_exp_from_complete` | 84 | 0 | 0 | OK |
+| `find_exp_complete` | 107 | 0 | 0 | OK |
+| `find_exp_sound` | 123 | 0 | 0 | OK |
+| `pot_crs_from_length` | 171 | 0 | 0 | OK |
+| `pot_crs_length` | 181 | 0 | 0 | OK |
+| `pot_crs_from_nth` | 188 | 0 | 0 | OK |
+| `pot_crs_nth` | 205 | 0 | 0 | OK |
+| `recover_honest` | 230 | 0 | 0 | OK |
+| `quad_row_spec` | 277 | 0 | 0 | OK |
+| `quad_combine_spec` | 313 | 0 | 0 | OK |
+| `quad_combine_is_product` | 348 | 0 | 0 | OK |
+| `first_exps_nn` | 378 | 0 | 0 | OK |
+| `public_quad_complete` | 390 | 0 | 0 | OK |
+| `public_quad_qap` | 420 | 0 | 0 | OK |
+| `public_quad_pin_accepts` | 455 | 0 | 0 | OK |
+| `public_quad_pin_rejects_group_mul` | 466 | 0 | 0 | OK |
+| `public_quad_pin_sum_neq_prod` | 478 | 0 | 0 | OK |
+| `public_quad_pin_qap` | 484 | 0 | 0 | OK |
 
 ## QAP.v
 

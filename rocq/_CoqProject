@@ -73,6 +73,7 @@ Dark.v
 EvalProduct.v
 QAP.v
 CoeffPoK.v
+PublicQuad.v
 MulGate.v
 AddGate.v
 WirePoK.v

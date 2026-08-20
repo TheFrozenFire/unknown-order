@@ -67,6 +67,13 @@ only with a written death in this file.
    remainder encoding `1` means `τ` is a root or the order
    divides. **Have** `qap_complete_at_tau`, `qap_point_sound`,
    `pot_wires_is_lincomb`, `pot_wires_app`; CAS 96.
+   Public quadratic check on encodings + CRS slots: bounded
+   search on public `P_i` recovers slot exponents; bilinear
+   combine `∏ P_{i+j}^{a_i b_j}` is `C_{a·b}`. Completeness
+   and “not group-mul” on the pin. Reveals bounded coefficients
+   — not a hiding pairing. **Have** `public_quad_complete`,
+   `public_quad_qap`, `public_quad_pin_rejects_group_mul`;
+   CAS 112.
    Coefficient PoK (`slots_assemble`, `coeff_slot_extracts`; CAS 97),
    one mul gate (`mul_gate_complete`; CAS 98), same-`w` check
    (`same_w_check`; CAS 99).

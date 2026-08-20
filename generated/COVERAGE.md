@@ -1360,6 +1360,38 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `Pexp_0` | 411 |
 | Theorem | `Pexp_S_rsa` | 418 |
 
+## `PublicQuad.v`
+
+- L16: Public quadratic check of two committed evaluations
+  - L41: Bounded exponent search against a public base
+  - L139: Recover a coefficient list from slot encodings vs CRS
+  - L160: Public CRS list [P_0,…,P_{n-1}]
+  - L258: Bilinear combine [∏_{i,j} P_{i+j}^{a_i b_j}]
+  - L365: The public check: encodings and CRS only
+  - L446: Representative pin: the check is not the group law
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `find_exp_from_sound` | 54 |
+| Lemma | `find_exp_from_complete` | 84 |
+| Lemma | `find_exp_complete` | 107 |
+| Lemma | `find_exp_sound` | 123 |
+| Lemma | `pot_crs_from_length` | 171 |
+| Lemma | `pot_crs_length` | 181 |
+| Lemma | `pot_crs_from_nth` | 188 |
+| Lemma | `pot_crs_nth` | 205 |
+| Lemma | `recover_honest` | 230 |
+| Lemma | `quad_row_spec` | 277 |
+| Lemma | `quad_combine_spec` | 313 |
+| Theorem | `quad_combine_is_product` | 348 |
+| Lemma | `first_exps_nn` | 378 |
+| Theorem | `public_quad_complete` | 390 |
+| Theorem | `public_quad_qap` | 420 |
+| Theorem | `public_quad_pin_accepts` | 455 |
+| Theorem | `public_quad_pin_rejects_group_mul` | 466 |
+| Theorem | `public_quad_pin_sum_neq_prod` | 478 |
+| Theorem | `public_quad_pin_qap` | 484 |
+
 ## `QAP.v`
 
 - L15: QAP completeness on committed evaluations
@@ -1936,4 +1968,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1216 theorems/lemmas/corollaries/examples across 86 files._
+_1235 theorems/lemmas/corollaries/examples across 87 files._

@@ -94,7 +94,8 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Equal-DL / PoK of a contribution `ρ` | **Have** `update_pok_complete`, `extracted_contributor_agrees`; CAS 85 |
 | Equal-DL ladder: slot `i` is `i` same-`ρ` steps, `P'_i = P_i^{ρ^i}` | **Have** `ladder_realizes_update`, `contribution_ladder_step`, `slot2_leg1_complete`, `slot2_leg2_complete`; CAS 94 |
 | Product of committed evaluations: `g^{f(τ)h(τ)} = C_f^{h(τ)}`; group law adds | **Have** `poly_eval_conv`, `pot_poly_conv_raise`, `monomial_conv_is_later_slot`, `self_bil_committed_product`, `two_wire_commit`; CAS 95 |
-| QAP: honest witness encodings satisfy `C_{AB}=C_C C_{HZ}`; remainder `1` is a root or annihilator | **Have** `qap_complete_at_tau`, `qap_point_sound`, `pot_wires_is_lincomb`, `pot_wires_app`; CAS 96 |
+| Public quadratic check on encodings + CRS slots (bounded slot search + bilinear combine); not group-mul | **Have** `public_quad_complete`, `public_quad_pin_rejects_group_mul`, `quad_combine_is_product`; CAS 112 |
+| QAP: honest witness encodings satisfy `C_{AB}=C_C C_{HZ}`; remainder `1` is a root or annihilator | **Have** `qap_complete_at_tau`, `qap_point_sound`, `pot_wires_is_lincomb`, `pot_wires_app`, `public_quad_qap`; CAS 96, 112 |
 | Per-slot coeff PoK: assemble `∏ P_i^{a_i}`; extract `a_i` | **Have** `slots_assemble`, `coeff_slot_eqdl`, `coeff_slot_extracts`; CAS 97 |
 | Mul gate `w0·w1=w2` as QAP | **Have** `mul_gate_sat`, `mul_gate_complete`; CAS 98 |
 | Same `w` on two CRSs: `C_A · C_B^r = wires(A_j + r B_j)` | **Have** `same_w_check`; CAS 99 |
