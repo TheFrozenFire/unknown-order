@@ -95,6 +95,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Equal-DL ladder: slot `i` is `i` same-`ρ` steps, `P'_i = P_i^{ρ^i}` | **Have** `ladder_realizes_update`, `contribution_ladder_step`, `slot2_leg1_complete`, `slot2_leg2_complete`; CAS 94 |
 | Product of committed evaluations: `g^{f(τ)h(τ)} = C_f^{h(τ)}`; group law adds | **Have** `poly_eval_conv`, `pot_poly_conv_raise`, `monomial_conv_is_later_slot`, `self_bil_committed_product`, `two_wire_commit`; CAS 95 |
 | Public quadratic check on encodings + CRS slots (bounded slot search + bilinear combine); not group-mul | **Have** `public_quad_complete`, `public_quad_pin_rejects_group_mul`, `quad_combine_is_product`; CAS 112 |
+| Succinct product check: posted proof `13 log2 n + 2` words, not one slot per coefficient | **Have** `succ_proof_len_is_log`, `succ_pin_n2_accepts`, `succ_pin_n2_rejects_group_mul`; CAS 114 |
 | QAP: honest witness encodings satisfy `C_{AB}=C_C C_{HZ}`; remainder `1` is a root or annihilator | **Have** `qap_complete_at_tau`, `qap_point_sound`, `pot_wires_is_lincomb`, `pot_wires_app`, `public_quad_qap`; CAS 96, 112 |
 | Per-slot coeff PoK: assemble `∏ P_i^{a_i}`; extract `a_i` | **Have** `slots_assemble`, `coeff_slot_eqdl`, `coeff_slot_extracts`; CAS 97 |
 | Fiat–Shamir compilation of eqdl / slot Sigma: `c = H(statement, t)`; NI verifier recomputes `c` | **Have** `fs_eqdl_complete`, `fs_slot_complete`, `fs_pin_rejects_wrong_challenge`; CAS 113. ROM/PPT NIZK stays named (`Refuse_NIZK_Fiat_Shamir`) |

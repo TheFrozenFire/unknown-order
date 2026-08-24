@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1250 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1269 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1250 results across 88 files.
+Captured for 1269 results across 89 files.
 
 Counts:
 
@@ -1483,6 +1483,30 @@ Counts:
 | `prime_5` | 142 | 0 | 0 | OK |
 | `five_is_safe` | 150 | 0 | 0 | OK |
 | `five_resists_B1` | 156 | 0 | 0 | OK |
+
+## Succinct.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `poly_eval_app` | 44 | 0 | 0 | OK |
+| `nn_app` | 61 | 0 | 0 | OK |
+| `nn_firstn` | 70 | 0 | 0 | OK |
+| `nn_skipn` | 82 | 0 | 0 | OK |
+| `nn_map_mul_nonneg` | 94 | 0 | 0 | OK |
+| `nn_poly_add` | 103 | 0 | 0 | OK |
+| `nn_succ_fold` | 115 | 0 | 0 | OK |
+| `poly_eval_succ_fold` | 124 | 0 | 0 | OK |
+| `succ_round_pack_length` | 199 | 0 | 0 | OK |
+| `succ_prove_cons_length` | 205 | 0 | 0 | OK |
+| `succ_prove_rounds_log` | 212 | 0 | 0 | OK |
+| `succ_proof_len_is_log` | 263 | 0 | 0 | OK |
+| `succ_proof_len_n4` | 274 | 0 | 0 | OK |
+| `succ_proof_len_n16` | 284 | 0 | 0 | OK |
+| `succ_proof_len_bound_pin` | 294 | 0 | 0 | OK |
+| `succ_pin_n2_accepts` | 305 | 0 | 0 | OK |
+| `succ_pin_n2_rejects_group_mul` | 317 | 0 | 0 | OK |
+| `succ_pin_n2_sum_neq_prod` | 327 | 0 | 0 | OK |
+| `succ_pin_qap` | 334 | 0 | 0 | OK |
 
 ## Takagi.v
 

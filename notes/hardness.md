@@ -52,6 +52,7 @@ Constructible torsion `H` is a family parameter
 | `i` same-`ρ` equal-DLs on base `P_i` | `P'_i = P_i^{ρ^i} = g^{(τρ)^i}` | `ladder_realizes_update`, `contribution_ladder_step` | a pairing check of the CRS |
 | committed `f,h` at `τ` | `g^{f(τ)h(τ)} = C_f^{h(τ)} = C_{f·h}` | `pot_poly_conv_raise`, `poly_eval_conv` | a hiding pairing (this check recovers bounded coeffs) |
 | public product of encodings | `∏ P_{i+j}^{a_i b_j} = C_{a·b}` from slots vs CRS | `public_quad_complete`, `quad_combine_is_product` | a hiding map; NIZK |
+| succinct product fold | posted proof `13 log2 n + 2` words | `succ_proof_len_is_log`, `succ_pin_n2_accepts` | ROM / PPT SNARK |
 | monomials `X^i, X^j` | `g^{τ^i · τ^j} = P_{i+j}` | `monomial_eval_product`, `monomial_conv_is_later_slot` | `P_i · P_j` (that is the sum) |
 | self-bilinear `e` with `e(g,g)=g` | `e(C_f, C_h) = C_{f·h}` | `self_bil_committed_product` | existence of `e` |
 | QAP identity at `τ` | `C_{A·B} = C_C · C_{H·Z}` | `qap_complete_at_tau`, `qap_witness_complete`, `public_quad_qap` | a hiding check of the same identity |

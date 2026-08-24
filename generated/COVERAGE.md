@@ -1731,6 +1731,38 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `five_is_safe` | 150 |
 | Theorem | `five_resists_B1` | 156 |
 
+## `Succinct.v`
+
+- L16: Logarithmic fold of the bilinear CRS combine
+  - L35: List halves and the fold [a_L + 2 a_R]
+  - L135: One round of the posted proof (13 residues)
+  - L146: Prover
+  - L227: Verifier: no slot list, no per-slot bound search
+  - L261: Size: [13 log2 n + 2]
+  - L299: Completeness on the pin family and QAP
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `poly_eval_app` | 44 |
+| Lemma | `nn_app` | 61 |
+| Lemma | `nn_firstn` | 70 |
+| Lemma | `nn_skipn` | 82 |
+| Lemma | `nn_map_mul_nonneg` | 94 |
+| Lemma | `nn_poly_add` | 103 |
+| Lemma | `nn_succ_fold` | 115 |
+| Lemma | `poly_eval_succ_fold` | 124 |
+| Lemma | `succ_round_pack_length` | 199 |
+| Lemma | `succ_prove_cons_length` | 205 |
+| Lemma | `succ_prove_rounds_log` | 212 |
+| Theorem | `succ_proof_len_is_log` | 263 |
+| Theorem | `succ_proof_len_n4` | 274 |
+| Theorem | `succ_proof_len_n16` | 284 |
+| Theorem | `succ_proof_len_bound_pin` | 294 |
+| Theorem | `succ_pin_n2_accepts` | 305 |
+| Theorem | `succ_pin_n2_rejects_group_mul` | 317 |
+| Theorem | `succ_pin_n2_sum_neq_prod` | 327 |
+| Theorem | `succ_pin_qap` | 334 |
+
 ## `Takagi.v`
 
 - L9: Takagi multi-power RSA: [N = p² q]
@@ -1993,4 +2025,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1250 theorems/lemmas/corollaries/examples across 88 files._
+_1269 theorems/lemmas/corollaries/examples across 89 files._
