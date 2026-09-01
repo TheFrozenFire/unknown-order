@@ -75,6 +75,14 @@ Constructible torsion `H` is a family parameter
 | aux self-bilinear with `e(aux,g,g)=g` | publishes `P_{i+1}` | `aux_eval_publishes_next` | existence; iO deferred |
 | DARK `C = g^{f(s)}`, `π = g^{q(s)}` | `C = π^{s−z} · g^{f(z)}` | `dark_deg1_open`, `dark_deg2_open` | a pairing/PoE check without `s` |
 | Jacobi of `g^a` and `g^b` | product is Jacobi of `g^{a+b}` | `jacobi_additive_pairing` | a large-target pairing |
+| GGM product eq-test `2^{10}−1` | Factor | `ggm_eq_leak_factors` | query-complexity lower bound |
+| JNT affine root `(x+c)^{1/e}` | integer cube of `x+c` | `jnt_roots_affine` | SNFS cost; general `GRoot` |
+| prep advice `N/17` | Factor before looking at `y` | `prep_then_gra_factors` | RSA easier than factoring |
+| SAGM product of handles | sum of exponents | `sagm_product_adds_exponents` | standard-model hardness |
+| one queried RSA root + extra unqueried | `Problem_OneMore` | `one_more_pin` | PPT one-more game |
+| prime public `e` | `Problem_GHR` | `ghr_pin`; `ghr_prime_e_shamir_gcd` | a new scheme |
+| `e \| λ` | φ-hiding relation | `phi_hiding_pin_e5` | PPT φ-hiding game |
+| GQ at public `e` | `Problem_RSA` at that `e` | `cpp17_extract_is_fixed_e` | NIZK / HVZK; chosen-`e` sRSA |
 | GRA eq-test lift `gcd` proper | Factor | `gra_eq_leak_factors` | every GRA factors `N` |
 | `P^e − X` at 2, `e ≥ 2` | not the zero polynomial over `Z` | `Pe_minus_X_eval_2_nonzero` | vanishing as a function on `(Z/NZ)*` |
 | no-div GRA identity `X^3 − X` | linear coeff `−1`, `N` cannot divide all coeffs | `gra_nodiv_identical_root_impossible_X3` | a solver for one `y` (const 42) |

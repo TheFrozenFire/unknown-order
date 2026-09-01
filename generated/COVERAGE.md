@@ -309,6 +309,21 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `brown_dual_gcd_pin` | 72 |
 | Theorem | `brown_ed_minus_1_is_80` | 76 |
 
+## `CPP17.v`
+
+- L14: Couteau–Peters–Pointcheval (EUROCRYPT 2017) shape
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `cpp17_witness_is_rsa` | 21 |
+| Theorem | `cpp17_complete_pin` | 25 |
+| Theorem | `cpp17_second_transcript` | 32 |
+| Theorem | `cpp17_shamir_gcd_pin` | 39 |
+| Theorem | `cpp17_extract_is_fixed_e` | 43 |
+| Theorem | `cpp17_protocol_e_is_three` | 51 |
+| Theorem | `cpp17_srsa_other_pair` | 55 |
+| Theorem | `cpp17_sigma_does_not_output_that_pair` | 62 |
+
 ## `CRTRSA.v`
 
 - L12: CRT-RSA: a small [d_p] is a short one-sided annihilator
@@ -725,6 +740,26 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wesolowski_odd_challenge_accepts_negation` | 273 |
 | Theorem | `wesolowski_soundness_fails_on_units_odd_challenge` | 303 |
 
+## `ExtraRelations.v`
+
+- L14: Extra search relations: one-more RSA, GHR prime-[e], φ-hiding
+  - L19: One-more RSA
+  - L48: GHR: prime public [e]
+  - L87: φ-hiding: [e | λ(N)], a relation, not a PPT game
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `one_more_pin` | 30 |
+| Theorem | `one_more_queried_is_not_extra` | 41 |
+| Lemma | `prime_3` | 53 |
+| Theorem | `ghr_pin` | 61 |
+| Theorem | `ghr_is_rsa` | 68 |
+| Theorem | `ghr_prime_e_shamir_gcd` | 72 |
+| Theorem | `ghr_shamir_gcd_pin` | 83 |
+| Theorem | `phi_hiding_lambda_80` | 92 |
+| Theorem | `phi_hiding_pin_e5` | 96 |
+| Theorem | `phi_hiding_public_e3_misses` | 103 |
+
 ## `FactorEnum.v`
 
 - L10: Multiplier enumeration: factor [N] from [(e,d)] when [e] is small
@@ -893,6 +928,20 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `gq_e2_complete` | 161 |
 | Theorem | `gq_e2_odd_delta_extracts_sqrt` | 173 |
 
+## `GenericGroup.v`
+
+- L15: Unknown-order generic group interpreter
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `ggm_add_uninhabited` | 48 |
+| Theorem | `ggm_step_is_mul_inv_or_eq` | 52 |
+| Theorem | `ggm_init_is_one_and_y` | 72 |
+| Theorem | `ggm_pow10_handle` | 76 |
+| Theorem | `ggm_eq_leak_from_tape` | 80 |
+| Theorem | `ggm_eq_leak_factors` | 84 |
+| Theorem | `ggm_yyy_pin` | 91 |
+
 ## `GenericRing.v`
 
 - L17: Generic ring algorithms (GRA) on [Z/NZ]
@@ -1037,6 +1086,18 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `lagrange_125_at_5` | 79 |
 | Theorem | `lagrange_125_at_3` | 82 |
 | Theorem | `gra_jacobi_not_deg2_fit` | 85 |
+
+## `JouxNaccacheThome.v`
+
+- L10: Joux–Naccache–Thomé affine-root oracle
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `jnt_roots_affine` | 19 |
+| Theorem | `jnt_affine_is_plain_cube` | 23 |
+| Theorem | `jnt_not_a_general_root` | 27 |
+| Theorem | `jnt_general_roots_plain_cubes` | 31 |
+| Theorem | `jnt_c0_is_general` | 35 |
 
 ## `KeyGen.v`
 
@@ -1455,6 +1516,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pratt_fermat_side` | 53 |
 | Theorem | `duality_unique_order_2_on_prime` | 66 |
 
+## `PreprocessGRA.v`
+
+- L14: Preprocessing GRA (Dachman-Soled–Loss–O'Neill shape)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `prep_advice_depends_on_N` | 26 |
+| Theorem | `prep_advice_ignores_y` | 30 |
+| Theorem | `prep_factor_advice` | 34 |
+| Theorem | `prep_id_advice_not_a_split` | 42 |
+| Theorem | `prep_ginv_of_factor_advice` | 54 |
+| Theorem | `prep_then_gra_factors` | 58 |
+
 ## `Presentation.v`
 
 - L14: A presentation of a group of unknown order
@@ -1686,6 +1760,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `range2_bit_qap` | 34 |
 | Theorem | `range2_encoding` | 51 |
 | Theorem | `range2_eval_commit` | 67 |
+
+## `SAGM.v`
+
+- L9: Strong algebraic group model (representation)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `sagm_eval_21` | 30 |
+| Theorem | `sagm_product_adds_exponents` | 35 |
+| Theorem | `sagm_mul_exps` | 43 |
 
 ## `SameW.v`
 
@@ -2138,4 +2222,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1348 theorems/lemmas/corollaries/examples across 93 files._
+_1387 theorems/lemmas/corollaries/examples across 99 files._

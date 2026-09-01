@@ -20,8 +20,13 @@ Hardness.v
 Wiener.v
 SmallExponent.v
 GenericRing.v
+GenericGroup.v
 BonehVenkatesan.v
 BrownSLP.v
+JouxNaccacheThome.v
+PreprocessGRA.v
+SAGM.v
+ExtraRelations.v
 StrongPrimes.v
 CRTRSA.v
 BitLeak.v
@@ -53,6 +58,7 @@ Presentation.v
 ExpProof.v
 Accumulator.v
 GQ.v
+CPP17.v
 ChallengePrime.v
 Torus.v
 Takagi.v

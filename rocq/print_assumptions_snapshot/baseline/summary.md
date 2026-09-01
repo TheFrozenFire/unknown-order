@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1348 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1387 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1348 results across 93 files.
+Captured for 1387 results across 99 files.
 
 Counts:
 
@@ -278,6 +278,19 @@ Counts:
 | `brown_dual_tangent_mod_N` | 68 | 0 | 0 | OK |
 | `brown_dual_gcd_pin` | 72 | 0 | 0 | OK |
 | `brown_ed_minus_1_is_80` | 76 | 0 | 0 | OK |
+
+## CPP17.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `cpp17_witness_is_rsa` | 21 | 0 | 0 | OK |
+| `cpp17_complete_pin` | 25 | 0 | 0 | OK |
+| `cpp17_second_transcript` | 32 | 0 | 0 | OK |
+| `cpp17_shamir_gcd_pin` | 39 | 0 | 0 | OK |
+| `cpp17_extract_is_fixed_e` | 43 | 0 | 0 | OK |
+| `cpp17_protocol_e_is_three` | 51 | 0 | 0 | OK |
+| `cpp17_srsa_other_pair` | 55 | 0 | 0 | OK |
+| `cpp17_sigma_does_not_output_that_pair` | 62 | 0 | 0 | OK |
 
 ## CRTRSA.v
 
@@ -635,6 +648,21 @@ Counts:
 | `wesolowski_odd_challenge_accepts_negation` | 273 | 0 | 0 | OK |
 | `wesolowski_soundness_fails_on_units_odd_challenge` | 303 | 0 | 0 | OK |
 
+## ExtraRelations.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `one_more_pin` | 30 | 0 | 0 | OK |
+| `one_more_queried_is_not_extra` | 41 | 0 | 0 | OK |
+| `prime_3` | 53 | 0 | 0 | OK |
+| `ghr_pin` | 61 | 0 | 0 | OK |
+| `ghr_is_rsa` | 68 | 0 | 0 | OK |
+| `ghr_prime_e_shamir_gcd` | 72 | 0 | 0 | OK |
+| `ghr_shamir_gcd_pin` | 83 | 0 | 0 | OK |
+| `phi_hiding_lambda_80` | 92 | 0 | 0 | OK |
+| `phi_hiding_pin_e5` | 96 | 0 | 0 | OK |
+| `phi_hiding_public_e3_misses` | 103 | 0 | 0 | OK |
+
 ## FactorEnum.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -789,6 +817,18 @@ Counts:
 | `gq_e2_complete` | 161 | 0 | 0 | OK |
 | `gq_e2_odd_delta_extracts_sqrt` | 173 | 0 | 0 | OK |
 
+## GenericGroup.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `ggm_add_uninhabited` | 48 | 0 | 0 | OK |
+| `ggm_step_is_mul_inv_or_eq` | 52 | 0 | 0 | OK |
+| `ggm_init_is_one_and_y` | 72 | 0 | 0 | OK |
+| `ggm_pow10_handle` | 76 | 0 | 0 | OK |
+| `ggm_eq_leak_from_tape` | 80 | 0 | 0 | OK |
+| `ggm_eq_leak_factors` | 84 | 0 | 0 | OK |
+| `ggm_yyy_pin` | 91 | 0 | 0 | OK |
+
 ## GenericRing.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -909,6 +949,16 @@ Counts:
 | `lagrange_125_at_5` | 79 | 0 | 0 | OK |
 | `lagrange_125_at_3` | 82 | 0 | 0 | OK |
 | `gra_jacobi_not_deg2_fit` | 85 | 0 | 0 | OK |
+
+## JouxNaccacheThome.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `jnt_roots_affine` | 19 | 0 | 0 | OK |
+| `jnt_affine_is_plain_cube` | 23 | 0 | 0 | OK |
+| `jnt_not_a_general_root` | 27 | 0 | 0 | OK |
+| `jnt_general_roots_plain_cubes` | 31 | 0 | 0 | OK |
+| `jnt_c0_is_general` | 35 | 0 | 0 | OK |
 
 ## KeyGen.v
 
@@ -1260,6 +1310,17 @@ Counts:
 | `pratt_fermat_side` | 53 | 0 | 0 | OK |
 | `duality_unique_order_2_on_prime` | 66 | 0 | 0 | OK |
 
+## PreprocessGRA.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `prep_advice_depends_on_N` | 26 | 0 | 0 | OK |
+| `prep_advice_ignores_y` | 30 | 0 | 0 | OK |
+| `prep_factor_advice` | 34 | 0 | 0 | OK |
+| `prep_id_advice_not_a_split` | 42 | 0 | 0 | OK |
+| `prep_ginv_of_factor_advice` | 54 | 0 | 0 | OK |
+| `prep_then_gra_factors` | 58 | 0 | 0 | OK |
+
 ## Presentation.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -1452,6 +1513,14 @@ Counts:
 | `range2_bit_qap` | 34 | 0 | 0 | OK |
 | `range2_encoding` | 51 | 0 | 0 | OK |
 | `range2_eval_commit` | 67 | 0 | 0 | OK |
+
+## SAGM.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `sagm_eval_21` | 30 | 0 | 0 | OK |
+| `sagm_product_adds_exponents` | 35 | 0 | 0 | OK |
+| `sagm_mul_exps` | 43 | 0 | 0 | OK |
 
 ## SameW.v
 
