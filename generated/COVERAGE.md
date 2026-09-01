@@ -1928,6 +1928,50 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `five_is_safe` | 150 |
 | Theorem | `five_resists_B1` | 156 |
 
+## `StrongRSAPeel.v`
+
+- L17: Standard-model Strong-RSA witness peel
+  - L27: Non-unit [x]
+  - L66: Jacobi [−1] forces odd [e]
+  - L99: Even [e] is a square root
+  - L147: [λ]-type: [x = y] is an annihilator
+  - L241: Residual leaf (named, not solved)
+  - L261: Self-randomization and related queries
+  - L309: SAGM handle still peels
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `srsa_unit_y_forces_unit_x` | 29 |
+| Theorem | `srsa_gcd_proper_is_factor` | 42 |
+| Theorem | `srsa_nonunit_x_pin` | 56 |
+| Theorem | `srsa_jacobi_minus1_forces_odd_e` | 68 |
+| Theorem | `srsa_jacobi_two_is_minus1` | 87 |
+| Theorem | `srsa_lambda_type_on_jacobi_minus1` | 91 |
+| Theorem | `srsa_even_e_is_square_root` | 101 |
+| Theorem | `srsa_even_e_pin` | 113 |
+| Theorem | `srsa_associate_neg6_does_not_split` | 117 |
+| Theorem | `srsa_mixed_root_of_36_factors` | 122 |
+| Theorem | `srsa_even_e_nonassociate_factors` | 132 |
+| Theorem | `srsa_x_eq_y_annihilates` | 149 |
+| Theorem | `srsa_lambda_type_annihilator_pin` | 179 |
+| Theorem | `srsa_lambda_type_miller_splits` | 189 |
+| Theorem | `srsa_lambda_type_miller_factors` | 199 |
+| Lemma | `prime_7` | 210 |
+| Theorem | `srsa_safeprime_lambda_30` | 218 |
+| Theorem | `srsa_safeprime_lambda_type` | 222 |
+| Theorem | `srsa_safeprime_g0_square` | 226 |
+| Theorem | `srsa_safeprime_miller_gcd` | 230 |
+| Theorem | `srsa_safeprime_miller_factors` | 234 |
+| Theorem | `srsa_residual_pin` | 250 |
+| Theorem | `srsa_fixed_e_rerand` | 263 |
+| Theorem | `srsa_fixed_e_rerand_pin` | 276 |
+| Theorem | `srsa_poly_e_not_rerand_invariant` | 283 |
+| Theorem | `srsa_related_y_square` | 289 |
+| Theorem | `srsa_related_pin` | 305 |
+| Theorem | `srsa_sagm_handle_unit` | 311 |
+| Theorem | `srsa_sagm_lambda_type_peel` | 316 |
+| Theorem | `srsa_sagm_product_reused` | 321 |
+
 ## `Succinct.v`
 
 - L16: Logarithmic fold of the bilinear CRS combine
@@ -2222,4 +2266,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1387 theorems/lemmas/corollaries/examples across 99 files._
+_1417 theorems/lemmas/corollaries/examples across 100 files._

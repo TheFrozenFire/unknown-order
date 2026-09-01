@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1387 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1417 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1387 results across 99 files.
+Captured for 1417 results across 100 files.
 
 Counts:
 
@@ -1651,6 +1651,41 @@ Counts:
 | `prime_5` | 142 | 0 | 0 | OK |
 | `five_is_safe` | 150 | 0 | 0 | OK |
 | `five_resists_B1` | 156 | 0 | 0 | OK |
+
+## StrongRSAPeel.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `srsa_unit_y_forces_unit_x` | 29 | 0 | 0 | OK |
+| `srsa_gcd_proper_is_factor` | 42 | 0 | 0 | OK |
+| `srsa_nonunit_x_pin` | 56 | 0 | 0 | OK |
+| `srsa_jacobi_minus1_forces_odd_e` | 68 | 0 | 0 | OK |
+| `srsa_jacobi_two_is_minus1` | 87 | 0 | 0 | OK |
+| `srsa_lambda_type_on_jacobi_minus1` | 91 | 0 | 0 | OK |
+| `srsa_even_e_is_square_root` | 101 | 0 | 0 | OK |
+| `srsa_even_e_pin` | 113 | 0 | 0 | OK |
+| `srsa_associate_neg6_does_not_split` | 117 | 0 | 0 | OK |
+| `srsa_mixed_root_of_36_factors` | 122 | 0 | 0 | OK |
+| `srsa_even_e_nonassociate_factors` | 132 | 0 | 0 | OK |
+| `srsa_x_eq_y_annihilates` | 149 | 0 | 0 | OK |
+| `srsa_lambda_type_annihilator_pin` | 179 | 0 | 0 | OK |
+| `srsa_lambda_type_miller_splits` | 189 | 0 | 0 | OK |
+| `srsa_lambda_type_miller_factors` | 199 | 0 | 0 | OK |
+| `prime_7` | 210 | 0 | 0 | OK |
+| `srsa_safeprime_lambda_30` | 218 | 0 | 0 | OK |
+| `srsa_safeprime_lambda_type` | 222 | 0 | 0 | OK |
+| `srsa_safeprime_g0_square` | 226 | 0 | 0 | OK |
+| `srsa_safeprime_miller_gcd` | 230 | 0 | 0 | OK |
+| `srsa_safeprime_miller_factors` | 234 | 0 | 0 | OK |
+| `srsa_residual_pin` | 250 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand` | 263 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand_pin` | 276 | 0 | 0 | OK |
+| `srsa_poly_e_not_rerand_invariant` | 283 | 0 | 0 | OK |
+| `srsa_related_y_square` | 289 | 0 | 0 | OK |
+| `srsa_related_pin` | 305 | 0 | 0 | OK |
+| `srsa_sagm_handle_unit` | 311 | 0 | 0 | OK |
+| `srsa_sagm_lambda_type_peel` | 316 | 0 | 0 | OK |
+| `srsa_sagm_product_reused` | 321 | 0 | 0 | OK |
 
 ## Succinct.v
 

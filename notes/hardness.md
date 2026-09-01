@@ -111,6 +111,26 @@ CAS pin: `cas/18_hardness.gp`.
 Decisional RSA on units with `gcd(e, λ) = 1` is vacuous: the `e`-power
 map is a permutation, so `(N,e,x^e)` and `(N,e,y)` are identical.
 
+## Strong-RSA witness peel (standard model)
+
+A witness `(x,e)` of unit `y` on `N=pq` is classified; only the last leaf is open.
+
+| Leaf | Identity | Rocq | Residual? |
+|---|---|---|---|
+| non-unit `x` | `gcd(x,N)` proper | `srsa_nonunit_x_pin` | no |
+| Jacobi `(y/N)=−1` | `e` odd | `srsa_jacobi_minus1_forces_odd_e` | no |
+| even `e` | `x^{e/2}` is a square root | `srsa_even_e_is_square_root` | no |
+| associate `±r` | gcd is `N`, no split | `srsa_associate_neg6_does_not_split` | no |
+| mixed square root | `rabin_oracle_nonassociate_factors` | `srsa_mixed_root_of_36_factors` | no |
+| `x=y` | `y^{e−1}≡1` | `srsa_x_eq_y_annihilates` | no |
+| `λ \| e−1` | Miller `gcd(g−1,N)` | `srsa_lambda_type_miller_factors` | no |
+| safeprime `λ=2p'q'` | same Miller on `N=77` | `srsa_safeprime_miller_factors` | no |
+| odd `e`, `gcd(e,λ)=1`, `λ` ndiv `e−1` | named `srsa_residual_leaf` | `srsa_residual_pin` (42³≡36) | **yes — Jacobian sentence** |
+
+Self-randomization preserves a *fixed* `e` (`srsa_fixed_e_rerand`) and does not preserve polynomial `e=X` (`srsa_poly_e_not_rerand_invariant`). Related `y,y²` is `x1^{2 e1}=x2^{e2}` (`srsa_related_y_square`). A SAGM handle still peels (`srsa_sagm_lambda_type_peel`).
+
+Do not record Strong RSA ≡ factoring as a theorem. The residual leaf *is* standard-model RSA with a `y`-dependent exponent coprime to `λ`.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
