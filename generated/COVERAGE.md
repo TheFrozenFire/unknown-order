@@ -275,16 +275,21 @@ in the Rocq tree.  Do not edit by hand.
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `bv_root_gate_is_not_rsa_inverter` | 26 |
-| Theorem | `bv_two_is_integer_cube` | 31 |
-| Theorem | `bv_36_is_not_integer_cube` | 35 |
-| Theorem | `cube_is_powm3_pin` | 39 |
-| Theorem | `bv_with_root_outputs_11` | 50 |
-| Theorem | `bv_unwound_outputs_11` | 54 |
-| Theorem | `bv_unwind_one_cube` | 58 |
-| Theorem | `bv_few_query_low_e_drops_oracle` | 65 |
-| Theorem | `bv_42_cube_in_Z_is_not_36` | 72 |
-| Theorem | `bv_query_leak_already_factors` | 76 |
+| Theorem | `bv_two_is_integer_cube` | 26 |
+| Theorem | `bv_36_is_not_integer_cube` | 30 |
+| Theorem | `cube_is_powm3_pin` | 34 |
+| Theorem | `integer_cube_root_8` | 38 |
+| Theorem | `bv_groot_8_is_2` | 42 |
+| Theorem | `bv_root_gate_is_not_rsa_inverter` | 46 |
+| Theorem | `bv_groot_handle_is_2` | 75 |
+| Theorem | `bv_unwound_handle_is_2` | 79 |
+| Theorem | `bv_with_root_outputs_11` | 83 |
+| Theorem | `bv_unwound_outputs_11` | 87 |
+| Theorem | `bv_unwind_one_cube` | 91 |
+| Theorem | `bv_few_query_low_e_drops_oracle` | 98 |
+| Theorem | `bv_factor_from_root_handle` | 105 |
+| Theorem | `bv_42_cube_in_Z_is_not_36` | 112 |
+| Theorem | `bv_query_leak_already_factors` | 116 |
 
 ## `BrownSLP.v`
 
@@ -892,51 +897,54 @@ in the Rocq tree.  Do not edit by hand.
 
 - L17: Generic ring algorithms (GRA) on [Z/NZ]
   - L25: The machine
-  - L58: Wave 0 — equality leak and the tape
-  - L131: Wave 1 — Leander–Rupp, no division, low [e]
-  - L172: Wave 2a — AM09 inversion leak and leading term
-  - L213: Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y]
-  - L248: Wave 6a — Damgård–Koprowski signature contrast
+  - L101: Wave 0 — equality leak and the tape
+  - L194: Wave 1 — Leander–Rupp, no division, low [e]
+  - L235: Wave 2a — AM09 inversion leak and leading term
+  - L287: Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y]
+  - L322: Wave 6a — Damgård–Koprowski signature contrast
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `gra_eq_leak_pin` | 60 |
-| Theorem | `gra_eq_leak_factors` | 64 |
-| Theorem | `gra_eq_leak_onesided` | 71 |
-| Theorem | `gra_eq_N_is_not_a_split` | 82 |
-| Theorem | `gra_mul_y_pin` | 86 |
-| Theorem | `gra_const42` | 90 |
-| Theorem | `slp_init_eval` | 115 |
-| Theorem | `slp_to_poly_mul_pin` | 126 |
-| Theorem | `gra_nodiv_const42_inverts_36` | 133 |
-| Theorem | `gra_nodiv_const42_fails_on_8` | 137 |
-| Theorem | `gra_identity_not_cube_root_at_2` | 141 |
-| Theorem | `gra_identity_at_one` | 145 |
-| Theorem | `gra_identity_gcd_at_2` | 149 |
-| Theorem | `gra_nodiv_identical_X3_linear` | 153 |
-| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 157 |
-| Theorem | `gra_nodiv_identical_root_impossible_X3` | 161 |
-| Theorem | `Pe_minus_X_eval2_is_six_on_X` | 168 |
-| Theorem | `gra_inv_nonunit_pin` | 174 |
-| Theorem | `gra_inv_nonunit_factors` | 178 |
-| Theorem | `gra_inv_22_factors` | 185 |
-| Theorem | `gra_inv_unit_pin` | 189 |
-| Theorem | `gra_fixed_e_leading_const` | 193 |
-| Theorem | `gra_fixed_e_leading` | 197 |
-| Theorem | `rsa_inverter_is_not_a_GRA_comment` | 203 |
-| Theorem | `powm_d_inverts_cube_pin` | 209 |
-| Theorem | `gra_const_81` | 215 |
-| Theorem | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 220 |
-| Theorem | `gra_const_81_does_not_factor` | 230 |
-| Theorem | `lambda_plus_one_is_81` | 234 |
-| Theorem | `gra_add_mul_of_36_is_not_81` | 238 |
-| Theorem | `am09_fixed_e_is_a_parameter` | 242 |
-| Theorem | `gadd_is_not_a_ggm_op` | 258 |
-| Theorem | `gsub_is_not_a_ggm_op` | 262 |
-| Theorem | `gconst_is_not_a_ggm_op` | 266 |
-| Theorem | `gra_poly_construction_needs_add` | 270 |
-| Theorem | `generic_group_does_not_separate_rsa_from_srsa` | 274 |
-| Theorem | `ggm_mul_pin` | 281 |
+| Theorem | `gra_eq_tape_88` | 115 |
+| Theorem | `gra_eq_tape_zero` | 119 |
+| Theorem | `gra_eq_leak_pin` | 123 |
+| Theorem | `gra_eq_leak_factors` | 127 |
+| Theorem | `gra_eq_leak_onesided` | 134 |
+| Theorem | `gra_eq_N_is_not_a_split` | 145 |
+| Theorem | `gra_mul_y_pin` | 149 |
+| Theorem | `gra_const42` | 153 |
+| Theorem | `slp_init_eval` | 178 |
+| Theorem | `slp_to_poly_mul_pin` | 189 |
+| Theorem | `gra_nodiv_const42_inverts_36` | 196 |
+| Theorem | `gra_nodiv_const42_fails_on_8` | 200 |
+| Theorem | `gra_identity_not_cube_root_at_2` | 204 |
+| Theorem | `gra_identity_at_one` | 208 |
+| Theorem | `gra_identity_gcd_at_2` | 212 |
+| Theorem | `gra_nodiv_identical_X3_linear` | 216 |
+| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 220 |
+| Theorem | `gra_nodiv_identical_root_impossible_X3` | 224 |
+| Theorem | `Pe_minus_X_eval2_is_six_on_X` | 231 |
+| Theorem | `gra_inv_nonunit_pin` | 244 |
+| Theorem | `gra_inv_nonunit_factors` | 248 |
+| Theorem | `gra_inv_22_from_tape` | 255 |
+| Theorem | `gra_inv_unit_gcd` | 259 |
+| Theorem | `gra_inv_unit_from_tape` | 263 |
+| Theorem | `gra_fixed_e_leading_const` | 267 |
+| Theorem | `gra_fixed_e_leading` | 271 |
+| Theorem | `rsa_inverter_is_not_a_GRA_comment` | 277 |
+| Theorem | `powm_d_inverts_cube_pin` | 283 |
+| Theorem | `gra_const_81` | 289 |
+| Theorem | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 294 |
+| Theorem | `gra_const_81_does_not_factor` | 304 |
+| Theorem | `lambda_plus_one_is_81` | 308 |
+| Theorem | `gra_add_mul_of_36_is_not_81` | 312 |
+| Theorem | `am09_fixed_e_is_a_parameter` | 316 |
+| Theorem | `gadd_is_not_a_ggm_op` | 332 |
+| Theorem | `gsub_is_not_a_ggm_op` | 336 |
+| Theorem | `gconst_is_not_a_ggm_op` | 340 |
+| Theorem | `gra_poly_construction_needs_add` | 344 |
+| Theorem | `generic_group_does_not_separate_rsa_from_srsa` | 348 |
+| Theorem | `ggm_mul_pin` | 355 |
 
 ## `Hardness.v`
 
@@ -2130,4 +2138,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1340 theorems/lemmas/corollaries/examples across 93 files._
+_1348 theorems/lemmas/corollaries/examples across 93 files._

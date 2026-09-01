@@ -32,37 +32,100 @@ Inductive GRAOp : Set :=
   | GInv (i : nat)
   | GRoot (i : nat).
 
+Definition pin_N : Z := 187.
+
 Definition gra_init (y : Z) : list Z := [0; 1; y].
 
-Definition step_Z (op : GRAOp) (t : list Z) : list Z :=
+(** Extended Euclidean: [fst * a + snd * b = gcd] when fuel suffices. *)
+Fixpoint egcd_uv (fuel : nat) (a b : Z) : Z * Z :=
+  match fuel with
+  | O => (1, 0)
+  | S fuel' =>
+      if b =? 0 then (1, 0)
+      else
+        let uv := egcd_uv fuel' b (a mod b) in
+        (snd uv, fst uv - snd uv * (a / b))
+  end.
+
+(** Invert [h] in [Z/NZ] when [gcd = 1]; otherwise return that gcd
+    (the AM09 non-unit leak). *)
+Definition gra_inv (h N : Z) : Z :=
+  let g := Z.gcd h N in
+  if g =? 1 then (fst (egcd_uv 64%nat h N)) mod N else g.
+
+(** Integer cube root by bounded search.  Not a cube: identity. *)
+Fixpoint icbrt_up (k fuel : nat) (t : Z) : Z :=
+  match fuel with
+  | O => t
+  | S fuel' =>
+      let kz := Z.of_nat k in
+      if kz * kz * kz =? t then kz
+      else if (- kz) * (- kz) * (- kz) =? t then - kz
+      else icbrt_up (S k) fuel' t
+  end.
+
+Definition integer_cube_root (t : Z) : Z := icbrt_up 0%nat 64%nat t.
+
+Definition step (N : Z) (op : GRAOp) (t : list Z) : list Z :=
   match op with
   | GConst c => t ++ [c]
   | GAdd i j => t ++ [nth i t 0 + nth j t 0]
   | GSub i j => t ++ [nth i t 0 - nth j t 0]
   | GMul i j => t ++ [nth i t 0 * nth j t 0]
-  | GInv i => t ++ [Z.gcd (nth i t 0) 1]
-  | GRoot i => t ++ [nth i t 0]
+  | GInv i => t ++ [gra_inv (nth i t 0) N]
+  | GRoot i => t ++ [integer_cube_root (nth i t 0)]
   end.
 
-Fixpoint gra_run_Z (ops : list GRAOp) (t : list Z) : list Z :=
+Definition step_Z (op : GRAOp) (t : list Z) : list Z := step pin_N op t.
+
+Fixpoint gra_run (N : Z) (ops : list GRAOp) (t : list Z) : list Z :=
   match ops with
   | nil => t
-  | op :: rest => gra_run_Z rest (step_Z op t)
+  | op :: rest => gra_run N rest (step N op t)
   end.
 
+Definition gra_run_Z (ops : list GRAOp) (t : list Z) : list Z :=
+  gra_run pin_N ops t.
+
+Definition gra_eval (N : Z) (ops : list GRAOp) (y : Z) (out : nat) : Z :=
+  nth out (gra_run N ops (gra_init y)) 0.
+
 Definition gra_eval_Z (ops : list GRAOp) (y : Z) (out : nat) : Z :=
-  nth out (gra_run_Z ops (gra_init y)) 0.
+  gra_eval pin_N ops y out.
 
 Definition gra_eq_gcd (a b N : Z) : Z := Z.gcd (a - b) N.
 
-(** ** Wave 0 — equality leak and the tape *)
+Definition gra_eq_leak (N : Z) (ops : list GRAOp) (y : Z) (i j : nat) : Z :=
+  gra_eq_gcd (gra_eval N ops y i) (gra_eval N ops y j) N.
+
+(** ** Wave 0 — equality leak and the tape
+
+    Build 88 from 1 by [+,*]: [2,4,8,16,64,80,88].  Equality against
+    handle 0 (the ring zero) is [gcd(88−0, N)]. *)
+
+Definition gra_eq_prog : list GRAOp :=
+  [GAdd 1%nat 1%nat;
+   GMul 3%nat 3%nat;
+   GMul 4%nat 3%nat;
+   GMul 4%nat 4%nat;
+   GMul 6%nat 4%nat;
+   GAdd 7%nat 6%nat;
+   GAdd 8%nat 5%nat].
+
+Theorem gra_eq_tape_88 :
+  gra_eval_Z gra_eq_prog 36 9%nat = 88.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem gra_eq_tape_zero :
+  gra_eval_Z gra_eq_prog 36 0%nat = 0.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_eq_leak_pin :
-  Z.gcd 88 187 = 11.
+  gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat = 11.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_eq_leak_factors :
-  Problem_Factor 187 (Z.gcd 88 187).
+  Problem_Factor 187 (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
 Proof.
   unfold Problem_Factor. rewrite gra_eq_leak_pin.
   split; [lia|]. exists 17. reflexivity.
@@ -169,25 +232,36 @@ Theorem Pe_minus_X_eval2_is_six_on_X :
   poly_eval (poly_Pe_minus_X poly_X 3%nat) 2 = 6.
 Proof. apply X3_minus_X_eval_2. Qed.
 
-(** ** Wave 2a — AM09 inversion leak and leading term *)
+(** ** Wave 2a — AM09 inversion leak and leading term
+
+    [GInv] of a non-unit handle returns [gcd(h, N)].  [GInv] of a unit
+    returns a modular inverse. *)
+
+Definition gra_inv11_prog : list GRAOp := [GConst 11; GInv 3%nat].
+Definition gra_inv22_prog : list GRAOp := [GConst 22; GInv 3%nat].
+Definition gra_inv36_prog : list GRAOp := [GConst 36; GInv 3%nat].
 
 Theorem gra_inv_nonunit_pin :
-  Z.gcd 11 187 = 11.
+  gra_eval_Z gra_inv11_prog 36 4%nat = 11.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_inv_nonunit_factors :
-  Problem_Factor 187 (Z.gcd 11 187).
+  Problem_Factor 187 (gra_eval_Z gra_inv11_prog 36 4%nat).
 Proof.
   unfold Problem_Factor. rewrite gra_inv_nonunit_pin.
   split; [lia|]. exists 17. reflexivity.
 Qed.
 
-Theorem gra_inv_22_factors :
-  Z.gcd 22 187 = 11.
+Theorem gra_inv_22_from_tape :
+  gra_eval_Z gra_inv22_prog 36 4%nat = 11.
 Proof. vm_compute. reflexivity. Qed.
 
-Theorem gra_inv_unit_pin :
+Theorem gra_inv_unit_gcd :
   Z.gcd 36 187 = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem gra_inv_unit_from_tape :
+  (gra_eval_Z gra_inv36_prog 0 4%nat * 36) mod 187 = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_fixed_e_leading_const :

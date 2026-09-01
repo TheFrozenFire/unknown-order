@@ -7,11 +7,18 @@ check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" 
 
 p = 11; q = 17; N = p*q; ee = 3; d = 27; lam = lcm(p-1, q-1);
 
-\\ GInv of a non-unit handle
-check(gcd(11, N) == 11,                 "GInv(11) gcd is 11");
+\\ GInv on a tape: init [0,1,y], GConst 11 at handle 3, GInv of that
+invtape = [0, 1, 36];
+invtape = concat(invtape, [11]);
+g11 = gcd(invtape[4], N);
+invtape = concat(invtape, [g11]);
+check(invtape[5] == 11,                 "GInv(11) on tape returns 11");
 check(1 < 11 && 11 < N,                 "non-unit inverse is Problem_Factor");
-check(gcd(22, N) == 11,                 "GInv(22) gcd is 11");
+inv22 = [0, 1, 36, 22];
+check(gcd(inv22[4], N) == 11,           "GInv(22) gcd is 11");
 check(gcd(36, N) == 1,                  "36 is a unit, gcd=1");
+inv36 = lift(1/Mod(36, N));
+check((inv36 * 36) % N == 1,            "GInv(36) is a modular inverse");
 
 \\ leading-term: e*dp <> 1 + e*dq for e>1
 check(ee * 0 != 1 + ee * 0,             "const/const: 0 <> 1");

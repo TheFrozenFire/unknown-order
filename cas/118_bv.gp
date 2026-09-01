@@ -14,10 +14,23 @@ check(3^3 == 27,                        "3^3 = 27");
 check(4^3 == 64,                        "4^3 = 64");
 check(36 != 27 && 36 != 64,             "36 is not an integer cube");
 
-\\ unwind: program [GConst 8; GRoot; GConst 11] outputs 11, a factor
-\\ dropping GRoot and writing GConst 2 still outputs 11
-check(gcd(11, N) == 11,                 "output 11 is a factor");
+\\ tape: GConst 8, GRoot → 2, then 2^10-1, GInv = gcd(1023, N) = 11
+btape = [0, 1, 36];
+btape = concat(btape, [8]);
+btape = concat(btape, [2]);
+check(btape[5] == 2,                    "GRoot(8) = 2");
+btape = concat(btape, [btape[5]*btape[5]]);
+btape = concat(btape, [btape[6]*btape[6]]);
+btape = concat(btape, [btape[7]*btape[7]]);
+btape = concat(btape, [btape[8]*btape[6]]);
+btape = concat(btape, [1]);
+btape = concat(btape, [btape[9]-btape[10]]);
+check(btape[9] == 1024,                 "2^10 = 1024");
+check(btape[11] == 1023,                "2^10-1 = 1023");
+check(gcd(btape[11], N) == 11,          "GInv of that handle is 11");
 check(1 < 11 && 11 < N,                 "proper");
+\\ unwind: GConst 2 in place of GRoot still yields 11
+check(gcd(2^10-1, N) == 11,             "unwound GConst 2 still factors");
 
 \\ a reduction that queries GRoot(36) over Z cannot replace it by an integer
 \\ cube (36 is not a cube); 42^3 = 74088 ≠ 36
