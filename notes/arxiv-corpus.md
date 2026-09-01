@@ -22,8 +22,12 @@ pass would quote the claim and point at a Rocq name (or add one).
 | Kemmoe–Lysyanskaya 2024/505 | Shamir; Odds-AR; composite members | `shamir_trick`; `bdm_*`; `AdaptiveRoot_C` |
 | Belabas–Kleinjung–Sanso–Wesolowski 2020/1310 (also Math. Cryptology) | Mersenne / Shanks form has odd order | `mersenne31_wins_restricted_LowOrder`; `cl_mersenne_H` |
 | Coron–May JoC 2007 / May CRYPTO 2004 | `(N,e,d)` ⇒ factor, deterministic | in-corpus Miller / Coron–May algebra |
-| Boneh–Venkatesan EUROCRYPT 1998 | algebraic FACT ≤ low-`e` RSA collapses | `Refuse_RSA_eq_factoring_standard_model` |
-| Aggarwal–Maurer EUROCRYPT 2009 | RSA ≡ factoring in the *generic ring* | `Refuse_AM09_generic_ring_as_standard_model` |
+| Boneh–Venkatesan EUROCRYPT 1998 | algebraic FACT ≤ low-`e` RSA collapses | `bv_few_query_low_e_drops_oracle` (in-model unwind; not RSA ≢ factoring) |
+| Aggarwal–Maurer EUROCRYPT 2009 | RSA ≡ factoring in the *generic ring* | `gra_inv_nonunit_factors`; `rational_Pe_minus_XQe_leading`. Standard-model slogan still `Refuse_AM09_generic_ring_as_standard_model` |
+| Leander–Rupp ASIACRYPT 2006 | GRA, no division, low `e` | `gra_nodiv_identical_root_impossible_X3`; `gra_eq_leak_factors` |
+| Aggarwal–Maurer–Shparlinski WCC 2011 | Strong RSA in the GRA | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` (negative: `λ+1` is a constant) |
+| Brown ePrint 2005/380 | SLP solver for low-`e` RSA | `slp_carmichael_is_functional`; `slp_solver_not_poly_identity_linear` |
+| Jager–Schwenk JoC / ASIACRYPT 2009 | Jacobi GRA-hard, standard-easy | `jacobi_two_values`; `gra_jacobi_not_deg2_fit` |
 | Barić–Pfitzmann 1997, Camenisch–Lysyanskaya 2002 | prime members; Shamir updates | `rsa_composite_member_splits_witness`; `shamir_trick` |
 
 ## B. New cells we could add (do not have yet)
@@ -32,9 +36,9 @@ pass would quote the claim and point at a Rocq name (or add one).
 |---|---|---|---|
 | Dobson–Galbraith–Smith [arXiv:2211.16128](https://arxiv.org/abs/2211.16128) (eprint 2020/196) | knowing `h(Δ)` trivializes AR *search* on `Cl`, same as `λ+1` on units | `annihilator_plus_one_is_strong_RSA`; `class_number_solves_AR_neg31` (pin `h=3` on `Cl(−31)`). `D+1` is still not `h` (`cl_has_no_lambda_plus_one`). Bit-length / Sutherland cost stays named. |
 | Bünz–Fisch–Szepieniec DARK (eprint 2019/1229; surveyed in [arXiv:2306.11383](https://arxiv.org/abs/2306.11383)) | *order assumption*: given random `g`, find `e ≠ 0` with `g^e = 1`; *r-fractional root*: `x^a = y^b` | `Problem_Annihilator` / `P_Annihilator`; `Problem_FractionalRoot` / `P_FractionalRoot`. RSA/sRSA are fractional root at `b=1`. `r`-powers stay named. |
-| Hhan [arXiv:2402.11269](https://arxiv.org/abs/2402.11269) | unknown-order *generic group* lower bounds for order-finding, root extraction, repeated squaring | Model-relative, like AM09. `Refuse_UO_GGM`. Identities (root extraction = AR search) already have. | Do **not** build a GGM. |
+| Hhan [arXiv:2402.11269](https://arxiv.org/abs/2402.11269) | unknown-order *generic group* lower bounds for order-finding, root extraction, repeated squaring | Model-relative, like AM09. `Refuse_UO_GGM` (GGM-as-standard-model). Signature contrast: `gadd_is_not_a_ggm_op`. Interpreter is wave 6b, not shipped. | Do **not** treat GGM lower bounds as standard-model. |
 | Jurkiewicz [arXiv:2503.00950](https://arxiv.org/abs/2503.00950) | even-order elements / `√1` factor `N` | Overlap only: `mixed_sqrt1_splits`, `rabin_roots_split`, `TwoSylow`, `MultiPrime` | Do not re-derive. |
-| Damgård–Koprowski (generic UO groups, 2002; not arXiv-native) | generic-group lower bounds for DL / order in UO groups | Same bucket as Hhan / AM09 | Named refuse, not a formalization. |
+| Damgård–Koprowski (generic UO groups, 2002; not arXiv-native) | generic-group lower bounds for DL / order in UO groups | `generic_group_does_not_separate_rsa_from_srsa`; `gadd_is_not_a_ggm_op`. Query lower bounds stay `Refuse_UO_GGM`. | Interpreter is wave 6b, not shipped. |
 
 ## C. Uses the assumptions; do not treat as hardness theorems
 

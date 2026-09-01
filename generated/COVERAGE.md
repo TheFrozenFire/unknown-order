@@ -269,6 +269,41 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `chaum_sign_blinded_is_raw_times_r` | 25 |
 | Theorem | `chaum_unblind_is_raw_sign` | 46 |
 
+## `BonehVenkatesan.v`
+
+- L17: Boneh–Venkatesan unwind of a low-[e] algebraic reduction
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `bv_root_gate_is_not_rsa_inverter` | 26 |
+| Theorem | `bv_two_is_integer_cube` | 31 |
+| Theorem | `bv_36_is_not_integer_cube` | 35 |
+| Theorem | `cube_is_powm3_pin` | 39 |
+| Theorem | `bv_with_root_outputs_11` | 50 |
+| Theorem | `bv_unwound_outputs_11` | 54 |
+| Theorem | `bv_unwind_one_cube` | 58 |
+| Theorem | `bv_few_query_low_e_drops_oracle` | 65 |
+| Theorem | `bv_42_cube_in_Z_is_not_36` | 72 |
+| Theorem | `bv_query_leak_already_factors` | 76 |
+
+## `BrownSLP.v`
+
+- L17: Brown SLP-solver: identity vs functional-on-units
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `slp_carmichael_is_functional` | 27 |
+| Theorem | `slp_solver_not_poly_identity_linear` | 31 |
+| Theorem | `slp_solver_not_poly_identity_last` | 35 |
+| Theorem | `X81_minus_X_leading_not_zero_mod_11` | 39 |
+| Theorem | `brown_low_degree_identity_forbids_N_dividing_minus1` | 43 |
+| Theorem | `two_pow_81_is_two_mod_N` | 47 |
+| Theorem | `brown_dual_pow27_fst` | 60 |
+| Theorem | `brown_dual_not_identity` | 64 |
+| Theorem | `brown_dual_tangent_mod_N` | 68 |
+| Theorem | `brown_dual_gcd_pin` | 72 |
+| Theorem | `brown_ed_minus_1_is_80` | 76 |
+
 ## `CRTRSA.v`
 
 - L12: CRT-RSA: a small [d_p] is a short one-sided annihilator
@@ -853,6 +888,56 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `gq_e2_complete` | 161 |
 | Theorem | `gq_e2_odd_delta_extracts_sqrt` | 173 |
 
+## `GenericRing.v`
+
+- L17: Generic ring algorithms (GRA) on [Z/NZ]
+  - L25: The machine
+  - L58: Wave 0 — equality leak and the tape
+  - L131: Wave 1 — Leander–Rupp, no division, low [e]
+  - L172: Wave 2a — AM09 inversion leak and leading term
+  - L213: Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y]
+  - L248: Wave 6a — Damgård–Koprowski signature contrast
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `gra_eq_leak_pin` | 60 |
+| Theorem | `gra_eq_leak_factors` | 64 |
+| Theorem | `gra_eq_leak_onesided` | 71 |
+| Theorem | `gra_eq_N_is_not_a_split` | 82 |
+| Theorem | `gra_mul_y_pin` | 86 |
+| Theorem | `gra_const42` | 90 |
+| Theorem | `slp_init_eval` | 115 |
+| Theorem | `slp_to_poly_mul_pin` | 126 |
+| Theorem | `gra_nodiv_const42_inverts_36` | 133 |
+| Theorem | `gra_nodiv_const42_fails_on_8` | 137 |
+| Theorem | `gra_identity_not_cube_root_at_2` | 141 |
+| Theorem | `gra_identity_at_one` | 145 |
+| Theorem | `gra_identity_gcd_at_2` | 149 |
+| Theorem | `gra_nodiv_identical_X3_linear` | 153 |
+| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 157 |
+| Theorem | `gra_nodiv_identical_root_impossible_X3` | 161 |
+| Theorem | `Pe_minus_X_eval2_is_six_on_X` | 168 |
+| Theorem | `gra_inv_nonunit_pin` | 174 |
+| Theorem | `gra_inv_nonunit_factors` | 178 |
+| Theorem | `gra_inv_22_factors` | 185 |
+| Theorem | `gra_inv_unit_pin` | 189 |
+| Theorem | `gra_fixed_e_leading_const` | 193 |
+| Theorem | `gra_fixed_e_leading` | 197 |
+| Theorem | `rsa_inverter_is_not_a_GRA_comment` | 203 |
+| Theorem | `powm_d_inverts_cube_pin` | 209 |
+| Theorem | `gra_const_81` | 215 |
+| Theorem | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 220 |
+| Theorem | `gra_const_81_does_not_factor` | 230 |
+| Theorem | `lambda_plus_one_is_81` | 234 |
+| Theorem | `gra_add_mul_of_36_is_not_81` | 238 |
+| Theorem | `am09_fixed_e_is_a_parameter` | 242 |
+| Theorem | `gadd_is_not_a_ggm_op` | 258 |
+| Theorem | `gsub_is_not_a_ggm_op` | 262 |
+| Theorem | `gconst_is_not_a_ggm_op` | 266 |
+| Theorem | `gra_poly_construction_needs_add` | 270 |
+| Theorem | `generic_group_does_not_separate_rsa_from_srsa` | 274 |
+| Theorem | `ggm_mul_pin` | 281 |
+
 ## `Hardness.v`
 
 - L12: Relation-level structure of the named problems
@@ -924,6 +1009,26 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `inner2_sat` | 24 |
 | Theorem | `inner2_complete` | 46 |
 | Theorem | `inner2_public_sum` | 67 |
+
+## `JagerSchwenk.v`
+
+- L17: Jager–Schwenk: Jacobi is standard-easy and not a GRA polynomial
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `jacobi_one_pin` | 27 |
+| Theorem | `jacobi_two_pin` | 31 |
+| Theorem | `jacobi_two_values` | 35 |
+| Theorem | `jacobi_is_standard_easy` | 39 |
+| Theorem | `jacobi_is_not_a_constant_polynomial` | 43 |
+| Theorem | `jacobi_is_not_a_ring_polynomial` | 51 |
+| Theorem | `jacobi_three_pin` | 56 |
+| Theorem | `jacobi_five_pin` | 60 |
+| Theorem | `lagrange_125_at_1` | 73 |
+| Theorem | `lagrange_125_at_2` | 76 |
+| Theorem | `lagrange_125_at_5` | 79 |
+| Theorem | `lagrange_125_at_3` | 82 |
+| Theorem | `gra_jacobi_not_deg2_fit` | 85 |
 
 ## `KeyGen.v`
 
@@ -2025,4 +2130,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1269 theorems/lemmas/corollaries/examples across 89 files._
+_1340 theorems/lemmas/corollaries/examples across 93 files._

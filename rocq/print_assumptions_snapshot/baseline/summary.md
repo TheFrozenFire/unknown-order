@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1269 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1340 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1269 results across 89 files.
+Captured for 1340 results across 93 files.
 
 Counts:
 
@@ -242,6 +242,37 @@ Counts:
 |---|---:|---:|---:|---|
 | `chaum_sign_blinded_is_raw_times_r` | 25 | 0 | 0 | OK |
 | `chaum_unblind_is_raw_sign` | 46 | 0 | 0 | OK |
+
+## BonehVenkatesan.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `bv_root_gate_is_not_rsa_inverter` | 26 | 0 | 0 | OK |
+| `bv_two_is_integer_cube` | 31 | 0 | 0 | OK |
+| `bv_36_is_not_integer_cube` | 35 | 0 | 0 | OK |
+| `cube_is_powm3_pin` | 39 | 0 | 0 | OK |
+| `bv_with_root_outputs_11` | 50 | 0 | 0 | OK |
+| `bv_unwound_outputs_11` | 54 | 0 | 0 | OK |
+| `bv_unwind_one_cube` | 58 | 0 | 0 | OK |
+| `bv_few_query_low_e_drops_oracle` | 65 | 0 | 0 | OK |
+| `bv_42_cube_in_Z_is_not_36` | 72 | 0 | 0 | OK |
+| `bv_query_leak_already_factors` | 76 | 0 | 0 | OK |
+
+## BrownSLP.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `slp_carmichael_is_functional` | 27 | 0 | 0 | OK |
+| `slp_solver_not_poly_identity_linear` | 31 | 0 | 0 | OK |
+| `slp_solver_not_poly_identity_last` | 35 | 0 | 0 | OK |
+| `X81_minus_X_leading_not_zero_mod_11` | 39 | 0 | 0 | OK |
+| `brown_low_degree_identity_forbids_N_dividing_minus1` | 43 | 0 | 0 | OK |
+| `two_pow_81_is_two_mod_N` | 47 | 0 | 0 | OK |
+| `brown_dual_pow27_fst` | 60 | 0 | 0 | OK |
+| `brown_dual_not_identity` | 64 | 0 | 0 | OK |
+| `brown_dual_tangent_mod_N` | 68 | 0 | 0 | OK |
+| `brown_dual_gcd_pin` | 72 | 0 | 0 | OK |
+| `brown_ed_minus_1_is_80` | 76 | 0 | 0 | OK |
 
 ## CRTRSA.v
 
@@ -753,6 +784,48 @@ Counts:
 | `gq_e2_complete` | 161 | 0 | 0 | OK |
 | `gq_e2_odd_delta_extracts_sqrt` | 173 | 0 | 0 | OK |
 
+## GenericRing.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `gra_eq_leak_pin` | 60 | 0 | 0 | OK |
+| `gra_eq_leak_factors` | 64 | 0 | 0 | OK |
+| `gra_eq_leak_onesided` | 71 | 0 | 0 | OK |
+| `gra_eq_N_is_not_a_split` | 82 | 0 | 0 | OK |
+| `gra_mul_y_pin` | 86 | 0 | 0 | OK |
+| `gra_const42` | 90 | 0 | 0 | OK |
+| `slp_init_eval` | 115 | 0 | 0 | OK |
+| `slp_to_poly_mul_pin` | 126 | 0 | 0 | OK |
+| `gra_nodiv_const42_inverts_36` | 133 | 0 | 0 | OK |
+| `gra_nodiv_const42_fails_on_8` | 137 | 0 | 0 | OK |
+| `gra_identity_not_cube_root_at_2` | 141 | 0 | 0 | OK |
+| `gra_identity_at_one` | 145 | 0 | 0 | OK |
+| `gra_identity_gcd_at_2` | 149 | 0 | 0 | OK |
+| `gra_nodiv_identical_X3_linear` | 153 | 0 | 0 | OK |
+| `gra_nodiv_N_does_not_divide_minus1` | 157 | 0 | 0 | OK |
+| `gra_nodiv_identical_root_impossible_X3` | 161 | 0 | 0 | OK |
+| `Pe_minus_X_eval2_is_six_on_X` | 168 | 0 | 0 | OK |
+| `gra_inv_nonunit_pin` | 174 | 0 | 0 | OK |
+| `gra_inv_nonunit_factors` | 178 | 0 | 0 | OK |
+| `gra_inv_22_factors` | 185 | 0 | 0 | OK |
+| `gra_inv_unit_pin` | 189 | 0 | 0 | OK |
+| `gra_fixed_e_leading_const` | 193 | 0 | 0 | OK |
+| `gra_fixed_e_leading` | 197 | 0 | 0 | OK |
+| `rsa_inverter_is_not_a_GRA_comment` | 203 | 0 | 0 | OK |
+| `powm_d_inverts_cube_pin` | 209 | 0 | 0 | OK |
+| `gra_const_81` | 215 | 0 | 0 | OK |
+| `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 220 | 0 | 0 | OK |
+| `gra_const_81_does_not_factor` | 230 | 0 | 0 | OK |
+| `lambda_plus_one_is_81` | 234 | 0 | 0 | OK |
+| `gra_add_mul_of_36_is_not_81` | 238 | 0 | 0 | OK |
+| `am09_fixed_e_is_a_parameter` | 242 | 0 | 0 | OK |
+| `gadd_is_not_a_ggm_op` | 258 | 0 | 0 | OK |
+| `gsub_is_not_a_ggm_op` | 262 | 0 | 0 | OK |
+| `gconst_is_not_a_ggm_op` | 266 | 0 | 0 | OK |
+| `gra_poly_construction_needs_add` | 270 | 0 | 0 | OK |
+| `generic_group_does_not_separate_rsa_from_srsa` | 274 | 0 | 0 | OK |
+| `ggm_mul_pin` | 281 | 0 | 0 | OK |
+
 ## Hardness.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -810,6 +883,24 @@ Counts:
 | `inner2_sat` | 24 | 0 | 0 | OK |
 | `inner2_complete` | 46 | 0 | 0 | OK |
 | `inner2_public_sum` | 67 | 0 | 0 | OK |
+
+## JagerSchwenk.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `jacobi_one_pin` | 27 | 0 | 0 | OK |
+| `jacobi_two_pin` | 31 | 0 | 0 | OK |
+| `jacobi_two_values` | 35 | 0 | 0 | OK |
+| `jacobi_is_standard_easy` | 39 | 0 | 0 | OK |
+| `jacobi_is_not_a_constant_polynomial` | 43 | 0 | 0 | OK |
+| `jacobi_is_not_a_ring_polynomial` | 51 | 0 | 0 | OK |
+| `jacobi_three_pin` | 56 | 0 | 0 | OK |
+| `jacobi_five_pin` | 60 | 0 | 0 | OK |
+| `lagrange_125_at_1` | 73 | 0 | 0 | OK |
+| `lagrange_125_at_2` | 76 | 0 | 0 | OK |
+| `lagrange_125_at_5` | 79 | 0 | 0 | OK |
+| `lagrange_125_at_3` | 82 | 0 | 0 | OK |
+| `gra_jacobi_not_deg2_fit` | 85 | 0 | 0 | OK |
 
 ## KeyGen.v
 

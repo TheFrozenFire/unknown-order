@@ -75,6 +75,16 @@ Constructible torsion `H` is a family parameter
 | aux self-bilinear with `e(aux,g,g)=g` | publishes `P_{i+1}` | `aux_eval_publishes_next` | existence; iO deferred |
 | DARK `C = g^{f(s)}`, `π = g^{q(s)}` | `C = π^{s−z} · g^{f(z)}` | `dark_deg1_open`, `dark_deg2_open` | a pairing/PoE check without `s` |
 | Jacobi of `g^a` and `g^b` | product is Jacobi of `g^{a+b}` | `jacobi_additive_pairing` | a large-target pairing |
+| GRA eq-test lift `gcd` proper | Factor | `gra_eq_leak_factors` | every GRA factors `N` |
+| `P^e − X` at 2, `e ≥ 2` | not the zero polynomial over `Z` | `Pe_minus_X_eval_2_nonzero` | vanishing as a function on `(Z/NZ)*` |
+| no-div GRA identity `X^3 − X` | linear coeff `−1`, `N` cannot divide all coeffs | `gra_nodiv_identical_root_impossible_X3` | a solver for one `y` (const 42) |
+| `GInv` of a non-unit | Factor | `gra_inv_nonunit_factors` | `rsa_inverter` (not a GRA) |
+| `e > 1` | `e·deg P ≠ 1 + e·deg Q` | `rational_Pe_minus_XQe_leading` | randomized GRAs; huge binary `e` |
+| `GConst (λ+1)` | Strong RSA on every unit, no factor | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | AMS KeyGen-density |
+| 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
+| SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
+| Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |
+| multiply-only ops | no `GAdd`; RSA solution is sRSA | `gadd_is_not_a_ggm_op`, `generic_group_does_not_separate_rsa_from_srsa` | query-complexity lower bound |
 | `y = 1` | RSA / sRSA inhabited | `rsa_trivial_at_one`, `strong_RSA_trivial_at_one` | hardness (it refutes *existence*-hardness) |
 | `ord(a) = k` | `k \| λ` | `order_divides_lambda` | lcm of enough orders *is* `λ` |
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |
@@ -95,20 +105,31 @@ map is a permutation, so `(N,e,x^e)` and `(N,e,y)` are identical.
 
 ## Open / refused as slogans
 
-- Factoring ≤ RSA (oracle inversion ⇒ factors). Boneh–Venkatesan:
-  a straight-line reduction for small `e` is unlikely.
-  An `rsa_inverter` recovers `m` (`rsa_inverter_recovers_message`)
-  and does not construct a factor
-  (`rsa_inverter_constructs_factor_named`). Rabin inversion of a
-  planted square does (`rabin_oracle_nonassociate_factors`).
-- Aggarwal–Maurer (generic ring) is not that converse in the
-  standard model. Citing it as “RSA ≡ factoring” is a model mismatch
-  (`notes/paper-overlaps.md` row 8).
-- Coron–May / Miller-from-`(e,d)` is *not* that converse.
+- Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
+  factor). The inverter recovers `m`
+  (`rsa_inverter_recovers_message`); the converse stays unused
+  (`rsa_inverter_constructs_factor_named`). In the generic *ring*,
+  a GRA that identically computes low-`e` roots leaks a factor or
+  is forbidden by degree (`gra_eq_leak_factors`,
+  `gra_inv_nonunit_factors`, `gra_nodiv_identical_root_impossible_X3`).
+  That is not the standard-model slogan
+  (`Refuse_RSA_eq_factoring_standard_model`,
+  `Refuse_AM09_generic_ring_as_standard_model`).
+- Boneh–Venkatesan: a few-query low-`e` algebraic reduction that
+  outputs a factor can drop `GRoot` (`bv_few_query_low_e_drops_oracle`).
+  Not a theorem that RSA is easier than factoring.
+- Brown: an SLP that *is* a low-`e` solver is a different object
+  (`slp_carmichael_is_functional`, identity forbidden by coeff `−1`).
+- Jacobi is standard-easy and not a constant GRA polynomial
+  (`jacobi_two_values`) — GRA-hard does not imply standard-hard.
+- Coron–May / Miller-from-`(e,d)` is *not* Factoring ≤ RSA.
 - GNFS cost; “leak-free `KG` ⇒ this bit length is enough.”
 - Global axioms `RSA_hard`, `Factoring_hard`.
 - BP97 Strong RSA (prime `e`, ordinary primes) is not the modern
   game (any `e>1`, safe primes); they are incomparable (row 6).
+- UO-GGM query lower bounds (`Refuse_UO_GGM`). The stolen DK
+  remark is the op signature (`gadd_is_not_a_ggm_op`) plus
+  `generic_group_does_not_separate_rsa_from_srsa`.
 
 ## Leaks are refutations of a claim about that `KG`
 

@@ -19,6 +19,9 @@ PollardP1.v
 Hardness.v
 Wiener.v
 SmallExponent.v
+GenericRing.v
+BonehVenkatesan.v
+BrownSLP.v
 StrongPrimes.v
 CRTRSA.v
 BitLeak.v
@@ -61,6 +64,7 @@ DamgardJurik.v
 SharedKey.v
 PowersOfTau.v
 QRModN.v
+JagerSchwenk.v
 Cocks.v
 PotCheck.v
 PotLadder.v
