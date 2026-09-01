@@ -131,6 +131,16 @@ Self-randomization preserves a *fixed* `e` (`srsa_fixed_e_rerand`) and does not 
 
 Do not record Strong RSA ≡ factoring as a theorem. The residual leaf *is* standard-model RSA with a `y`-dependent exponent coprime to `λ`.
 
+### Algorithm restrictions (not the Jacobian leaf)
+
+| Restriction | What closes | What does not |
+|---|---|---|
+| SAGM-only (`x = g^a`) | `ae−1` annihilates `g`; Miller (`sagm_generator_annihilated`, `sagm_only_miller_splits`) | a residue with no representation |
+| Safeprime `N=77`, `λ=30` | odd `e` sharing a factor with `λ` names `2e+1` (`safeprime_e3_names_p`); residual `e=7` is `safeprime_residual_e7` | that residual does not factor |
+| Polynomial `e(y)` | non-constant `P` not rerand-invariant; constant `P=[3]` is fixed-`e` residual | bit/hash/Jacobi `e(y)` |
+
+CAS `128`. These restrict the *algorithm*. `srsa_residual_leaf` stays unnamed as `Problem_Factor`.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a

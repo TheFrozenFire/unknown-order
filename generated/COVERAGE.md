@@ -1911,6 +1911,32 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `fr_cube_gap` | 110 |
 | Theorem | `fr_cube_gap_mod` | 116 |
 
+## `SolverRestrict.v`
+
+- L18: Algorithm restrictions: SAGM-only, safeprime residual, polynomial [e(y)]
+  - L24: SAGM-only: known exponents of public bases
+  - L72: Safeprime residual on [N = 77], [λ = 30 = 2 p' q']
+  - L101: Polynomial [e] of the challenge
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `sagm_powm_mul_exp` | 29 |
+| Theorem | `sagm_root_of_generator_pin` | 40 |
+| Theorem | `sagm_ae_minus_one_is_lambda` | 44 |
+| Theorem | `sagm_generator_annihilated` | 48 |
+| Theorem | `sagm_only_miller_splits` | 52 |
+| Theorem | `sagm_scale_eval_pin` | 60 |
+| Theorem | `sagm_scale_lambda_type` | 66 |
+| Theorem | `safeprime_e3_names_p` | 74 |
+| Theorem | `safeprime_e5_names_q` | 80 |
+| Theorem | `safeprime_e3_not_residual` | 86 |
+| Theorem | `safeprime_residual_e7` | 90 |
+| Theorem | `poly_e_constant` | 103 |
+| Theorem | `poly_e_constant_is_fixed_e` | 107 |
+| Theorem | `poly_e_X_two_points` | 112 |
+| Theorem | `poly_e_X_not_rerand` | 116 |
+| Theorem | `poly_e_nonconstant_not_fixed_parameter` | 120 |
+
 ## `StrongPrimes.v`
 
 - L9: Safe / strong primes: generation-side refusal of one-sided annihilators
@@ -2266,4 +2292,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1417 theorems/lemmas/corollaries/examples across 100 files._
+_1433 theorems/lemmas/corollaries/examples across 101 files._

@@ -71,6 +71,7 @@ SharedKey.v
 PowersOfTau.v
 QRModN.v
 StrongRSAPeel.v
+SolverRestrict.v
 JagerSchwenk.v
 Cocks.v
 PotCheck.v

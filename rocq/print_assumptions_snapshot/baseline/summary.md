@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1417 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1433 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1417 results across 100 files.
+Captured for 1433 results across 101 files.
 
 Counts:
 
@@ -1636,6 +1636,27 @@ Counts:
 | `related_message_common_root` | 97 | 0 | 0 | OK |
 | `fr_cube_gap` | 110 | 0 | 0 | OK |
 | `fr_cube_gap_mod` | 116 | 0 | 0 | OK |
+
+## SolverRestrict.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `sagm_powm_mul_exp` | 29 | 0 | 0 | OK |
+| `sagm_root_of_generator_pin` | 40 | 0 | 0 | OK |
+| `sagm_ae_minus_one_is_lambda` | 44 | 0 | 0 | OK |
+| `sagm_generator_annihilated` | 48 | 0 | 0 | OK |
+| `sagm_only_miller_splits` | 52 | 0 | 0 | OK |
+| `sagm_scale_eval_pin` | 60 | 0 | 0 | OK |
+| `sagm_scale_lambda_type` | 66 | 0 | 0 | OK |
+| `safeprime_e3_names_p` | 74 | 0 | 0 | OK |
+| `safeprime_e5_names_q` | 80 | 0 | 0 | OK |
+| `safeprime_e3_not_residual` | 86 | 0 | 0 | OK |
+| `safeprime_residual_e7` | 90 | 0 | 0 | OK |
+| `poly_e_constant` | 103 | 0 | 0 | OK |
+| `poly_e_constant_is_fixed_e` | 107 | 0 | 0 | OK |
+| `poly_e_X_two_points` | 112 | 0 | 0 | OK |
+| `poly_e_X_not_rerand` | 116 | 0 | 0 | OK |
+| `poly_e_nonconstant_not_fixed_parameter` | 120 | 0 | 0 | OK |
 
 ## StrongPrimes.v
 
