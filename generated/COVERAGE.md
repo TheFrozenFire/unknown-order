@@ -1148,42 +1148,46 @@ in the Rocq tree.  Do not edit by hand.
 ## `Hardness.v`
 
 - L12: Relation-level structure of the named problems
-  - L26: Factoring as a relation
-  - L31: RSA is a one-way permutation on units, not a predicate
-  - L60: RSA vs strong RSA (relations)
-  - L121: Order divides the exponent
-  - L168: One-sided small exponent (the Type-B winning condition)
-  - L230: Order assumption and fractional root
+  - L28: Factoring as a relation
+  - L33: RSA is a one-way permutation on units, not a predicate
+  - L62: RSA vs strong RSA (relations)
+  - L123: Order divides the exponent
+  - L170: One-sided small exponent (the Type-B winning condition)
+  - L232: Order assumption and fractional root
+  - L445: Order → Strong RSA by invert in the cyclic (equality / multiply)
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `rsa_units_are_eth_powers` | 37 |
-| Theorem | `trapdoor_inverts_RSA` | 48 |
-| Theorem | `rsa_solution_is_strong_RSA` | 68 |
-| Theorem | `lambda_solves_strong_RSA` | 82 |
-| Lemma | `strong_RSA_trivial_at_one` | 106 |
-| Lemma | `rsa_trivial_at_one` | 114 |
-| Lemma | `order_divides_annihilator` | 123 |
-| Theorem | `order_divides_lambda` | 152 |
-| Theorem | `one_sided_low_order_factors` | 180 |
-| Theorem | `one_sided_low_order_is_factor` | 212 |
-| Lemma | `adaptive_root_is_strong_RSA` | 225 |
-| Theorem | `order_is_annihilator` | 236 |
-| Theorem | `low_order_is_annihilator` | 245 |
-| Theorem | `lambda_is_annihilator_on_units` | 254 |
-| Theorem | `annihilator_plus_one_is_strong_RSA` | 267 |
-| Theorem | `rsa_is_fractional_root` | 284 |
-| Theorem | `strong_RSA_is_fractional_root` | 300 |
-| Theorem | `annihilator_is_fractional_root_of_one` | 315 |
-| Theorem | `ar_C_implies_strong_RSA` | 344 |
-| Theorem | `ar_C_requires_C` | 353 |
-| Theorem | `strong_RSA_is_ar_C_iff` | 358 |
-| Theorem | `lambda_plus_one_11_17` | 369 |
-| Theorem | `lambda_plus_one_11_17_not_prime` | 373 |
-| Theorem | `lambda_solves_search_11_17` | 381 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 392 |
-| Theorem | `adaptive_root_known_product_breaks` | 410 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 426 |
+| Theorem | `rsa_units_are_eth_powers` | 39 |
+| Theorem | `trapdoor_inverts_RSA` | 50 |
+| Theorem | `rsa_solution_is_strong_RSA` | 70 |
+| Theorem | `lambda_solves_strong_RSA` | 84 |
+| Lemma | `strong_RSA_trivial_at_one` | 108 |
+| Lemma | `rsa_trivial_at_one` | 116 |
+| Lemma | `order_divides_annihilator` | 125 |
+| Theorem | `order_divides_lambda` | 154 |
+| Theorem | `one_sided_low_order_factors` | 182 |
+| Theorem | `one_sided_low_order_is_factor` | 214 |
+| Lemma | `adaptive_root_is_strong_RSA` | 227 |
+| Theorem | `order_is_annihilator` | 238 |
+| Theorem | `low_order_is_annihilator` | 247 |
+| Theorem | `lambda_is_annihilator_on_units` | 256 |
+| Theorem | `annihilator_plus_one_is_strong_RSA` | 269 |
+| Theorem | `rsa_is_fractional_root` | 286 |
+| Theorem | `strong_RSA_is_fractional_root` | 302 |
+| Theorem | `annihilator_is_fractional_root_of_one` | 317 |
+| Theorem | `ar_C_implies_strong_RSA` | 346 |
+| Theorem | `ar_C_requires_C` | 355 |
+| Theorem | `strong_RSA_is_ar_C_iff` | 360 |
+| Theorem | `lambda_plus_one_11_17` | 371 |
+| Theorem | `lambda_plus_one_11_17_not_prime` | 375 |
+| Theorem | `lambda_solves_search_11_17` | 383 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 394 |
+| Theorem | `adaptive_root_known_product_breaks` | 412 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 428 |
+| Theorem | `order_inverts_in_cyclic` | 451 |
+| Theorem | `order_yields_strong_RSA` | 476 |
+| Theorem | `leftover_mismatch_factors` | 496 |
 
 ## `HashSlot.v`
 
@@ -2361,6 +2365,30 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `modulus_N323_cube_shares` | 132 |
 | Theorem | `modulus_prime_cube` | 138 |
 
+## `SrsaOrderArrows.v`
+
+- L14: Order / residual Strong RSA / Factor arrows
+  - L23: Order of the pin challenge
+  - L87: Mismatch ⇒ Factor; matching local orders do not
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `is_order_pin_y_40` | 25 |
+| Theorem | `order_yields_residual_sRSA` | 44 |
+| Theorem | `order_yields_residual_pin` | 66 |
+| Theorem | `order_invert_pin_is_cube_root` | 82 |
+| Theorem | `residual_mismatch_factors` | 92 |
+| Theorem | `leftover_x_one_sided_pin` | 103 |
+| Theorem | `leftover_x_mismatch_factors_pin` | 112 |
+| Theorem | `residual_mismatch_factors_pin` | 120 |
+| Theorem | `leftover_y_one_sided_pin` | 131 |
+| Theorem | `order_mismatch_factors_pin` | 140 |
+| Theorem | `leftover_77_one_sided` | 148 |
+| Theorem | `leftover_77_mismatch_factors` | 157 |
+| Theorem | `matching_247_not_one_sided` | 169 |
+| Theorem | `matching_247_gcd_not_proper` | 177 |
+| Theorem | `matching_247_two_sided_gcd_is_N` | 187 |
+
 ## `SrsaPeriod.v`
 
 - L13: Period: gcd vs multiply
@@ -3103,4 +3131,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2094 theorems/lemmas/corollaries/examples across 114 files._
+_2112 theorems/lemmas/corollaries/examples across 115 files._

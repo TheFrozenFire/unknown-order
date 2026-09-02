@@ -21,7 +21,9 @@ Open Scope Z_scope.
     ([adaptive_root_known_product_breaks];
     [notes/paper-overlaps.md] row 3).  Public [λ] is row 7.
 
-    Cross-confirmed by [cas/18_hardness.gp]. *)
+    Cross-confirmed by [cas/18_hardness.gp].  Order → residual
+    Strong RSA by invert in [⟨y⟩], and leftover-or-order → Factor
+    under KeyGen mismatch, are [cas/145_order_arrows.gp]. *)
 
 (** ** Factoring as a relation *)
 
@@ -438,4 +440,64 @@ Proof.
   rewrite Z.mul_comm.
   apply adaptive_root_known_product_breaks; [assumption | assumption | assumption |].
   apply Z.pow_nonneg; lia.
+Qed.
+
+(** ** Order → Strong RSA by invert in the cyclic (equality / multiply)
+
+    Given [ord(y)=k] and [e d ≡ 1 (mod k)], [x = y^d] is a Strong-RSA
+    witness.  No [gcd(·−1,N)].  Not a claim that a Strong-RSA solver
+    finds orders, nor RSA ≡ factoring. *)
+
+Theorem order_inverts_in_cyclic :
+  forall N y k e d,
+    1 < N ->
+    0 <= y < N ->
+    is_order N y k ->
+    0 <= e ->
+    0 <= d ->
+    (e * d) mod k = 1 ->
+    powm (powm y d N) e N = y.
+Proof.
+  intros N y k e d HN Hy [Hk [Hyk _]] He Hd Hinv.
+  pose proof (Z.div_mod (e * d) k ltac:(lia)) as Hdm.
+  rewrite Hinv in Hdm.
+  set (q := (e * d) / k) in *.
+  assert (0 <= q) by (apply Z.div_pos; nia).
+  rewrite <- powm_mul_r by lia.
+  rewrite (Z.mul_comm d e), Hdm.
+  rewrite powm_add_r by lia.
+  rewrite (powm_one_mul y k q N) by (lia || exact Hyk).
+  rewrite powm_1_r by lia.
+  rewrite Z.mod_1_l by lia.
+  rewrite Z.mul_1_l, Z.mod_mod by lia.
+  apply Z.mod_small; lia.
+Qed.
+
+Theorem order_yields_strong_RSA :
+  forall N y k e d,
+    1 < N ->
+    0 <= y < N ->
+    is_order N y k ->
+    1 < e ->
+    0 <= d ->
+    (e * d) mod k = 1 ->
+    Problem_StrongRSA N y (powm y d N) e.
+Proof.
+  intros N y k e d HN Hy Hord He Hd Hinv.
+  unfold Problem_StrongRSA. split; [lia|].
+  apply (order_inverts_in_cyclic N y k e d); [assumption | assumption | assumption | lia | assumption | assumption].
+Qed.
+
+(** Leftover [x] (or any unit) with a one-sided local annihilator
+    factors [N].  The mismatch hypothesis is [one_sided_low_order].
+    Matching local orders fall outside that hypothesis.  Not RSA ≡
+    factoring. *)
+
+Theorem leftover_mismatch_factors :
+  forall p q x k,
+    Z.prime p -> Z.prime q -> p <> q ->
+    one_sided_low_order p q x k ->
+    Problem_Factor (p * q) p.
+Proof.
+  intros. apply (one_sided_low_order_is_factor p q x k); assumption.
 Qed.

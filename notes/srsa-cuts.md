@@ -124,6 +124,15 @@ local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
 (`period_247_*`). Residual leaf named, not `Problem_Factor`.
 `SrsaPeriod.v` (`period_*`). CAS `140`.
 
+**Named arrows on the same fork.** Invert from `ord(y)` always:
+`order_inverts_in_cyclic` / `order_yields_residual_sRSA` (pin
+`42³≡36`). Leftover or order factors `N` only under KeyGen mismatch
+(`leftover_mismatch_factors`; pins `187` at `k=5` and `77` at
+`k=3`). Matching orders on `247` are not one-sided at `k=5` and the
+gcd is `1` or `N` (`matching_247_*`). Residual leaf is not
+`Problem_Factor` without that mismatch hyp. Not RSA ≡ or ≢
+factoring. `Hardness.v`, `SrsaOrderArrows.v`. CAS `145`.
+
 **Public exponent lattice vs trapdoor period.** `N−1=186=2·3·31` and
 `N+1=188=4·47` are public. Pohlig `k∈{5,8,10,16}` that split leftover
 `x` do not divide `N−1` (`period_pohlig_ndiv_Nminus1`). No divisor of
@@ -288,6 +297,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | `⟨y⟩ ≅ C₈×C₅` | `primary_*` | `SrsaPrimary.v` | |
 | dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | |
 | gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141`, `144` |
+| Order / residual sRSA / Factor arrows | `order_yields_*` / `leftover_*_mismatch_*` / `matching_247_*` | `Hardness.v`, `SrsaOrderArrows.v` | `145` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

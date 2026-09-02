@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2094 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2112 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2094 results across 114 files.
+Captured for 2112 results across 115 files.
 
 Counts:
 
@@ -984,33 +984,36 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `rsa_units_are_eth_powers` | 37 | 0 | 0 | OK |
-| `trapdoor_inverts_RSA` | 48 | 0 | 0 | OK |
-| `rsa_solution_is_strong_RSA` | 68 | 0 | 0 | OK |
-| `lambda_solves_strong_RSA` | 82 | 0 | 0 | OK |
-| `strong_RSA_trivial_at_one` | 106 | 0 | 0 | OK |
-| `rsa_trivial_at_one` | 114 | 0 | 0 | OK |
-| `order_divides_annihilator` | 123 | 0 | 0 | OK |
-| `order_divides_lambda` | 152 | 0 | 0 | OK |
-| `one_sided_low_order_factors` | 180 | 0 | 0 | OK |
-| `one_sided_low_order_is_factor` | 212 | 0 | 0 | OK |
-| `adaptive_root_is_strong_RSA` | 225 | 0 | 0 | OK |
-| `order_is_annihilator` | 236 | 0 | 0 | OK |
-| `low_order_is_annihilator` | 245 | 0 | 0 | OK |
-| `lambda_is_annihilator_on_units` | 254 | 0 | 0 | OK |
-| `annihilator_plus_one_is_strong_RSA` | 267 | 0 | 0 | OK |
-| `rsa_is_fractional_root` | 284 | 0 | 0 | OK |
-| `strong_RSA_is_fractional_root` | 300 | 0 | 0 | OK |
-| `annihilator_is_fractional_root_of_one` | 315 | 0 | 0 | OK |
-| `ar_C_implies_strong_RSA` | 344 | 0 | 0 | OK |
-| `ar_C_requires_C` | 353 | 0 | 0 | OK |
-| `strong_RSA_is_ar_C_iff` | 358 | 0 | 0 | OK |
-| `lambda_plus_one_11_17` | 369 | 0 | 0 | OK |
-| `lambda_plus_one_11_17_not_prime` | 373 | 0 | 0 | OK |
-| `lambda_solves_search_11_17` | 381 | 0 | 0 | OK |
-| `search_lambda_plus_one_misses_prime_AR` | 392 | 0 | 0 | OK |
-| `adaptive_root_known_product_breaks` | 410 | 0 | 0 | OK |
-| `adaptive_root_smooth_power_breaks` | 426 | 0 | 0 | OK |
+| `rsa_units_are_eth_powers` | 39 | 0 | 0 | OK |
+| `trapdoor_inverts_RSA` | 50 | 0 | 0 | OK |
+| `rsa_solution_is_strong_RSA` | 70 | 0 | 0 | OK |
+| `lambda_solves_strong_RSA` | 84 | 0 | 0 | OK |
+| `strong_RSA_trivial_at_one` | 108 | 0 | 0 | OK |
+| `rsa_trivial_at_one` | 116 | 0 | 0 | OK |
+| `order_divides_annihilator` | 125 | 0 | 0 | OK |
+| `order_divides_lambda` | 154 | 0 | 0 | OK |
+| `one_sided_low_order_factors` | 182 | 0 | 0 | OK |
+| `one_sided_low_order_is_factor` | 214 | 0 | 0 | OK |
+| `adaptive_root_is_strong_RSA` | 227 | 0 | 0 | OK |
+| `order_is_annihilator` | 238 | 0 | 0 | OK |
+| `low_order_is_annihilator` | 247 | 0 | 0 | OK |
+| `lambda_is_annihilator_on_units` | 256 | 0 | 0 | OK |
+| `annihilator_plus_one_is_strong_RSA` | 269 | 0 | 0 | OK |
+| `rsa_is_fractional_root` | 286 | 0 | 0 | OK |
+| `strong_RSA_is_fractional_root` | 302 | 0 | 0 | OK |
+| `annihilator_is_fractional_root_of_one` | 317 | 0 | 0 | OK |
+| `ar_C_implies_strong_RSA` | 346 | 0 | 0 | OK |
+| `ar_C_requires_C` | 355 | 0 | 0 | OK |
+| `strong_RSA_is_ar_C_iff` | 360 | 0 | 0 | OK |
+| `lambda_plus_one_11_17` | 371 | 0 | 0 | OK |
+| `lambda_plus_one_11_17_not_prime` | 375 | 0 | 0 | OK |
+| `lambda_solves_search_11_17` | 383 | 0 | 0 | OK |
+| `search_lambda_plus_one_misses_prime_AR` | 394 | 0 | 0 | OK |
+| `adaptive_root_known_product_breaks` | 412 | 0 | 0 | OK |
+| `adaptive_root_smooth_power_breaks` | 428 | 0 | 0 | OK |
+| `order_inverts_in_cyclic` | 451 | 0 | 0 | OK |
+| `order_yields_strong_RSA` | 476 | 0 | 0 | OK |
+| `leftover_mismatch_factors` | 496 | 0 | 0 | OK |
 
 ## HashSlot.v
 
@@ -2013,6 +2016,26 @@ Counts:
 | `modulus_N221_cube_shares` | 126 | 0 | 0 | OK |
 | `modulus_N323_cube_shares` | 132 | 0 | 0 | OK |
 | `modulus_prime_cube` | 138 | 0 | 0 | OK |
+
+## SrsaOrderArrows.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `is_order_pin_y_40` | 25 | 0 | 0 | OK |
+| `order_yields_residual_sRSA` | 44 | 0 | 0 | OK |
+| `order_yields_residual_pin` | 66 | 0 | 0 | OK |
+| `order_invert_pin_is_cube_root` | 82 | 0 | 0 | OK |
+| `residual_mismatch_factors` | 92 | 0 | 0 | OK |
+| `leftover_x_one_sided_pin` | 103 | 0 | 0 | OK |
+| `leftover_x_mismatch_factors_pin` | 112 | 0 | 0 | OK |
+| `residual_mismatch_factors_pin` | 120 | 0 | 0 | OK |
+| `leftover_y_one_sided_pin` | 131 | 0 | 0 | OK |
+| `order_mismatch_factors_pin` | 140 | 0 | 0 | OK |
+| `leftover_77_one_sided` | 148 | 0 | 0 | OK |
+| `leftover_77_mismatch_factors` | 157 | 0 | 0 | OK |
+| `matching_247_not_one_sided` | 169 | 0 | 0 | OK |
+| `matching_247_gcd_not_proper` | 177 | 0 | 0 | OK |
+| `matching_247_two_sided_gcd_is_N` | 187 | 0 | 0 | OK |
 
 ## SrsaPeriod.v
 
