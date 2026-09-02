@@ -3,28 +3,40 @@ From Stdlib Require Import Znumtheory.
 
 Open Scope Z_scope.
 
-(** * First-class skips
+(** * First-class skips and live targets
 
     Rocq has no keyword for "we will not prove this."  Comments are
     invisible to [Print Assumptions].  This file, plus every
-    [Definition *_named] in the tree, *is* the gap list.
+    [Definition *_named] / [*_open_named] in the tree, *is* the gap
+    list.
 
     Classification is by *use* (harness [named-skips] tool):
 
-    - [Definition foo_named] unused → refuse
+    - [Definition foo_named] unused → refuse (not doing this skip)
     - [Definition foo_named] taken as a hypothesis → weakness
-    - [NamedRefuse] constructor → refuse that is not a proposition
+    - [Definition foo_open_named] unused → live target (unproved,
+      on-goal; proving or refuting it is success)
+    - [NamedRefuse] constructor → out of *model*, not a proposition
     - [Axiom] / [Admitted] → load-bearing trust (none in this tree)
+
+    [NamedRefuse] is not a ban on proving a nearby Gallina statement.
+    Honest closure forbids stamping a slogan on a lemma that did not
+    prove it.  It does not forbid proving the slogan's precise form
+    (an inverter or Strong-RSA solver constructs a factor, etc.).
 
     File-local mathematical skips live next to the algebra they
     bound ([compose_assoc_named], [coppersmith_named],
     [pratt_complete_named], …).  Cross-cutting refuses live here.
+    Live reductions live next to the objects ([*_open_named]).
 
     Do not cite a hand-written theory map from other [.v] files.
     The TOC is generated ([generated/COVERAGE.md]). *)
 
-(** Refuses that are not Gallina claims: no group, no cost model, no
-    hash, no PPT class.  The constructors *are* the register. *)
+(** Out of model: no cost class, no hash, no GNFS, no protocol.
+    [Refuse_RSA_eq_factoring_standard_model] means: do not *assume*
+    the slogan, and do not take generic-ring AM09 as a standard-model
+    proof ([Refuse_AM09_generic_ring_as_standard_model]).  Precise
+    reductions are [*_open_named], not this constructor. *)
 Inductive NamedRefuse : Set :=
   | Refuse_ROM
   | Refuse_SHA_in_Rocq

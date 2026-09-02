@@ -5,7 +5,8 @@ Grouping by *question* is [`srsa-cuts.md`](srsa-cuts.md). Rocq names are
 semantic (`xmap_*`, `emap_*`, `extra_*`, `engine_*`, `modulus_*`); this
 table is the CAS↔Rocq crosswalk, not an index of theorem IDs.
 
-None inhabits `srsa_residual_leaf` as `Problem_Factor`. Pin `N=187`
+Cuts of the writer, not a verdict on residual-solver ⇒ factor
+(`residual_solver_constructs_factor_open_named`). Pin `N=187`
 unless noted.
 
 | # | Class | Rocq | Fate |

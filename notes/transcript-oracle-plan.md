@@ -368,7 +368,7 @@ not started: T11+K1 classify the later rows. ACGS-as-hardness stays
 | T8 | `e3_small_cube_verifies` | `s³ < N` ⇒ `s` is a raw `e=3` signature of `s³` |
 | K1+ctor | `onesided_plain_one_factors`; `ctor_slot_mod_r_need_not_factor` | `m≡1 (mod p)` factors; `m_p≡1 (mod r)` with `r\|p−1` need not |
 | T27 | `rabin_oracle_nonassociate_factors` | inversion of a planted square, non-associate root, factors |
-| — | `rsa_inverter_constructs_factor_named` unused | RSA inverter recovers `m`, does not construct a factor |
+| — | `rsa_inverter_constructs_factor_open_named` unused | RSA inverter recovers `m`; solver ⇒ factor is the live unproved target |
 | sweep | `cas/58` | no cheap predicate of `m_p` is a function of `m` or of `(N,c)` (80 far 12-bit samples) |
 
 The sweep is the oracle-world Method 1: `lsb(m_p)`, `m_p < p/2`, `(m/p)`, `m_p mod 3` match neither the recombined payload nor `(c/N)` / `c`. No public CRT-side handle.
@@ -383,7 +383,7 @@ Read every `TranscriptOracle` headline as something an adversary could fail.
 - **Kept, scoped:** `recover_interval_correct` is integer binary search, not RSA. It is the *engine* of T11; the RSA content is `lsb_double_decides_half` feeding the comparison. Not vacuous, not a key handle.
 - **Kept, thin:** `sign_homomorphism` is `powm_mul_l`. T7 (`sign_hom_3`, product-one, weighted) is the same algebra stacked; CAS 62 pins a concrete product.
 - **Kept, encoding:** `other_legendre_from_product` is `(p-sign)² = 1`. The load-bearing sibling is `cipher_jacobi_eq_message`.
-- **Honest refuse:** `rsa_inverter_constructs_factor_named` unused; `ctor_slot_mod_r_need_not_factor` is a Closed negative.
+- **Live target:** `rsa_inverter_constructs_factor_open_named` unused (unproved, on-goal); `ctor_slot_mod_r_need_not_factor` is a Closed negative.
 
 No PPT added.
 

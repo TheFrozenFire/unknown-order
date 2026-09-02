@@ -6,6 +6,10 @@ about a `KG`, an algorithm class, a winning condition, and a challenge
 distribution; omit one and the sentence has no truth value this project
 will use.
 
+The “Not a claim of” column is the *lemma’s scope*, not a ban on proving
+the adjacent question. Live algebraic targets are `*_open_named`
+(solver ⇒ factor). PPT is still out of model.
+
 ## Named search relations
 
 | Problem | Input | Output | Relation | Rocq |
@@ -133,7 +137,7 @@ A witness `(x,e)` of unit `y` on `N=pq` is classified; only the last leaf is ope
 
 Self-randomization preserves a *fixed* `e` (`srsa_fixed_e_rerand`) and does not preserve polynomial `e=X` (`srsa_poly_e_not_rerand_invariant`). Related `y,y²` is `x1^{2 e1}=x2^{e2}` (`srsa_related_y_square`). A SAGM handle still peels (`srsa_sagm_lambda_type_peel`).
 
-Do not record Strong RSA ≡ factoring as a theorem. The residual leaf *is* standard-model RSA with a `y`-dependent exponent coprime to `λ`.
+The residual leaf *is* standard-model RSA with a `y`-dependent exponent coprime to `λ`. A leftover pair is not a factor. A residual *solver* constructing a factor is the live target (`residual_solver_constructs_factor_open_named`).
 
 ### Cuts of the solver (taxonomy)
 
@@ -149,35 +153,41 @@ by *question* is [`notes/srsa-cuts.md`](srsa-cuts.md):
 
 CAS probe classes 1–500 are a crosswalk in `notes/hundred.md` …
 `hundred5.md`, not theorem IDs. Joined first-hundred CAS: `134`.
-Residual cube is still not `Problem_Factor`.
+A residual *pair* is not by itself `Problem_Factor`. Whether a residual
+*solver* constructs a factor is `residual_solver_constructs_factor_open_named`.
 
-## Open / refused as slogans
+## Live algebraic targets
 
-- Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
-  factor). The inverter recovers `m`
-  (`rsa_inverter_recovers_message`); the converse stays unused
-  (`rsa_inverter_constructs_factor_named`). In the generic *ring*,
-  a GRA that identically computes low-`e` roots leaks a factor or
-  is forbidden by degree (`gra_eq_leak_factors`,
-  `gra_inv_nonunit_factors`, `gra_nodiv_identical_root_impossible_X3`).
-  That is not the standard-model slogan
-  (`Refuse_RSA_eq_factoring_standard_model`,
-  `Refuse_AM09_generic_ring_as_standard_model`).
-- Boneh–Venkatesan: a few-query low-`e` algebraic reduction that
-  outputs a factor can drop `GRoot` (`bv_few_query_low_e_drops_oracle`).
-  Not a theorem that RSA is easier than factoring.
-- Brown: an SLP that *is* a low-`e` solver is a different object
-  (`slp_carmichael_is_functional`, identity forbidden by coeff `−1`).
+These are `*_open_named`: unused means unproved, on-goal.
+
+- An `rsa_inverter` constructs a factor:
+  `rsa_inverter_constructs_factor_open_named`. The inverter recovers
+  `m` (`rsa_inverter_recovers_message`). Rabin `e=2` already factors
+  from a non-associate root (`rabin_oracle_nonassociate_factors`).
+- A Strong-RSA solver constructs a factor:
+  `strong_rsa_solver_constructs_factor_open_named`.
+- A residual solver (leftover leaf, every unit `y`) constructs a
+  factor: `residual_solver_constructs_factor_open_named`. A single
+  leftover pair does not always split (`matching_247_*`); invert from
+  `ord(y)` always inhabits the leaf (`order_yields_residual_sRSA`).
+  One-sided mismatch *does* split (`leftover_mismatch_factors`).
+
+## Out of model (not a ban on the targets above)
+
+- PPT / advantage, ROM, SHA, NFS cost (`Refuse_PPT_advantage`, …).
+- The *slogan* RSA ≡ factoring as an axiom, or taking generic-ring
+  AM09 as a standard-model proof (`Refuse_RSA_eq_factoring_standard_model`,
+  `Refuse_AM09_generic_ring_as_standard_model`). GRA identities
+  (`gra_eq_leak_factors`, `gra_inv_nonunit_factors`,
+  `gra_nodiv_identical_root_impossible_X3`) and Boneh–Venkatesan
+  (`bv_few_query_low_e_drops_oracle`) are inroads *in those models*.
 - Jacobi is standard-easy and not a constant GRA polynomial
   (`jacobi_two_values`) — GRA-hard does not imply standard-hard.
-- Coron–May / Miller-from-`(e,d)` is *not* Factoring ≤ RSA.
-- GNFS cost; “leak-free `KG` ⇒ this bit length is enough.”
+- Coron–May / Miller-from-`(e,d)` is knowledge of `(e,d)`, not an
+  inverter-only reduction.
 - Global axioms `RSA_hard`, `Factoring_hard`.
-- BP97 Strong RSA (prime `e`, ordinary primes) is not the modern
-  game (any `e>1`, safe primes); they are incomparable (row 6).
-- UO-GGM query lower bounds (`Refuse_UO_GGM`). The stolen DK
-  remark is the op signature (`gadd_is_not_a_ggm_op`) plus
-  `generic_group_does_not_separate_rsa_from_srsa`.
+- BP97 Strong RSA vs the modern game: incomparable (row 6).
+- UO-GGM query lower bounds (`Refuse_UO_GGM`).
 
 ## Leaks are refutations of a claim about that `KG`
 
@@ -186,7 +196,8 @@ See `notes/keygen-weaknesses.md`. A hardness claim that does not name
 refute RSA on a restricted challenge distribution without factoring.
 Predicate oracles that recover `m` (LSB, interval, padding) are
 the same kind of restricted inversion; they are catalogued in
-`notes/transcript-oracle-plan.md`, not as Factoring ≤ RSA.
+`notes/transcript-oracle-plan.md`. They are not the inverter-only
+reduction (`rsa_inverter_constructs_factor_open_named`).
 
 ## Design overlaps (paper-check)
 
@@ -202,5 +213,5 @@ without naming a bad `KG`. The lookup is `notes/paper-overlaps.md`.
 | 5 | low-order in every class group / “excluding `Cl[2]` is enough” | `mersenne31_wins_restricted_LowOrder` |
 | 6 | BP97-sRSA ≡ modern sRSA | `Refuse_BP97_vs_modern_sRSA` |
 | 7 | sRSA / AR given public `λ` | `lambda_solves_strong_RSA` |
-| 8 | standard-model RSA ≡ factoring | `Refuse_RSA_eq_factoring_standard_model` |
+| 8 | cites AM09 / generic ring as standard-model RSA ≡ factoring | `Refuse_AM09_generic_ring_as_standard_model`; live target `rsa_inverter_constructs_factor_open_named` |
 | 9 | LLX non-membership with `∏S mod φ(N)` public | `llx_lambda_forges_nonmem`; `peng_bao_member_still_forges` |

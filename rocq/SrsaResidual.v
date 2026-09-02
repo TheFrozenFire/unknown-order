@@ -17,8 +17,9 @@ Open Scope Z_scope.
     [x] generates [⟨y⟩] ([ord=40], [φ(40)=16] generators), [e]
     invertible mod [16] and mod [5], unique unit cube, local CRT,
     Jacobi [+1].  A solver that writes outside this set is not
-    residual.  Does not inhabit [srsa_residual_leaf] as
-    [Problem_Factor]. *)
+    residual.  Output language of the leftover, not a verdict on
+    residual-solver ⇒ factor
+    ([residual_solver_constructs_factor_open_named]). *)
 
 (** ** Pin geometry of [N] and of [⟨2⟩] *)
 

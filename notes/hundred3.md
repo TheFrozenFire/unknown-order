@@ -6,7 +6,7 @@ on this pin lives in the 16-element generator set of `⟨y⟩`
 (`ord(y)=40`). Local orders of `y` are `5` and `8`, so Pohlig/Miller
 on the challenge splits `N`.
 
-None inhabits `srsa_residual_leaf` as `Problem_Factor`. Pin `N=187`.
+Cuts of the writer, not a verdict on residual-solver ⇒ factor. Pin `N=187`.
 
 | # | Class | Rocq | Fate |
 |---:|---|---|---|

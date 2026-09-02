@@ -15,9 +15,10 @@ Open Scope Z_scope.
 (** * Twelve partial-root, public-stand-in, and filter inroads
 
     Local correctness of [x], public stand-ins for [λ], and
-    filters a TM can run without the trapdoor.  None inhabits
-    [srsa_residual_leaf] as [Problem_Factor].  Cross-confirmed
-    by [cas/131]. *)
+    filters a TM can run without the trapdoor.  These cuts do not
+    settle residual-solver ⇒ factor
+    ([residual_solver_constructs_factor_open_named]).
+    Cross-confirmed by [cas/131]. *)
 
 (** ** 1. One-sided local root as an integer *)
 

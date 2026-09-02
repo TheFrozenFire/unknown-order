@@ -17,9 +17,10 @@ Open Scope Z_scope.
 
 (** * Algorithm restrictions: SAGM-only, safeprime residual, polynomial [e(y)]
 
-    These close solvers of a restricted *shape*.  They do not inhabit
-    [srsa_residual_leaf] as [Problem_Factor].  Cross-confirmed by
-    [cas/128]. *)
+    These close solvers of a restricted *shape*.  They do not settle
+    residual-solver ⇒ factor
+    ([residual_solver_constructs_factor_open_named]).
+    Cross-confirmed by [cas/128]. *)
 
 (** ** SAGM-only: known exponents of public bases *)
 

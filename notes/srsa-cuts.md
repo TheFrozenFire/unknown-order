@@ -10,18 +10,23 @@ not theorem IDs.
 Pin unless noted: `N=11·17=187`, `λ=80`, `(y,x,e)=(36,42,3)`,
 `ord(y)=40`, `⟨y⟩≅C₈×C₅`. Residual means
 `srsa_residual_leaf` — odd `e`, `gcd(e,λ)=1`, `λ∤ e−1`, units,
-`x^e≡y`. None of these cuts inhabits that leaf as `Problem_Factor`.
+`x^e≡y`. Cuts of the writer classify which TMs inhabit that leaf,
+split, peel, or miss. They do not settle whether a residual *solver*
+constructs a factor (`residual_solver_constructs_factor_open_named`).
 
 A **fate** is one of: splits `N`; peels (already-named easy witness);
 does not inhabit; leftover (inverts, does not factor); other sentence
 (different group or modulus).
 
-## 0. The open leaf
+## 0. The residual leaf (live target)
 
 `srsa_residual_pin`: `42³≡36`. That is standard-model RSA with a
-`y`-dependent exponent coprime to `λ`. The rest of this file is
-restrictions on the TM that is allowed to write `(x,e)`, or
-identities the leftover pair must satisfy.
+`y`-dependent exponent coprime to `λ`. Invert from `ord(y)` always
+inhabits it. A leftover pair factors `N` only under KeyGen mismatch.
+Whether a residual *solver* (every unit `y`) constructs a factor is
+`residual_solver_constructs_factor_open_named` — unproved, on-goal.
+The rest of this file restricts the TM that writes `(x,e)`, or
+records identities the leftover pair must satisfy.
 
 Joined CAS of the *first* hundred fates: `cas/134_whole_identity.gp`
 (`whole()`). Numbered CAS `01`–`138` stay.
@@ -121,8 +126,8 @@ via `g^8−1`, order 4 via `g^2−1`, max-order via `g^5−1` and
 `period_77_two_pow3`). Extra pin `N=13·19=247` has
 `gcd(p−1,q−1)=6`; leftover `x=179` of `y=69` at `e=5` has matching
 local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
-(`period_247_*`). Residual leaf named, not `Problem_Factor`.
-`SrsaPeriod.v` (`period_*`). CAS `140`.
+(`period_247_*`). A leftover pair is not a factor; residual-solver ⇒
+factor is the live target. `SrsaPeriod.v` (`period_*`). CAS `140`.
 
 **Named arrows on the same fork.** Invert from `ord(y)` always:
 `order_inverts_in_cyclic` / `order_yields_residual_sRSA` (pin
@@ -130,9 +135,10 @@ local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
 the public quantity is `gcd(x^k−1,N)` (`leftover_mismatch_factors`;
 pins `187` leftover `x=42` and `y=36` at `k=5`, `77` leftover `2`
 at `k=3`). Matching orders on `247` are not one-sided at `k=5` and
-the gcd is `1` or `N` (`matching_247_*`). Residual leaf is not
-`Problem_Factor` without that mismatch hyp. Not RSA ≡ or ≢
-factoring. `Hardness.v`, `SrsaOrderArrows.v`. CAS `145`.
+the gcd is `1` or `N` (`matching_247_*`). A leftover pair is not a
+residual solver; solver ⇒ factor is
+`residual_solver_constructs_factor_open_named`. `Hardness.v`,
+`SrsaOrderArrows.v`. CAS `145`.
 
 **Public exponent lattice vs trapdoor period.** `N−1=186=2·3·31` and
 `N+1=188=4·47` are public. Pohlig `k∈{5,8,10,16}` that split leftover

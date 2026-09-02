@@ -21,7 +21,9 @@ Open Scope Z_scope.
     does not split; mixed root does).  The [λ]-type [x = y] is an
     annihilator; [a^{e−1} ≡ 1] on units makes [e−1] a multiple of
     [λ] and Miller splits.  The leftover — odd [e(y)] coprime to
-    [λ], [λ] not dividing [e−1] — is named, not solved.
+    [λ], [λ] not dividing [e−1] — is the residual leaf: standard-model
+    RSA with a [y]-dependent exponent.  Whether a residual *solver*
+    constructs a factor is [residual_solver_constructs_factor_open_named].
     Cross-confirmed by [cas/127]. *)
 
 (** ** Non-unit [x] *)
@@ -238,7 +240,7 @@ Proof.
   split; [lia|]. exists 11. reflexivity.
 Qed.
 
-(** ** Residual leaf (named, not solved) *)
+(** ** Residual leaf (open: solver ⇒ factor is the live target) *)
 
 Definition srsa_residual_leaf (N lam y x e : Z) : Prop :=
   Z.coprime y N /\
@@ -257,6 +259,17 @@ Proof.
   split; [vm_compute; reflexivity|].
   intros [k Hk]. nia.
 Qed.
+
+(** A residual solver returns a leftover pair for every unit [y].
+    A single leftover pair does not always split ([matching_247_*]).
+    Whether the *solver* constructs a factor is unproved and on-goal. *)
+Definition residual_solver (N lam : Z) : Type :=
+  forall y, Z.coprime y N ->
+    { xe : Z * Z | let '(x, e) := xe in srsa_residual_leaf N lam y x e }.
+
+Definition residual_solver_constructs_factor_open_named : Prop :=
+  forall (R : RSAInstance) (Solve : residual_solver (rsa_N R) (rsa_lambda R)),
+    exists f, Problem_Factor (rsa_N R) f.
 
 (** ** Self-randomization and related queries *)
 

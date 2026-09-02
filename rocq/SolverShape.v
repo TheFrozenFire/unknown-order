@@ -23,8 +23,9 @@ Open Scope Z_scope.
 (** * Twelve solver-shape inroads on Strong RSA
 
     Restrict how a TM writes [x] and [e], not which values they
-    happen to be.  None inhabits [srsa_residual_leaf] as
-    [Problem_Factor].  Cross-confirmed by [cas/130]. *)
+    happen to be.  These cuts do not settle residual-solver ⇒ factor
+    ([residual_solver_constructs_factor_open_named]).
+    Cross-confirmed by [cas/130]. *)
 
 (** ** 1. Monomial [x = y^k], [k] even *)
 

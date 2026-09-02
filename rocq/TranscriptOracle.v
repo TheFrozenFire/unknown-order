@@ -573,13 +573,14 @@ Qed.
 
 (** ** RSA inverter vs Rabin inverter
 
-    [rsa_inverter] recovers [m] ([rsa_dec_enc_units]).  It does not
-    construct a factor: that implication is the open converse
-    ([Refuse_RSA_eq_factoring_standard_model]).  Unused = refuse.
-    Rabin [e=2] *does* factor from a non-associate root
+    [rsa_inverter] recovers [m] ([rsa_dec_enc_units]).  Whether it
+    constructs a factor is the live converse
+    ([rsa_inverter_constructs_factor_open_named]).  Unused means
+    unproved, not banned.  Rabin [e=2] *does* factor from a
+    non-associate root
     ([RabinWilliams.rabin_oracle_nonassociate_factors]). *)
 
-Definition rsa_inverter_constructs_factor_named : Prop :=
+Definition rsa_inverter_constructs_factor_open_named : Prop :=
   forall (R : RSAInstance) (Inv : rsa_inverter (rsa_N R) (rsa_e R)),
     exists f, 1 < f < rsa_N R /\ (f | rsa_N R).
 

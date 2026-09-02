@@ -62,10 +62,20 @@ Qed.
 (** ** RSA vs strong RSA (relations)
 
     A prescribed-[e] root is a strong-RSA witness for that [e].
-    The converse is false as a relation: strong RSA may choose [e].
-    Hardness therefore runs the other way from solvability:
-    strong-RSA-hard ⇒ RSA-hard is informal PPT
-    ([Refuse_PPT_advantage], [Refuse_RSA_eq_factoring_standard_model]). *)
+    The converse is false as a *relation*: strong RSA may choose [e].
+    Whether a Strong-RSA *solver* constructs a factor is the live
+    target [strong_rsa_solver_constructs_factor_open_named].  PPT
+    advantage is still out of model ([Refuse_PPT_advantage]). *)
+
+(** A Strong-RSA solver for a fixed [N] returns some [(x,e)] for
+    every challenge [y].  Whether that oracle constructs a factor
+    of [N] is unproved and on-goal. *)
+Definition strong_rsa_solver (N : Z) : Type :=
+  forall y, { xe : Z * Z | let '(x, e) := xe in Problem_StrongRSA N y x e }.
+
+Definition strong_rsa_solver_constructs_factor_open_named : Prop :=
+  forall (R : RSAInstance) (Solve : strong_rsa_solver (rsa_N R)),
+    exists f, Problem_Factor (rsa_N R) f.
 
 Theorem rsa_solution_is_strong_RSA :
   forall N e y x,
@@ -492,7 +502,9 @@ Qed.
     factors [N].  The mismatch hypothesis is [one_sided_low_order]
     and is load-bearing: the public quantity is [gcd(x^k−1, N)],
     equal to [p] by [one_sided_low_order_factors].  Matching local
-    orders fall outside that hypothesis.  Not RSA ≡ factoring. *)
+    orders fall outside that hypothesis.  A leftover *pair* is not
+    a Strong-RSA *solver*; the solver-to-factor implication is
+    [strong_rsa_solver_constructs_factor_open_named]. *)
 
 Lemma gcd_powm_minus_1 :
   forall a k n,

@@ -29,7 +29,8 @@ Do not treat “RSA-FDH is EUF-CMA” as a theorem of this corpus.
 | `φ = λ · gcd(p−1, q−1)` | **Have** `phi_eq_lambda_times_gcd`; CAS 75 |
 | Miller / enum from `(e,d)` | **Have** |
 | `(N,e,d)` ⇒ factor | **Have** (not the converse) |
-| RSA inverter recovers `m`, does not factor | **Have** `rsa_inverter_recovers_message`; refuse converse |
+| RSA inverter recovers `m` | **Have** `rsa_inverter_recovers_message` |
+| RSA inverter constructs a factor | **Open** `rsa_inverter_constructs_factor_open_named` |
 | Decisional RSA on units | vacuous (`rsa_units_are_eth_powers`) |
 
 ## 2. Blinding and homomorphism

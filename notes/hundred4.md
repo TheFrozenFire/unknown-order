@@ -6,7 +6,7 @@ dictionary, `⟨y⟩ ≅ C₈ × C₅`, the 2-to-1 map of residual `e`, and the
 dichotomy **gcd-Pohlig splits** vs **equality-only order-finding
 leftover-inhabits**.
 
-None inhabits `srsa_residual_leaf` as `Problem_Factor`. Pin `N=187`.
+Cuts of the writer, not a verdict on residual-solver ⇒ factor. Pin `N=187`.
 
 | # | Class | Rocq | Fate |
 |---:|---|---|---|

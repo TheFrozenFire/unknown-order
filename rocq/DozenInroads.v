@@ -19,9 +19,10 @@ Open Scope Z_scope.
 
 (** * Twelve algorithm-class inroads on Strong RSA
 
-    Each class restricts the solver or the modulus.  None inhabits
-    [srsa_residual_leaf] as [Problem_Factor].  Cross-confirmed by
-    [cas/129]. *)
+    Each class restricts the solver or the modulus.  These cuts do
+    not settle residual-solver ⇒ factor
+    ([residual_solver_constructs_factor_open_named]).
+    Cross-confirmed by [cas/129]. *)
 
 (** ** 1. GRA plus a Jacobi gate *)
 

@@ -4,7 +4,7 @@ CAS probe classes 101–200 in [`cas/135_hundred2.gp`](../cas/135_hundred2.gp).
 Grouping by *question*: [`srsa-cuts.md`](srsa-cuts.md). Rocq names are
 semantic; this table is the CAS↔Rocq crosswalk.
 
-None inhabits `srsa_residual_leaf` as `Problem_Factor`. Pin `N=187`
+Cuts of the writer, not a verdict on residual-solver ⇒ factor. Pin `N=187`
 unless noted.
 
 | # | Class | Rocq | Fate |

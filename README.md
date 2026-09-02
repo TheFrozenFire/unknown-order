@@ -154,8 +154,12 @@ order is public — Type A, already in the catalog.
 `Hardness.v` records arrows: trapdoor inverts RSA; an RSA solution is strong
 RSA at that `e`; `λ+1` solves adaptive root on units; order divides `λ`;
 one-sided low-order factors. There is no global `RSA_hard`. A hardness
-*claim* needs a named KeyGen distribution (`Refuse_PPT_advantage`). Factoring ≤ RSA
-and PPT / advantage are out of scope.
+*claim* needs a named KeyGen distribution (`Refuse_PPT_advantage`). PPT /
+advantage is out of *model*. Whether an RSA inverter or Strong-RSA solver
+constructs a factor is a live Gallina target
+(`rsa_inverter_constructs_factor_open_named`,
+`strong_rsa_solver_constructs_factor_open_named`,
+`residual_solver_constructs_factor_open_named`) — unproved, on-goal.
 
 Strong RSA solver-class cuts (peel, leftover subgroup, gcd vs
 multiply, public maps of `x` and `e`) are grouped by *question* in

@@ -69,46 +69,46 @@ in the Rocq tree.  Do not edit by hand.
 ## `ArithShape.v`
 
 - L17: Twelve arith, peel-gap, and modulus-shape inroads
-  - L25: 1. Newton iteration in [(Z/NZ)]
-  - L37: 2. [e | (y−1)]
-  - L58: 3. [x=y] with [e = ord(y)+1] (missing peel leaf)
-  - L81: 4. Fermat-on-the-witness [gcd(x−y, N)]
-  - L87: 5. Takagi [N=p²q], Hensel tape
-  - L103: 6. Public scaling [x = 2y]
-  - L110: 7. [e = nextprime(y)]
-  - L147: 8. Continued fraction of [y/N]
-  - L161: 9. Same [x], two coprime moduli
-  - L172: 10. Multiprime [N=pqr], mixed [√1]
-  - L191: 11. Factored composite [e = 15]
-  - L199: 12. DL of [y] in public base [2]
+  - L26: 1. Newton iteration in [(Z/NZ)]
+  - L38: 2. [e | (y−1)]
+  - L59: 3. [x=y] with [e = ord(y)+1] (missing peel leaf)
+  - L82: 4. Fermat-on-the-witness [gcd(x−y, N)]
+  - L88: 5. Takagi [N=p²q], Hensel tape
+  - L104: 6. Public scaling [x = 2y]
+  - L111: 7. [e = nextprime(y)]
+  - L148: 8. Continued fraction of [y/N]
+  - L162: 9. Same [x], two coprime moduli
+  - L173: 10. Multiprime [N=pqr], mixed [√1]
+  - L192: 11. Factored composite [e = 15]
+  - L200: 12. DL of [y] in public base [2]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `arith_newton_inv3` | 27 |
-| Theorem | `arith_newton_from_one` | 31 |
-| Theorem | `arith_e5_divides_yminus1` | 39 |
-| Theorem | `arith_e7_divides_yminus1` | 43 |
-| Theorem | `arith_e7_residual` | 47 |
-| Theorem | `arith_xy_period_residual` | 60 |
-| Theorem | `arith_xy_period_no_split` | 71 |
-| Theorem | `arith_witness_gap_no_split` | 83 |
-| Theorem | `arith_takagi_shape` | 89 |
-| Theorem | `arith_takagi_euler_p2` | 95 |
-| Theorem | `arith_takagi_p_on_tape` | 99 |
-| Theorem | `arith_double_y_not_root` | 105 |
-| Lemma | `prime_37` | 112 |
-| Theorem | `arith_nextprime_e37` | 127 |
-| Theorem | `arith_nextprime_residual` | 131 |
-| Theorem | `arith_nextprime_root_is_49` | 142 |
-| Theorem | `arith_cf_euclidean` | 149 |
-| Theorem | `arith_cf_convergents_not_root` | 155 |
-| Theorem | `arith_two_moduli_coprime` | 163 |
-| Theorem | `arith_two_moduli_same_x` | 167 |
-| Lemma | `three_prime_357` | 174 |
-| Theorem | `arith_mixed_pqr_is_factor` | 181 |
-| Theorem | `arith_composite_e15_shares_lambda` | 193 |
-| Theorem | `arith_36_not_in_ltwo` | 209 |
-| Theorem | `arith_two_and_thirtysix_same_order_period` | 213 |
+| Theorem | `arith_newton_inv3` | 28 |
+| Theorem | `arith_newton_from_one` | 32 |
+| Theorem | `arith_e5_divides_yminus1` | 40 |
+| Theorem | `arith_e7_divides_yminus1` | 44 |
+| Theorem | `arith_e7_residual` | 48 |
+| Theorem | `arith_xy_period_residual` | 61 |
+| Theorem | `arith_xy_period_no_split` | 72 |
+| Theorem | `arith_witness_gap_no_split` | 84 |
+| Theorem | `arith_takagi_shape` | 90 |
+| Theorem | `arith_takagi_euler_p2` | 96 |
+| Theorem | `arith_takagi_p_on_tape` | 100 |
+| Theorem | `arith_double_y_not_root` | 106 |
+| Lemma | `prime_37` | 113 |
+| Theorem | `arith_nextprime_e37` | 128 |
+| Theorem | `arith_nextprime_residual` | 132 |
+| Theorem | `arith_nextprime_root_is_49` | 143 |
+| Theorem | `arith_cf_euclidean` | 150 |
+| Theorem | `arith_cf_convergents_not_root` | 156 |
+| Theorem | `arith_two_moduli_coprime` | 164 |
+| Theorem | `arith_two_moduli_same_x` | 168 |
+| Lemma | `three_prime_357` | 175 |
+| Theorem | `arith_mixed_pqr_is_factor` | 182 |
+| Theorem | `arith_composite_e15_shares_lambda` | 194 |
+| Theorem | `arith_36_not_in_ltwo` | 210 |
+| Theorem | `arith_two_and_thirtysix_same_order_period` | 214 |
 
 ## `AuxBil.v`
 
@@ -664,46 +664,46 @@ in the Rocq tree.  Do not edit by hand.
 ## `DozenInroads.v`
 
 - L20: Twelve algorithm-class inroads on Strong RSA
-  - L26: 1. GRA plus a Jacobi gate
-  - L38: 2. SAGM on both [x] and [y] in base [g=3]
-  - L49: 3. Related queries with coprime exponents (Shamir)
-  - L64: 4. Higher residue: 5th-power Euler on [p=11]
-  - L74: 5. One-sided [a^{e-1}]
-  - L95: 6. Short [e] vs long [e] on this pin
-  - L105: 7. Bounded advice on [N]
-  - L118: 8. Blum modulus [N=11·23], [λ=110]
-  - L145: 9. Census: every unit is an [e=3] residual witness
-  - L163: 10. GQ extract is residual, not a factor
-  - L174: 11. Integer polynomial in [N]
-  - L184: 12. [gcd(e−1, λ)] proper, not [λ] and not [2]
+  - L27: 1. GRA plus a Jacobi gate
+  - L39: 2. SAGM on both [x] and [y] in base [g=3]
+  - L50: 3. Related queries with coprime exponents (Shamir)
+  - L65: 4. Higher residue: 5th-power Euler on [p=11]
+  - L75: 5. One-sided [a^{e-1}]
+  - L96: 6. Short [e] vs long [e] on this pin
+  - L106: 7. Bounded advice on [N]
+  - L119: 8. Blum modulus [N=11·23], [λ=110]
+  - L146: 9. Census: every unit is an [e=3] residual witness
+  - L164: 10. GQ extract is residual, not a factor
+  - L175: 11. Integer polynomial in [N]
+  - L185: 12. [gcd(e−1, λ)] proper, not [λ] and not [2]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `dozen_jacobi_gate_minus1` | 30 |
-| Theorem | `dozen_jacobi_gate_forces_odd` | 34 |
-| Theorem | `dozen_sagm_both_pin` | 40 |
-| Theorem | `dozen_sagm_ae_eq_c_mod_lambda` | 45 |
-| Theorem | `dozen_related_coprime_exps` | 51 |
-| Theorem | `dozen_related_shamir_gcd` | 58 |
-| Theorem | `dozen_fifth_divides_pminus1` | 66 |
-| Theorem | `dozen_fifth_power_euler` | 70 |
-| Theorem | `dozen_onesided_e11` | 76 |
-| Theorem | `dozen_e11_residual_shaped` | 84 |
-| Theorem | `dozen_short_e3` | 97 |
-| Theorem | `dozen_short_e_is_residual_cube` | 101 |
-| Theorem | `dozen_advice_bit_no_split` | 107 |
-| Theorem | `dozen_advice_div_splits` | 111 |
-| Lemma | `prime_23` | 120 |
-| Theorem | `dozen_blum_shape` | 132 |
-| Theorem | `dozen_blum_e5_names_p` | 137 |
-| Theorem | `dozen_blum_e11_names_q` | 141 |
-| Theorem | `dozen_phi_160` | 147 |
-| Theorem | `dozen_every_unit_is_cube` | 151 |
-| Theorem | `dozen_gq_extract_is_residual` | 165 |
-| Theorem | `dozen_gq_complete_still` | 170 |
-| Theorem | `dozen_N_cong_q` | 176 |
-| Theorem | `dozen_gcd_Nminus1_pminus1` | 180 |
-| Theorem | `dozen_e11_minus1_shares_lambda` | 186 |
+| Theorem | `dozen_jacobi_gate_minus1` | 31 |
+| Theorem | `dozen_jacobi_gate_forces_odd` | 35 |
+| Theorem | `dozen_sagm_both_pin` | 41 |
+| Theorem | `dozen_sagm_ae_eq_c_mod_lambda` | 46 |
+| Theorem | `dozen_related_coprime_exps` | 52 |
+| Theorem | `dozen_related_shamir_gcd` | 59 |
+| Theorem | `dozen_fifth_divides_pminus1` | 67 |
+| Theorem | `dozen_fifth_power_euler` | 71 |
+| Theorem | `dozen_onesided_e11` | 77 |
+| Theorem | `dozen_e11_residual_shaped` | 85 |
+| Theorem | `dozen_short_e3` | 98 |
+| Theorem | `dozen_short_e_is_residual_cube` | 102 |
+| Theorem | `dozen_advice_bit_no_split` | 108 |
+| Theorem | `dozen_advice_div_splits` | 112 |
+| Lemma | `prime_23` | 121 |
+| Theorem | `dozen_blum_shape` | 133 |
+| Theorem | `dozen_blum_e5_names_p` | 138 |
+| Theorem | `dozen_blum_e11_names_q` | 142 |
+| Theorem | `dozen_phi_160` | 148 |
+| Theorem | `dozen_every_unit_is_cube` | 152 |
+| Theorem | `dozen_gq_extract_is_residual` | 166 |
+| Theorem | `dozen_gq_complete_still` | 171 |
+| Theorem | `dozen_N_cong_q` | 177 |
+| Theorem | `dozen_gcd_Nminus1_pminus1` | 181 |
+| Theorem | `dozen_e11_minus1_shares_lambda` | 187 |
 
 ## `Endo.v`
 
@@ -908,64 +908,64 @@ in the Rocq tree.  Do not edit by hand.
 ## `FilterShape.v`
 
 - L15: Twelve partial-root, public-stand-in, and filter inroads
-  - L22: 1. One-sided local root as an integer
-  - L42: 2. [x = −y]
-  - L53: 3. Euclid on [(y±1, N)]
-  - L63: 4. Nontrivial [e]-th root of 1 at [gcd(e,λ)>1]
-  - L82: 5. Public period [N+1]
-  - L91: 6. Extra output [φ]
-  - L107: 7. 2-adic Hensel: [v₂(y)] not divisible by 3
-  - L117: 8. Locally constant [X] ([y] modulo [m])
-  - L125: 9. Branch on Jacobi to [λ+1]
-  - L140: 10. Public coprimality filter [gcd(e, N−1)=1]
-  - L160: 11. Low-bit [e = 2(y mod 2^k)+1]
-  - L184: 12. Trace [x + x^{-1}]
-  - L198: Public tests of [e] vs residual tests that mention [λ]
-  - L270: Public tests of leftover [x]
+  - L23: 1. One-sided local root as an integer
+  - L43: 2. [x = −y]
+  - L54: 3. Euclid on [(y±1, N)]
+  - L64: 4. Nontrivial [e]-th root of 1 at [gcd(e,λ)>1]
+  - L83: 5. Public period [N+1]
+  - L92: 6. Extra output [φ]
+  - L108: 7. 2-adic Hensel: [v₂(y)] not divisible by 3
+  - L118: 8. Locally constant [X] ([y] modulo [m])
+  - L126: 9. Branch on Jacobi to [λ+1]
+  - L141: 10. Public coprimality filter [gcd(e, N−1)=1]
+  - L161: 11. Low-bit [e = 2(y mod 2^k)+1]
+  - L185: 12. Trace [x + x^{-1}]
+  - L199: Public tests of [e] vs residual tests that mention [λ]
+  - L271: Public tests of leftover [x]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `filter_onesided_local_mod_p` | 24 |
-| Theorem | `filter_onesided_not_global` | 28 |
-| Theorem | `filter_onesided_integer_splits` | 32 |
-| Theorem | `filter_neg_y_not_cube_root` | 44 |
-| Theorem | `filter_y_square_not_minus1` | 49 |
-| Theorem | `filter_euclid_y_minus_1` | 55 |
-| Theorem | `filter_euclid_y_plus_1` | 59 |
-| Theorem | `filter_fifth_shares_lambda` | 65 |
-| Theorem | `filter_fifth_root_of_1_splits` | 70 |
-| Theorem | `filter_Nplus1_does_not_annihilate` | 84 |
-| Theorem | `filter_phi_gives_sum` | 93 |
-| Theorem | `filter_phi_enum_factors` | 98 |
-| Theorem | `filter_phi_is_factor` | 103 |
-| Theorem | `filter_val2_36` | 109 |
-| Theorem | `filter_val2_not_div_by_3` | 113 |
-| Theorem | `filter_locally_constant_clash` | 119 |
-| Theorem | `filter_jacobi_branch_lambda_type` | 127 |
-| Theorem | `filter_jacobi_branch_not_residual` | 133 |
-| Theorem | `filter_cube_fails_public_e` | 144 |
-| Theorem | `filter_e11_passes_public_e` | 148 |
-| Theorem | `filter_public_e11_miller_splits` | 152 |
-| Theorem | `filter_lowbit_e9` | 164 |
-| Theorem | `filter_lowbit_e9_residual` | 168 |
-| Theorem | `filter_lowbit_root_is_70` | 179 |
-| Theorem | `filter_trace_not_root` | 186 |
-| Theorem | `filter_torus_order_not_Nplus1` | 193 |
-| Theorem | `filter_residual_tests_on_cube` | 205 |
-| Theorem | `filter_e5_shares_lambda` | 215 |
-| Theorem | `filter_e15_odd_shares_lambda` | 220 |
-| Theorem | `filter_e7_residual_shaped` | 225 |
-| Theorem | `filter_e5_passes_public_e` | 235 |
-| Theorem | `filter_e7_passes_public_e` | 239 |
-| Theorem | `filter_e_coprime_N_cube_passes` | 243 |
-| Theorem | `filter_e_coprime_N_accepts_nonresidual` | 247 |
-| Theorem | `filter_e_coprime_N_does_not_certify` | 252 |
-| Theorem | `filter_phi_y_of_36` | 257 |
-| Theorem | `filter_e_coprime_phi_y_rejects_cube` | 265 |
-| Theorem | `filter_jacobi_x_plus` | 277 |
-| Theorem | `filter_jacobi_10_plus_not_leftover` | 282 |
-| Theorem | `filter_jacobi_2_minus` | 289 |
-| Theorem | `filter_x_cube_check_is_rsa_e3` | 294 |
+| Theorem | `filter_onesided_local_mod_p` | 25 |
+| Theorem | `filter_onesided_not_global` | 29 |
+| Theorem | `filter_onesided_integer_splits` | 33 |
+| Theorem | `filter_neg_y_not_cube_root` | 45 |
+| Theorem | `filter_y_square_not_minus1` | 50 |
+| Theorem | `filter_euclid_y_minus_1` | 56 |
+| Theorem | `filter_euclid_y_plus_1` | 60 |
+| Theorem | `filter_fifth_shares_lambda` | 66 |
+| Theorem | `filter_fifth_root_of_1_splits` | 71 |
+| Theorem | `filter_Nplus1_does_not_annihilate` | 85 |
+| Theorem | `filter_phi_gives_sum` | 94 |
+| Theorem | `filter_phi_enum_factors` | 99 |
+| Theorem | `filter_phi_is_factor` | 104 |
+| Theorem | `filter_val2_36` | 110 |
+| Theorem | `filter_val2_not_div_by_3` | 114 |
+| Theorem | `filter_locally_constant_clash` | 120 |
+| Theorem | `filter_jacobi_branch_lambda_type` | 128 |
+| Theorem | `filter_jacobi_branch_not_residual` | 134 |
+| Theorem | `filter_cube_fails_public_e` | 145 |
+| Theorem | `filter_e11_passes_public_e` | 149 |
+| Theorem | `filter_public_e11_miller_splits` | 153 |
+| Theorem | `filter_lowbit_e9` | 165 |
+| Theorem | `filter_lowbit_e9_residual` | 169 |
+| Theorem | `filter_lowbit_root_is_70` | 180 |
+| Theorem | `filter_trace_not_root` | 187 |
+| Theorem | `filter_torus_order_not_Nplus1` | 194 |
+| Theorem | `filter_residual_tests_on_cube` | 206 |
+| Theorem | `filter_e5_shares_lambda` | 216 |
+| Theorem | `filter_e15_odd_shares_lambda` | 221 |
+| Theorem | `filter_e7_residual_shaped` | 226 |
+| Theorem | `filter_e5_passes_public_e` | 236 |
+| Theorem | `filter_e7_passes_public_e` | 240 |
+| Theorem | `filter_e_coprime_N_cube_passes` | 244 |
+| Theorem | `filter_e_coprime_N_accepts_nonresidual` | 248 |
+| Theorem | `filter_e_coprime_N_does_not_certify` | 253 |
+| Theorem | `filter_phi_y_of_36` | 258 |
+| Theorem | `filter_e_coprime_phi_y_rejects_cube` | 266 |
+| Theorem | `filter_jacobi_x_plus` | 278 |
+| Theorem | `filter_jacobi_10_plus_not_leftover` | 283 |
+| Theorem | `filter_jacobi_2_minus` | 290 |
+| Theorem | `filter_x_cube_check_is_rsa_e3` | 295 |
 
 ## `Fp2.v`
 
@@ -1151,44 +1151,44 @@ in the Rocq tree.  Do not edit by hand.
   - L28: Factoring as a relation
   - L33: RSA is a one-way permutation on units, not a predicate
   - L62: RSA vs strong RSA (relations)
-  - L123: Order divides the exponent
-  - L170: One-sided small exponent (the Type-B winning condition)
-  - L232: Order assumption and fractional root
-  - L445: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L133: Order divides the exponent
+  - L180: One-sided small exponent (the Type-B winning condition)
+  - L242: Order assumption and fractional root
+  - L455: Order → Strong RSA by invert in the cyclic (equality / multiply)
 
 | Kind | Name | Line |
 |---|---|---:|
 | Theorem | `rsa_units_are_eth_powers` | 39 |
 | Theorem | `trapdoor_inverts_RSA` | 50 |
-| Theorem | `rsa_solution_is_strong_RSA` | 70 |
-| Theorem | `lambda_solves_strong_RSA` | 84 |
-| Lemma | `strong_RSA_trivial_at_one` | 108 |
-| Lemma | `rsa_trivial_at_one` | 116 |
-| Lemma | `order_divides_annihilator` | 125 |
-| Theorem | `order_divides_lambda` | 154 |
-| Theorem | `one_sided_low_order_factors` | 182 |
-| Theorem | `one_sided_low_order_is_factor` | 214 |
-| Lemma | `adaptive_root_is_strong_RSA` | 227 |
-| Theorem | `order_is_annihilator` | 238 |
-| Theorem | `low_order_is_annihilator` | 247 |
-| Theorem | `lambda_is_annihilator_on_units` | 256 |
-| Theorem | `annihilator_plus_one_is_strong_RSA` | 269 |
-| Theorem | `rsa_is_fractional_root` | 286 |
-| Theorem | `strong_RSA_is_fractional_root` | 302 |
-| Theorem | `annihilator_is_fractional_root_of_one` | 317 |
-| Theorem | `ar_C_implies_strong_RSA` | 346 |
-| Theorem | `ar_C_requires_C` | 355 |
-| Theorem | `strong_RSA_is_ar_C_iff` | 360 |
-| Theorem | `lambda_plus_one_11_17` | 371 |
-| Theorem | `lambda_plus_one_11_17_not_prime` | 375 |
-| Theorem | `lambda_solves_search_11_17` | 383 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 394 |
-| Theorem | `adaptive_root_known_product_breaks` | 412 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 428 |
-| Theorem | `order_inverts_in_cyclic` | 451 |
-| Theorem | `order_yields_strong_RSA` | 476 |
-| Lemma | `gcd_powm_minus_1` | 497 |
-| Theorem | `leftover_mismatch_factors` | 510 |
+| Theorem | `rsa_solution_is_strong_RSA` | 80 |
+| Theorem | `lambda_solves_strong_RSA` | 94 |
+| Lemma | `strong_RSA_trivial_at_one` | 118 |
+| Lemma | `rsa_trivial_at_one` | 126 |
+| Lemma | `order_divides_annihilator` | 135 |
+| Theorem | `order_divides_lambda` | 164 |
+| Theorem | `one_sided_low_order_factors` | 192 |
+| Theorem | `one_sided_low_order_is_factor` | 224 |
+| Lemma | `adaptive_root_is_strong_RSA` | 237 |
+| Theorem | `order_is_annihilator` | 248 |
+| Theorem | `low_order_is_annihilator` | 257 |
+| Theorem | `lambda_is_annihilator_on_units` | 266 |
+| Theorem | `annihilator_plus_one_is_strong_RSA` | 279 |
+| Theorem | `rsa_is_fractional_root` | 296 |
+| Theorem | `strong_RSA_is_fractional_root` | 312 |
+| Theorem | `annihilator_is_fractional_root_of_one` | 327 |
+| Theorem | `ar_C_implies_strong_RSA` | 356 |
+| Theorem | `ar_C_requires_C` | 365 |
+| Theorem | `strong_RSA_is_ar_C_iff` | 370 |
+| Theorem | `lambda_plus_one_11_17` | 381 |
+| Theorem | `lambda_plus_one_11_17_not_prime` | 385 |
+| Theorem | `lambda_solves_search_11_17` | 393 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 404 |
+| Theorem | `adaptive_root_known_product_breaks` | 422 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 438 |
+| Theorem | `order_inverts_in_cyclic` | 461 |
+| Theorem | `order_yields_strong_RSA` | 486 |
+| Lemma | `gcd_powm_minus_1` | 509 |
+| Theorem | `leftover_mismatch_factors` | 522 |
 
 ## `HashSlot.v`
 
@@ -1502,7 +1502,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `NamedSkips.v`
 
-- L6: First-class skips
+- L6: First-class skips and live targets
 
 ## `OkamotoUchiyama.v`
 
@@ -1880,8 +1880,8 @@ in the Rocq tree.  Do not edit by hand.
   - L41: Prime shape
   - L107: Williams tweak: among [{±a, ±2a}] exactly one Legendre pair
   - L210: Rabin reduction: two non-associated square roots factor [N]
-  - L293: Verification shape: [s²] is one of the four tweaks of [H].
-  - L311: Keygen obligation on top of the RSA rulers: the mod-8 split.
+  - L294: Verification shape: [s²] is one of the four tweaks of [H].
+  - L312: Keygen obligation on top of the RSA rulers: the mod-8 split.
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1900,10 +1900,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `williams_two_symbol_q` | 195 |
 | Theorem | `williams_neg1_on_blum` | 199 |
 | Theorem | `rabin_roots_split` | 218 |
-| Theorem | `rabin_oracle_nonassociate_factors` | 268 |
-| Lemma | `rw_verify_of_root` | 304 |
-| Lemma | `kg_rw_implies_blum` | 315 |
-| Lemma | `kg_rw_pminus1_almost_odd` | 323 |
+| Theorem | `rabin_oracle_nonassociate_factors` | 269 |
+| Lemma | `rw_verify_of_root` | 305 |
+| Lemma | `kg_rw_implies_blum` | 316 |
+| Lemma | `kg_rw_pminus1_almost_odd` | 324 |
 
 ## `Range2.v`
 
@@ -2069,95 +2069,95 @@ in the Rocq tree.  Do not edit by hand.
 ## `SolverRestrict.v`
 
 - L18: Algorithm restrictions: SAGM-only, safeprime residual, polynomial [e(y)]
-  - L24: SAGM-only: known exponents of public bases
-  - L72: Safeprime residual on [N = 77], [λ = 30 = 2 p' q']
-  - L101: Polynomial [e] of the challenge
-  - L124: Degree-[≥2] polynomial [e = P(y)], rejection sample, write-[e] then [x]
+  - L25: SAGM-only: known exponents of public bases
+  - L73: Safeprime residual on [N = 77], [λ = 30 = 2 p' q']
+  - L102: Polynomial [e] of the challenge
+  - L125: Degree-[≥2] polynomial [e = P(y)], rejection sample, write-[e] then [x]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `sagm_powm_mul_exp` | 29 |
-| Theorem | `sagm_root_of_generator_pin` | 40 |
-| Theorem | `sagm_ae_minus_one_is_lambda` | 44 |
-| Theorem | `sagm_generator_annihilated` | 48 |
-| Theorem | `sagm_only_miller_splits` | 52 |
-| Theorem | `sagm_scale_eval_pin` | 60 |
-| Theorem | `sagm_scale_lambda_type` | 66 |
-| Theorem | `safeprime_e3_names_p` | 74 |
-| Theorem | `safeprime_e5_names_q` | 80 |
-| Theorem | `safeprime_e3_not_residual` | 86 |
-| Theorem | `safeprime_residual_e7` | 90 |
-| Theorem | `poly_e_constant` | 103 |
-| Theorem | `poly_e_constant_is_fixed_e` | 107 |
-| Theorem | `poly_e_X_two_points` | 112 |
-| Theorem | `poly_e_X_not_rerand` | 116 |
-| Theorem | `poly_e_nonconstant_not_fixed_parameter` | 120 |
-| Theorem | `poly_e_quadratic` | 134 |
-| Theorem | `poly_e_quadratic_residual_shaped` | 138 |
-| Theorem | `poly_e_quadratic_leftover_with_period` | 145 |
-| Theorem | `poly_e_quadratic_encrypt_not_leftover` | 160 |
-| Theorem | `poly_e_square_even_peel` | 167 |
-| Theorem | `reject_sample_public_e_emits_5` | 178 |
-| Theorem | `reject_sample_emits_nonresidual` | 182 |
+| Theorem | `sagm_powm_mul_exp` | 30 |
+| Theorem | `sagm_root_of_generator_pin` | 41 |
+| Theorem | `sagm_ae_minus_one_is_lambda` | 45 |
+| Theorem | `sagm_generator_annihilated` | 49 |
+| Theorem | `sagm_only_miller_splits` | 53 |
+| Theorem | `sagm_scale_eval_pin` | 61 |
+| Theorem | `sagm_scale_lambda_type` | 67 |
+| Theorem | `safeprime_e3_names_p` | 75 |
+| Theorem | `safeprime_e5_names_q` | 81 |
+| Theorem | `safeprime_e3_not_residual` | 87 |
+| Theorem | `safeprime_residual_e7` | 91 |
+| Theorem | `poly_e_constant` | 104 |
+| Theorem | `poly_e_constant_is_fixed_e` | 108 |
+| Theorem | `poly_e_X_two_points` | 113 |
+| Theorem | `poly_e_X_not_rerand` | 117 |
+| Theorem | `poly_e_nonconstant_not_fixed_parameter` | 121 |
+| Theorem | `poly_e_quadratic` | 135 |
+| Theorem | `poly_e_quadratic_residual_shaped` | 139 |
+| Theorem | `poly_e_quadratic_leftover_with_period` | 146 |
+| Theorem | `poly_e_quadratic_encrypt_not_leftover` | 161 |
+| Theorem | `poly_e_square_even_peel` | 168 |
+| Theorem | `reject_sample_public_e_emits_5` | 179 |
+| Theorem | `reject_sample_emits_nonresidual` | 183 |
 
 ## `SolverShape.v`
 
 - L23: Twelve solver-shape inroads on Strong RSA
-  - L29: 1. Monomial [x = y^k], [k] even
-  - L52: 2. Inverse [x = y^{-1}]
-  - L78: 3. Affine identity [x = a y + b] for all [y]
-  - L97: 4. Two outputs at the same coprime [e]
-  - L156: 5. Franklin–Reiter: additive related at fixed [e]
-  - L183: 6. Chaum-blind: sees [y r^e], returns [x r]
-  - L206: 7. Jacobi-discrete [e(y) ∈ {3,5}]
-  - L222: 8. Extra annihilator output [M] with [y^M ≡ 1]
-  - L242: 9. Extra [d] with [e d ≡ 1 (mod λ)]
-  - L254: 10. Euler inverse modulo [N−1], not [λ]
-  - L269: 11. CRT-tape: [x = CRT(x_p, x_q)]
-  - L289: 12. Miller on [e−1] against the challenge [y]
-  - L308: Public addition chain, polynomial [X], short bases, gcd-free multiply
+  - L30: 1. Monomial [x = y^k], [k] even
+  - L53: 2. Inverse [x = y^{-1}]
+  - L79: 3. Affine identity [x = a y + b] for all [y]
+  - L98: 4. Two outputs at the same coprime [e]
+  - L157: 5. Franklin–Reiter: additive related at fixed [e]
+  - L184: 6. Chaum-blind: sees [y r^e], returns [x r]
+  - L207: 7. Jacobi-discrete [e(y) ∈ {3,5}]
+  - L223: 8. Extra annihilator output [M] with [y^M ≡ 1]
+  - L243: 9. Extra [d] with [e d ≡ 1 (mod λ)]
+  - L255: 10. Euler inverse modulo [N−1], not [λ]
+  - L270: 11. CRT-tape: [x = CRT(x_p, x_q)]
+  - L290: 12. Miller on [e−1] against the challenge [y]
+  - L309: Public addition chain, polynomial [X], short bases, gcd-free multiply
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `shape_even_ndiv_odd` | 31 |
-| Theorem | `shape_monomial_k2_period_obstruction` | 38 |
-| Theorem | `shape_monomial_k2_pin` | 46 |
-| Theorem | `shape_inverse_of_36_residual_shaped` | 54 |
-| Theorem | `shape_inverse_of_generator` | 65 |
-| Theorem | `shape_inverse_generator_miller` | 70 |
-| Theorem | `shape_affine_identity_forbidden` | 80 |
-| Theorem | `shape_affine_eval_not_zero` | 89 |
-| Theorem | `shape_affine_pointwise_const_residual` | 93 |
-| Theorem | `shape_eth_root_of_1` | 99 |
-| Theorem | `shape_unique_eth_root` | 115 |
-| Theorem | `shape_two_unit_cube_roots_agree` | 128 |
-| Theorem | `shape_unique_unit_cube_root_of_36` | 143 |
-| Theorem | `shape_fr_small_integer` | 158 |
-| Theorem | `shape_fr_cube_gap_small` | 166 |
-| Theorem | `shape_fr_residual_not_integer_cube` | 171 |
-| Theorem | `shape_fr_reduced_offset_not_integer` | 178 |
-| Theorem | `shape_chaum_unblind` | 185 |
-| Theorem | `shape_chaum_recovers_cube_root` | 194 |
-| Theorem | `shape_chaum_e_is_protocol` | 201 |
-| Theorem | `shape_jacobi_e_on_square` | 211 |
-| Theorem | `shape_jacobi_e_on_nonsquare` | 216 |
-| Theorem | `shape_short_period_of_y_no_split` | 224 |
-| Theorem | `shape_lambda_quality_miller` | 234 |
-| Theorem | `shape_ed_minus_one_is_lambda` | 244 |
-| Theorem | `shape_ed_miller` | 249 |
-| Theorem | `shape_e3_not_invertible_mod_Nminus1` | 256 |
-| Theorem | `shape_wrong_euler_inv` | 261 |
-| Theorem | `shape_crt_residues` | 271 |
-| Theorem | `shape_crt_recovers_root` | 276 |
-| Theorem | `shape_crt_moduli_are_factors` | 280 |
-| Theorem | `shape_miller_e11_on_y_splits` | 291 |
-| Theorem | `shape_miller_e3_on_y_survives` | 303 |
-| Theorem | `shape_public_chain_e3` | 316 |
-| Theorem | `shape_trapdoor_chain_d27` | 324 |
-| Theorem | `shape_poly_x_quadratic` | 329 |
-| Theorem | `shape_public_bases_2_3` | 337 |
-| Theorem | `shape_gcdfree_bounded_from_y` | 347 |
-| Theorem | `shape_public_exp_not_membership` | 355 |
+| Theorem | `shape_even_ndiv_odd` | 32 |
+| Theorem | `shape_monomial_k2_period_obstruction` | 39 |
+| Theorem | `shape_monomial_k2_pin` | 47 |
+| Theorem | `shape_inverse_of_36_residual_shaped` | 55 |
+| Theorem | `shape_inverse_of_generator` | 66 |
+| Theorem | `shape_inverse_generator_miller` | 71 |
+| Theorem | `shape_affine_identity_forbidden` | 81 |
+| Theorem | `shape_affine_eval_not_zero` | 90 |
+| Theorem | `shape_affine_pointwise_const_residual` | 94 |
+| Theorem | `shape_eth_root_of_1` | 100 |
+| Theorem | `shape_unique_eth_root` | 116 |
+| Theorem | `shape_two_unit_cube_roots_agree` | 129 |
+| Theorem | `shape_unique_unit_cube_root_of_36` | 144 |
+| Theorem | `shape_fr_small_integer` | 159 |
+| Theorem | `shape_fr_cube_gap_small` | 167 |
+| Theorem | `shape_fr_residual_not_integer_cube` | 172 |
+| Theorem | `shape_fr_reduced_offset_not_integer` | 179 |
+| Theorem | `shape_chaum_unblind` | 186 |
+| Theorem | `shape_chaum_recovers_cube_root` | 195 |
+| Theorem | `shape_chaum_e_is_protocol` | 202 |
+| Theorem | `shape_jacobi_e_on_square` | 212 |
+| Theorem | `shape_jacobi_e_on_nonsquare` | 217 |
+| Theorem | `shape_short_period_of_y_no_split` | 225 |
+| Theorem | `shape_lambda_quality_miller` | 235 |
+| Theorem | `shape_ed_minus_one_is_lambda` | 245 |
+| Theorem | `shape_ed_miller` | 250 |
+| Theorem | `shape_e3_not_invertible_mod_Nminus1` | 257 |
+| Theorem | `shape_wrong_euler_inv` | 262 |
+| Theorem | `shape_crt_residues` | 272 |
+| Theorem | `shape_crt_recovers_root` | 277 |
+| Theorem | `shape_crt_moduli_are_factors` | 281 |
+| Theorem | `shape_miller_e11_on_y_splits` | 292 |
+| Theorem | `shape_miller_e3_on_y_survives` | 304 |
+| Theorem | `shape_public_chain_e3` | 317 |
+| Theorem | `shape_trapdoor_chain_d27` | 325 |
+| Theorem | `shape_poly_x_quadratic` | 330 |
+| Theorem | `shape_public_bases_2_3` | 338 |
+| Theorem | `shape_gcdfree_bounded_from_y` | 348 |
+| Theorem | `shape_public_exp_not_membership` | 356 |
 
 ## `SrsaDict.v`
 
@@ -2369,26 +2369,26 @@ in the Rocq tree.  Do not edit by hand.
 ## `SrsaOrderArrows.v`
 
 - L14: Order / residual Strong RSA / Factor arrows
-  - L23: Order of the pin challenge
-  - L87: Mismatch ⇒ Factor; matching local orders do not
+  - L24: Order of the pin challenge
+  - L88: Mismatch ⇒ Factor; matching local orders do not
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `is_order_pin_y_40` | 25 |
-| Theorem | `order_yields_residual_sRSA` | 44 |
-| Theorem | `order_yields_residual_pin` | 66 |
-| Theorem | `order_invert_pin_is_cube_root` | 82 |
-| Theorem | `residual_mismatch_factors` | 93 |
-| Theorem | `leftover_x_one_sided_pin` | 105 |
-| Theorem | `leftover_x_mismatch_factors_pin` | 114 |
-| Theorem | `residual_mismatch_factors_pin` | 123 |
-| Theorem | `leftover_y_one_sided_pin` | 135 |
-| Theorem | `order_mismatch_factors_pin` | 144 |
-| Theorem | `leftover_77_one_sided` | 153 |
-| Theorem | `leftover_77_mismatch_factors` | 162 |
-| Theorem | `matching_247_not_one_sided` | 175 |
-| Theorem | `matching_247_gcd_not_proper` | 183 |
-| Theorem | `matching_247_two_sided_gcd_is_N` | 193 |
+| Theorem | `is_order_pin_y_40` | 26 |
+| Theorem | `order_yields_residual_sRSA` | 45 |
+| Theorem | `order_yields_residual_pin` | 67 |
+| Theorem | `order_invert_pin_is_cube_root` | 83 |
+| Theorem | `residual_mismatch_factors` | 94 |
+| Theorem | `leftover_x_one_sided_pin` | 106 |
+| Theorem | `leftover_x_mismatch_factors_pin` | 115 |
+| Theorem | `residual_mismatch_factors_pin` | 124 |
+| Theorem | `leftover_y_one_sided_pin` | 136 |
+| Theorem | `order_mismatch_factors_pin` | 145 |
+| Theorem | `leftover_77_one_sided` | 154 |
+| Theorem | `leftover_77_mismatch_factors` | 163 |
+| Theorem | `matching_247_not_one_sided` | 176 |
+| Theorem | `matching_247_gcd_not_proper` | 184 |
+| Theorem | `matching_247_two_sided_gcd_is_N` | 194 |
 
 ## `SrsaPeriod.v`
 
@@ -2540,109 +2540,109 @@ in the Rocq tree.  Do not edit by hand.
 ## `SrsaResidual.v`
 
 - L14: Residual leftover language
-  - L23: Pin geometry of [N] and of [⟨2⟩]
-  - L78: Leftover [x] generates [⟨y⟩]
-  - L441: Public search slack and forbidden cosets
+  - L24: Pin geometry of [N] and of [⟨2⟩]
+  - L79: Leftover [x] generates [⟨y⟩]
+  - L442: Public search slack and forbidden cosets
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `residual_phi_over_lambda` | 25 |
-| Theorem | `residual_N_mod_8` | 29 |
-| Theorem | `residual_bitlength_N` | 33 |
-| Theorem | `residual_v2_N_minus_1` | 37 |
-| Theorem | `residual_units_not_cyclic` | 42 |
-| Theorem | `residual_mod4_shape` | 47 |
-| Theorem | `residual_N_mod_8_two_sylow` | 52 |
-| Theorem | `residual_y_to_lambda` | 56 |
-| Theorem | `residual_y_to_phi` | 60 |
-| Theorem | `residual_ord2_is_40` | 64 |
-| Theorem | `residual_phi_is_product` | 69 |
-| Theorem | `residual_y_to_lam_identity` | 73 |
-| Theorem | `residual_x_in_cyc_y` | 80 |
-| Theorem | `residual_x_generates` | 84 |
-| Theorem | `residual_x_is_y_to_27` | 90 |
-| Theorem | `residual_cube_root_of_1` | 95 |
-| Theorem | `residual_unique_unit_cube` | 101 |
-| Theorem | `residual_e_inv_mod_16` | 109 |
-| Theorem | `residual_e_inv_mod_5` | 113 |
-| Theorem | `residual_crt_e_inverse` | 117 |
-| Theorem | `residual_five_divides_lambda` | 123 |
-| Theorem | `residual_local_squares` | 128 |
-| Theorem | `residual_qr_both_sides` | 135 |
-| Theorem | `residual_not_in_ltwo` | 140 |
-| Theorem | `residual_in_lthree_and_lfive` | 146 |
-| Theorem | `residual_local_cube_mod_p` | 151 |
-| Theorem | `residual_local_x_mod_q` | 157 |
-| Theorem | `residual_crt_locals` | 161 |
-| Theorem | `residual_bits_of_x` | 166 |
-| Theorem | `residual_x_mod_8` | 170 |
-| Theorem | `residual_x_minus_1_prime` | 174 |
-| Theorem | `residual_x_plus_1_prime` | 178 |
-| Theorem | `residual_sixteen_generators` | 182 |
-| Theorem | `residual_even_k_not_generator` | 186 |
-| Theorem | `residual_y_inv_generator` | 200 |
-| Theorem | `residual_x_inv_generator` | 205 |
-| Theorem | `residual_y29` | 210 |
-| Theorem | `residual_y3_generator` | 214 |
-| Theorem | `residual_y9_generator` | 219 |
-| Theorem | `residual_five_divides_ord` | 224 |
-| Theorem | `residual_eight_divides_ord` | 228 |
-| Theorem | `residual_three_index_two` | 232 |
-| Theorem | `residual_dl_even` | 237 |
-| Theorem | `residual_y_in_square_subgroup` | 241 |
-| Theorem | `residual_v2_lambda` | 245 |
-| Theorem | `residual_ord_divides_lam` | 250 |
-| Theorem | `residual_y_to_ord` | 254 |
-| Theorem | `residual_phi_over_lam` | 258 |
-| Theorem | `residual_ord_div_lam` | 262 |
-| Theorem | `residual_e_coprime_10_16` | 266 |
-| Theorem | `residual_five_ndiv_e` | 271 |
-| Theorem | `residual_y_local_qr` | 276 |
-| Theorem | `residual_bitlength_lam` | 283 |
-| Theorem | `residual_lambda_lcm` | 287 |
-| Theorem | `residual_y_to_e_inv` | 291 |
-| Theorem | `residual_k1_is_y` | 301 |
-| Theorem | `residual_k3_is_y_cube` | 306 |
-| Theorem | `residual_even_k_shares_ord` | 311 |
-| Theorem | `residual_crt_is_residual_x` | 316 |
-| Theorem | `residual_ratio_five_torsion` | 321 |
-| Theorem | `residual_ratio_y4` | 326 |
-| Theorem | `residual_ord_5_smooth` | 331 |
-| Theorem | `residual_index_lam_over_ord` | 335 |
-| Theorem | `residual_x_order_40_not_20` | 339 |
-| Theorem | `residual_three_not_in_cyc_y` | 344 |
-| Theorem | `residual_three_full_lambda` | 348 |
-| Theorem | `residual_y_even_power_of_3` | 352 |
-| Theorem | `residual_product_primaries` | 356 |
-| Theorem | `residual_cube_of_x` | 360 |
-| Theorem | `residual_y_to_27` | 364 |
-| Theorem | `residual_jacobi_x_vs_2` | 368 |
-| Theorem | `residual_x_not_in_lten` | 374 |
-| Theorem | `residual_pminus1_qminus1` | 379 |
-| Theorem | `residual_phi_product` | 384 |
-| Theorem | `residual_index_four` | 388 |
-| Theorem | `residual_x_order_40` | 392 |
-| Theorem | `residual_v2_ord_x` | 397 |
-| Theorem | `residual_v2_lam` | 402 |
-| Theorem | `residual_x_generates_5_sylow` | 407 |
-| Theorem | `residual_N_mod_8_for_2` | 412 |
-| Theorem | `residual_ten_jacobi_plus` | 416 |
-| Theorem | `residual_ten_not_ord40` | 420 |
-| Theorem | `residual_21_mod_8` | 425 |
-| Theorem | `residual_ltwo_ord40` | 429 |
-| Theorem | `residual_two_ne_y` | 433 |
-| Theorem | `residual_four_cosets` | 437 |
-| Theorem | `residual_jacobi_plus_count` | 447 |
-| Theorem | `residual_phi40_generators` | 452 |
-| Theorem | `residual_coset_10_no_split` | 460 |
-| Theorem | `residual_coset_2_no_split` | 465 |
-| Theorem | `residual_x16_not_1` | 471 |
-| Theorem | `residual_x8_not_1` | 476 |
-| Theorem | `residual_lam_bitlength` | 480 |
-| Theorem | `residual_x_local_qr` | 484 |
-| Theorem | `residual_161_mod_8` | 489 |
-| Theorem | `residual_x_not_ord16` | 494 |
-| Theorem | `residual_x_not_ord10` | 498 |
+| Theorem | `residual_phi_over_lambda` | 26 |
+| Theorem | `residual_N_mod_8` | 30 |
+| Theorem | `residual_bitlength_N` | 34 |
+| Theorem | `residual_v2_N_minus_1` | 38 |
+| Theorem | `residual_units_not_cyclic` | 43 |
+| Theorem | `residual_mod4_shape` | 48 |
+| Theorem | `residual_N_mod_8_two_sylow` | 53 |
+| Theorem | `residual_y_to_lambda` | 57 |
+| Theorem | `residual_y_to_phi` | 61 |
+| Theorem | `residual_ord2_is_40` | 65 |
+| Theorem | `residual_phi_is_product` | 70 |
+| Theorem | `residual_y_to_lam_identity` | 74 |
+| Theorem | `residual_x_in_cyc_y` | 81 |
+| Theorem | `residual_x_generates` | 85 |
+| Theorem | `residual_x_is_y_to_27` | 91 |
+| Theorem | `residual_cube_root_of_1` | 96 |
+| Theorem | `residual_unique_unit_cube` | 102 |
+| Theorem | `residual_e_inv_mod_16` | 110 |
+| Theorem | `residual_e_inv_mod_5` | 114 |
+| Theorem | `residual_crt_e_inverse` | 118 |
+| Theorem | `residual_five_divides_lambda` | 124 |
+| Theorem | `residual_local_squares` | 129 |
+| Theorem | `residual_qr_both_sides` | 136 |
+| Theorem | `residual_not_in_ltwo` | 141 |
+| Theorem | `residual_in_lthree_and_lfive` | 147 |
+| Theorem | `residual_local_cube_mod_p` | 152 |
+| Theorem | `residual_local_x_mod_q` | 158 |
+| Theorem | `residual_crt_locals` | 162 |
+| Theorem | `residual_bits_of_x` | 167 |
+| Theorem | `residual_x_mod_8` | 171 |
+| Theorem | `residual_x_minus_1_prime` | 175 |
+| Theorem | `residual_x_plus_1_prime` | 179 |
+| Theorem | `residual_sixteen_generators` | 183 |
+| Theorem | `residual_even_k_not_generator` | 187 |
+| Theorem | `residual_y_inv_generator` | 201 |
+| Theorem | `residual_x_inv_generator` | 206 |
+| Theorem | `residual_y29` | 211 |
+| Theorem | `residual_y3_generator` | 215 |
+| Theorem | `residual_y9_generator` | 220 |
+| Theorem | `residual_five_divides_ord` | 225 |
+| Theorem | `residual_eight_divides_ord` | 229 |
+| Theorem | `residual_three_index_two` | 233 |
+| Theorem | `residual_dl_even` | 238 |
+| Theorem | `residual_y_in_square_subgroup` | 242 |
+| Theorem | `residual_v2_lambda` | 246 |
+| Theorem | `residual_ord_divides_lam` | 251 |
+| Theorem | `residual_y_to_ord` | 255 |
+| Theorem | `residual_phi_over_lam` | 259 |
+| Theorem | `residual_ord_div_lam` | 263 |
+| Theorem | `residual_e_coprime_10_16` | 267 |
+| Theorem | `residual_five_ndiv_e` | 272 |
+| Theorem | `residual_y_local_qr` | 277 |
+| Theorem | `residual_bitlength_lam` | 284 |
+| Theorem | `residual_lambda_lcm` | 288 |
+| Theorem | `residual_y_to_e_inv` | 292 |
+| Theorem | `residual_k1_is_y` | 302 |
+| Theorem | `residual_k3_is_y_cube` | 307 |
+| Theorem | `residual_even_k_shares_ord` | 312 |
+| Theorem | `residual_crt_is_residual_x` | 317 |
+| Theorem | `residual_ratio_five_torsion` | 322 |
+| Theorem | `residual_ratio_y4` | 327 |
+| Theorem | `residual_ord_5_smooth` | 332 |
+| Theorem | `residual_index_lam_over_ord` | 336 |
+| Theorem | `residual_x_order_40_not_20` | 340 |
+| Theorem | `residual_three_not_in_cyc_y` | 345 |
+| Theorem | `residual_three_full_lambda` | 349 |
+| Theorem | `residual_y_even_power_of_3` | 353 |
+| Theorem | `residual_product_primaries` | 357 |
+| Theorem | `residual_cube_of_x` | 361 |
+| Theorem | `residual_y_to_27` | 365 |
+| Theorem | `residual_jacobi_x_vs_2` | 369 |
+| Theorem | `residual_x_not_in_lten` | 375 |
+| Theorem | `residual_pminus1_qminus1` | 380 |
+| Theorem | `residual_phi_product` | 385 |
+| Theorem | `residual_index_four` | 389 |
+| Theorem | `residual_x_order_40` | 393 |
+| Theorem | `residual_v2_ord_x` | 398 |
+| Theorem | `residual_v2_lam` | 403 |
+| Theorem | `residual_x_generates_5_sylow` | 408 |
+| Theorem | `residual_N_mod_8_for_2` | 413 |
+| Theorem | `residual_ten_jacobi_plus` | 417 |
+| Theorem | `residual_ten_not_ord40` | 421 |
+| Theorem | `residual_21_mod_8` | 426 |
+| Theorem | `residual_ltwo_ord40` | 430 |
+| Theorem | `residual_two_ne_y` | 434 |
+| Theorem | `residual_four_cosets` | 438 |
+| Theorem | `residual_jacobi_plus_count` | 448 |
+| Theorem | `residual_phi40_generators` | 453 |
+| Theorem | `residual_coset_10_no_split` | 461 |
+| Theorem | `residual_coset_2_no_split` | 466 |
+| Theorem | `residual_x16_not_1` | 472 |
+| Theorem | `residual_x8_not_1` | 477 |
+| Theorem | `residual_lam_bitlength` | 481 |
+| Theorem | `residual_x_local_qr` | 485 |
+| Theorem | `residual_161_mod_8` | 490 |
+| Theorem | `residual_x_not_ord16` | 495 |
+| Theorem | `residual_x_not_ord10` | 499 |
 
 ## `SrsaWriteE.v`
 
@@ -2791,52 +2791,52 @@ in the Rocq tree.  Do not edit by hand.
 ## `StrongRSAPeel.v`
 
 - L17: Standard-model Strong-RSA witness peel
-  - L27: Non-unit [x]
-  - L66: Jacobi [−1] forces odd [e]
-  - L99: Even [e] is a square root
-  - L147: [λ]-type: [x = y] is an annihilator
-  - L241: Residual leaf (named, not solved)
-  - L261: Self-randomization and related queries
-  - L309: SAGM handle still peels
-  - L329: Four square roots of 1; mixed splits, [−1] does not
+  - L29: Non-unit [x]
+  - L68: Jacobi [−1] forces odd [e]
+  - L101: Even [e] is a square root
+  - L149: [λ]-type: [x = y] is an annihilator
+  - L243: Residual leaf (open: solver ⇒ factor is the live target)
+  - L274: Self-randomization and related queries
+  - L322: SAGM handle still peels
+  - L342: Four square roots of 1; mixed splits, [−1] does not
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `srsa_unit_y_forces_unit_x` | 29 |
-| Theorem | `srsa_gcd_proper_is_factor` | 42 |
-| Theorem | `srsa_nonunit_x_pin` | 56 |
-| Theorem | `srsa_jacobi_minus1_forces_odd_e` | 68 |
-| Theorem | `srsa_jacobi_two_is_minus1` | 87 |
-| Theorem | `srsa_lambda_type_on_jacobi_minus1` | 91 |
-| Theorem | `srsa_even_e_is_square_root` | 101 |
-| Theorem | `srsa_even_e_pin` | 113 |
-| Theorem | `srsa_associate_neg6_does_not_split` | 117 |
-| Theorem | `srsa_mixed_root_of_36_factors` | 122 |
-| Theorem | `srsa_even_e_nonassociate_factors` | 132 |
-| Theorem | `srsa_x_eq_y_annihilates` | 149 |
-| Theorem | `srsa_lambda_type_annihilator_pin` | 179 |
-| Theorem | `srsa_lambda_type_miller_splits` | 189 |
-| Theorem | `srsa_lambda_type_miller_factors` | 199 |
-| Lemma | `prime_7` | 210 |
-| Theorem | `srsa_safeprime_lambda_30` | 218 |
-| Theorem | `srsa_safeprime_lambda_type` | 222 |
-| Theorem | `srsa_safeprime_g0_square` | 226 |
-| Theorem | `srsa_safeprime_miller_gcd` | 230 |
-| Theorem | `srsa_safeprime_miller_factors` | 234 |
-| Theorem | `srsa_residual_pin` | 250 |
-| Theorem | `srsa_fixed_e_rerand` | 263 |
-| Theorem | `srsa_fixed_e_rerand_pin` | 276 |
-| Theorem | `srsa_poly_e_not_rerand_invariant` | 283 |
-| Theorem | `srsa_related_y_square` | 289 |
-| Theorem | `srsa_related_pin` | 305 |
-| Theorem | `srsa_sagm_handle_unit` | 311 |
-| Theorem | `srsa_sagm_lambda_type_peel` | 316 |
-| Theorem | `srsa_sagm_product_reused` | 321 |
-| Theorem | `srsa_sqrt1_120_splits` | 331 |
-| Theorem | `srsa_minus1_no_split` | 337 |
-| Theorem | `srsa_120_plus_1` | 342 |
-| Theorem | `srsa_miller_66` | 348 |
-| Theorem | `srsa_four_sqrt1` | 353 |
+| Theorem | `srsa_unit_y_forces_unit_x` | 31 |
+| Theorem | `srsa_gcd_proper_is_factor` | 44 |
+| Theorem | `srsa_nonunit_x_pin` | 58 |
+| Theorem | `srsa_jacobi_minus1_forces_odd_e` | 70 |
+| Theorem | `srsa_jacobi_two_is_minus1` | 89 |
+| Theorem | `srsa_lambda_type_on_jacobi_minus1` | 93 |
+| Theorem | `srsa_even_e_is_square_root` | 103 |
+| Theorem | `srsa_even_e_pin` | 115 |
+| Theorem | `srsa_associate_neg6_does_not_split` | 119 |
+| Theorem | `srsa_mixed_root_of_36_factors` | 124 |
+| Theorem | `srsa_even_e_nonassociate_factors` | 134 |
+| Theorem | `srsa_x_eq_y_annihilates` | 151 |
+| Theorem | `srsa_lambda_type_annihilator_pin` | 181 |
+| Theorem | `srsa_lambda_type_miller_splits` | 191 |
+| Theorem | `srsa_lambda_type_miller_factors` | 201 |
+| Lemma | `prime_7` | 212 |
+| Theorem | `srsa_safeprime_lambda_30` | 220 |
+| Theorem | `srsa_safeprime_lambda_type` | 224 |
+| Theorem | `srsa_safeprime_g0_square` | 228 |
+| Theorem | `srsa_safeprime_miller_gcd` | 232 |
+| Theorem | `srsa_safeprime_miller_factors` | 236 |
+| Theorem | `srsa_residual_pin` | 252 |
+| Theorem | `srsa_fixed_e_rerand` | 276 |
+| Theorem | `srsa_fixed_e_rerand_pin` | 289 |
+| Theorem | `srsa_poly_e_not_rerand_invariant` | 296 |
+| Theorem | `srsa_related_y_square` | 302 |
+| Theorem | `srsa_related_pin` | 318 |
+| Theorem | `srsa_sagm_handle_unit` | 324 |
+| Theorem | `srsa_sagm_lambda_type_peel` | 329 |
+| Theorem | `srsa_sagm_product_reused` | 334 |
+| Theorem | `srsa_sqrt1_120_splits` | 344 |
+| Theorem | `srsa_minus1_no_split` | 350 |
+| Theorem | `srsa_120_plus_1` | 355 |
+| Theorem | `srsa_miller_66` | 361 |
+| Theorem | `srsa_four_sqrt1` | 366 |
 
 ## `Succinct.v`
 
@@ -2944,11 +2944,11 @@ in the Rocq tree.  Do not edit by hand.
   - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
   - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
   - L574: RSA inverter vs Rabin inverter
-  - L612: T7 — finite products of raw signatures
-  - L684: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
-  - L763: Constructor slot vs K1
-  - L801: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
-  - L831: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
+  - L613: T7 — finite products of raw signatures
+  - L685: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
+  - L764: Constructor slot vs K1
+  - L802: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
+  - L832: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2985,22 +2985,22 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `non_williams_two_chars` | 535 |
 | Theorem | `sign_neg1_odd` | 547 |
 | Theorem | `odd_exp_preserves_minus1` | 559 |
-| Theorem | `rsa_inverter_recovers_message` | 586 |
-| Theorem | `sign_hom_3` | 618 |
-| Theorem | `sign_of_msg_product_one` | 634 |
-| Theorem | `sign_weighted_commute` | 651 |
-| Theorem | `sign_weighted_product` | 665 |
-| Lemma | `euler_sign_of_pm1` | 692 |
-| Lemma | `euler_sign_sq` | 709 |
-| Theorem | `other_legendre_from_product` | 720 |
-| Theorem | `cipher_jacobi_eq_message` | 733 |
-| Theorem | `onesided_plain_one_factors` | 768 |
-| Theorem | `ctor_slot_mod_r_need_not_factor` | 783 |
-| Theorem | `cube_below_N` | 803 |
-| Theorem | `e3_small_cube_verifies` | 818 |
-| Theorem | `bleiche_wrap_interval` | 833 |
-| Theorem | `pkcs15_prefix_is_type2` | 859 |
-| Theorem | `manger_is_stricter_than_type2` | 869 |
+| Theorem | `rsa_inverter_recovers_message` | 587 |
+| Theorem | `sign_hom_3` | 619 |
+| Theorem | `sign_of_msg_product_one` | 635 |
+| Theorem | `sign_weighted_commute` | 652 |
+| Theorem | `sign_weighted_product` | 666 |
+| Lemma | `euler_sign_of_pm1` | 693 |
+| Lemma | `euler_sign_sq` | 710 |
+| Theorem | `other_legendre_from_product` | 721 |
+| Theorem | `cipher_jacobi_eq_message` | 734 |
+| Theorem | `onesided_plain_one_factors` | 769 |
+| Theorem | `ctor_slot_mod_r_need_not_factor` | 784 |
+| Theorem | `cube_below_N` | 804 |
+| Theorem | `e3_small_cube_verifies` | 819 |
+| Theorem | `bleiche_wrap_interval` | 834 |
+| Theorem | `pkcs15_prefix_is_type2` | 860 |
+| Theorem | `manger_is_stricter_than_type2` | 870 |
 
 ## `TwoPartyPair.v`
 

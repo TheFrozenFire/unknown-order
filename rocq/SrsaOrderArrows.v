@@ -16,8 +16,9 @@ Open Scope Z_scope.
     Invert in [⟨y⟩] from [ord(y)] always (equality / multiply).
     A leftover pair factors [N] only under KeyGen mismatch
     ([one_sided_low_order]).  Matching local orders on [N=247] do
-    not yield a proper factor.  None inhabits [srsa_residual_leaf]
-    as [Problem_Factor] without mismatch.  Not RSA ≡ or ≢ factoring.
+    not yield a proper factor.  A leftover pair is not a residual
+    *solver*; solver ⇒ factor is
+    [residual_solver_constructs_factor_open_named].
     Cross-confirmed by [cas/145]. *)
 
 (** ** Order of the pin challenge *)

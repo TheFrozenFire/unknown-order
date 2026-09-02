@@ -22,8 +22,8 @@ pass would quote the claim and point at a Rocq name (or add one).
 | Kemmoe–Lysyanskaya 2024/505 | Shamir; Odds-AR; composite members | `shamir_trick`; `bdm_*`; `AdaptiveRoot_C` |
 | Belabas–Kleinjung–Sanso–Wesolowski 2020/1310 (also Math. Cryptology) | Mersenne / Shanks form has odd order | `mersenne31_wins_restricted_LowOrder`; `cl_mersenne_H` |
 | Coron–May JoC 2007 / May CRYPTO 2004 | `(N,e,d)` ⇒ factor, deterministic | in-corpus Miller / Coron–May algebra |
-| Boneh–Venkatesan EUROCRYPT 1998 | algebraic FACT ≤ low-`e` RSA collapses | `bv_few_query_low_e_drops_oracle` (in-model unwind; not RSA ≢ factoring) |
-| Aggarwal–Maurer EUROCRYPT 2009 | RSA ≡ factoring in the *generic ring* | `gra_inv_nonunit_factors`; `rational_Pe_minus_XQe_leading`. Standard-model slogan still `Refuse_AM09_generic_ring_as_standard_model` |
+| Boneh–Venkatesan EUROCRYPT 1998 | algebraic FACT ≤ low-`e` RSA collapses | `bv_few_query_low_e_drops_oracle` (in-model unwind of a few-query algebraic reduction) |
+| Aggarwal–Maurer EUROCRYPT 2009 | RSA ≡ factoring in the *generic ring* | `gra_inv_nonunit_factors`; `rational_Pe_minus_XQe_leading`. AM09 does not discharge the standard-model reduction (`Refuse_AM09_generic_ring_as_standard_model`); that reduction is `rsa_inverter_constructs_factor_open_named` |
 | Leander–Rupp ASIACRYPT 2006 | GRA, no division, low `e` | `gra_nodiv_identical_root_impossible_X3`; `gra_eq_leak_factors` |
 | Aggarwal–Maurer–Shparlinski WCC 2011 | Strong RSA in the GRA | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` (negative: `λ+1` is a constant) |
 | Brown ePrint 2005/380 | SLP solver for low-`e` RSA | `slp_carmichael_is_functional`; `slp_solver_not_poly_identity_linear` |

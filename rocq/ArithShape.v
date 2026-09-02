@@ -18,9 +18,10 @@ Open Scope Z_scope.
 
     Newton / Euclidean arithmetic of [y], a missing [x=y]
     period-of-[y] peel, Takagi and triprime tapes, and a public
-    base that cannot represent the residual [y].  None inhabits
-    [srsa_residual_leaf] as [Problem_Factor].  Cross-confirmed
-    by [cas/132]. *)
+    base that cannot represent the residual [y].  These cuts do not
+    settle residual-solver ⇒ factor
+    ([residual_solver_constructs_factor_open_named]).
+    Cross-confirmed by [cas/132]. *)
 
 (** ** 1. Newton iteration in [(Z/NZ)] *)
 

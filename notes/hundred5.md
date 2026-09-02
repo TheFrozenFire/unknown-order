@@ -8,7 +8,7 @@ as `y`. Cubing permutes the 16 generators in four 4-cycles.
 `k=27` gives three leftover roots in `⟨2⟩`, `⟨3⟩`, `⟨y⟩`; two of those
 pairs split `N`.
 
-None inhabits `srsa_residual_leaf` as `Problem_Factor`. Pin `N=187`
+Cuts of the writer, not a verdict on residual-solver ⇒ factor. Pin `N=187`
 unless noted (`77`).
 
 | # | Class | Rocq | Fate |

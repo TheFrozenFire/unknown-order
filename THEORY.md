@@ -26,20 +26,24 @@ Those conditions are `Problem_*` in `UnknownOrder.v` / `Hardness.v` /
 `Presentation.v`.  None of them is assumed hard.
 
 A hardness *claim* needs a named KeyGen distribution and a class of
-algorithms.  This corpus records **relations** (which witnesses exist)
-and **refuses** PPT/advantage (`Refuse_PPT_advantage`).
+algorithms.  This corpus records **relations** (which witnesses exist).
+PPT/advantage is out of model (`Refuse_PPT_advantage`).  Algebraic
+solver ⇒ factor reductions are live targets (`*_open_named`), not
+refuses.
 
 ## How gaps are recorded
 
 Rocq has no “we will not prove this” keyword.  Comments are invisible
 to `Print Assumptions`.
 
-- `Definition foo_named : Prop` **unused** → refuse
+- `Definition foo_named : Prop` **unused** → refuse (this skip is not being done)
 - `Definition foo_named` taken as a **hypothesis** → weakness
-- `NamedRefuse` constructor → refuse that is not a proposition
+- `Definition foo_open_named : Prop` **unused** → live target (unproved, on-goal)
+- `NamedRefuse` constructor → out of *model*, not a proposition
 - `Axiom` / `Admitted` → load-bearing trust (this tree has none)
 
 See `rocq/NamedSkips.v` and `rocq-proofs/PROOF_STYLE.md` §5.1.
+`NamedRefuse` is not a ban on proving a nearby Gallina statement.
 
 ## What must not be axiomatized
 
@@ -48,8 +52,13 @@ They are `NamedRefuse` constructors, not axioms.
 
 - A global `RSA_hard` / `Factoring_hard` / `sRSA_hard`
 - Decisional RSA on units with `gcd(e, λ) = 1`
-- Standard-model RSA ≡ factoring (`Refuse_RSA_eq_factoring_standard_model`);
-  AM09 is generic-ring (`Refuse_AM09_generic_ring_as_standard_model`)
+- The *slogan* RSA ≡ factoring as an axiom
+  (`Refuse_RSA_eq_factoring_standard_model`); AM09 is generic-ring
+  (`Refuse_AM09_generic_ring_as_standard_model`) and does not discharge
+  the standard-model reduction.  The reductions themselves are
+  `rsa_inverter_constructs_factor_open_named` and
+  `strong_rsa_solver_constructs_factor_open_named` /
+  `residual_solver_constructs_factor_open_named`.
 - ROM, SHA-in-Rocq, PPT/advantage, NFS cost
 - LLL / Coppersmith *development* (`Refuse_lattice_lll_development`);
   the algebraic use of a recovered `φ` is a theorem

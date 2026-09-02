@@ -49,7 +49,11 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
 5. **Honest closure (never let a headline outrun its theorem).** Say exactly what a proof
    establishes: existence vs construction, deterministic vs Monte-Carlo, success probability vs
    worst-case, λ(N) vs φ(N), one algorithm vs the whole family. A randomized factoring procedure
-   that succeeds on a positive-density set of coins is not "N is factored."
+   that succeeds on a positive-density set of coins is not "N is factored."  Honest
+   closure forbids stamping "RSA ≡ factoring" on a lemma that did not prove it.  It
+   does **not** forbid proving a precise reduction (an inverter or Strong-RSA
+   solver constructs a factor).  Those are `*_open_named` live targets.
+   `NamedRefuse` is out of *model* (no PPT, hash, NFS) — not a ban on nearby algebra.
 
 6. **Record why a tier was skipped.** Certora, Halmos, and the Rocq equivalence (Gallina ↔ solc-Yul)
    tiers are EVM-bound and skipped-by-construction. CAS + Rocq-SIM are the two differently-failing
@@ -59,10 +63,13 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
 7. **Paper-check against known breaks.** Before treating a paper's unknown-order claim as
    live, walk `notes/paper-overlaps.md`. A design that re-uses Wesolowski on raw units,
    unrestricted low-order on `Cl(Δ)`, a smooth adaptive-root challenge, composite
-   accumulator members, or “RSA ≡ factoring” in the standard model overlaps a documented
-   weakness. Quote the trigger, the row, and the Rocq name (or a `NamedRefuse` /
-   `*_named` from `generated/NAMED_SKIPS.md`). Do not cite `THEORY.md` from a `.v` file.
-   Do not grow `THEORY.md` — regenerate `generated/COVERAGE.md`.
+   accumulator members, or cites generic-ring AM09 as discharging standard-model
+   RSA ≡ factoring, overlaps a documented weakness. Quote the trigger, the row,
+   and the Rocq name (or a `NamedRefuse` / `*_named` / `*_open_named` from
+   `generated/NAMED_SKIPS.md`). Do not cite `THEORY.md` from a `.v` file.
+   Do not grow `THEORY.md` — regenerate `generated/COVERAGE.md`.  Treating AM09
+   as the standard-model slogan is the overlap; proving a Gallina reduction
+   (solver ⇒ factor) is on-goal.
 
 ## Toolchain
 
