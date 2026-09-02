@@ -2667,65 +2667,80 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `SrsaResidualGRA.v`
 
-- L17: Residual GRA dichotomy
-  - L32: Residual-shaped exponents
-  - L60: [λ+1] is outside the residual class
-  - L98: Constant leftover inverts one [y], not every unit
-  - L117: Degree / leading-coefficient fork for residual-shaped [e]
-  - L176: Division-free tape denotes a polynomial; integer [P^e = X]
-  - L219: Low-degree vanishing on units
-  - L351: Roots bound: low-degree + vanish on [1..10] ⇒ [11] | coeffs
+- L18: Residual GRA dichotomy
+  - L34: Residual-shaped exponents
+  - L62: [λ+1] is outside the residual class
+  - L100: Constant leftover inverts one [y], not every unit
+  - L119: Degree / leading-coefficient fork for residual-shaped [e]
+  - L178: Division-free tape denotes a polynomial; integer [P^e = X]
+  - L221: Low-degree vanishing on units
+  - L353: Roots bound: low-degree + vanish on [1..10] ⇒ [11] | coeffs
+  - L463: CRT lift: vanish on [(Z/NZ)*] + low degree ⇒ [N] | coeffs
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `residual_shaped_e_3` | 40 |
-| Theorem | `residual_shaped_e_7` | 50 |
-| Theorem | `not_residual_shaped_e_81` | 62 |
-| Theorem | `lambda_plus_one_witness_not_residual` | 70 |
-| Theorem | `residual_gra_const81_independent_of_y` | 78 |
-| Theorem | `residual_gra_const81_gcd_is_1` | 83 |
-| Theorem | `residual_gra_const81_solves_sRSA_not_residual` | 87 |
-| Theorem | `residual_gra_const42_inverts_pin_not_8` | 100 |
-| Theorem | `residual_gra_const42_misses_unit_2` | 112 |
-| Theorem | `residual_shaped_forbids_rational_Pe_XQe` | 119 |
-| Theorem | `residual_shaped_e3_leading` | 128 |
-| Theorem | `residual_shaped_e7_leading` | 136 |
-| Theorem | `residual_gra_Xe_minus_X_N_ndiv_linear` | 144 |
-| Theorem | `residual_gra_X3_minus_X_N_ndiv_linear` | 155 |
-| Theorem | `residual_gra_X7_minus_X_N_ndiv_linear` | 160 |
-| Theorem | `residual_gra_eq_leak_factors` | 168 |
-| Theorem | `residual_gra_inv_nonunit_factors` | 172 |
-| Theorem | `residual_gra_nodiv_empty_is_nodiv` | 180 |
-| Theorem | `residual_gra_identity_tape_is_y` | 184 |
-| Theorem | `residual_gra_identity_tape_not_cube` | 188 |
-| Theorem | `residual_gra_nodiv_integer_identity_forbidden` | 192 |
-| Theorem | `residual_gra_nodiv_cube_identity_forbidden` | 204 |
-| Theorem | `residual_gra_mul_denotes_square` | 215 |
-| Theorem | `residual_identity_is_low_degree` | 234 |
-| Lemma | `residual_X3_eval` | 240 |
-| Lemma | `residual_X3_not_div_11_mid` | 244 |
-| Theorem | `residual_X3_roots_mod_11` | 253 |
-| Theorem | `residual_X3_unit_2_not_root_mod_11` | 266 |
-| Lemma | `residual_X3_not_div_17_mid` | 272 |
-| Theorem | `residual_X3_unit_2_not_root_mod_17` | 283 |
-| Theorem | `residual_X3_roots_mod_17` | 289 |
-| Theorem | `residual_const_Pe_minus_X_nth1` | 302 |
-| Theorem | `residual_const_N_ndiv_linear` | 306 |
-| Theorem | `residual_nodiv_identity_denotes_X` | 312 |
-| Theorem | `residual_identity_cube_minus_y` | 316 |
-| Theorem | `residual_nodiv_const_is_nodiv` | 326 |
-| Theorem | `residual_nodiv_const_denotes` | 330 |
-| Theorem | `residual_low_degree_identity_not_all_Fp_units` | 341 |
-| Lemma | `pin_Fp_star_length` | 362 |
-| Lemma | `forall_pin_Fp_star` | 365 |
-| Lemma | `pin_Fp_star_coprime` | 375 |
-| Lemma | `pin_Fp_star_distinct_mod_11` | 383 |
-| Theorem | `residual_low_degree_units_divides_11` | 392 |
-| Theorem | `residual_nodiv_low_degree_units_divides_11` | 406 |
-| Theorem | `residual_identity_nth1_ndiv_11` | 424 |
-| Theorem | `residual_identity_cannot_vanish_on_Fp_star` | 428 |
-| Lemma | `residual_const_Pe_degree` | 441 |
-| Theorem | `residual_const_cannot_vanish_on_Fp_star` | 445 |
+| Theorem | `residual_shaped_e_3` | 42 |
+| Theorem | `residual_shaped_e_7` | 52 |
+| Theorem | `not_residual_shaped_e_81` | 64 |
+| Theorem | `lambda_plus_one_witness_not_residual` | 72 |
+| Theorem | `residual_gra_const81_independent_of_y` | 80 |
+| Theorem | `residual_gra_const81_gcd_is_1` | 85 |
+| Theorem | `residual_gra_const81_solves_sRSA_not_residual` | 89 |
+| Theorem | `residual_gra_const42_inverts_pin_not_8` | 102 |
+| Theorem | `residual_gra_const42_misses_unit_2` | 114 |
+| Theorem | `residual_shaped_forbids_rational_Pe_XQe` | 121 |
+| Theorem | `residual_shaped_e3_leading` | 130 |
+| Theorem | `residual_shaped_e7_leading` | 138 |
+| Theorem | `residual_gra_Xe_minus_X_N_ndiv_linear` | 146 |
+| Theorem | `residual_gra_X3_minus_X_N_ndiv_linear` | 157 |
+| Theorem | `residual_gra_X7_minus_X_N_ndiv_linear` | 162 |
+| Theorem | `residual_gra_eq_leak_factors` | 170 |
+| Theorem | `residual_gra_inv_nonunit_factors` | 174 |
+| Theorem | `residual_gra_nodiv_empty_is_nodiv` | 182 |
+| Theorem | `residual_gra_identity_tape_is_y` | 186 |
+| Theorem | `residual_gra_identity_tape_not_cube` | 190 |
+| Theorem | `residual_gra_nodiv_integer_identity_forbidden` | 194 |
+| Theorem | `residual_gra_nodiv_cube_identity_forbidden` | 206 |
+| Theorem | `residual_gra_mul_denotes_square` | 217 |
+| Theorem | `residual_identity_is_low_degree` | 236 |
+| Lemma | `residual_X3_eval` | 242 |
+| Lemma | `residual_X3_not_div_11_mid` | 246 |
+| Theorem | `residual_X3_roots_mod_11` | 255 |
+| Theorem | `residual_X3_unit_2_not_root_mod_11` | 268 |
+| Lemma | `residual_X3_not_div_17_mid` | 274 |
+| Theorem | `residual_X3_unit_2_not_root_mod_17` | 285 |
+| Theorem | `residual_X3_roots_mod_17` | 291 |
+| Theorem | `residual_const_Pe_minus_X_nth1` | 304 |
+| Theorem | `residual_const_N_ndiv_linear` | 308 |
+| Theorem | `residual_nodiv_identity_denotes_X` | 314 |
+| Theorem | `residual_identity_cube_minus_y` | 318 |
+| Theorem | `residual_nodiv_const_is_nodiv` | 328 |
+| Theorem | `residual_nodiv_const_denotes` | 332 |
+| Theorem | `residual_low_degree_identity_not_all_Fp_units` | 343 |
+| Lemma | `pin_Fp_star_length` | 364 |
+| Lemma | `forall_pin_Fp_star` | 367 |
+| Lemma | `pin_Fp_star_coprime` | 377 |
+| Lemma | `pin_Fp_star_distinct_mod_11` | 385 |
+| Theorem | `residual_low_degree_units_divides_11` | 394 |
+| Theorem | `residual_nodiv_low_degree_units_divides_11` | 408 |
+| Theorem | `residual_identity_nth1_ndiv_11` | 426 |
+| Theorem | `residual_identity_cannot_vanish_on_Fp_star` | 430 |
+| Lemma | `residual_const_Pe_degree` | 443 |
+| Theorem | `residual_const_cannot_vanish_on_Fp_star` | 447 |
+| Lemma | `pin_Fq_star_length` | 473 |
+| Lemma | `forall_pin_Fq_star` | 476 |
+| Lemma | `pin_Fq_star_distinct_mod_17` | 486 |
+| Lemma | `pin_1_16_coprime_N` | 495 |
+| Lemma | `pin_crt_lift_11_spec` | 510 |
+| Lemma | `pin_N_divides_11` | 517 |
+| Lemma | `pin_N_divides_17` | 522 |
+| Lemma | `pin_11_17_divides_N` | 527 |
+| Lemma | `residual_ZN_units_vanish_at_Fq` | 536 |
+| Theorem | `residual_low_degree_ZN_units_divides_17` | 558 |
+| Theorem | `residual_low_degree_ZN_units_divides_N` | 573 |
+| Theorem | `residual_nodiv_low_degree_ZN_units_divides_N` | 587 |
+| Theorem | `residual_identity_cannot_vanish_on_ZN_units` | 605 |
+| Theorem | `residual_const_cannot_vanish_on_ZN_units` | 620 |
 
 ## `SrsaWriteE.v`
 
@@ -3215,4 +3230,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2181 theorems/lemmas/corollaries/examples across 116 files._
+_2195 theorems/lemmas/corollaries/examples across 116 files._

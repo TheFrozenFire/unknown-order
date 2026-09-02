@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2181 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2195 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2181 results across 116 files.
+Captured for 2195 results across 116 files.
 
 Counts:
 
@@ -2304,54 +2304,68 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `residual_shaped_e_3` | 40 | 0 | 0 | OK |
-| `residual_shaped_e_7` | 50 | 0 | 0 | OK |
-| `not_residual_shaped_e_81` | 62 | 0 | 0 | OK |
-| `lambda_plus_one_witness_not_residual` | 70 | 0 | 0 | OK |
-| `residual_gra_const81_independent_of_y` | 78 | 0 | 0 | OK |
-| `residual_gra_const81_gcd_is_1` | 83 | 0 | 0 | OK |
-| `residual_gra_const81_solves_sRSA_not_residual` | 87 | 0 | 0 | OK |
-| `residual_gra_const42_inverts_pin_not_8` | 100 | 0 | 0 | OK |
-| `residual_gra_const42_misses_unit_2` | 112 | 0 | 0 | OK |
-| `residual_shaped_forbids_rational_Pe_XQe` | 119 | 0 | 0 | OK |
-| `residual_shaped_e3_leading` | 128 | 0 | 0 | OK |
-| `residual_shaped_e7_leading` | 136 | 0 | 0 | OK |
-| `residual_gra_Xe_minus_X_N_ndiv_linear` | 144 | 0 | 0 | OK |
-| `residual_gra_X3_minus_X_N_ndiv_linear` | 155 | 0 | 0 | OK |
-| `residual_gra_X7_minus_X_N_ndiv_linear` | 160 | 0 | 0 | OK |
-| `residual_gra_eq_leak_factors` | 168 | 0 | 0 | OK |
-| `residual_gra_inv_nonunit_factors` | 172 | 0 | 0 | OK |
-| `residual_gra_nodiv_empty_is_nodiv` | 180 | 0 | 0 | OK |
-| `residual_gra_identity_tape_is_y` | 184 | 0 | 0 | OK |
-| `residual_gra_identity_tape_not_cube` | 188 | 0 | 0 | OK |
-| `residual_gra_nodiv_integer_identity_forbidden` | 192 | 0 | 0 | OK |
-| `residual_gra_nodiv_cube_identity_forbidden` | 204 | 0 | 0 | OK |
-| `residual_gra_mul_denotes_square` | 215 | 0 | 0 | OK |
-| `residual_identity_is_low_degree` | 234 | 0 | 0 | OK |
-| `residual_X3_eval` | 240 | 0 | 0 | OK |
-| `residual_X3_not_div_11_mid` | 244 | 0 | 0 | OK |
-| `residual_X3_roots_mod_11` | 253 | 0 | 0 | OK |
-| `residual_X3_unit_2_not_root_mod_11` | 266 | 0 | 0 | OK |
-| `residual_X3_not_div_17_mid` | 272 | 0 | 0 | OK |
-| `residual_X3_unit_2_not_root_mod_17` | 283 | 0 | 0 | OK |
-| `residual_X3_roots_mod_17` | 289 | 0 | 0 | OK |
-| `residual_const_Pe_minus_X_nth1` | 302 | 0 | 0 | OK |
-| `residual_const_N_ndiv_linear` | 306 | 0 | 0 | OK |
-| `residual_nodiv_identity_denotes_X` | 312 | 0 | 0 | OK |
-| `residual_identity_cube_minus_y` | 316 | 0 | 0 | OK |
-| `residual_nodiv_const_is_nodiv` | 326 | 0 | 0 | OK |
-| `residual_nodiv_const_denotes` | 330 | 0 | 0 | OK |
-| `residual_low_degree_identity_not_all_Fp_units` | 341 | 0 | 0 | OK |
-| `pin_Fp_star_length` | 362 | 0 | 0 | OK |
-| `forall_pin_Fp_star` | 365 | 0 | 0 | OK |
-| `pin_Fp_star_coprime` | 375 | 0 | 0 | OK |
-| `pin_Fp_star_distinct_mod_11` | 383 | 0 | 0 | OK |
-| `residual_low_degree_units_divides_11` | 392 | 0 | 0 | OK |
-| `residual_nodiv_low_degree_units_divides_11` | 406 | 0 | 0 | OK |
-| `residual_identity_nth1_ndiv_11` | 424 | 0 | 0 | OK |
-| `residual_identity_cannot_vanish_on_Fp_star` | 428 | 0 | 0 | OK |
-| `residual_const_Pe_degree` | 441 | 0 | 0 | OK |
-| `residual_const_cannot_vanish_on_Fp_star` | 445 | 0 | 0 | OK |
+| `residual_shaped_e_3` | 42 | 0 | 0 | OK |
+| `residual_shaped_e_7` | 52 | 0 | 0 | OK |
+| `not_residual_shaped_e_81` | 64 | 0 | 0 | OK |
+| `lambda_plus_one_witness_not_residual` | 72 | 0 | 0 | OK |
+| `residual_gra_const81_independent_of_y` | 80 | 0 | 0 | OK |
+| `residual_gra_const81_gcd_is_1` | 85 | 0 | 0 | OK |
+| `residual_gra_const81_solves_sRSA_not_residual` | 89 | 0 | 0 | OK |
+| `residual_gra_const42_inverts_pin_not_8` | 102 | 0 | 0 | OK |
+| `residual_gra_const42_misses_unit_2` | 114 | 0 | 0 | OK |
+| `residual_shaped_forbids_rational_Pe_XQe` | 121 | 0 | 0 | OK |
+| `residual_shaped_e3_leading` | 130 | 0 | 0 | OK |
+| `residual_shaped_e7_leading` | 138 | 0 | 0 | OK |
+| `residual_gra_Xe_minus_X_N_ndiv_linear` | 146 | 0 | 0 | OK |
+| `residual_gra_X3_minus_X_N_ndiv_linear` | 157 | 0 | 0 | OK |
+| `residual_gra_X7_minus_X_N_ndiv_linear` | 162 | 0 | 0 | OK |
+| `residual_gra_eq_leak_factors` | 170 | 0 | 0 | OK |
+| `residual_gra_inv_nonunit_factors` | 174 | 0 | 0 | OK |
+| `residual_gra_nodiv_empty_is_nodiv` | 182 | 0 | 0 | OK |
+| `residual_gra_identity_tape_is_y` | 186 | 0 | 0 | OK |
+| `residual_gra_identity_tape_not_cube` | 190 | 0 | 0 | OK |
+| `residual_gra_nodiv_integer_identity_forbidden` | 194 | 0 | 0 | OK |
+| `residual_gra_nodiv_cube_identity_forbidden` | 206 | 0 | 0 | OK |
+| `residual_gra_mul_denotes_square` | 217 | 0 | 0 | OK |
+| `residual_identity_is_low_degree` | 236 | 0 | 0 | OK |
+| `residual_X3_eval` | 242 | 0 | 0 | OK |
+| `residual_X3_not_div_11_mid` | 246 | 0 | 0 | OK |
+| `residual_X3_roots_mod_11` | 255 | 0 | 0 | OK |
+| `residual_X3_unit_2_not_root_mod_11` | 268 | 0 | 0 | OK |
+| `residual_X3_not_div_17_mid` | 274 | 0 | 0 | OK |
+| `residual_X3_unit_2_not_root_mod_17` | 285 | 0 | 0 | OK |
+| `residual_X3_roots_mod_17` | 291 | 0 | 0 | OK |
+| `residual_const_Pe_minus_X_nth1` | 304 | 0 | 0 | OK |
+| `residual_const_N_ndiv_linear` | 308 | 0 | 0 | OK |
+| `residual_nodiv_identity_denotes_X` | 314 | 0 | 0 | OK |
+| `residual_identity_cube_minus_y` | 318 | 0 | 0 | OK |
+| `residual_nodiv_const_is_nodiv` | 328 | 0 | 0 | OK |
+| `residual_nodiv_const_denotes` | 332 | 0 | 0 | OK |
+| `residual_low_degree_identity_not_all_Fp_units` | 343 | 0 | 0 | OK |
+| `pin_Fp_star_length` | 364 | 0 | 0 | OK |
+| `forall_pin_Fp_star` | 367 | 0 | 0 | OK |
+| `pin_Fp_star_coprime` | 377 | 0 | 0 | OK |
+| `pin_Fp_star_distinct_mod_11` | 385 | 0 | 0 | OK |
+| `residual_low_degree_units_divides_11` | 394 | 0 | 0 | OK |
+| `residual_nodiv_low_degree_units_divides_11` | 408 | 0 | 0 | OK |
+| `residual_identity_nth1_ndiv_11` | 426 | 0 | 0 | OK |
+| `residual_identity_cannot_vanish_on_Fp_star` | 430 | 0 | 0 | OK |
+| `residual_const_Pe_degree` | 443 | 0 | 0 | OK |
+| `residual_const_cannot_vanish_on_Fp_star` | 447 | 0 | 0 | OK |
+| `pin_Fq_star_length` | 473 | 0 | 0 | OK |
+| `forall_pin_Fq_star` | 476 | 0 | 0 | OK |
+| `pin_Fq_star_distinct_mod_17` | 486 | 0 | 0 | OK |
+| `pin_1_16_coprime_N` | 495 | 0 | 0 | OK |
+| `pin_crt_lift_11_spec` | 510 | 0 | 0 | OK |
+| `pin_N_divides_11` | 517 | 0 | 0 | OK |
+| `pin_N_divides_17` | 522 | 0 | 0 | OK |
+| `pin_11_17_divides_N` | 527 | 0 | 0 | OK |
+| `residual_ZN_units_vanish_at_Fq` | 536 | 0 | 0 | OK |
+| `residual_low_degree_ZN_units_divides_17` | 558 | 0 | 0 | OK |
+| `residual_low_degree_ZN_units_divides_N` | 573 | 0 | 0 | OK |
+| `residual_nodiv_low_degree_ZN_units_divides_N` | 587 | 0 | 0 | OK |
+| `residual_identity_cannot_vanish_on_ZN_units` | 605 | 0 | 0 | OK |
+| `residual_const_cannot_vanish_on_ZN_units` | 620 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

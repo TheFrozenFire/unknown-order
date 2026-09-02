@@ -97,6 +97,7 @@ Constructible torsion `H` is a family parameter
 | division-free GRA tape | denotes a polynomial; integer `P(y)^e = y` for all `y` forbidden when `e≥2` | `gra_nodiv_denotes`, `gra_nodiv_integer_eth_root_forbidden`, `residual_gra_nodiv_cube_identity_forbidden` | high-degree functional-on-units maps (`X^d`); unrestricted solver ⇒ factor |
 | identity `X^3−X` / `GConst` | `deg=3 < p−1,q−1`; not all of `𝔽_p*` are roots; const linear coeff `−1` | `residual_identity_is_low_degree`, `residual_X3_roots_mod_11`, `residual_low_degree_identity_not_all_Fp_units`, `residual_const_N_ndiv_linear` | high-degree `X^d`; `N\|`all coeffs for a large `P` (eval-at-2 can be a multiple of `N`) |
 | low-degree `Q` vanishing on `1..10` | `11` divides every coefficient | `poly_prime_roots_divides`, `residual_low_degree_units_divides_11`, `residual_nodiv_low_degree_units_divides_11` | `deg = p−1` (`X^{10}−1`); vanishing on `(Z/NZ)*` as `17` divides every coeff (residue `11` is not a unit of `Z/NZ`) |
+| low-degree `Q` vanishing on `(Z/NZ)*` | CRT-lifts `11` mod `17` to unit `45`; `11` and `17` divide every coeff, hence `N` | `residual_low_degree_ZN_units_divides_N`, `residual_nodiv_low_degree_ZN_units_divides_N` | high-degree `X^d`; eval-at-2 for a general large `P` (can be a multiple of `N` without `P=0` over `Z`) |
 | pin unit `3` | `ord(3)=λ=80` | `is_order_pin_3_80`, `orders_generate_lambda_pin` | sampling-completeness for every `N` (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
@@ -113,7 +114,7 @@ Constructible torsion `H` is a family parameter
 | residual leaf + mismatch | `gcd(x^k−1,N)` is a proper factor (leaf unused; mismatch is load-bearing) | `residual_mismatch_factors`, `residual_mismatch_factors_pin` | `srsa_residual_leaf` as `Problem_Factor` on its own; RSA ≡ or ≢ factoring; PPT |
 | every unit | an `e`-th power | `rsa_units_are_eth_powers` | a decision problem on units |
 
-CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`. Residual GRA dichotomy: `cas/146_residual_gra.gp`. GRA denotation / `λ` attained: `cas/147_gra_denotes.gp`. Low-degree vanishing on units: `cas/148_low_degree_units.gp`. Low-degree roots bound: `cas/149_low_degree_roots.gp`.
+CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`. Residual GRA dichotomy: `cas/146_residual_gra.gp`. GRA denotation / `λ` attained: `cas/147_gra_denotes.gp`. Low-degree vanishing on units: `cas/148_low_degree_units.gp`. Low-degree roots bound: `cas/149_low_degree_roots.gp`. CRT lift of units-vanishing: `cas/150_crt_units_roots.gp`.
 
 ## Decision neighbours (not RSA, not formalized)
 

@@ -11,6 +11,7 @@ Require Import UnknownOrder.
 Require Import Hardness.
 Require Import StrongRSAPeel.
 Require Import GenericRing.
+Require Import TwoPrimary.
 
 Open Scope Z_scope.
 
@@ -27,7 +28,8 @@ Open Scope Z_scope.
 
     Generic-ring inroad on [residual_solver_constructs_factor_open_named],
     not a proof of that unrestricted name, and not RSA ≡ or ≢
-    factoring.  Cross-confirmed by [cas/146], [cas/148], and [cas/149]. *)
+    factoring.  Cross-confirmed by [cas/146], [cas/148], [cas/149],
+    and [cas/150]. *)
 
 (** ** Residual-shaped exponents *)
 
@@ -451,6 +453,179 @@ Proof.
   intros c. split; [rewrite residual_const_Pe_degree; lia|].
   intros Hall.
   pose proof (residual_low_degree_units_divides_11
+                (poly_Pe_minus_X [c] 3%nat)
+                ltac:(rewrite residual_const_Pe_degree; lia)
+                Hall 1%nat) as Hdiv.
+  rewrite residual_const_Pe_minus_X_nth1 in Hdiv.
+  destruct Hdiv as [k Hk]. nia.
+Qed.
+
+(** ** CRT lift: vanish on [(Z/NZ)*] + low degree ⇒ [N] | coeffs
+
+    Residue [11] is missing from the [𝔽_17*] sample of [(Z/NZ)*].
+    [crt2 11 17 1 11] lifts it to a unit ([45]).  Then [deg < 10 < 16]
+    forces [17] to divide every coefficient, hence [N].  High-degree
+    [X^d] is not forbidden.  Cross-confirmed by [cas/150]. *)
+
+Definition pin_Fq_star : list Z :=
+  [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 13; 14; 15; 16].
+
+Lemma pin_Fq_star_length : length pin_Fq_star = 16%nat.
+Proof. reflexivity. Qed.
+
+Lemma forall_pin_Fq_star :
+  forall (R : Z -> Prop),
+    (forall y, 1 <= y <= 16 -> R y) ->
+    Forall R pin_Fq_star.
+Proof.
+  intros R HR. unfold pin_Fq_star.
+  repeat (apply Forall_cons; [apply HR; lia|]).
+  apply Forall_nil.
+Qed.
+
+Lemma pin_Fq_star_distinct_mod_17 :
+  pairwise_distinct_mod 17 pin_Fq_star.
+Proof.
+  unfold pin_Fq_star, pairwise_distinct_mod.
+  repeat split;
+    repeat (apply Forall_cons; [intros [k Hk]; lia|]);
+    apply Forall_nil.
+Qed.
+
+Lemma pin_1_16_coprime_N :
+  forall a, 1 <= a <= 16 -> a <> 11 -> Z.coprime a 187.
+Proof.
+  intros a Ha Hne.
+  change 187 with (11 * 17).
+  apply (proj2 (coprime_semiprime 11 17 a prime_11 prime_17 ltac:(lia))).
+  split.
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply prime_11|].
+    intros [k Hk]. nia.
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply prime_17|].
+    intros [k Hk]. nia.
+Qed.
+
+Definition pin_crt_lift_11 : Z := crt2 11 17 1 11.
+
+Lemma pin_crt_lift_11_spec :
+  pin_crt_lift_11 = 45 /\
+  pin_crt_lift_11 mod 11 = 1 /\
+  pin_crt_lift_11 mod 17 = 11 /\
+  Z.coprime pin_crt_lift_11 187.
+Proof. unfold pin_crt_lift_11, crt2. vm_compute. repeat split; reflexivity. Qed.
+
+Lemma pin_N_divides_11 : forall n, (187 | n) -> (11 | n).
+Proof.
+  intros n Hn. apply (Z.divide_trans 11 187 n); [exists 17; reflexivity | exact Hn].
+Qed.
+
+Lemma pin_N_divides_17 : forall n, (187 | n) -> (17 | n).
+Proof.
+  intros n Hn. apply (Z.divide_trans 17 187 n); [exists 11; reflexivity | exact Hn].
+Qed.
+
+Lemma pin_11_17_divides_N :
+  forall c, (11 | c) -> (17 | c) -> (187 | c).
+Proof.
+  intros c H11 H17.
+  change 187 with (11 * 17).
+  apply divide_by_coprime_product; [|exact H11 | exact H17].
+  apply prime_coprime_distinct; [apply prime_11 | apply prime_17 | lia].
+Qed.
+
+Lemma residual_ZN_units_vanish_at_Fq :
+  forall Q,
+    (forall y, Z.coprime y 187 -> (187 | poly_eval Q y)) ->
+    forall a, 1 <= a <= 16 -> (17 | poly_eval Q a).
+Proof.
+  intros Q Hall a Ha.
+  destruct (Z.eq_dec a 11) as [H11 | Hne].
+  - subst a.
+    destruct pin_crt_lift_11_spec as [Heq [_ [Hmod Hcop]]].
+    pose proof (Hall _ Hcop) as HyN.
+    pose proof (pin_N_divides_17 _ HyN) as Hy17.
+    assert (Hcong : (17 | pin_crt_lift_11 - 11)).
+    { apply Z.mod_divide; [lia|].
+      rewrite Zminus_mod, Hmod, Z.sub_diag, Z.mod_0_l by lia. reflexivity. }
+    pose proof (poly_eval_cong Q 11 pin_crt_lift_11 17 Hcong) as Hdiff.
+    replace (poly_eval Q 11) with
+      (poly_eval Q pin_crt_lift_11 - (poly_eval Q pin_crt_lift_11 - poly_eval Q 11))
+      by ring.
+    apply Z.divide_sub_r; [exact Hy17 | exact Hdiff].
+  - apply pin_N_divides_17. apply Hall. apply pin_1_16_coprime_N; [exact Ha | exact Hne].
+Qed.
+
+Theorem residual_low_degree_ZN_units_divides_17 :
+  forall Q,
+    (poly_degree Q < 10)%nat ->
+    (forall y, Z.coprime y 187 -> (187 | poly_eval Q y)) ->
+    forall i, (17 | nth i Q 0).
+Proof.
+  intros Q Hdeg Hall i.
+  apply (poly_prime_roots_divides 17 pin_Fq_star Q).
+  - apply prime_17.
+  - apply pin_Fq_star_distinct_mod_17.
+  - rewrite pin_Fq_star_length. lia.
+  - apply forall_pin_Fq_star.
+    intros a Ha. apply residual_ZN_units_vanish_at_Fq; [exact Hall | exact Ha].
+Qed.
+
+Theorem residual_low_degree_ZN_units_divides_N :
+  forall Q,
+    (poly_degree Q < 10)%nat ->
+    (forall y, Z.coprime y 187 -> (187 | poly_eval Q y)) ->
+    forall i, (187 | nth i Q 0).
+Proof.
+  intros Q Hdeg Hall i.
+  apply pin_11_17_divides_N.
+  - apply residual_low_degree_units_divides_11; [exact Hdeg|].
+    intros y Hy. apply pin_N_divides_11. apply Hall.
+    apply pin_1_16_coprime_N; lia.
+  - apply residual_low_degree_ZN_units_divides_17; [exact Hdeg | exact Hall].
+Qed.
+
+Theorem residual_nodiv_low_degree_ZN_units_divides_N :
+  forall ops out e,
+    Forall is_nodiv ops ->
+    (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e)
+       < 10)%nat ->
+    (forall y, Z.coprime y 187 ->
+      (187 | Z.pow (gra_eval 187 ops y out) (Z.of_nat e) - y)) ->
+    forall i,
+      (187 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
+Proof.
+  intros ops out e Hop Hdeg Hall i.
+  apply residual_low_degree_ZN_units_divides_N; [exact Hdeg|].
+  intros y Hy.
+  rewrite poly_eval_Pe_minus_X.
+  rewrite <- (gra_nodiv_denotes ops 187 y out Hop).
+  apply Hall. exact Hy.
+Qed.
+
+Theorem residual_identity_cannot_vanish_on_ZN_units :
+  (poly_degree (poly_Pe_minus_X poly_X 3%nat) < 10)%nat /\
+  ~ (forall y, Z.coprime y 187 ->
+       (187 | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
+Proof.
+  split; [rewrite poly_degree_X3_minus_X; lia|].
+  intros Hall.
+  pose proof (residual_low_degree_ZN_units_divides_N
+                (poly_Pe_minus_X poly_X 3%nat)
+                ltac:(rewrite poly_degree_X3_minus_X; lia)
+                Hall 1%nat) as Hdiv.
+  rewrite X3_minus_X_nth1 in Hdiv.
+  destruct Hdiv as [k Hk]. nia.
+Qed.
+
+Theorem residual_const_cannot_vanish_on_ZN_units :
+  forall c,
+    (poly_degree (poly_Pe_minus_X [c] 3%nat) < 10)%nat /\
+    ~ (forall y, Z.coprime y 187 ->
+         (187 | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
+Proof.
+  intros c. split; [rewrite residual_const_Pe_degree; lia|].
+  intros Hall.
+  pose proof (residual_low_degree_ZN_units_divides_N
                 (poly_Pe_minus_X [c] 3%nat)
                 ltac:(rewrite residual_const_Pe_degree; lia)
                 Hall 1%nat) as Hdiv.

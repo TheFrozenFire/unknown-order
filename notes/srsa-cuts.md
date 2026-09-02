@@ -298,9 +298,10 @@ coeff `−1` so `N` cannot divide every coefficient (CAS `148`).
 High-degree `X^d` is not forbidden. Low-degree plus vanishing on
 `1..10` (all of `𝔽_11*` and units of `Z/187Z`) forces `11` to divide
 every coefficient (`poly_prime_roots_divides`, CAS `149`); identity
-and `GConst` have linear `−1`, so they cannot vanish. Vanishing on
-`(Z/NZ)*` does not sample `11` mod `17`. Pin unit `3` has order `λ`
-(`orders_generate_lambda_pin`).
+and `GConst` have linear `−1`, so they cannot vanish. CRT lifts residue
+`11` mod `17` to the unit `45`, so vanishing on `(Z/NZ)*` plus
+`deg < 10` forces `N` to divide every coefficient (CAS `150`). Pin unit
+`3` has order `λ` (`orders_generate_lambda_pin`).
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
 GGM: `GenericGroup.v`, CAS `121`–`122`.
@@ -327,6 +328,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | nodiv GRA denotation / pin attains `λ` | `gra_nodiv_*` / `orders_generate_lambda_pin` | `GenericRing.v`, `Order.v` | `147` |
 | low-degree vanishing on units | `residual_identity_*` / `residual_X3_*` / `residual_const_*` / `residual_nodiv_const_*` / `residual_low_degree_*` | `SrsaResidualGRA.v` | `148` |
 | low-degree roots bound on `𝔽_11*` | `residual_low_degree_units_divides_11` / `residual_nodiv_low_degree_units_divides_11` / `residual_*_cannot_vanish_on_Fp_star` | `SrsaResidualGRA.v`, `ZPoly.v` | `149` |
+| CRT lift of units-vanishing to `N \|` coeffs | `residual_low_degree_ZN_units_divides_N` / `residual_nodiv_low_degree_ZN_units_divides_N` / `residual_*_cannot_vanish_on_ZN_units` | `SrsaResidualGRA.v` | `150` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |
