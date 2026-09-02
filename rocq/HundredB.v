@@ -67,9 +67,10 @@ Proof. vm_compute. repeat split; discriminate. Qed.
 Theorem hun_20_bitrev_36_is_9 :
   powm 9 3 187 = 168 /\
   168 <> 36 /\
+  Z.gcd (168 - 36) 187 = 11 /\
   powm 53 3 187 = 25 /\
   25 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+Proof. vm_compute. repeat split; try discriminate; reflexivity. Qed.
 
 Theorem hun_21_triangular :
   (36 * 35 / 2) mod 187 = 69 /\
@@ -84,14 +85,17 @@ Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 Theorem hun_23_fibonacci_y :
   hun_fib_iter 36%nat 0 1 = 14930352 /\
   14930352 mod 187 = 85 /\
+  Z.gcd 85 187 = 17 /\
   powm 85 3 187 = 17 /\
   17 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+Proof. vm_compute. repeat split; try discriminate; reflexivity. Qed.
 
 Theorem hun_24_exp_base2 :
   powm 2 36 187 = 152 /\
-  152 <> 36.
-Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
+  152 <> 36 /\
+  powm 152 3 187 = 135 /\
+  Z.gcd (135 - 36) 187 = 11.
+Proof. vm_compute. repeat split; try discriminate; reflexivity. Qed.
 
 Theorem hun_25_exp_base3 :
   powm 3 36 187 = 47 /\
@@ -105,13 +109,17 @@ Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem hun_27_inv_then_cube :
   powm 26 3 187 = 185 /\
-  185 <> 36.
-Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
+  185 <> 36 /\
+  powm 185 3 187 = 179 /\
+  Z.gcd (179 - 36) 187 = 11.
+Proof. vm_compute. repeat split; try discriminate; reflexivity. Qed.
 
 Theorem hun_28_cube_then_inv :
   (93 * 185) mod 187 = 1 /\
-  185 <> 36.
-Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
+  185 <> 36 /\
+  powm 185 3 187 = 179 /\
+  Z.gcd (179 - 36) 187 = 11.
+Proof. vm_compute. repeat split; try discriminate; reflexivity. Qed.
 
 Theorem hun_29_hybrid_crt :
   crt2 11 17 1 36 = 155 /\

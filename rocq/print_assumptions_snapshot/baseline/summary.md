@@ -1020,17 +1020,17 @@ Counts:
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
 | `hun_01_odd_monomial` | 21 | 0 | 0 | OK |
-| `hun_02_associate` | 27 | 0 | 0 | OK |
-| `hun_03_midpoint` | 32 | 0 | 0 | OK |
-| `hun_04_phi_y_even` | 39 | 0 | 0 | OK |
-| `hun_05_hamming_even` | 44 | 0 | 0 | OK |
-| `hun_06_shamir_two_leftovers` | 49 | 0 | 0 | OK |
-| `hun_07_paillier_carrier` | 55 | 0 | 0 | OK |
-| `hun_08_williams_Ve` | 63 | 0 | 0 | OK |
-| `hun_09_lsb_y_even` | 69 | 0 | 0 | OK |
-| `hun_10_encrypt_as_decrypt` | 73 | 0 | 0 | OK |
-| `hun_11_e25_shares_lambda` | 78 | 0 | 0 | OK |
-| `hun_12_not_coppersmith_small` | 83 | 0 | 0 | OK |
+| `hun_02_associate` | 28 | 0 | 0 | OK |
+| `hun_03_midpoint` | 33 | 0 | 0 | OK |
+| `hun_04_phi_y_even` | 40 | 0 | 0 | OK |
+| `hun_05_hamming_even` | 45 | 0 | 0 | OK |
+| `hun_06_shamir_two_leftovers` | 50 | 0 | 0 | OK |
+| `hun_07_paillier_carrier` | 56 | 0 | 0 | OK |
+| `hun_08_williams_Ve` | 64 | 0 | 0 | OK |
+| `hun_09_lsb_y_even` | 70 | 0 | 0 | OK |
+| `hun_10_encrypt_as_decrypt` | 74 | 0 | 0 | OK |
+| `hun_11_e25_shares_lambda` | 79 | 0 | 0 | OK |
+| `hun_12_not_coppersmith_small` | 84 | 0 | 0 | OK |
 
 ## HundredB.v
 
@@ -1044,18 +1044,18 @@ Counts:
 | `hun_18_floor_sqrt_y` | 56 | 0 | 0 | OK |
 | `hun_19_half_y` | 61 | 0 | 0 | OK |
 | `hun_20_bitrev_36_is_9` | 67 | 0 | 0 | OK |
-| `hun_21_triangular` | 74 | 0 | 0 | OK |
-| `hun_22_nextprime_as_x` | 79 | 0 | 0 | OK |
-| `hun_23_fibonacci_y` | 84 | 0 | 0 | OK |
-| `hun_24_exp_base2` | 91 | 0 | 0 | OK |
-| `hun_25_exp_base3` | 96 | 0 | 0 | OK |
-| `hun_26_phi3_of_y` | 101 | 0 | 0 | OK |
-| `hun_27_inv_then_cube` | 106 | 0 | 0 | OK |
-| `hun_28_cube_then_inv` | 111 | 0 | 0 | OK |
-| `hun_29_hybrid_crt` | 116 | 0 | 0 | OK |
-| `hun_30_mismatched_crt_splits` | 123 | 0 | 0 | OK |
-| `hun_31_integer_jnt` | 133 | 0 | 0 | OK |
-| `hun_32_y2_plus_1` | 138 | 0 | 0 | OK |
+| `hun_21_triangular` | 75 | 0 | 0 | OK |
+| `hun_22_nextprime_as_x` | 80 | 0 | 0 | OK |
+| `hun_23_fibonacci_y` | 85 | 0 | 0 | OK |
+| `hun_24_exp_base2` | 93 | 0 | 0 | OK |
+| `hun_25_exp_base3` | 100 | 0 | 0 | OK |
+| `hun_26_phi3_of_y` | 105 | 0 | 0 | OK |
+| `hun_27_inv_then_cube` | 110 | 0 | 0 | OK |
+| `hun_28_cube_then_inv` | 117 | 0 | 0 | OK |
+| `hun_29_hybrid_crt` | 124 | 0 | 0 | OK |
+| `hun_30_mismatched_crt_splits` | 131 | 0 | 0 | OK |
+| `hun_31_integer_jnt` | 141 | 0 | 0 | OK |
+| `hun_32_y2_plus_1` | 146 | 0 | 0 | OK |
 
 ## HundredC.v
 

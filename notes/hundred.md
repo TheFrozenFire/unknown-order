@@ -9,7 +9,7 @@ Files: `HundredA.v` (1–12), `HundredB.v` (13–32), `HundredC.v` (33–50),
 
 | # | Class | Rocq | Fate |
 |---:|---|---|---|
-| 1 | Odd monomial `x=y³` | `hun_01_odd_monomial` | does not inhabit |
+| 1 | Odd monomial `x=y³` | `hun_01_odd_monomial` | does not invert; one-sided cube splits (`gcd=17`) |
 | 2 | Associate `N−x` | `hun_02_associate` | does not inhabit |
 | 3 | Midpoint `\|y−⌊N/2⌋\|` | `hun_03_midpoint` | does not inhabit |
 | 4 | `e=φ(y)` | `hun_04_phi_y_even` | peels (even `e`) |
@@ -18,7 +18,7 @@ Files: `HundredA.v` (1–12), `HundredB.v` (13–32), `HundredC.v` (33–50),
 | 7 | Paillier `(ℤ/N²ℤ)*` | `hun_07_paillier_carrier` | different group |
 | 8 | Williams `V_e` output | `hun_08_williams_Ve` | torus, not the cube |
 | 9 | LSB(`y`) then constant `e` | `hun_09_lsb_y_even` | discrete `e`, even branch |
-| 10 | `x=y^e` encrypt-as-decrypt | `hun_10_encrypt_as_decrypt` | does not invert |
+| 10 | `x=y^e` encrypt-as-decrypt | `hun_10_encrypt_as_decrypt` | does not invert (`93≠42`); same monomial as 1 |
 | 11 | `e=25=5²` | `hun_11_e25_shares_lambda` | not residual |
 | 12 | Coppersmith-small `x` | `hun_12_not_coppersmith_small` | residual `x` outside bound |
 | 13 | Odd monomial `x=y⁵` | `hun_13_odd_monomial_y5` | does not inhabit |
@@ -28,15 +28,15 @@ Files: `HundredA.v` (1–12), `HundredB.v` (13–32), `HundredC.v` (33–50),
 | 17 | `x=y^{N+1}` | `hun_17_y_to_Nplus1` | does not inhabit |
 | 18 | `x=⌊√y⌋` | `hun_18_floor_sqrt_y` | square, even-`e` peel |
 | 19 | `x=⌊y/2⌋` | `hun_19_half_y` | does not inhabit |
-| 20 | 6-bit reverse of `y` | `hun_20_bitrev_36_is_9` | reverse of `36` is `9`, not a root |
+| 20 | 6-bit reverse of `y` | `hun_20_bitrev_36_is_9` | reverse of `36` is `9`; one-sided cube splits (`gcd=11`) |
 | 21 | Triangular `y(y−1)/2` | `hun_21_triangular` | `69` is a 5th root of `1` |
 | 22 | `nextprime(y)` as `x` | `hun_22_nextprime_as_x` | does not inhabit |
-| 23 | `x=F_y` Fibonacci | `hun_23_fibonacci_y` | does not inhabit |
-| 24 | `x=2^y` | `hun_24_exp_base2` | does not inhabit |
+| 23 | `x=F_y` Fibonacci | `hun_23_fibonacci_y` | splits (`gcd(85,N)=17`, non-unit `x`) |
+| 24 | `x=2^y` | `hun_24_exp_base2` | does not invert; one-sided cube splits (`gcd=11`) |
 | 25 | `x=3^y` | `hun_25_exp_base3` | does not inhabit |
 | 26 | `x=Φ_3(y)` | `hun_26_phi3_of_y` | does not inhabit |
-| 27 | `x=(y^{-1})³` | `hun_27_inv_then_cube` | does not inhabit |
-| 28 | `x=(y³)^{-1}` | `hun_28_cube_then_inv` | does not inhabit |
+| 27 | `x=(y^{-1})³` | `hun_27_inv_then_cube` | does not invert; one-sided cube splits (`gcd=11`) |
+| 28 | `x=(y³)^{-1}` | `hun_28_cube_then_inv` | same residue as 27; one-sided cube splits |
 | 29 | Hybrid CRT`(1, y mod q)` | `hun_29_hybrid_crt` | unit, not a root |
 | 30 | Mismatched CRT`(x_p,1)` | `hun_30_mismatched_crt_splits` | splits |
 | 31 | Integer JNT `y+c` cube | `hun_31_integer_jnt` | only when `y+c` is a cube |
@@ -111,6 +111,8 @@ Files: `HundredA.v` (1–12), `HundredB.v` (13–32), `HundredC.v` (33–50),
 | 100 | DL of `y` base `3` | `hun_100_dl_base3` | `y=3^{46}`, `x=3^{42}`, `ae≡c (mod λ)` |
 
 Count: 100. CAS `133`. Jacobian leftover stays unnamed as factoring.
+
+Verbose residue dump (not globbed): `cas/verbose_dump.gp`. On this pin `y=6²=(q−p)²` and `x=y+√y`, so several public maps collide; `y^N≡x` is `N≡d (mod ord y)`, not a general solver. Classes 1, 20, 23, 24, 27, 28 leak a prime without being residual cubes.
 
 ## Joined identity (CAS `134`)
 

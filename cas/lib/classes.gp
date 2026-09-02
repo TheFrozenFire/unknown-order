@@ -1,7 +1,10 @@
 \\ One predicate per enumerated class.  Fate of that shape on the pin
 \\ (and named second moduli).  Requires init_pin() first.
 
-cl_01() = lift(Mod(36,N)^3)==93 && lift(Mod(93,N)^3)==70;
+cl_01() = {
+  lift(Mod(36,N)^3)==93 && lift(Mod(93,N)^3)==70
+  && gcd(70-36,N)==17
+};
 cl_02() = lift(Mod(145,N)^3)==151;
 cl_03() = N\2==93 && abs(36-93)==57 && lift(Mod(57,N)^3)==63;
 cl_04() = eulerphi(36)==12 && 12%2==0;
@@ -26,16 +29,17 @@ cl_18() = sqrtint(36)==6 && 6^2==36;
 cl_19() = lift(Mod(18,N)^3)==35;
 cl_20() = {
   fromdigits(Vecrev(binary(36)),2)==9 && lift(Mod(9,N)^3)==168
+  && gcd(168-36,N)==11
   && fromdigits(Vecrev(binary(43)),2)==53
 };
 cl_21() = (36*35/2)%N==69;
 cl_22() = lift(Mod(37,N)^3)==163;
-cl_23() = fibonacci(36)%N==85 && lift(Mod(85,N)^3)==17;
-cl_24() = lift(Mod(2,N)^36)==152;
+cl_23() = fibonacci(36)%N==85 && gcd(85,N)==17 && lift(Mod(85,N)^3)==17;
+cl_24() = lift(Mod(2,N)^36)==152 && lift(Mod(152,N)^3)==135 && gcd(135-36,N)==11;
 cl_25() = lift(Mod(3,N)^36)==47;
 cl_26() = (36^2+36+1)%N==24;
-cl_27() = lift(Mod(26,N)^3)==185;
-cl_28() = lift(1/Mod(93,N))==185;
+cl_27() = lift(Mod(26,N)^3)==185 && lift(Mod(185,N)^3)==179 && gcd(179-36,N)==11;
+cl_28() = lift(1/Mod(93,N))==185 && lift(Mod(185,N)^3)==179 && gcd(179-36,N)==11;
 cl_29() = {
   my(h = lift(chinese(Mod(1,11), Mod(36,17))));
   h==155 && gcd(h,N)==1 && lift(Mod(155,N)^3)==144

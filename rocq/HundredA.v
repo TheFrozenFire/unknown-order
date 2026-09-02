@@ -21,8 +21,9 @@ Open Scope Z_scope.
 Theorem hun_01_odd_monomial :
   powm 36 3 187 = 93 /\
   powm 93 3 187 = 70 /\
-  70 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  70 <> 36 /\
+  Z.gcd (70 - 36) 187 = 17.
+Proof. vm_compute. repeat split; try discriminate; reflexivity. Qed.
 
 Theorem hun_02_associate :
   powm (187 - 42) 3 187 = 151 /\
