@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1458 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1491 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1458 results across 102 files.
+Captured for 1491 results across 103 files.
 
 Counts:
 
@@ -1687,6 +1687,44 @@ Counts:
 | `poly_e_X_two_points` | 112 | 0 | 0 | OK |
 | `poly_e_X_not_rerand` | 116 | 0 | 0 | OK |
 | `poly_e_nonconstant_not_fixed_parameter` | 120 | 0 | 0 | OK |
+
+## SolverShape.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `shape_even_ndiv_odd` | 31 | 0 | 0 | OK |
+| `shape_monomial_k2_period_obstruction` | 38 | 0 | 0 | OK |
+| `shape_monomial_k2_pin` | 46 | 0 | 0 | OK |
+| `shape_inverse_of_36_residual_shaped` | 54 | 0 | 0 | OK |
+| `shape_inverse_of_generator` | 65 | 0 | 0 | OK |
+| `shape_inverse_generator_miller` | 70 | 0 | 0 | OK |
+| `shape_affine_identity_forbidden` | 80 | 0 | 0 | OK |
+| `shape_affine_eval_not_zero` | 89 | 0 | 0 | OK |
+| `shape_affine_pointwise_const_residual` | 93 | 0 | 0 | OK |
+| `shape_eth_root_of_1` | 99 | 0 | 0 | OK |
+| `shape_unique_eth_root` | 115 | 0 | 0 | OK |
+| `shape_two_unit_cube_roots_agree` | 128 | 0 | 0 | OK |
+| `shape_unique_unit_cube_root_of_36` | 143 | 0 | 0 | OK |
+| `shape_fr_small_integer` | 158 | 0 | 0 | OK |
+| `shape_fr_cube_gap_small` | 166 | 0 | 0 | OK |
+| `shape_fr_residual_not_integer_cube` | 171 | 0 | 0 | OK |
+| `shape_fr_reduced_offset_not_integer` | 178 | 0 | 0 | OK |
+| `shape_chaum_unblind` | 185 | 0 | 0 | OK |
+| `shape_chaum_recovers_cube_root` | 194 | 0 | 0 | OK |
+| `shape_chaum_e_is_protocol` | 201 | 0 | 0 | OK |
+| `shape_jacobi_e_on_square` | 211 | 0 | 0 | OK |
+| `shape_jacobi_e_on_nonsquare` | 216 | 0 | 0 | OK |
+| `shape_short_period_of_y_no_split` | 224 | 0 | 0 | OK |
+| `shape_lambda_quality_miller` | 234 | 0 | 0 | OK |
+| `shape_ed_minus_one_is_lambda` | 244 | 0 | 0 | OK |
+| `shape_ed_miller` | 249 | 0 | 0 | OK |
+| `shape_e3_not_invertible_mod_Nminus1` | 256 | 0 | 0 | OK |
+| `shape_wrong_euler_inv` | 261 | 0 | 0 | OK |
+| `shape_crt_residues` | 271 | 0 | 0 | OK |
+| `shape_crt_recovers_root` | 276 | 0 | 0 | OK |
+| `shape_crt_moduli_are_factors` | 280 | 0 | 0 | OK |
+| `shape_miller_e11_on_y_splits` | 291 | 0 | 0 | OK |
+| `shape_miller_e3_on_y_survives` | 303 | 0 | 0 | OK |
 
 ## StrongPrimes.v
 

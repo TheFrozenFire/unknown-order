@@ -1981,6 +1981,58 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `poly_e_X_not_rerand` | 116 |
 | Theorem | `poly_e_nonconstant_not_fixed_parameter` | 120 |
 
+## `SolverShape.v`
+
+- L23: Twelve solver-shape inroads on Strong RSA
+  - L29: 1. Monomial [x = y^k], [k] even
+  - L52: 2. Inverse [x = y^{-1}]
+  - L78: 3. Affine identity [x = a y + b] for all [y]
+  - L97: 4. Two outputs at the same coprime [e]
+  - L156: 5. Franklin–Reiter: additive related at fixed [e]
+  - L183: 6. Chaum-blind: sees [y r^e], returns [x r]
+  - L206: 7. Jacobi-discrete [e(y) ∈ {3,5}]
+  - L222: 8. Extra annihilator output [M] with [y^M ≡ 1]
+  - L242: 9. Extra [d] with [e d ≡ 1 (mod λ)]
+  - L254: 10. Euler inverse modulo [N−1], not [λ]
+  - L269: 11. CRT-tape: [x = CRT(x_p, x_q)]
+  - L289: 12. Miller on [e−1] against the challenge [y]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `shape_even_ndiv_odd` | 31 |
+| Theorem | `shape_monomial_k2_period_obstruction` | 38 |
+| Theorem | `shape_monomial_k2_pin` | 46 |
+| Theorem | `shape_inverse_of_36_residual_shaped` | 54 |
+| Theorem | `shape_inverse_of_generator` | 65 |
+| Theorem | `shape_inverse_generator_miller` | 70 |
+| Theorem | `shape_affine_identity_forbidden` | 80 |
+| Theorem | `shape_affine_eval_not_zero` | 89 |
+| Theorem | `shape_affine_pointwise_const_residual` | 93 |
+| Theorem | `shape_eth_root_of_1` | 99 |
+| Theorem | `shape_unique_eth_root` | 115 |
+| Theorem | `shape_two_unit_cube_roots_agree` | 128 |
+| Theorem | `shape_unique_unit_cube_root_of_36` | 143 |
+| Theorem | `shape_fr_small_integer` | 158 |
+| Theorem | `shape_fr_cube_gap_small` | 166 |
+| Theorem | `shape_fr_residual_not_integer_cube` | 171 |
+| Theorem | `shape_fr_reduced_offset_not_integer` | 178 |
+| Theorem | `shape_chaum_unblind` | 185 |
+| Theorem | `shape_chaum_recovers_cube_root` | 194 |
+| Theorem | `shape_chaum_e_is_protocol` | 201 |
+| Theorem | `shape_jacobi_e_on_square` | 211 |
+| Theorem | `shape_jacobi_e_on_nonsquare` | 216 |
+| Theorem | `shape_short_period_of_y_no_split` | 224 |
+| Theorem | `shape_lambda_quality_miller` | 234 |
+| Theorem | `shape_ed_minus_one_is_lambda` | 244 |
+| Theorem | `shape_ed_miller` | 249 |
+| Theorem | `shape_e3_not_invertible_mod_Nminus1` | 256 |
+| Theorem | `shape_wrong_euler_inv` | 261 |
+| Theorem | `shape_crt_residues` | 271 |
+| Theorem | `shape_crt_recovers_root` | 276 |
+| Theorem | `shape_crt_moduli_are_factors` | 280 |
+| Theorem | `shape_miller_e11_on_y_splits` | 291 |
+| Theorem | `shape_miller_e3_on_y_survives` | 303 |
+
 ## `StrongPrimes.v`
 
 - L9: Safe / strong primes: generation-side refusal of one-sided annihilators
@@ -2336,4 +2388,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1458 theorems/lemmas/corollaries/examples across 102 files._
+_1491 theorems/lemmas/corollaries/examples across 103 files._

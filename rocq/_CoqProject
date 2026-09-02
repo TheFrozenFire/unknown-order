@@ -73,6 +73,7 @@ QRModN.v
 StrongRSAPeel.v
 SolverRestrict.v
 DozenInroads.v
+SolverShape.v
 JagerSchwenk.v
 Cocks.v
 PotCheck.v

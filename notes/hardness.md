@@ -160,6 +160,27 @@ CAS `128`. These restrict the *algorithm*. `srsa_residual_leaf` stays unnamed as
 
 None of these twelve is a proof that `srsa_residual_leaf` factors.
 
+### Solver shapes (`SolverShape.v`, CAS `130`)
+
+How the TM writes `x` and `e`, not further case analysis of the witness.
+
+| # | Class | Pin identity | Residual? |
+|---|---|---|---|
+| 1 | Monomial `x=y^k` even `k` | `40 ∤ 2e−1` (even ndiv odd); `(36²)³ ≢ 36` | no (impossible) |
+| 2 | Inverse `x=y^{-1}` | `26^{39}≡36` residual-shaped; `125^{79}≡3` and `e+1=λ` | mixed; generator inverse Miller-splits |
+| 3 | Affine identity `x=ay+b` | `Y³−Y` linear `−1`; eval at 2 is 6 | identity no; pointwise const still residual |
+| 4 | Two outputs at coprime `e` | unique unit cube root of `36` is `42` | second unit root impossible |
+| 5 | Franklin–Reiter `y,y+δ` | `5³−4³=61` integer-small; `42³=74088` not `<N` | small-message closes; residual not integer |
+| 6 | Chaum-blind `y r^e` | unblind recovers `42`; protocol `e=3` | leftover is fixed-`e` residual |
+| 7 | Jacobi-discrete `e∈{3,5}` | `(36/N)=1 → e=3`; `(2/N)=−1 → e=5\|λ` | mixed, not uniformly residual |
+| 8 | Extra annihilator `M` | `36^{40}≡1`, `gcd=N`; λ-Miller splits | short period of this `y` does not |
+| 9 | Extra `d`, `ed≡1 (mod λ)` | `3·27−1=80`; Miller | factors; leftover writes no `d` |
+| 10 | Euler inverse mod `N−1` | `3` ndiv-invertible mod `186`; `36^{17}≡53≠42` | does not invert |
+| 11 | CRT-tape `CRT(x_p,x_q)` | `42≡9 (mod 11)≡8 (mod 17)`; CRT=`42` | combining moduli are factors |
+| 12 | Miller on `e−1` against `y` | `gcd(36^{10}−1,N)=11`; `gcd(36²−1,N)=1` | splits some residual-shaped `e`; cube survives |
+
+None of these twelve is a proof that `srsa_residual_leaf` factors.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
