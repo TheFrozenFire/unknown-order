@@ -251,6 +251,14 @@ Roster `notes/hundred4.md`. Residual dictionary (`e` and `e+40` same
 challenge. Equality-only `y^k≡1` finds `ord=40` and inverts; gcd of
 the same powers splits. Still not `Problem_Factor`.
 
+### Fifth hundred (`HundredX.v`–`HundredAB.v`, CAS `138`)
+
+Roster `notes/hundred5.md`. Leftover `x` Pohlig-splits the same way
+`y` does. Cubing the 16 generators is four 4-cycles. `gcd(p−1,q−1)=2`
+so local orders match only at `{1,2}`. Cube roots of `2`, `3`, and
+`36` at `k=27` live in three subgroups; two pairwise gcds split.
+Still not `Problem_Factor`.
+
 ### Joined pin identity (CAS `134`)
 
 `cas/lib/pin.gp` plus `cas/lib/classes.gp` give one predicate `whole()`:

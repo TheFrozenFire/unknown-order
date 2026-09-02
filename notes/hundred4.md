@@ -113,7 +113,7 @@ CAS `137`.
 | 399 | `y^{27}` | `hun_399_y_to_27` | leftover `x` |
 | 400 | cubing on both primaries | `hun_400_cube_bij_primaries` | bijective |
 
-Count: 100. CAS `137`.
+Count: 100. CAS `137`. A fifth hundred is `notes/hundred5.md` / CAS `138`.
 
 The residual cube is SAGM `(a,e)=(27,3)` on the challenge. Equality-only
 tests `y^k ≡ 1` find `ord=40` and invert without a factor. The same

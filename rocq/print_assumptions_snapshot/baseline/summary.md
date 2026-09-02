@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1942 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2042 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1942 results across 125 files.
+Captured for 2042 results across 130 files.
 
 Counts:
 
@@ -1032,6 +1032,56 @@ Counts:
 | `hun_11_e25_shares_lambda` | 79 | 0 | 0 | OK |
 | `hun_12_not_coppersmith_small` | 84 | 0 | 0 | OK |
 
+## HundredAA.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_461_cycle2_168` | 19 | 0 | 0 | OK |
+| `hun_462_cycle3_25` | 23 | 0 | 0 | OK |
+| `hun_463_cycle3_104` | 27 | 0 | 0 | OK |
+| `hun_464_cycle3_59` | 31 | 0 | 0 | OK |
+| `hun_465_cycle3_53` | 35 | 0 | 0 | OK |
+| `hun_466_cycle4_49` | 39 | 0 | 0 | OK |
+| `hun_467_cycle4_26` | 43 | 0 | 0 | OK |
+| `hun_468_cycle4_185` | 47 | 0 | 0 | OK |
+| `hun_469_cycle4_179` | 51 | 0 | 0 | OK |
+| `hun_470_gcd_pminus1_qminus1` | 55 | 0 | 0 | OK |
+| `hun_471_five_div_ord` | 59 | 0 | 0 | OK |
+| `hun_472_eight_div_ord` | 63 | 0 | 0 | OK |
+| `hun_473_three_pohlig_5` | 67 | 0 | 0 | OK |
+| `hun_474_three_pohlig_16` | 75 | 0 | 0 | OK |
+| `hun_475_three_pow8_no_split` | 83 | 0 | 0 | OK |
+| `hun_476_120_plus_1` | 87 | 0 | 0 | OK |
+| `hun_477_miller_66` | 93 | 0 | 0 | OK |
+| `hun_478_four_sqrt1` | 98 | 0 | 0 | OK |
+| `hun_479_x16_not_1` | 105 | 0 | 0 | OK |
+| `hun_480_x8_not_1` | 110 | 0 | 0 | OK |
+
+## HundredAB.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_481_cbrt_2_in_ltwo` | 20 | 0 | 0 | OK |
+| `hun_482_cbrt_3_in_lthree` | 25 | 0 | 0 | OK |
+| `hun_483_cbrt_36_in_ly` | 30 | 0 | 0 | OK |
+| `hun_484_three_x_for_k27` | 35 | 0 | 0 | OK |
+| `hun_485_cbrt2_cbrt36_split` | 40 | 0 | 0 | OK |
+| `hun_486_cbrt3_cbrt36_split` | 48 | 0 | 0 | OK |
+| `hun_487_cbrt3_cbrt2` | 56 | 0 | 0 | OK |
+| `hun_488_five_max_order` | 60 | 0 | 0 | OK |
+| `hun_489_five_pohlig_5` | 65 | 0 | 0 | OK |
+| `hun_490_five_pohlig_16` | 73 | 0 | 0 | OK |
+| `hun_491_lam_bitlength` | 81 | 0 | 0 | OK |
+| `hun_492_x_local_qr` | 85 | 0 | 0 | OK |
+| `hun_493_161_mod_8` | 90 | 0 | 0 | OK |
+| `hun_494_ord16_to_miller` | 95 | 0 | 0 | OK |
+| `hun_495_x_not_ord16` | 99 | 0 | 0 | OK |
+| `hun_496_x_not_ord10` | 103 | 0 | 0 | OK |
+| `hun_497_77_51_is_2_pow7` | 107 | 0 | 0 | OK |
+| `hun_498_77_lambda` | 111 | 0 | 0 | OK |
+| `hun_499_77_two_pow3` | 115 | 0 | 0 | OK |
+| `hun_500_77_two_pow5` | 123 | 0 | 0 | OK |
+
 ## HundredB.v
 
 | Theorem | Line | total | load-bearing | status |
@@ -1514,6 +1564,81 @@ Counts:
 | `hun_398_cube_of_x` | 96 | 0 | 0 | OK |
 | `hun_399_y_to_27` | 100 | 0 | 0 | OK |
 | `hun_400_cube_bij_primaries` | 104 | 0 | 0 | OK |
+
+## HundredX.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_401_x5_minus_1_splits` | 18 | 0 | 0 | OK |
+| `hun_402_x8_minus_1_splits` | 26 | 0 | 0 | OK |
+| `hun_403_x10_minus_1_splits` | 34 | 0 | 0 | OK |
+| `hun_404_x16_minus_1_splits` | 42 | 0 | 0 | OK |
+| `hun_405_x4_minus_1` | 50 | 0 | 0 | OK |
+| `hun_406_x2_minus_1` | 54 | 0 | 0 | OK |
+| `hun_407_x5_generates_C8` | 58 | 0 | 0 | OK |
+| `hun_408_x8_in_C5` | 63 | 0 | 0 | OK |
+| `hun_409_reconstruct_x` | 68 | 0 | 0 | OK |
+| `hun_410_same_oracle` | 72 | 0 | 0 | OK |
+| `hun_411_cycle_70_cube` | 77 | 0 | 0 | OK |
+| `hun_412_cycle_42_cube` | 81 | 0 | 0 | OK |
+| `hun_413_cycle_36_cube` | 85 | 0 | 0 | OK |
+| `hun_414_cycle_93_cube` | 89 | 0 | 0 | OK |
+| `hun_415_three_order_4_mod_40` | 93 | 0 | 0 | OK |
+| `hun_416_27_order_4_mod_40` | 97 | 0 | 0 | OK |
+| `hun_417_cycle2_9` | 101 | 0 | 0 | OK |
+| `hun_418_cycle2_168` | 105 | 0 | 0 | OK |
+| `hun_419_cycle2_15` | 109 | 0 | 0 | OK |
+| `hun_420_jacobi_x_vs_2` | 113 | 0 | 0 | OK |
+
+## HundredY.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_421_ten_order_16` | 19 | 0 | 0 | OK |
+| `hun_422_ten_pow8_miller` | 24 | 0 | 0 | OK |
+| `hun_423_ten_pow8_splits` | 28 | 0 | 0 | OK |
+| `hun_424_ten_pow16` | 36 | 0 | 0 | OK |
+| `hun_425_x_not_in_lten` | 40 | 0 | 0 | OK |
+| `hun_426_21_order_4` | 45 | 0 | 0 | OK |
+| `hun_427_21_sq_splits` | 50 | 0 | 0 | OK |
+| `hun_428_89_order_4` | 58 | 0 | 0 | OK |
+| `hun_429_120_mixed` | 63 | 0 | 0 | OK |
+| `hun_430_minus1_no_split` | 69 | 0 | 0 | OK |
+| `hun_431_pminus1_qminus1` | 74 | 0 | 0 | OK |
+| `hun_432_lambda_lcm` | 79 | 0 | 0 | OK |
+| `hun_433_phi_product` | 83 | 0 | 0 | OK |
+| `hun_434_index_four` | 87 | 0 | 0 | OK |
+| `hun_435_x_order_40` | 91 | 0 | 0 | OK |
+| `hun_436_v2_ord_x` | 96 | 0 | 0 | OK |
+| `hun_437_v2_lam` | 101 | 0 | 0 | OK |
+| `hun_438_69_generates_C5` | 106 | 0 | 0 | OK |
+| `hun_439_111_generates_C8` | 111 | 0 | 0 | OK |
+| `hun_440_x_generates_5_sylow` | 116 | 0 | 0 | OK |
+
+## HundredZ.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_441_77_pminus1` | 19 | 0 | 0 | OK |
+| `hun_442_77_qminus1` | 27 | 0 | 0 | OK |
+| `hun_443_77_leftover_pohlig` | 35 | 0 | 0 | OK |
+| `hun_444_77_ord2_is_lam` | 43 | 0 | 0 | OK |
+| `hun_445_k27_coords` | 48 | 0 | 0 | OK |
+| `hun_446_e3_coords` | 53 | 0 | 0 | OK |
+| `hun_447_3_order_4_mod_40` | 58 | 0 | 0 | OK |
+| `hun_448_N_mod_8_for_2` | 63 | 0 | 0 | OK |
+| `hun_449_cube_root_of_2` | 67 | 0 | 0 | OK |
+| `hun_450_sagm_of_3` | 72 | 0 | 0 | OK |
+| `hun_451_75_not_42` | 77 | 0 | 0 | OK |
+| `hun_452_y_to_27` | 81 | 0 | 0 | OK |
+| `hun_453_ten_jacobi_plus` | 85 | 0 | 0 | OK |
+| `hun_454_ten_not_ord40` | 89 | 0 | 0 | OK |
+| `hun_455_21_mod_8` | 94 | 0 | 0 | OK |
+| `hun_456_ltwo_ord40` | 98 | 0 | 0 | OK |
+| `hun_457_two_ne_y` | 102 | 0 | 0 | OK |
+| `hun_458_two_subgroups_split` | 106 | 0 | 0 | OK |
+| `hun_459_four_cosets` | 114 | 0 | 0 | OK |
+| `hun_460_cycle2_60` | 118 | 0 | 0 | OK |
 
 ## Inner2.v
 
