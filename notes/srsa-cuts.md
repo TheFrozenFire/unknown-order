@@ -295,7 +295,11 @@ for all `y` is forbidden for `e≥2` (`gra_nodiv_integer_eth_root_forbidden`,
 CAS `147`). Identity `X^3−X` is low-degree (`deg=3 < p−1, q−1`) and
 does not vanish on `𝔽_11*` or `𝔽_17*` (unit 2); `GConst` has linear
 coeff `−1` so `N` cannot divide every coefficient (CAS `148`).
-High-degree `X^d` is not forbidden. Pin unit `3` has order `λ`
+High-degree `X^d` is not forbidden. Low-degree plus vanishing on
+`1..10` (all of `𝔽_11*` and units of `Z/187Z`) forces `11` to divide
+every coefficient (`poly_prime_roots_divides`, CAS `149`); identity
+and `GConst` have linear `−1`, so they cannot vanish. Vanishing on
+`(Z/NZ)*` does not sample `11` mod `17`. Pin unit `3` has order `λ`
 (`orders_generate_lambda_pin`).
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
@@ -322,6 +326,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | residual GRA dichotomy | `residual_shaped_*` / `residual_gra_*` | `SrsaResidualGRA.v` | `146` |
 | nodiv GRA denotation / pin attains `λ` | `gra_nodiv_*` / `orders_generate_lambda_pin` | `GenericRing.v`, `Order.v` | `147` |
 | low-degree vanishing on units | `residual_identity_*` / `residual_X3_*` / `residual_const_*` / `residual_nodiv_const_*` / `residual_low_degree_*` | `SrsaResidualGRA.v` | `148` |
+| low-degree roots bound on `𝔽_11*` | `residual_low_degree_units_divides_11` / `residual_nodiv_low_degree_units_divides_11` / `residual_*_cannot_vanish_on_Fp_star` | `SrsaResidualGRA.v`, `ZPoly.v` | `149` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

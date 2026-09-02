@@ -2674,6 +2674,7 @@ in the Rocq tree.  Do not edit by hand.
   - L117: Degree / leading-coefficient fork for residual-shaped [e]
   - L176: Division-free tape denotes a polynomial; integer [P^e = X]
   - L219: Low-degree vanishing on units
+  - L351: Roots bound: low-degree + vanish on [1..10] ⇒ [11] | coeffs
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2700,21 +2701,31 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `residual_gra_nodiv_integer_identity_forbidden` | 192 |
 | Theorem | `residual_gra_nodiv_cube_identity_forbidden` | 204 |
 | Theorem | `residual_gra_mul_denotes_square` | 215 |
-| Theorem | `residual_identity_is_low_degree` | 230 |
-| Lemma | `residual_X3_eval` | 236 |
-| Lemma | `residual_X3_not_div_11_mid` | 240 |
-| Theorem | `residual_X3_roots_mod_11` | 249 |
-| Theorem | `residual_X3_unit_2_not_root_mod_11` | 262 |
-| Lemma | `residual_X3_not_div_17_mid` | 268 |
-| Theorem | `residual_X3_unit_2_not_root_mod_17` | 279 |
-| Theorem | `residual_X3_roots_mod_17` | 285 |
-| Theorem | `residual_const_Pe_minus_X_nth1` | 298 |
-| Theorem | `residual_const_N_ndiv_linear` | 302 |
-| Theorem | `residual_nodiv_identity_denotes_X` | 308 |
-| Theorem | `residual_identity_cube_minus_y` | 312 |
-| Theorem | `residual_nodiv_const_is_nodiv` | 322 |
-| Theorem | `residual_nodiv_const_denotes` | 326 |
-| Theorem | `residual_low_degree_identity_not_all_Fp_units` | 337 |
+| Theorem | `residual_identity_is_low_degree` | 234 |
+| Lemma | `residual_X3_eval` | 240 |
+| Lemma | `residual_X3_not_div_11_mid` | 244 |
+| Theorem | `residual_X3_roots_mod_11` | 253 |
+| Theorem | `residual_X3_unit_2_not_root_mod_11` | 266 |
+| Lemma | `residual_X3_not_div_17_mid` | 272 |
+| Theorem | `residual_X3_unit_2_not_root_mod_17` | 283 |
+| Theorem | `residual_X3_roots_mod_17` | 289 |
+| Theorem | `residual_const_Pe_minus_X_nth1` | 302 |
+| Theorem | `residual_const_N_ndiv_linear` | 306 |
+| Theorem | `residual_nodiv_identity_denotes_X` | 312 |
+| Theorem | `residual_identity_cube_minus_y` | 316 |
+| Theorem | `residual_nodiv_const_is_nodiv` | 326 |
+| Theorem | `residual_nodiv_const_denotes` | 330 |
+| Theorem | `residual_low_degree_identity_not_all_Fp_units` | 341 |
+| Lemma | `pin_Fp_star_length` | 362 |
+| Lemma | `forall_pin_Fp_star` | 365 |
+| Lemma | `pin_Fp_star_coprime` | 375 |
+| Lemma | `pin_Fp_star_distinct_mod_11` | 383 |
+| Theorem | `residual_low_degree_units_divides_11` | 392 |
+| Theorem | `residual_nodiv_low_degree_units_divides_11` | 406 |
+| Theorem | `residual_identity_nth1_ndiv_11` | 424 |
+| Theorem | `residual_identity_cannot_vanish_on_Fp_star` | 428 |
+| Lemma | `residual_const_Pe_degree` | 441 |
+| Theorem | `residual_const_cannot_vanish_on_Fp_star` | 445 |
 
 ## `SrsaWriteE.v`
 
@@ -3204,4 +3215,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2171 theorems/lemmas/corollaries/examples across 116 files._
+_2181 theorems/lemmas/corollaries/examples across 116 files._

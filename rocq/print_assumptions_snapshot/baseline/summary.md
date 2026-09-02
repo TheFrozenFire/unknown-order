@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2171 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2181 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2171 results across 116 files.
+Captured for 2181 results across 116 files.
 
 Counts:
 
@@ -2327,21 +2327,31 @@ Counts:
 | `residual_gra_nodiv_integer_identity_forbidden` | 192 | 0 | 0 | OK |
 | `residual_gra_nodiv_cube_identity_forbidden` | 204 | 0 | 0 | OK |
 | `residual_gra_mul_denotes_square` | 215 | 0 | 0 | OK |
-| `residual_identity_is_low_degree` | 230 | 0 | 0 | OK |
-| `residual_X3_eval` | 236 | 0 | 0 | OK |
-| `residual_X3_not_div_11_mid` | 240 | 0 | 0 | OK |
-| `residual_X3_roots_mod_11` | 249 | 0 | 0 | OK |
-| `residual_X3_unit_2_not_root_mod_11` | 262 | 0 | 0 | OK |
-| `residual_X3_not_div_17_mid` | 268 | 0 | 0 | OK |
-| `residual_X3_unit_2_not_root_mod_17` | 279 | 0 | 0 | OK |
-| `residual_X3_roots_mod_17` | 285 | 0 | 0 | OK |
-| `residual_const_Pe_minus_X_nth1` | 298 | 0 | 0 | OK |
-| `residual_const_N_ndiv_linear` | 302 | 0 | 0 | OK |
-| `residual_nodiv_identity_denotes_X` | 308 | 0 | 0 | OK |
-| `residual_identity_cube_minus_y` | 312 | 0 | 0 | OK |
-| `residual_nodiv_const_is_nodiv` | 322 | 0 | 0 | OK |
-| `residual_nodiv_const_denotes` | 326 | 0 | 0 | OK |
-| `residual_low_degree_identity_not_all_Fp_units` | 337 | 0 | 0 | OK |
+| `residual_identity_is_low_degree` | 234 | 0 | 0 | OK |
+| `residual_X3_eval` | 240 | 0 | 0 | OK |
+| `residual_X3_not_div_11_mid` | 244 | 0 | 0 | OK |
+| `residual_X3_roots_mod_11` | 253 | 0 | 0 | OK |
+| `residual_X3_unit_2_not_root_mod_11` | 266 | 0 | 0 | OK |
+| `residual_X3_not_div_17_mid` | 272 | 0 | 0 | OK |
+| `residual_X3_unit_2_not_root_mod_17` | 283 | 0 | 0 | OK |
+| `residual_X3_roots_mod_17` | 289 | 0 | 0 | OK |
+| `residual_const_Pe_minus_X_nth1` | 302 | 0 | 0 | OK |
+| `residual_const_N_ndiv_linear` | 306 | 0 | 0 | OK |
+| `residual_nodiv_identity_denotes_X` | 312 | 0 | 0 | OK |
+| `residual_identity_cube_minus_y` | 316 | 0 | 0 | OK |
+| `residual_nodiv_const_is_nodiv` | 326 | 0 | 0 | OK |
+| `residual_nodiv_const_denotes` | 330 | 0 | 0 | OK |
+| `residual_low_degree_identity_not_all_Fp_units` | 341 | 0 | 0 | OK |
+| `pin_Fp_star_length` | 362 | 0 | 0 | OK |
+| `forall_pin_Fp_star` | 365 | 0 | 0 | OK |
+| `pin_Fp_star_coprime` | 375 | 0 | 0 | OK |
+| `pin_Fp_star_distinct_mod_11` | 383 | 0 | 0 | OK |
+| `residual_low_degree_units_divides_11` | 392 | 0 | 0 | OK |
+| `residual_nodiv_low_degree_units_divides_11` | 406 | 0 | 0 | OK |
+| `residual_identity_nth1_ndiv_11` | 424 | 0 | 0 | OK |
+| `residual_identity_cannot_vanish_on_Fp_star` | 428 | 0 | 0 | OK |
+| `residual_const_Pe_degree` | 441 | 0 | 0 | OK |
+| `residual_const_cannot_vanish_on_Fp_star` | 445 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

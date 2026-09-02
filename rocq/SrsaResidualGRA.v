@@ -27,7 +27,7 @@ Open Scope Z_scope.
 
     Generic-ring inroad on [residual_solver_constructs_factor_open_named],
     not a proof of that unrestricted name, and not RSA ≡ or ≢
-    factoring.  Cross-confirmed by [cas/146] and [cas/148]. *)
+    factoring.  Cross-confirmed by [cas/146], [cas/148], and [cas/149]. *)
 
 (** ** Residual-shaped exponents *)
 
@@ -225,7 +225,11 @@ Proof. apply gra_nodiv_mul_denotes_square. Qed.
     (unit 2 is a counterexample).  A constant [P] has [P^e − X]
     linear coeff [−1], so [N] cannot divide every coefficient.
     High-degree functional-on-units maps ([X^d], [d=27]) are not
-    forbidden by this degree bound. *)
+    forbidden by this degree bound.  The general roots bound:
+    [deg Q < 10] and vanishing on [1..10] (all of [𝔽_11*] and
+    units of [Z/187Z]) forces [11] to divide every coefficient.
+    Vanishing on [(Z/NZ)*] does not sample [11] mod [17], so this
+    is not a [17]-divides claim. *)
 
 Theorem residual_identity_is_low_degree :
   poly_degree (poly_Pe_minus_X poly_X 3%nat) = 3%nat /\
@@ -342,4 +346,114 @@ Proof.
   rewrite residual_identity_cube_minus_y.
   destruct residual_X3_unit_2_not_root_mod_11 as [_ Hnd].
   exact Hnd.
+Qed.
+
+(** ** Roots bound: low-degree + vanish on [1..10] ⇒ [11] | coeffs
+
+    Denotation is load-bearing: a nodiv tape that cube-inverts
+    (or [e]-inverts) every pin unit denotes a [Q = P^e − X] that
+    vanishes on [1..10].  If that [Q] is low-degree, every
+    coefficient is [0] mod [11].  Identity and [GConst] have
+    linear coeff [−1], so they cannot vanish.  Cross-confirmed
+    by [cas/149]. *)
+
+Definition pin_Fp_star : list Z := [1; 2; 3; 4; 5; 6; 7; 8; 9; 10].
+
+Lemma pin_Fp_star_length : length pin_Fp_star = 10%nat.
+Proof. reflexivity. Qed.
+
+Lemma forall_pin_Fp_star :
+  forall (R : Z -> Prop),
+    (forall y, 1 <= y <= 10 -> R y) ->
+    Forall R pin_Fp_star.
+Proof.
+  intros R HR. unfold pin_Fp_star.
+  repeat (apply Forall_cons; [apply HR; lia|]).
+  apply Forall_nil.
+Qed.
+
+Lemma pin_Fp_star_coprime :
+  Forall (fun y => Z.coprime y 187) pin_Fp_star.
+Proof.
+  unfold pin_Fp_star.
+  repeat (apply Forall_cons; [vm_compute; reflexivity|]).
+  apply Forall_nil.
+Qed.
+
+Lemma pin_Fp_star_distinct_mod_11 :
+  pairwise_distinct_mod 11 pin_Fp_star.
+Proof.
+  unfold pin_Fp_star, pairwise_distinct_mod.
+  repeat split;
+    repeat (apply Forall_cons; [intros [k Hk]; lia|]);
+    apply Forall_nil.
+Qed.
+
+Theorem residual_low_degree_units_divides_11 :
+  forall Q,
+    (poly_degree Q < 10)%nat ->
+    (forall y, 1 <= y <= 10 -> (11 | poly_eval Q y)) ->
+    forall i, (11 | nth i Q 0).
+Proof.
+  intros Q Hdeg Hall i.
+  apply (poly_prime_roots_divides 11 pin_Fp_star Q).
+  - apply prime_11.
+  - apply pin_Fp_star_distinct_mod_11.
+  - rewrite pin_Fp_star_length. exact Hdeg.
+  - apply forall_pin_Fp_star. exact Hall.
+Qed.
+
+Theorem residual_nodiv_low_degree_units_divides_11 :
+  forall ops out e,
+    Forall is_nodiv ops ->
+    (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e)
+       < 10)%nat ->
+    (forall y, 1 <= y <= 10 ->
+      (11 | Z.pow (gra_eval 187 ops y out) (Z.of_nat e) - y)) ->
+    forall i,
+      (11 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
+Proof.
+  intros ops out e Hop Hdeg Hall i.
+  apply residual_low_degree_units_divides_11; [exact Hdeg|].
+  intros y Hy.
+  rewrite poly_eval_Pe_minus_X.
+  rewrite <- (gra_nodiv_denotes ops 187 y out Hop).
+  apply Hall. exact Hy.
+Qed.
+
+Theorem residual_identity_nth1_ndiv_11 :
+  ~ (11 | nth 1%nat (poly_Pe_minus_X poly_X 3%nat) 0).
+Proof. rewrite X3_minus_X_nth1. intros [k Hk]. nia. Qed.
+
+Theorem residual_identity_cannot_vanish_on_Fp_star :
+  (poly_degree (poly_Pe_minus_X poly_X 3%nat) < 10)%nat /\
+  ~ (forall y, 1 <= y <= 10 ->
+       (11 | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
+Proof.
+  split; [rewrite poly_degree_X3_minus_X; lia|].
+  intros Hall.
+  apply residual_identity_nth1_ndiv_11.
+  apply residual_low_degree_units_divides_11.
+  - rewrite poly_degree_X3_minus_X. lia.
+  - exact Hall.
+Qed.
+
+Lemma residual_const_Pe_degree :
+  forall c, poly_degree (poly_Pe_minus_X [c] 3%nat) = 1%nat.
+Proof. intros c. vm_compute. reflexivity. Qed.
+
+Theorem residual_const_cannot_vanish_on_Fp_star :
+  forall c,
+    (poly_degree (poly_Pe_minus_X [c] 3%nat) < 10)%nat /\
+    ~ (forall y, 1 <= y <= 10 ->
+         (11 | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
+Proof.
+  intros c. split; [rewrite residual_const_Pe_degree; lia|].
+  intros Hall.
+  pose proof (residual_low_degree_units_divides_11
+                (poly_Pe_minus_X [c] 3%nat)
+                ltac:(rewrite residual_const_Pe_degree; lia)
+                Hall 1%nat) as Hdiv.
+  rewrite residual_const_Pe_minus_X_nth1 in Hdiv.
+  destruct Hdiv as [k Hk]. nia.
 Qed.
