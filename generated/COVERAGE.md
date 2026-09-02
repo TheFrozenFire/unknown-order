@@ -2105,6 +2105,7 @@ in the Rocq tree.  Do not edit by hand.
   - L254: 10. Euler inverse modulo [N−1], not [λ]
   - L269: 11. CRT-tape: [x = CRT(x_p, x_q)]
   - L289: 12. Miller on [e−1] against the challenge [y]
+  - L308: Public addition chain, polynomial [X], short bases, gcd-free multiply
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2141,6 +2142,12 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `shape_crt_moduli_are_factors` | 280 |
 | Theorem | `shape_miller_e11_on_y_splits` | 291 |
 | Theorem | `shape_miller_e3_on_y_survives` | 303 |
+| Theorem | `shape_public_chain_e3` | 316 |
+| Theorem | `shape_trapdoor_chain_d27` | 324 |
+| Theorem | `shape_poly_x_quadratic` | 329 |
+| Theorem | `shape_public_bases_2_3` | 337 |
+| Theorem | `shape_gcdfree_bounded_from_y` | 347 |
+| Theorem | `shape_public_exp_not_membership` | 355 |
 
 ## `SrsaDict.v`
 
@@ -2353,6 +2360,7 @@ in the Rocq tree.  Do not edit by hand.
 
 - L13: Period: gcd vs multiply
   - L441: KeyGen shape: leftover [x] splits iff local orders mismatch
+  - L505: Public exponent lattice [N−1], [N+1] vs trapdoor period
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2433,6 +2441,15 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `period_247_x5_minus_1_no_split` | 492 |
 | Theorem | `period_247_x8_minus_1_no_split` | 496 |
 | Theorem | `period_247_x6_minus_1_is_N` | 500 |
+| Theorem | `period_Nminus1_factors` | 511 |
+| Theorem | `period_pohlig_ndiv_Nminus1` | 515 |
+| Theorem | `period_ord_ndiv_Nminus1` | 522 |
+| Theorem | `period_Nminus1_divisors_no_split` | 528 |
+| Theorem | `period_y_Nminus1_no_annihilator` | 537 |
+| Theorem | `period_x_Nminus1_no_membership` | 543 |
+| Theorem | `period_Nplus1_factors` | 549 |
+| Theorem | `period_Nplus1_divisors_no_split` | 553 |
+| Theorem | `period_y_Nplus1_no_annihilator` | 559 |
 
 ## `SrsaPrimary.v`
 
@@ -3067,4 +3084,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2063 theorems/lemmas/corollaries/examples across 114 files._
+_2078 theorems/lemmas/corollaries/examples across 114 files._

@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2063 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2078 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2063 results across 114 files.
+Captured for 2078 results across 114 files.
 
 Counts:
 
@@ -1804,6 +1804,12 @@ Counts:
 | `shape_crt_moduli_are_factors` | 280 | 0 | 0 | OK |
 | `shape_miller_e11_on_y_splits` | 291 | 0 | 0 | OK |
 | `shape_miller_e3_on_y_survives` | 303 | 0 | 0 | OK |
+| `shape_public_chain_e3` | 316 | 0 | 0 | OK |
+| `shape_trapdoor_chain_d27` | 324 | 0 | 0 | OK |
+| `shape_poly_x_quadratic` | 329 | 0 | 0 | OK |
+| `shape_public_bases_2_3` | 337 | 0 | 0 | OK |
+| `shape_gcdfree_bounded_from_y` | 347 | 0 | 0 | OK |
+| `shape_public_exp_not_membership` | 355 | 0 | 0 | OK |
 
 ## SrsaDict.v
 
@@ -2085,6 +2091,15 @@ Counts:
 | `period_247_x5_minus_1_no_split` | 492 | 0 | 0 | OK |
 | `period_247_x8_minus_1_no_split` | 496 | 0 | 0 | OK |
 | `period_247_x6_minus_1_is_N` | 500 | 0 | 0 | OK |
+| `period_Nminus1_factors` | 511 | 0 | 0 | OK |
+| `period_pohlig_ndiv_Nminus1` | 515 | 0 | 0 | OK |
+| `period_ord_ndiv_Nminus1` | 522 | 0 | 0 | OK |
+| `period_Nminus1_divisors_no_split` | 528 | 0 | 0 | OK |
+| `period_y_Nminus1_no_annihilator` | 537 | 0 | 0 | OK |
+| `period_x_Nminus1_no_membership` | 543 | 0 | 0 | OK |
+| `period_Nplus1_factors` | 549 | 0 | 0 | OK |
+| `period_Nplus1_divisors_no_split` | 553 | 0 | 0 | OK |
+| `period_y_Nplus1_no_annihilator` | 559 | 0 | 0 | OK |
 
 ## SrsaPrimary.v
 

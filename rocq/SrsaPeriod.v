@@ -501,3 +501,63 @@ Theorem period_247_x6_minus_1_is_N :
   powm 179 6 247 = 1 /\
   Z.gcd (powm 179 6 247 - 1) 247 = 247.
 Proof. vm_compute. split; reflexivity. Qed.
+
+(** ** Public exponent lattice [N−1], [N+1] vs trapdoor period
+
+    A TM that only uses exponents dividing [N−1=186=2·3·31] or
+    [N+1=188] neither finds [ord(y)=40] nor hits the Pohlig [k]
+    that split leftover [x].  Cross-confirmed by [cas/141]. *)
+
+Theorem period_Nminus1_factors :
+  186 = 2 * 3 * 31.
+Proof. reflexivity. Qed.
+
+Theorem period_pohlig_ndiv_Nminus1 :
+  186 mod 5 = 1 /\
+  186 mod 8 = 2 /\
+  186 mod 10 = 6 /\
+  186 mod 16 = 10.
+Proof. repeat split; reflexivity. Qed.
+
+Theorem period_ord_ndiv_Nminus1 :
+  186 mod 40 = 26 /\
+  186 mod 80 = 26 /\
+  188 mod 40 = 28.
+Proof. repeat split; reflexivity. Qed.
+
+Theorem period_Nminus1_divisors_no_split :
+  Z.gcd (powm 36 2 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 3 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 6 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 31 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 62 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 93 187 - 1) 187 = 1.
+Proof. vm_compute. repeat split; reflexivity. Qed.
+
+Theorem period_y_Nminus1_no_annihilator :
+  powm 36 186 187 = 157 /\
+  157 <> 1 /\
+  Z.gcd (157 - 1) 187 = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem period_x_Nminus1_no_membership :
+  powm 42 186 187 = 64 /\
+  64 <> 1 /\
+  Z.gcd (64 - 1) 187 = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem period_Nplus1_factors :
+  188 = 4 * 47.
+Proof. reflexivity. Qed.
+
+Theorem period_Nplus1_divisors_no_split :
+  Z.gcd (powm 36 4 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 47 187 - 1) 187 = 1 /\
+  Z.gcd (powm 36 94 187 - 1) 187 = 1.
+Proof. vm_compute. repeat split; reflexivity. Qed.
+
+Theorem period_y_Nplus1_no_annihilator :
+  powm 36 188 187 = 16 /\
+  16 <> 1 /\
+  Z.gcd (16 - 1) 187 = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.

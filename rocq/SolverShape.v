@@ -304,3 +304,56 @@ Theorem shape_miller_e3_on_y_survives :
   Z.gcd (powm 36 2 187 - 1) 187 = 1 /\
   srsa_residual_leaf 187 80 36 42 3.
 Proof. split; [vm_compute; reflexivity | apply srsa_residual_pin]. Qed.
+
+(** ** Public addition chain, polynomial [X], short bases, gcd-free multiply
+
+    Joint machines that write [x] after a public [e], or from [y]
+    by multiply-only of bounded length, or as [P(y)] of degree [≥2],
+    or in the cyclic of a short public base list without SAGM-known
+    exponents.  None hits leftover [x] except the trapdoor chain
+    for [d=27].  Cross-confirmed by [cas/142]. *)
+
+Theorem shape_public_chain_e3 :
+  3 = 2 + 1 /\
+  powm 36 2 187 = 174 /\
+  (174 * 36) mod 187 = 93 /\
+  93 <> 42 /\
+  powm 93 3 187 <> 36.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem shape_trapdoor_chain_d27 :
+  27 = 16 + 8 + 2 + 1 /\
+  powm 36 27 187 = 42.
+Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
+
+Theorem shape_poly_x_quadratic :
+  poly_eval [1; 0; 1] 36 = 1297 /\
+  1297 mod 187 = 175 /\
+  powm 175 3 187 = 142 /\
+  142 <> 36 /\
+  Z.gcd (142 - 36) 187 = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem shape_public_bases_2_3 :
+  (2 * 3) mod 187 = 6 /\
+  powm 6 3 187 = 29 /\
+  29 <> 36 /\
+  powm 2 3 187 = 8 /\
+  8 <> 42 /\
+  powm 2 27 187 = 161 /\
+  161 <> 42.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem shape_gcdfree_bounded_from_y :
+  36 <> 42 /\
+  (36 * 36) mod 187 = 174 /\
+  174 <> 42 /\
+  (174 * 36) mod 187 = 93 /\
+  93 <> 42.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem shape_public_exp_not_membership :
+  powm 42 40 187 = 1 /\
+  powm 42 186 187 = 64 /\
+  64 <> 1.
+Proof. vm_compute. repeat split; discriminate. Qed.

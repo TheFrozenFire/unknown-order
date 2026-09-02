@@ -114,6 +114,14 @@ local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
 (`period_247_*`). Residual leaf named, not `Problem_Factor`.
 `SrsaPeriod.v` (`period_*`). CAS `140`.
 
+**Public exponent lattice vs trapdoor period.** `N−1=186=2·3·31` and
+`N+1=188=4·47` are public. Pohlig `k∈{5,8,10,16}` that split leftover
+`x` do not divide `N−1` (`period_pohlig_ndiv_Nminus1`). No divisor of
+`N−1` or `N+1` annihilates `y` or splits (`period_Nminus1_divisors_no_split`,
+`period_y_Nminus1_no_annihilator`, `period_Nplus1_*`). Leftover `x^{N−1}≢1`,
+so `N−1` does not certify `x∈⟨y⟩` (`period_x_Nminus1_no_membership`).
+CAS `141`.
+
 One `k=27` in three subgroups: cube roots of `2`, `3`, `36`.
 `gcd(161−42,N)=17`, `gcd(75−42,N)=11`. IDs: `period_two_subgroups_split`, `period_cbrt2_cbrt36_split`–`period_cbrt3_cbrt2`.
 
@@ -147,6 +155,17 @@ but `gcd(x^3−y,N)` or `gcd(x,N)` is proper. IDs: `xmap_odd_monomial`, `xmap_bi
 written, including leftover-shaped inverses):** `shape_monomial_*`,
 `shape_inverse_*`, `shape_affine_*`, `xmap_odd_monomial_y5`, `xmap_y_to_the_y`, `xmap_y_to_Nminus1`,
 `xmap_y_to_Nplus1`, `residual_y_inv_generator`, `xmap_inv_lam_minus_1`.
+
+**Joint pair / gcd-free X machines** (not another `f(y)` formula).
+Public addition chain for `e=3` (Hamming 2: `y^2·y≡93`) is not leftover
+`x`; trapdoor `d=27` (Hamming 4) is (`shape_public_chain_e3`,
+`shape_trapdoor_chain_d27`). Polynomial `X=1+Y^2` is `175`, not a cube
+root and no one-sided split (`shape_poly_x_quadratic`). Short public
+bases `{2,3}` with public exponents: `2·3≡6`, `6^3≢36`; `2^3≢42`; SAGM
+`2^{27}≡161` is another instance (`shape_public_bases_2_3`). Gcd-free
+multiply from `y` of length `≤3` stays at `y`, `y^2`, `y^3`, none leftover
+(`shape_gcdfree_bounded_from_y`). Public `x^{N−1}` does not test
+membership in `⟨y⟩` (`shape_public_exp_not_membership`). CAS `142`.
 
 ## 5. How the TM writes `e`
 
@@ -244,13 +263,13 @@ advice `N/17`: `PreprocessGRA.v`.
 | peel a witness | `srsa_*` | `StrongRSAPeel.v` | `127` |
 | SAGM / safeprime / poly `e` | `sagm_*` / `safeprime_*` / `poly_e_*` / `reject_sample_*` | `SolverRestrict.v` | `128`, `139` |
 | first dozen inroads | `dozen_*` | `DozenInroads.v` | `129` |
-| solver shapes | `shape_*` | `SolverShape.v` | `130` |
+| solver shapes | `shape_*` | `SolverShape.v` | `130`, `142` |
 | public filters | `filter_*` | `FilterShape.v` | `131`, `139` |
 | arithmetic maps | `arith_*` | `ArithShape.v` | `132` |
 | leftover language of `(x,e)` | `residual_*` | `SrsaResidual.v` | |
 | `⟨y⟩ ≅ C₈×C₅` | `primary_*` | `SrsaPrimary.v` | |
 | dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | |
-| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140` |
+| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |
