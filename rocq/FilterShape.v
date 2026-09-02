@@ -194,3 +194,75 @@ Theorem filter_torus_order_not_Nplus1 :
   Z.lcm (11 + 1) (17 + 1) = 36 /\
   36 <> 187 + 1.
 Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
+
+(** ** Public tests of [e] vs residual tests that mention [λ]
+
+    Residual: odd, [gcd(e,λ)=1], [λ∤ e−1].  Public tests see only
+    [(N,y)].  [gcd(e,N−1)=1] rejects the cube.  Invertibility mod
+    [N] does not certify residual.  [gcd(e,φ(y))=1] is [(N,y)]-only
+    and rejects the cube.  Cross-confirmed by [cas/139]. *)
+
+Theorem filter_residual_tests_on_cube :
+  Z.odd 3 = true /\
+  Z.gcd 3 80 = 1 /\
+  ~ (80 | 2).
+Proof.
+  split; [reflexivity|].
+  split; [reflexivity|].
+  intros [k Hk]. nia.
+Qed.
+
+Theorem filter_e5_shares_lambda :
+  Z.gcd 5 80 = 5 /\
+  Z.gcd 5 80 <> 1.
+Proof. split; [reflexivity | discriminate]. Qed.
+
+Theorem filter_e15_odd_shares_lambda :
+  Z.odd 15 = true /\
+  Z.gcd 15 80 = 5.
+Proof. split; reflexivity. Qed.
+
+Theorem filter_e7_residual_shaped :
+  Z.odd 7 = true /\
+  Z.gcd 7 80 = 1 /\
+  ~ (80 | 6).
+Proof.
+  split; [reflexivity|].
+  split; [reflexivity|].
+  intros [k Hk]. nia.
+Qed.
+
+Theorem filter_e5_passes_public_e :
+  public_e_filter 5 187.
+Proof. unfold public_e_filter. vm_compute. reflexivity. Qed.
+
+Theorem filter_e7_passes_public_e :
+  public_e_filter 7 187.
+Proof. unfold public_e_filter. vm_compute. reflexivity. Qed.
+
+Theorem filter_e_coprime_N_cube_passes :
+  Z.gcd 3 187 = 1.
+Proof. reflexivity. Qed.
+
+Theorem filter_e_coprime_N_accepts_nonresidual :
+  Z.gcd 5 187 = 1 /\
+  Z.gcd 5 80 = 5.
+Proof. split; reflexivity. Qed.
+
+Theorem filter_e_coprime_N_does_not_certify :
+  Z.gcd 15 187 = 1 /\
+  Z.gcd 15 80 = 5.
+Proof. split; reflexivity. Qed.
+
+Theorem filter_phi_y_of_36 :
+  36 = 4 * 9 /\
+  Z.gcd 4 9 = 1 /\
+  4 - 2 = 2 /\
+  9 - 3 = 6 /\
+  2 * 6 = 12.
+Proof. repeat split; reflexivity. Qed.
+
+Theorem filter_e_coprime_phi_y_rejects_cube :
+  Z.gcd 3 12 = 3 /\
+  Z.gcd 3 12 <> 1.
+Proof. split; [reflexivity | discriminate]. Qed.

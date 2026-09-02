@@ -15,8 +15,9 @@ Open Scope Z_scope.
     The same exponents, two TMs.  [gcd(y^k−1,N)] for [k∈{5,8,10}]
     splits; equality [y^k≡1] finds [ord=40] and does not split, then
     [x=y^{27}] leftover-inverts.  Leftover [x] is the same Pohlig
-    oracle.  [gcd(p−1,q−1)=2], so matching local orders exist only
-    at [{1,2}]. *)
+    oracle.  On this pin [gcd(p−1,q−1)=2], so matching local orders
+    exist only at [{1,2}].  Extra pin [N=247] has matching leftover
+    orders and the same gcd is not a proper factor. *)
 
 Theorem period_base3_period :
   Z.gcd (powm 3 8 187 - 1) 187 = 1 /\
@@ -436,3 +437,67 @@ Qed.
 Theorem period_77_two_pow5 :
   Z.gcd (2 ^ 5 - 1) 77 = 1.
 Proof. vm_compute. reflexivity. Qed.
+
+(** ** KeyGen shape: leftover [x] splits iff local orders mismatch
+
+    [N=187] and [N=77]: [gcd(p−1,q−1)=2], leftover [x] is a
+    [gcd(x^k−1,N)] proper-factor oracle.  [N=13·19=247]: leftover
+    [x=179] of [y=69] at [e=5] has matching local orders [6], and
+    the same [k∈{5,8}] do not split.  Residual leaf named, not
+    [Problem_Factor].  Cross-confirmed by [cas/140]. *)
+
+Theorem period_187_mismatch_gcd :
+  Z.gcd 10 16 = 2.
+Proof. reflexivity. Qed.
+
+Theorem period_77_mismatch_gcd :
+  Z.gcd 6 10 = 2.
+Proof. reflexivity. Qed.
+
+Theorem period_247_match_gcd :
+  13 * 19 = 247 /\
+  Z.gcd 12 18 = 6 /\
+  Z.lcm 12 18 = 36.
+Proof. split; [reflexivity|]. split; [reflexivity | vm_compute; reflexivity]. Qed.
+
+Theorem period_247_leftover_pair :
+  powm 179 5 247 = 69 /\
+  Z.gcd 69 247 = 1 /\
+  Z.gcd 179 247 = 1.
+Proof. vm_compute. repeat split; reflexivity. Qed.
+
+Theorem period_247_residual_leaf :
+  srsa_residual_leaf 247 36 69 179 5.
+Proof.
+  unfold srsa_residual_leaf, Problem_StrongRSA.
+  split; [vm_compute; reflexivity|].
+  split; [split; [lia|]; vm_compute; reflexivity|].
+  split; [exists 2; lia|].
+  split; [vm_compute; reflexivity|].
+  intros [k Hk]. nia.
+Qed.
+
+Theorem period_247_local_residues :
+  179 mod 13 = 10 /\
+  179 mod 19 = 8.
+Proof. split; reflexivity. Qed.
+
+Theorem period_247_matching_local_orders :
+  powm 10 6 13 = 1 /\
+  powm 10 3 13 <> 1 /\
+  powm 8 6 19 = 1 /\
+  powm 8 3 19 <> 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem period_247_x5_minus_1_no_split :
+  Z.gcd (powm 179 5 247 - 1) 247 = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem period_247_x8_minus_1_no_split :
+  Z.gcd (powm 179 8 247 - 1) 247 = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem period_247_x6_minus_1_is_N :
+  powm 179 6 247 = 1 /\
+  Z.gcd (powm 179 6 247 - 1) 247 = 247.
+Proof. vm_compute. split; reflexivity. Qed.

@@ -920,6 +920,7 @@ in the Rocq tree.  Do not edit by hand.
   - L140: 10. Public coprimality filter [gcd(e, N−1)=1]
   - L160: 11. Low-bit [e = 2(y mod 2^k)+1]
   - L184: 12. Trace [x + x^{-1}]
+  - L198: Public tests of [e] vs residual tests that mention [λ]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -949,6 +950,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `filter_lowbit_root_is_70` | 179 |
 | Theorem | `filter_trace_not_root` | 186 |
 | Theorem | `filter_torus_order_not_Nplus1` | 193 |
+| Theorem | `filter_residual_tests_on_cube` | 205 |
+| Theorem | `filter_e5_shares_lambda` | 215 |
+| Theorem | `filter_e15_odd_shares_lambda` | 220 |
+| Theorem | `filter_e7_residual_shaped` | 225 |
+| Theorem | `filter_e5_passes_public_e` | 235 |
+| Theorem | `filter_e7_passes_public_e` | 239 |
+| Theorem | `filter_e_coprime_N_cube_passes` | 243 |
+| Theorem | `filter_e_coprime_N_accepts_nonresidual` | 247 |
+| Theorem | `filter_e_coprime_N_does_not_certify` | 252 |
+| Theorem | `filter_phi_y_of_36` | 257 |
+| Theorem | `filter_e_coprime_phi_y_rejects_cube` | 265 |
 
 ## `Fp2.v`
 
@@ -2050,6 +2062,7 @@ in the Rocq tree.  Do not edit by hand.
   - L24: SAGM-only: known exponents of public bases
   - L72: Safeprime residual on [N = 77], [λ = 30 = 2 p' q']
   - L101: Polynomial [e] of the challenge
+  - L124: Degree-[≥2] polynomial [e = P(y)], rejection sample, write-[e] then [x]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2069,6 +2082,13 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `poly_e_X_two_points` | 112 |
 | Theorem | `poly_e_X_not_rerand` | 116 |
 | Theorem | `poly_e_nonconstant_not_fixed_parameter` | 120 |
+| Theorem | `poly_e_quadratic` | 134 |
+| Theorem | `poly_e_quadratic_residual_shaped` | 138 |
+| Theorem | `poly_e_quadratic_leftover_with_period` | 145 |
+| Theorem | `poly_e_quadratic_encrypt_not_leftover` | 160 |
+| Theorem | `poly_e_square_even_peel` | 167 |
+| Theorem | `reject_sample_public_e_emits_5` | 178 |
+| Theorem | `reject_sample_emits_nonresidual` | 182 |
 
 ## `SolverShape.v`
 
@@ -2332,76 +2352,87 @@ in the Rocq tree.  Do not edit by hand.
 ## `SrsaPeriod.v`
 
 - L13: Period: gcd vs multiply
+  - L441: KeyGen shape: leftover [x] splits iff local orders mismatch
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `period_base3_period` | 21 |
-| Theorem | `period_y32_splits` | 31 |
-| Theorem | `period_y5_minus_1_splits` | 43 |
-| Theorem | `period_y8_minus_1_splits` | 51 |
-| Theorem | `period_y10_minus_1_splits` | 59 |
-| Theorem | `period_phi8_y_splits` | 67 |
-| Theorem | `period_y2_plus_1_gcd` | 75 |
-| Theorem | `period_phi5_y_splits` | 79 |
-| Theorem | `period_x2_minus_1_int` | 89 |
-| Theorem | `period_full_period_no_split` | 93 |
-| Theorem | `period_miller_on_period2` | 98 |
-| Theorem | `period_local_orders` | 108 |
-| Theorem | `period_gcd_pminus1_qminus1` | 115 |
-| Theorem | `period_public_d5_pohlig` | 119 |
-| Theorem | `period_mismatched_local_orders` | 129 |
-| Theorem | `period_lcm_local_orders` | 134 |
-| Theorem | `period_v2_local_orders` | 138 |
-| Theorem | `period_gcd_path_splits` | 143 |
-| Theorem | `period_exp_path_leftover` | 151 |
-| Theorem | `period_eq_order_40` | 159 |
-| Theorem | `period_eq_not_8` | 164 |
-| Theorem | `period_eq_not_5` | 168 |
-| Theorem | `period_eq_y40` | 172 |
-| Theorem | `period_eq_y20` | 176 |
-| Theorem | `period_eq_y8` | 180 |
-| Theorem | `period_eq_y5` | 184 |
-| Theorem | `period_gcd_y5_splits` | 188 |
-| Theorem | `period_gcd_y8_splits` | 196 |
-| Theorem | `period_gcd_full_period` | 204 |
-| Theorem | `period_after_ord_invert` | 208 |
-| Theorem | `period_v2_ord_p` | 216 |
-| Theorem | `period_v2_ord_q` | 220 |
-| Theorem | `period_v2_ord_N` | 224 |
-| Theorem | `period_v2_lam_bigger` | 229 |
-| Theorem | `period_x5_minus_1_splits` | 234 |
-| Theorem | `period_x8_minus_1_splits` | 242 |
-| Theorem | `period_x10_minus_1_splits` | 250 |
-| Theorem | `period_x16_minus_1_splits` | 258 |
-| Theorem | `period_x4_minus_1` | 266 |
-| Theorem | `period_x2_minus_1` | 270 |
-| Theorem | `period_same_oracle` | 274 |
-| Theorem | `period_ten_order_16` | 279 |
-| Theorem | `period_ten_pow8_miller` | 284 |
-| Theorem | `period_ten_pow8_splits` | 288 |
-| Theorem | `period_ten_pow16` | 296 |
-| Theorem | `period_21_order_4` | 300 |
-| Theorem | `period_21_sq_splits` | 305 |
-| Theorem | `period_89_order_4` | 313 |
-| Theorem | `period_77_pminus1` | 318 |
-| Theorem | `period_77_qminus1` | 326 |
-| Theorem | `period_77_leftover_pohlig` | 334 |
-| Theorem | `period_77_ord2_is_lam` | 342 |
-| Theorem | `period_two_subgroups_split` | 347 |
-| Theorem | `period_three_pohlig_5` | 355 |
-| Theorem | `period_three_pohlig_16` | 363 |
-| Theorem | `period_three_pow8_no_split` | 371 |
-| Theorem | `period_cbrt2_cbrt36_split` | 375 |
-| Theorem | `period_cbrt3_cbrt36_split` | 383 |
-| Theorem | `period_cbrt3_cbrt2` | 391 |
-| Theorem | `period_five_max_order` | 395 |
-| Theorem | `period_five_pohlig_5` | 400 |
-| Theorem | `period_five_pohlig_16` | 408 |
-| Theorem | `period_ord16_to_miller` | 416 |
-| Theorem | `period_77_51_is_2_pow7` | 420 |
-| Theorem | `period_77_lambda` | 424 |
-| Theorem | `period_77_two_pow3` | 428 |
-| Theorem | `period_77_two_pow5` | 436 |
+| Theorem | `period_base3_period` | 22 |
+| Theorem | `period_y32_splits` | 32 |
+| Theorem | `period_y5_minus_1_splits` | 44 |
+| Theorem | `period_y8_minus_1_splits` | 52 |
+| Theorem | `period_y10_minus_1_splits` | 60 |
+| Theorem | `period_phi8_y_splits` | 68 |
+| Theorem | `period_y2_plus_1_gcd` | 76 |
+| Theorem | `period_phi5_y_splits` | 80 |
+| Theorem | `period_x2_minus_1_int` | 90 |
+| Theorem | `period_full_period_no_split` | 94 |
+| Theorem | `period_miller_on_period2` | 99 |
+| Theorem | `period_local_orders` | 109 |
+| Theorem | `period_gcd_pminus1_qminus1` | 116 |
+| Theorem | `period_public_d5_pohlig` | 120 |
+| Theorem | `period_mismatched_local_orders` | 130 |
+| Theorem | `period_lcm_local_orders` | 135 |
+| Theorem | `period_v2_local_orders` | 139 |
+| Theorem | `period_gcd_path_splits` | 144 |
+| Theorem | `period_exp_path_leftover` | 152 |
+| Theorem | `period_eq_order_40` | 160 |
+| Theorem | `period_eq_not_8` | 165 |
+| Theorem | `period_eq_not_5` | 169 |
+| Theorem | `period_eq_y40` | 173 |
+| Theorem | `period_eq_y20` | 177 |
+| Theorem | `period_eq_y8` | 181 |
+| Theorem | `period_eq_y5` | 185 |
+| Theorem | `period_gcd_y5_splits` | 189 |
+| Theorem | `period_gcd_y8_splits` | 197 |
+| Theorem | `period_gcd_full_period` | 205 |
+| Theorem | `period_after_ord_invert` | 209 |
+| Theorem | `period_v2_ord_p` | 217 |
+| Theorem | `period_v2_ord_q` | 221 |
+| Theorem | `period_v2_ord_N` | 225 |
+| Theorem | `period_v2_lam_bigger` | 230 |
+| Theorem | `period_x5_minus_1_splits` | 235 |
+| Theorem | `period_x8_minus_1_splits` | 243 |
+| Theorem | `period_x10_minus_1_splits` | 251 |
+| Theorem | `period_x16_minus_1_splits` | 259 |
+| Theorem | `period_x4_minus_1` | 267 |
+| Theorem | `period_x2_minus_1` | 271 |
+| Theorem | `period_same_oracle` | 275 |
+| Theorem | `period_ten_order_16` | 280 |
+| Theorem | `period_ten_pow8_miller` | 285 |
+| Theorem | `period_ten_pow8_splits` | 289 |
+| Theorem | `period_ten_pow16` | 297 |
+| Theorem | `period_21_order_4` | 301 |
+| Theorem | `period_21_sq_splits` | 306 |
+| Theorem | `period_89_order_4` | 314 |
+| Theorem | `period_77_pminus1` | 319 |
+| Theorem | `period_77_qminus1` | 327 |
+| Theorem | `period_77_leftover_pohlig` | 335 |
+| Theorem | `period_77_ord2_is_lam` | 343 |
+| Theorem | `period_two_subgroups_split` | 348 |
+| Theorem | `period_three_pohlig_5` | 356 |
+| Theorem | `period_three_pohlig_16` | 364 |
+| Theorem | `period_three_pow8_no_split` | 372 |
+| Theorem | `period_cbrt2_cbrt36_split` | 376 |
+| Theorem | `period_cbrt3_cbrt36_split` | 384 |
+| Theorem | `period_cbrt3_cbrt2` | 392 |
+| Theorem | `period_five_max_order` | 396 |
+| Theorem | `period_five_pohlig_5` | 401 |
+| Theorem | `period_five_pohlig_16` | 409 |
+| Theorem | `period_ord16_to_miller` | 417 |
+| Theorem | `period_77_51_is_2_pow7` | 421 |
+| Theorem | `period_77_lambda` | 425 |
+| Theorem | `period_77_two_pow3` | 429 |
+| Theorem | `period_77_two_pow5` | 437 |
+| Theorem | `period_187_mismatch_gcd` | 449 |
+| Theorem | `period_77_mismatch_gcd` | 453 |
+| Theorem | `period_247_match_gcd` | 457 |
+| Theorem | `period_247_leftover_pair` | 463 |
+| Theorem | `period_247_residual_leaf` | 469 |
+| Theorem | `period_247_local_residues` | 480 |
+| Theorem | `period_247_matching_local_orders` | 485 |
+| Theorem | `period_247_x5_minus_1_no_split` | 492 |
+| Theorem | `period_247_x8_minus_1_no_split` | 496 |
+| Theorem | `period_247_x6_minus_1_is_N` | 500 |
 
 ## `SrsaPrimary.v`
 
@@ -3036,4 +3067,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2035 theorems/lemmas/corollaries/examples across 114 files._
+_2063 theorems/lemmas/corollaries/examples across 114 files._

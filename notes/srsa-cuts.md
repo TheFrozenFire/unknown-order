@@ -104,10 +104,15 @@ The same exponents, two TMs.
 | `gcd(y^{40}−1,N)` | `period_full_period_no_split`, `period_gcd_full_period` | `=N`, no proper factor |
 | `gcd(x^k−1,N)` on leftover `x` | `period_x5_minus_1_splits`–`period_x16_minus_1_splits`, `period_same_oracle` | **same split** — leftover `x` is a Pohlig oracle |
 
-`gcd(p−1,q−1)=2`, so matching local orders exist only at `{1,2}`.
-Any unit of order `>2` is a period leak (order 16 via `g^8−1`,
-order 4 via `g^2−1`, max-order via `g^5−1` and `g^{16}−1`).
-`SrsaPeriod.v` (`period_*`).
+On the default pin `gcd(p−1,q−1)=2`, so matching local orders exist
+only at `{1,2}`. Any unit of order `>2` is a period leak (order 16
+via `g^8−1`, order 4 via `g^2−1`, max-order via `g^5−1` and
+`g^{16}−1`). Same mismatch on `N=77` (`period_77_leftover_pohlig`,
+`period_77_two_pow3`). Extra pin `N=13·19=247` has
+`gcd(p−1,q−1)=6`; leftover `x=179` of `y=69` at `e=5` has matching
+local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
+(`period_247_*`). Residual leaf named, not `Problem_Factor`.
+`SrsaPeriod.v` (`period_*`). CAS `140`.
 
 One `k=27` in three subgroups: cube roots of `2`, `3`, `36`.
 `gcd(161−42,N)=17`, `gcd(75−42,N)=11`. IDs: `period_two_subgroups_split`, `period_cbrt2_cbrt36_split`–`period_cbrt3_cbrt2`.
@@ -162,9 +167,27 @@ named `x`. IDs: `emap_tau_leftover_e9`–`emap_sigma_leftover`, `emap_mersenne_l
 `emap_e_N_minus_lam`, `emap_prime_e7`, `dict_x93_e67`–`dict_x185_e53`, `filter_lowbit_e9`,
 `arith_nextprime_e37`, `arith_e7_residual`.
 
-**Public filter `gcd(e,N−1)=1` rejects the cube** (`gcd(3,186)=3`):
-`filter_cube_fails_public_e`. Wrong-Euler inverse mod `N−1`:
-`shape_wrong_euler_inv`.
+**Public tests of `e` vs residual tests that mention `λ`.** Residual:
+odd, `gcd(e,λ)=1`, `λ∤ e−1` (`filter_residual_tests_on_cube`; `e=5`
+and `e=15` share `λ`; `e=7` is residual-shaped). Public tests see
+`(N,y)` only:
+
+| Public test | Fate | Rocq |
+|---|---|---|
+| `gcd(e,N−1)=1` | rejects the cube (`gcd(3,186)=3`); accepts non-residual `e=5` and residual `e=7` | `filter_cube_fails_public_e`, `filter_e5_passes_public_e`, `filter_e7_passes_public_e` |
+| `gcd(e,N)=1` invertibility mod `N` | does not certify residual (`e=5`, `e=15` pass) | `filter_e_coprime_N_does_not_certify` |
+| `gcd(e,φ(y))=1` | `(N,y)`-only; rejects the cube (`φ(36)=12`) | `filter_e_coprime_phi_y_rejects_cube` |
+
+Wrong-Euler inverse mod `N−1`: `shape_wrong_euler_inv`. CAS `139`.
+
+**`E(N,y)` algorithm classes** (not another named `f(y)`). Constant `e`
+is RSA at that `e` (`poly_e_constant_is_fixed_e`). `e=X` is not
+rerand-invariant (`poly_e_X_not_rerand`). Degree 2: `e=y²` even peels
+(`poly_e_square_even_peel`); `e=y²+1=1297` is residual-shaped, leftover
+`x=y^{33}≡104` only with a period oracle, and write-`e`-then-`x=y^e`
+is `53≠104` (`poly_e_quadratic_*`). Rejection-sampling odd primes
+against `gcd(e,N−1)=1` emits `e=5`, which shares `λ`
+(`reject_sample_public_e_emits_5`). CAS `139`.
 
 ## 6. Extra tapes and related challenges
 
@@ -219,15 +242,15 @@ advice `N/17`: `PreprocessGRA.v`.
 | Cut | Prefix | Rocq | CAS |
 |---|---|---|---|
 | peel a witness | `srsa_*` | `StrongRSAPeel.v` | `127` |
-| SAGM / safeprime / poly `e` | `sagm_*` / `safeprime_*` / `poly_e_*` | `SolverRestrict.v` | `128` |
+| SAGM / safeprime / poly `e` | `sagm_*` / `safeprime_*` / `poly_e_*` / `reject_sample_*` | `SolverRestrict.v` | `128`, `139` |
 | first dozen inroads | `dozen_*` | `DozenInroads.v` | `129` |
 | solver shapes | `shape_*` | `SolverShape.v` | `130` |
-| public filters | `filter_*` | `FilterShape.v` | `131` |
+| public filters | `filter_*` | `FilterShape.v` | `131`, `139` |
 | arithmetic maps | `arith_*` | `ArithShape.v` | `132` |
 | leftover language of `(x,e)` | `residual_*` | `SrsaResidual.v` | |
 | `⟨y⟩ ≅ C₈×C₅` | `primary_*` | `SrsaPrimary.v` | |
 | dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | |
-| gcd vs multiply | `period_*` | `SrsaPeriod.v` | |
+| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

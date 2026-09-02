@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2035 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2063 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2035 results across 114 files.
+Captured for 2063 results across 114 files.
 
 Counts:
 
@@ -801,6 +801,17 @@ Counts:
 | `filter_lowbit_root_is_70` | 179 | 0 | 0 | OK |
 | `filter_trace_not_root` | 186 | 0 | 0 | OK |
 | `filter_torus_order_not_Nplus1` | 193 | 0 | 0 | OK |
+| `filter_residual_tests_on_cube` | 205 | 0 | 0 | OK |
+| `filter_e5_shares_lambda` | 215 | 0 | 0 | OK |
+| `filter_e15_odd_shares_lambda` | 220 | 0 | 0 | OK |
+| `filter_e7_residual_shaped` | 225 | 0 | 0 | OK |
+| `filter_e5_passes_public_e` | 235 | 0 | 0 | OK |
+| `filter_e7_passes_public_e` | 239 | 0 | 0 | OK |
+| `filter_e_coprime_N_cube_passes` | 243 | 0 | 0 | OK |
+| `filter_e_coprime_N_accepts_nonresidual` | 247 | 0 | 0 | OK |
+| `filter_e_coprime_N_does_not_certify` | 252 | 0 | 0 | OK |
+| `filter_phi_y_of_36` | 257 | 0 | 0 | OK |
+| `filter_e_coprime_phi_y_rejects_cube` | 265 | 0 | 0 | OK |
 
 ## Fp2.v
 
@@ -1748,6 +1759,13 @@ Counts:
 | `poly_e_X_two_points` | 112 | 0 | 0 | OK |
 | `poly_e_X_not_rerand` | 116 | 0 | 0 | OK |
 | `poly_e_nonconstant_not_fixed_parameter` | 120 | 0 | 0 | OK |
+| `poly_e_quadratic` | 134 | 0 | 0 | OK |
+| `poly_e_quadratic_residual_shaped` | 138 | 0 | 0 | OK |
+| `poly_e_quadratic_leftover_with_period` | 145 | 0 | 0 | OK |
+| `poly_e_quadratic_encrypt_not_leftover` | 160 | 0 | 0 | OK |
+| `poly_e_square_even_peel` | 167 | 0 | 0 | OK |
+| `reject_sample_public_e_emits_5` | 178 | 0 | 0 | OK |
+| `reject_sample_emits_nonresidual` | 182 | 0 | 0 | OK |
 
 ## SolverShape.v
 
@@ -1990,73 +2008,83 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `period_base3_period` | 21 | 0 | 0 | OK |
-| `period_y32_splits` | 31 | 0 | 0 | OK |
-| `period_y5_minus_1_splits` | 43 | 0 | 0 | OK |
-| `period_y8_minus_1_splits` | 51 | 0 | 0 | OK |
-| `period_y10_minus_1_splits` | 59 | 0 | 0 | OK |
-| `period_phi8_y_splits` | 67 | 0 | 0 | OK |
-| `period_y2_plus_1_gcd` | 75 | 0 | 0 | OK |
-| `period_phi5_y_splits` | 79 | 0 | 0 | OK |
-| `period_x2_minus_1_int` | 89 | 0 | 0 | OK |
-| `period_full_period_no_split` | 93 | 0 | 0 | OK |
-| `period_miller_on_period2` | 98 | 0 | 0 | OK |
-| `period_local_orders` | 108 | 0 | 0 | OK |
-| `period_gcd_pminus1_qminus1` | 115 | 0 | 0 | OK |
-| `period_public_d5_pohlig` | 119 | 0 | 0 | OK |
-| `period_mismatched_local_orders` | 129 | 0 | 0 | OK |
-| `period_lcm_local_orders` | 134 | 0 | 0 | OK |
-| `period_v2_local_orders` | 138 | 0 | 0 | OK |
-| `period_gcd_path_splits` | 143 | 0 | 0 | OK |
-| `period_exp_path_leftover` | 151 | 0 | 0 | OK |
-| `period_eq_order_40` | 159 | 0 | 0 | OK |
-| `period_eq_not_8` | 164 | 0 | 0 | OK |
-| `period_eq_not_5` | 168 | 0 | 0 | OK |
-| `period_eq_y40` | 172 | 0 | 0 | OK |
-| `period_eq_y20` | 176 | 0 | 0 | OK |
-| `period_eq_y8` | 180 | 0 | 0 | OK |
-| `period_eq_y5` | 184 | 0 | 0 | OK |
-| `period_gcd_y5_splits` | 188 | 0 | 0 | OK |
-| `period_gcd_y8_splits` | 196 | 0 | 0 | OK |
-| `period_gcd_full_period` | 204 | 0 | 0 | OK |
-| `period_after_ord_invert` | 208 | 0 | 0 | OK |
-| `period_v2_ord_p` | 216 | 0 | 0 | OK |
-| `period_v2_ord_q` | 220 | 0 | 0 | OK |
-| `period_v2_ord_N` | 224 | 0 | 0 | OK |
-| `period_v2_lam_bigger` | 229 | 0 | 0 | OK |
-| `period_x5_minus_1_splits` | 234 | 0 | 0 | OK |
-| `period_x8_minus_1_splits` | 242 | 0 | 0 | OK |
-| `period_x10_minus_1_splits` | 250 | 0 | 0 | OK |
-| `period_x16_minus_1_splits` | 258 | 0 | 0 | OK |
-| `period_x4_minus_1` | 266 | 0 | 0 | OK |
-| `period_x2_minus_1` | 270 | 0 | 0 | OK |
-| `period_same_oracle` | 274 | 0 | 0 | OK |
-| `period_ten_order_16` | 279 | 0 | 0 | OK |
-| `period_ten_pow8_miller` | 284 | 0 | 0 | OK |
-| `period_ten_pow8_splits` | 288 | 0 | 0 | OK |
-| `period_ten_pow16` | 296 | 0 | 0 | OK |
-| `period_21_order_4` | 300 | 0 | 0 | OK |
-| `period_21_sq_splits` | 305 | 0 | 0 | OK |
-| `period_89_order_4` | 313 | 0 | 0 | OK |
-| `period_77_pminus1` | 318 | 0 | 0 | OK |
-| `period_77_qminus1` | 326 | 0 | 0 | OK |
-| `period_77_leftover_pohlig` | 334 | 0 | 0 | OK |
-| `period_77_ord2_is_lam` | 342 | 0 | 0 | OK |
-| `period_two_subgroups_split` | 347 | 0 | 0 | OK |
-| `period_three_pohlig_5` | 355 | 0 | 0 | OK |
-| `period_three_pohlig_16` | 363 | 0 | 0 | OK |
-| `period_three_pow8_no_split` | 371 | 0 | 0 | OK |
-| `period_cbrt2_cbrt36_split` | 375 | 0 | 0 | OK |
-| `period_cbrt3_cbrt36_split` | 383 | 0 | 0 | OK |
-| `period_cbrt3_cbrt2` | 391 | 0 | 0 | OK |
-| `period_five_max_order` | 395 | 0 | 0 | OK |
-| `period_five_pohlig_5` | 400 | 0 | 0 | OK |
-| `period_five_pohlig_16` | 408 | 0 | 0 | OK |
-| `period_ord16_to_miller` | 416 | 0 | 0 | OK |
-| `period_77_51_is_2_pow7` | 420 | 0 | 0 | OK |
-| `period_77_lambda` | 424 | 0 | 0 | OK |
-| `period_77_two_pow3` | 428 | 0 | 0 | OK |
-| `period_77_two_pow5` | 436 | 0 | 0 | OK |
+| `period_base3_period` | 22 | 0 | 0 | OK |
+| `period_y32_splits` | 32 | 0 | 0 | OK |
+| `period_y5_minus_1_splits` | 44 | 0 | 0 | OK |
+| `period_y8_minus_1_splits` | 52 | 0 | 0 | OK |
+| `period_y10_minus_1_splits` | 60 | 0 | 0 | OK |
+| `period_phi8_y_splits` | 68 | 0 | 0 | OK |
+| `period_y2_plus_1_gcd` | 76 | 0 | 0 | OK |
+| `period_phi5_y_splits` | 80 | 0 | 0 | OK |
+| `period_x2_minus_1_int` | 90 | 0 | 0 | OK |
+| `period_full_period_no_split` | 94 | 0 | 0 | OK |
+| `period_miller_on_period2` | 99 | 0 | 0 | OK |
+| `period_local_orders` | 109 | 0 | 0 | OK |
+| `period_gcd_pminus1_qminus1` | 116 | 0 | 0 | OK |
+| `period_public_d5_pohlig` | 120 | 0 | 0 | OK |
+| `period_mismatched_local_orders` | 130 | 0 | 0 | OK |
+| `period_lcm_local_orders` | 135 | 0 | 0 | OK |
+| `period_v2_local_orders` | 139 | 0 | 0 | OK |
+| `period_gcd_path_splits` | 144 | 0 | 0 | OK |
+| `period_exp_path_leftover` | 152 | 0 | 0 | OK |
+| `period_eq_order_40` | 160 | 0 | 0 | OK |
+| `period_eq_not_8` | 165 | 0 | 0 | OK |
+| `period_eq_not_5` | 169 | 0 | 0 | OK |
+| `period_eq_y40` | 173 | 0 | 0 | OK |
+| `period_eq_y20` | 177 | 0 | 0 | OK |
+| `period_eq_y8` | 181 | 0 | 0 | OK |
+| `period_eq_y5` | 185 | 0 | 0 | OK |
+| `period_gcd_y5_splits` | 189 | 0 | 0 | OK |
+| `period_gcd_y8_splits` | 197 | 0 | 0 | OK |
+| `period_gcd_full_period` | 205 | 0 | 0 | OK |
+| `period_after_ord_invert` | 209 | 0 | 0 | OK |
+| `period_v2_ord_p` | 217 | 0 | 0 | OK |
+| `period_v2_ord_q` | 221 | 0 | 0 | OK |
+| `period_v2_ord_N` | 225 | 0 | 0 | OK |
+| `period_v2_lam_bigger` | 230 | 0 | 0 | OK |
+| `period_x5_minus_1_splits` | 235 | 0 | 0 | OK |
+| `period_x8_minus_1_splits` | 243 | 0 | 0 | OK |
+| `period_x10_minus_1_splits` | 251 | 0 | 0 | OK |
+| `period_x16_minus_1_splits` | 259 | 0 | 0 | OK |
+| `period_x4_minus_1` | 267 | 0 | 0 | OK |
+| `period_x2_minus_1` | 271 | 0 | 0 | OK |
+| `period_same_oracle` | 275 | 0 | 0 | OK |
+| `period_ten_order_16` | 280 | 0 | 0 | OK |
+| `period_ten_pow8_miller` | 285 | 0 | 0 | OK |
+| `period_ten_pow8_splits` | 289 | 0 | 0 | OK |
+| `period_ten_pow16` | 297 | 0 | 0 | OK |
+| `period_21_order_4` | 301 | 0 | 0 | OK |
+| `period_21_sq_splits` | 306 | 0 | 0 | OK |
+| `period_89_order_4` | 314 | 0 | 0 | OK |
+| `period_77_pminus1` | 319 | 0 | 0 | OK |
+| `period_77_qminus1` | 327 | 0 | 0 | OK |
+| `period_77_leftover_pohlig` | 335 | 0 | 0 | OK |
+| `period_77_ord2_is_lam` | 343 | 0 | 0 | OK |
+| `period_two_subgroups_split` | 348 | 0 | 0 | OK |
+| `period_three_pohlig_5` | 356 | 0 | 0 | OK |
+| `period_three_pohlig_16` | 364 | 0 | 0 | OK |
+| `period_three_pow8_no_split` | 372 | 0 | 0 | OK |
+| `period_cbrt2_cbrt36_split` | 376 | 0 | 0 | OK |
+| `period_cbrt3_cbrt36_split` | 384 | 0 | 0 | OK |
+| `period_cbrt3_cbrt2` | 392 | 0 | 0 | OK |
+| `period_five_max_order` | 396 | 0 | 0 | OK |
+| `period_five_pohlig_5` | 401 | 0 | 0 | OK |
+| `period_five_pohlig_16` | 409 | 0 | 0 | OK |
+| `period_ord16_to_miller` | 417 | 0 | 0 | OK |
+| `period_77_51_is_2_pow7` | 421 | 0 | 0 | OK |
+| `period_77_lambda` | 425 | 0 | 0 | OK |
+| `period_77_two_pow3` | 429 | 0 | 0 | OK |
+| `period_77_two_pow5` | 437 | 0 | 0 | OK |
+| `period_187_mismatch_gcd` | 449 | 0 | 0 | OK |
+| `period_77_mismatch_gcd` | 453 | 0 | 0 | OK |
+| `period_247_match_gcd` | 457 | 0 | 0 | OK |
+| `period_247_leftover_pair` | 463 | 0 | 0 | OK |
+| `period_247_residual_leaf` | 469 | 0 | 0 | OK |
+| `period_247_local_residues` | 480 | 0 | 0 | OK |
+| `period_247_matching_local_orders` | 485 | 0 | 0 | OK |
+| `period_247_x5_minus_1_no_split` | 492 | 0 | 0 | OK |
+| `period_247_x8_minus_1_no_split` | 496 | 0 | 0 | OK |
+| `period_247_x6_minus_1_is_N` | 500 | 0 | 0 | OK |
 
 ## SrsaPrimary.v
 

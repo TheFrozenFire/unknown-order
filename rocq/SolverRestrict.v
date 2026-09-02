@@ -120,3 +120,70 @@ Proof. apply srsa_poly_e_not_rerand_invariant. Qed.
 Theorem poly_e_nonconstant_not_fixed_parameter :
   forall dq, 3 * 1 <> 1 + 3 * dq.
 Proof. intros dq. apply am09_fixed_e_is_a_parameter. lia. Qed.
+
+(** ** Degree-[≥2] polynomial [e = P(y)], rejection sample, write-[e] then [x]
+
+    Constant [e] is RSA at that [e].  Quadratic [P=1+Y²] is
+    residual-shaped on this pin; without [ord(y)]/[λ] the public
+    map [x=y^e] does not hit leftover [x].  [e=y²] is even and
+    peels.  Rejection-sampling odd primes against [gcd(e,N−1)=1]
+    emits [e=5], which shares [λ].  Cross-confirmed by [cas/139]. *)
+
+Definition poly_Y2_plus_1 : list Z := [1; 0; 1].
+
+Theorem poly_e_quadratic :
+  poly_eval poly_Y2_plus_1 36 = 1297.
+Proof. reflexivity. Qed.
+
+Theorem poly_e_quadratic_residual_shaped :
+  Z.odd 1297 = true /\
+  Z.gcd 1297 80 = 1 /\
+  1296 mod 80 = 16 /\
+  16 <> 0.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem poly_e_quadratic_leftover_with_period :
+  powm 36 33 187 = 104 /\
+  powm 104 1297 187 = 36 /\
+  srsa_residual_leaf 187 80 36 104 1297.
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
+  unfold srsa_residual_leaf, Problem_StrongRSA.
+  split; [vm_compute; reflexivity|].
+  split; [split; [lia|]; vm_compute; reflexivity|].
+  split; [exists 648; lia|].
+  split; [vm_compute; reflexivity|].
+  intros [k Hk]. nia.
+Qed.
+
+Theorem poly_e_quadratic_encrypt_not_leftover :
+  powm 36 1297 187 = 53 /\
+  53 <> 104 /\
+  powm 36 187 187 = 42 /\
+  42 <> 104.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem poly_e_square_even_peel :
+  Z.even (36 * 36) = true.
+Proof. reflexivity. Qed.
+
+Fixpoint first_passing_public_e (es : list Z) (N : Z) : Z :=
+  match es with
+  | nil => 0
+  | e :: rest =>
+      if Z.eqb (Z.gcd e (N - 1)) 1 then e else first_passing_public_e rest N
+  end.
+
+Theorem reject_sample_public_e_emits_5 :
+  first_passing_public_e [3; 5; 7; 11] 187 = 5.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem reject_sample_emits_nonresidual :
+  first_passing_public_e [3; 5; 7; 11] 187 = 5 /\
+  Z.gcd 5 80 = 5 /\
+  Z.gcd 3 186 <> 1.
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [reflexivity | discriminate].
+Qed.
