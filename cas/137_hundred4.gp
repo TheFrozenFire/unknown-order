@@ -1,5 +1,5 @@
 \\ Fourth hundred: residual dictionary, C8 x C5, e and e+40,
-\\ equality-only order-finding vs gcd-Pohlig.  Mirrors HundredS..W.v.
+\\ equality-only order-finding vs gcd-Pohlig.  Crosswalk: notes/hundred4.md.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));

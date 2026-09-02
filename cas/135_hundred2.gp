@@ -1,5 +1,4 @@
-\\ Second hundred Strong-RSA algorithm-class pins.  Mirrors HundredI..HundredM.v.
-\\ Probe names avoid the word "fail" (cas-gate tally footgun).
+\\ Second hundred Strong-RSA algorithm-class pins.  CAS↔Rocq crosswalk: notes/hundred2.md.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));

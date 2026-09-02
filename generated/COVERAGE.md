@@ -1190,141 +1190,6 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `slot_try_sound` | 163 |
 | Theorem | `slot_try_complete` | 183 |
 
-## `HundredA.v`
-
-- L15: Hundred classes A (1–12)
-
-| Kind | Name | Line |
-|---|---|---:|
-| Theorem | `hun_01_odd_monomial` | 21 |
-| Theorem | `hun_02_associate` | 27 |
-| Theorem | `hun_03_midpoint` | 32 |
-| Theorem | `hun_04_phi_y_even` | 39 |
-| Theorem | `hun_05_hamming_even` | 44 |
-| Theorem | `hun_06_shamir_two_leftovers` | 49 |
-| Theorem | `hun_07_paillier_carrier` | 55 |
-| Theorem | `hun_08_williams_Ve` | 63 |
-| Theorem | `hun_09_lsb_y_even` | 69 |
-| Theorem | `hun_10_encrypt_as_decrypt` | 73 |
-| Theorem | `hun_11_e25_shares_lambda` | 78 |
-| Theorem | `hun_12_not_coppersmith_small` | 83 |
-
-## `HundredB.v`
-
-- L15: Hundred classes B (13–32)
-
-| Kind | Name | Line |
-|---|---|---:|
-| Theorem | `hun_13_odd_monomial_y5` | 25 |
-| Theorem | `hun_14_y_to_the_y` | 31 |
-| Theorem | `hun_15_y_to_the_N` | 36 |
-| Theorem | `hun_16_y_to_Nminus1` | 46 |
-| Theorem | `hun_17_y_to_Nplus1` | 51 |
-| Theorem | `hun_18_floor_sqrt_y` | 56 |
-| Theorem | `hun_19_half_y` | 61 |
-| Theorem | `hun_20_bitrev_36_is_9` | 67 |
-| Theorem | `hun_21_triangular` | 74 |
-| Theorem | `hun_22_nextprime_as_x` | 79 |
-| Theorem | `hun_23_fibonacci_y` | 84 |
-| Theorem | `hun_24_exp_base2` | 91 |
-| Theorem | `hun_25_exp_base3` | 96 |
-| Theorem | `hun_26_phi3_of_y` | 101 |
-| Theorem | `hun_27_inv_then_cube` | 106 |
-| Theorem | `hun_28_cube_then_inv` | 111 |
-| Theorem | `hun_29_hybrid_crt` | 116 |
-| Theorem | `hun_30_mismatched_crt_splits` | 123 |
-| Theorem | `hun_31_integer_jnt` | 133 |
-| Theorem | `hun_32_y2_plus_1` | 138 |
-
-## `HundredC.v`
-
-- L15: Hundred classes C (33–50)
-
-| Kind | Name | Line |
-|---|---|---:|
-| Theorem | `hun_33_lambda_y_even` | 20 |
-| Theorem | `hun_34_bitlength_even` | 25 |
-| Theorem | `hun_35_tau_leftover_e9` | 30 |
-| Theorem | `hun_36_sigma_leftover` | 35 |
-| Theorem | `hun_37_rad_even` | 50 |
-| Theorem | `hun_38_omega_even` | 55 |
-| Theorem | `hun_39_Omega_even` | 59 |
-| Theorem | `hun_40_lpf_hits_cube` | 63 |
-| Theorem | `hun_41_y_plus_1_is_nextprime` | 67 |
-| Theorem | `hun_42_odd_part_e9` | 73 |
-| Theorem | `hun_43_odd_hamming_shares` | 78 |
-| Theorem | `hun_44_gcd_yminus1_Nminus1` | 83 |
-| Theorem | `hun_45_phi3_y_leftover_shaped` | 87 |
-| Theorem | `hun_46_v2_yminus1` | 97 |
-| Theorem | `hun_47_mersenne_leftover` | 103 |
-| Theorem | `hun_48_N_mod_y_hits_e7` | 118 |
-| Theorem | `hun_49_fermatish_leftover` | 123 |
-| Theorem | `hun_50_smooth_even` | 129 |
-
-## `HundredDE.v`
-
-- L16: Hundred classes D–E (51–74)
-
-| Kind | Name | Line |
-|---|---|---:|
-| Theorem | `hun_51_extra_dp` | 21 |
-| Theorem | `hun_52_fermat_difference` | 26 |
-| Theorem | `hun_53_extra_sqrt_splits` | 30 |
-| Theorem | `hun_54_extra_order_is_lambda` | 40 |
-| Theorem | `hun_55_factor_e_minus_1` | 45 |
-| Theorem | `hun_56_factor_N_minus_1` | 50 |
-| Theorem | `hun_57_wiener_d_not_small` | 54 |
-| Theorem | `hun_58_sequential_square_period` | 60 |
-| Theorem | `hun_59_height_mismatch` | 64 |
-| Theorem | `hun_60_primitive_root_mod_p` | 69 |
-| Theorem | `hun_61_half_bits` | 74 |
-| Theorem | `hun_62_cubic_symbol_vacuous` | 79 |
-| Theorem | `hun_63_inverse_challenge` | 83 |
-| Theorem | `hun_64_neg_y` | 88 |
-| Theorem | `hun_65_two_y` | 92 |
-| Theorem | `hun_66_three_powers_gcd` | 96 |
-| Theorem | `hun_67_y_plus_1_root` | 100 |
-| Theorem | `hun_68_batch_gcd_of_roots` | 104 |
-| Theorem | `hun_69_adaptive_lambda_plus_one` | 108 |
-| Theorem | `hun_70_same_y_two_moduli` | 113 |
-| Theorem | `hun_71_twin_exponents` | 118 |
-| Theorem | `hun_72_product_of_leftovers` | 122 |
-| Theorem | `hun_73_rerand_forces_fixed_e` | 128 |
-| Theorem | `hun_74_coins_independent_fixed_e` | 132 |
-
-## `HundredFH.v`
-
-- L20: Hundred classes F–H (75–100)
-
-| Kind | Name | Line |
-|---|---|---:|
-| Theorem | `hun_75_pollard_p1` | 25 |
-| Theorem | `hun_76_rho_walk` | 37 |
-| Theorem | `hun_77_bsgs_wrong_order` | 53 |
-| Theorem | `hun_78_fermat_splits` | 59 |
-| Theorem | `hun_79_trial_division` | 73 |
-| Theorem | `hun_80_williams_pplus1` | 81 |
-| Theorem | `hun_81_index_calculus_Nminus1` | 89 |
-| Theorem | `hun_82_squaring_only` | 93 |
-| Theorem | `hun_83_advice_on_y_lsb` | 99 |
-| Theorem | `hun_84_streaming_first_bit` | 103 |
-| Theorem | `hun_85_ou_carrier` | 107 |
-| Theorem | `hun_86_dj_carrier` | 115 |
-| Theorem | `hun_87_cocks_jacobi` | 119 |
-| Theorem | `hun_88_prime_power_field` | 123 |
-| Theorem | `hun_89_two_safeprimes` | 129 |
-| Theorem | `hun_90_rw_shape_odd_e` | 140 |
-| Theorem | `hun_91_twins` | 145 |
-| Theorem | `hun_92_unbalanced` | 150 |
-| Theorem | `hun_93_triprime_cube_not_residual` | 160 |
-| Theorem | `hun_94_prime_field` | 171 |
-| Theorem | `hun_95_e_eq_N` | 177 |
-| Theorem | `hun_96_e_eq_Nminus2` | 182 |
-| Theorem | `hun_97_x_eq_Nminus1` | 187 |
-| Theorem | `hun_98_floor_sqrt_N` | 192 |
-| Theorem | `hun_99_phi3_of_N` | 198 |
-| Theorem | `hun_100_dl_base3` | 202 |
-
 ## `Inner2.v`
 
 - L15: Inner product of two pairs: [s = x0·y0 + x1·y1]
@@ -2257,6 +2122,559 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `shape_miller_e11_on_y_splits` | 291 |
 | Theorem | `shape_miller_e3_on_y_survives` | 303 |
 
+## `SrsaDict.v`
+
+- L14: Residual dictionary, cubing cycles, SAGM on [y]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `dict_e_eq_d` | 21 |
+| Theorem | `dict_e43_same_x_leaf` | 36 |
+| Theorem | `dict_N_mod_40_is_d` | 51 |
+| Theorem | `dict_public_N_mod_40` | 55 |
+| Theorem | `dict_y_to_d` | 60 |
+| Theorem | `dict_x93_e67` | 64 |
+| Theorem | `dict_x25_e11` | 77 |
+| Theorem | `dict_x25_e51` | 90 |
+| Theorem | `dict_x15_e29` | 103 |
+| Theorem | `dict_x15_e69` | 116 |
+| Theorem | `dict_x168_e61` | 129 |
+| Theorem | `dict_x104_e57` | 142 |
+| Theorem | `dict_x185_e53` | 155 |
+| Theorem | `dict_xy_e41` | 168 |
+| Theorem | `dict_y_lambda_type` | 176 |
+| Theorem | `dict_e_plus_80` | 181 |
+| Theorem | `dict_phi80` | 185 |
+| Theorem | `dict_phi40` | 189 |
+| Theorem | `dict_two_e_per_x` | 193 |
+| Theorem | `dict_e_mod_40` | 197 |
+| Theorem | `dict_kernel_1_41` | 202 |
+| Theorem | `dict_cube_bij_on_cyc` | 208 |
+| Theorem | `dict_27th_is_inverse_auto` | 212 |
+| Theorem | `dict_compose_autos` | 217 |
+| Theorem | `dict_ae_is_lambda_plus_1` | 222 |
+| Theorem | `dict_bits_of_27` | 226 |
+| Theorem | `dict_binary_product` | 230 |
+| Theorem | `dict_add_chain_y6` | 237 |
+| Theorem | `dict_add_chain_y12` | 241 |
+| Theorem | `dict_add_chain_y24` | 245 |
+| Theorem | `dict_k_odd` | 249 |
+| Theorem | `dict_hamming_27` | 253 |
+| Theorem | `dict_naf_shape` | 257 |
+| Theorem | `dict_y25` | 263 |
+| Theorem | `dict_y16_is_g5sq` | 267 |
+| Theorem | `dict_sagm_on_y` | 272 |
+| Theorem | `dict_y81` | 276 |
+| Theorem | `dict_ae_lambda_plus_1` | 280 |
+| Theorem | `dict_e43_same_x` | 284 |
+| Theorem | `dict_e83_same_x` | 288 |
+| Theorem | `dict_e43_minus_3` | 292 |
+| Theorem | `dict_e83_minus_3` | 296 |
+| Theorem | `dict_e67_coprime` | 300 |
+| Theorem | `dict_e51_coprime` | 304 |
+| Theorem | `dict_e61_coprime` | 308 |
+| Theorem | `dict_e57_coprime` | 312 |
+| Theorem | `dict_e29_coprime` | 316 |
+| Theorem | `dict_e39_coprime` | 320 |
+| Theorem | `dict_x26_e39` | 324 |
+| Theorem | `dict_self_inverse_11` | 337 |
+| Theorem | `dict_sagm_ae_minus_1` | 341 |
+| Theorem | `dict_inv_mod_40` | 345 |
+| Theorem | `dict_inv_mod_lam` | 349 |
+| Theorem | `dict_cycle_70_cube` | 353 |
+| Theorem | `dict_cycle_42_cube` | 357 |
+| Theorem | `dict_cycle_36_cube` | 361 |
+| Theorem | `dict_cycle_93_cube` | 365 |
+| Theorem | `dict_three_order_4_mod_40` | 369 |
+| Theorem | `dict_27_order_4_mod_40` | 373 |
+| Theorem | `dict_cycle2_9` | 377 |
+| Theorem | `dict_cycle2_168` | 381 |
+| Theorem | `dict_cycle2_15` | 385 |
+| Theorem | `dict_k27_coords` | 389 |
+| Theorem | `dict_e3_coords` | 394 |
+| Theorem | `dict_3_order_4_mod_40` | 399 |
+| Theorem | `dict_cube_root_of_2` | 404 |
+| Theorem | `dict_sagm_of_3` | 409 |
+| Theorem | `dict_75_not_42` | 414 |
+| Theorem | `dict_cycle2_60` | 418 |
+| Theorem | `dict_cycle3_25` | 422 |
+| Theorem | `dict_cycle3_104` | 426 |
+| Theorem | `dict_cycle3_59` | 430 |
+| Theorem | `dict_cycle3_53` | 434 |
+| Theorem | `dict_cycle4_49` | 438 |
+| Theorem | `dict_cycle4_26` | 442 |
+| Theorem | `dict_cycle4_185` | 446 |
+| Theorem | `dict_cycle4_179` | 450 |
+| Theorem | `dict_cbrt_2_in_ltwo` | 454 |
+| Theorem | `dict_cbrt_3_in_lthree` | 459 |
+| Theorem | `dict_cbrt_36_in_ly` | 464 |
+| Theorem | `dict_three_x_for_k27` | 469 |
+
+## `SrsaEngines.v`
+
+- L14: Named factoring engines as solvers
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `engine_pollard_p1` | 21 |
+| Theorem | `engine_rho_walk` | 33 |
+| Theorem | `engine_bsgs_wrong_order` | 49 |
+| Theorem | `engine_fermat_splits` | 55 |
+| Theorem | `engine_trial_division` | 69 |
+| Theorem | `engine_williams_pplus1` | 77 |
+| Theorem | `engine_index_calculus_Nminus1` | 85 |
+| Theorem | `engine_F9_splits` | 89 |
+| Theorem | `engine_F10_splits` | 97 |
+| Theorem | `engine_mersenne_255` | 105 |
+| Theorem | `engine_pminus1_B8` | 115 |
+| Theorem | `engine_rho_x2_minus_1` | 119 |
+| Theorem | `engine_williams_P3_no_split` | 131 |
+| Theorem | `engine_factorial_trial` | 135 |
+| Theorem | `engine_hart_square` | 139 |
+| Theorem | `engine_fermat_recovers` | 144 |
+| Theorem | `engine_trial_13_then_11` | 154 |
+| Theorem | `engine_fibonacci_gcd_engine` | 164 |
+| Theorem | `engine_mersenne_engine` | 172 |
+| Theorem | `engine_shor_period_of_2` | 180 |
+| Theorem | `engine_lam_ne_Nminus1` | 185 |
+
+## `SrsaExtra.v`
+
+- L14: Extra tapes and related challenges
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `extra_shamir_two_leftovers` | 20 |
+| Theorem | `extra_crt_dp` | 26 |
+| Theorem | `extra_fermat_difference` | 31 |
+| Theorem | `extra_sqrt_splits` | 35 |
+| Theorem | `extra_order_is_lambda` | 45 |
+| Theorem | `extra_factor_e_minus_1` | 50 |
+| Theorem | `extra_factor_N_minus_1` | 55 |
+| Theorem | `extra_wiener_d_not_small` | 59 |
+| Theorem | `extra_sequential_square_period` | 65 |
+| Theorem | `extra_height_mismatch` | 69 |
+| Theorem | `extra_primitive_root_mod_p` | 74 |
+| Theorem | `extra_half_bits` | 79 |
+| Theorem | `extra_cubic_symbol_vacuous` | 84 |
+| Theorem | `extra_inverse_challenge` | 88 |
+| Theorem | `extra_neg_y` | 93 |
+| Theorem | `extra_two_y` | 97 |
+| Theorem | `extra_three_powers_gcd` | 101 |
+| Theorem | `extra_y_plus_1_root` | 105 |
+| Theorem | `extra_batch_gcd_of_roots` | 109 |
+| Theorem | `extra_adaptive_lambda_plus_one` | 113 |
+| Theorem | `extra_same_y_two_moduli` | 118 |
+| Theorem | `extra_twin_exponents` | 123 |
+| Theorem | `extra_product_of_leftovers` | 127 |
+| Theorem | `extra_rerand_forces_fixed_e` | 133 |
+| Theorem | `extra_coins_independent_fixed_e` | 137 |
+| Theorem | `extra_squaring_only` | 142 |
+| Theorem | `extra_advice_on_y_lsb` | 148 |
+| Theorem | `extra_streaming_first_bit` | 152 |
+| Theorem | `extra_dl_base3` | 156 |
+| Theorem | `extra_p_plus_q` | 162 |
+| Theorem | `extra_torus_order_is_y` | 166 |
+| Theorem | `extra_hamming_N` | 170 |
+| Theorem | `extra_digit_reverse_splits` | 174 |
+| Theorem | `extra_digits_of_N` | 184 |
+| Theorem | `extra_N_mod_100` | 188 |
+| Theorem | `extra_nextprime_N` | 192 |
+| Theorem | `extra_prevprime_associate` | 197 |
+| Theorem | `extra_xor_leftovers` | 202 |
+| Theorem | `extra_related_y_cube` | 208 |
+| Theorem | `extra_leftover_pair_splits` | 213 |
+| Theorem | `extra_first_nibble` | 223 |
+| Theorem | `extra_two_bit_advice` | 227 |
+| Theorem | `extra_dl_base5` | 231 |
+| Theorem | `extra_dl_base9` | 237 |
+| Theorem | `extra_gen_pair_42_9` | 243 |
+| Theorem | `extra_gen_pair_42_53` | 251 |
+| Theorem | `extra_gen_pair_42_93` | 259 |
+| Theorem | `extra_y_minus_x` | 267 |
+| Theorem | `extra_advice_five_div_lam` | 271 |
+| Theorem | `extra_advice_local_9` | 275 |
+| Theorem | `extra_euclid_x_minus_y` | 279 |
+| Theorem | `extra_low_bits_y` | 283 |
+| Theorem | `extra_hensel_p2` | 287 |
+| Theorem | `extra_dp` | 291 |
+| Theorem | `extra_edp_minus_1` | 295 |
+| Theorem | `extra_dq` | 299 |
+| Theorem | `extra_edq_minus_1` | 303 |
+| Theorem | `extra_shamir_3_7` | 307 |
+| Theorem | `extra_rerand_fixed_e` | 311 |
+
+## `SrsaModulus.v`
+
+- L18: Different group or modulus
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `modulus_paillier_carrier` | 24 |
+| Theorem | `modulus_williams_Ve` | 32 |
+| Theorem | `modulus_ou_carrier` | 38 |
+| Theorem | `modulus_dj_carrier` | 46 |
+| Theorem | `modulus_cocks_jacobi` | 50 |
+| Theorem | `modulus_prime_power_field` | 54 |
+| Theorem | `modulus_two_safeprimes` | 60 |
+| Theorem | `modulus_rw_shape_odd_e` | 71 |
+| Theorem | `modulus_twins` | 76 |
+| Theorem | `modulus_unbalanced` | 81 |
+| Theorem | `modulus_triprime_cube_not_residual` | 91 |
+| Theorem | `modulus_prime_field` | 102 |
+| Theorem | `modulus_N55_cube_residual_shaped` | 108 |
+| Theorem | `modulus_N119_cube_shares` | 114 |
+| Theorem | `modulus_N209_cube_shares` | 120 |
+| Theorem | `modulus_N221_cube_shares` | 126 |
+| Theorem | `modulus_N323_cube_shares` | 132 |
+| Theorem | `modulus_prime_cube` | 138 |
+
+## `SrsaPeriod.v`
+
+- L13: Period: gcd vs multiply
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `period_base3_period` | 21 |
+| Theorem | `period_y32_splits` | 31 |
+| Theorem | `period_y5_minus_1_splits` | 43 |
+| Theorem | `period_y8_minus_1_splits` | 51 |
+| Theorem | `period_y10_minus_1_splits` | 59 |
+| Theorem | `period_phi8_y_splits` | 67 |
+| Theorem | `period_y2_plus_1_gcd` | 75 |
+| Theorem | `period_phi5_y_splits` | 79 |
+| Theorem | `period_x2_minus_1_int` | 89 |
+| Theorem | `period_full_period_no_split` | 93 |
+| Theorem | `period_miller_on_period2` | 98 |
+| Theorem | `period_local_orders` | 108 |
+| Theorem | `period_gcd_pminus1_qminus1` | 115 |
+| Theorem | `period_public_d5_pohlig` | 119 |
+| Theorem | `period_mismatched_local_orders` | 129 |
+| Theorem | `period_lcm_local_orders` | 134 |
+| Theorem | `period_v2_local_orders` | 138 |
+| Theorem | `period_gcd_path_splits` | 143 |
+| Theorem | `period_exp_path_leftover` | 151 |
+| Theorem | `period_eq_order_40` | 159 |
+| Theorem | `period_eq_not_8` | 164 |
+| Theorem | `period_eq_not_5` | 168 |
+| Theorem | `period_eq_y40` | 172 |
+| Theorem | `period_eq_y20` | 176 |
+| Theorem | `period_eq_y8` | 180 |
+| Theorem | `period_eq_y5` | 184 |
+| Theorem | `period_gcd_y5_splits` | 188 |
+| Theorem | `period_gcd_y8_splits` | 196 |
+| Theorem | `period_gcd_full_period` | 204 |
+| Theorem | `period_after_ord_invert` | 208 |
+| Theorem | `period_v2_ord_p` | 216 |
+| Theorem | `period_v2_ord_q` | 220 |
+| Theorem | `period_v2_ord_N` | 224 |
+| Theorem | `period_v2_lam_bigger` | 229 |
+| Theorem | `period_x5_minus_1_splits` | 234 |
+| Theorem | `period_x8_minus_1_splits` | 242 |
+| Theorem | `period_x10_minus_1_splits` | 250 |
+| Theorem | `period_x16_minus_1_splits` | 258 |
+| Theorem | `period_x4_minus_1` | 266 |
+| Theorem | `period_x2_minus_1` | 270 |
+| Theorem | `period_same_oracle` | 274 |
+| Theorem | `period_ten_order_16` | 279 |
+| Theorem | `period_ten_pow8_miller` | 284 |
+| Theorem | `period_ten_pow8_splits` | 288 |
+| Theorem | `period_ten_pow16` | 296 |
+| Theorem | `period_21_order_4` | 300 |
+| Theorem | `period_21_sq_splits` | 305 |
+| Theorem | `period_89_order_4` | 313 |
+| Theorem | `period_77_pminus1` | 318 |
+| Theorem | `period_77_qminus1` | 326 |
+| Theorem | `period_77_leftover_pohlig` | 334 |
+| Theorem | `period_77_ord2_is_lam` | 342 |
+| Theorem | `period_two_subgroups_split` | 347 |
+| Theorem | `period_three_pohlig_5` | 355 |
+| Theorem | `period_three_pohlig_16` | 363 |
+| Theorem | `period_three_pow8_no_split` | 371 |
+| Theorem | `period_cbrt2_cbrt36_split` | 375 |
+| Theorem | `period_cbrt3_cbrt36_split` | 383 |
+| Theorem | `period_cbrt3_cbrt2` | 391 |
+| Theorem | `period_five_max_order` | 395 |
+| Theorem | `period_five_pohlig_5` | 400 |
+| Theorem | `period_five_pohlig_16` | 408 |
+| Theorem | `period_ord16_to_miller` | 416 |
+| Theorem | `period_77_51_is_2_pow7` | 420 |
+| Theorem | `period_77_lambda` | 424 |
+| Theorem | `period_77_two_pow3` | 428 |
+| Theorem | `period_77_two_pow5` | 436 |
+
+## `SrsaPrimary.v`
+
+- L13: Primary decomposition of [⟨y⟩]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `primary_y20_miller` | 19 |
+| Theorem | `primary_y16_five_torsion` | 24 |
+| Theorem | `primary_y8_five_torsion` | 29 |
+| Theorem | `primary_y5_order8` | 34 |
+| Theorem | `primary_y10_order4` | 40 |
+| Theorem | `primary_y4_order10` | 45 |
+| Theorem | `primary_x_to_8_is_five_torsion` | 50 |
+| Theorem | `primary_C8_generator` | 55 |
+| Theorem | `primary_C8_squares` | 60 |
+| Theorem | `primary_C5_generator` | 66 |
+| Theorem | `primary_C5_elements` | 71 |
+| Theorem | `primary_cube_bij_C5` | 77 |
+| Theorem | `primary_cube_bij_C8` | 81 |
+| Theorem | `primary_reconstruct_y` | 85 |
+| Theorem | `primary_bezout_5_8` | 89 |
+| Theorem | `primary_C8_order2_is_miller` | 93 |
+| Theorem | `primary_eight_div_ord` | 98 |
+| Theorem | `primary_five_div_ord` | 102 |
+| Theorem | `primary_C8_is_y5` | 106 |
+| Theorem | `primary_order4_in_C8` | 110 |
+| Theorem | `primary_C8_pow6` | 115 |
+| Theorem | `primary_C8_pow3` | 119 |
+| Theorem | `primary_C8_pow5` | 123 |
+| Theorem | `primary_C8_pow7` | 127 |
+| Theorem | `primary_C5_pow3` | 131 |
+| Theorem | `primary_ker_squaring_C8` | 136 |
+| Theorem | `primary_C8_order` | 140 |
+| Theorem | `primary_C5_order` | 145 |
+| Theorem | `primary_lcm_primaries` | 150 |
+| Theorem | `primary_coprime_primaries` | 154 |
+| Theorem | `primary_cube_bij_primaries` | 158 |
+| Theorem | `primary_x5_generates_C8` | 163 |
+| Theorem | `primary_x8_in_C5` | 168 |
+| Theorem | `primary_reconstruct_x` | 173 |
+| Theorem | `primary_69_generates_C5` | 177 |
+| Theorem | `primary_111_generates_C8` | 182 |
+
+## `SrsaResidual.v`
+
+- L14: Residual leftover language
+  - L23: Pin geometry of [N] and of [⟨2⟩]
+  - L78: Leftover [x] generates [⟨y⟩]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `residual_phi_over_lambda` | 25 |
+| Theorem | `residual_N_mod_8` | 29 |
+| Theorem | `residual_bitlength_N` | 33 |
+| Theorem | `residual_v2_N_minus_1` | 37 |
+| Theorem | `residual_units_not_cyclic` | 42 |
+| Theorem | `residual_mod4_shape` | 47 |
+| Theorem | `residual_N_mod_8_two_sylow` | 52 |
+| Theorem | `residual_y_to_lambda` | 56 |
+| Theorem | `residual_y_to_phi` | 60 |
+| Theorem | `residual_ord2_is_40` | 64 |
+| Theorem | `residual_phi_is_product` | 69 |
+| Theorem | `residual_y_to_lam_identity` | 73 |
+| Theorem | `residual_x_in_cyc_y` | 80 |
+| Theorem | `residual_x_generates` | 84 |
+| Theorem | `residual_x_is_y_to_27` | 90 |
+| Theorem | `residual_cube_root_of_1` | 95 |
+| Theorem | `residual_unique_unit_cube` | 101 |
+| Theorem | `residual_e_inv_mod_16` | 109 |
+| Theorem | `residual_e_inv_mod_5` | 113 |
+| Theorem | `residual_crt_e_inverse` | 117 |
+| Theorem | `residual_five_divides_lambda` | 123 |
+| Theorem | `residual_local_squares` | 128 |
+| Theorem | `residual_qr_both_sides` | 135 |
+| Theorem | `residual_not_in_ltwo` | 140 |
+| Theorem | `residual_in_lthree_and_lfive` | 146 |
+| Theorem | `residual_local_cube_mod_p` | 151 |
+| Theorem | `residual_local_x_mod_q` | 157 |
+| Theorem | `residual_crt_locals` | 161 |
+| Theorem | `residual_bits_of_x` | 166 |
+| Theorem | `residual_x_mod_8` | 170 |
+| Theorem | `residual_x_minus_1_prime` | 174 |
+| Theorem | `residual_x_plus_1_prime` | 178 |
+| Theorem | `residual_sixteen_generators` | 182 |
+| Theorem | `residual_even_k_not_generator` | 186 |
+| Theorem | `residual_y_inv_generator` | 200 |
+| Theorem | `residual_x_inv_generator` | 205 |
+| Theorem | `residual_y29` | 210 |
+| Theorem | `residual_y3_generator` | 214 |
+| Theorem | `residual_y9_generator` | 219 |
+| Theorem | `residual_five_divides_ord` | 224 |
+| Theorem | `residual_eight_divides_ord` | 228 |
+| Theorem | `residual_three_index_two` | 232 |
+| Theorem | `residual_dl_even` | 237 |
+| Theorem | `residual_y_in_square_subgroup` | 241 |
+| Theorem | `residual_v2_lambda` | 245 |
+| Theorem | `residual_ord_divides_lam` | 250 |
+| Theorem | `residual_y_to_ord` | 254 |
+| Theorem | `residual_phi_over_lam` | 258 |
+| Theorem | `residual_ord_div_lam` | 262 |
+| Theorem | `residual_e_coprime_10_16` | 266 |
+| Theorem | `residual_five_ndiv_e` | 271 |
+| Theorem | `residual_y_local_qr` | 276 |
+| Theorem | `residual_bitlength_lam` | 283 |
+| Theorem | `residual_lambda_lcm` | 287 |
+| Theorem | `residual_y_to_e_inv` | 291 |
+| Theorem | `residual_k1_is_y` | 301 |
+| Theorem | `residual_k3_is_y_cube` | 306 |
+| Theorem | `residual_even_k_shares_ord` | 311 |
+| Theorem | `residual_crt_is_residual_x` | 316 |
+| Theorem | `residual_ratio_five_torsion` | 321 |
+| Theorem | `residual_ratio_y4` | 326 |
+| Theorem | `residual_ord_5_smooth` | 331 |
+| Theorem | `residual_index_lam_over_ord` | 335 |
+| Theorem | `residual_x_order_40_not_20` | 339 |
+| Theorem | `residual_three_not_in_cyc_y` | 344 |
+| Theorem | `residual_three_full_lambda` | 348 |
+| Theorem | `residual_y_even_power_of_3` | 352 |
+| Theorem | `residual_product_primaries` | 356 |
+| Theorem | `residual_cube_of_x` | 360 |
+| Theorem | `residual_y_to_27` | 364 |
+| Theorem | `residual_jacobi_x_vs_2` | 368 |
+| Theorem | `residual_x_not_in_lten` | 374 |
+| Theorem | `residual_pminus1_qminus1` | 379 |
+| Theorem | `residual_phi_product` | 384 |
+| Theorem | `residual_index_four` | 388 |
+| Theorem | `residual_x_order_40` | 392 |
+| Theorem | `residual_v2_ord_x` | 397 |
+| Theorem | `residual_v2_lam` | 402 |
+| Theorem | `residual_x_generates_5_sylow` | 407 |
+| Theorem | `residual_N_mod_8_for_2` | 412 |
+| Theorem | `residual_ten_jacobi_plus` | 416 |
+| Theorem | `residual_ten_not_ord40` | 420 |
+| Theorem | `residual_21_mod_8` | 425 |
+| Theorem | `residual_ltwo_ord40` | 429 |
+| Theorem | `residual_two_ne_y` | 433 |
+| Theorem | `residual_four_cosets` | 437 |
+| Theorem | `residual_x16_not_1` | 441 |
+| Theorem | `residual_x8_not_1` | 446 |
+| Theorem | `residual_lam_bitlength` | 450 |
+| Theorem | `residual_x_local_qr` | 454 |
+| Theorem | `residual_161_mod_8` | 459 |
+| Theorem | `residual_x_not_ord16` | 464 |
+| Theorem | `residual_x_not_ord10` | 468 |
+
+## `SrsaWriteE.v`
+
+- L15: Public maps of leftover [e]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `emap_phi_y_even` | 21 |
+| Theorem | `emap_hamming_even` | 26 |
+| Theorem | `emap_lsb_y_even` | 31 |
+| Theorem | `emap_e25_shares_lambda` | 35 |
+| Theorem | `emap_lambda_y_even` | 40 |
+| Theorem | `emap_bitlength_even` | 45 |
+| Theorem | `emap_tau_leftover_e9` | 50 |
+| Theorem | `emap_sigma_leftover` | 55 |
+| Theorem | `emap_rad_even` | 70 |
+| Theorem | `emap_omega_even` | 75 |
+| Theorem | `emap_Omega_even` | 79 |
+| Theorem | `emap_lpf_hits_cube` | 83 |
+| Theorem | `emap_y_plus_1_is_nextprime` | 87 |
+| Theorem | `emap_odd_part_e9` | 93 |
+| Theorem | `emap_odd_hamming_shares` | 98 |
+| Theorem | `emap_gcd_yminus1_Nminus1` | 103 |
+| Theorem | `emap_phi3_y_leftover_shaped` | 107 |
+| Theorem | `emap_v2_yminus1` | 117 |
+| Theorem | `emap_mersenne_leftover` | 123 |
+| Theorem | `emap_N_mod_y_hits_e7` | 138 |
+| Theorem | `emap_fermatish_leftover` | 143 |
+| Theorem | `emap_smooth_even` | 149 |
+| Theorem | `emap_e_eq_N` | 154 |
+| Theorem | `emap_e_eq_Nminus2` | 159 |
+| Theorem | `emap_e_y_minus_1_shares` | 164 |
+| Theorem | `emap_e_two_y_plus_1` | 169 |
+| Theorem | `emap_e_two_y_minus_1` | 184 |
+| Theorem | `emap_prevprime_e31` | 199 |
+| Theorem | `emap_dedekind_psi_even` | 214 |
+| Theorem | `emap_ord_y_even` | 219 |
+| Theorem | `emap_phi_N_even` | 224 |
+| Theorem | `emap_aliquot_shares` | 228 |
+| Theorem | `emap_e17_leftover` | 233 |
+| Theorem | `emap_e_N_plus_1_even` | 248 |
+| Theorem | `emap_e_N_minus_1_even` | 252 |
+| Theorem | `emap_e_lam_minus_1` | 256 |
+| Theorem | `emap_phi_y_plus_1` | 271 |
+| Theorem | `emap_digit_sum_e9` | 286 |
+| Theorem | `emap_repunit_111` | 296 |
+| Theorem | `emap_primorial_even` | 311 |
+| Theorem | `emap_fermat_5_shares` | 316 |
+| Theorem | `emap_collatz_e21` | 321 |
+| Theorem | `emap_squarefree_core_e9` | 336 |
+| Theorem | `emap_e47_second_leftover` | 341 |
+| Theorem | `emap_e23_ninth` | 356 |
+| Theorem | `emap_e19_leftover` | 371 |
+| Theorem | `emap_e_eq_x` | 386 |
+| Theorem | `emap_e_N_minus_lam` | 401 |
+| Theorem | `emap_e_nextprime_N` | 416 |
+| Theorem | `emap_prevprime_even_peel` | 421 |
+| Theorem | `emap_e_prime` | 427 |
+| Theorem | `emap_prime_e7` | 432 |
+
+## `SrsaWriteX.v`
+
+- L15: Public maps of leftover [x]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `xmap_odd_monomial` | 27 |
+| Theorem | `xmap_associate` | 34 |
+| Theorem | `xmap_midpoint` | 39 |
+| Theorem | `xmap_encrypt_as_decrypt` | 46 |
+| Theorem | `xmap_not_coppersmith_small` | 51 |
+| Theorem | `xmap_odd_monomial_y5` | 62 |
+| Theorem | `xmap_y_to_the_y` | 68 |
+| Theorem | `xmap_y_to_the_N` | 73 |
+| Theorem | `xmap_y_to_Nminus1` | 83 |
+| Theorem | `xmap_y_to_Nplus1` | 88 |
+| Theorem | `xmap_floor_sqrt_y` | 93 |
+| Theorem | `xmap_half_y` | 98 |
+| Theorem | `xmap_bitrev_36_is_9` | 104 |
+| Theorem | `xmap_triangular` | 112 |
+| Theorem | `xmap_nextprime_as_x` | 117 |
+| Theorem | `xmap_fibonacci_y` | 122 |
+| Theorem | `xmap_exp_base2` | 130 |
+| Theorem | `xmap_exp_base3` | 137 |
+| Theorem | `xmap_phi3_of_y` | 142 |
+| Theorem | `xmap_inv_then_cube` | 147 |
+| Theorem | `xmap_cube_then_inv` | 154 |
+| Theorem | `xmap_hybrid_crt` | 161 |
+| Theorem | `xmap_mismatched_crt_splits` | 168 |
+| Theorem | `xmap_integer_jnt` | 178 |
+| Theorem | `xmap_y2_plus_1` | 183 |
+| Theorem | `xmap_x_eq_Nminus1` | 188 |
+| Theorem | `xmap_floor_sqrt_N` | 193 |
+| Theorem | `xmap_phi3_of_N` | 199 |
+| Theorem | `xmap_y7_onesided` | 203 |
+| Theorem | `xmap_y9_cubes_to_root` | 210 |
+| Theorem | `xmap_y11_onesided` | 217 |
+| Theorem | `xmap_floor_y_div_3` | 224 |
+| Theorem | `xmap_floor_N_div_y` | 230 |
+| Theorem | `xmap_three_y_onesided` | 236 |
+| Theorem | `xmap_y_minus_1` | 243 |
+| Theorem | `xmap_y_plus_1_as_x` | 248 |
+| Theorem | `xmap_two_y_plus_1` | 254 |
+| Theorem | `xmap_y2_minus_1` | 260 |
+| Theorem | `xmap_gray_code` | 266 |
+| Theorem | `xmap_nibble_swap_nonunit` | 272 |
+| Theorem | `xmap_popcount_as_x` | 282 |
+| Theorem | `xmap_catalan_C5` | 288 |
+| Theorem | `xmap_lucas_L8` | 298 |
+| Theorem | `xmap_floor_y_three_halves` | 303 |
+| Theorem | `xmap_shift_left_2_onesided` | 309 |
+| Theorem | `xmap_y_mod_16` | 316 |
+| Theorem | `xmap_eightbit_palindrome` | 322 |
+| Theorem | `xmap_partition_p10` | 327 |
+| Theorem | `xmap_catalan_C6_nonunit` | 335 |
+| Theorem | `xmap_y_inv_sq` | 345 |
+| Theorem | `xmap_x_eq_phi` | 351 |
+| Theorem | `xmap_x_bitlength_N` | 356 |
+| Theorem | `xmap_nextprime_mod_N` | 361 |
+| Theorem | `xmap_identity_not_root` | 367 |
+| Theorem | `xmap_y35_onesided` | 372 |
+| Theorem | `xmap_inv_lam_minus_1` | 384 |
+| Theorem | `xmap_pkcs_pad` | 397 |
+| Theorem | `xmap_sqrt_then_n_nplus1` | 403 |
+| Theorem | `xmap_integer_sqrt_unit` | 415 |
+| Theorem | `xmap_binary_encrypt` | 420 |
+| Theorem | `xmap_mont_form` | 426 |
+
 ## `StrongPrimes.v`
 
 - L9: Safe / strong primes: generation-side refusal of one-sided annihilators
@@ -2284,6 +2702,7 @@ in the Rocq tree.  Do not edit by hand.
   - L241: Residual leaf (named, not solved)
   - L261: Self-randomization and related queries
   - L309: SAGM handle still peels
+  - L329: Four square roots of 1; mixed splits, [−1] does not
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2317,6 +2736,11 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `srsa_sagm_handle_unit` | 311 |
 | Theorem | `srsa_sagm_lambda_type_peel` | 316 |
 | Theorem | `srsa_sagm_product_reused` | 321 |
+| Theorem | `srsa_sqrt1_120_splits` | 331 |
+| Theorem | `srsa_minus1_no_split` | 337 |
+| Theorem | `srsa_120_plus_1` | 342 |
+| Theorem | `srsa_miller_66` | 348 |
+| Theorem | `srsa_four_sqrt1` | 353 |
 
 ## `Succinct.v`
 
@@ -2612,4 +3036,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1642 theorems/lemmas/corollaries/examples across 110 files._
+_2035 theorems/lemmas/corollaries/examples across 114 files._

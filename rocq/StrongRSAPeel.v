@@ -325,3 +325,34 @@ Theorem srsa_sagm_product_reused :
      sagm_eval 187 sagm_pin_g sagm_pin_h {| sagm_a := 1; sagm_b := 3 |})
       mod 187.
 Proof. apply sagm_product_adds_exponents. Qed.
+
+(** ** Four square roots of 1; mixed splits, [−1] does not *)
+
+Theorem srsa_sqrt1_120_splits :
+  powm 120 2 187 = 1 /\
+  Z.gcd (120 - 1) 187 = 17 /\
+  Z.gcd (120 + 1) 187 = 11.
+Proof. vm_compute. repeat split; reflexivity. Qed.
+
+Theorem srsa_minus1_no_split :
+  powm 186 2 187 = 1 /\
+  Z.gcd (186 - 1) 187 = 1.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem srsa_120_plus_1 :
+  120 + 1 = 121 /\
+  11 * 11 = 121 /\
+  Z.gcd 121 187 = 11.
+Proof. split; [reflexivity|]. split; [reflexivity | vm_compute; reflexivity]. Qed.
+
+Theorem srsa_miller_66 :
+  67 - 1 = 66 /\
+  Z.gcd 66 187 = 11.
+Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
+
+Theorem srsa_four_sqrt1 :
+  powm 1 2 187 = 1 /\
+  powm 186 2 187 = 1 /\
+  powm 67 2 187 = 1 /\
+  powm 120 2 187 = 1.
+Proof. vm_compute. repeat split; reflexivity. Qed.

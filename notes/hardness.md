@@ -133,8 +133,8 @@ Do not record Strong RSA ≡ factoring as a theorem. The residual leaf *is* stan
 
 ### Cuts of the solver (taxonomy)
 
-The numbered IDs were written in batches. The map by *question* is
-[`notes/srsa-cuts.md`](srsa-cuts.md):
+Rocq IDs are semantic (`residual_*`, `period_*`, `xmap_*`, …). The map
+by *question* is [`notes/srsa-cuts.md`](srsa-cuts.md):
 
 1. Peel a witness you already have.
 2. What leftover `(x,e)` is allowed to be (`⟨y⟩`, `C₈×C₅`, 16 generators).
@@ -143,10 +143,9 @@ The numbered IDs were written in batches. The map by *question* is
 6. Extra tapes and related `y`. 7. Engines that ignore `y`.
 8. Different group or modulus. 9. GRA / GGM / SAGM / SLP.
 
-Stable IDs (do not renumber): `notes/hundred.md` … `hundred5.md`,
-`DozenInroads.v`, `SolverShape.v`, `FilterShape.v`, `ArithShape.v`,
-`SolverRestrict.v`. Joined first-hundred CAS: `134`. Residual cube
-is still not `Problem_Factor`.
+CAS probe classes 1–500 are a crosswalk in `notes/hundred.md` …
+`hundred5.md`, not theorem IDs. Joined first-hundred CAS: `134`.
+Residual cube is still not `Problem_Factor`.
 
 ## Open / refused as slogans
 

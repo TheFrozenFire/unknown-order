@@ -1,6 +1,5 @@
-\\ Third hundred: cuts of the residual leaf, not more public misses.
-\\ Subgroup of y, Pohlig on mismatched local orders, generators,
-\\ partial lambda, programs that still invert.  Mirrors HundredN..R.v.
+\\ Third hundred: residual leaf, Pohlig on mismatched local orders.
+\\ CAS↔Rocq crosswalk: notes/hundred3.md.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));

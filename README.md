@@ -159,8 +159,8 @@ and PPT / advantage are out of scope.
 
 Strong RSA solver-class cuts (peel, leftover subgroup, gcd vs
 multiply, public maps of `x` and `e`) are grouped by *question* in
-[`notes/srsa-cuts.md`](notes/srsa-cuts.md). Numbered `hun_NN` IDs stay
-as the roster.
+[`notes/srsa-cuts.md`](notes/srsa-cuts.md). Rocq IDs are semantic
+(`residual_*`, `period_*`, `xmap_*`, …); CAS numbered files stay.
 
 ## Run it
 
