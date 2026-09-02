@@ -101,7 +101,9 @@ Constructible torsion `H` is a family parameter
 | nodiv tape `gra_deg_bound ≤ 3` | `deg P ≤ 3`, so `deg(P^3−X) < 10`; vanishing on units ⇒ `N \|` coeffs | `gra_nodiv_degree_le`, `residual_nodiv_bound_le3_Q_lt10`, `residual_nodiv_short_ZN_units_divides_N` | two squarings (bound 4); trapdoor `X^{27}` |
 | exact `deg(PQ)` / square `X^2` / cube `X^3` | `deg(PQ)=deg P+deg Q` when both nonzero; `X^6−X` and `X^9−X` linear `−1`, unit 2 not a root | `poly_degree_mul`, `residual_square_cannot_vanish_on_ZN_units`, `residual_cube_cannot_vanish_on_ZN_units`, `residual_trapdoor_inverts_pin` | forbidding `X^{27}` as a map on units; `N\|`all coeffs contradicts eval-at-2 for a general large `P` |
 | pin unit `3` | `ord(3)=λ=80` | `is_order_pin_3_80`, `orders_generate_lambda_pin` | sampling-completeness for every `N` (`orders_generate_lambda_named`) |
-| lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | a primitive root in `𝔽_p*` (max order + `X^d−1`); CRT of local generators is `λ` |
+| lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | sampling enough orders to recover `λ` (`orders_generate_lambda_named`) |
+| prime `p` | a generator of `𝔽_p*` | `primitive_root_exists` | a named iso `(Z/pZ)* ≅ C_{p-1}` (`pratt_complete_named`) |
+| distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals` | sampling-completeness (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |

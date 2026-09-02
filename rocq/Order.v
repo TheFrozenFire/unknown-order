@@ -25,9 +25,10 @@ Open Scope Z_scope.
     Completeness of sampling orders to recover [λ] is
     [orders_generate_lambda_named], unused refuse of a density
     statement ([cas/25_order.gp]).  The lcm of two unit orders is
-    again a unit order ([order_lcm_attained]).  Existence of a
-    unit of order [λ] for general [N=pq] still needs a primitive
-    root in [𝔽_p*] and CRT of local generators ([cas/153]). *)
+    again a unit order ([order_lcm_attained]).  [𝔽_p*] has a
+    primitive root ([primitive_root_exists]); CRT of local
+    generators is a unit of order [λ] ([exists_unit_order_lambda],
+    [cas/153]). *)
 
 (** ** Uniqueness and the divide criterion *)
 
@@ -502,9 +503,9 @@ Qed.
     [orders_generate_lambda_named] stays unused: it is sampling
     completeness, not existence.  [order_lcm_attained]: the lcm
     of two unit orders is the order of a unit.  A maximal-order
-    unit of [𝔽_p*] is then a primitive root once [X^d−1] cannot
-    vanish on all of [𝔽_p*] for [d < p−1]; CRT of two local
-    generators has order [λ].  Cross-confirmed by [cas/153]. *)
+    unit of [𝔽_p*] is a primitive root: [X^d−1] cannot vanish on
+    all of [𝔽_p*] for [d < p−1].  CRT of two local generators
+    has order [λ].  Cross-confirmed by [cas/153]. *)
 
 Fixpoint zseq (start : Z) (n : nat) : list Z :=
   match n with
@@ -823,4 +824,185 @@ Proof.
   intros k' Hk' Hpow.
   rewrite powm_mod_base in Hpow by lia.
   apply (Hmin k' Hk' Hpow).
+Qed.
+
+Lemma is_order_of_mod :
+  forall n a k,
+    1 < n ->
+    is_order n (a mod n) k ->
+    is_order n a k.
+Proof.
+  intros n a k Hn [Hk [H1 Hmin]].
+  rewrite powm_mod_base in H1 by lia.
+  split; [exact Hk|]. split; [exact H1|].
+  intros k' Hk' Hpow.
+  rewrite <- powm_mod_base in Hpow by lia.
+  apply (Hmin k' Hk' Hpow).
+Qed.
+
+Lemma is_order_eq_mod :
+  forall n a b k,
+    1 < n ->
+    a mod n = b mod n ->
+    is_order n a k <-> is_order n b k.
+Proof.
+  intros n a b k Hn Heq. split; intros Hord.
+  - apply is_order_of_mod; [lia|].
+    rewrite <- Heq. apply is_order_mod_base; [lia | exact Hord].
+  - apply is_order_of_mod; [lia|].
+    rewrite Heq. apply is_order_mod_base; [lia | exact Hord].
+Qed.
+
+Theorem primitive_root_exists :
+  forall p,
+    Z.prime p ->
+    exists g, Z.coprime g p /\ is_order p g (p - 1).
+Proof.
+  intros p Hp.
+  pose proof (Z.prime_ge_2 p Hp) as Hp2.
+  destruct (exists_max_order_in p (units_mod_prime p) Hp
+              (units_mod_prime_coprime p Hp)
+              (units_mod_prime_nonnil p ltac:(lia)))
+    as [g [k [Hin [Hord Hmax]]]].
+  pose proof (units_mod_prime_coprime p Hp) as HcsF.
+  assert (Hcg : Z.coprime g p).
+  { rewrite Forall_forall in HcsF. apply HcsF. exact Hin. }
+  assert (Hkdiv : (k | p - 1)).
+  { apply (order_divides_annihilator p g k (p - 1));
+      [lia | lia | exact Hord | apply fermat_coprime; assumption]. }
+  assert (Hkpos : 0 < k) by apply Hord.
+  assert (k <= p - 1) by (apply Z.divide_pos_le; [lia | exact Hkdiv]).
+  assert (Hall1 : forall b, Z.coprime b p -> powm b k p = 1).
+  { intros b Hcb.
+    destruct (order_exists_prime p b Hp Hcb) as [kb Horb].
+    assert (0 < kb) by apply Horb.
+    destruct (order_lcm_attained p g b k kb ltac:(lia) Hcg Hcb Hord Horb)
+      as [c [Hcc Horc]].
+    pose proof (is_order_mod_base p c (Z.lcm k kb) ltac:(lia) Horc) as Horcm.
+    pose proof (unit_mod_in_list p c Hp Hcc) as Hinc.
+    pose proof (Hmax (c mod p) (Z.lcm k kb) Hinc Horcm) as Hle.
+    assert (Z.lcm k kb = k) as Hlcmk.
+    { pose proof (Z.divide_lcm_l k kb) as Hdl.
+      pose proof (lcm_pos k kb Hkpos ltac:(apply Horb)) as Hlp.
+      apply Z.le_antisymm; [exact Hle | apply Z.divide_pos_le; [lia | exact Hdl]]. }
+    rewrite <- Hlcmk.
+    apply (proj1 (order_iff_divides p b kb (Z.lcm k kb) ltac:(lia) ltac:(lia) Horb)).
+    apply Z.divide_lcm_r. }
+  assert (k = p - 1) as Hkpe.
+  { destruct (Z.eq_dec k (p - 1)) as [Heq | Hne]; [exact Heq|].
+    exfalso.
+    assert (Hklt : k < p - 1) by lia.
+    assert (Hkn : (0 < Z.to_nat k)%nat).
+    { destruct (Z.to_nat k) eqn:Hz; [| lia].
+      apply (f_equal Z.of_nat) in Hz. rewrite Z2Nat.id in Hz; lia. }
+    assert (Hdeg : (poly_degree (poly_Xn_minus_1 (Z.to_nat k)) <
+                    length (units_mod_prime p))%nat).
+    { rewrite poly_degree_Xn_minus_1 by exact Hkn.
+      rewrite units_mod_prime_length by lia.
+      apply Z2Nat.inj_lt; lia. }
+    assert (Hvan : Forall
+              (fun a => (p | poly_eval (poly_Xn_minus_1 (Z.to_nat k)) a))
+              (units_mod_prime p)).
+    { apply Forall_forall. intros a HaIn.
+      assert (Hca : Z.coprime a p).
+      { rewrite Forall_forall in HcsF. apply HcsF. exact HaIn. }
+      rewrite poly_eval_Xn_minus_1, Z2Nat.id by lia.
+      apply Z.mod_divide; [lia|].
+      pose proof (Hall1 a Hca) as Hpow1. unfold powm in Hpow1.
+      rewrite Zminus_mod, Hpow1, Z.mod_1_l, Z.sub_diag, Z.mod_0_l; lia. }
+    pose proof (poly_prime_roots_divides p (units_mod_prime p)
+                  (poly_Xn_minus_1 (Z.to_nat k)) Hp
+                  (units_mod_prime_distinct p Hp) Hdeg Hvan (Z.to_nat k))
+      as Hlead.
+    rewrite Xn_minus_1_leading in Hlead by (apply Nat.le_succ_l; exact Hkn).
+    apply Z.divide_1_r in Hlead. lia. }
+  exists g. split; [exact Hcg | rewrite <- Hkpe; exact Hord].
+Qed.
+
+Lemma order_semiprime_from_locals :
+  forall p q a kp kq,
+    Z.prime p -> Z.prime q -> p <> q ->
+    Z.coprime a (p * q) ->
+    is_order p a kp ->
+    is_order q a kq ->
+    is_order (p * q) a (Z.lcm kp kq).
+Proof.
+  intros p q a kp kq Hp Hq Hneq Hcop Horp Horq.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  assert (0 < kp) by apply Horp.
+  assert (0 < kq) by apply Horq.
+  pose proof (lcm_pos kp kq ltac:(lia) ltac:(lia)) as Hlp.
+  apply coprime_semiprime in Hcop; [| assumption | assumption | assumption].
+  destruct Hcop as [Hap Haq].
+  split; [lia|]. split.
+  - assert (Hp1 : powm a (Z.lcm kp kq) p = 1).
+    { apply (proj1 (order_iff_divides p a kp (Z.lcm kp kq) ltac:(lia) ltac:(lia) Horp)).
+      apply Z.divide_lcm_l. }
+    assert (Hq1 : powm a (Z.lcm kp kq) q = 1).
+    { apply (proj1 (order_iff_divides q a kq (Z.lcm kp kq) ltac:(lia) ltac:(lia) Horq)).
+      apply Z.divide_lcm_r. }
+    unfold powm in Hp1, Hq1 |- *.
+    apply crt_one; try assumption.
+  - intros t [Htpos Htlt] Ht1.
+    assert (Htp : powm a t p = 1).
+    { pose proof (powm_reduce_factor a t p q ltac:(lia) ltac:(lia) ltac:(lia)) as Hr.
+      rewrite Ht1, Z.mod_1_l in Hr by lia. symmetry; exact Hr. }
+    assert (Htq : powm a t q = 1).
+    { pose proof (powm_reduce_factor a t q p ltac:(lia) ltac:(lia) ltac:(lia)) as Hr.
+      rewrite Z.mul_comm in Hr.
+      rewrite Ht1, Z.mod_1_l in Hr by lia. symmetry; exact Hr. }
+    assert (Hkp_t : (kp | t)).
+    { apply (proj2 (order_iff_divides p a kp t ltac:(lia) ltac:(lia) Horp)).
+      exact Htp. }
+    assert (Hkq_t : (kq | t)).
+    { apply (proj2 (order_iff_divides q a kq t ltac:(lia) ltac:(lia) Horq)).
+      exact Htq. }
+    pose proof (Z.lcm_least kp kq t Hkp_t Hkq_t) as Hdiv.
+    apply Z.divide_pos_le in Hdiv; [| lia].
+    lia.
+Qed.
+
+Theorem exists_unit_order_lambda :
+  forall p q,
+    Z.prime p -> Z.prime q -> p <> q ->
+    exists a, Z.coprime a (p * q) /\
+      is_order (p * q) a (lambda_semiprime p q).
+Proof.
+  intros p q Hp Hq Hneq.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  destruct (primitive_root_exists p Hp) as [gp [Hgp Horp]].
+  destruct (primitive_root_exists q Hq) as [gq [Hgq Horq]].
+  set (g := crt2 p q gp gq).
+  pose proof (crt2_mod p q gp gq Hp Hq Hneq) as [Hgpmod Hgqmod].
+  assert (Hcp : Z.coprime g p).
+  { unfold Z.coprime.
+    rewrite <- (Z.gcd_mod_l g p) by lia.
+    unfold g. rewrite Hgpmod.
+    rewrite Z.gcd_mod_l by lia. exact Hgp. }
+  assert (Hcq : Z.coprime g q).
+  { unfold Z.coprime.
+    rewrite <- (Z.gcd_mod_l g q) by lia.
+    unfold g. rewrite Hgqmod.
+    rewrite Z.gcd_mod_l by lia. exact Hgq. }
+  assert (HcN : Z.coprime g (p * q)).
+  { apply coprime_semiprime; [exact Hp | exact Hq | exact Hneq | split; [exact Hcp | exact Hcq]]. }
+  assert (Horpg : is_order p g (p - 1)).
+  { apply (proj2 (is_order_eq_mod p g gp (p - 1) ltac:(lia) Hgpmod)).
+    exact Horp. }
+  assert (Horqg : is_order q g (q - 1)).
+  { apply (proj2 (is_order_eq_mod q g gq (q - 1) ltac:(lia) Hgqmod)).
+    exact Horq. }
+  exists g. split; [exact HcN|].
+  unfold lambda_semiprime.
+  apply (order_semiprime_from_locals p q g (p - 1) (q - 1));
+    [exact Hp | exact Hq | exact Hneq | exact HcN | exact Horpg | exact Horqg].
+Qed.
+
+Theorem exists_unit_order_lambda_pin :
+  exists a, Z.coprime a 187 /\ is_order 187 a 80.
+Proof.
+  destruct (exists_unit_order_lambda 11 17 prime_11 prime_17 ltac:(lia))
+    as [a [Hc Ho]].
+  exists a. split; [exact Hc|].
+  rewrite rsa_test_lambda in Ho. exact Ho.
 Qed.

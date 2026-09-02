@@ -309,6 +309,9 @@ units (linear `−1`); the cube tape denotes `X^3` and `X^9−X`
 misses units; trapdoor `X^{27}` inverts the pin but is not
 low-degree (CAS `152`). The low-degree nodiv GRA class on this pin
 is settled. Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
+A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
+local generators is a unit of order `λ` (`exists_unit_order_lambda`).
+`orders_generate_lambda_named` stays unused sampling-completeness.
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
 GGM: `GenericGroup.v`, CAS `121`–`122`.
@@ -338,7 +341,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | CRT lift of units-vanishing to `N \|` coeffs | `residual_low_degree_ZN_units_divides_N` / `residual_nodiv_low_degree_ZN_units_divides_N` / `residual_*_cannot_vanish_on_ZN_units` | `SrsaResidualGRA.v` | `150` |
 | nodiv tape degree bound | `gra_nodiv_degree_le` / `residual_nodiv_bound_le3_Q_lt10` / `residual_nodiv_short_ZN_units_divides_N` | `GenericRing.v`, `SrsaResidualGRA.v` | `151` |
 | exact deg; square/cube miss units | `poly_degree_mul` / `residual_square_*` / `residual_cube_*` / `residual_trapdoor_inverts_pin` | `ZPoly.v`, `SrsaResidualGRA.v` | `152` |
-| lcm of unit orders attained | `order_lcm_attained` / `order_mul_coprime` | `Order.v` | `153` |
+| lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |
