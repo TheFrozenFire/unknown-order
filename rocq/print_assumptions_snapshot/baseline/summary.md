@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1433 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1458 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1433 results across 101 files.
+Captured for 1458 results across 102 files.
 
 Counts:
 
@@ -542,6 +542,36 @@ Counts:
 | `dist_force_residue_can_leave_range` | 621 | 0 | 0 | OK |
 | `dist_seeded_slot_balanced` | 633 | 0 | 0 | OK |
 | `long_seed_hits_every_index` | 649 | 0 | 0 | OK |
+
+## DozenInroads.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `dozen_jacobi_gate_minus1` | 30 | 0 | 0 | OK |
+| `dozen_jacobi_gate_forces_odd` | 34 | 0 | 0 | OK |
+| `dozen_sagm_both_pin` | 40 | 0 | 0 | OK |
+| `dozen_sagm_ae_eq_c_mod_lambda` | 45 | 0 | 0 | OK |
+| `dozen_related_coprime_exps` | 51 | 0 | 0 | OK |
+| `dozen_related_shamir_gcd` | 58 | 0 | 0 | OK |
+| `dozen_fifth_divides_pminus1` | 66 | 0 | 0 | OK |
+| `dozen_fifth_power_euler` | 70 | 0 | 0 | OK |
+| `dozen_onesided_e11` | 76 | 0 | 0 | OK |
+| `dozen_e11_residual_shaped` | 84 | 0 | 0 | OK |
+| `dozen_short_e3` | 97 | 0 | 0 | OK |
+| `dozen_short_e_is_residual_cube` | 101 | 0 | 0 | OK |
+| `dozen_advice_bit_no_split` | 107 | 0 | 0 | OK |
+| `dozen_advice_div_splits` | 111 | 0 | 0 | OK |
+| `prime_23` | 120 | 0 | 0 | OK |
+| `dozen_blum_shape` | 132 | 0 | 0 | OK |
+| `dozen_blum_e5_names_p` | 137 | 0 | 0 | OK |
+| `dozen_blum_e11_names_q` | 141 | 0 | 0 | OK |
+| `dozen_phi_160` | 147 | 0 | 0 | OK |
+| `dozen_every_unit_is_cube` | 151 | 0 | 0 | OK |
+| `dozen_gq_extract_is_residual` | 165 | 0 | 0 | OK |
+| `dozen_gq_complete_still` | 170 | 0 | 0 | OK |
+| `dozen_N_cong_q` | 176 | 0 | 0 | OK |
+| `dozen_gcd_Nminus1_pminus1` | 180 | 0 | 0 | OK |
+| `dozen_e11_minus1_shares_lambda` | 186 | 0 | 0 | OK |
 
 ## Endo.v
 

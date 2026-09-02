@@ -617,6 +617,50 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `dist_seeded_slot_balanced` | 633 |
 | Theorem | `long_seed_hits_every_index` | 649 |
 
+## `DozenInroads.v`
+
+- L20: Twelve algorithm-class inroads on Strong RSA
+  - L26: 1. GRA plus a Jacobi gate
+  - L38: 2. SAGM on both [x] and [y] in base [g=3]
+  - L49: 3. Related queries with coprime exponents (Shamir)
+  - L64: 4. Higher residue: 5th-power Euler on [p=11]
+  - L74: 5. One-sided [a^{e-1}]
+  - L95: 6. Short [e] vs long [e] on this pin
+  - L105: 7. Bounded advice on [N]
+  - L118: 8. Blum modulus [N=11·23], [λ=110]
+  - L145: 9. Census: every unit is an [e=3] residual witness
+  - L163: 10. GQ extract is residual, not a factor
+  - L174: 11. Integer polynomial in [N]
+  - L184: 12. [gcd(e−1, λ)] proper, not [λ] and not [2]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `dozen_jacobi_gate_minus1` | 30 |
+| Theorem | `dozen_jacobi_gate_forces_odd` | 34 |
+| Theorem | `dozen_sagm_both_pin` | 40 |
+| Theorem | `dozen_sagm_ae_eq_c_mod_lambda` | 45 |
+| Theorem | `dozen_related_coprime_exps` | 51 |
+| Theorem | `dozen_related_shamir_gcd` | 58 |
+| Theorem | `dozen_fifth_divides_pminus1` | 66 |
+| Theorem | `dozen_fifth_power_euler` | 70 |
+| Theorem | `dozen_onesided_e11` | 76 |
+| Theorem | `dozen_e11_residual_shaped` | 84 |
+| Theorem | `dozen_short_e3` | 97 |
+| Theorem | `dozen_short_e_is_residual_cube` | 101 |
+| Theorem | `dozen_advice_bit_no_split` | 107 |
+| Theorem | `dozen_advice_div_splits` | 111 |
+| Lemma | `prime_23` | 120 |
+| Theorem | `dozen_blum_shape` | 132 |
+| Theorem | `dozen_blum_e5_names_p` | 137 |
+| Theorem | `dozen_blum_e11_names_q` | 141 |
+| Theorem | `dozen_phi_160` | 147 |
+| Theorem | `dozen_every_unit_is_cube` | 151 |
+| Theorem | `dozen_gq_extract_is_residual` | 165 |
+| Theorem | `dozen_gq_complete_still` | 170 |
+| Theorem | `dozen_N_cong_q` | 176 |
+| Theorem | `dozen_gcd_Nminus1_pminus1` | 180 |
+| Theorem | `dozen_e11_minus1_shares_lambda` | 186 |
+
 ## `Endo.v`
 
 - L14: Endomorphisms of [(Z/NZ)*] and of [Cl(Δ)]
@@ -2292,4 +2336,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1433 theorems/lemmas/corollaries/examples across 101 files._
+_1458 theorems/lemmas/corollaries/examples across 102 files._

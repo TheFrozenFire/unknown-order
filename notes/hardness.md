@@ -141,6 +141,25 @@ Do not record Strong RSA ≡ factoring as a theorem. The residual leaf *is* stan
 
 CAS `128`. These restrict the *algorithm*. `srsa_residual_leaf` stays unnamed as `Problem_Factor`.
 
+### Twelve further classes (`DozenInroads.v`, CAS `129`)
+
+| # | Class | Pin identity | Residual? |
+|---|---|---|---|
+| 1 | GRA + Jacobi gate | `(2/N)=−1` ⇒ odd `e` | no (parity) |
+| 2 | SAGM both `x,y` | `3^{54·3}≡3^2`, `ae≡c (mod λ)` | no (exponents) |
+| 3 | Related `y,y²` coprime `e` | `(32,3)` and `(64,5)`, `gcd=1` | Shamir, not factoring |
+| 4 | 5th-power Euler | `32^2≡1 (mod 11)` | residue constraint |
+| 5 | One-sided `a^{e−1}` | `gcd(2^{10}−1,N)=11`, `e=11` residual-shaped | splits |
+| 6 | Short `e` | `3<4<81` | cube is still residual |
+| 7 | Bounded advice on `N` | `N mod 2` no split; `N/17` splits | advice class |
+| 8 | Blum `N=253`, `λ=110` | `e=5` names `11`; `e=11` names `23` | rigid `λ` |
+| 9 | Census of units | every unit is a cube (`e=3` permutation) | residual inhabited for all units |
+| 10 | GQ extract | `(42,3,36)` residual, `gcd(42,N)=1` | does not split |
+| 11 | Integer poly in `N` | `187≡17 (mod 10)` | public-integer formula |
+| 12 | `gcd(e−1,λ)` proper | `gcd(10,80)=10` | one-sided, not `λ`-type |
+
+None of these twelve is a proof that `srsa_residual_leaf` factors.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
