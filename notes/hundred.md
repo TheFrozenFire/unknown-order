@@ -111,6 +111,7 @@ Files: `HundredA.v` (1–12), `HundredB.v` (13–32), `HundredC.v` (33–50),
 | 100 | DL of `y` base `3` | `hun_100_dl_base3` | `y=3^{46}`, `x=3^{42}`, `ae≡c (mod λ)` |
 
 Count: 100. CAS `133`. Jacobian leftover stays unnamed as factoring.
+A second hundred is `notes/hundred2.md` / CAS `135`.
 
 Verbose residue dump (not globbed): `cas/verbose_dump.gp`. On this pin `y=6²=(q−p)²` and `x=y+√y`, so several public maps collide; `y^N≡x` is `N≡d (mod ord y)`, not a general solver. Classes 1, 20, 23, 24, 27, 28 leak a prime without being residual cubes.
 

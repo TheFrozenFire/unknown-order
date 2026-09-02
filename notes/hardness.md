@@ -227,6 +227,15 @@ None of these twelve is a proof that `srsa_residual_leaf` factors.
 
 Roster `notes/hundred.md` maps items 1–100 to `hun_NN_*` headlines. Algorithm/modulus restrictions only. The residual cube `42³≡36` is still not `Problem_Factor`. On this pin some “does not invert” maps are still one-sided cubes (`gcd(x³−y,N)∈{11,17}`) or a non-unit `x` (`F_{36}≡85`); that is a split of a failed root, not the leftover cube.
 
+### Second hundred (`HundredI.v`–`HundredM.v`, CAS `135`)
+
+Roster `notes/hundred2.md` maps items 101–200. Same discipline: algorithm
+restrictions, honest fates, pin `187` unless a named second modulus.
+Catalan `C_5` and `p(10)` hit the residual cube on this pin; leftover
+`e` maps that stay odd and coprime to `λ` still invert in `⟨y⟩`.
+`gcd(42−25,N)=17` splits a leftover pair that `gcd(42−60,N)` does not.
+The residual cube is still not `Problem_Factor`.
+
 ### Joined pin identity (CAS `134`)
 
 `cas/lib/pin.gp` plus `cas/lib/classes.gp` give one predicate `whole()`:
