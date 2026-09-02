@@ -69,7 +69,9 @@ Qed.
 
 (** A Strong-RSA solver for a fixed [N] returns some [(x,e)] for
     every challenge [y].  Whether that oracle constructs a factor
-    of [N] is unproved and on-goal. *)
+    of [N] is unproved and on-goal.  Do not inhabit by projecting
+    [rsa_p].  Well-posed GRA fragment:
+    [gra_nodiv_integer_eth_root_forbidden]. *)
 Definition strong_rsa_solver (N : Z) : Type :=
   forall y, { xe : Z * Z | let '(x, e) := xe in Problem_StrongRSA N y x e }.
 

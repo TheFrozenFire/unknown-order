@@ -191,6 +191,186 @@ Theorem slp_to_poly_mul_pin :
   poly_eval (nth 3%nat t []) 36 = 36 * 36.
 Proof. vm_compute. reflexivity. Qed.
 
+(** ** Division-free tapes denote polynomials
+
+    [GConst]/[GAdd]/[GSub]/[GMul] act on integer handles exactly as
+    [poly_eval] of the matching coefficient lists.  [GInv] and [GRoot]
+    are excluded.  An integer identity [P(y)^e = y] for all [y] is
+    forbidden for [e ≥ 2] by evaluation at 2. *)
+
+Inductive is_nodiv : GRAOp -> Prop :=
+  | nodiv_GConst : forall c, is_nodiv (GConst c)
+  | nodiv_GAdd : forall i j, is_nodiv (GAdd i j)
+  | nodiv_GSub : forall i j, is_nodiv (GSub i j)
+  | nodiv_GMul : forall i j, is_nodiv (GMul i j).
+
+Lemma nth_app_last :
+  forall (A : Type) (l : list A) (x d : A),
+    nth (length l) (l ++ [x]) d = x.
+Proof.
+  intros A l x d. induction l as [|h t IH]; simpl; [reflexivity | exact IH].
+Qed.
+
+Lemma nth_app_lt :
+  forall (A : Type) (l : list A) (x d : A) i,
+    (i < length l)%nat ->
+    nth i (l ++ [x]) d = nth i l d.
+Proof.
+  intros A l x d i Hi. rewrite app_nth1; [reflexivity | exact Hi].
+Qed.
+
+Lemma step_length :
+  forall N op t, length (step N op t) = S (length t).
+Proof. intros N op t. destruct op; simpl; rewrite length_app; simpl; lia. Qed.
+
+Lemma step_poly_length :
+  forall op t, length (step_poly op t) = S (length t).
+Proof. intros op t. destruct op; simpl; rewrite length_app; simpl; lia. Qed.
+
+Lemma step_nodiv_prefix :
+  forall N y op t pt k,
+    length t = length pt ->
+    (k < length t)%nat ->
+    (forall i, nth i t 0 = poly_eval (nth i pt []) y) ->
+    nth k (step N op t) 0 = poly_eval (nth k (step_poly op pt) []) y.
+Proof.
+  intros N y op t pt k Hlen Hlt Hagree.
+  destruct op; simpl;
+    (rewrite nth_app_lt by exact Hlt;
+     rewrite nth_app_lt by (rewrite <- Hlen; exact Hlt);
+     apply Hagree).
+Qed.
+
+Lemma step_nodiv_new :
+  forall N y op t pt,
+    is_nodiv op ->
+    length t = length pt ->
+    (forall i, nth i t 0 = poly_eval (nth i pt []) y) ->
+    nth (length t) (step N op t) 0 =
+      poly_eval (nth (length pt) (step_poly op pt) []) y.
+Proof.
+  intros N y op t pt Hop Hlen Hagree.
+  destruct op as [c | ia ja | ia ja | ia ja | ia | ia];
+    try (inversion Hop).
+  - simpl. rewrite !nth_app_last. simpl. lia.
+  - simpl. rewrite !nth_app_last.
+    rewrite Hagree, (Hagree ja). rewrite <- poly_eval_add. reflexivity.
+  - simpl. rewrite !nth_app_last.
+    rewrite Hagree, (Hagree ja). rewrite <- poly_eval_sub. reflexivity.
+  - simpl. rewrite !nth_app_last.
+    rewrite Hagree, (Hagree ja). rewrite <- poly_eval_mul. reflexivity.
+Qed.
+
+Lemma step_nodiv_overflow :
+  forall N y op t pt k,
+    length t = length pt ->
+    (length t < k)%nat ->
+    nth k (step N op t) 0 = poly_eval (nth k (step_poly op pt) []) y.
+Proof.
+  intros N y op t pt k Hlen Hgt.
+  destruct op; simpl;
+    (rewrite nth_overflow by (rewrite length_app; simpl; lia);
+     rewrite nth_overflow by (rewrite length_app, <- Hlen; simpl; lia);
+     reflexivity).
+Qed.
+
+Lemma step_nodiv_agree :
+  forall N y op t pt,
+    is_nodiv op ->
+    length t = length pt ->
+    (forall i, nth i t 0 = poly_eval (nth i pt []) y) ->
+    length (step N op t) = length (step_poly op pt) /\
+    forall k, nth k (step N op t) 0 = poly_eval (nth k (step_poly op pt) []) y.
+Proof.
+  intros N y op t pt Hop Hlen Hagree.
+  split.
+  - rewrite step_length, step_poly_length, Hlen. reflexivity.
+  - intros k.
+    destruct (lt_dec k (length t)) as [Hlt | Hnlt].
+    + apply step_nodiv_prefix; assumption.
+    + apply Nat.nlt_ge in Hnlt.
+      destruct (Nat.eq_dec k (length t)) as [Heq | Hne].
+      * subst k. rewrite Hlen at 2. apply step_nodiv_new; assumption.
+      * apply step_nodiv_overflow; [exact Hlen | lia].
+Qed.
+
+Lemma gra_run_nodiv_agree :
+  forall ops N y t pt,
+    Forall is_nodiv ops ->
+    length t = length pt ->
+    (forall i, nth i t 0 = poly_eval (nth i pt []) y) ->
+    length (gra_run N ops t) = length (gra_run_poly ops pt) /\
+    forall i, nth i (gra_run N ops t) 0 =
+      poly_eval (nth i (gra_run_poly ops pt) []) y.
+Proof.
+  intros ops N y.
+  induction ops as [|op rest IH]; intros t pt Hop Hlen Hagree.
+  - simpl. split; [exact Hlen | exact Hagree].
+  - inversion Hop; subst.
+    destruct (step_nodiv_agree N y op t pt H1 Hlen Hagree) as [Hlen' Hagree'].
+    apply IH; [exact H2 | exact Hlen' | exact Hagree'].
+Qed.
+
+Lemma slp_init_length : length slp_init_poly = 3%nat.
+Proof. reflexivity. Qed.
+
+Lemma gra_init_length : forall y, length (gra_init y) = 3%nat.
+Proof. reflexivity. Qed.
+
+Lemma gra_init_agrees :
+  forall y i, nth i (gra_init y) 0 = poly_eval (nth i slp_init_poly []) y.
+Proof.
+  intros y i.
+  destruct i as [|i]; [|destruct i as [|i]; [|destruct i as [|i]]].
+  - unfold gra_init, slp_init_poly. cbn [nth poly_eval]. ring.
+  - unfold gra_init, slp_init_poly. cbn [nth poly_eval]. ring.
+  - unfold gra_init, slp_init_poly, poly_X. cbn [nth poly_eval]. ring.
+  - unfold gra_init, slp_init_poly.
+    rewrite nth_overflow by (cbn [length]; lia).
+    rewrite nth_overflow by (cbn [length]; lia). reflexivity.
+Qed.
+
+Theorem gra_nodiv_denotes :
+  forall ops N y out,
+    Forall is_nodiv ops ->
+    gra_eval N ops y out =
+      poly_eval (nth out (gra_run_poly ops slp_init_poly) []) y.
+Proof.
+  intros ops N y out Hop.
+  unfold gra_eval.
+  destruct (gra_run_nodiv_agree ops N y (gra_init y) slp_init_poly
+              Hop (eq_trans (gra_init_length y) (eq_sym slp_init_length))
+              (gra_init_agrees y)) as [_ Hagree].
+  apply Hagree.
+Qed.
+
+Theorem gra_nodiv_mul_is_nodiv :
+  Forall is_nodiv [GMul 2%nat 2%nat].
+Proof. repeat constructor. Qed.
+
+Theorem gra_nodiv_mul_denotes_square :
+  gra_eval 187 [GMul 2%nat 2%nat] 36 3%nat = 36 * 36.
+Proof.
+  rewrite gra_nodiv_denotes by apply gra_nodiv_mul_is_nodiv.
+  vm_compute. reflexivity.
+Qed.
+
+Theorem gra_nodiv_integer_eth_root_forbidden :
+  forall ops e N out,
+    Forall is_nodiv ops ->
+    (2 <= e)%nat ->
+    (forall y, Z.pow (gra_eval N ops y out) (Z.of_nat e) = y) ->
+    False.
+Proof.
+  intros ops e N out Hop He Hall.
+  pose proof (Hall 2) as H2.
+  rewrite gra_nodiv_denotes in H2 by exact Hop.
+  pose proof (Pe_minus_X_eval_2_nonzero
+                (nth out (gra_run_poly ops slp_init_poly) []) e He) as Hz.
+  rewrite poly_eval_Pe_minus_X in Hz.
+  apply Hz. lia.
+Qed.
+
 (** ** Wave 1 — Leander–Rupp, no division, low [e] *)
 
 Theorem gra_nodiv_const42_inverts_36 :

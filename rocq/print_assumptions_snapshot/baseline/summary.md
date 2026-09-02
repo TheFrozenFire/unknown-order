@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2130 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2156 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2130 results across 116 files.
+Captured for 2156 results across 116 files.
 
 Counts:
 
@@ -949,36 +949,52 @@ Counts:
 | `gra_const42` | 153 | 0 | 0 | OK |
 | `slp_init_eval` | 178 | 0 | 0 | OK |
 | `slp_to_poly_mul_pin` | 189 | 0 | 0 | OK |
-| `gra_nodiv_const42_inverts_36` | 196 | 0 | 0 | OK |
-| `gra_nodiv_const42_fails_on_8` | 200 | 0 | 0 | OK |
-| `gra_identity_not_cube_root_at_2` | 204 | 0 | 0 | OK |
-| `gra_identity_at_one` | 208 | 0 | 0 | OK |
-| `gra_identity_gcd_at_2` | 212 | 0 | 0 | OK |
-| `gra_nodiv_identical_X3_linear` | 216 | 0 | 0 | OK |
-| `gra_nodiv_N_does_not_divide_minus1` | 220 | 0 | 0 | OK |
-| `gra_nodiv_identical_root_impossible_X3` | 224 | 0 | 0 | OK |
-| `Pe_minus_X_eval2_is_six_on_X` | 231 | 0 | 0 | OK |
-| `gra_inv_nonunit_pin` | 244 | 0 | 0 | OK |
-| `gra_inv_nonunit_factors` | 248 | 0 | 0 | OK |
-| `gra_inv_22_from_tape` | 255 | 0 | 0 | OK |
-| `gra_inv_unit_gcd` | 259 | 0 | 0 | OK |
-| `gra_inv_unit_from_tape` | 263 | 0 | 0 | OK |
-| `gra_fixed_e_leading_const` | 267 | 0 | 0 | OK |
-| `gra_fixed_e_leading` | 271 | 0 | 0 | OK |
-| `rsa_inverter_is_not_a_GRA_comment` | 277 | 0 | 0 | OK |
-| `powm_d_inverts_cube_pin` | 283 | 0 | 0 | OK |
-| `gra_const_81` | 289 | 0 | 0 | OK |
-| `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 294 | 0 | 0 | OK |
-| `gra_const_81_does_not_factor` | 304 | 0 | 0 | OK |
-| `lambda_plus_one_is_81` | 308 | 0 | 0 | OK |
-| `gra_add_mul_of_36_is_not_81` | 312 | 0 | 0 | OK |
-| `am09_fixed_e_is_a_parameter` | 316 | 0 | 0 | OK |
-| `gadd_is_not_a_ggm_op` | 332 | 0 | 0 | OK |
-| `gsub_is_not_a_ggm_op` | 336 | 0 | 0 | OK |
-| `gconst_is_not_a_ggm_op` | 340 | 0 | 0 | OK |
-| `gra_poly_construction_needs_add` | 344 | 0 | 0 | OK |
-| `generic_group_does_not_separate_rsa_from_srsa` | 348 | 0 | 0 | OK |
-| `ggm_mul_pin` | 355 | 0 | 0 | OK |
+| `nth_app_last` | 207 | 0 | 0 | OK |
+| `nth_app_lt` | 214 | 0 | 0 | OK |
+| `step_length` | 222 | 0 | 0 | OK |
+| `step_poly_length` | 226 | 0 | 0 | OK |
+| `step_nodiv_prefix` | 230 | 0 | 0 | OK |
+| `step_nodiv_new` | 244 | 0 | 0 | OK |
+| `step_nodiv_overflow` | 264 | 0 | 0 | OK |
+| `step_nodiv_agree` | 277 | 0 | 0 | OK |
+| `gra_run_nodiv_agree` | 297 | 0 | 0 | OK |
+| `slp_init_length` | 314 | 0 | 0 | OK |
+| `gra_init_length` | 317 | 0 | 0 | OK |
+| `gra_init_agrees` | 320 | 0 | 0 | OK |
+| `gra_nodiv_denotes` | 333 | 0 | 0 | OK |
+| `gra_nodiv_mul_is_nodiv` | 347 | 0 | 0 | OK |
+| `gra_nodiv_mul_denotes_square` | 351 | 0 | 0 | OK |
+| `gra_nodiv_integer_eth_root_forbidden` | 358 | 0 | 0 | OK |
+| `gra_nodiv_const42_inverts_36` | 376 | 0 | 0 | OK |
+| `gra_nodiv_const42_fails_on_8` | 380 | 0 | 0 | OK |
+| `gra_identity_not_cube_root_at_2` | 384 | 0 | 0 | OK |
+| `gra_identity_at_one` | 388 | 0 | 0 | OK |
+| `gra_identity_gcd_at_2` | 392 | 0 | 0 | OK |
+| `gra_nodiv_identical_X3_linear` | 396 | 0 | 0 | OK |
+| `gra_nodiv_N_does_not_divide_minus1` | 400 | 0 | 0 | OK |
+| `gra_nodiv_identical_root_impossible_X3` | 404 | 0 | 0 | OK |
+| `Pe_minus_X_eval2_is_six_on_X` | 411 | 0 | 0 | OK |
+| `gra_inv_nonunit_pin` | 424 | 0 | 0 | OK |
+| `gra_inv_nonunit_factors` | 428 | 0 | 0 | OK |
+| `gra_inv_22_from_tape` | 435 | 0 | 0 | OK |
+| `gra_inv_unit_gcd` | 439 | 0 | 0 | OK |
+| `gra_inv_unit_from_tape` | 443 | 0 | 0 | OK |
+| `gra_fixed_e_leading_const` | 447 | 0 | 0 | OK |
+| `gra_fixed_e_leading` | 451 | 0 | 0 | OK |
+| `rsa_inverter_is_not_a_GRA_comment` | 457 | 0 | 0 | OK |
+| `powm_d_inverts_cube_pin` | 463 | 0 | 0 | OK |
+| `gra_const_81` | 469 | 0 | 0 | OK |
+| `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 474 | 0 | 0 | OK |
+| `gra_const_81_does_not_factor` | 484 | 0 | 0 | OK |
+| `lambda_plus_one_is_81` | 488 | 0 | 0 | OK |
+| `gra_add_mul_of_36_is_not_81` | 492 | 0 | 0 | OK |
+| `am09_fixed_e_is_a_parameter` | 496 | 0 | 0 | OK |
+| `gadd_is_not_a_ggm_op` | 512 | 0 | 0 | OK |
+| `gsub_is_not_a_ggm_op` | 516 | 0 | 0 | OK |
+| `gconst_is_not_a_ggm_op` | 520 | 0 | 0 | OK |
+| `gra_poly_construction_needs_add` | 524 | 0 | 0 | OK |
+| `generic_group_does_not_separate_rsa_from_srsa` | 528 | 0 | 0 | OK |
+| `ggm_mul_pin` | 535 | 0 | 0 | OK |
 
 ## Hardness.v
 
@@ -986,35 +1002,35 @@ Counts:
 |---|---:|---:|---:|---|
 | `rsa_units_are_eth_powers` | 39 | 0 | 0 | OK |
 | `trapdoor_inverts_RSA` | 50 | 0 | 0 | OK |
-| `rsa_solution_is_strong_RSA` | 80 | 0 | 0 | OK |
-| `lambda_solves_strong_RSA` | 94 | 0 | 0 | OK |
-| `strong_RSA_trivial_at_one` | 118 | 0 | 0 | OK |
-| `rsa_trivial_at_one` | 126 | 0 | 0 | OK |
-| `order_divides_annihilator` | 135 | 0 | 0 | OK |
-| `order_divides_lambda` | 164 | 0 | 0 | OK |
-| `one_sided_low_order_factors` | 192 | 0 | 0 | OK |
-| `one_sided_low_order_is_factor` | 224 | 0 | 0 | OK |
-| `adaptive_root_is_strong_RSA` | 237 | 0 | 0 | OK |
-| `order_is_annihilator` | 248 | 0 | 0 | OK |
-| `low_order_is_annihilator` | 257 | 0 | 0 | OK |
-| `lambda_is_annihilator_on_units` | 266 | 0 | 0 | OK |
-| `annihilator_plus_one_is_strong_RSA` | 279 | 0 | 0 | OK |
-| `rsa_is_fractional_root` | 296 | 0 | 0 | OK |
-| `strong_RSA_is_fractional_root` | 312 | 0 | 0 | OK |
-| `annihilator_is_fractional_root_of_one` | 327 | 0 | 0 | OK |
-| `ar_C_implies_strong_RSA` | 356 | 0 | 0 | OK |
-| `ar_C_requires_C` | 365 | 0 | 0 | OK |
-| `strong_RSA_is_ar_C_iff` | 370 | 0 | 0 | OK |
-| `lambda_plus_one_11_17` | 381 | 0 | 0 | OK |
-| `lambda_plus_one_11_17_not_prime` | 385 | 0 | 0 | OK |
-| `lambda_solves_search_11_17` | 393 | 0 | 0 | OK |
-| `search_lambda_plus_one_misses_prime_AR` | 404 | 0 | 0 | OK |
-| `adaptive_root_known_product_breaks` | 422 | 0 | 0 | OK |
-| `adaptive_root_smooth_power_breaks` | 438 | 0 | 0 | OK |
-| `order_inverts_in_cyclic` | 461 | 0 | 0 | OK |
-| `order_yields_strong_RSA` | 486 | 0 | 0 | OK |
-| `gcd_powm_minus_1` | 509 | 0 | 0 | OK |
-| `leftover_mismatch_factors` | 522 | 0 | 0 | OK |
+| `rsa_solution_is_strong_RSA` | 82 | 0 | 0 | OK |
+| `lambda_solves_strong_RSA` | 96 | 0 | 0 | OK |
+| `strong_RSA_trivial_at_one` | 120 | 0 | 0 | OK |
+| `rsa_trivial_at_one` | 128 | 0 | 0 | OK |
+| `order_divides_annihilator` | 137 | 0 | 0 | OK |
+| `order_divides_lambda` | 166 | 0 | 0 | OK |
+| `one_sided_low_order_factors` | 194 | 0 | 0 | OK |
+| `one_sided_low_order_is_factor` | 226 | 0 | 0 | OK |
+| `adaptive_root_is_strong_RSA` | 239 | 0 | 0 | OK |
+| `order_is_annihilator` | 250 | 0 | 0 | OK |
+| `low_order_is_annihilator` | 259 | 0 | 0 | OK |
+| `lambda_is_annihilator_on_units` | 268 | 0 | 0 | OK |
+| `annihilator_plus_one_is_strong_RSA` | 281 | 0 | 0 | OK |
+| `rsa_is_fractional_root` | 298 | 0 | 0 | OK |
+| `strong_RSA_is_fractional_root` | 314 | 0 | 0 | OK |
+| `annihilator_is_fractional_root_of_one` | 329 | 0 | 0 | OK |
+| `ar_C_implies_strong_RSA` | 358 | 0 | 0 | OK |
+| `ar_C_requires_C` | 367 | 0 | 0 | OK |
+| `strong_RSA_is_ar_C_iff` | 372 | 0 | 0 | OK |
+| `lambda_plus_one_11_17` | 383 | 0 | 0 | OK |
+| `lambda_plus_one_11_17_not_prime` | 387 | 0 | 0 | OK |
+| `lambda_solves_search_11_17` | 395 | 0 | 0 | OK |
+| `search_lambda_plus_one_misses_prime_AR` | 406 | 0 | 0 | OK |
+| `adaptive_root_known_product_breaks` | 424 | 0 | 0 | OK |
+| `adaptive_root_smooth_power_breaks` | 440 | 0 | 0 | OK |
+| `order_inverts_in_cyclic` | 463 | 0 | 0 | OK |
+| `order_yields_strong_RSA` | 488 | 0 | 0 | OK |
+| `gcd_powm_minus_1` | 511 | 0 | 0 | OK |
+| `leftover_mismatch_factors` | 524 | 0 | 0 | OK |
 
 ## HashSlot.v
 
@@ -1311,13 +1327,17 @@ Counts:
 | `minus1_order_2_rsa_test` | 263 | 0 | 0 | OK |
 | `mixed67_order_2_rsa_test` | 269 | 0 | 0 | OK |
 | `lcm_two_order2_not_lambda` | 275 | 0 | 0 | OK |
-| `powm_eq_1_iff_order_divides` | 287 | 0 | 0 | OK |
-| `pow2_divides_pow2` | 298 | 0 | 0 | OK |
-| `two_height_is_val2_ord` | 321 | 0 | 0 | OK |
-| `order_2_mod_11` | 380 | 0 | 0 | OK |
-| `order_2_mod_17` | 391 | 0 | 0 | OK |
-| `two_height_independent_of_odd_multiple` | 404 | 0 | 0 | OK |
-| `height_is_val2_ord_textbook` | 420 | 0 | 0 | OK |
+| `is_order_pin_3_80` | 285 | 0 | 0 | OK |
+| `pin_unit_3_coprime` | 312 | 0 | 0 | OK |
+| `pin_attains_lambda` | 316 | 0 | 0 | OK |
+| `orders_generate_lambda_pin` | 329 | 0 | 0 | OK |
+| `powm_eq_1_iff_order_divides` | 336 | 0 | 0 | OK |
+| `pow2_divides_pow2` | 347 | 0 | 0 | OK |
+| `two_height_is_val2_ord` | 370 | 0 | 0 | OK |
+| `order_2_mod_11` | 429 | 0 | 0 | OK |
+| `order_2_mod_17` | 440 | 0 | 0 | OK |
+| `two_height_independent_of_odd_multiple` | 453 | 0 | 0 | OK |
+| `height_is_val2_ord_textbook` | 469 | 0 | 0 | OK |
 
 ## Paillier.v
 
@@ -2301,6 +2321,12 @@ Counts:
 | `residual_gra_X7_minus_X_N_ndiv_linear` | 160 | 0 | 0 | OK |
 | `residual_gra_eq_leak_factors` | 168 | 0 | 0 | OK |
 | `residual_gra_inv_nonunit_factors` | 172 | 0 | 0 | OK |
+| `residual_gra_nodiv_empty_is_nodiv` | 180 | 0 | 0 | OK |
+| `residual_gra_identity_tape_is_y` | 184 | 0 | 0 | OK |
+| `residual_gra_identity_tape_not_cube` | 188 | 0 | 0 | OK |
+| `residual_gra_nodiv_integer_identity_forbidden` | 192 | 0 | 0 | OK |
+| `residual_gra_nodiv_cube_identity_forbidden` | 204 | 0 | 0 | OK |
+| `residual_gra_mul_denotes_square` | 215 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 
@@ -2466,19 +2492,19 @@ Counts:
 | `srsa_safeprime_miller_gcd` | 232 | 0 | 0 | OK |
 | `srsa_safeprime_miller_factors` | 236 | 0 | 0 | OK |
 | `srsa_residual_pin` | 252 | 0 | 0 | OK |
-| `srsa_fixed_e_rerand` | 276 | 0 | 0 | OK |
-| `srsa_fixed_e_rerand_pin` | 289 | 0 | 0 | OK |
-| `srsa_poly_e_not_rerand_invariant` | 296 | 0 | 0 | OK |
-| `srsa_related_y_square` | 302 | 0 | 0 | OK |
-| `srsa_related_pin` | 318 | 0 | 0 | OK |
-| `srsa_sagm_handle_unit` | 324 | 0 | 0 | OK |
-| `srsa_sagm_lambda_type_peel` | 329 | 0 | 0 | OK |
-| `srsa_sagm_product_reused` | 334 | 0 | 0 | OK |
-| `srsa_sqrt1_120_splits` | 344 | 0 | 0 | OK |
-| `srsa_minus1_no_split` | 350 | 0 | 0 | OK |
-| `srsa_120_plus_1` | 355 | 0 | 0 | OK |
-| `srsa_miller_66` | 361 | 0 | 0 | OK |
-| `srsa_four_sqrt1` | 366 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand` | 279 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand_pin` | 292 | 0 | 0 | OK |
+| `srsa_poly_e_not_rerand_invariant` | 299 | 0 | 0 | OK |
+| `srsa_related_y_square` | 305 | 0 | 0 | OK |
+| `srsa_related_pin` | 321 | 0 | 0 | OK |
+| `srsa_sagm_handle_unit` | 327 | 0 | 0 | OK |
+| `srsa_sagm_lambda_type_peel` | 332 | 0 | 0 | OK |
+| `srsa_sagm_product_reused` | 337 | 0 | 0 | OK |
+| `srsa_sqrt1_120_splits` | 347 | 0 | 0 | OK |
+| `srsa_minus1_no_split` | 353 | 0 | 0 | OK |
+| `srsa_120_plus_1` | 358 | 0 | 0 | OK |
+| `srsa_miller_66` | 364 | 0 | 0 | OK |
+| `srsa_four_sqrt1` | 369 | 0 | 0 | OK |
 
 ## Succinct.v
 
@@ -2593,22 +2619,22 @@ Counts:
 | `non_williams_two_chars` | 535 | 0 | 0 | OK |
 | `sign_neg1_odd` | 547 | 0 | 0 | OK |
 | `odd_exp_preserves_minus1` | 559 | 0 | 0 | OK |
-| `rsa_inverter_recovers_message` | 587 | 0 | 0 | OK |
-| `sign_hom_3` | 619 | 0 | 0 | OK |
-| `sign_of_msg_product_one` | 635 | 0 | 0 | OK |
-| `sign_weighted_commute` | 652 | 0 | 0 | OK |
-| `sign_weighted_product` | 666 | 0 | 0 | OK |
-| `euler_sign_of_pm1` | 693 | 0 | 0 | OK |
-| `euler_sign_sq` | 710 | 0 | 0 | OK |
-| `other_legendre_from_product` | 721 | 0 | 0 | OK |
-| `cipher_jacobi_eq_message` | 734 | 0 | 0 | OK |
-| `onesided_plain_one_factors` | 769 | 0 | 0 | OK |
-| `ctor_slot_mod_r_need_not_factor` | 784 | 0 | 0 | OK |
-| `cube_below_N` | 804 | 0 | 0 | OK |
-| `e3_small_cube_verifies` | 819 | 0 | 0 | OK |
-| `bleiche_wrap_interval` | 834 | 0 | 0 | OK |
-| `pkcs15_prefix_is_type2` | 860 | 0 | 0 | OK |
-| `manger_is_stricter_than_type2` | 870 | 0 | 0 | OK |
+| `rsa_inverter_recovers_message` | 591 | 0 | 0 | OK |
+| `sign_hom_3` | 623 | 0 | 0 | OK |
+| `sign_of_msg_product_one` | 639 | 0 | 0 | OK |
+| `sign_weighted_commute` | 656 | 0 | 0 | OK |
+| `sign_weighted_product` | 670 | 0 | 0 | OK |
+| `euler_sign_of_pm1` | 697 | 0 | 0 | OK |
+| `euler_sign_sq` | 714 | 0 | 0 | OK |
+| `other_legendre_from_product` | 725 | 0 | 0 | OK |
+| `cipher_jacobi_eq_message` | 738 | 0 | 0 | OK |
+| `onesided_plain_one_factors` | 773 | 0 | 0 | OK |
+| `ctor_slot_mod_r_need_not_factor` | 788 | 0 | 0 | OK |
+| `cube_below_N` | 808 | 0 | 0 | OK |
+| `e3_small_cube_verifies` | 823 | 0 | 0 | OK |
+| `bleiche_wrap_interval` | 838 | 0 | 0 | OK |
+| `pkcs15_prefix_is_type2` | 864 | 0 | 0 | OK |
+| `manger_is_stricter_than_type2` | 874 | 0 | 0 | OK |
 
 ## TwoPartyPair.v
 

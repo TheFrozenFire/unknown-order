@@ -289,7 +289,11 @@ Not standard-model hardness. GRA / SLP / Jacobi: `GenericRing.v`,
 `λ`, `λ` ndiv `e−1`): identity is degree-forbidden or the tape
 gcd-leaks; `e=λ+1` is outside that class so `GConst (λ+1)` is not a
 counterexample; constant leftover `42` inverts one `y` not every
-unit (`SrsaResidualGRA.v`, CAS `146`). Generic-ring inroad on
+unit (`SrsaResidualGRA.v`, CAS `146`). A division-free tape denotes
+a polynomial (`gra_nodiv_denotes`); an integer identity `P(y)^e = y`
+for all `y` is forbidden for `e≥2` (`gra_nodiv_integer_eth_root_forbidden`,
+CAS `147`). Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
+Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
 GGM: `GenericGroup.v`, CAS `121`–`122`.
 SAGM as the *only* writing of `x`: `SolverRestrict.v`, CAS `128`.
@@ -312,6 +316,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141`, `144` |
 | Order / residual sRSA / Factor arrows | `order_yields_*` / `leftover_*_mismatch_*` / `matching_247_*` | `Hardness.v`, `SrsaOrderArrows.v` | `145` |
 | residual GRA dichotomy | `residual_shaped_*` / `residual_gra_*` | `SrsaResidualGRA.v` | `146` |
+| nodiv GRA denotation / pin attains `λ` | `gra_nodiv_*` / `orders_generate_lambda_pin` | `GenericRing.v`, `Order.v` | `147` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

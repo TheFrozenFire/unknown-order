@@ -13,9 +13,9 @@ Generated.  Do not edit by hand.
 
 | Name | File | Line | Status | Used at |
 |---|---|---:|---|---|
-| `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 76 | open | — |
-| `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 270 | open | — |
-| `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 583 | open | — |
+| `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 78 | open | — |
+| `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 273 | open | — |
+| `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 587 | open | — |
 | `compose_preserves_disc_named` | `BinForms.v` | 677 | refuse | — |
 | `compose_assoc_named` | `BinForms.v` | 803 | refuse | — |
 | `compose_left_compat_named` | `BinForms.v` | 812 | refuse | — |

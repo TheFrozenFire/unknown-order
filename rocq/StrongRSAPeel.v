@@ -262,7 +262,10 @@ Qed.
 
 (** A residual solver returns a leftover pair for every unit [y].
     A single leftover pair does not always split ([matching_247_*]).
-    Whether the *solver* constructs a factor is unproved and on-goal. *)
+    Whether the *solver* constructs a factor is unproved and on-goal.
+    Do not inhabit by projecting [rsa_p].  Well-posed GRA fragment:
+    [gra_nodiv_integer_eth_root_forbidden] and the residual dichotomy
+    in [SrsaResidualGRA]. *)
 Definition residual_solver (N lam : Z) : Type :=
   forall y, Z.coprime y N ->
     { xe : Z * Z | let '(x, e) := xe in srsa_residual_leaf N lam y x e }.

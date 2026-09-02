@@ -172,3 +172,46 @@ Proof. apply gra_eq_leak_factors. Qed.
 Theorem residual_gra_inv_nonunit_factors :
   Problem_Factor 187 (gra_eval_Z gra_inv11_prog 36 4%nat).
 Proof. apply gra_inv_nonunit_factors. Qed.
+
+(** ** Division-free tape denotes a polynomial; integer [P^e = X]
+    is forbidden for residual-shaped [e ≥ 2].  Identity tape
+    (output [y]) is not residual invert on the pin. *)
+
+Theorem residual_gra_nodiv_empty_is_nodiv :
+  Forall is_nodiv [].
+Proof. constructor. Qed.
+
+Theorem residual_gra_identity_tape_is_y :
+  gra_eval 187 [] 36 2%nat = 36.
+Proof. reflexivity. Qed.
+
+Theorem residual_gra_identity_tape_not_cube :
+  powm 36 3 187 <> 36.
+Proof. vm_compute. discriminate. Qed.
+
+Theorem residual_gra_nodiv_integer_identity_forbidden :
+  forall ops e N out,
+    Forall is_nodiv ops ->
+    residual_shaped_e (Z.of_nat e) 80 ->
+    (2 <= e)%nat ->
+    (forall y, Z.pow (gra_eval N ops y out) (Z.of_nat e) = y) ->
+    False.
+Proof.
+  intros ops e N out Hop [He _] H2 Hall.
+  apply (gra_nodiv_integer_eth_root_forbidden ops e N out); assumption.
+Qed.
+
+Theorem residual_gra_nodiv_cube_identity_forbidden :
+  forall ops N out,
+    Forall is_nodiv ops ->
+    (forall y, Z.pow (gra_eval N ops y out) 3 = y) ->
+    False.
+Proof.
+  intros ops N out Hop Hall.
+  apply (gra_nodiv_integer_eth_root_forbidden ops 3%nat N out);
+    [exact Hop | lia | exact Hall].
+Qed.
+
+Theorem residual_gra_mul_denotes_square :
+  gra_eval 187 [GMul 2%nat 2%nat] 36 3%nat = 36 * 36.
+Proof. apply gra_nodiv_mul_denotes_square. Qed.

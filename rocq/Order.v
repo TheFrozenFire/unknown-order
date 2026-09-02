@@ -282,6 +282,55 @@ Proof.
   rewrite rsa_test_lambda. vm_compute. discriminate.
 Qed.
 
+Theorem is_order_pin_3_80 :
+  is_order 187 3 80.
+Proof.
+  unfold is_order. split; [lia|]. split.
+  - vm_compute. reflexivity.
+  - intros k' [Hk' Hk'lt] Hk'1.
+    assert (
+      k' = 1 \/ k' = 2 \/ k' = 3 \/ k' = 4 \/ k' = 5 \/
+      k' = 6 \/ k' = 7 \/ k' = 8 \/ k' = 9 \/ k' = 10 \/
+      k' = 11 \/ k' = 12 \/ k' = 13 \/ k' = 14 \/ k' = 15 \/
+      k' = 16 \/ k' = 17 \/ k' = 18 \/ k' = 19 \/ k' = 20 \/
+      k' = 21 \/ k' = 22 \/ k' = 23 \/ k' = 24 \/ k' = 25 \/
+      k' = 26 \/ k' = 27 \/ k' = 28 \/ k' = 29 \/ k' = 30 \/
+      k' = 31 \/ k' = 32 \/ k' = 33 \/ k' = 34 \/ k' = 35 \/
+      k' = 36 \/ k' = 37 \/ k' = 38 \/ k' = 39 \/ k' = 40 \/
+      k' = 41 \/ k' = 42 \/ k' = 43 \/ k' = 44 \/ k' = 45 \/
+      k' = 46 \/ k' = 47 \/ k' = 48 \/ k' = 49 \/ k' = 50 \/
+      k' = 51 \/ k' = 52 \/ k' = 53 \/ k' = 54 \/ k' = 55 \/
+      k' = 56 \/ k' = 57 \/ k' = 58 \/ k' = 59 \/ k' = 60 \/
+      k' = 61 \/ k' = 62 \/ k' = 63 \/ k' = 64 \/ k' = 65 \/
+      k' = 66 \/ k' = 67 \/ k' = 68 \/ k' = 69 \/ k' = 70 \/
+      k' = 71 \/ k' = 72 \/ k' = 73 \/ k' = 74 \/ k' = 75 \/
+      k' = 76 \/ k' = 77 \/ k' = 78 \/ k' = 79) by lia.
+    repeat (destruct H as [H | H]; [subst k'; vm_compute in Hk'1; discriminate|]).
+    subst k'. vm_compute in Hk'1. discriminate.
+Qed.
+
+Theorem pin_unit_3_coprime :
+  Z.coprime 3 187.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_attains_lambda :
+  Z.coprime 3 187 /\ is_order 187 3 80 /\
+  80 = lambda_semiprime 11 17.
+Proof.
+  split; [apply pin_unit_3_coprime|].
+  split; [apply is_order_pin_3_80|].
+  vm_compute. reflexivity.
+Qed.
+
+(** Completeness on this pin: [λ] is some unit's order, so the lcm
+    of unit orders is [λ].  The unused [orders_generate_lambda_named]
+    remains the general density statement. *)
+
+Theorem orders_generate_lambda_pin :
+  exists a, Z.coprime a 187 /\ is_order 187 a 80 /\
+    80 = lambda_semiprime 11 17.
+Proof. exists 3. apply pin_attains_lambda. Qed.
+
 (** ** 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)] *)
 
 Lemma powm_eq_1_iff_order_divides :
