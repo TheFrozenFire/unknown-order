@@ -285,7 +285,13 @@ semiprime cube.
 ## 9. Restricted algebraic machines
 
 Not standard-model hardness. GRA / SLP / Jacobi: `GenericRing.v`,
-`BrownSLP.v`, CAS `115`–`120`. GGM: `GenericGroup.v`, CAS `121`–`122`.
+`BrownSLP.v`, CAS `115`–`120`. Residual-shaped `e` (odd, coprime to
+`λ`, `λ` ndiv `e−1`): identity is degree-forbidden or the tape
+gcd-leaks; `e=λ+1` is outside that class so `GConst (λ+1)` is not a
+counterexample; constant leftover `42` inverts one `y` not every
+unit (`SrsaResidualGRA.v`, CAS `146`). Generic-ring inroad on
+`residual_solver_constructs_factor_open_named`, not a proof of it.
+GGM: `GenericGroup.v`, CAS `121`–`122`.
 SAGM as the *only* writing of `x`: `SolverRestrict.v`, CAS `128`.
 JNT affine integer cubes: `JouxNaccacheThome.v`. Prep-GRA with
 advice `N/17`: `PreprocessGRA.v`.
@@ -305,6 +311,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | |
 | gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141`, `144` |
 | Order / residual sRSA / Factor arrows | `order_yields_*` / `leftover_*_mismatch_*` / `matching_247_*` | `Hardness.v`, `SrsaOrderArrows.v` | `145` |
+| residual GRA dichotomy | `residual_shaped_*` / `residual_gra_*` | `SrsaResidualGRA.v` | `146` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

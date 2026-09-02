@@ -72,6 +72,7 @@ PowersOfTau.v
 QRModN.v
 StrongRSAPeel.v
 SrsaOrderArrows.v
+SrsaResidualGRA.v
 SolverRestrict.v
 DozenInroads.v
 SolverShape.v

@@ -93,6 +93,9 @@ Constructible torsion `H` is a family parameter
 | `GInv` of a non-unit | Factor | `gra_inv_nonunit_factors` | `rsa_inverter` (not a GRA) |
 | `e > 1` | `e·deg P ≠ 1 + e·deg Q` | `rational_Pe_minus_XQe_leading` | randomized GRAs; huge binary `e` |
 | `GConst (λ+1)` | Strong RSA on every unit, no factor | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | AMS KeyGen-density |
+| residual-shaped `e` (odd, `gcd(e,λ)=1`, `λ` ndiv `e−1`) | GRA identity is degree-forbidden (`e·deg P ≠ 1+e·deg Q`; `X^e−X` linear `−1`) or eq-test/`GInv` gcd-leaks | `residual_shaped_forbids_rational_Pe_XQe`, `residual_gra_Xe_minus_X_N_ndiv_linear`, `residual_gra_eq_leak_factors`, `residual_gra_inv_nonunit_factors` | standard-model RSA ≡ or ≢ factoring; PPT; `residual_solver_constructs_factor_open_named` |
+| `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
+| `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |
@@ -106,7 +109,7 @@ Constructible torsion `H` is a family parameter
 | residual leaf + mismatch | `gcd(x^k−1,N)` is a proper factor (leaf unused; mismatch is load-bearing) | `residual_mismatch_factors`, `residual_mismatch_factors_pin` | `srsa_residual_leaf` as `Problem_Factor` on its own; RSA ≡ or ≢ factoring; PPT |
 | every unit | an `e`-th power | `rsa_units_are_eth_powers` | a decision problem on units |
 
-CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`.
+CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`. Residual GRA dichotomy: `cas/146_residual_gra.gp`.
 
 ## Decision neighbours (not RSA, not formalized)
 

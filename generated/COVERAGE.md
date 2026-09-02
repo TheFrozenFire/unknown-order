@@ -2644,6 +2644,34 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `residual_x_not_ord16` | 495 |
 | Theorem | `residual_x_not_ord10` | 499 |
 
+## `SrsaResidualGRA.v`
+
+- L17: Residual GRA dichotomy
+  - L32: Residual-shaped exponents
+  - L60: [λ+1] is outside the residual class
+  - L98: Constant leftover inverts one [y], not every unit
+  - L117: Degree / leading-coefficient fork for residual-shaped [e]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `residual_shaped_e_3` | 40 |
+| Theorem | `residual_shaped_e_7` | 50 |
+| Theorem | `not_residual_shaped_e_81` | 62 |
+| Theorem | `lambda_plus_one_witness_not_residual` | 70 |
+| Theorem | `residual_gra_const81_independent_of_y` | 78 |
+| Theorem | `residual_gra_const81_gcd_is_1` | 83 |
+| Theorem | `residual_gra_const81_solves_sRSA_not_residual` | 87 |
+| Theorem | `residual_gra_const42_inverts_pin_not_8` | 100 |
+| Theorem | `residual_gra_const42_misses_unit_2` | 112 |
+| Theorem | `residual_shaped_forbids_rational_Pe_XQe` | 119 |
+| Theorem | `residual_shaped_e3_leading` | 128 |
+| Theorem | `residual_shaped_e7_leading` | 136 |
+| Theorem | `residual_gra_Xe_minus_X_N_ndiv_linear` | 144 |
+| Theorem | `residual_gra_X3_minus_X_N_ndiv_linear` | 155 |
+| Theorem | `residual_gra_X7_minus_X_N_ndiv_linear` | 160 |
+| Theorem | `residual_gra_eq_leak_factors` | 168 |
+| Theorem | `residual_gra_inv_nonunit_factors` | 172 |
+
 ## `SrsaWriteE.v`
 
 - L15: Public maps of leftover [e]
@@ -3132,4 +3160,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2113 theorems/lemmas/corollaries/examples across 115 files._
+_2130 theorems/lemmas/corollaries/examples across 116 files._

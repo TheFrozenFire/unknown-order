@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2113 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2130 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2113 results across 115 files.
+Captured for 2130 results across 116 files.
 
 Counts:
 
@@ -2279,6 +2279,28 @@ Counts:
 | `residual_161_mod_8` | 490 | 0 | 0 | OK |
 | `residual_x_not_ord16` | 495 | 0 | 0 | OK |
 | `residual_x_not_ord10` | 499 | 0 | 0 | OK |
+
+## SrsaResidualGRA.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `residual_shaped_e_3` | 40 | 0 | 0 | OK |
+| `residual_shaped_e_7` | 50 | 0 | 0 | OK |
+| `not_residual_shaped_e_81` | 62 | 0 | 0 | OK |
+| `lambda_plus_one_witness_not_residual` | 70 | 0 | 0 | OK |
+| `residual_gra_const81_independent_of_y` | 78 | 0 | 0 | OK |
+| `residual_gra_const81_gcd_is_1` | 83 | 0 | 0 | OK |
+| `residual_gra_const81_solves_sRSA_not_residual` | 87 | 0 | 0 | OK |
+| `residual_gra_const42_inverts_pin_not_8` | 100 | 0 | 0 | OK |
+| `residual_gra_const42_misses_unit_2` | 112 | 0 | 0 | OK |
+| `residual_shaped_forbids_rational_Pe_XQe` | 119 | 0 | 0 | OK |
+| `residual_shaped_e3_leading` | 128 | 0 | 0 | OK |
+| `residual_shaped_e7_leading` | 136 | 0 | 0 | OK |
+| `residual_gra_Xe_minus_X_N_ndiv_linear` | 144 | 0 | 0 | OK |
+| `residual_gra_X3_minus_X_N_ndiv_linear` | 155 | 0 | 0 | OK |
+| `residual_gra_X7_minus_X_N_ndiv_linear` | 160 | 0 | 0 | OK |
+| `residual_gra_eq_leak_factors` | 168 | 0 | 0 | OK |
+| `residual_gra_inv_nonunit_factors` | 172 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 
