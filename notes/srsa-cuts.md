@@ -70,6 +70,16 @@ cosets are forbidden. All 16 generators are Jacobi `+1`.
 | not in `⟨2⟩`, not order 16 or 10 | `residual_not_in_ltwo`, `residual_x_not_in_lten`, `residual_x_not_ord16`, `residual_x_not_ord10` |
 | generates the 5-Sylow | `primary_69_generates_C5`, `residual_x_generates_5_sylow` |
 
+**Public tests of leftover `x`.** Jacobi `+1` is public; leftover `x=42`
+satisfies it, but so does `10` (order 16, QNR both sides, not a cube
+root): `filter_jacobi_x_plus`, `filter_jacobi_10_plus_not_leftover`.
+`2` has Jacobi `−1` and is rejected (`filter_jacobi_2_minus`). Jacobi
+`+1` leaves `80` units vs `16` generators (slack `5`):
+`residual_jacobi_plus_count`. Checking `x^3≡y` is RSA uniqueness at
+fixed `e=3` (`filter_x_cube_check_is_rsa_e3`). Coset reps `2`,`10` of
+`⟨y⟩` do not split via `gcd(x−a,N)` (`residual_coset_*_no_split`).
+CAS `143`.
+
 **`⟨y⟩ ≅ C₈ × C₅`.** `y^5=100` generates `C₈`; `y^8=137` generates
 `C₅`. Cubing is bijective on both. `y` reconstructs as `155·69`.
 The order-2 of `C₈` is Miller `67`.
@@ -121,6 +131,14 @@ local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
 `period_y_Nminus1_no_annihilator`, `period_Nplus1_*`). Leftover `x^{N−1}≢1`,
 so `N−1` does not certify `x∈⟨y⟩` (`period_x_Nminus1_no_membership`).
 CAS `141`.
+
+**Annihilator quality short of `λ`.** A scale of `M` on `gcd(y^M−1,N)`:
+`M=2` and `M=4` no split; odd part `5` and `2`-powers `8`,`16` split;
+`ord(y)=40` leftover-inverts with `gcd=N`; `λ=80` still Miller-splits
+on `67` (`period_M2_no_split`, `period_M4_no_split`,
+`period_advice_odd_part_splits`, `period_advice_v2_8_splits`,
+`period_advice_v2_16_splits`, `period_advice_ord_invert_no_proper`,
+`period_advice_lam_miller`). CAS `144`.
 
 One `k=27` in three subgroups: cube roots of `2`, `3`, `36`.
 `gcd(161−42,N)=17`, `gcd(75−42,N)=11`. IDs: `period_two_subgroups_split`, `period_cbrt2_cbrt36_split`–`period_cbrt3_cbrt2`.
@@ -264,12 +282,12 @@ advice `N/17`: `PreprocessGRA.v`.
 | SAGM / safeprime / poly `e` | `sagm_*` / `safeprime_*` / `poly_e_*` / `reject_sample_*` | `SolverRestrict.v` | `128`, `139` |
 | first dozen inroads | `dozen_*` | `DozenInroads.v` | `129` |
 | solver shapes | `shape_*` | `SolverShape.v` | `130`, `142` |
-| public filters | `filter_*` | `FilterShape.v` | `131`, `139` |
+| public filters | `filter_*` | `FilterShape.v` | `131`, `139`, `143` |
 | arithmetic maps | `arith_*` | `ArithShape.v` | `132` |
-| leftover language of `(x,e)` | `residual_*` | `SrsaResidual.v` | |
+| leftover language of `(x,e)` | `residual_*` | `SrsaResidual.v` | `143` |
 | `⟨y⟩ ≅ C₈×C₅` | `primary_*` | `SrsaPrimary.v` | |
 | dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | |
-| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141` |
+| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141`, `144` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

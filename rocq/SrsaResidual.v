@@ -438,6 +438,36 @@ Theorem residual_four_cosets :
   160 / 40 = 4.
 Proof. reflexivity. Qed.
 
+(** ** Public search slack and forbidden cosets
+
+    Jacobi [+1] leaves [80] units; leftover generators are [16].
+    Coset representatives [2] and [10] of [⟨y⟩] do not split by
+    [gcd(x−a,N)].  Cross-confirmed by [cas/143]. *)
+
+Theorem residual_jacobi_plus_count :
+  160 / 2 = 80 /\
+  80 / 16 = 5.
+Proof. split; reflexivity. Qed.
+
+Theorem residual_phi40_generators :
+  40 = 8 * 5 /\
+  Z.gcd 8 5 = 1 /\
+  8 - 4 = 4 /\
+  5 - 1 = 4 /\
+  4 * 4 = 16.
+Proof. repeat split; reflexivity. Qed.
+
+Theorem residual_coset_10_no_split :
+  Z.gcd (42 - 10) 187 = 1 /\
+  powm 10 16 187 = 1.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem residual_coset_2_no_split :
+  Z.gcd (42 - 2) 187 = 1 /\
+  powm 2 40 187 = 1 /\
+  2 <> 36.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
 Theorem residual_x16_not_1 :
   powm 42 16 187 = 86 /\
   86 <> 1.

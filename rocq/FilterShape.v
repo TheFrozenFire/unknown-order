@@ -266,3 +266,32 @@ Theorem filter_e_coprime_phi_y_rejects_cube :
   Z.gcd 3 12 = 3 /\
   Z.gcd 3 12 <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
+
+(** ** Public tests of leftover [x]
+
+    Jacobi [+1] is public and leftover satisfies it, but so does
+    [10] (order 16, QNR both sides, not a cube root).  [2] has
+    Jacobi [−1] and is rejected.  Checking [x^3≡y] is the RSA
+    special case at fixed [e=3].  Cross-confirmed by [cas/143]. *)
+
+Theorem filter_jacobi_x_plus :
+  jacobi_N 42 11 17 = 1 /\
+  jacobi_N 36 11 17 = 1.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem filter_jacobi_10_plus_not_leftover :
+  jacobi_N 10 11 17 = 1 /\
+  powm 10 3 187 <> 36 /\
+  powm 10 16 187 = 1 /\
+  powm 10 8 187 <> 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
+
+Theorem filter_jacobi_2_minus :
+  jacobi_N 2 11 17 = -1 /\
+  2 <> 42.
+Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
+
+Theorem filter_x_cube_check_is_rsa_e3 :
+  powm 42 3 187 = 36 /\
+  powm 10 3 187 <> 36.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.

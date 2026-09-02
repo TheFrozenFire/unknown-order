@@ -561,3 +561,56 @@ Theorem period_y_Nplus1_no_annihilator :
   16 <> 1 /\
   Z.gcd (16 - 1) 187 = 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
+
+(** ** Annihilator quality short of [λ]
+
+    A scale of [M]: [2] and [4] do not split; odd part [5] and
+    [2]-powers [8],[16] split; [ord(y)=40] leftover-inverts with
+    [gcd=N]; [λ=80] still Miller-splits.  Cross-confirmed by
+    [cas/144]. *)
+
+Theorem period_lam_v2_odd_part :
+  80 = 16 * 5 /\
+  16 = 2 ^ 4.
+Proof. split; reflexivity. Qed.
+
+Theorem period_M2_no_split :
+  Z.gcd (powm 36 2 187 - 1) 187 = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem period_M4_no_split :
+  Z.gcd (powm 36 4 187 - 1) 187 = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem period_advice_odd_part_splits :
+  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
+  Problem_Factor 187 11.
+Proof. apply period_y5_minus_1_splits. Qed.
+
+Theorem period_advice_v2_8_splits :
+  Z.gcd (powm 36 8 187 - 1) 187 = 17 /\
+  Problem_Factor 187 17.
+Proof. apply period_y8_minus_1_splits. Qed.
+
+Theorem period_advice_v2_16_splits :
+  Z.gcd (powm 36 16 187 - 1) 187 = 17 /\
+  Problem_Factor 187 17.
+Proof.
+  split; [vm_compute; reflexivity|].
+  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+Qed.
+
+Theorem period_advice_ord_invert_no_proper :
+  powm 36 40 187 = 1 /\
+  Z.gcd (powm 36 40 187 - 1) 187 = 187.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem period_advice_lam_miller :
+  powm 36 80 187 = 1 /\
+  Z.gcd (67 - 1) 187 = 11 /\
+  Problem_Factor 187 11.
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
+  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+Qed.

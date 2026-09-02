@@ -921,6 +921,7 @@ in the Rocq tree.  Do not edit by hand.
   - L160: 11. Low-bit [e = 2(y mod 2^k)+1]
   - L184: 12. Trace [x + x^{-1}]
   - L198: Public tests of [e] vs residual tests that mention [λ]
+  - L270: Public tests of leftover [x]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -961,6 +962,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `filter_e_coprime_N_does_not_certify` | 252 |
 | Theorem | `filter_phi_y_of_36` | 257 |
 | Theorem | `filter_e_coprime_phi_y_rejects_cube` | 265 |
+| Theorem | `filter_jacobi_x_plus` | 277 |
+| Theorem | `filter_jacobi_10_plus_not_leftover` | 282 |
+| Theorem | `filter_jacobi_2_minus` | 289 |
+| Theorem | `filter_x_cube_check_is_rsa_e3` | 294 |
 
 ## `Fp2.v`
 
@@ -2361,6 +2366,7 @@ in the Rocq tree.  Do not edit by hand.
 - L13: Period: gcd vs multiply
   - L441: KeyGen shape: leftover [x] splits iff local orders mismatch
   - L505: Public exponent lattice [N−1], [N+1] vs trapdoor period
+  - L565: Annihilator quality short of [λ]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2450,6 +2456,14 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `period_Nplus1_factors` | 549 |
 | Theorem | `period_Nplus1_divisors_no_split` | 553 |
 | Theorem | `period_y_Nplus1_no_annihilator` | 559 |
+| Theorem | `period_lam_v2_odd_part` | 572 |
+| Theorem | `period_M2_no_split` | 577 |
+| Theorem | `period_M4_no_split` | 581 |
+| Theorem | `period_advice_odd_part_splits` | 585 |
+| Theorem | `period_advice_v2_8_splits` | 590 |
+| Theorem | `period_advice_v2_16_splits` | 595 |
+| Theorem | `period_advice_ord_invert_no_proper` | 603 |
+| Theorem | `period_advice_lam_miller` | 608 |
 
 ## `SrsaPrimary.v`
 
@@ -2499,6 +2513,7 @@ in the Rocq tree.  Do not edit by hand.
 - L14: Residual leftover language
   - L23: Pin geometry of [N] and of [⟨2⟩]
   - L78: Leftover [x] generates [⟨y⟩]
+  - L441: Public search slack and forbidden cosets
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2588,13 +2603,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `residual_ltwo_ord40` | 429 |
 | Theorem | `residual_two_ne_y` | 433 |
 | Theorem | `residual_four_cosets` | 437 |
-| Theorem | `residual_x16_not_1` | 441 |
-| Theorem | `residual_x8_not_1` | 446 |
-| Theorem | `residual_lam_bitlength` | 450 |
-| Theorem | `residual_x_local_qr` | 454 |
-| Theorem | `residual_161_mod_8` | 459 |
-| Theorem | `residual_x_not_ord16` | 464 |
-| Theorem | `residual_x_not_ord10` | 468 |
+| Theorem | `residual_jacobi_plus_count` | 447 |
+| Theorem | `residual_phi40_generators` | 452 |
+| Theorem | `residual_coset_10_no_split` | 460 |
+| Theorem | `residual_coset_2_no_split` | 465 |
+| Theorem | `residual_x16_not_1` | 471 |
+| Theorem | `residual_x8_not_1` | 476 |
+| Theorem | `residual_lam_bitlength` | 480 |
+| Theorem | `residual_x_local_qr` | 484 |
+| Theorem | `residual_161_mod_8` | 489 |
+| Theorem | `residual_x_not_ord16` | 494 |
+| Theorem | `residual_x_not_ord10` | 498 |
 
 ## `SrsaWriteE.v`
 
@@ -3084,4 +3103,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2078 theorems/lemmas/corollaries/examples across 114 files._
+_2094 theorems/lemmas/corollaries/examples across 114 files._

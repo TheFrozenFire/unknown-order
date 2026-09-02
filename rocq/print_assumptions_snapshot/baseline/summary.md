@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2078 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2094 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2078 results across 114 files.
+Captured for 2094 results across 114 files.
 
 Counts:
 
@@ -812,6 +812,10 @@ Counts:
 | `filter_e_coprime_N_does_not_certify` | 252 | 0 | 0 | OK |
 | `filter_phi_y_of_36` | 257 | 0 | 0 | OK |
 | `filter_e_coprime_phi_y_rejects_cube` | 265 | 0 | 0 | OK |
+| `filter_jacobi_x_plus` | 277 | 0 | 0 | OK |
+| `filter_jacobi_10_plus_not_leftover` | 282 | 0 | 0 | OK |
+| `filter_jacobi_2_minus` | 289 | 0 | 0 | OK |
+| `filter_x_cube_check_is_rsa_e3` | 294 | 0 | 0 | OK |
 
 ## Fp2.v
 
@@ -2100,6 +2104,14 @@ Counts:
 | `period_Nplus1_factors` | 549 | 0 | 0 | OK |
 | `period_Nplus1_divisors_no_split` | 553 | 0 | 0 | OK |
 | `period_y_Nplus1_no_annihilator` | 559 | 0 | 0 | OK |
+| `period_lam_v2_odd_part` | 572 | 0 | 0 | OK |
+| `period_M2_no_split` | 577 | 0 | 0 | OK |
+| `period_M4_no_split` | 581 | 0 | 0 | OK |
+| `period_advice_odd_part_splits` | 585 | 0 | 0 | OK |
+| `period_advice_v2_8_splits` | 590 | 0 | 0 | OK |
+| `period_advice_v2_16_splits` | 595 | 0 | 0 | OK |
+| `period_advice_ord_invert_no_proper` | 603 | 0 | 0 | OK |
+| `period_advice_lam_miller` | 608 | 0 | 0 | OK |
 
 ## SrsaPrimary.v
 
@@ -2232,13 +2244,17 @@ Counts:
 | `residual_ltwo_ord40` | 429 | 0 | 0 | OK |
 | `residual_two_ne_y` | 433 | 0 | 0 | OK |
 | `residual_four_cosets` | 437 | 0 | 0 | OK |
-| `residual_x16_not_1` | 441 | 0 | 0 | OK |
-| `residual_x8_not_1` | 446 | 0 | 0 | OK |
-| `residual_lam_bitlength` | 450 | 0 | 0 | OK |
-| `residual_x_local_qr` | 454 | 0 | 0 | OK |
-| `residual_161_mod_8` | 459 | 0 | 0 | OK |
-| `residual_x_not_ord16` | 464 | 0 | 0 | OK |
-| `residual_x_not_ord10` | 468 | 0 | 0 | OK |
+| `residual_jacobi_plus_count` | 447 | 0 | 0 | OK |
+| `residual_phi40_generators` | 452 | 0 | 0 | OK |
+| `residual_coset_10_no_split` | 460 | 0 | 0 | OK |
+| `residual_coset_2_no_split` | 465 | 0 | 0 | OK |
+| `residual_x16_not_1` | 471 | 0 | 0 | OK |
+| `residual_x8_not_1` | 476 | 0 | 0 | OK |
+| `residual_lam_bitlength` | 480 | 0 | 0 | OK |
+| `residual_x_local_qr` | 484 | 0 | 0 | OK |
+| `residual_161_mod_8` | 489 | 0 | 0 | OK |
+| `residual_x_not_ord16` | 494 | 0 | 0 | OK |
+| `residual_x_not_ord10` | 498 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 
