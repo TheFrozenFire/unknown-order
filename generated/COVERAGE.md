@@ -1187,7 +1187,8 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `adaptive_root_smooth_power_breaks` | 428 |
 | Theorem | `order_inverts_in_cyclic` | 451 |
 | Theorem | `order_yields_strong_RSA` | 476 |
-| Theorem | `leftover_mismatch_factors` | 496 |
+| Lemma | `gcd_powm_minus_1` | 497 |
+| Theorem | `leftover_mismatch_factors` | 510 |
 
 ## `HashSlot.v`
 
@@ -2377,17 +2378,17 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `order_yields_residual_sRSA` | 44 |
 | Theorem | `order_yields_residual_pin` | 66 |
 | Theorem | `order_invert_pin_is_cube_root` | 82 |
-| Theorem | `residual_mismatch_factors` | 92 |
-| Theorem | `leftover_x_one_sided_pin` | 103 |
-| Theorem | `leftover_x_mismatch_factors_pin` | 112 |
-| Theorem | `residual_mismatch_factors_pin` | 120 |
-| Theorem | `leftover_y_one_sided_pin` | 131 |
-| Theorem | `order_mismatch_factors_pin` | 140 |
-| Theorem | `leftover_77_one_sided` | 148 |
-| Theorem | `leftover_77_mismatch_factors` | 157 |
-| Theorem | `matching_247_not_one_sided` | 169 |
-| Theorem | `matching_247_gcd_not_proper` | 177 |
-| Theorem | `matching_247_two_sided_gcd_is_N` | 187 |
+| Theorem | `residual_mismatch_factors` | 93 |
+| Theorem | `leftover_x_one_sided_pin` | 105 |
+| Theorem | `leftover_x_mismatch_factors_pin` | 114 |
+| Theorem | `residual_mismatch_factors_pin` | 123 |
+| Theorem | `leftover_y_one_sided_pin` | 135 |
+| Theorem | `order_mismatch_factors_pin` | 144 |
+| Theorem | `leftover_77_one_sided` | 153 |
+| Theorem | `leftover_77_mismatch_factors` | 162 |
+| Theorem | `matching_247_not_one_sided` | 175 |
+| Theorem | `matching_247_gcd_not_proper` | 183 |
+| Theorem | `matching_247_two_sided_gcd_is_N` | 193 |
 
 ## `SrsaPeriod.v`
 
@@ -3131,4 +3132,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2112 theorems/lemmas/corollaries/examples across 115 files._
+_2113 theorems/lemmas/corollaries/examples across 115 files._

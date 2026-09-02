@@ -88,13 +88,15 @@ Proof. vm_compute. split; reflexivity. Qed.
 
 (** The residual leaf is unused: mismatch is the load-bearing
     hypothesis.  The leaf is in the type so the arrow is not
-    [srsa_residual_leaf] as [Problem_Factor] on its own. *)
+    [srsa_residual_leaf] as [Problem_Factor] on its own.  The
+    factor is the public [gcd(x^k−1, N)], not a named prime. *)
 Theorem residual_mismatch_factors :
   forall p q y x e k lam,
     Z.prime p -> Z.prime q -> p <> q ->
     srsa_residual_leaf (p * q) lam y x e ->
     one_sided_low_order p q x k ->
-    Problem_Factor (p * q) p.
+    Z.gcd (powm x k (p * q) - 1) (p * q) = p /\
+    Problem_Factor (p * q) (Z.gcd (powm x k (p * q) - 1) (p * q)).
 Proof.
   intros p q y x e k lam Hp Hq Hneq _ Hone.
   apply leftover_mismatch_factors with (x := x) (k := k); assumption.
@@ -110,7 +112,8 @@ Proof.
 Qed.
 
 Theorem leftover_x_mismatch_factors_pin :
-  Problem_Factor 187 11.
+  Z.gcd (powm 42 5 187 - 1) 187 = 11 /\
+  Problem_Factor 187 (Z.gcd (powm 42 5 187 - 1) 187).
 Proof.
   change 187 with (11 * 17).
   apply leftover_mismatch_factors with (x := 42) (k := 5);
@@ -120,7 +123,8 @@ Qed.
 Theorem residual_mismatch_factors_pin :
   srsa_residual_leaf 187 80 36 42 3 ->
   one_sided_low_order 11 17 42 5 ->
-  Problem_Factor 187 11.
+  Z.gcd (powm 42 5 187 - 1) 187 = 11 /\
+  Problem_Factor 187 (Z.gcd (powm 42 5 187 - 1) 187).
 Proof.
   intros _ Hone.
   change 187 with (11 * 17).
@@ -138,7 +142,8 @@ Proof.
 Qed.
 
 Theorem order_mismatch_factors_pin :
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
+  Problem_Factor 187 (Z.gcd (powm 36 5 187 - 1) 187).
 Proof.
   change 187 with (11 * 17).
   apply leftover_mismatch_factors with (x := 36) (k := 5);
@@ -155,7 +160,8 @@ Proof.
 Qed.
 
 Theorem leftover_77_mismatch_factors :
-  Problem_Factor 77 7.
+  Z.gcd (powm 2 3 77 - 1) 77 = 7 /\
+  Problem_Factor 77 (Z.gcd (powm 2 3 77 - 1) 77).
 Proof.
   change 77 with (7 * 11).
   apply leftover_mismatch_factors with (x := 2) (k := 3);

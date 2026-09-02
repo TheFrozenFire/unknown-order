@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2112 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2113 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2112 results across 115 files.
+Captured for 2113 results across 115 files.
 
 Counts:
 
@@ -1013,7 +1013,8 @@ Counts:
 | `adaptive_root_smooth_power_breaks` | 428 | 0 | 0 | OK |
 | `order_inverts_in_cyclic` | 451 | 0 | 0 | OK |
 | `order_yields_strong_RSA` | 476 | 0 | 0 | OK |
-| `leftover_mismatch_factors` | 496 | 0 | 0 | OK |
+| `gcd_powm_minus_1` | 497 | 0 | 0 | OK |
+| `leftover_mismatch_factors` | 510 | 0 | 0 | OK |
 
 ## HashSlot.v
 
@@ -2025,17 +2026,17 @@ Counts:
 | `order_yields_residual_sRSA` | 44 | 0 | 0 | OK |
 | `order_yields_residual_pin` | 66 | 0 | 0 | OK |
 | `order_invert_pin_is_cube_root` | 82 | 0 | 0 | OK |
-| `residual_mismatch_factors` | 92 | 0 | 0 | OK |
-| `leftover_x_one_sided_pin` | 103 | 0 | 0 | OK |
-| `leftover_x_mismatch_factors_pin` | 112 | 0 | 0 | OK |
-| `residual_mismatch_factors_pin` | 120 | 0 | 0 | OK |
-| `leftover_y_one_sided_pin` | 131 | 0 | 0 | OK |
-| `order_mismatch_factors_pin` | 140 | 0 | 0 | OK |
-| `leftover_77_one_sided` | 148 | 0 | 0 | OK |
-| `leftover_77_mismatch_factors` | 157 | 0 | 0 | OK |
-| `matching_247_not_one_sided` | 169 | 0 | 0 | OK |
-| `matching_247_gcd_not_proper` | 177 | 0 | 0 | OK |
-| `matching_247_two_sided_gcd_is_N` | 187 | 0 | 0 | OK |
+| `residual_mismatch_factors` | 93 | 0 | 0 | OK |
+| `leftover_x_one_sided_pin` | 105 | 0 | 0 | OK |
+| `leftover_x_mismatch_factors_pin` | 114 | 0 | 0 | OK |
+| `residual_mismatch_factors_pin` | 123 | 0 | 0 | OK |
+| `leftover_y_one_sided_pin` | 135 | 0 | 0 | OK |
+| `order_mismatch_factors_pin` | 144 | 0 | 0 | OK |
+| `leftover_77_one_sided` | 153 | 0 | 0 | OK |
+| `leftover_77_mismatch_factors` | 162 | 0 | 0 | OK |
+| `matching_247_not_one_sided` | 175 | 0 | 0 | OK |
+| `matching_247_gcd_not_proper` | 183 | 0 | 0 | OK |
+| `matching_247_two_sided_gcd_is_N` | 193 | 0 | 0 | OK |
 
 ## SrsaPeriod.v
 

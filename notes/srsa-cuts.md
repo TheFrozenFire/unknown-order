@@ -126,10 +126,11 @@ local orders `6`, and `gcd(x^5−1,N)=1`, `gcd(x^8−1,N)=1`
 
 **Named arrows on the same fork.** Invert from `ord(y)` always:
 `order_inverts_in_cyclic` / `order_yields_residual_sRSA` (pin
-`42³≡36`). Leftover or order factors `N` only under KeyGen mismatch
-(`leftover_mismatch_factors`; pins `187` at `k=5` and `77` at
-`k=3`). Matching orders on `247` are not one-sided at `k=5` and the
-gcd is `1` or `N` (`matching_247_*`). Residual leaf is not
+`42³≡36`). Leftover or order factors `N` only under KeyGen mismatch:
+the public quantity is `gcd(x^k−1,N)` (`leftover_mismatch_factors`;
+pins `187` leftover `x=42` and `y=36` at `k=5`, `77` leftover `2`
+at `k=3`). Matching orders on `247` are not one-sided at `k=5` and
+the gcd is `1` or `N` (`matching_247_*`). Residual leaf is not
 `Problem_Factor` without that mismatch hyp. Not RSA ≡ or ≢
 factoring. `Hardness.v`, `SrsaOrderArrows.v`. CAS `145`.
 

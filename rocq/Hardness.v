@@ -489,15 +489,36 @@ Proof.
 Qed.
 
 (** Leftover [x] (or any unit) with a one-sided local annihilator
-    factors [N].  The mismatch hypothesis is [one_sided_low_order].
-    Matching local orders fall outside that hypothesis.  Not RSA ≡
-    factoring. *)
+    factors [N].  The mismatch hypothesis is [one_sided_low_order]
+    and is load-bearing: the public quantity is [gcd(x^k−1, N)],
+    equal to [p] by [one_sided_low_order_factors].  Matching local
+    orders fall outside that hypothesis.  Not RSA ≡ factoring. *)
+
+Lemma gcd_powm_minus_1 :
+  forall a k n,
+    1 < n ->
+    Z.gcd (powm a k n - 1) n = Z.gcd (a ^ k - 1) n.
+Proof.
+  intros a k n Hn.
+  unfold powm.
+  rewrite <- (Z.gcd_mod_l (a ^ k - 1) n).
+  replace ((a ^ k - 1) mod n) with ((a ^ k mod n - 1) mod n).
+  - rewrite <- (Z.gcd_mod_l (a ^ k mod n - 1) n). reflexivity.
+  - symmetry. rewrite Zminus_mod, Z.mod_1_l by lia. reflexivity.
+Qed.
 
 Theorem leftover_mismatch_factors :
   forall p q x k,
     Z.prime p -> Z.prime q -> p <> q ->
     one_sided_low_order p q x k ->
-    Problem_Factor (p * q) p.
+    Z.gcd (powm x k (p * q) - 1) (p * q) = p /\
+    Problem_Factor (p * q) (Z.gcd (powm x k (p * q) - 1) (p * q)).
 Proof.
-  intros. apply (one_sided_low_order_is_factor p q x k); assumption.
+  intros p q x k Hp Hq Hneq Hone.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  assert (1 < p * q) by nia.
+  pose proof (one_sided_low_order_factors p q x k Hp Hq Hneq Hone) as Hg.
+  rewrite gcd_powm_minus_1 by lia.
+  split; [exact Hg|].
+  rewrite Hg. split; [nia|]. exists q. apply Z.mul_comm.
 Qed.
