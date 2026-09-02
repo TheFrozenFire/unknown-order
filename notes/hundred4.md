@@ -1,5 +1,7 @@
 # Fourth hundred Strong-RSA algorithm-class inroads
 
+Stable IDs 301–400. Grouping by *question*: [`srsa-cuts.md`](srsa-cuts.md).
+
 Roster of items 301–400. Residual dictionary, `⟨y⟩ ≅ C₈ × C₅`, the
 2-to-1 map of residual `e`, and the dichotomy **gcd-Pohlig splits** vs
 **equality-only order-finding leftover-inhabits**.

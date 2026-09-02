@@ -1,6 +1,9 @@
 # One hundred Strong-RSA algorithm-class inroads
 
-Roster of items 1–100. Each class has a Rocq headline `hun_NN_*` and a
+Stable IDs 1–100 (batch order). Grouping by *question* is
+[`srsa-cuts.md`](srsa-cuts.md).
+
+Each class has a Rocq headline `hun_NN_*` and a
 PARI probe in `cas/133_hundred.gp`. None inhabits `srsa_residual_leaf`
 as `Problem_Factor`. Pin `N=187` unless noted.
 

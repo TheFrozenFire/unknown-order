@@ -1,5 +1,7 @@
 # Second hundred Strong-RSA algorithm-class inroads
 
+Stable IDs 101–200. Grouping by *question*: [`srsa-cuts.md`](srsa-cuts.md).
+
 Roster of items 101–200. Each class has a Rocq headline `hun_NN_*`
 and a PARI probe in `cas/135_hundred2.gp`. None inhabits
 `srsa_residual_leaf` as `Problem_Factor`. Pin `N=187` unless noted.

@@ -131,142 +131,22 @@ Self-randomization preserves a *fixed* `e` (`srsa_fixed_e_rerand`) and does not 
 
 Do not record Strong RSA ≡ factoring as a theorem. The residual leaf *is* standard-model RSA with a `y`-dependent exponent coprime to `λ`.
 
-### Algorithm restrictions (not the Jacobian leaf)
+### Cuts of the solver (taxonomy)
 
-| Restriction | What closes | What does not |
-|---|---|---|
-| SAGM-only (`x = g^a`) | `ae−1` annihilates `g`; Miller (`sagm_generator_annihilated`, `sagm_only_miller_splits`) | a residue with no representation |
-| Safeprime `N=77`, `λ=30` | odd `e` sharing a factor with `λ` names `2e+1` (`safeprime_e3_names_p`); residual `e=7` is `safeprime_residual_e7` | that residual does not factor |
-| Polynomial `e(y)` | non-constant `P` not rerand-invariant; constant `P=[3]` is fixed-`e` residual | bit/hash/Jacobi `e(y)` |
+The numbered IDs were written in batches. The map by *question* is
+[`notes/srsa-cuts.md`](srsa-cuts.md):
 
-CAS `128`. These restrict the *algorithm*. `srsa_residual_leaf` stays unnamed as `Problem_Factor`.
+1. Peel a witness you already have.
+2. What leftover `(x,e)` is allowed to be (`⟨y⟩`, `C₈×C₅`, 16 generators).
+3. Gcd-Pohlig **splits**; equality-only order-finding **inverts**.
+4. Public maps of `x`. 5. Public maps of `e`.
+6. Extra tapes and related `y`. 7. Engines that ignore `y`.
+8. Different group or modulus. 9. GRA / GGM / SAGM / SLP.
 
-### Twelve further classes (`DozenInroads.v`, CAS `129`)
-
-| # | Class | Pin identity | Residual? |
-|---|---|---|---|
-| 1 | GRA + Jacobi gate | `(2/N)=−1` ⇒ odd `e` | no (parity) |
-| 2 | SAGM both `x,y` | `3^{54·3}≡3^2`, `ae≡c (mod λ)` | no (exponents) |
-| 3 | Related `y,y²` coprime `e` | `(32,3)` and `(64,5)`, `gcd=1` | Shamir, not factoring |
-| 4 | 5th-power Euler | `32^2≡1 (mod 11)` | residue constraint |
-| 5 | One-sided `a^{e−1}` | `gcd(2^{10}−1,N)=11`, `e=11` residual-shaped | splits |
-| 6 | Short `e` | `3<4<81` | cube is still residual |
-| 7 | Bounded advice on `N` | `N mod 2` no split; `N/17` splits | advice class |
-| 8 | Blum `N=253`, `λ=110` | `e=5` names `11`; `e=11` names `23` | rigid `λ` |
-| 9 | Census of units | every unit is a cube (`e=3` permutation) | residual inhabited for all units |
-| 10 | GQ extract | `(42,3,36)` residual, `gcd(42,N)=1` | does not split |
-| 11 | Integer poly in `N` | `187≡17 (mod 10)` | public-integer formula |
-| 12 | `gcd(e−1,λ)` proper | `gcd(10,80)=10` | one-sided, not `λ`-type |
-
-None of these twelve is a proof that `srsa_residual_leaf` factors.
-
-### Solver shapes (`SolverShape.v`, CAS `130`)
-
-How the TM writes `x` and `e`, not further case analysis of the witness.
-
-| # | Class | Pin identity | Residual? |
-|---|---|---|---|
-| 1 | Monomial `x=y^k` even `k` | `40 ∤ 2e−1` (even ndiv odd); `(36²)³ ≢ 36` | no (impossible) |
-| 2 | Inverse `x=y^{-1}` | `26^{39}≡36` residual-shaped; `125^{79}≡3` and `e+1=λ` | mixed; generator inverse Miller-splits |
-| 3 | Affine identity `x=ay+b` | `Y³−Y` linear `−1`; eval at 2 is 6 | identity no; pointwise const still residual |
-| 4 | Two outputs at coprime `e` | unique unit cube root of `36` is `42` | second unit root impossible |
-| 5 | Franklin–Reiter `y,y+δ` | `5³−4³=61` integer-small; `42³=74088` not `<N` | small-message closes; residual not integer |
-| 6 | Chaum-blind `y r^e` | unblind recovers `42`; protocol `e=3` | leftover is fixed-`e` residual |
-| 7 | Jacobi-discrete `e∈{3,5}` | `(36/N)=1 → e=3`; `(2/N)=−1 → e=5\|λ` | mixed, not uniformly residual |
-| 8 | Extra annihilator `M` | `36^{40}≡1`, `gcd=N`; λ-Miller splits | short period of this `y` does not |
-| 9 | Extra `d`, `ed≡1 (mod λ)` | `3·27−1=80`; Miller | factors; leftover writes no `d` |
-| 10 | Euler inverse mod `N−1` | `3` ndiv-invertible mod `186`; `36^{17}≡53≠42` | does not invert |
-| 11 | CRT-tape `CRT(x_p,x_q)` | `42≡9 (mod 11)≡8 (mod 17)`; CRT=`42` | combining moduli are factors |
-| 12 | Miller on `e−1` against `y` | `gcd(36^{10}−1,N)=11`; `gcd(36²−1,N)=1` | splits some residual-shaped `e`; cube survives |
-
-None of these twelve is a proof that `srsa_residual_leaf` factors.
-
-### Partial roots, public stand-ins, filters (`FilterShape.v`, CAS `131`)
-
-Local correctness of `x`, public stand-ins for `λ`, and filters a TM can run without the trapdoor.
-
-| # | Class | Pin identity | Residual? |
-|---|---|---|---|
-| 1 | One-sided local root as an integer | `9³≡36 (mod 11)`, `gcd(729−36,N)=11`; not global | splits |
-| 2 | `x=−y` | `(−36)³≡94≠36`; `36²≢−1` | does not inhabit |
-| 3 | Euclid on `(y±1,N)` | `gcd(35,187)=1`, `gcd(37,187)=1` | no split |
-| 4 | Nontrivial 5th root of 1 | `69⁵≡1`, `gcd(68,N)=17`; `5\|λ` | splits on λ-sharing `e` |
-| 5 | Public period `N+1` | `2^{188}≡135≠2`; `2^{80}≡1` | does not annihilate |
-| 6 | Extra output `φ` | `N−160+1=28=p+q`; `factors_from_phi` | factors |
-| 7 | 2-adic Hensel | `v₂(36)=2`, `3∤2` | fails this `y` |
-| 8 | Locally constant `X` | `36≡6 (mod 5)`; `42³≡36≠6` | cannot cover many `y` |
-| 9 | Jacobi branch to `λ+1` | `(2/N)=−1`, `2^{81}≡2`, `λ\|e−1` | QNR branch peels |
-| 10 | Public filter `gcd(e,N−1)=1` | `gcd(3,186)=3` rejects the cube; `e=11` Miller-splits | cube not in the image |
-| 11 | Low-bit `e=2(y mod 2^k)+1` | `e=9`, `70⁹≡36` residual-shaped | leftover inhabited |
-| 12 | Trace `x+x^{-1}` | `36+26=62`, `62³≡90≠36`; torus order `36≠N+1` | not an `e`-th root |
-
-None of these twelve is a proof that `srsa_residual_leaf` factors.
-
-### Arith, peel-gap, modulus shapes (`ArithShape.v`, CAS `132`)
-
-Newton / Euclidean arithmetic of `y`, a missing `x=y` period-of-`y` peel, Takagi and triprime tapes, and a public base that cannot represent the residual `y`.
-
-| # | Class | Pin identity | Residual? |
-|---|---|---|---|
-| 1 | Newton in `(ℤ/Nℤ)` | `3^{-1}≡125`; from `1` lands on `75`, `75³≡3≠36` | does not inhabit |
-| 2 | `e \|(y−1)` | `7\|35`, `60⁷≡36`; `5\|35` shares `λ` | mixed; `e=7` residual-shaped |
-| 3 | `x=y`, `e=ord(y)+1` | `36^{41}≡36`; `λ∤40`; `gcd(36^{40}−1,N)=N` | residual-shaped (peel gap), no split |
-| 4 | `gcd(x−y,N)` | `gcd(6,187)=1` | no split |
-| 5 | Takagi `N=p²q` | `N=45`, `λ=12`; `2⁶≡1 (mod 9)`; `3\|45` | `p` is a factor |
-| 6 | Public `x=2y` | `72³≡183≠36` | does not inhabit |
-| 7 | `e=nextprime(y)` | `37`, `49^{37}≡36` | residual-shaped leftover |
-| 8 | CF of `y/N` | `187=5·36+7`; convergents `1/5`, `5/26` | not a root |
-| 9 | Same `x`, two moduli | `42³≡36 (mod 187)≡235 (mod 247)`; `gcd=1` | does not factor either `N` |
-| 10 | Multiprime mixed `√1` | `N=105`; `gcd(x−1,N)` proper | splits; not the semiprime cube |
-| 11 | Composite `e=15` | `gcd(15,80)=5` | not residual |
-| 12 | DL in public base `2` | `36 ∉ ⟨2⟩` for exponents `0..40` | this base cannot represent `y` |
-
-None of these twelve is a proof that `srsa_residual_leaf` factors.
-
-### One hundred classes (`HundredA.v`–`HundredFH.v`, CAS `133`)
-
-Roster `notes/hundred.md` maps items 1–100 to `hun_NN_*` headlines. Algorithm/modulus restrictions only. The residual cube `42³≡36` is still not `Problem_Factor`. On this pin some “does not invert” maps are still one-sided cubes (`gcd(x³−y,N)∈{11,17}`) or a non-unit `x` (`F_{36}≡85`); that is a split of a failed root, not the leftover cube.
-
-### Second hundred (`HundredI.v`–`HundredM.v`, CAS `135`)
-
-Roster `notes/hundred2.md` maps items 101–200. Same discipline: algorithm
-restrictions, honest fates, pin `187` unless a named second modulus.
-Catalan `C_5` and `p(10)` hit the residual cube on this pin; leftover
-`e` maps that stay odd and coprime to `λ` still invert in `⟨y⟩`.
-`gcd(42−25,N)=17` splits a leftover pair that `gcd(42−60,N)` does not.
-The residual cube is still not `Problem_Factor`.
-
-### Third hundred (`HundredN.v`–`HundredR.v`, CAS `136`)
-
-Roster `notes/hundred3.md`. Cuts of the residual leaf: `x` generates
-`⟨y⟩` (`16` candidates); local orders of `y` are `5` and `8`, so
-`gcd(y^5−1,N)` and `gcd(y^8−1,N)` split; `x=y^{e^{-1} mod 40}` inverts
-without factoring; integer `√y` then `n(n+1)` hits the cube on this
-pin. Still not `srsa_residual_leaf` as `Problem_Factor`.
-
-### Fourth hundred (`HundredS.v`–`HundredW.v`, CAS `137`)
-
-Roster `notes/hundred4.md`. Residual dictionary (`e` and `e+40` same
-`x`); `⟨y⟩ ≅ C₈ × C₅`; cubing an automorphism; SAGM `(27,3)` on the
-challenge. Equality-only `y^k≡1` finds `ord=40` and inverts; gcd of
-the same powers splits. Still not `Problem_Factor`.
-
-### Fifth hundred (`HundredX.v`–`HundredAB.v`, CAS `138`)
-
-Roster `notes/hundred5.md`. Leftover `x` Pohlig-splits the same way
-`y` does. Cubing the 16 generators is four 4-cycles. `gcd(p−1,q−1)=2`
-so local orders match only at `{1,2}`. Cube roots of `2`, `3`, and
-`36` at `k=27` live in three subgroups; two pairwise gcds split.
-Still not `Problem_Factor`.
-
-### Joined pin identity (CAS `134`)
-
-`cas/lib/pin.gp` plus `cas/lib/classes.gp` give one predicate `whole()`:
-residual ∧ ¬factor_from_x ∧ peel ∧ the 100 class fates, on the default
-pin. CAS `134` checks that conjunction and the named extra pins
-(`77`, `253`, `45`, `105`, `247`, `N²`). Runner glob of `01`–`133` is
-job aggregation, not this identity. The join is still not
-`srsa_residual_leaf` as `Problem_Factor`.
+Stable IDs (do not renumber): `notes/hundred.md` … `hundred5.md`,
+`DozenInroads.v`, `SolverShape.v`, `FilterShape.v`, `ArithShape.v`,
+`SolverRestrict.v`. Joined first-hundred CAS: `134`. Residual cube
+is still not `Problem_Factor`.
 
 ## Open / refused as slogans
 

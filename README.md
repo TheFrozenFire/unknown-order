@@ -157,6 +157,11 @@ one-sided low-order factors. There is no global `RSA_hard`. A hardness
 *claim* needs a named KeyGen distribution (`Refuse_PPT_advantage`). Factoring ≤ RSA
 and PPT / advantage are out of scope.
 
+Strong RSA solver-class cuts (peel, leftover subgroup, gcd vs
+multiply, public maps of `x` and `e`) are grouped by *question* in
+[`notes/srsa-cuts.md`](notes/srsa-cuts.md). Numbered `hun_NN` IDs stay
+as the roster.
+
 ## Run it
 
 ```sh

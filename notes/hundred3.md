@@ -1,5 +1,7 @@
 # Third hundred Strong-RSA algorithm-class inroads
 
+Stable IDs 201–300. Grouping by *question*: [`srsa-cuts.md`](srsa-cuts.md).
+
 Roster of items 201–300. Selective cuts of the **residual leaf**, not
 more public maps that miss. Residual `(x,e)` on this pin lives in the
 16-element generator set of `⟨y⟩` (`ord(y)=40`). Local orders of `y`

@@ -1,5 +1,7 @@
 # Fifth hundred Strong-RSA algorithm-class inroads
 
+Stable IDs 401–500. Grouping by *question*: [`srsa-cuts.md`](srsa-cuts.md).
+
 Roster of items 401–500. The leftover cube root **is a Pohlig oracle**
 for the same mismatched local orders as `y`. Cubing permutes the 16
 generators in four 4-cycles. `gcd(p−1,q−1)=2` so matching local orders
