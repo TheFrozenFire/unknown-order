@@ -244,6 +244,13 @@ Roster `notes/hundred3.md`. Cuts of the residual leaf: `x` generates
 without factoring; integer `√y` then `n(n+1)` hits the cube on this
 pin. Still not `srsa_residual_leaf` as `Problem_Factor`.
 
+### Fourth hundred (`HundredS.v`–`HundredW.v`, CAS `137`)
+
+Roster `notes/hundred4.md`. Residual dictionary (`e` and `e+40` same
+`x`); `⟨y⟩ ≅ C₈ × C₅`; cubing an automorphism; SAGM `(27,3)` on the
+challenge. Equality-only `y^k≡1` finds `ord=40` and inverts; gcd of
+the same powers splits. Still not `Problem_Factor`.
+
 ### Joined pin identity (CAS `134`)
 
 `cas/lib/pin.gp` plus `cas/lib/classes.gp` give one predicate `whole()`:

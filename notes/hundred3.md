@@ -114,7 +114,8 @@ CAS `136`.
 | 299 | mismatched local orders | `hun_299_mismatched_local_orders` | `(5,8)` |
 | 300 | `lcm(ord_p y, ord_q y)` | `hun_300_lcm_local_orders` | `=40=ord_N y` |
 
-Count: 100. CAS `136`. The residual cube is still not factoring:
+Count: 100. CAS `136`. A fourth hundred is `notes/hundred4.md` / CAS `137`.
+The residual cube is still not factoring:
 enumerating `⟨y⟩` or writing `x=y^{e^{-1}}` inverts without a factor.
 Pohlig on the mismatched local orders of `y` *does* factor — that uses
 the challenge as a period oracle, not as an `e`-th root.
