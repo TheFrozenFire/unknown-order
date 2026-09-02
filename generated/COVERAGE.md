@@ -1190,6 +1190,141 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `slot_try_sound` | 163 |
 | Theorem | `slot_try_complete` | 183 |
 
+## `HundredA.v`
+
+- L15: Hundred classes A (1–12)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `hun_01_odd_monomial` | 21 |
+| Theorem | `hun_02_associate` | 27 |
+| Theorem | `hun_03_midpoint` | 32 |
+| Theorem | `hun_04_phi_y_even` | 39 |
+| Theorem | `hun_05_hamming_even` | 44 |
+| Theorem | `hun_06_shamir_two_leftovers` | 49 |
+| Theorem | `hun_07_paillier_carrier` | 55 |
+| Theorem | `hun_08_williams_Ve` | 63 |
+| Theorem | `hun_09_lsb_y_even` | 69 |
+| Theorem | `hun_10_encrypt_as_decrypt` | 73 |
+| Theorem | `hun_11_e25_shares_lambda` | 78 |
+| Theorem | `hun_12_not_coppersmith_small` | 83 |
+
+## `HundredB.v`
+
+- L15: Hundred classes B (13–32)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `hun_13_odd_monomial_y5` | 25 |
+| Theorem | `hun_14_y_to_the_y` | 31 |
+| Theorem | `hun_15_y_to_the_N` | 36 |
+| Theorem | `hun_16_y_to_Nminus1` | 46 |
+| Theorem | `hun_17_y_to_Nplus1` | 51 |
+| Theorem | `hun_18_floor_sqrt_y` | 56 |
+| Theorem | `hun_19_half_y` | 61 |
+| Theorem | `hun_20_bitrev_36_is_9` | 67 |
+| Theorem | `hun_21_triangular` | 74 |
+| Theorem | `hun_22_nextprime_as_x` | 79 |
+| Theorem | `hun_23_fibonacci_y` | 84 |
+| Theorem | `hun_24_exp_base2` | 91 |
+| Theorem | `hun_25_exp_base3` | 96 |
+| Theorem | `hun_26_phi3_of_y` | 101 |
+| Theorem | `hun_27_inv_then_cube` | 106 |
+| Theorem | `hun_28_cube_then_inv` | 111 |
+| Theorem | `hun_29_hybrid_crt` | 116 |
+| Theorem | `hun_30_mismatched_crt_splits` | 123 |
+| Theorem | `hun_31_integer_jnt` | 133 |
+| Theorem | `hun_32_y2_plus_1` | 138 |
+
+## `HundredC.v`
+
+- L15: Hundred classes C (33–50)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `hun_33_lambda_y_even` | 20 |
+| Theorem | `hun_34_bitlength_even` | 25 |
+| Theorem | `hun_35_tau_leftover_e9` | 30 |
+| Theorem | `hun_36_sigma_leftover` | 35 |
+| Theorem | `hun_37_rad_even` | 50 |
+| Theorem | `hun_38_omega_even` | 55 |
+| Theorem | `hun_39_Omega_even` | 59 |
+| Theorem | `hun_40_lpf_hits_cube` | 63 |
+| Theorem | `hun_41_y_plus_1_is_nextprime` | 67 |
+| Theorem | `hun_42_odd_part_e9` | 73 |
+| Theorem | `hun_43_odd_hamming_shares` | 78 |
+| Theorem | `hun_44_gcd_yminus1_Nminus1` | 83 |
+| Theorem | `hun_45_phi3_y_leftover_shaped` | 87 |
+| Theorem | `hun_46_v2_yminus1` | 97 |
+| Theorem | `hun_47_mersenne_leftover` | 103 |
+| Theorem | `hun_48_N_mod_y_hits_e7` | 118 |
+| Theorem | `hun_49_fermatish_leftover` | 123 |
+| Theorem | `hun_50_smooth_even` | 129 |
+
+## `HundredDE.v`
+
+- L16: Hundred classes D–E (51–74)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `hun_51_extra_dp` | 21 |
+| Theorem | `hun_52_fermat_difference` | 26 |
+| Theorem | `hun_53_extra_sqrt_splits` | 30 |
+| Theorem | `hun_54_extra_order_is_lambda` | 40 |
+| Theorem | `hun_55_factor_e_minus_1` | 45 |
+| Theorem | `hun_56_factor_N_minus_1` | 50 |
+| Theorem | `hun_57_wiener_d_not_small` | 54 |
+| Theorem | `hun_58_sequential_square_period` | 60 |
+| Theorem | `hun_59_height_mismatch` | 64 |
+| Theorem | `hun_60_primitive_root_mod_p` | 69 |
+| Theorem | `hun_61_half_bits` | 74 |
+| Theorem | `hun_62_cubic_symbol_vacuous` | 79 |
+| Theorem | `hun_63_inverse_challenge` | 83 |
+| Theorem | `hun_64_neg_y` | 88 |
+| Theorem | `hun_65_two_y` | 92 |
+| Theorem | `hun_66_three_powers_gcd` | 96 |
+| Theorem | `hun_67_y_plus_1_root` | 100 |
+| Theorem | `hun_68_batch_gcd_of_roots` | 104 |
+| Theorem | `hun_69_adaptive_lambda_plus_one` | 108 |
+| Theorem | `hun_70_same_y_two_moduli` | 113 |
+| Theorem | `hun_71_twin_exponents` | 118 |
+| Theorem | `hun_72_product_of_leftovers` | 122 |
+| Theorem | `hun_73_rerand_forces_fixed_e` | 128 |
+| Theorem | `hun_74_coins_independent_fixed_e` | 132 |
+
+## `HundredFH.v`
+
+- L20: Hundred classes F–H (75–100)
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `hun_75_pollard_p1` | 25 |
+| Theorem | `hun_76_rho_walk` | 37 |
+| Theorem | `hun_77_bsgs_wrong_order` | 53 |
+| Theorem | `hun_78_fermat_splits` | 59 |
+| Theorem | `hun_79_trial_division` | 73 |
+| Theorem | `hun_80_williams_pplus1` | 81 |
+| Theorem | `hun_81_index_calculus_Nminus1` | 89 |
+| Theorem | `hun_82_squaring_only` | 93 |
+| Theorem | `hun_83_advice_on_y_lsb` | 99 |
+| Theorem | `hun_84_streaming_first_bit` | 103 |
+| Theorem | `hun_85_ou_carrier` | 107 |
+| Theorem | `hun_86_dj_carrier` | 115 |
+| Theorem | `hun_87_cocks_jacobi` | 119 |
+| Theorem | `hun_88_prime_power_field` | 123 |
+| Theorem | `hun_89_two_safeprimes` | 129 |
+| Theorem | `hun_90_rw_shape_odd_e` | 140 |
+| Theorem | `hun_91_twins` | 145 |
+| Theorem | `hun_92_unbalanced` | 150 |
+| Theorem | `hun_93_triprime_cube_not_residual` | 160 |
+| Theorem | `hun_94_prime_field` | 171 |
+| Theorem | `hun_95_e_eq_N` | 177 |
+| Theorem | `hun_96_e_eq_Nminus2` | 182 |
+| Theorem | `hun_97_x_eq_Nminus1` | 187 |
+| Theorem | `hun_98_floor_sqrt_N` | 192 |
+| Theorem | `hun_99_phi3_of_N` | 198 |
+| Theorem | `hun_100_dl_base3` | 202 |
+
 ## `Inner2.v`
 
 - L15: Inner product of two pairs: [s = x0·y0 + x1·y1]
@@ -2477,4 +2612,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1542 theorems/lemmas/corollaries/examples across 105 files._
+_1642 theorems/lemmas/corollaries/examples across 110 files._

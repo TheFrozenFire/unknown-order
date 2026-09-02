@@ -223,6 +223,10 @@ Newton / Euclidean arithmetic of `y`, a missing `x=y` period-of-`y` peel, Takagi
 
 None of these twelve is a proof that `srsa_residual_leaf` factors.
 
+### One hundred classes (`HundredA.v`–`HundredFH.v`, CAS `133`)
+
+Roster `notes/hundred.md` maps items 1–100 to `hun_NN_*` headlines. Algorithm/modulus restrictions only. The residual cube `42³≡36` is still not `Problem_Factor`.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a

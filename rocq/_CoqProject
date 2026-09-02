@@ -76,6 +76,11 @@ DozenInroads.v
 SolverShape.v
 FilterShape.v
 ArithShape.v
+HundredA.v
+HundredB.v
+HundredC.v
+HundredDE.v
+HundredFH.v
 JagerSchwenk.v
 Cocks.v
 PotCheck.v
