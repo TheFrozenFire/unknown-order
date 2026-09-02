@@ -2,6 +2,7 @@ From Stdlib Require Import ZArith.
 From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 From Stdlib Require Import List.
+From Stdlib Require Import PeanoNat.
 Import ListNotations.
 
 Require Import RocqProofs.NumberTheory.
@@ -343,6 +344,127 @@ Proof.
               (gra_init_agrees y)) as [_ Hagree].
   apply Hagree.
 Qed.
+
+(** ** Degree bound of a nodiv tape
+
+    Init handles have degrees [0; 0; 1].  [GConst] is [0]; add/sub
+    take [Nat.max]; mul adds.  Upper bound: cancellation may drop
+    degree.  A handle of bound [≤ 3] sits in the pin window
+    [e=3 ⇒ deg(P^3−X) < 10]. *)
+
+Definition slp_init_deg : list nat := [0%nat; 0%nat; 1%nat].
+
+Definition step_deg_bound (op : GRAOp) (bs : list nat) : list nat :=
+  match op with
+  | GConst _ => bs ++ [0%nat]
+  | GAdd i j => bs ++ [Nat.max (nth i bs 0%nat) (nth j bs 0%nat)]
+  | GSub i j => bs ++ [Nat.max (nth i bs 0%nat) (nth j bs 0%nat)]
+  | GMul i j => bs ++ [(nth i bs 0%nat + nth j bs 0%nat)%nat]
+  | GInv i => bs ++ [nth i bs 0%nat]
+  | GRoot i => bs ++ [nth i bs 0%nat]
+  end.
+
+Fixpoint gra_deg_bound (ops : list GRAOp) (bs : list nat) : list nat :=
+  match ops with
+  | nil => bs
+  | op :: rest => gra_deg_bound rest (step_deg_bound op bs)
+  end.
+
+Lemma slp_init_deg_le :
+  forall i,
+    (poly_degree (nth i slp_init_poly []) <= nth i slp_init_deg 0%nat)%nat.
+Proof.
+  intros i.
+  destruct i as [|i]; [|destruct i as [|i]; [|destruct i as [|i]]];
+    try (vm_compute; lia).
+  unfold slp_init_poly, slp_init_deg.
+  rewrite !nth_overflow by (cbn [length]; lia).
+  unfold poly_degree. simpl. lia.
+Qed.
+
+Lemma step_deg_bound_length :
+  forall op bs, length (step_deg_bound op bs) = S (length bs).
+Proof. intros op bs. destruct op; simpl; rewrite length_app; simpl; lia. Qed.
+
+Lemma step_nodiv_degree_le :
+  forall op pt bs i,
+    is_nodiv op ->
+    length pt = length bs ->
+    (forall k, (poly_degree (nth k pt []) <= nth k bs 0%nat)%nat) ->
+    (poly_degree (nth i (step_poly op pt) []) <=
+       nth i (step_deg_bound op bs) 0%nat)%nat.
+Proof.
+  intros op pt bs i Hop Hlen Hall.
+  destruct (lt_dec i (length pt)) as [Hlt | Hnlt].
+  - destruct op; simpl;
+      (rewrite nth_app_lt by exact Hlt;
+       rewrite nth_app_lt by (rewrite <- Hlen; exact Hlt);
+       apply Hall).
+  - apply Nat.nlt_ge in Hnlt.
+    destruct (Nat.eq_dec i (length pt)) as [Heq | Hne].
+    + subst i. rewrite Hlen at 2.
+      destruct Hop as [c | ia ja | ia ja | ia ja]; simpl; rewrite !nth_app_last.
+      * unfold poly_degree. simpl. destruct (c =? 0); lia.
+      * pose proof (poly_degree_add_le (nth ia pt []) (nth ja pt [])).
+        pose proof (Hall ia). pose proof (Hall ja). lia.
+      * pose proof (poly_degree_sub_le (nth ia pt []) (nth ja pt [])).
+        pose proof (Hall ia). pose proof (Hall ja). lia.
+      * pose proof (poly_degree_mul_le (nth ia pt []) (nth ja pt [])).
+        pose proof (Hall ia). pose proof (Hall ja). lia.
+    + destruct op; simpl;
+        (rewrite nth_overflow by (rewrite length_app; simpl; lia);
+         rewrite nth_overflow by (rewrite length_app, <- Hlen; simpl; lia);
+         unfold poly_degree; simpl; lia).
+Qed.
+
+Lemma gra_run_poly_length :
+  forall ops t, length (gra_run_poly ops t) = (length t + length ops)%nat.
+Proof.
+  intros ops. induction ops as [|op rest IH]; intros t; simpl.
+  - lia.
+  - rewrite IH, step_poly_length. lia.
+Qed.
+
+Lemma gra_nodiv_degree_le :
+  forall ops i,
+    Forall is_nodiv ops ->
+    (poly_degree (nth i (gra_run_poly ops slp_init_poly) []) <=
+       nth i (gra_deg_bound ops slp_init_deg) 0%nat)%nat.
+Proof.
+  intros ops i Hop.
+  assert (Hacc :
+    length slp_init_poly = length slp_init_deg /\
+    forall k, (poly_degree (nth k slp_init_poly []) <= nth k slp_init_deg 0%nat)%nat).
+  { split; [reflexivity | apply slp_init_deg_le]. }
+  revert Hop Hacc.
+  generalize slp_init_poly as pt. generalize slp_init_deg as bs.
+  intros bs pt Hop Hacc.
+  revert pt bs Hacc.
+  induction ops as [|op rest IH]; intros pt bs Hacc.
+  - simpl. destruct Hacc as [_ Hall]. apply Hall.
+  - inversion Hop; subst.
+    destruct Hacc as [Hlen Hall].
+    apply (IH H2 (step_poly op pt) (step_deg_bound op bs)).
+    split.
+    + rewrite step_poly_length, step_deg_bound_length, Hlen. reflexivity.
+    + intros k. apply step_nodiv_degree_le; [exact H1 | exact Hlen | exact Hall].
+Qed.
+
+Theorem gra_deg_bound_identity :
+  nth 2%nat (gra_deg_bound [] slp_init_deg) 0%nat = 1%nat.
+Proof. reflexivity. Qed.
+
+Theorem gra_deg_bound_square :
+  nth 3%nat (gra_deg_bound [GMul 2%nat 2%nat] slp_init_deg) 0%nat = 2%nat.
+Proof. reflexivity. Qed.
+
+Theorem gra_deg_bound_x3 :
+  nth 4%nat (gra_deg_bound [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_deg) 0%nat = 3%nat.
+Proof. reflexivity. Qed.
+
+Theorem gra_deg_bound_x4 :
+  nth 4%nat (gra_deg_bound [GMul 2%nat 2%nat; GMul 3%nat 3%nat] slp_init_deg) 0%nat = 4%nat.
+Proof. reflexivity. Qed.
 
 Theorem gra_nodiv_mul_is_nodiv :
   Forall is_nodiv [GMul 2%nat 2%nat].

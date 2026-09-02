@@ -1094,73 +1094,83 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `GenericRing.v`
 
-- L17: Generic ring algorithms (GRA) on [Z/NZ]
-  - L25: The machine
-  - L101: Wave 0 — equality leak and the tape
-  - L194: Division-free tapes denote polynomials
-  - L374: Wave 1 — Leander–Rupp, no division, low [e]
-  - L415: Wave 2a — AM09 inversion leak and leading term
-  - L467: Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y]
-  - L502: Wave 6a — Damgård–Koprowski signature contrast
+- L18: Generic ring algorithms (GRA) on [Z/NZ]
+  - L26: The machine
+  - L102: Wave 0 — equality leak and the tape
+  - L195: Division-free tapes denote polynomials
+  - L348: Degree bound of a nodiv tape
+  - L496: Wave 1 — Leander–Rupp, no division, low [e]
+  - L537: Wave 2a — AM09 inversion leak and leading term
+  - L589: Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y]
+  - L624: Wave 6a — Damgård–Koprowski signature contrast
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `gra_eq_tape_88` | 115 |
-| Theorem | `gra_eq_tape_zero` | 119 |
-| Theorem | `gra_eq_leak_pin` | 123 |
-| Theorem | `gra_eq_leak_factors` | 127 |
-| Theorem | `gra_eq_leak_onesided` | 134 |
-| Theorem | `gra_eq_N_is_not_a_split` | 145 |
-| Theorem | `gra_mul_y_pin` | 149 |
-| Theorem | `gra_const42` | 153 |
-| Theorem | `slp_init_eval` | 178 |
-| Theorem | `slp_to_poly_mul_pin` | 189 |
-| Lemma | `nth_app_last` | 207 |
-| Lemma | `nth_app_lt` | 214 |
-| Lemma | `step_length` | 222 |
-| Lemma | `step_poly_length` | 226 |
-| Lemma | `step_nodiv_prefix` | 230 |
-| Lemma | `step_nodiv_new` | 244 |
-| Lemma | `step_nodiv_overflow` | 264 |
-| Lemma | `step_nodiv_agree` | 277 |
-| Lemma | `gra_run_nodiv_agree` | 297 |
-| Lemma | `slp_init_length` | 314 |
-| Lemma | `gra_init_length` | 317 |
-| Lemma | `gra_init_agrees` | 320 |
-| Theorem | `gra_nodiv_denotes` | 333 |
-| Theorem | `gra_nodiv_mul_is_nodiv` | 347 |
-| Theorem | `gra_nodiv_mul_denotes_square` | 351 |
-| Theorem | `gra_nodiv_integer_eth_root_forbidden` | 358 |
-| Theorem | `gra_nodiv_const42_inverts_36` | 376 |
-| Theorem | `gra_nodiv_const42_fails_on_8` | 380 |
-| Theorem | `gra_identity_not_cube_root_at_2` | 384 |
-| Theorem | `gra_identity_at_one` | 388 |
-| Theorem | `gra_identity_gcd_at_2` | 392 |
-| Theorem | `gra_nodiv_identical_X3_linear` | 396 |
-| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 400 |
-| Theorem | `gra_nodiv_identical_root_impossible_X3` | 404 |
-| Theorem | `Pe_minus_X_eval2_is_six_on_X` | 411 |
-| Theorem | `gra_inv_nonunit_pin` | 424 |
-| Theorem | `gra_inv_nonunit_factors` | 428 |
-| Theorem | `gra_inv_22_from_tape` | 435 |
-| Theorem | `gra_inv_unit_gcd` | 439 |
-| Theorem | `gra_inv_unit_from_tape` | 443 |
-| Theorem | `gra_fixed_e_leading_const` | 447 |
-| Theorem | `gra_fixed_e_leading` | 451 |
-| Theorem | `rsa_inverter_is_not_a_GRA_comment` | 457 |
-| Theorem | `powm_d_inverts_cube_pin` | 463 |
-| Theorem | `gra_const_81` | 469 |
-| Theorem | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 474 |
-| Theorem | `gra_const_81_does_not_factor` | 484 |
-| Theorem | `lambda_plus_one_is_81` | 488 |
-| Theorem | `gra_add_mul_of_36_is_not_81` | 492 |
-| Theorem | `am09_fixed_e_is_a_parameter` | 496 |
-| Theorem | `gadd_is_not_a_ggm_op` | 512 |
-| Theorem | `gsub_is_not_a_ggm_op` | 516 |
-| Theorem | `gconst_is_not_a_ggm_op` | 520 |
-| Theorem | `gra_poly_construction_needs_add` | 524 |
-| Theorem | `generic_group_does_not_separate_rsa_from_srsa` | 528 |
-| Theorem | `ggm_mul_pin` | 535 |
+| Theorem | `gra_eq_tape_88` | 116 |
+| Theorem | `gra_eq_tape_zero` | 120 |
+| Theorem | `gra_eq_leak_pin` | 124 |
+| Theorem | `gra_eq_leak_factors` | 128 |
+| Theorem | `gra_eq_leak_onesided` | 135 |
+| Theorem | `gra_eq_N_is_not_a_split` | 146 |
+| Theorem | `gra_mul_y_pin` | 150 |
+| Theorem | `gra_const42` | 154 |
+| Theorem | `slp_init_eval` | 179 |
+| Theorem | `slp_to_poly_mul_pin` | 190 |
+| Lemma | `nth_app_last` | 208 |
+| Lemma | `nth_app_lt` | 215 |
+| Lemma | `step_length` | 223 |
+| Lemma | `step_poly_length` | 227 |
+| Lemma | `step_nodiv_prefix` | 231 |
+| Lemma | `step_nodiv_new` | 245 |
+| Lemma | `step_nodiv_overflow` | 265 |
+| Lemma | `step_nodiv_agree` | 278 |
+| Lemma | `gra_run_nodiv_agree` | 298 |
+| Lemma | `slp_init_length` | 315 |
+| Lemma | `gra_init_length` | 318 |
+| Lemma | `gra_init_agrees` | 321 |
+| Theorem | `gra_nodiv_denotes` | 334 |
+| Lemma | `slp_init_deg_le` | 373 |
+| Lemma | `step_deg_bound_length` | 385 |
+| Lemma | `step_nodiv_degree_le` | 389 |
+| Lemma | `gra_run_poly_length` | 420 |
+| Lemma | `gra_nodiv_degree_le` | 428 |
+| Theorem | `gra_deg_bound_identity` | 453 |
+| Theorem | `gra_deg_bound_square` | 457 |
+| Theorem | `gra_deg_bound_x3` | 461 |
+| Theorem | `gra_deg_bound_x4` | 465 |
+| Theorem | `gra_nodiv_mul_is_nodiv` | 469 |
+| Theorem | `gra_nodiv_mul_denotes_square` | 473 |
+| Theorem | `gra_nodiv_integer_eth_root_forbidden` | 480 |
+| Theorem | `gra_nodiv_const42_inverts_36` | 498 |
+| Theorem | `gra_nodiv_const42_fails_on_8` | 502 |
+| Theorem | `gra_identity_not_cube_root_at_2` | 506 |
+| Theorem | `gra_identity_at_one` | 510 |
+| Theorem | `gra_identity_gcd_at_2` | 514 |
+| Theorem | `gra_nodiv_identical_X3_linear` | 518 |
+| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 522 |
+| Theorem | `gra_nodiv_identical_root_impossible_X3` | 526 |
+| Theorem | `Pe_minus_X_eval2_is_six_on_X` | 533 |
+| Theorem | `gra_inv_nonunit_pin` | 546 |
+| Theorem | `gra_inv_nonunit_factors` | 550 |
+| Theorem | `gra_inv_22_from_tape` | 557 |
+| Theorem | `gra_inv_unit_gcd` | 561 |
+| Theorem | `gra_inv_unit_from_tape` | 565 |
+| Theorem | `gra_fixed_e_leading_const` | 569 |
+| Theorem | `gra_fixed_e_leading` | 573 |
+| Theorem | `rsa_inverter_is_not_a_GRA_comment` | 579 |
+| Theorem | `powm_d_inverts_cube_pin` | 585 |
+| Theorem | `gra_const_81` | 591 |
+| Theorem | `gra_const_lambda_plus_one_solves_sRSA_without_factoring` | 596 |
+| Theorem | `gra_const_81_does_not_factor` | 606 |
+| Theorem | `lambda_plus_one_is_81` | 610 |
+| Theorem | `gra_add_mul_of_36_is_not_81` | 614 |
+| Theorem | `am09_fixed_e_is_a_parameter` | 618 |
+| Theorem | `gadd_is_not_a_ggm_op` | 634 |
+| Theorem | `gsub_is_not_a_ggm_op` | 638 |
+| Theorem | `gconst_is_not_a_ggm_op` | 642 |
+| Theorem | `gra_poly_construction_needs_add` | 646 |
+| Theorem | `generic_group_does_not_separate_rsa_from_srsa` | 650 |
+| Theorem | `ggm_mul_pin` | 657 |
 
 ## `Hardness.v`
 
@@ -2676,6 +2686,7 @@ in the Rocq tree.  Do not edit by hand.
   - L221: Low-degree vanishing on units
   - L353: Roots bound: low-degree + vanish on [1..10] ⇒ [11] | coeffs
   - L463: CRT lift: vanish on [(Z/NZ)*] + low degree ⇒ [N] | coeffs
+  - L636: Nodiv tape degree bound
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2741,6 +2752,14 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `residual_nodiv_low_degree_ZN_units_divides_N` | 587 |
 | Theorem | `residual_identity_cannot_vanish_on_ZN_units` | 605 |
 | Theorem | `residual_const_cannot_vanish_on_ZN_units` | 620 |
+| Theorem | `residual_nodiv_bound_le3_Q_lt10` | 643 |
+| Theorem | `residual_nodiv_short_ZN_units_divides_N` | 656 |
+| Theorem | `residual_identity_bound_is_1` | 672 |
+| Theorem | `residual_square_bound_is_2` | 676 |
+| Theorem | `residual_x3_bound_is_3` | 680 |
+| Theorem | `residual_two_squarings_bound_is_4` | 684 |
+| Theorem | `residual_two_squarings_outside_window` | 688 |
+| Theorem | `residual_trapdoor_deg27_outside_window` | 692 |
 
 ## `SrsaWriteE.v`
 
@@ -3230,4 +3249,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2195 theorems/lemmas/corollaries/examples across 116 files._
+_2212 theorems/lemmas/corollaries/examples across 116 files._

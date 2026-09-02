@@ -29,7 +29,7 @@ Open Scope Z_scope.
     Generic-ring inroad on [residual_solver_constructs_factor_open_named],
     not a proof of that unrestricted name, and not RSA ≡ or ≢
     factoring.  Cross-confirmed by [cas/146], [cas/148], [cas/149],
-    and [cas/150]. *)
+    [cas/150], and [cas/151]. *)
 
 (** ** Residual-shaped exponents *)
 
@@ -632,3 +632,63 @@ Proof.
   rewrite residual_const_Pe_minus_X_nth1 in Hdiv.
   destruct Hdiv as [k Hk]. nia.
 Qed.
+
+(** ** Nodiv tape degree bound
+
+    Denotation is load-bearing: a handle of [gra_deg_bound ≤ 3]
+    has [deg P ≤ 3], so [deg(P^3−X) < 10].  One squaring is bound
+    [2]; [X^2·X] is [3]; two squarings are [4], outside the window.
+    [X^{27}] is not low-degree.  Cross-confirmed by [cas/151]. *)
+
+Theorem residual_nodiv_bound_le3_Q_lt10 :
+  forall ops out,
+    Forall is_nodiv ops ->
+    (nth out (gra_deg_bound ops slp_init_deg) 0%nat <= 3)%nat ->
+    (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) 3%nat)
+       < 10)%nat.
+Proof.
+  intros ops out Hop Hbound.
+  apply poly_degree_Pe_minus_X_e3_degP_le3_lt10.
+  pose proof (gra_nodiv_degree_le ops out Hop) as Hle.
+  lia.
+Qed.
+
+Theorem residual_nodiv_short_ZN_units_divides_N :
+  forall ops out,
+    Forall is_nodiv ops ->
+    (nth out (gra_deg_bound ops slp_init_deg) 0%nat <= 3)%nat ->
+    (forall y, Z.coprime y 187 ->
+      (187 | Z.pow (gra_eval 187 ops y out) 3 - y)) ->
+    forall i,
+      (187 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) 3%nat) 0).
+Proof.
+  intros ops out Hop Hbound Hall i.
+  apply residual_nodiv_low_degree_ZN_units_divides_N.
+  - exact Hop.
+  - apply residual_nodiv_bound_le3_Q_lt10; [exact Hop | exact Hbound].
+  - intros y Hy. apply Hall. exact Hy.
+Qed.
+
+Theorem residual_identity_bound_is_1 :
+  nth 2%nat (gra_deg_bound [] slp_init_deg) 0%nat = 1%nat.
+Proof. apply gra_deg_bound_identity. Qed.
+
+Theorem residual_square_bound_is_2 :
+  nth 3%nat (gra_deg_bound [GMul 2%nat 2%nat] slp_init_deg) 0%nat = 2%nat.
+Proof. apply gra_deg_bound_square. Qed.
+
+Theorem residual_x3_bound_is_3 :
+  nth 4%nat (gra_deg_bound [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_deg) 0%nat = 3%nat.
+Proof. apply gra_deg_bound_x3. Qed.
+
+Theorem residual_two_squarings_bound_is_4 :
+  nth 4%nat (gra_deg_bound [GMul 2%nat 2%nat; GMul 3%nat 3%nat] slp_init_deg) 0%nat = 4%nat.
+Proof. apply gra_deg_bound_x4. Qed.
+
+Theorem residual_two_squarings_outside_window :
+  (3 * 4 >= 10)%nat.
+Proof. lia. Qed.
+
+Theorem residual_trapdoor_deg27_outside_window :
+  (3 * 27 >= 10)%nat.
+Proof. lia. Qed.
