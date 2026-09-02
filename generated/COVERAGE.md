@@ -2687,6 +2687,7 @@ in the Rocq tree.  Do not edit by hand.
   - L353: Roots bound: low-degree + vanish on [1..10] ⇒ [11] | coeffs
   - L463: CRT lift: vanish on [(Z/NZ)*] + low degree ⇒ [N] | coeffs
   - L636: Nodiv tape degree bound
+  - L698: Exact degree; square and cube tapes miss units
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2752,14 +2753,31 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `residual_nodiv_low_degree_ZN_units_divides_N` | 587 |
 | Theorem | `residual_identity_cannot_vanish_on_ZN_units` | 605 |
 | Theorem | `residual_const_cannot_vanish_on_ZN_units` | 620 |
-| Theorem | `residual_nodiv_bound_le3_Q_lt10` | 643 |
-| Theorem | `residual_nodiv_short_ZN_units_divides_N` | 656 |
-| Theorem | `residual_identity_bound_is_1` | 672 |
-| Theorem | `residual_square_bound_is_2` | 676 |
-| Theorem | `residual_x3_bound_is_3` | 680 |
-| Theorem | `residual_two_squarings_bound_is_4` | 684 |
-| Theorem | `residual_two_squarings_outside_window` | 688 |
-| Theorem | `residual_trapdoor_deg27_outside_window` | 692 |
+| Theorem | `residual_nodiv_bound_le3_Q_lt10` | 645 |
+| Theorem | `residual_nodiv_short_ZN_units_divides_N` | 658 |
+| Theorem | `residual_identity_bound_is_1` | 674 |
+| Theorem | `residual_square_bound_is_2` | 678 |
+| Theorem | `residual_x3_bound_is_3` | 682 |
+| Theorem | `residual_two_squarings_bound_is_4` | 686 |
+| Theorem | `residual_two_squarings_outside_window` | 690 |
+| Theorem | `residual_trapdoor_deg27_outside_window` | 694 |
+| Theorem | `residual_square_denotes_X2` | 710 |
+| Theorem | `residual_square_degree_eq_bound` | 715 |
+| Theorem | `residual_square_eval` | 725 |
+| Theorem | `residual_square_Q_degree_is_6` | 734 |
+| Theorem | `residual_square_Q_nth1` | 742 |
+| Theorem | `residual_square_cannot_vanish_on_ZN_units` | 750 |
+| Theorem | `residual_square_unit_2_not_root` | 770 |
+| Theorem | `residual_cube_is_nodiv` | 780 |
+| Theorem | `residual_cube_denotes_X3` | 784 |
+| Theorem | `residual_cube_degree_eq_bound` | 789 |
+| Theorem | `residual_cube_eval` | 801 |
+| Theorem | `residual_cube_Q_degree_is_9` | 812 |
+| Theorem | `residual_cube_Q_nth1` | 820 |
+| Theorem | `residual_cube_cannot_vanish_on_ZN_units` | 828 |
+| Theorem | `residual_cube_unit_2_not_root` | 852 |
+| Theorem | `residual_trapdoor_inverts_pin` | 864 |
+| Theorem | `residual_trapdoor_not_a_low_degree_identity` | 868 |
 
 ## `SrsaWriteE.v`
 
@@ -3249,4 +3267,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2212 theorems/lemmas/corollaries/examples across 116 files._
+_2229 theorems/lemmas/corollaries/examples across 116 files._

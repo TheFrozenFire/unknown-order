@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2212 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2229 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2212 results across 116 files.
+Captured for 2229 results across 116 files.
 
 Counts:
 
@@ -2375,14 +2375,31 @@ Counts:
 | `residual_nodiv_low_degree_ZN_units_divides_N` | 587 | 0 | 0 | OK |
 | `residual_identity_cannot_vanish_on_ZN_units` | 605 | 0 | 0 | OK |
 | `residual_const_cannot_vanish_on_ZN_units` | 620 | 0 | 0 | OK |
-| `residual_nodiv_bound_le3_Q_lt10` | 643 | 0 | 0 | OK |
-| `residual_nodiv_short_ZN_units_divides_N` | 656 | 0 | 0 | OK |
-| `residual_identity_bound_is_1` | 672 | 0 | 0 | OK |
-| `residual_square_bound_is_2` | 676 | 0 | 0 | OK |
-| `residual_x3_bound_is_3` | 680 | 0 | 0 | OK |
-| `residual_two_squarings_bound_is_4` | 684 | 0 | 0 | OK |
-| `residual_two_squarings_outside_window` | 688 | 0 | 0 | OK |
-| `residual_trapdoor_deg27_outside_window` | 692 | 0 | 0 | OK |
+| `residual_nodiv_bound_le3_Q_lt10` | 645 | 0 | 0 | OK |
+| `residual_nodiv_short_ZN_units_divides_N` | 658 | 0 | 0 | OK |
+| `residual_identity_bound_is_1` | 674 | 0 | 0 | OK |
+| `residual_square_bound_is_2` | 678 | 0 | 0 | OK |
+| `residual_x3_bound_is_3` | 682 | 0 | 0 | OK |
+| `residual_two_squarings_bound_is_4` | 686 | 0 | 0 | OK |
+| `residual_two_squarings_outside_window` | 690 | 0 | 0 | OK |
+| `residual_trapdoor_deg27_outside_window` | 694 | 0 | 0 | OK |
+| `residual_square_denotes_X2` | 710 | 0 | 0 | OK |
+| `residual_square_degree_eq_bound` | 715 | 0 | 0 | OK |
+| `residual_square_eval` | 725 | 0 | 0 | OK |
+| `residual_square_Q_degree_is_6` | 734 | 0 | 0 | OK |
+| `residual_square_Q_nth1` | 742 | 0 | 0 | OK |
+| `residual_square_cannot_vanish_on_ZN_units` | 750 | 0 | 0 | OK |
+| `residual_square_unit_2_not_root` | 770 | 0 | 0 | OK |
+| `residual_cube_is_nodiv` | 780 | 0 | 0 | OK |
+| `residual_cube_denotes_X3` | 784 | 0 | 0 | OK |
+| `residual_cube_degree_eq_bound` | 789 | 0 | 0 | OK |
+| `residual_cube_eval` | 801 | 0 | 0 | OK |
+| `residual_cube_Q_degree_is_9` | 812 | 0 | 0 | OK |
+| `residual_cube_Q_nth1` | 820 | 0 | 0 | OK |
+| `residual_cube_cannot_vanish_on_ZN_units` | 828 | 0 | 0 | OK |
+| `residual_cube_unit_2_not_root` | 852 | 0 | 0 | OK |
+| `residual_trapdoor_inverts_pin` | 864 | 0 | 0 | OK |
+| `residual_trapdoor_not_a_low_degree_identity` | 868 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

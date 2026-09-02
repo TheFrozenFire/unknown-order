@@ -29,7 +29,7 @@ Open Scope Z_scope.
     Generic-ring inroad on [residual_solver_constructs_factor_open_named],
     not a proof of that unrestricted name, and not RSA ≡ or ≢
     factoring.  Cross-confirmed by [cas/146], [cas/148], [cas/149],
-    [cas/150], and [cas/151]. *)
+    [cas/150], [cas/151], and [cas/152]. *)
 
 (** ** Residual-shaped exponents *)
 
@@ -638,7 +638,9 @@ Qed.
     Denotation is load-bearing: a handle of [gra_deg_bound ≤ 3]
     has [deg P ≤ 3], so [deg(P^3−X) < 10].  One squaring is bound
     [2]; [X^2·X] is [3]; two squarings are [4], outside the window.
-    [X^{27}] is not low-degree.  Cross-confirmed by [cas/151]. *)
+    [X^{27}] is not low-degree.  Exact [deg(PQ)=deg P+deg Q] is
+    [poly_degree_mul]; the [≤] bound is the tape-window payload.
+    Cross-confirmed by [cas/151]. *)
 
 Theorem residual_nodiv_bound_le3_Q_lt10 :
   forall ops out,
@@ -692,3 +694,182 @@ Proof. lia. Qed.
 Theorem residual_trapdoor_deg27_outside_window :
   (3 * 27 >= 10)%nat.
 Proof. lia. Qed.
+
+(** ** Exact degree; square and cube tapes miss units
+
+    Over [Z], [deg(X·X)=2] and [deg((X^2)^3−X)=6]; [deg(X^3)=3]
+    and [deg((X^3)^3−X)=9].  Both [Q] have linear coeff [−1], so
+    [N] cannot divide every coefficient, and unit [2] is not a
+    root.  Trapdoor [X^{27}] inverts the pin and cubes back, but
+    sits outside the low-degree window: it is not forbidden as a
+    map on units.  The low-degree nodiv GRA class on this pin is
+    settled.  Not a proof of
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/152]. *)
+
+Theorem residual_square_denotes_X2 :
+  nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) [] =
+    poly_mul poly_X poly_X.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem residual_square_degree_eq_bound :
+  poly_degree (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) [])
+    = 2%nat /\
+  nth 3%nat (gra_deg_bound [GMul 2%nat 2%nat] slp_init_deg) 0%nat = 2%nat.
+Proof.
+  split.
+  - rewrite residual_square_denotes_X2. apply poly_degree_XX_is_2.
+  - apply gra_deg_bound_square.
+Qed.
+
+Theorem residual_square_eval :
+  forall y, gra_eval 187 [GMul 2%nat 2%nat] y 3%nat = y * y.
+Proof.
+  intros y.
+  rewrite gra_nodiv_denotes by apply gra_nodiv_mul_is_nodiv.
+  rewrite residual_square_denotes_X2, poly_eval_mul, !poly_eval_X.
+  reflexivity.
+Qed.
+
+Theorem residual_square_Q_degree_is_6 :
+  poly_degree (poly_Pe_minus_X
+    (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat)
+    = 6%nat.
+Proof.
+  rewrite residual_square_denotes_X2. apply poly_degree_X6_minus_X.
+Qed.
+
+Theorem residual_square_Q_nth1 :
+  nth 1%nat (poly_Pe_minus_X
+    (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat) 0
+    = -1.
+Proof.
+  rewrite residual_square_denotes_X2. apply X6_minus_X_nth1.
+Qed.
+
+Theorem residual_square_cannot_vanish_on_ZN_units :
+  (poly_degree (poly_Pe_minus_X
+     (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat)
+     < 10)%nat /\
+  ~ (forall y, Z.coprime y 187 ->
+       (187 | poly_eval (poly_Pe_minus_X
+         (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat) y)).
+Proof.
+  split; [rewrite residual_square_Q_degree_is_6; lia|].
+  intros Hall.
+  pose proof (residual_low_degree_ZN_units_divides_N
+                (poly_Pe_minus_X
+                   (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) [])
+                   3%nat)
+                ltac:(rewrite residual_square_Q_degree_is_6; lia)
+                Hall 1%nat) as Hdiv.
+  rewrite residual_square_Q_nth1 in Hdiv.
+  destruct Hdiv as [k Hk]. nia.
+Qed.
+
+Theorem residual_square_unit_2_not_root :
+  Z.coprime 2 187 /\
+  ~ (187 | poly_eval (poly_Pe_minus_X
+       (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat) 2).
+Proof.
+  split; [vm_compute; reflexivity|].
+  rewrite residual_square_denotes_X2, X6_minus_X_eval_2.
+  intros [k Hk]. nia.
+Qed.
+
+Theorem residual_cube_is_nodiv :
+  Forall is_nodiv [GMul 2%nat 2%nat; GMul 3%nat 2%nat].
+Proof. repeat constructor. Qed.
+
+Theorem residual_cube_denotes_X3 :
+  nth 4%nat (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [] =
+    poly_pow poly_X 3%nat.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem residual_cube_degree_eq_bound :
+  poly_degree (nth 4%nat
+    (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
+    = 3%nat /\
+  nth 4%nat (gra_deg_bound [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_deg)
+    0%nat = 3%nat.
+Proof.
+  split.
+  - rewrite residual_cube_denotes_X3. apply poly_degree_X3_is_3.
+  - apply gra_deg_bound_x3.
+Qed.
+
+Theorem residual_cube_eval :
+  forall y,
+    gra_eval 187 [GMul 2%nat 2%nat; GMul 3%nat 2%nat] y 4%nat = y * y * y.
+Proof.
+  intros y.
+  rewrite gra_nodiv_denotes by apply residual_cube_is_nodiv.
+  rewrite residual_cube_denotes_X3, poly_eval_pow, poly_eval_X.
+  change (Z.of_nat 3%nat) with (Z.succ (Z.succ 1)).
+  rewrite !Z.pow_succ_r, Z.pow_1_r by lia. ring.
+Qed.
+
+Theorem residual_cube_Q_degree_is_9 :
+  poly_degree (poly_Pe_minus_X
+    (nth 4%nat (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
+    3%nat) = 9%nat.
+Proof.
+  rewrite residual_cube_denotes_X3. apply poly_degree_X9_minus_X.
+Qed.
+
+Theorem residual_cube_Q_nth1 :
+  nth 1%nat (poly_Pe_minus_X
+    (nth 4%nat (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
+    3%nat) 0 = -1.
+Proof.
+  rewrite residual_cube_denotes_X3. apply X9_minus_X_nth1.
+Qed.
+
+Theorem residual_cube_cannot_vanish_on_ZN_units :
+  (poly_degree (poly_Pe_minus_X
+     (nth 4%nat (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
+     3%nat) < 10)%nat /\
+  ~ (forall y, Z.coprime y 187 ->
+       (187 | poly_eval (poly_Pe_minus_X
+         (nth 4%nat
+            (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
+         3%nat) y)).
+Proof.
+  split; [rewrite residual_cube_Q_degree_is_9; lia|].
+  intros Hall.
+  pose proof (residual_low_degree_ZN_units_divides_N
+                (poly_Pe_minus_X
+                   (nth 4%nat
+                      (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat]
+                         slp_init_poly) [])
+                   3%nat)
+                ltac:(rewrite residual_cube_Q_degree_is_9; lia)
+                Hall 1%nat) as Hdiv.
+  rewrite residual_cube_Q_nth1 in Hdiv.
+  destruct Hdiv as [k Hk]. nia.
+Qed.
+
+Theorem residual_cube_unit_2_not_root :
+  Z.coprime 2 187 /\
+  ~ (187 | poly_eval (poly_Pe_minus_X
+       (nth 4%nat
+          (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
+       3%nat) 2).
+Proof.
+  split; [vm_compute; reflexivity|].
+  rewrite residual_cube_denotes_X3, X9_minus_X_eval_2.
+  intros [k Hk]. nia.
+Qed.
+
+Theorem residual_trapdoor_inverts_pin :
+  powm 36 27 187 = 42 /\ powm 42 3 187 = 36.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem residual_trapdoor_not_a_low_degree_identity :
+  powm 36 27 187 = 42 /\
+  (3 * 27 >= 10)%nat.
+Proof.
+  split.
+  - exact (proj1 residual_trapdoor_inverts_pin).
+  - apply residual_trapdoor_deg27_outside_window.
+Qed.
