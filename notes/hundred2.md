@@ -112,4 +112,5 @@ Files: `HundredI.v` (101–120), `HundredJ.v` (121–140),
 
 Count: 100. CAS `135`. Jacobian leftover stays unnamed as factoring.
 The first hundred (`notes/hundred.md`, CAS `133`) is unchanged.
+A third hundred is `notes/hundred3.md` / CAS `136`.
 `whole()` still conjoins classes 1–100 only.

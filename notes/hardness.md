@@ -236,6 +236,14 @@ Catalan `C_5` and `p(10)` hit the residual cube on this pin; leftover
 `gcd(42−25,N)=17` splits a leftover pair that `gcd(42−60,N)` does not.
 The residual cube is still not `Problem_Factor`.
 
+### Third hundred (`HundredN.v`–`HundredR.v`, CAS `136`)
+
+Roster `notes/hundred3.md`. Cuts of the residual leaf: `x` generates
+`⟨y⟩` (`16` candidates); local orders of `y` are `5` and `8`, so
+`gcd(y^5−1,N)` and `gcd(y^8−1,N)` split; `x=y^{e^{-1} mod 40}` inverts
+without factoring; integer `√y` then `n(n+1)` hits the cube on this
+pin. Still not `srsa_residual_leaf` as `Problem_Factor`.
+
 ### Joined pin identity (CAS `134`)
 
 `cas/lib/pin.gp` plus `cas/lib/classes.gp` give one predicate `whole()`:

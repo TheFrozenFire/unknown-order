@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1742 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1842 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1742 results across 115 files.
+Captured for 1842 results across 120 files.
 
 Counts:
 
@@ -1264,6 +1264,131 @@ Counts:
 | `hun_198_dl_base9` | 128 | 0 | 0 | OK |
 | `hun_199_e_nextprime_N` | 134 | 0 | 0 | OK |
 | `hun_200_prevprime_even_peel` | 139 | 0 | 0 | OK |
+
+## HundredN.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_201_x_in_cyc_y` | 20 | 0 | 0 | OK |
+| `hun_202_x_generates` | 24 | 0 | 0 | OK |
+| `hun_203_x_is_y_to_27` | 30 | 0 | 0 | OK |
+| `hun_204_cube_root_of_1` | 35 | 0 | 0 | OK |
+| `hun_205_unique_unit_cube` | 41 | 0 | 0 | OK |
+| `hun_206_e_inv_mod_16` | 49 | 0 | 0 | OK |
+| `hun_207_e_inv_mod_5` | 53 | 0 | 0 | OK |
+| `hun_208_crt_e_inverse` | 57 | 0 | 0 | OK |
+| `hun_209_five_divides_lambda` | 63 | 0 | 0 | OK |
+| `hun_210_local_squares` | 68 | 0 | 0 | OK |
+| `hun_211_qr_both_sides` | 75 | 0 | 0 | OK |
+| `hun_212_not_in_ltwo` | 80 | 0 | 0 | OK |
+| `hun_213_in_lthree_and_lfive` | 86 | 0 | 0 | OK |
+| `hun_214_local_cube_mod_p` | 91 | 0 | 0 | OK |
+| `hun_215_local_x_mod_q` | 97 | 0 | 0 | OK |
+| `hun_216_crt_locals` | 101 | 0 | 0 | OK |
+| `hun_217_bits_of_x` | 106 | 0 | 0 | OK |
+| `hun_218_x_mod_8` | 110 | 0 | 0 | OK |
+| `hun_219_x_minus_1_prime` | 114 | 0 | 0 | OK |
+| `hun_220_x_plus_1_prime` | 118 | 0 | 0 | OK |
+
+## HundredO.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_221_sixteen_generators` | 19 | 0 | 0 | OK |
+| `hun_222_even_k_not_generator` | 23 | 0 | 0 | OK |
+| `hun_223_y20_miller` | 37 | 0 | 0 | OK |
+| `hun_224_y16_five_torsion` | 42 | 0 | 0 | OK |
+| `hun_225_y8_five_torsion` | 47 | 0 | 0 | OK |
+| `hun_226_y32_splits` | 52 | 0 | 0 | OK |
+| `hun_227_y5_order8` | 64 | 0 | 0 | OK |
+| `hun_228_y10_order4` | 70 | 0 | 0 | OK |
+| `hun_229_identity_not_root` | 75 | 0 | 0 | OK |
+| `hun_230_y35_onesided` | 80 | 0 | 0 | OK |
+| `hun_231_y4_order10` | 92 | 0 | 0 | OK |
+| `hun_232_gen_pair_42_9` | 97 | 0 | 0 | OK |
+| `hun_233_gen_pair_42_53` | 105 | 0 | 0 | OK |
+| `hun_234_gen_pair_42_93` | 113 | 0 | 0 | OK |
+| `hun_235_y_minus_x` | 121 | 0 | 0 | OK |
+| `hun_236_y_inv_generator` | 125 | 0 | 0 | OK |
+| `hun_237_x_inv_generator` | 130 | 0 | 0 | OK |
+| `hun_238_y29` | 135 | 0 | 0 | OK |
+| `hun_239_y3_generator` | 139 | 0 | 0 | OK |
+| `hun_240_y9_generator` | 144 | 0 | 0 | OK |
+
+## HundredP.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_241_y5_minus_1_splits` | 19 | 0 | 0 | OK |
+| `hun_242_y8_minus_1_splits` | 27 | 0 | 0 | OK |
+| `hun_243_y10_minus_1_splits` | 35 | 0 | 0 | OK |
+| `hun_244_phi8_y_splits` | 43 | 0 | 0 | OK |
+| `hun_245_y2_plus_1` | 51 | 0 | 0 | OK |
+| `hun_246_phi5_y_splits` | 55 | 0 | 0 | OK |
+| `hun_247_x2_minus_1` | 65 | 0 | 0 | OK |
+| `hun_248_full_period_no_split` | 69 | 0 | 0 | OK |
+| `hun_249_miller_on_period2` | 74 | 0 | 0 | OK |
+| `hun_250_local_orders` | 84 | 0 | 0 | OK |
+| `hun_251_five_divides_ord` | 91 | 0 | 0 | OK |
+| `hun_252_eight_divides_ord` | 95 | 0 | 0 | OK |
+| `hun_253_index_two` | 99 | 0 | 0 | OK |
+| `hun_254_dl_even` | 104 | 0 | 0 | OK |
+| `hun_255_y_in_square_subgroup` | 108 | 0 | 0 | OK |
+| `hun_256_advice_five_div_lam` | 112 | 0 | 0 | OK |
+| `hun_257_v2_lambda` | 116 | 0 | 0 | OK |
+| `hun_258_ord_divides_lam` | 121 | 0 | 0 | OK |
+| `hun_259_y_to_ord` | 125 | 0 | 0 | OK |
+| `hun_260_phi_over_lam` | 129 | 0 | 0 | OK |
+
+## HundredQ.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_261_lam_ne_Nminus1` | 19 | 0 | 0 | OK |
+| `hun_262_ord_div_lam` | 23 | 0 | 0 | OK |
+| `hun_263_e_coprime_10_16` | 27 | 0 | 0 | OK |
+| `hun_264_five_ndiv_e` | 32 | 0 | 0 | OK |
+| `hun_265_y_local_qr` | 37 | 0 | 0 | OK |
+| `hun_266_advice_local_9` | 44 | 0 | 0 | OK |
+| `hun_267_N_mod_40_is_d` | 48 | 0 | 0 | OK |
+| `hun_268_bitlength_lam` | 52 | 0 | 0 | OK |
+| `hun_269_gcd_pminus1_qminus1` | 56 | 0 | 0 | OK |
+| `hun_270_lambda_lcm` | 60 | 0 | 0 | OK |
+| `hun_271_y_to_e_inv` | 64 | 0 | 0 | OK |
+| `hun_272_public_N_mod_40` | 74 | 0 | 0 | OK |
+| `hun_273_y_to_d` | 79 | 0 | 0 | OK |
+| `hun_274_k1_is_y` | 83 | 0 | 0 | OK |
+| `hun_275_k3_is_y_cube` | 88 | 0 | 0 | OK |
+| `hun_276_public_d5_pohlig` | 93 | 0 | 0 | OK |
+| `hun_277_euclid_x_minus_y` | 103 | 0 | 0 | OK |
+| `hun_278_low_bits_y` | 107 | 0 | 0 | OK |
+| `hun_279_even_k_shares_ord` | 111 | 0 | 0 | OK |
+| `hun_280_inv_lam_minus_1` | 116 | 0 | 0 | OK |
+
+## HundredR.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `hun_281_crt_is_residual_x` | 20 | 0 | 0 | OK |
+| `hun_282_hensel_p2` | 25 | 0 | 0 | OK |
+| `hun_283_pkcs_pad` | 29 | 0 | 0 | OK |
+| `hun_284_sqrt_then_n_nplus1` | 35 | 0 | 0 | OK |
+| `hun_285_integer_sqrt_unit` | 47 | 0 | 0 | OK |
+| `hun_286_dp` | 52 | 0 | 0 | OK |
+| `hun_287_edp_minus_1` | 56 | 0 | 0 | OK |
+| `hun_288_dq` | 60 | 0 | 0 | OK |
+| `hun_289_edq_minus_1` | 64 | 0 | 0 | OK |
+| `hun_290_e_prime` | 68 | 0 | 0 | OK |
+| `hun_291_binary_encrypt` | 73 | 0 | 0 | OK |
+| `hun_292_mont_form` | 79 | 0 | 0 | OK |
+| `hun_293_prime_e7` | 83 | 0 | 0 | OK |
+| `hun_294_shamir_3_7` | 96 | 0 | 0 | OK |
+| `hun_295_ratio_five_torsion` | 100 | 0 | 0 | OK |
+| `hun_296_ratio_y4` | 105 | 0 | 0 | OK |
+| `hun_297_rerand_fixed_e` | 110 | 0 | 0 | OK |
+| `hun_298_x_to_8_is_five_torsion` | 114 | 0 | 0 | OK |
+| `hun_299_mismatched_local_orders` | 119 | 0 | 0 | OK |
+| `hun_300_lcm_local_orders` | 124 | 0 | 0 | OK |
 
 ## Inner2.v
 
