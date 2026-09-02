@@ -111,3 +111,13 @@ Files: `HundredA.v` (1–12), `HundredB.v` (13–32), `HundredC.v` (33–50),
 | 100 | DL of `y` base `3` | `hun_100_dl_base3` | `y=3^{46}`, `x=3^{42}`, `ae≡c (mod λ)` |
 
 Count: 100. CAS `133`. Jacobian leftover stays unnamed as factoring.
+
+## Joined identity (CAS `134`)
+
+`cas/134_whole_identity.gp` loads `cas/lib/pin.gp` and `cas/lib/classes.gp`
+and checks `whole()` on the default pin: residual ∧ ¬factor_from_x ∧
+peel_all ∧ classes_all. That is a conjunction of recorded fates on
+`(N,y,x,e)=(187,36,42,3)`, not a disjunction of solvers, not CRT of
+theorems, and not a proof that the residual cube factors. Numbered
+witnesses `01`–`133` stay. Second moduli `77`, `253`, `45`, `105`,
+`247`, `N²` are named extra pins, not a replacement of `N=187`.

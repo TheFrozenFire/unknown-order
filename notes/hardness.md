@@ -227,6 +227,15 @@ None of these twelve is a proof that `srsa_residual_leaf` factors.
 
 Roster `notes/hundred.md` maps items 1–100 to `hun_NN_*` headlines. Algorithm/modulus restrictions only. The residual cube `42³≡36` is still not `Problem_Factor`.
 
+### Joined pin identity (CAS `134`)
+
+`cas/lib/pin.gp` plus `cas/lib/classes.gp` give one predicate `whole()`:
+residual ∧ ¬factor_from_x ∧ peel ∧ the 100 class fates, on the default
+pin. CAS `134` checks that conjunction and the named extra pins
+(`77`, `253`, `45`, `105`, `247`, `N²`). Runner glob of `01`–`133` is
+job aggregation, not this identity. The join is still not
+`srsa_residual_leaf` as `Problem_Factor`.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
