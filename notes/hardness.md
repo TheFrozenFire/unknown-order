@@ -181,6 +181,27 @@ How the TM writes `x` and `e`, not further case analysis of the witness.
 
 None of these twelve is a proof that `srsa_residual_leaf` factors.
 
+### Partial roots, public stand-ins, filters (`FilterShape.v`, CAS `131`)
+
+Local correctness of `x`, public stand-ins for `λ`, and filters a TM can run without the trapdoor.
+
+| # | Class | Pin identity | Residual? |
+|---|---|---|---|
+| 1 | One-sided local root as an integer | `9³≡36 (mod 11)`, `gcd(729−36,N)=11`; not global | splits |
+| 2 | `x=−y` | `(−36)³≡94≠36`; `36²≢−1` | does not inhabit |
+| 3 | Euclid on `(y±1,N)` | `gcd(35,187)=1`, `gcd(37,187)=1` | no split |
+| 4 | Nontrivial 5th root of 1 | `69⁵≡1`, `gcd(68,N)=17`; `5\|λ` | splits on λ-sharing `e` |
+| 5 | Public period `N+1` | `2^{188}≡135≠2`; `2^{80}≡1` | does not annihilate |
+| 6 | Extra output `φ` | `N−160+1=28=p+q`; `factors_from_phi` | factors |
+| 7 | 2-adic Hensel | `v₂(36)=2`, `3∤2` | fails this `y` |
+| 8 | Locally constant `X` | `36≡6 (mod 5)`; `42³≡36≠6` | cannot cover many `y` |
+| 9 | Jacobi branch to `λ+1` | `(2/N)=−1`, `2^{81}≡2`, `λ\|e−1` | QNR branch peels |
+| 10 | Public filter `gcd(e,N−1)=1` | `gcd(3,186)=3` rejects the cube; `e=11` Miller-splits | cube not in the image |
+| 11 | Low-bit `e=2(y mod 2^k)+1` | `e=9`, `70⁹≡36` residual-shaped | leftover inhabited |
+| 12 | Trace `x+x^{-1}` | `36+26=62`, `62³≡90≠36`; torus order `36≠N+1` | not an `e`-th root |
+
+None of these twelve is a proof that `srsa_residual_leaf` factors.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a

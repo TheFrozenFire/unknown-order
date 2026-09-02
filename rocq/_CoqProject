@@ -74,6 +74,7 @@ StrongRSAPeel.v
 SolverRestrict.v
 DozenInroads.v
 SolverShape.v
+FilterShape.v
 JagerSchwenk.v
 Cocks.v
 PotCheck.v

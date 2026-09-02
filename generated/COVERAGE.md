@@ -861,6 +861,51 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `fs_pin_second_accepts` | 229 |
 | Theorem | `fs_pin_commits_distinct` | 233 |
 
+## `FilterShape.v`
+
+- L15: Twelve partial-root, public-stand-in, and filter inroads
+  - L22: 1. One-sided local root as an integer
+  - L42: 2. [x = −y]
+  - L53: 3. Euclid on [(y±1, N)]
+  - L63: 4. Nontrivial [e]-th root of 1 at [gcd(e,λ)>1]
+  - L82: 5. Public period [N+1]
+  - L91: 6. Extra output [φ]
+  - L107: 7. 2-adic Hensel: [v₂(y)] not divisible by 3
+  - L117: 8. Locally constant [X] ([y] modulo [m])
+  - L125: 9. Branch on Jacobi to [λ+1]
+  - L140: 10. Public coprimality filter [gcd(e, N−1)=1]
+  - L160: 11. Low-bit [e = 2(y mod 2^k)+1]
+  - L184: 12. Trace [x + x^{-1}]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `filter_onesided_local_mod_p` | 24 |
+| Theorem | `filter_onesided_not_global` | 28 |
+| Theorem | `filter_onesided_integer_splits` | 32 |
+| Theorem | `filter_neg_y_not_cube_root` | 44 |
+| Theorem | `filter_y_square_not_minus1` | 49 |
+| Theorem | `filter_euclid_y_minus_1` | 55 |
+| Theorem | `filter_euclid_y_plus_1` | 59 |
+| Theorem | `filter_fifth_shares_lambda` | 65 |
+| Theorem | `filter_fifth_root_of_1_splits` | 70 |
+| Theorem | `filter_Nplus1_does_not_annihilate` | 84 |
+| Theorem | `filter_phi_gives_sum` | 93 |
+| Theorem | `filter_phi_enum_factors` | 98 |
+| Theorem | `filter_phi_is_factor` | 103 |
+| Theorem | `filter_val2_36` | 109 |
+| Theorem | `filter_val2_not_div_by_3` | 113 |
+| Theorem | `filter_locally_constant_clash` | 119 |
+| Theorem | `filter_jacobi_branch_lambda_type` | 127 |
+| Theorem | `filter_jacobi_branch_not_residual` | 133 |
+| Theorem | `filter_cube_fails_public_e` | 144 |
+| Theorem | `filter_e11_passes_public_e` | 148 |
+| Theorem | `filter_public_e11_miller_splits` | 152 |
+| Theorem | `filter_lowbit_e9` | 164 |
+| Theorem | `filter_lowbit_e9_residual` | 168 |
+| Theorem | `filter_lowbit_root_is_70` | 179 |
+| Theorem | `filter_trace_not_root` | 186 |
+| Theorem | `filter_torus_order_not_Nplus1` | 193 |
+
 ## `Fp2.v`
 
 - L13: [F_p[√D]] and [V_{p+1} ≡ 2] when [D] is a QNR
@@ -2388,4 +2433,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1491 theorems/lemmas/corollaries/examples across 103 files._
+_1517 theorems/lemmas/corollaries/examples across 104 files._

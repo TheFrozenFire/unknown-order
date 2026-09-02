@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1491 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1517 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1491 results across 103 files.
+Captured for 1517 results across 104 files.
 
 Counts:
 
@@ -740,6 +740,37 @@ Counts:
 | `fs_pin_challenge_depends_on_commit` | 222 | 0 | 0 | OK |
 | `fs_pin_second_accepts` | 229 | 0 | 0 | OK |
 | `fs_pin_commits_distinct` | 233 | 0 | 0 | OK |
+
+## FilterShape.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `filter_onesided_local_mod_p` | 24 | 0 | 0 | OK |
+| `filter_onesided_not_global` | 28 | 0 | 0 | OK |
+| `filter_onesided_integer_splits` | 32 | 0 | 0 | OK |
+| `filter_neg_y_not_cube_root` | 44 | 0 | 0 | OK |
+| `filter_y_square_not_minus1` | 49 | 0 | 0 | OK |
+| `filter_euclid_y_minus_1` | 55 | 0 | 0 | OK |
+| `filter_euclid_y_plus_1` | 59 | 0 | 0 | OK |
+| `filter_fifth_shares_lambda` | 65 | 0 | 0 | OK |
+| `filter_fifth_root_of_1_splits` | 70 | 0 | 0 | OK |
+| `filter_Nplus1_does_not_annihilate` | 84 | 0 | 0 | OK |
+| `filter_phi_gives_sum` | 93 | 0 | 0 | OK |
+| `filter_phi_enum_factors` | 98 | 0 | 0 | OK |
+| `filter_phi_is_factor` | 103 | 0 | 0 | OK |
+| `filter_val2_36` | 109 | 0 | 0 | OK |
+| `filter_val2_not_div_by_3` | 113 | 0 | 0 | OK |
+| `filter_locally_constant_clash` | 119 | 0 | 0 | OK |
+| `filter_jacobi_branch_lambda_type` | 127 | 0 | 0 | OK |
+| `filter_jacobi_branch_not_residual` | 133 | 0 | 0 | OK |
+| `filter_cube_fails_public_e` | 144 | 0 | 0 | OK |
+| `filter_e11_passes_public_e` | 148 | 0 | 0 | OK |
+| `filter_public_e11_miller_splits` | 152 | 0 | 0 | OK |
+| `filter_lowbit_e9` | 164 | 0 | 0 | OK |
+| `filter_lowbit_e9_residual` | 168 | 0 | 0 | OK |
+| `filter_lowbit_root_is_70` | 179 | 0 | 0 | OK |
+| `filter_trace_not_root` | 186 | 0 | 0 | OK |
+| `filter_torus_order_not_Nplus1` | 193 | 0 | 0 | OK |
 
 ## Fp2.v
 
