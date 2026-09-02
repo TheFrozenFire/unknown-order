@@ -98,8 +98,8 @@ Constructible torsion `H` is a family parameter
 | one-sided `a^k ≡ 1 (mod p)` | `Problem_Factor` | `one_sided_low_order_factors` | two-sided `Problem_LowOrder` splits `N` |
 | `ord(y)=k` and `e d ≡ 1 (mod k)` | Strong RSA / residual leaf by invert in `⟨y⟩` (equality / multiply, no gcd) | `order_inverts_in_cyclic`, `order_yields_strong_RSA`, `order_yields_residual_sRSA`, `order_yields_residual_pin` | a Strong-RSA solver finds orders; RSA ≡ or ≢ factoring; PPT |
 | leftover `x` or `y` + one-sided local order | `gcd(x^k−1,N)=p` (proper factor; mismatch load-bearing) | `leftover_mismatch_factors`, `leftover_x_mismatch_factors_pin`, `order_mismatch_factors_pin`, `leftover_77_mismatch_factors` | leftover always factors; residual leaf as factoring; RSA ≡ or ≢ factoring; PPT |
-| matching local orders on `N=13·19=247` | gcd is `1` or `N`, not a proper factor | `matching_247_not_one_sided`, `matching_247_gcd_not_proper`, `matching_247_two_sided_gcd_is_N` | leftover never factors |
-| residual leaf + mismatch | `gcd(x^k−1,N)` is a proper factor (leaf unused; mismatch is load-bearing) | `residual_mismatch_factors`, `residual_mismatch_factors_pin` | `srsa_residual_leaf` as `Problem_Factor` on its own |
+| matching local orders on `N=13·19=247` | gcd is `1` or `N`, not a proper factor | `matching_247_not_one_sided`, `matching_247_gcd_not_proper`, `matching_247_two_sided_gcd_is_N` | leftover never factors; RSA ≡ or ≢ factoring; PPT |
+| residual leaf + mismatch | `gcd(x^k−1,N)` is a proper factor (leaf unused; mismatch is load-bearing) | `residual_mismatch_factors`, `residual_mismatch_factors_pin` | `srsa_residual_leaf` as `Problem_Factor` on its own; RSA ≡ or ≢ factoring; PPT |
 | every unit | an `e`-th power | `rsa_units_are_eth_powers` | a decision problem on units |
 
 CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`.
