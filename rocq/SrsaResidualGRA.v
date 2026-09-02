@@ -27,7 +27,7 @@ Open Scope Z_scope.
 
     Generic-ring inroad on [residual_solver_constructs_factor_open_named],
     not a proof of that unrestricted name, and not RSA ≡ or ≢
-    factoring.  Cross-confirmed by [cas/146]. *)
+    factoring.  Cross-confirmed by [cas/146] and [cas/148]. *)
 
 (** ** Residual-shaped exponents *)
 
@@ -215,3 +215,131 @@ Qed.
 Theorem residual_gra_mul_denotes_square :
   gra_eval 187 [GMul 2%nat 2%nat] 36 3%nat = 36 * 36.
 Proof. apply gra_nodiv_mul_denotes_square. Qed.
+
+(** ** Low-degree vanishing on units
+
+    Denotation is load-bearing: the identity tape denotes [X], so
+    [y^3 − y] is [eval(X^3 − X, y)]; [GConst c] denotes [[c]].
+    [X^3 − X] has degree 3, strictly below [p−1=10] and [q−1=16].
+    Its roots mod 11 are [0,1,10], so it does not vanish on [𝔽_11*]
+    (unit 2 is a counterexample).  A constant [P] has [P^e − X]
+    linear coeff [−1], so [N] cannot divide every coefficient.
+    High-degree functional-on-units maps ([X^d], [d=27]) are not
+    forbidden by this degree bound. *)
+
+Theorem residual_identity_is_low_degree :
+  poly_degree (poly_Pe_minus_X poly_X 3%nat) = 3%nat /\
+  (3 < 10)%nat /\
+  (3 < 16)%nat.
+Proof. split; [apply poly_degree_X3_minus_X | lia]. Qed.
+
+Lemma residual_X3_eval :
+  forall a, poly_eval (poly_Pe_minus_X poly_X 3%nat) a = a * a * a - a.
+Proof. apply poly_eval_X3_minus_X. Qed.
+
+Lemma residual_X3_not_div_11_mid :
+  forall a, a = 2 \/ a = 3 \/ a = 4 \/ a = 5 \/ a = 6 \/ a = 7 \/ a = 8 \/ a = 9 ->
+    ~ (11 | a * a * a - a).
+Proof.
+  intros a Ha [k Hk].
+  repeat (destruct Ha as [Heq|Ha]; [subst a; lia|]).
+  subst a. lia.
+Qed.
+
+Theorem residual_X3_roots_mod_11 :
+  forall a,
+    0 <= a < 11 ->
+    (11 | poly_eval (poly_Pe_minus_X poly_X 3%nat) a) ->
+    a = 0 \/ a = 1 \/ a = 10.
+Proof.
+  intros a Ha Hdiv. rewrite residual_X3_eval in Hdiv.
+  destruct (Z.eq_dec a 0) as [Hz|Hnz]; [left; exact Hz|].
+  destruct (Z.eq_dec a 1) as [Hone|Hnone]; [right; left; exact Hone|].
+  destruct (Z.eq_dec a 10) as [Hten|Hnten]; [right; right; exact Hten|].
+  exfalso. apply (residual_X3_not_div_11_mid a); [lia|exact Hdiv].
+Qed.
+
+Theorem residual_X3_unit_2_not_root_mod_11 :
+  0 < 2 < 11 /\ ~ (11 | poly_eval (poly_Pe_minus_X poly_X 3%nat) 2).
+Proof.
+  split; [lia|]. rewrite residual_X3_eval. apply residual_X3_not_div_11_mid. lia.
+Qed.
+
+Lemma residual_X3_not_div_17_mid :
+  forall a,
+    a = 2 \/ a = 3 \/ a = 4 \/ a = 5 \/ a = 6 \/ a = 7 \/ a = 8 \/
+    a = 9 \/ a = 10 \/ a = 11 \/ a = 12 \/ a = 13 \/ a = 14 \/ a = 15 ->
+    ~ (17 | a * a * a - a).
+Proof.
+  intros a Ha [k Hk].
+  repeat (destruct Ha as [Heq|Ha]; [subst a; lia|]).
+  subst a. lia.
+Qed.
+
+Theorem residual_X3_unit_2_not_root_mod_17 :
+  0 < 2 < 17 /\ ~ (17 | poly_eval (poly_Pe_minus_X poly_X 3%nat) 2).
+Proof.
+  split; [lia|]. rewrite residual_X3_eval. apply residual_X3_not_div_17_mid. lia.
+Qed.
+
+Theorem residual_X3_roots_mod_17 :
+  forall a,
+    0 <= a < 17 ->
+    (17 | poly_eval (poly_Pe_minus_X poly_X 3%nat) a) ->
+    a = 0 \/ a = 1 \/ a = 16.
+Proof.
+  intros a Ha Hdiv. rewrite residual_X3_eval in Hdiv.
+  destruct (Z.eq_dec a 0) as [Hz|Hnz]; [left; exact Hz|].
+  destruct (Z.eq_dec a 1) as [Hone|Hnone]; [right; left; exact Hone|].
+  destruct (Z.eq_dec a 16) as [Hlast|Hnlast]; [right; right; exact Hlast|].
+  exfalso. apply (residual_X3_not_div_17_mid a); [lia|exact Hdiv].
+Qed.
+
+Theorem residual_const_Pe_minus_X_nth1 :
+  forall c, nth 1%nat (poly_Pe_minus_X [c] 3%nat) 0 = -1.
+Proof. intros c. apply const_Pe_minus_X_nth1. Qed.
+
+Theorem residual_const_N_ndiv_linear :
+  forall c, ~ (187 | nth 1%nat (poly_Pe_minus_X [c] 3%nat) 0).
+Proof.
+  intros c. rewrite residual_const_Pe_minus_X_nth1. intros [k Hk]. nia.
+Qed.
+
+Theorem residual_nodiv_identity_denotes_X :
+  forall y, gra_eval 187 [] y 2%nat = poly_eval poly_X y.
+Proof. intros y. rewrite gra_nodiv_denotes by constructor. reflexivity. Qed.
+
+Theorem residual_identity_cube_minus_y :
+  forall y,
+    Z.pow (gra_eval 187 [] y 2%nat) (Z.of_nat 3%nat) - y =
+      poly_eval (poly_Pe_minus_X poly_X 3%nat) y.
+Proof.
+  intros y.
+  rewrite residual_nodiv_identity_denotes_X, poly_eval_Pe_minus_X, poly_eval_X.
+  reflexivity.
+Qed.
+
+Theorem residual_nodiv_const_is_nodiv :
+  forall c, Forall is_nodiv [GConst c].
+Proof. intros c. repeat constructor. Qed.
+
+Theorem residual_nodiv_const_denotes :
+  forall c y, gra_eval 187 [GConst c] y 3%nat = poly_eval [c] y.
+Proof.
+  intros c y.
+  rewrite gra_nodiv_denotes by apply residual_nodiv_const_is_nodiv.
+  cbn [gra_run_poly step_poly].
+  rewrite <- slp_init_length.
+  rewrite nth_app_last.
+  unfold poly_eval. lia.
+Qed.
+
+Theorem residual_low_degree_identity_not_all_Fp_units :
+  (3 < 10)%nat /\
+  ~ (11 | Z.pow (gra_eval 187 [] 2 2%nat) (Z.of_nat 3%nat) - 2).
+Proof.
+  split; [lia|].
+  rewrite residual_identity_cube_minus_y.
+  destruct residual_X3_unit_2_not_root_mod_11 as [_ Hnd].
+  exact Hnd.
+Qed.

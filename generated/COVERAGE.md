@@ -1168,44 +1168,44 @@ in the Rocq tree.  Do not edit by hand.
   - L28: Factoring as a relation
   - L33: RSA is a one-way permutation on units, not a predicate
   - L62: RSA vs strong RSA (relations)
-  - L135: Order divides the exponent
-  - L182: One-sided small exponent (the Type-B winning condition)
-  - L244: Order assumption and fractional root
-  - L457: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L136: Order divides the exponent
+  - L183: One-sided small exponent (the Type-B winning condition)
+  - L245: Order assumption and fractional root
+  - L458: Order → Strong RSA by invert in the cyclic (equality / multiply)
 
 | Kind | Name | Line |
 |---|---|---:|
 | Theorem | `rsa_units_are_eth_powers` | 39 |
 | Theorem | `trapdoor_inverts_RSA` | 50 |
-| Theorem | `rsa_solution_is_strong_RSA` | 82 |
-| Theorem | `lambda_solves_strong_RSA` | 96 |
-| Lemma | `strong_RSA_trivial_at_one` | 120 |
-| Lemma | `rsa_trivial_at_one` | 128 |
-| Lemma | `order_divides_annihilator` | 137 |
-| Theorem | `order_divides_lambda` | 166 |
-| Theorem | `one_sided_low_order_factors` | 194 |
-| Theorem | `one_sided_low_order_is_factor` | 226 |
-| Lemma | `adaptive_root_is_strong_RSA` | 239 |
-| Theorem | `order_is_annihilator` | 250 |
-| Theorem | `low_order_is_annihilator` | 259 |
-| Theorem | `lambda_is_annihilator_on_units` | 268 |
-| Theorem | `annihilator_plus_one_is_strong_RSA` | 281 |
-| Theorem | `rsa_is_fractional_root` | 298 |
-| Theorem | `strong_RSA_is_fractional_root` | 314 |
-| Theorem | `annihilator_is_fractional_root_of_one` | 329 |
-| Theorem | `ar_C_implies_strong_RSA` | 358 |
-| Theorem | `ar_C_requires_C` | 367 |
-| Theorem | `strong_RSA_is_ar_C_iff` | 372 |
-| Theorem | `lambda_plus_one_11_17` | 383 |
-| Theorem | `lambda_plus_one_11_17_not_prime` | 387 |
-| Theorem | `lambda_solves_search_11_17` | 395 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 406 |
-| Theorem | `adaptive_root_known_product_breaks` | 424 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 440 |
-| Theorem | `order_inverts_in_cyclic` | 463 |
-| Theorem | `order_yields_strong_RSA` | 488 |
-| Lemma | `gcd_powm_minus_1` | 511 |
-| Theorem | `leftover_mismatch_factors` | 524 |
+| Theorem | `rsa_solution_is_strong_RSA` | 83 |
+| Theorem | `lambda_solves_strong_RSA` | 97 |
+| Lemma | `strong_RSA_trivial_at_one` | 121 |
+| Lemma | `rsa_trivial_at_one` | 129 |
+| Lemma | `order_divides_annihilator` | 138 |
+| Theorem | `order_divides_lambda` | 167 |
+| Theorem | `one_sided_low_order_factors` | 195 |
+| Theorem | `one_sided_low_order_is_factor` | 227 |
+| Lemma | `adaptive_root_is_strong_RSA` | 240 |
+| Theorem | `order_is_annihilator` | 251 |
+| Theorem | `low_order_is_annihilator` | 260 |
+| Theorem | `lambda_is_annihilator_on_units` | 269 |
+| Theorem | `annihilator_plus_one_is_strong_RSA` | 282 |
+| Theorem | `rsa_is_fractional_root` | 299 |
+| Theorem | `strong_RSA_is_fractional_root` | 315 |
+| Theorem | `annihilator_is_fractional_root_of_one` | 330 |
+| Theorem | `ar_C_implies_strong_RSA` | 359 |
+| Theorem | `ar_C_requires_C` | 368 |
+| Theorem | `strong_RSA_is_ar_C_iff` | 373 |
+| Theorem | `lambda_plus_one_11_17` | 384 |
+| Theorem | `lambda_plus_one_11_17_not_prime` | 388 |
+| Theorem | `lambda_solves_search_11_17` | 396 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 407 |
+| Theorem | `adaptive_root_known_product_breaks` | 425 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 441 |
+| Theorem | `order_inverts_in_cyclic` | 464 |
+| Theorem | `order_yields_strong_RSA` | 489 |
+| Lemma | `gcd_powm_minus_1` | 512 |
+| Theorem | `leftover_mismatch_factors` | 525 |
 
 ## `HashSlot.v`
 
@@ -2673,6 +2673,7 @@ in the Rocq tree.  Do not edit by hand.
   - L98: Constant leftover inverts one [y], not every unit
   - L117: Degree / leading-coefficient fork for residual-shaped [e]
   - L176: Division-free tape denotes a polynomial; integer [P^e = X]
+  - L219: Low-degree vanishing on units
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2699,6 +2700,21 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `residual_gra_nodiv_integer_identity_forbidden` | 192 |
 | Theorem | `residual_gra_nodiv_cube_identity_forbidden` | 204 |
 | Theorem | `residual_gra_mul_denotes_square` | 215 |
+| Theorem | `residual_identity_is_low_degree` | 230 |
+| Lemma | `residual_X3_eval` | 236 |
+| Lemma | `residual_X3_not_div_11_mid` | 240 |
+| Theorem | `residual_X3_roots_mod_11` | 249 |
+| Theorem | `residual_X3_unit_2_not_root_mod_11` | 262 |
+| Lemma | `residual_X3_not_div_17_mid` | 268 |
+| Theorem | `residual_X3_unit_2_not_root_mod_17` | 279 |
+| Theorem | `residual_X3_roots_mod_17` | 285 |
+| Theorem | `residual_const_Pe_minus_X_nth1` | 298 |
+| Theorem | `residual_const_N_ndiv_linear` | 302 |
+| Theorem | `residual_nodiv_identity_denotes_X` | 308 |
+| Theorem | `residual_identity_cube_minus_y` | 312 |
+| Theorem | `residual_nodiv_const_is_nodiv` | 322 |
+| Theorem | `residual_nodiv_const_denotes` | 326 |
+| Theorem | `residual_low_degree_identity_not_all_Fp_units` | 337 |
 
 ## `SrsaWriteE.v`
 
@@ -3188,4 +3204,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2156 theorems/lemmas/corollaries/examples across 116 files._
+_2171 theorems/lemmas/corollaries/examples across 116 files._

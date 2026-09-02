@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2156 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2171 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2156 results across 116 files.
+Captured for 2171 results across 116 files.
 
 Counts:
 
@@ -1002,35 +1002,35 @@ Counts:
 |---|---:|---:|---:|---|
 | `rsa_units_are_eth_powers` | 39 | 0 | 0 | OK |
 | `trapdoor_inverts_RSA` | 50 | 0 | 0 | OK |
-| `rsa_solution_is_strong_RSA` | 82 | 0 | 0 | OK |
-| `lambda_solves_strong_RSA` | 96 | 0 | 0 | OK |
-| `strong_RSA_trivial_at_one` | 120 | 0 | 0 | OK |
-| `rsa_trivial_at_one` | 128 | 0 | 0 | OK |
-| `order_divides_annihilator` | 137 | 0 | 0 | OK |
-| `order_divides_lambda` | 166 | 0 | 0 | OK |
-| `one_sided_low_order_factors` | 194 | 0 | 0 | OK |
-| `one_sided_low_order_is_factor` | 226 | 0 | 0 | OK |
-| `adaptive_root_is_strong_RSA` | 239 | 0 | 0 | OK |
-| `order_is_annihilator` | 250 | 0 | 0 | OK |
-| `low_order_is_annihilator` | 259 | 0 | 0 | OK |
-| `lambda_is_annihilator_on_units` | 268 | 0 | 0 | OK |
-| `annihilator_plus_one_is_strong_RSA` | 281 | 0 | 0 | OK |
-| `rsa_is_fractional_root` | 298 | 0 | 0 | OK |
-| `strong_RSA_is_fractional_root` | 314 | 0 | 0 | OK |
-| `annihilator_is_fractional_root_of_one` | 329 | 0 | 0 | OK |
-| `ar_C_implies_strong_RSA` | 358 | 0 | 0 | OK |
-| `ar_C_requires_C` | 367 | 0 | 0 | OK |
-| `strong_RSA_is_ar_C_iff` | 372 | 0 | 0 | OK |
-| `lambda_plus_one_11_17` | 383 | 0 | 0 | OK |
-| `lambda_plus_one_11_17_not_prime` | 387 | 0 | 0 | OK |
-| `lambda_solves_search_11_17` | 395 | 0 | 0 | OK |
-| `search_lambda_plus_one_misses_prime_AR` | 406 | 0 | 0 | OK |
-| `adaptive_root_known_product_breaks` | 424 | 0 | 0 | OK |
-| `adaptive_root_smooth_power_breaks` | 440 | 0 | 0 | OK |
-| `order_inverts_in_cyclic` | 463 | 0 | 0 | OK |
-| `order_yields_strong_RSA` | 488 | 0 | 0 | OK |
-| `gcd_powm_minus_1` | 511 | 0 | 0 | OK |
-| `leftover_mismatch_factors` | 524 | 0 | 0 | OK |
+| `rsa_solution_is_strong_RSA` | 83 | 0 | 0 | OK |
+| `lambda_solves_strong_RSA` | 97 | 0 | 0 | OK |
+| `strong_RSA_trivial_at_one` | 121 | 0 | 0 | OK |
+| `rsa_trivial_at_one` | 129 | 0 | 0 | OK |
+| `order_divides_annihilator` | 138 | 0 | 0 | OK |
+| `order_divides_lambda` | 167 | 0 | 0 | OK |
+| `one_sided_low_order_factors` | 195 | 0 | 0 | OK |
+| `one_sided_low_order_is_factor` | 227 | 0 | 0 | OK |
+| `adaptive_root_is_strong_RSA` | 240 | 0 | 0 | OK |
+| `order_is_annihilator` | 251 | 0 | 0 | OK |
+| `low_order_is_annihilator` | 260 | 0 | 0 | OK |
+| `lambda_is_annihilator_on_units` | 269 | 0 | 0 | OK |
+| `annihilator_plus_one_is_strong_RSA` | 282 | 0 | 0 | OK |
+| `rsa_is_fractional_root` | 299 | 0 | 0 | OK |
+| `strong_RSA_is_fractional_root` | 315 | 0 | 0 | OK |
+| `annihilator_is_fractional_root_of_one` | 330 | 0 | 0 | OK |
+| `ar_C_implies_strong_RSA` | 359 | 0 | 0 | OK |
+| `ar_C_requires_C` | 368 | 0 | 0 | OK |
+| `strong_RSA_is_ar_C_iff` | 373 | 0 | 0 | OK |
+| `lambda_plus_one_11_17` | 384 | 0 | 0 | OK |
+| `lambda_plus_one_11_17_not_prime` | 388 | 0 | 0 | OK |
+| `lambda_solves_search_11_17` | 396 | 0 | 0 | OK |
+| `search_lambda_plus_one_misses_prime_AR` | 407 | 0 | 0 | OK |
+| `adaptive_root_known_product_breaks` | 425 | 0 | 0 | OK |
+| `adaptive_root_smooth_power_breaks` | 441 | 0 | 0 | OK |
+| `order_inverts_in_cyclic` | 464 | 0 | 0 | OK |
+| `order_yields_strong_RSA` | 489 | 0 | 0 | OK |
+| `gcd_powm_minus_1` | 512 | 0 | 0 | OK |
+| `leftover_mismatch_factors` | 525 | 0 | 0 | OK |
 
 ## HashSlot.v
 
@@ -2327,6 +2327,21 @@ Counts:
 | `residual_gra_nodiv_integer_identity_forbidden` | 192 | 0 | 0 | OK |
 | `residual_gra_nodiv_cube_identity_forbidden` | 204 | 0 | 0 | OK |
 | `residual_gra_mul_denotes_square` | 215 | 0 | 0 | OK |
+| `residual_identity_is_low_degree` | 230 | 0 | 0 | OK |
+| `residual_X3_eval` | 236 | 0 | 0 | OK |
+| `residual_X3_not_div_11_mid` | 240 | 0 | 0 | OK |
+| `residual_X3_roots_mod_11` | 249 | 0 | 0 | OK |
+| `residual_X3_unit_2_not_root_mod_11` | 262 | 0 | 0 | OK |
+| `residual_X3_not_div_17_mid` | 268 | 0 | 0 | OK |
+| `residual_X3_unit_2_not_root_mod_17` | 279 | 0 | 0 | OK |
+| `residual_X3_roots_mod_17` | 285 | 0 | 0 | OK |
+| `residual_const_Pe_minus_X_nth1` | 298 | 0 | 0 | OK |
+| `residual_const_N_ndiv_linear` | 302 | 0 | 0 | OK |
+| `residual_nodiv_identity_denotes_X` | 308 | 0 | 0 | OK |
+| `residual_identity_cube_minus_y` | 312 | 0 | 0 | OK |
+| `residual_nodiv_const_is_nodiv` | 322 | 0 | 0 | OK |
+| `residual_nodiv_const_denotes` | 326 | 0 | 0 | OK |
+| `residual_low_degree_identity_not_all_Fp_units` | 337 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

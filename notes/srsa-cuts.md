@@ -292,7 +292,11 @@ counterexample; constant leftover `42` inverts one `y` not every
 unit (`SrsaResidualGRA.v`, CAS `146`). A division-free tape denotes
 a polynomial (`gra_nodiv_denotes`); an integer identity `P(y)^e = y`
 for all `y` is forbidden for `e≥2` (`gra_nodiv_integer_eth_root_forbidden`,
-CAS `147`). Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
+CAS `147`). Identity `X^3−X` is low-degree (`deg=3 < p−1, q−1`) and
+does not vanish on `𝔽_11*` or `𝔽_17*` (unit 2); `GConst` has linear
+coeff `−1` so `N` cannot divide every coefficient (CAS `148`).
+High-degree `X^d` is not forbidden. Pin unit `3` has order `λ`
+(`orders_generate_lambda_pin`).
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
 GGM: `GenericGroup.v`, CAS `121`–`122`.
@@ -317,6 +321,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | Order / residual sRSA / Factor arrows | `order_yields_*` / `leftover_*_mismatch_*` / `matching_247_*` | `Hardness.v`, `SrsaOrderArrows.v` | `145` |
 | residual GRA dichotomy | `residual_shaped_*` / `residual_gra_*` | `SrsaResidualGRA.v` | `146` |
 | nodiv GRA denotation / pin attains `λ` | `gra_nodiv_*` / `orders_generate_lambda_pin` | `GenericRing.v`, `Order.v` | `147` |
+| low-degree vanishing on units | `residual_identity_*` / `residual_X3_*` / `residual_const_*` / `residual_nodiv_const_*` / `residual_low_degree_*` | `SrsaResidualGRA.v` | `148` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |
