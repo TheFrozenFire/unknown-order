@@ -1545,38 +1545,55 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Order.v`
 
-- L13: Orders of units, as objects
-  - L26: Uniqueness and the divide criterion
-  - L74: Existence from a positive annihilator
-  - L158: [ord(a^k) = ord(a) / gcd(ord(a), k)]
-  - L220: [lcm] of orders divides [λ]
-  - L334: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
+- L16: Orders of units, as objects
+  - L32: Uniqueness and the divide criterion
+  - L80: Existence from a positive annihilator
+  - L164: [ord(a^k) = ord(a) / gcd(ord(a), k)]
+  - L226: [lcm] of orders divides [λ]
+  - L340: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
+  - L500: A unit of order [λ] for general [N = pq]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `is_order_unique` | 28 |
-| Lemma | `powm_one_of_divide` | 41 |
-| Theorem | `order_iff_divides` | 57 |
-| Lemma | `order_exists_from_annihilator` | 79 |
-| Theorem | `order_exists_prime` | 129 |
-| Theorem | `order_exists_semiprime` | 143 |
-| Theorem | `order_of_power` | 160 |
-| Theorem | `lcm_orders_divides_lambda` | 222 |
-| Lemma | `is_order_2_of` | 249 |
-| Theorem | `minus1_order_2_rsa_test` | 263 |
-| Theorem | `mixed67_order_2_rsa_test` | 269 |
-| Theorem | `lcm_two_order2_not_lambda` | 275 |
-| Theorem | `is_order_pin_3_80` | 285 |
-| Theorem | `pin_unit_3_coprime` | 312 |
-| Theorem | `pin_attains_lambda` | 316 |
-| Theorem | `orders_generate_lambda_pin` | 329 |
-| Lemma | `powm_eq_1_iff_order_divides` | 336 |
-| Lemma | `pow2_divides_pow2` | 347 |
-| Theorem | `two_height_is_val2_ord` | 370 |
-| Theorem | `order_2_mod_11` | 429 |
-| Theorem | `order_2_mod_17` | 440 |
-| Theorem | `two_height_independent_of_odd_multiple` | 453 |
-| Theorem | `height_is_val2_ord_textbook` | 469 |
+| Lemma | `is_order_unique` | 34 |
+| Lemma | `powm_one_of_divide` | 47 |
+| Theorem | `order_iff_divides` | 63 |
+| Lemma | `order_exists_from_annihilator` | 85 |
+| Theorem | `order_exists_prime` | 135 |
+| Theorem | `order_exists_semiprime` | 149 |
+| Theorem | `order_of_power` | 166 |
+| Theorem | `lcm_orders_divides_lambda` | 228 |
+| Lemma | `is_order_2_of` | 255 |
+| Theorem | `minus1_order_2_rsa_test` | 269 |
+| Theorem | `mixed67_order_2_rsa_test` | 275 |
+| Theorem | `lcm_two_order2_not_lambda` | 281 |
+| Theorem | `is_order_pin_3_80` | 291 |
+| Theorem | `pin_unit_3_coprime` | 318 |
+| Theorem | `pin_attains_lambda` | 322 |
+| Theorem | `orders_generate_lambda_pin` | 335 |
+| Lemma | `powm_eq_1_iff_order_divides` | 342 |
+| Lemma | `pow2_divides_pow2` | 353 |
+| Theorem | `two_height_is_val2_ord` | 376 |
+| Theorem | `order_2_mod_11` | 435 |
+| Theorem | `order_2_mod_17` | 446 |
+| Theorem | `two_height_independent_of_odd_multiple` | 459 |
+| Theorem | `height_is_val2_ord_textbook` | 475 |
+| Lemma | `zseq_length` | 515 |
+| Lemma | `zseq_In_bounds` | 522 |
+| Lemma | `zseq_Forall_distinct_head` | 535 |
+| Lemma | `zseq_pairwise_distinct` | 555 |
+| Lemma | `units_mod_prime_length` | 571 |
+| Lemma | `units_mod_prime_In` | 575 |
+| Lemma | `units_mod_prime_coprime` | 585 |
+| Lemma | `units_mod_prime_distinct` | 597 |
+| Lemma | `units_mod_prime_nonnil` | 607 |
+| Lemma | `order_mul_coprime` | 615 |
+| Lemma | `order_of_divisor_power` | 686 |
+| Lemma | `order_lcm_attained` | 715 |
+| Lemma | `exists_max_order_in` | 746 |
+| Lemma | `zseq_In_interval` | 780 |
+| Lemma | `unit_mod_in_list` | 793 |
+| Lemma | `is_order_mod_base` | 814 |
 
 ## `Paillier.v`
 
@@ -3267,4 +3284,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2229 theorems/lemmas/corollaries/examples across 116 files._
+_2245 theorems/lemmas/corollaries/examples across 116 files._

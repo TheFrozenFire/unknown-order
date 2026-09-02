@@ -101,6 +101,7 @@ Constructible torsion `H` is a family parameter
 | nodiv tape `gra_deg_bound ≤ 3` | `deg P ≤ 3`, so `deg(P^3−X) < 10`; vanishing on units ⇒ `N \|` coeffs | `gra_nodiv_degree_le`, `residual_nodiv_bound_le3_Q_lt10`, `residual_nodiv_short_ZN_units_divides_N` | two squarings (bound 4); trapdoor `X^{27}` |
 | exact `deg(PQ)` / square `X^2` / cube `X^3` | `deg(PQ)=deg P+deg Q` when both nonzero; `X^6−X` and `X^9−X` linear `−1`, unit 2 not a root | `poly_degree_mul`, `residual_square_cannot_vanish_on_ZN_units`, `residual_cube_cannot_vanish_on_ZN_units`, `residual_trapdoor_inverts_pin` | forbidding `X^{27}` as a map on units; `N\|`all coeffs contradicts eval-at-2 for a general large `P` |
 | pin unit `3` | `ord(3)=λ=80` | `is_order_pin_3_80`, `orders_generate_lambda_pin` | sampling-completeness for every `N` (`orders_generate_lambda_named`) |
+| lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | a primitive root in `𝔽_p*` (max order + `X^d−1`); CRT of local generators is `λ` |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
@@ -116,7 +117,7 @@ Constructible torsion `H` is a family parameter
 | residual leaf + mismatch | `gcd(x^k−1,N)` is a proper factor (leaf unused; mismatch is load-bearing) | `residual_mismatch_factors`, `residual_mismatch_factors_pin` | `srsa_residual_leaf` as `Problem_Factor` on its own; RSA ≡ or ≢ factoring; PPT |
 | every unit | an `e`-th power | `rsa_units_are_eth_powers` | a decision problem on units |
 
-CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`. Residual GRA dichotomy: `cas/146_residual_gra.gp`. GRA denotation / `λ` attained: `cas/147_gra_denotes.gp`. Low-degree vanishing on units: `cas/148_low_degree_units.gp`. Low-degree roots bound: `cas/149_low_degree_roots.gp`. CRT lift of units-vanishing: `cas/150_crt_units_roots.gp`. Nodiv tape degree bound: `cas/151_tape_degree.gp`. Exact degree / square and cube miss units / trapdoor outside: `cas/152_gra_settle.gp`.
+CAS pin: `cas/18_hardness.gp`. Order / residual / Factor arrows: `cas/145_order_arrows.gp`. Residual GRA dichotomy: `cas/146_residual_gra.gp`. GRA denotation / `λ` attained: `cas/147_gra_denotes.gp`. Low-degree vanishing on units: `cas/148_low_degree_units.gp`. Low-degree roots bound: `cas/149_low_degree_roots.gp`. CRT lift of units-vanishing: `cas/150_crt_units_roots.gp`. Nodiv tape degree bound: `cas/151_tape_degree.gp`. Exact degree / square and cube miss units / trapdoor outside: `cas/152_gra_settle.gp`. Lcm of orders / CRT generator attains `λ`: `cas/153_order_lambda.gp`.
 
 ## Decision neighbours (not RSA, not formalized)
 

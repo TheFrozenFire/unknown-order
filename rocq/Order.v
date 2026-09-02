@@ -1,8 +1,11 @@
 From Stdlib Require Import ZArith.
 From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
+From Stdlib Require Import List.
+Import ListNotations.
 
 Require Import RocqProofs.NumberTheory.
+Require Import RocqProofs.ZPoly.
 Require Import RSA.
 Require Import UnknownOrder.
 Require Import Hardness.
@@ -20,8 +23,11 @@ Open Scope Z_scope.
     [v₂(ord)].
 
     Completeness of sampling orders to recover [λ] is
-    [orders_generate_lambda_named], discharged only by CAS on
-    small [N] ([cas/25_order.gp]). *)
+    [orders_generate_lambda_named], unused refuse of a density
+    statement ([cas/25_order.gp]).  The lcm of two unit orders is
+    again a unit order ([order_lcm_attained]).  Existence of a
+    unit of order [λ] for general [N=pq] still needs a primitive
+    root in [𝔽_p*] and CRT of local generators ([cas/153]). *)
 
 (** ** Uniqueness and the divide criterion *)
 
@@ -489,4 +495,332 @@ Proof.
     + assert (odd_part 8 = 1) as H8 by (vm_compute; reflexivity).
       rewrite H8. exists 0%Z. reflexivity.
     + apply Z.divide_refl.
+Qed.
+
+(** ** A unit of order [λ] for general [N = pq]
+
+    [orders_generate_lambda_named] stays unused: it is sampling
+    completeness, not existence.  [order_lcm_attained]: the lcm
+    of two unit orders is the order of a unit.  A maximal-order
+    unit of [𝔽_p*] is then a primitive root once [X^d−1] cannot
+    vanish on all of [𝔽_p*] for [d < p−1]; CRT of two local
+    generators has order [λ].  Cross-confirmed by [cas/153]. *)
+
+Fixpoint zseq (start : Z) (n : nat) : list Z :=
+  match n with
+  | O => nil
+  | S n' => start :: zseq (start + 1) n'
+  end.
+
+Lemma zseq_length : forall start n, length (zseq start n) = n.
+Proof.
+  intros start n. revert start. induction n as [|n IH]; intros start; simpl.
+  - reflexivity.
+  - rewrite IH. reflexivity.
+Qed.
+
+Lemma zseq_In_bounds :
+  forall start n x,
+    In x (zseq start n) ->
+    start <= x < start + Z.of_nat n.
+Proof.
+  intros start n. revert start.
+  induction n as [|n IH]; intros start x Hin; simpl in Hin.
+  - contradiction.
+  - destruct Hin as [Heq | Hin].
+    + subst x. lia.
+    + pose proof (IH (start + 1) x Hin). lia.
+Qed.
+
+Lemma zseq_Forall_distinct_head :
+  forall p start n,
+    1 < p ->
+    0 <= start ->
+    start + Z.of_nat (S n) <= p ->
+    Forall (fun b => ~ (p | b - start)) (zseq (start + 1) n).
+Proof.
+  intros p start n Hp Hs Hle.
+  apply Forall_forall. intros b Hin [k Hk].
+  pose proof (zseq_In_bounds (start + 1) n b Hin) as Hb.
+  assert (Hlo : 1 <= b - start) by lia.
+  assert (Hhi : b < p).
+  { replace (Z.of_nat (S n)) with (1 + Z.of_nat n) in Hle
+      by (rewrite Nat2Z.inj_succ; unfold Z.succ; lia).
+    lia. }
+  replace b with (start + (b - start)) in Hhi by ring.
+  rewrite Hk in Hhi, Hlo.
+  destruct k as [|k|k]; nia.
+Qed.
+
+Lemma zseq_pairwise_distinct :
+  forall p start n,
+    1 < p ->
+    0 <= start ->
+    start + Z.of_nat n <= p ->
+    pairwise_distinct_mod p (zseq start n).
+Proof.
+  intros p start n Hp Hs Hle. revert start Hs Hle.
+  induction n as [|n IH]; intros start Hs Hle; [simpl; exact I|].
+  simpl. split.
+  - apply zseq_Forall_distinct_head; lia.
+  - apply IH; lia.
+Qed.
+
+Definition units_mod_prime (p : Z) : list Z := zseq 1 (Z.to_nat (p - 1)).
+
+Lemma units_mod_prime_length :
+  forall p, 1 < p -> length (units_mod_prime p) = Z.to_nat (p - 1).
+Proof. intros p Hp. unfold units_mod_prime. apply zseq_length. Qed.
+
+Lemma units_mod_prime_In :
+  forall p x,
+    1 < p ->
+    In x (units_mod_prime p) ->
+    1 <= x < p.
+Proof.
+  intros p x Hp Hin. unfold units_mod_prime in Hin.
+  pose proof (zseq_In_bounds 1 (Z.to_nat (p - 1)) x Hin). lia.
+Qed.
+
+Lemma units_mod_prime_coprime :
+  forall p,
+    Z.prime p ->
+    Forall (fun a => Z.coprime a p) (units_mod_prime p).
+Proof.
+  intros p Hp. apply Forall_forall. intros x Hin.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (units_mod_prime_In p x ltac:(lia) Hin).
+  apply rel_prime_iff_coprime, rel_prime_le_prime;
+    [apply prime_alt; exact Hp | lia].
+Qed.
+
+Lemma units_mod_prime_distinct :
+  forall p,
+    Z.prime p ->
+    pairwise_distinct_mod p (units_mod_prime p).
+Proof.
+  intros p Hp. unfold units_mod_prime.
+  pose proof (Z.prime_ge_2 p Hp).
+  apply zseq_pairwise_distinct; lia.
+Qed.
+
+Lemma units_mod_prime_nonnil :
+  forall p, 1 < p -> units_mod_prime p <> [].
+Proof.
+  intros p Hp. unfold units_mod_prime.
+  destruct (Z.to_nat (p - 1)) eqn:Hnat; [|discriminate].
+  apply (f_equal Z.of_nat) in Hnat. rewrite Z2Nat.id in Hnat; lia.
+Qed.
+
+Lemma order_mul_coprime :
+  forall n a b ka kb,
+    1 < n ->
+    Z.coprime a n ->
+    Z.coprime b n ->
+    is_order n a ka ->
+    is_order n b kb ->
+    Z.gcd ka kb = 1 ->
+    is_order n ((a * b) mod n) (ka * kb).
+Proof.
+  intros n a b ka kb Hn Hca Hcb [Hka [Ha1 Hamin]] [Hkb [Hb1 Hbmin]] Hg.
+  split; [nia|]. split.
+  - rewrite powm_mod_base by lia.
+    rewrite powm_mul_base by nia.
+    assert (Ha : powm a (ka * kb) n = 1).
+    { rewrite (powm_one_mul a ka kb n) by (try lia; exact Ha1).
+      apply Z.mod_1_l. lia. }
+    assert (Hb : powm b (ka * kb) n = 1).
+    { rewrite (Z.mul_comm ka kb).
+      rewrite (powm_one_mul b kb ka n) by (try lia; exact Hb1).
+      apply Z.mod_1_l. lia. }
+    rewrite Ha, Hb, Z.mul_1_l. apply Z.mod_1_l. lia.
+  - intros t [Htpos Htlt] Htpow.
+    rewrite powm_mod_base in Htpow by lia.
+    assert (Hakt : powm a (t * kb) n = 1).
+    { assert (Hab : powm (a * b) (t * kb) n = 1).
+      { rewrite (powm_one_mul (a * b) t kb n);
+          [apply Z.mod_1_l; lia | lia | lia | lia | exact Htpow]. }
+      rewrite powm_mul_base in Hab by nia.
+      assert (Hbt : powm b (t * kb) n = 1).
+      { rewrite (Z.mul_comm t kb).
+        rewrite (powm_one_mul b kb t n);
+          [apply Z.mod_1_l; lia | lia | lia | lia | exact Hb1]. }
+      rewrite Hbt, Z.mul_1_r, Z.mod_small in Hab.
+      2: { unfold powm. apply Z.mod_pos_bound. lia. }
+      exact Hab. }
+    assert (Hbkt : powm b (t * ka) n = 1).
+    { assert (Hab : powm (a * b) (t * ka) n = 1).
+      { rewrite (powm_one_mul (a * b) t ka n);
+          [apply Z.mod_1_l; lia | lia | lia | lia | exact Htpow]. }
+      rewrite powm_mul_base in Hab by nia.
+      assert (Hat : powm a (t * ka) n = 1).
+      { rewrite (Z.mul_comm t ka).
+        rewrite (powm_one_mul a ka t n);
+          [apply Z.mod_1_l; lia | lia | lia | lia | exact Ha1]. }
+      rewrite Hat, Z.mul_1_l, Z.mod_small in Hab.
+      2: { unfold powm. apply Z.mod_pos_bound. lia. }
+      exact Hab. }
+    assert (Hord_a : is_order n a ka).
+    { split; [exact Hka | split; [exact Ha1 | exact Hamin]]. }
+    assert (Hord_b : is_order n b kb).
+    { split; [exact Hkb | split; [exact Hb1 | exact Hbmin]]. }
+    assert (Hka_t : (ka | t)).
+    { apply Z.gauss with kb; [| exact Hg].
+      rewrite Z.mul_comm.
+      apply (order_divides_annihilator n a ka (t * kb));
+        [lia | nia | exact Hord_a | exact Hakt]. }
+    assert (Hkb_t : (kb | t)).
+    { apply Z.gauss with ka; [| rewrite Z.gcd_comm; exact Hg].
+      rewrite Z.mul_comm.
+      apply (order_divides_annihilator n b kb (t * ka));
+        [lia | nia | exact Hord_b | exact Hbkt]. }
+    destruct Hkb_t as [r Hr].
+    assert (Hkar : (ka | kb * r)).
+    { replace (kb * r) with t by (rewrite Hr; ring). exact Hka_t. }
+    apply (Z.gauss ka kb r) in Hkar; [| exact Hg].
+    destruct Hkar as [s Hs].
+    assert (t = ka * kb * s) by nia.
+    destruct s as [|s|s]; nia.
+Qed.
+
+Lemma order_of_divisor_power :
+  forall n a d d',
+    1 < n ->
+    0 < d' ->
+    (d' | d) ->
+    is_order n a d ->
+    is_order n (powm a (d / d') n) d'.
+Proof.
+  intros n a d d' Hn Hd' Hdiv Hord.
+  destruct Hdiv as [q Hq].
+  assert (0 < d) by apply Hord.
+  assert (0 < q) by (destruct q as [|q|q]; nia).
+  assert (d / d' = q) as Hquot.
+  { rewrite Hq, Z.div_mul; lia. }
+  rewrite Hquot.
+  pose proof (order_of_power n a d q Hn ltac:(lia) Hord) as Hor.
+  replace (d / Z.gcd d q) with d' in Hor.
+  2: { rewrite Hq.
+       assert (Z.gcd (q * d') q = q) as Hgq.
+       { rewrite Z.gcd_comm.
+         transitivity (Z.gcd (q * 1) (q * d')).
+         - f_equal; lia.
+         - assert (Heq : Z.gcd (q * 1) (q * d') = q * Z.gcd 1 d').
+           { apply Z.gcd_mul_mono_l_nonneg. lia. }
+           rewrite Heq, Z.gcd_1_l, Z.mul_1_r. reflexivity. }
+       rewrite Hgq. rewrite (Z.mul_comm q d'), Z.div_mul; lia. }
+  exact Hor.
+Qed.
+
+Lemma order_lcm_attained :
+  forall n a b ka kb,
+    1 < n ->
+    Z.coprime a n ->
+    Z.coprime b n ->
+    is_order n a ka ->
+    is_order n b kb ->
+    exists c, Z.coprime c n /\ is_order n c (Z.lcm ka kb).
+Proof.
+  intros n a b ka kb Hn Hca Hcb Hoa Hob.
+  assert (Hka : 0 < ka) by apply Hoa.
+  assert (Hkb : 0 < kb) by apply Hob.
+  destruct (lcm_coprime_factors ka kb Hka Hkb)
+    as [ka' [kb' [Hka'pos [Hkb'pos [Hka'd [Hkb'd [Hg1 Hprod]]]]]]].
+  set (a' := powm a (ka / ka') n).
+  set (b' := powm b (kb / kb') n).
+  assert (Horda' : is_order n a' ka').
+  { unfold a'. apply order_of_divisor_power; [lia | lia | exact Hka'd | exact Hoa]. }
+  assert (Hordb' : is_order n b' kb').
+  { unfold b'. apply order_of_divisor_power; [lia | lia | exact Hkb'd | exact Hob]. }
+  assert (Hca' : Z.coprime a' n).
+  { unfold a'. apply coprime_powm; [lia | apply Z.div_pos; lia | exact Hca]. }
+  assert (Hcb' : Z.coprime b' n).
+  { unfold b'. apply coprime_powm; [lia | apply Z.div_pos; lia | exact Hcb]. }
+  exists ((a' * b') mod n). split.
+  - unfold Z.coprime. rewrite Z.gcd_mod_l by lia.
+    apply Z.coprime_mul_l; [exact Hca' | exact Hcb'].
+  - rewrite <- Hprod.
+    apply order_mul_coprime; [lia | exact Hca' | exact Hcb' | exact Horda' | exact Hordb' | exact Hg1].
+Qed.
+
+Lemma exists_max_order_in :
+  forall p xs,
+    Z.prime p ->
+    Forall (fun a => Z.coprime a p) xs ->
+    xs <> [] ->
+    exists a k,
+      In a xs /\ is_order p a k /\
+      forall b kb, In b xs -> is_order p b kb -> kb <= k.
+Proof.
+  intros p xs Hp. induction xs as [|x rest IH]; intros Hcop Hne.
+  - contradiction.
+  - destruct rest as [|y rest'].
+    + apply Forall_inv in Hcop.
+      destruct (order_exists_prime p x Hp Hcop) as [k Hk].
+      exists x, k. split; [left; reflexivity|]. split; [exact Hk|].
+      intros b kb Hin Hob.
+      destruct Hin as [Heq | []]. subst b.
+      pose proof (@is_order_unique p x k kb Hk Hob) as Huk. lia.
+    + assert (Hrest : Forall (fun a => Z.coprime a p) (y :: rest')).
+      { apply Forall_inv_tail in Hcop. exact Hcop. }
+      destruct (IH Hrest ltac:(discriminate)) as [a0 [k0 [Hin0 [Hor0 Hmax0]]]].
+      apply Forall_inv in Hcop.
+      destruct (order_exists_prime p x Hp Hcop) as [kx Horx].
+      destruct (Z.le_ge_cases kx k0) as [Hle | Hge].
+      * exists a0, k0. split; [right; exact Hin0|]. split; [exact Hor0|].
+        intros b kb Hin Hob. destruct Hin as [Heq | Hin].
+        -- subst b. pose proof (@is_order_unique p x kx kb Horx Hob) as Huk. lia.
+        -- apply (Hmax0 b kb); [exact Hin | exact Hob].
+      * exists x, kx. split; [left; reflexivity|]. split; [exact Horx|].
+        intros b kb Hin Hob. destruct Hin as [Heq | Hin].
+        -- subst b. pose proof (@is_order_unique p x kx kb Horx Hob) as Huk. lia.
+        -- pose proof (Hmax0 b kb Hin Hob). lia.
+Qed.
+
+Lemma zseq_In_interval :
+  forall start n x,
+    start <= x < start + Z.of_nat n ->
+    In x (zseq start n).
+Proof.
+  intros start n. revert start.
+  induction n as [|n IH]; intros start x Hx; simpl.
+  - lia.
+  - destruct (Z.eq_dec x start) as [Heq | Hne].
+    + left. symmetry. exact Heq.
+    + right. apply IH. lia.
+Qed.
+
+Lemma unit_mod_in_list :
+  forall p a,
+    Z.prime p ->
+    Z.coprime a p ->
+    In (a mod p) (units_mod_prime p).
+Proof.
+  intros p a Hp Hcop.
+  pose proof (Z.prime_ge_2 p Hp).
+  assert (0 < a mod p < p).
+  { pose proof (Z.mod_pos_bound a p ltac:(lia)).
+    split; [| lia].
+    destruct (Z.eq_dec (a mod p) 0) as [Hz | Hnz]; [| lia].
+    apply Z.mod_divide in Hz; [| lia].
+    unfold Z.coprime in Hcop.
+    assert (HpG : (p | Z.gcd a p)).
+    { apply Z.gcd_greatest; [exact Hz | apply Z.divide_refl]. }
+    rewrite Hcop in HpG. apply Z.divide_1_r in HpG. lia. }
+  unfold units_mod_prime.
+  apply zseq_In_interval. lia.
+Qed.
+
+Lemma is_order_mod_base :
+  forall n a k,
+    1 < n ->
+    is_order n a k ->
+    is_order n (a mod n) k.
+Proof.
+  intros n a k Hn [Hk [H1 Hmin]].
+  rewrite <- (powm_mod_base a k n) in H1 by lia.
+  split; [exact Hk|]. split; [exact H1|].
+  intros k' Hk' Hpow.
+  rewrite powm_mod_base in Hpow by lia.
+  apply (Hmin k' Hk' Hpow).
 Qed.

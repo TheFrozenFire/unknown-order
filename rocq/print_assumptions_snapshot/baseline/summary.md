@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2229 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2245 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2229 results across 116 files.
+Captured for 2245 results across 116 files.
 
 Counts:
 
@@ -1324,29 +1324,45 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `is_order_unique` | 28 | 0 | 0 | OK |
-| `powm_one_of_divide` | 41 | 0 | 0 | OK |
-| `order_iff_divides` | 57 | 0 | 0 | OK |
-| `order_exists_from_annihilator` | 79 | 0 | 0 | OK |
-| `order_exists_prime` | 129 | 0 | 0 | OK |
-| `order_exists_semiprime` | 143 | 0 | 0 | OK |
-| `order_of_power` | 160 | 0 | 0 | OK |
-| `lcm_orders_divides_lambda` | 222 | 0 | 0 | OK |
-| `is_order_2_of` | 249 | 0 | 0 | OK |
-| `minus1_order_2_rsa_test` | 263 | 0 | 0 | OK |
-| `mixed67_order_2_rsa_test` | 269 | 0 | 0 | OK |
-| `lcm_two_order2_not_lambda` | 275 | 0 | 0 | OK |
-| `is_order_pin_3_80` | 285 | 0 | 0 | OK |
-| `pin_unit_3_coprime` | 312 | 0 | 0 | OK |
-| `pin_attains_lambda` | 316 | 0 | 0 | OK |
-| `orders_generate_lambda_pin` | 329 | 0 | 0 | OK |
-| `powm_eq_1_iff_order_divides` | 336 | 0 | 0 | OK |
-| `pow2_divides_pow2` | 347 | 0 | 0 | OK |
-| `two_height_is_val2_ord` | 370 | 0 | 0 | OK |
-| `order_2_mod_11` | 429 | 0 | 0 | OK |
-| `order_2_mod_17` | 440 | 0 | 0 | OK |
-| `two_height_independent_of_odd_multiple` | 453 | 0 | 0 | OK |
-| `height_is_val2_ord_textbook` | 469 | 0 | 0 | OK |
+| `is_order_unique` | 34 | 0 | 0 | OK |
+| `powm_one_of_divide` | 47 | 0 | 0 | OK |
+| `order_iff_divides` | 63 | 0 | 0 | OK |
+| `order_exists_from_annihilator` | 85 | 0 | 0 | OK |
+| `order_exists_prime` | 135 | 0 | 0 | OK |
+| `order_exists_semiprime` | 149 | 0 | 0 | OK |
+| `order_of_power` | 166 | 0 | 0 | OK |
+| `lcm_orders_divides_lambda` | 228 | 0 | 0 | OK |
+| `is_order_2_of` | 255 | 0 | 0 | OK |
+| `minus1_order_2_rsa_test` | 269 | 0 | 0 | OK |
+| `mixed67_order_2_rsa_test` | 275 | 0 | 0 | OK |
+| `lcm_two_order2_not_lambda` | 281 | 0 | 0 | OK |
+| `is_order_pin_3_80` | 291 | 0 | 0 | OK |
+| `pin_unit_3_coprime` | 318 | 0 | 0 | OK |
+| `pin_attains_lambda` | 322 | 0 | 0 | OK |
+| `orders_generate_lambda_pin` | 335 | 0 | 0 | OK |
+| `powm_eq_1_iff_order_divides` | 342 | 0 | 0 | OK |
+| `pow2_divides_pow2` | 353 | 0 | 0 | OK |
+| `two_height_is_val2_ord` | 376 | 0 | 0 | OK |
+| `order_2_mod_11` | 435 | 0 | 0 | OK |
+| `order_2_mod_17` | 446 | 0 | 0 | OK |
+| `two_height_independent_of_odd_multiple` | 459 | 0 | 0 | OK |
+| `height_is_val2_ord_textbook` | 475 | 0 | 0 | OK |
+| `zseq_length` | 515 | 0 | 0 | OK |
+| `zseq_In_bounds` | 522 | 0 | 0 | OK |
+| `zseq_Forall_distinct_head` | 535 | 0 | 0 | OK |
+| `zseq_pairwise_distinct` | 555 | 0 | 0 | OK |
+| `units_mod_prime_length` | 571 | 0 | 0 | OK |
+| `units_mod_prime_In` | 575 | 0 | 0 | OK |
+| `units_mod_prime_coprime` | 585 | 0 | 0 | OK |
+| `units_mod_prime_distinct` | 597 | 0 | 0 | OK |
+| `units_mod_prime_nonnil` | 607 | 0 | 0 | OK |
+| `order_mul_coprime` | 615 | 0 | 0 | OK |
+| `order_of_divisor_power` | 686 | 0 | 0 | OK |
+| `order_lcm_attained` | 715 | 0 | 0 | OK |
+| `exists_max_order_in` | 746 | 0 | 0 | OK |
+| `zseq_In_interval` | 780 | 0 | 0 | OK |
+| `unit_mod_in_list` | 793 | 0 | 0 | OK |
+| `is_order_mod_base` | 814 | 0 | 0 | OK |
 
 ## Paillier.v
 

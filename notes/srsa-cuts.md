@@ -338,6 +338,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | CRT lift of units-vanishing to `N \|` coeffs | `residual_low_degree_ZN_units_divides_N` / `residual_nodiv_low_degree_ZN_units_divides_N` / `residual_*_cannot_vanish_on_ZN_units` | `SrsaResidualGRA.v` | `150` |
 | nodiv tape degree bound | `gra_nodiv_degree_le` / `residual_nodiv_bound_le3_Q_lt10` / `residual_nodiv_short_ZN_units_divides_N` | `GenericRing.v`, `SrsaResidualGRA.v` | `151` |
 | exact deg; square/cube miss units | `poly_degree_mul` / `residual_square_*` / `residual_cube_*` / `residual_trapdoor_inverts_pin` | `ZPoly.v`, `SrsaResidualGRA.v` | `152` |
+| lcm of unit orders attained | `order_lcm_attained` / `order_mul_coprime` | `Order.v` | `153` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |
