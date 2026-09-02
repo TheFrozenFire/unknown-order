@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 1517 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 1542 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 1517 results across 104 files.
+Captured for 1542 results across 105 files.
 
 Counts:
 
@@ -62,6 +62,36 @@ Counts:
 | `all_bits_value_nonneg` | 36 | 0 | 0 | OK |
 | `all_bits_qap` | 42 | 0 | 0 | OK |
 | `three_bit_encoding` | 53 | 0 | 0 | OK |
+
+## ArithShape.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `arith_newton_inv3` | 27 | 0 | 0 | OK |
+| `arith_newton_from_one` | 31 | 0 | 0 | OK |
+| `arith_e5_divides_yminus1` | 39 | 0 | 0 | OK |
+| `arith_e7_divides_yminus1` | 43 | 0 | 0 | OK |
+| `arith_e7_residual` | 47 | 0 | 0 | OK |
+| `arith_xy_period_residual` | 60 | 0 | 0 | OK |
+| `arith_xy_period_no_split` | 71 | 0 | 0 | OK |
+| `arith_witness_gap_no_split` | 83 | 0 | 0 | OK |
+| `arith_takagi_shape` | 89 | 0 | 0 | OK |
+| `arith_takagi_euler_p2` | 95 | 0 | 0 | OK |
+| `arith_takagi_p_on_tape` | 99 | 0 | 0 | OK |
+| `arith_double_y_not_root` | 105 | 0 | 0 | OK |
+| `prime_37` | 112 | 0 | 0 | OK |
+| `arith_nextprime_e37` | 127 | 0 | 0 | OK |
+| `arith_nextprime_residual` | 131 | 0 | 0 | OK |
+| `arith_nextprime_root_is_49` | 142 | 0 | 0 | OK |
+| `arith_cf_euclidean` | 149 | 0 | 0 | OK |
+| `arith_cf_convergents_not_root` | 155 | 0 | 0 | OK |
+| `arith_two_moduli_coprime` | 163 | 0 | 0 | OK |
+| `arith_two_moduli_same_x` | 167 | 0 | 0 | OK |
+| `three_prime_357` | 174 | 0 | 0 | OK |
+| `arith_mixed_pqr_is_factor` | 181 | 0 | 0 | OK |
+| `arith_composite_e15_shares_lambda` | 193 | 0 | 0 | OK |
+| `arith_36_not_in_ltwo` | 209 | 0 | 0 | OK |
+| `arith_two_and_thirtysix_same_order_period` | 213 | 0 | 0 | OK |
 
 ## AuxBil.v
 

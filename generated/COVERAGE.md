@@ -66,6 +66,50 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `all_bits_qap` | 42 |
 | Theorem | `three_bit_encoding` | 53 |
 
+## `ArithShape.v`
+
+- L17: Twelve arith, peel-gap, and modulus-shape inroads
+  - L25: 1. Newton iteration in [(Z/NZ)]
+  - L37: 2. [e | (y−1)]
+  - L58: 3. [x=y] with [e = ord(y)+1] (missing peel leaf)
+  - L81: 4. Fermat-on-the-witness [gcd(x−y, N)]
+  - L87: 5. Takagi [N=p²q], Hensel tape
+  - L103: 6. Public scaling [x = 2y]
+  - L110: 7. [e = nextprime(y)]
+  - L147: 8. Continued fraction of [y/N]
+  - L161: 9. Same [x], two coprime moduli
+  - L172: 10. Multiprime [N=pqr], mixed [√1]
+  - L191: 11. Factored composite [e = 15]
+  - L199: 12. DL of [y] in public base [2]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Theorem | `arith_newton_inv3` | 27 |
+| Theorem | `arith_newton_from_one` | 31 |
+| Theorem | `arith_e5_divides_yminus1` | 39 |
+| Theorem | `arith_e7_divides_yminus1` | 43 |
+| Theorem | `arith_e7_residual` | 47 |
+| Theorem | `arith_xy_period_residual` | 60 |
+| Theorem | `arith_xy_period_no_split` | 71 |
+| Theorem | `arith_witness_gap_no_split` | 83 |
+| Theorem | `arith_takagi_shape` | 89 |
+| Theorem | `arith_takagi_euler_p2` | 95 |
+| Theorem | `arith_takagi_p_on_tape` | 99 |
+| Theorem | `arith_double_y_not_root` | 105 |
+| Lemma | `prime_37` | 112 |
+| Theorem | `arith_nextprime_e37` | 127 |
+| Theorem | `arith_nextprime_residual` | 131 |
+| Theorem | `arith_nextprime_root_is_49` | 142 |
+| Theorem | `arith_cf_euclidean` | 149 |
+| Theorem | `arith_cf_convergents_not_root` | 155 |
+| Theorem | `arith_two_moduli_coprime` | 163 |
+| Theorem | `arith_two_moduli_same_x` | 167 |
+| Lemma | `three_prime_357` | 174 |
+| Theorem | `arith_mixed_pqr_is_factor` | 181 |
+| Theorem | `arith_composite_e15_shares_lambda` | 193 |
+| Theorem | `arith_36_not_in_ltwo` | 209 |
+| Theorem | `arith_two_and_thirtysix_same_order_period` | 213 |
+
 ## `AuxBil.v`
 
 - L10: Self-bilinear with auxiliary public data
@@ -2433,4 +2477,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_1517 theorems/lemmas/corollaries/examples across 104 files._
+_1542 theorems/lemmas/corollaries/examples across 105 files._

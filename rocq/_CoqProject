@@ -75,6 +75,7 @@ SolverRestrict.v
 DozenInroads.v
 SolverShape.v
 FilterShape.v
+ArithShape.v
 JagerSchwenk.v
 Cocks.v
 PotCheck.v

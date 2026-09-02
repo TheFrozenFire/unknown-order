@@ -202,6 +202,27 @@ Local correctness of `x`, public stand-ins for `λ`, and filters a TM can run wi
 
 None of these twelve is a proof that `srsa_residual_leaf` factors.
 
+### Arith, peel-gap, modulus shapes (`ArithShape.v`, CAS `132`)
+
+Newton / Euclidean arithmetic of `y`, a missing `x=y` period-of-`y` peel, Takagi and triprime tapes, and a public base that cannot represent the residual `y`.
+
+| # | Class | Pin identity | Residual? |
+|---|---|---|---|
+| 1 | Newton in `(ℤ/Nℤ)` | `3^{-1}≡125`; from `1` lands on `75`, `75³≡3≠36` | does not inhabit |
+| 2 | `e \|(y−1)` | `7\|35`, `60⁷≡36`; `5\|35` shares `λ` | mixed; `e=7` residual-shaped |
+| 3 | `x=y`, `e=ord(y)+1` | `36^{41}≡36`; `λ∤40`; `gcd(36^{40}−1,N)=N` | residual-shaped (peel gap), no split |
+| 4 | `gcd(x−y,N)` | `gcd(6,187)=1` | no split |
+| 5 | Takagi `N=p²q` | `N=45`, `λ=12`; `2⁶≡1 (mod 9)`; `3\|45` | `p` is a factor |
+| 6 | Public `x=2y` | `72³≡183≠36` | does not inhabit |
+| 7 | `e=nextprime(y)` | `37`, `49^{37}≡36` | residual-shaped leftover |
+| 8 | CF of `y/N` | `187=5·36+7`; convergents `1/5`, `5/26` | not a root |
+| 9 | Same `x`, two moduli | `42³≡36 (mod 187)≡235 (mod 247)`; `gcd=1` | does not factor either `N` |
+| 10 | Multiprime mixed `√1` | `N=105`; `gcd(x−1,N)` proper | splits; not the semiprime cube |
+| 11 | Composite `e=15` | `gcd(15,80)=5` | not residual |
+| 12 | DL in public base `2` | `36 ∉ ⟨2⟩` for exponents `0..40` | this base cannot represent `y` |
+
+None of these twelve is a proof that `srsa_residual_leaf` factors.
+
 ## Open / refused as slogans
 
 - Standard-model Factoring ≤ RSA (an `rsa_inverter` constructs a
