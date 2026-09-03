@@ -313,7 +313,10 @@ A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
 Every unit is a power of a primitive root (`primitive_root_generates`);
 Euler converse: `a^{(p−1)/3}≡1` ⇒ cube when `3 | p−1`
-(`cube_euler_converse`, CAS `154`).
+(`cube_euler_converse`, CAS `154`). Cube mod `N=pq` is CRT of
+local cubes (`cube_N_iff_both`); `a^{λ/3}≡1` is necessary and
+not sufficient (`cube_euler_lambda_not_sufficient_247` on
+named extra `13×19`; CAS `155`). Pin: every unit is a cube.
 `orders_generate_lambda_named` stays unused sampling-completeness.
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
@@ -346,6 +349,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | exact deg; square/cube miss units | `poly_degree_mul` / `residual_square_*` / `residual_cube_*` / `residual_trapdoor_inverts_pin` | `ZPoly.v`, `SrsaResidualGRA.v` | `152` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
+| cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

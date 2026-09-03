@@ -40,6 +40,10 @@ only with a written death in this file.
    `three_divides_lambda_forbids_e3`; CAS 86. Converse
    (Euler `=1` ⇒ cube): **Have** `primitive_root_generates`,
    `cube_euler_converse`, `cube_euler_iff`; CAS 154.
+   Cubic residuosity of `N=pq` is CRT of local cubes
+   (`cube_N_iff_both`). `a^{λ/3}≡1` is necessary, not sufficient
+   (`cube_euler_lambda_not_sufficient_247` on named extra `13×19`);
+   CAS 155. Pin: every unit is a cube (`pin_units_are_cubes`).
 
 2. **Evaluation pairing on `μ_n` for `n=2,3,4,6`.** *(this sitting)*
    **Have** `eval_pair_reduce_mod_n`, `eval_pair_mu2_on_mixed`,

@@ -22,8 +22,14 @@ Open Scope Z_scope.
     decision problem is live exactly when textbook RSA at [e = 3]
     is not.
 
-    Cross-confirmed by [cas/86_cubic_residue.gp] and
-    [cas/154_cube_euler.gp]. *)
+    Cubic residuosity of [N = pq] is CRT of the local cubes
+    ([cube_N_iff_both]).  [a^{λ/3} ≡ 1] is necessary when [3 | λ]
+    and not sufficient: [7^{12} ≡ 1 (mod 247)] but [7] is not a
+    cube ([cas/155], named extra [13×19]).  On the pin, [gcd(3,λ)=1]
+    so every unit is a cube.
+
+    Cross-confirmed by [cas/86_cubic_residue.gp],
+    [cas/154_cube_euler.gp], and [cas/155_cube_modn.gp]. *)
 
 Definition is_cube (a p : Z) : Prop :=
   exists x, powm x 3 p = a mod p.
@@ -179,4 +185,202 @@ Proof.
   intros a p Hp Hne Hcop Hdiv. split.
   - intros [x Hx]. apply (cube_euler_one_direction a p x); assumption.
   - apply cube_euler_converse; assumption.
+Qed.
+
+Lemma cube_N_implies_local :
+  forall a p q,
+    Z.prime p ->
+    Z.prime q ->
+    is_cube a (p * q) ->
+    is_cube a p /\ is_cube a q.
+Proof.
+  intros a p q Hp Hq [x Hx].
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  split.
+  - exists x.
+    pose proof (powm_reduce_factor x 3 p q ltac:(lia) ltac:(lia) ltac:(lia)) as Hr.
+    rewrite Hx in Hr.
+    assert ((a mod (p * q)) mod p = a mod p) as Hred.
+    { apply Z.mod_mod_divide. exists q. ring. }
+    rewrite Hred in Hr. symmetry; exact Hr.
+  - exists x.
+    pose proof (powm_reduce_factor x 3 q p ltac:(lia) ltac:(lia) ltac:(lia)) as Hr.
+    rewrite Z.mul_comm in Hr.
+    rewrite Hx in Hr.
+    assert ((a mod (p * q)) mod q = a mod q) as Hred.
+    { apply Z.mod_mod_divide. exists p. ring. }
+    rewrite Hred in Hr. symmetry; exact Hr.
+Qed.
+
+Lemma cube_N_of_local :
+  forall a p q,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    is_cube a p ->
+    is_cube a q ->
+    is_cube a (p * q).
+Proof.
+  intros a p q Hp Hq Hneq [xp Hxp] [xq Hxq].
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  pose proof (prime_coprime_distinct p q Hp Hq Hneq) as Hcop.
+  set (x := Z.combinecong p q xp xq).
+  pose proof (Z.combinecong_sound_coprime p q xp xq Hcop) as [Hxp' Hxq'].
+  exists x.
+  unfold powm.
+  apply crt_mod_eq; [exact Hp | exact Hq | exact Hneq | | ].
+  - rewrite <- Z.mod_pow_l by lia.
+    unfold x. rewrite Hxp'.
+    rewrite Z.mod_pow_l by lia.
+    fold (powm xp 3 p). exact Hxp.
+  - rewrite <- Z.mod_pow_l by lia.
+    unfold x. rewrite Hxq'.
+    rewrite Z.mod_pow_l by lia.
+    fold (powm xq 3 q). exact Hxq.
+Qed.
+
+Theorem cube_N_iff_both :
+  forall a p q,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    is_cube a (p * q) <-> (is_cube a p /\ is_cube a q).
+Proof.
+  intros a p q Hp Hq Hneq. split.
+  - apply cube_N_implies_local; assumption.
+  - intros [Hp3 Hq3]. apply cube_N_of_local; assumption.
+Qed.
+
+Lemma cube_root_coprime :
+  forall x a n,
+    1 < n ->
+    Z.coprime a n ->
+    powm x 3 n = a mod n ->
+    Z.coprime x n.
+Proof.
+  intros x a n Hn Ha Hx.
+  unfold Z.coprime in *.
+  unfold powm in Hx.
+  apply mods_eq_iff_divides in Hx; [| lia].
+  assert (Z.gcd x n | a).
+  { assert (x ^ 3 = x * x * x) as Hcube.
+    { change 3 with (Z.succ (Z.succ 1)).
+      rewrite !Z.pow_succ_r by lia.
+      rewrite Z.pow_1_r. ring. }
+    assert (Z.gcd x n | (x * x * x)).
+    { apply Z.divide_mul_l. apply Z.divide_mul_l. apply Z.gcd_divide_l. }
+    rewrite <- Hcube in H.
+    assert (Z.gcd x n | n) by apply Z.gcd_divide_r.
+    assert (Z.gcd x n | (x ^ 3 - a)).
+    { apply Z.divide_trans with n; [exact H0 | exact Hx]. }
+    destruct H as [u Hu]. destruct H1 as [v Hv].
+    exists (u - v). nia. }
+  assert (Z.gcd x n | Z.gcd a n).
+  { apply Z.gcd_greatest; [exact H | apply Z.gcd_divide_r]. }
+  rewrite Ha in H0. apply Z.divide_1_r in H0.
+  pose proof (Z.gcd_nonneg x n). lia.
+Qed.
+
+Theorem cube_euler_lambda_necessary :
+  forall a p q,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    Z.coprime a (p * q) ->
+    (3 | lambda_semiprime p q) ->
+    is_cube a (p * q) ->
+    powm a (lambda_semiprime p q / 3) (p * q) = 1.
+Proof.
+  intros a p q Hp Hq Hneq Hcop Hdiv [x Hx].
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  pose proof (lambda_semiprime_pos p q Hp Hq).
+  assert (1 < p * q) by nia.
+  assert (Z.coprime x (p * q)) as Hcx.
+  { apply (cube_root_coprime x a (p * q)); [lia | exact Hcop | exact Hx]. }
+  destruct Hdiv as [t Ht].
+  assert (lambda_semiprime p q / 3 = t) as Hquot.
+  { rewrite Ht. apply Z.div_mul. lia. }
+  rewrite Hquot.
+  rewrite <- (powm_mod_base a t (p * q)) by lia.
+  rewrite <- Hx.
+  rewrite <- powm_mul_r by (try lia; nia).
+  replace (3 * t) with (lambda_semiprime p q) by (rewrite Ht; ring).
+  apply carmichael_semiprime; assumption.
+Qed.
+
+Lemma prime_7_cubic : Z.prime 7.
+Proof.
+  apply prime_alt. apply prime_intro; [lia|].
+  intros n Hn. apply rel_prime_iff_coprime. unfold Z.coprime.
+  assert (n = 1 \/ n = 2 \/ n = 3 \/ n = 4 \/ n = 5 \/ n = 6) by lia.
+  intuition subst; reflexivity.
+Qed.
+
+Lemma prime_13 : Z.prime 13.
+Proof.
+  apply prime_alt. apply prime_intro; [lia|].
+  intros n Hn. apply rel_prime_iff_coprime. unfold Z.coprime.
+  assert (n = 1 \/ n = 2 \/ n = 3 \/ n = 4 \/ n = 5 \/
+          n = 6 \/ n = 7 \/ n = 8 \/ n = 9 \/ n = 10 \/
+          n = 11 \/ n = 12) by lia.
+  intuition subst; reflexivity.
+Qed.
+
+Lemma prime_19 : Z.prime 19.
+Proof.
+  apply prime_alt. apply prime_intro; [lia|].
+  intros n Hn. apply rel_prime_iff_coprime. unfold Z.coprime.
+  assert (n = 1 \/ n = 2 \/ n = 3 \/ n = 4 \/ n = 5 \/
+          n = 6 \/ n = 7 \/ n = 8 \/ n = 9 \/ n = 10 \/
+          n = 11 \/ n = 12 \/ n = 13 \/ n = 14 \/ n = 15 \/
+          n = 16 \/ n = 17 \/ n = 18) by lia.
+  intuition subst; reflexivity.
+Qed.
+
+Theorem cube_mixed_5_not_global :
+  is_cube 5 13 /\ ~ is_cube 5 7 /\ ~ is_cube 5 91.
+Proof.
+  split.
+  - apply cube_euler_converse; [exact prime_13 | lia | vm_compute; reflexivity | exists 4; lia |].
+    vm_compute. reflexivity.
+  - split.
+    + intro Hc.
+      apply (proj1 (cube_euler_iff 5 7 prime_7_cubic ltac:(lia)
+                      ltac:(vm_compute; reflexivity) ltac:(exists 2; lia))) in Hc.
+      vm_compute in Hc. discriminate.
+    + intro Hc. change 91 with (13 * 7) in Hc.
+      apply cube_N_implies_local in Hc; [| exact prime_13 | exact prime_7_cubic].
+      destruct Hc as [_ Hq5].
+      apply (proj1 (cube_euler_iff 5 7 prime_7_cubic ltac:(lia)
+                      ltac:(vm_compute; reflexivity) ltac:(exists 2; lia))) in Hq5.
+      vm_compute in Hq5. discriminate.
+Qed.
+
+Theorem cube_euler_lambda_not_sufficient_247 :
+  Z.coprime 7 247 /\
+  powm 7 (lambda_semiprime 13 19 / 3) 247 = 1 /\
+  ~ is_cube 7 247.
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
+  intro Hc. change 247 with (13 * 19) in Hc.
+  apply cube_N_implies_local in Hc; [| exact prime_13 | exact prime_19].
+  destruct Hc as [Hp7 _].
+  apply (proj1 (cube_euler_iff 7 13 prime_13 ltac:(lia)
+                  ltac:(vm_compute; reflexivity) ltac:(exists 4; lia))) in Hp7.
+  vm_compute in Hp7. discriminate.
+Qed.
+
+Theorem pin_units_are_cubes :
+  forall a, Z.coprime a 187 -> is_cube a 187.
+Proof.
+  intros a Hcop.
+  change 187 with (11 * 17) in Hcop |- *.
+  apply coprime_semiprime in Hcop; [| exact prime_11 | exact prime_17 | lia].
+  destruct Hcop as [Hap Haq].
+  apply cube_N_of_local; [exact prime_11 | exact prime_17 | lia | | ].
+  - apply (cube_root_map_is_cube a 11 7 prime_11 ltac:(lia) Hap);
+      [vm_compute; reflexivity | lia].
+  - apply (cube_root_map_is_cube a 17 11 prime_17 ltac:(lia) Haq);
+      [vm_compute; reflexivity | lia].
 Qed.

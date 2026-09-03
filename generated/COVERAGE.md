@@ -527,12 +527,23 @@ in the Rocq tree.  Do not edit by hand.
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `cubing_invertible_on_units` | 31 |
-| Theorem | `cube_root_map_is_cube` | 60 |
-| Theorem | `cube_euler_one_direction` | 74 |
-| Theorem | `three_divides_lambda_forbids_e3` | 113 |
-| Theorem | `cube_euler_converse` | 131 |
-| Theorem | `cube_euler_iff` | 171 |
+| Theorem | `cubing_invertible_on_units` | 37 |
+| Theorem | `cube_root_map_is_cube` | 66 |
+| Theorem | `cube_euler_one_direction` | 80 |
+| Theorem | `three_divides_lambda_forbids_e3` | 119 |
+| Theorem | `cube_euler_converse` | 137 |
+| Theorem | `cube_euler_iff` | 177 |
+| Lemma | `cube_N_implies_local` | 190 |
+| Lemma | `cube_N_of_local` | 215 |
+| Theorem | `cube_N_iff_both` | 242 |
+| Lemma | `cube_root_coprime` | 254 |
+| Theorem | `cube_euler_lambda_necessary` | 284 |
+| Lemma | `prime_7_cubic` | 311 |
+| Lemma | `prime_13` | 319 |
+| Lemma | `prime_19` | 329 |
+| Theorem | `cube_mixed_5_not_global` | 340 |
+| Theorem | `cube_euler_lambda_not_sufficient_247` | 359 |
+| Theorem | `pin_units_are_cubes` | 374 |
 
 ## `CyclicCount.v`
 
@@ -3301,4 +3312,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2261 theorems/lemmas/corollaries/examples across 116 files._
+_2272 theorems/lemmas/corollaries/examples across 116 files._

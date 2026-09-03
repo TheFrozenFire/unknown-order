@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2261 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2272 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2261 results across 116 files.
+Captured for 2272 results across 116 files.
 
 Counts:
 
@@ -458,12 +458,23 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `cubing_invertible_on_units` | 31 | 0 | 0 | OK |
-| `cube_root_map_is_cube` | 60 | 0 | 0 | OK |
-| `cube_euler_one_direction` | 74 | 0 | 0 | OK |
-| `three_divides_lambda_forbids_e3` | 113 | 0 | 0 | OK |
-| `cube_euler_converse` | 131 | 0 | 0 | OK |
-| `cube_euler_iff` | 171 | 0 | 0 | OK |
+| `cubing_invertible_on_units` | 37 | 0 | 0 | OK |
+| `cube_root_map_is_cube` | 66 | 0 | 0 | OK |
+| `cube_euler_one_direction` | 80 | 0 | 0 | OK |
+| `three_divides_lambda_forbids_e3` | 119 | 0 | 0 | OK |
+| `cube_euler_converse` | 137 | 0 | 0 | OK |
+| `cube_euler_iff` | 177 | 0 | 0 | OK |
+| `cube_N_implies_local` | 190 | 0 | 0 | OK |
+| `cube_N_of_local` | 215 | 0 | 0 | OK |
+| `cube_N_iff_both` | 242 | 0 | 0 | OK |
+| `cube_root_coprime` | 254 | 0 | 0 | OK |
+| `cube_euler_lambda_necessary` | 284 | 0 | 0 | OK |
+| `prime_7_cubic` | 311 | 0 | 0 | OK |
+| `prime_13` | 319 | 0 | 0 | OK |
+| `prime_19` | 329 | 0 | 0 | OK |
+| `cube_mixed_5_not_global` | 340 | 0 | 0 | OK |
+| `cube_euler_lambda_not_sufficient_247` | 359 | 0 | 0 | OK |
+| `pin_units_are_cubes` | 374 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
