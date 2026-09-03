@@ -266,6 +266,12 @@ The TM may emit more than `(x,e)`, or see several `y`.
 Named factoring algorithms as “solvers.” They split this pin because
 `N` is tiny or `p−1` is smooth, not because they inverted `y`.
 
+Dixon / QS combination (`dixon_24_37_splits`, CAS `161`) and NFS two-sided
+combination (`nfs_two_sided_splits`, CAS `163`) manufacture a congruence of
+squares from smooth relations; they split this pin because the factor base
+covers it, not because they inverted `y`. Setup identity `hom_quad_remainder`
+(CAS `162`). Notes: `notes/sieve-rsa.md`.
+
 Pollard `p−1` (`engine_pollard_p1`, `engine_pminus1_B8`), rho (`engine_rho_walk`, `engine_rho_x2_minus_1`), Fermat /
 Hart (`engine_fermat_splits`, `engine_hart_square`–`engine_fermat_recovers`), trial (`engine_trial_division`, `engine_trial_13_then_11`),
 Williams `p+1` (`engine_williams_pplus1`; `P=3` does not, `engine_williams_P3_no_split`), Fibonacci gcd

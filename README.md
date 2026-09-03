@@ -87,6 +87,15 @@ pattern splits `N` (`mixed_pqr_splits`). `λ(pqr)` annihilates units
 
 `QuadResidue.v`, `RabinWilliams.v`, `TwoPrimary.v`, `MultiPrime.v`. CAS `19`–`20`, `59`.
 
+### Sieve relations (QS / NFS payload)
+
+Dixon combination of B-smooth squares is a congruence of squares
+(`dixon_combination_splits`). NFS setup is a common root of two integer
+polynomials and the homogenised remainder `F ≡ GH (mod N)`. Two-sided even
+combination splits the pin. Cost stays out.
+
+`rocq/SieveRelation.v`, `notes/sieve-rsa.md`. CAS `161`–`163`.
+
 ### Second incarnation: `Cl(Δ)`
 
 Primitive forms, Gauss reduction, identity, inverse. `id ∘ f = f`. `f ∘ f⁻¹`
@@ -175,7 +184,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 114 witnesses, `cas/01`–`114`. PARI is the gated CAS; do not add OSCAR.
+CAS is 163 witnesses, `cas/01`–`163`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW

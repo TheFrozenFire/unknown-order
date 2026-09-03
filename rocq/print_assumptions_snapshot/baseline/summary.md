@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2332 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2365 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2332 results across 116 files.
+Captured for 2365 results across 117 files.
 
 Counts:
 
@@ -1844,6 +1844,44 @@ Counts:
 |---|---:|---:|---:|---|
 | `gcd_shared_prime` | 14 | 0 | 0 | OK |
 | `gcd_shared_prime_divides_both` | 29 | 0 | 0 | OK |
+
+## SieveRelation.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `even_nonneg_pow_square` | 36 | 0 | 0 | OK |
+| `square_times_square` | 50 | 0 | 0 | OK |
+| `even_exp_2_3_5_square` | 57 | 0 | 0 | OK |
+| `mul_mod_cong` | 67 | 0 | 0 | OK |
+| `dixon_two_relations` | 83 | 0 | 0 | OK |
+| `dixon_combination_splits` | 97 | 0 | 0 | OK |
+| `dixon_residues_even_exponents` | 116 | 0 | 0 | OK |
+| `dixon_24_37_cong` | 123 | 0 | 0 | OK |
+| `dixon_24_37_not_assoc` | 137 | 0 | 0 | OK |
+| `dixon_24_37_splits` | 145 | 0 | 0 | OK |
+| `dixon_24_37_gcd` | 160 | 0 | 0 | OK |
+| `dixon_14_already_square` | 165 | 0 | 0 | OK |
+| `hom_quad_remainder` | 185 | 0 | 0 | OK |
+| `hom_quad_cong` | 192 | 0 | 0 | OK |
+| `nfs_eval_irr` | 213 | 0 | 0 | OK |
+| `nfs_eval_red` | 217 | 0 | 0 | OK |
+| `nfs_common_root_irr` | 222 | 0 | 0 | OK |
+| `nfs_common_root_red` | 226 | 0 | 0 | OK |
+| `nfs_f_irr_disc_neg` | 230 | 0 | 0 | OK |
+| `nfs_neg19_not_square` | 234 | 0 | 0 | OK |
+| `nfs_f_red_splits_Z` | 241 | 0 | 0 | OK |
+| `nfs_hom_irr_pin` | 245 | 0 | 0 | OK |
+| `nfs_hom_red_pin` | 250 | 0 | 0 | OK |
+| `nfs_F_cong_GH_irr` | 255 | 0 | 0 | OK |
+| `nfs_F_cong_GH_red` | 263 | 0 | 0 | OK |
+| `nfs_two_sided_product` | 273 | 0 | 0 | OK |
+| `nfs_rel_minus15` | 292 | 0 | 0 | OK |
+| `nfs_rel_minus6` | 298 | 0 | 0 | OK |
+| `nfs_two_sided_pin_squares` | 304 | 0 | 0 | OK |
+| `nfs_two_sided_120_is_sqrt1` | 324 | 0 | 0 | OK |
+| `nfs_two_sided_splits` | 334 | 0 | 0 | OK |
+| `nfs_two_sided_gcd` | 347 | 0 | 0 | OK |
+| `nfs_onesided_no_split` | 353 | 0 | 0 | OK |
 
 ## SixthType.v
 

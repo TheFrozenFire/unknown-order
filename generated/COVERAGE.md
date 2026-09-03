@@ -2164,6 +2164,49 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `gcd_shared_prime` | 14 |
 | Theorem | `gcd_shared_prime_divides_both` | 29 |
 
+## `SieveRelation.v`
+
+- L15: Sieve relations: the algebraic engine of QS and NFS
+  - L34: Even exponents make a square
+  - L175: NFS setup: common root and homogenised remainder
+  - L271: Two-sided combination
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `even_nonneg_pow_square` | 36 |
+| Lemma | `square_times_square` | 50 |
+| Theorem | `even_exp_2_3_5_square` | 57 |
+| Lemma | `mul_mod_cong` | 67 |
+| Theorem | `dixon_two_relations` | 83 |
+| Theorem | `dixon_combination_splits` | 97 |
+| Theorem | `dixon_residues_even_exponents` | 116 |
+| Theorem | `dixon_24_37_cong` | 123 |
+| Lemma | `dixon_24_37_not_assoc` | 137 |
+| Theorem | `dixon_24_37_splits` | 145 |
+| Theorem | `dixon_24_37_gcd` | 160 |
+| Theorem | `dixon_14_already_square` | 165 |
+| Theorem | `hom_quad_remainder` | 185 |
+| Theorem | `hom_quad_cong` | 192 |
+| Theorem | `nfs_eval_irr` | 213 |
+| Theorem | `nfs_eval_red` | 217 |
+| Theorem | `nfs_common_root_irr` | 222 |
+| Theorem | `nfs_common_root_red` | 226 |
+| Theorem | `nfs_f_irr_disc_neg` | 230 |
+| Theorem | `nfs_neg19_not_square` | 234 |
+| Theorem | `nfs_f_red_splits_Z` | 241 |
+| Theorem | `nfs_hom_irr_pin` | 245 |
+| Theorem | `nfs_hom_red_pin` | 250 |
+| Theorem | `nfs_F_cong_GH_irr` | 255 |
+| Theorem | `nfs_F_cong_GH_red` | 263 |
+| Theorem | `nfs_two_sided_product` | 273 |
+| Lemma | `nfs_rel_minus15` | 292 |
+| Lemma | `nfs_rel_minus6` | 298 |
+| Theorem | `nfs_two_sided_pin_squares` | 304 |
+| Theorem | `nfs_two_sided_120_is_sqrt1` | 324 |
+| Theorem | `nfs_two_sided_splits` | 334 |
+| Theorem | `nfs_two_sided_gcd` | 347 |
+| Theorem | `nfs_onesided_no_split` | 353 |
+
 ## `SixthType.v`
 
 - L10: Directed sixth-type leftovers (Methods 3–8)
@@ -3376,4 +3419,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2332 theorems/lemmas/corollaries/examples across 116 files._
+_2365 theorems/lemmas/corollaries/examples across 117 files._
