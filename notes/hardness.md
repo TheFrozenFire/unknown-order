@@ -109,6 +109,7 @@ Constructible torsion `H` is a family parameter
 | `3 \| λ`, cube mod `N` | `a^{λ/3} ≡ 1` | `cube_euler_lambda_necessary` | `a^{λ/3}≡1` ⇒ cube (false: `cube_euler_lambda_not_sufficient_247`) |
 | `3 \| p−1`, primitive root `g` | kernel of cubing is `{1, g^{(p−1)/3}, g^{2(p−1)/3}}` | `omega_from_primitive_root`, `cube_kernel_three` | a cubic pairing of two hidden DLs |
 | `x^3 ≡ 1 (mod pq)` | `x^3 ≡ 1` both locally | `mu3_N_iff_locals`, `mixed_kernel_91` | enumerating all 9 roots as a named list |
+| alternating bilinear `e` on cyclic `μ₃` | `e(x,y) ≡ 1` | `alternating_bilinear_mu3_trivial` | a non-degenerate pairing of two hidden `μ₃` elements (needs a curve) |
 | pin unit, `x^3 ≡ 1` | `x ≡ 1` | `pin_cube_kernel_trivial` | — |
 | distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals` | sampling-completeness (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |

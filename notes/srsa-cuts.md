@@ -321,6 +321,10 @@ Cubic character takes values in `μ₃`; kernel of cubing is
 `{1,ω,ω²}` locally and CRT of those pairs on `N`
 (`cube_kernel_three`, `mixed_kernel_91`). Pin kernel is trivial
 (`pin_cube_kernel_trivial`, CAS `156`).
+An alternating bilinear map on cyclic `μ₃` is constantly 1
+(`alternating_bilinear_mu3_trivial`, CAS `157`). Eval pairing
+is not alternating. A pairing of two hidden `μ₃` elements
+needs a curve (`Refuse_elliptic_curve_branch`).
 `orders_generate_lambda_named` stays unused sampling-completeness.
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
@@ -355,6 +359,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
 | cubic character / kernel of cubing | `cube_kernel_three` / `mu3_N_iff_locals` / `pin_cube_kernel_trivial` / `mixed_kernel_91` | `CubicResidue.v` | `156` |
+| alternating bilinear on cyclic `μ₃` is trivial | `alternating_bilinear_mu3_trivial` / `eval_pair_omega_13_not_alternating` | `EvalPairing.v` | `157` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

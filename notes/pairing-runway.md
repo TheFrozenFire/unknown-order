@@ -54,6 +54,11 @@ only with a written death in this file.
    `omega_cube_is_one`, `eval_pair_mu3`, `mu2_is_mu6`,
    `eval_pair_mu6`; CAS 87. Target order divides `n` (at most 6).
    One argument is an integer in the clear.
+   Alternating bilinear maps on cyclic `μ₃` are the constant-1
+   pairing (`alternating_bilinear_mu3_trivial`; CAS 157).
+   Eval pairing is not alternating (`eval_pair_omega_13_not_alternating`).
+   A non-degenerate pairing of two hidden `μ₃` elements needs a
+   curve / extension (`Refuse_elliptic_curve_branch`).
 
 3. **Endomorphisms / infeasible inversion.** *(this sitting)*
    **Have** `rsa_gii_search_empty`, `power_endo_hom`,

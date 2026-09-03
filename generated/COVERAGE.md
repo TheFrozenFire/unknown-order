@@ -549,10 +549,11 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `cube_char_cubed_one` | 434 |
 | Lemma | `cube_char_mul` | 454 |
 | Lemma | `mu3_N_iff_locals` | 467 |
-| Theorem | `pin_cube_kernel_trivial` | 488 |
-| Theorem | `cube_kernel_three` | 506 |
-| Theorem | `omega_13_order_3` | 551 |
-| Theorem | `mixed_kernel_91` | 559 |
+| Lemma | `mu3_unique_one_prime` | 488 |
+| Theorem | `pin_cube_kernel_trivial` | 513 |
+| Theorem | `cube_kernel_three` | 531 |
+| Theorem | `omega_13_order_3` | 576 |
+| Theorem | `mixed_kernel_91` | 584 |
 
 ## `CyclicCount.v`
 
@@ -772,22 +773,36 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `EvalPairing.v`
 
-- L10: Evaluation pairing on [μ_n]: [e(x,k) = x^k]
+- L14: Evaluation pairing on [μ_n]: [e(x,k) = x^k]
+  - L225: Alternating bilinear maps on cyclic [μ₃] are trivial
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `eval_pair_stays_in_mu` | 26 |
-| Theorem | `eval_pair_add` | 43 |
-| Theorem | `eval_pair_mul_base` | 56 |
-| Theorem | `eval_pair_reduce_mod_n` | 71 |
-| Theorem | `eval_pair_image_divides_n` | 94 |
-| Theorem | `eval_pair_mu2` | 104 |
-| Theorem | `eval_pair_mu2_on_mixed` | 119 |
-| Theorem | `omega_cube_is_one` | 134 |
-| Theorem | `eval_pair_mu3` | 154 |
-| Theorem | `mu2_is_mu6` | 167 |
-| Theorem | `mu3_is_mu6` | 182 |
-| Theorem | `eval_pair_mu6` | 197 |
+| Theorem | `eval_pair_stays_in_mu` | 37 |
+| Theorem | `eval_pair_add` | 54 |
+| Theorem | `eval_pair_mul_base` | 67 |
+| Theorem | `eval_pair_reduce_mod_n` | 82 |
+| Theorem | `eval_pair_image_divides_n` | 105 |
+| Theorem | `eval_pair_mu2` | 115 |
+| Theorem | `eval_pair_mu2_on_mixed` | 130 |
+| Theorem | `omega_cube_is_one` | 145 |
+| Theorem | `eval_pair_mu3` | 165 |
+| Theorem | `mu2_is_mu6` | 178 |
+| Theorem | `mu3_is_mu6` | 193 |
+| Theorem | `eval_pair_mu6` | 208 |
+| Lemma | `in_mu3_one` | 240 |
+| Lemma | `in_mu3_mod` | 247 |
+| Lemma | `pairing_one_left` | 255 |
+| Lemma | `pairing_one_right` | 281 |
+| Lemma | `two_omega_is_sq` | 307 |
+| Lemma | `in_mu3_omega` | 319 |
+| Lemma | `in_mu3_omega2` | 338 |
+| Lemma | `pairing_omega_omega2` | 362 |
+| Lemma | `pairing_omega2_omega` | 377 |
+| Lemma | `pairing_omega2_omega2` | 392 |
+| Theorem | `alternating_bilinear_mu3_trivial` | 405 |
+| Theorem | `eval_pair_omega_13_not_alternating` | 457 |
+| Theorem | `pin_mu3_only_one` | 461 |
 
 ## `EvalProduct.v`
 
@@ -3321,4 +3336,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2281 theorems/lemmas/corollaries/examples across 116 files._
+_2295 theorems/lemmas/corollaries/examples across 116 files._

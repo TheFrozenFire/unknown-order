@@ -485,6 +485,31 @@ Proof.
     apply crt_one; try assumption.
 Qed.
 
+Lemma mu3_unique_one_prime :
+  forall p x,
+    Z.prime p ->
+    p <> 2 ->
+    Z.gcd 3 (p - 1) = 1 ->
+    Z.coprime x p ->
+    powm x 3 p = 1 ->
+    x mod p = 1.
+Proof.
+  intros p x Hp Hne Hgcd Hcop Hmu.
+  pose proof (Z.prime_ge_2 p Hp).
+  destruct (order_exists_from_annihilator x p 3 ltac:(lia) ltac:(lia) Hmu)
+    as [k [Hord Hk3]].
+  assert (k | p - 1) as Hkpm.
+  { apply (order_divides_annihilator p x k (p - 1));
+      [lia | lia | exact Hord | apply fermat_coprime; assumption]. }
+  assert (k | 1) as Hk1.
+  { apply Z.gcd_greatest with (a := 3) (b := p - 1) in Hk3; [| exact Hkpm].
+    rewrite Hgcd in Hk3. exact Hk3. }
+  apply Z.divide_1_r in Hk1.
+  assert (k = 1) by (destruct Hord as [Hkpos _]; lia).
+  subst k. destruct Hord as [_ [H1 _]].
+  rewrite powm_1_r in H1 by lia. exact H1.
+Qed.
+
 Theorem pin_cube_kernel_trivial :
   forall x, Z.coprime x 187 -> powm x 3 187 = 1 -> x mod 187 = 1.
 Proof.

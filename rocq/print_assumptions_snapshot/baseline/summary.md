@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2281 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2295 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2281 results across 116 files.
+Captured for 2295 results across 116 files.
 
 Counts:
 
@@ -480,10 +480,11 @@ Counts:
 | `cube_char_cubed_one` | 434 | 0 | 0 | OK |
 | `cube_char_mul` | 454 | 0 | 0 | OK |
 | `mu3_N_iff_locals` | 467 | 0 | 0 | OK |
-| `pin_cube_kernel_trivial` | 488 | 0 | 0 | OK |
-| `cube_kernel_three` | 506 | 0 | 0 | OK |
-| `omega_13_order_3` | 551 | 0 | 0 | OK |
-| `mixed_kernel_91` | 559 | 0 | 0 | OK |
+| `mu3_unique_one_prime` | 488 | 0 | 0 | OK |
+| `pin_cube_kernel_trivial` | 513 | 0 | 0 | OK |
+| `cube_kernel_three` | 531 | 0 | 0 | OK |
+| `omega_13_order_3` | 576 | 0 | 0 | OK |
+| `mixed_kernel_91` | 584 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
@@ -666,18 +667,31 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `eval_pair_stays_in_mu` | 26 | 0 | 0 | OK |
-| `eval_pair_add` | 43 | 0 | 0 | OK |
-| `eval_pair_mul_base` | 56 | 0 | 0 | OK |
-| `eval_pair_reduce_mod_n` | 71 | 0 | 0 | OK |
-| `eval_pair_image_divides_n` | 94 | 0 | 0 | OK |
-| `eval_pair_mu2` | 104 | 0 | 0 | OK |
-| `eval_pair_mu2_on_mixed` | 119 | 0 | 0 | OK |
-| `omega_cube_is_one` | 134 | 0 | 0 | OK |
-| `eval_pair_mu3` | 154 | 0 | 0 | OK |
-| `mu2_is_mu6` | 167 | 0 | 0 | OK |
-| `mu3_is_mu6` | 182 | 0 | 0 | OK |
-| `eval_pair_mu6` | 197 | 0 | 0 | OK |
+| `eval_pair_stays_in_mu` | 37 | 0 | 0 | OK |
+| `eval_pair_add` | 54 | 0 | 0 | OK |
+| `eval_pair_mul_base` | 67 | 0 | 0 | OK |
+| `eval_pair_reduce_mod_n` | 82 | 0 | 0 | OK |
+| `eval_pair_image_divides_n` | 105 | 0 | 0 | OK |
+| `eval_pair_mu2` | 115 | 0 | 0 | OK |
+| `eval_pair_mu2_on_mixed` | 130 | 0 | 0 | OK |
+| `omega_cube_is_one` | 145 | 0 | 0 | OK |
+| `eval_pair_mu3` | 165 | 0 | 0 | OK |
+| `mu2_is_mu6` | 178 | 0 | 0 | OK |
+| `mu3_is_mu6` | 193 | 0 | 0 | OK |
+| `eval_pair_mu6` | 208 | 0 | 0 | OK |
+| `in_mu3_one` | 240 | 0 | 0 | OK |
+| `in_mu3_mod` | 247 | 0 | 0 | OK |
+| `pairing_one_left` | 255 | 0 | 0 | OK |
+| `pairing_one_right` | 281 | 0 | 0 | OK |
+| `two_omega_is_sq` | 307 | 0 | 0 | OK |
+| `in_mu3_omega` | 319 | 0 | 0 | OK |
+| `in_mu3_omega2` | 338 | 0 | 0 | OK |
+| `pairing_omega_omega2` | 362 | 0 | 0 | OK |
+| `pairing_omega2_omega` | 377 | 0 | 0 | OK |
+| `pairing_omega2_omega2` | 392 | 0 | 0 | OK |
+| `alternating_bilinear_mu3_trivial` | 405 | 0 | 0 | OK |
+| `eval_pair_omega_13_not_alternating` | 457 | 0 | 0 | OK |
+| `pin_mu3_only_one` | 461 | 0 | 0 | OK |
 
 ## EvalProduct.v
 
