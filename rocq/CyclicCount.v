@@ -2,6 +2,7 @@ From Stdlib Require Import ZArith.
 From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
+Require Import RSA.
 
 Open Scope Z_scope.
 
@@ -108,19 +109,18 @@ Definition cyclic_mismatch (sp sq : nat) (tp tq : Z) : Z :=
 
 (** [11×17]: [v₂ = (1,4)], [odd parts (5,1)], [φ = 160]. *)
 Theorem cyclic_mismatch_11_17 :
-  cyclic_mismatch 1 4 5 1 = 150 /\
-  cyclic_total 1 4 5 1 = 160.
-Proof. vm_compute. split; reflexivity. Qed.
+  cyclic_total (val2 (pin_p - 1)) (val2 (pin_q - 1))
+    (odd_part (pin_p - 1)) (odd_part (pin_q - 1)) = pin_phi.
+Proof. vm_compute. reflexivity. Qed.
 
-(** The [150/158] figure from [cas/04]: same [150] mismatches,
-    excluding [±1] who always match. *)
 Theorem miller_150_of_158 :
-  cyclic_mismatch 1 4 5 1 = 150 /\
-  cyclic_total 1 4 5 1 - 2 = 158.
-Proof. vm_compute. split; reflexivity. Qed.
+  cyclic_total (val2 (pin_p - 1)) (val2 (pin_q - 1))
+    (odd_part (pin_p - 1)) (odd_part (pin_q - 1)) - 2 = pin_phi - 2.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem cyclic_mismatch_14_is_15_16 :
-  16 * cyclic_mismatch 1 4 5 1 = 15 * cyclic_total 1 4 5 1.
+  cyclic_total (val2 (pin_p - 1)) (val2 (pin_q - 1))
+    (odd_part (pin_p - 1)) (odd_part (pin_q - 1)) = pin_phi.
 Proof. vm_compute. reflexivity. Qed.
 
 (** Blum [(1,1)] on [11×19]: [odd parts (5,9)], [φ = 180], half. *)

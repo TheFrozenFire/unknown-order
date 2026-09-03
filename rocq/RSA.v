@@ -196,7 +196,7 @@ Definition rsa_test : RSAInstance.
 Proof.
   refine {|
     rsa_p := pin_p; rsa_q := pin_q; rsa_e := pin_e; rsa_d := pin_d;
-    rsa_p_prime := prime_11; rsa_q_prime := prime_17;
+    rsa_p_prime := pin_p_prime; rsa_q_prime := pin_q_prime;
     rsa_distinct := ltac:(discriminate);
     rsa_e_coprime := ltac:(rewrite rsa_test_lambda; exact rsa_test_coprime_e);
     rsa_d_inv := ltac:(rewrite rsa_test_lambda; exact rsa_test_inv);
@@ -220,7 +220,7 @@ Theorem rsa_test_annihilator :
 Proof.
   intros a Hcop.
   rewrite <- rsa_test_lambda.
-  apply carmichael_semiprime; [exact prime_11 | exact prime_17 | discriminate | exact Hcop].
+  apply carmichael_semiprime; [exact pin_p_prime | exact pin_q_prime | discriminate | exact Hcop].
 Qed.
 
 (** ** Why a polynomial in [N] cannot be a handle

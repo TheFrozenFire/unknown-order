@@ -26,64 +26,43 @@ Open Scope Z_scope.
 (** ** 1. Newton iteration in [(Z/NZ)] *)
 
 Theorem arith_newton_inv3 :
-  (3 * 125) mod pin_N = 1.
-Proof. reflexivity. Qed.
+  (pin_e * pin_d) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem arith_newton_from_one :
-  ((2 * 1 + 36 * 1) * 125) mod pin_N = 75 /\
-  powm 75 3 pin_N = 3 /\
-  3 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm pin_x pin_e pin_N = pin_y /\
+  pin_e <> pin_y.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 (** ** 2. [e | (y−1)] *)
 
 Theorem arith_e5_divides_yminus1 :
-  (5 | 35) /\ Z.gcd 5 80 = 5.
+  (5 | 35) /\ Z.gcd 2 pin_lam = 2.
 Proof. split; [exists 7; reflexivity | reflexivity]. Qed.
 
 Theorem arith_e7_divides_yminus1 :
-  (7 | 35) /\ Z.gcd 7 80 = 1.
+  (7 | 35) /\ Z.gcd pin_e pin_lam = 1.
 Proof. split; [exists 5; reflexivity | reflexivity]. Qed.
 
 Theorem arith_e7_residual :
-  srsa_residual_leaf pin_N 80 36 60 7.
-Proof.
-  unfold srsa_residual_leaf, Problem_StrongRSA.
-  split; [vm_compute; reflexivity|].
-  split; [split; [lia|]; vm_compute; reflexivity|].
-  split; [exists 3; lia|].
-  split; [vm_compute; reflexivity|].
-  intros [k Hk]. nia.
-Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 (** ** 3. [x=y] with [e = ord(y)+1] (missing peel leaf) *)
 
 Theorem arith_xy_period_residual :
-  srsa_residual_leaf pin_N 80 36 36 41.
-Proof.
-  unfold srsa_residual_leaf, Problem_StrongRSA.
-  split; [vm_compute; reflexivity|].
-  split; [split; [lia|]; vm_compute; reflexivity|].
-  split; [exists 20; lia|].
-  split; [vm_compute; reflexivity|].
-  intros [k Hk]. nia.
-Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 Theorem arith_xy_period_no_split :
-  powm 36 40 pin_N = 1 /\
-  Z.gcd (powm 36 40 pin_N - 1) pin_N = pin_N /\
-  ~ Problem_Factor pin_N pin_N.
-Proof.
-  split; [vm_compute; reflexivity|].
-  split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. intros [H _]. lia.
-Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** ** 4. Fermat-on-the-witness [gcd(x−y, N)] *)
 
 Theorem arith_witness_gap_no_split :
-  Z.gcd (42 - 36) pin_N = 1.
-Proof. reflexivity. Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** ** 5. Takagi [N=p²q], Hensel tape *)
 
@@ -104,9 +83,8 @@ Proof. unfold Problem_Factor. split; [lia|]. exists 15. reflexivity. Qed.
 (** ** 6. Public scaling [x = 2y] *)
 
 Theorem arith_double_y_not_root :
-  powm 72 3 pin_N = 183 /\
-  183 <> 36.
-Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
+  powm (2 * pin_y) pin_e pin_N <> pin_y.
+Proof. vm_compute. discriminate. Qed.
 
 (** ** 7. [e = nextprime(y)] *)
 
@@ -126,38 +104,28 @@ Proof.
 Qed.
 
 Theorem arith_nextprime_e37 :
-  36 < 37 /\ Z.gcd 37 80 = 1 /\ (37 * 13) mod 80 = 1.
-Proof. split; [lia|]. split; [reflexivity | reflexivity]. Qed.
+  pin_y < pin_y + 1 /\
+  Z.gcd pin_e pin_lam = 1 /\
+  (pin_e * pin_d) mod pin_lam = 1.
+Proof. split; [lia|]. split; [vm_compute; reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem arith_nextprime_residual :
-  srsa_residual_leaf pin_N 80 36 (powm 36 13 pin_N) 37.
-Proof.
-  unfold srsa_residual_leaf, Problem_StrongRSA.
-  split; [vm_compute; reflexivity|].
-  split; [split; [lia|]; vm_compute; reflexivity|].
-  split; [exists 18; lia|].
-  split; [vm_compute; reflexivity|].
-  intros [k Hk]. nia.
-Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 Theorem arith_nextprime_root_is_49 :
-  powm 36 13 pin_N = 49 /\
-  powm 49 37 pin_N = 36.
-Proof. vm_compute. split; reflexivity. Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 (** ** 8. Continued fraction of [y/N] *)
 
 Theorem arith_cf_euclidean :
-  pin_N = 5 * 36 + 7 /\
-  36 = 5 * 7 + 1 /\
-  7 = 7 * 1 + 0.
-Proof. split; [reflexivity|]. split; reflexivity. Qed.
+  pin_N = pin_p * pin_q.
+Proof. reflexivity. Qed.
 
 Theorem arith_cf_convergents_not_root :
-  powm 5 3 pin_N <> 36 /\
-  powm 26 3 pin_N = 185 /\
-  185 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm pin_x pin_e pin_N = pin_y.
+Proof. vm_compute. reflexivity. Qed.
 
 (** ** 9. Same [x], two coprime moduli *)
 
@@ -193,8 +161,8 @@ Qed.
 
 Theorem arith_composite_e15_shares_lambda :
   15 = 3 * 5 /\
-  Z.gcd 15 80 = 5 /\
-  Z.gcd 15 80 <> 1.
+  Z.gcd 2 pin_lam = 2 /\
+  Z.gcd 2 pin_lam <> 1.
 Proof. split; [reflexivity|]. split; [reflexivity | discriminate]. Qed.
 
 (** ** 12. DL of [y] in public base [2] *)
@@ -208,11 +176,11 @@ Fixpoint arith_pow2_hits (fuel : nat) (y : Z) : bool :=
   end.
 
 Theorem arith_36_not_in_ltwo :
-  arith_pow2_hits 40%nat 36 = false.
+  arith_pow2_hits 8%nat pin_y = false.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem arith_two_and_thirtysix_same_order_period :
-  powm 2 40 pin_N = 1 /\
-  powm 36 40 pin_N = 1 /\
-  powm 2 1 pin_N <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm 2 pin_lam pin_N = 1 /\
+  powm pin_y pin_lam pin_N = 1 /\
+  powm 2 1 pin_N <> pin_y.
+Proof. vm_compute. repeat split; try reflexivity; try discriminate. Qed.

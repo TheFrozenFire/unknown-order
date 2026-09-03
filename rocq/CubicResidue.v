@@ -385,12 +385,12 @@ Theorem pin_units_are_cubes :
 Proof.
   intros a Hcop.
   
-  apply coprime_semiprime in Hcop; [| exact prime_11 | exact prime_17 | lia].
+  apply coprime_semiprime in Hcop; [| exact pin_p_prime | exact pin_q_prime | lia].
   destruct Hcop as [Hap Haq].
-  apply cube_N_of_local; [exact prime_11 | exact prime_17 | lia | | ].
-  - apply (cube_root_map_is_cube a 11 7 prime_11 ltac:(lia) Hap);
+  apply cube_N_of_local; [exact pin_p_prime | exact pin_q_prime | lia | | ].
+  - apply (cube_root_map_is_cube a pin_p pin_inv3_p pin_p_prime ltac:(lia) Hap);
       [vm_compute; reflexivity | lia].
-  - apply (cube_root_map_is_cube a 17 11 prime_17 ltac:(lia) Haq);
+  - apply (cube_root_map_is_cube a pin_q pin_inv3_q pin_q_prime ltac:(lia) Haq);
       [vm_compute; reflexivity | lia].
 Qed.
 
@@ -519,11 +519,11 @@ Proof.
   intros x Hcop Hmu.
   destruct (order_exists_from_annihilator x pin_N 3 ltac:(lia) ltac:(lia) Hmu)
     as [k [Hord Hk3]].
-  assert (k | 80) as Hk80.
+  assert (k | pin_lam) as Hk80.
   { 
-    apply (order_divides_lambda 11 17 x k prime_11 prime_17 ltac:(lia) Hcop Hord). }
+    apply (order_divides_lambda pin_p pin_q x k pin_p_prime pin_q_prime ltac:(lia) Hcop Hord). }
   assert (k | 1) as Hk1.
-  { apply Z.gcd_greatest with (a := 3) (b := 80) in Hk3; [| exact Hk80].
+  { apply Z.gcd_greatest with (a := 3) (b := pin_lam) in Hk3; [| exact Hk80].
     vm_compute in Hk3. exact Hk3. }
   apply Z.divide_1_r in Hk1.
   assert (k = 1) by (destruct Hord as [Hkpos _]; lia).

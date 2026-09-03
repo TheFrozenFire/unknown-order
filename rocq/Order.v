@@ -46,6 +46,47 @@ Proof.
   - exfalso. apply (Hmin k'); [lia | exact Hank'].
 Qed.
 
+(** Computational order certificate: [vm_compute] of [k−1] modular
+    powers, rather than a handwritten [1..k−1] disjunction. *)
+Definition no_smaller_order (N a k : Z) : bool :=
+  negb (existsb (fun i => powm a (Z.of_nat i) N =? 1)
+                (seq 1 (Z.to_nat (k - 1)))).
+
+Lemma no_smaller_order_sound :
+  forall N a k,
+    0 < k ->
+    no_smaller_order N a k = true ->
+    forall k', 0 < k' < k -> powm a k' N <> 1.
+Proof.
+  intros N a k Hk Hck k' [Hk'pos Hk'lt] Heq.
+  unfold no_smaller_order in Hck.
+  apply Bool.negb_true_iff in Hck.
+  assert (existsb (fun i => powm a (Z.of_nat i) N =? 1)
+                  (seq 1 (Z.to_nat (k - 1))) = true) as Htrue.
+  { apply existsb_exists.
+    exists (Z.to_nat k').
+    split.
+    - apply in_seq. split.
+      + change 1%nat with (Z.to_nat 1). apply Z2Nat.inj_le; lia.
+      + replace (1 + Z.to_nat (k - 1))%nat with (Z.to_nat k).
+        * apply Z2Nat.inj_lt; lia.
+        * rewrite <- Z2Nat.inj_succ by lia. f_equal. lia.
+    - apply Z.eqb_eq. rewrite Z2Nat.id by lia. exact Heq. }
+  congruence.
+Qed.
+
+Lemma is_order_by_vm :
+  forall N a k,
+    0 < k ->
+    powm a k N = 1 ->
+    no_smaller_order N a k = true ->
+    is_order N a k.
+Proof.
+  intros N a k Hk Hpow Hck.
+  unfold is_order. split; [exact Hk|]. split; [exact Hpow|].
+  apply no_smaller_order_sound; [lia | exact Hck].
+Qed.
+
 Lemma powm_one_of_divide :
   forall a k m n,
     1 < n ->
@@ -269,20 +310,20 @@ Proof.
 Qed.
 
 Theorem minus1_order_2_rsa_test :
-  is_order pin_N 186 2.
+  is_order pin_N (pin_N - 1) 2.
 Proof.
   apply is_order_2_of; [lia | vm_compute; reflexivity | vm_compute; discriminate].
 Qed.
 
 Theorem mixed67_order_2_rsa_test :
-  is_order pin_N 67 2.
+  is_order pin_N pin_sqrt1_mixed 2.
 Proof.
   apply is_order_2_of; [lia | vm_compute; reflexivity | vm_compute; discriminate].
 Qed.
 
 Theorem lcm_two_order2_not_lambda :
-  is_order pin_N 186 2 /\
-  is_order pin_N 67 2 /\
+  is_order pin_N (pin_N - 1) 2 /\
+  is_order pin_N pin_sqrt1_mixed 2 /\
   Z.lcm 2 2 <> lambda_semiprime pin_p pin_q.
 Proof.
   split; [apply minus1_order_2_rsa_test|].
@@ -291,54 +332,21 @@ Proof.
   discriminate.
 Qed.
 
-Theorem is_order_pin_3_80 :
-  is_order pin_N 3 80.
+Lemma is_order_pin_g_p : is_order pin_p pin_g pin_g_ord_p.
 Proof.
-  unfold is_order. split; [lia|]. split.
-  - vm_compute. reflexivity.
-  - intros k' [Hk' Hk'lt] Hk'1.
-    assert (
-      k' = 1 \/ k' = 2 \/ k' = 3 \/ k' = 4 \/ k' = 5 \/
-      k' = 6 \/ k' = 7 \/ k' = 8 \/ k' = 9 \/ k' = 10 \/
-      k' = 11 \/ k' = 12 \/ k' = 13 \/ k' = 14 \/ k' = 15 \/
-      k' = 16 \/ k' = 17 \/ k' = 18 \/ k' = 19 \/ k' = 20 \/
-      k' = 21 \/ k' = 22 \/ k' = 23 \/ k' = 24 \/ k' = 25 \/
-      k' = 26 \/ k' = 27 \/ k' = 28 \/ k' = 29 \/ k' = 30 \/
-      k' = 31 \/ k' = 32 \/ k' = 33 \/ k' = 34 \/ k' = 35 \/
-      k' = 36 \/ k' = 37 \/ k' = 38 \/ k' = 39 \/ k' = 40 \/
-      k' = 41 \/ k' = 42 \/ k' = 43 \/ k' = 44 \/ k' = 45 \/
-      k' = 46 \/ k' = 47 \/ k' = 48 \/ k' = 49 \/ k' = 50 \/
-      k' = 51 \/ k' = 52 \/ k' = 53 \/ k' = 54 \/ k' = 55 \/
-      k' = 56 \/ k' = 57 \/ k' = 58 \/ k' = 59 \/ k' = 60 \/
-      k' = 61 \/ k' = 62 \/ k' = 63 \/ k' = 64 \/ k' = 65 \/
-      k' = 66 \/ k' = 67 \/ k' = 68 \/ k' = 69 \/ k' = 70 \/
-      k' = 71 \/ k' = 72 \/ k' = 73 \/ k' = 74 \/ k' = 75 \/
-      k' = 76 \/ k' = 77 \/ k' = 78 \/ k' = 79) by lia.
-    repeat (destruct H as [H | H]; [subst k'; vm_compute in Hk'1; discriminate|]).
-    subst k'. vm_compute in Hk'1. discriminate.
+  apply is_order_by_vm; [lia | vm_compute; reflexivity | vm_compute; reflexivity].
 Qed.
+
+Lemma is_order_pin_g_q : is_order pin_q pin_g pin_g_ord_q.
+Proof.
+  apply is_order_by_vm; [lia | vm_compute; reflexivity | vm_compute; reflexivity].
+Qed.
+
+
 
 Theorem pin_unit_3_coprime :
-  Z.coprime 3 pin_N.
+  Z.coprime pin_g pin_N.
 Proof. vm_compute. reflexivity. Qed.
-
-Theorem pin_attains_lambda :
-  Z.coprime 3 pin_N /\ is_order pin_N 3 80 /\
-  pin_lam = lambda_semiprime pin_p pin_q.
-Proof.
-  split; [apply pin_unit_3_coprime|].
-  split; [apply is_order_pin_3_80|].
-  vm_compute. reflexivity.
-Qed.
-
-(** Completeness on this pin: [λ] is some unit's order, so the lcm
-    of unit orders is [λ].  The unused [orders_generate_lambda_named]
-    remains the general density statement. *)
-
-Theorem orders_generate_lambda_pin :
-  exists a, Z.coprime a pin_N /\ is_order pin_N a 80 /\
-    pin_lam = lambda_semiprime pin_p pin_q.
-Proof. exists 3. apply pin_attains_lambda. Qed.
 
 (** ** 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)] *)
 
@@ -435,26 +443,14 @@ Proof.
     + intros j Hj Hpow. apply Hchar in Hpow. lia.
 Qed.
 
-Theorem order_2_mod_11 : is_order 11 2 10.
+Theorem order_2_mod_11 : is_order pin_p 2 pin_ord2_p.
 Proof.
-  unfold is_order, powm. split; [lia|]. split.
-  - vm_compute. reflexivity.
-  - intros k' [Hk' Hk'lt] Hk'1.
-    assert (k' = 1 \/ k' = 2 \/ k' = 3 \/ k' = 4 \/ k' = 5 \/
-            k' = 6 \/ k' = 7 \/ k' = 8 \/ k' = 9) by lia.
-    repeat (destruct H as [H | H]; [subst k'; vm_compute in Hk'1; discriminate|]).
-    subst k'. vm_compute in Hk'1. discriminate.
+  apply is_order_by_vm; [lia | vm_compute; reflexivity | vm_compute; reflexivity].
 Qed.
 
-Theorem order_2_mod_17 : is_order 17 2 8.
+Theorem order_2_mod_17 : is_order pin_q 2 pin_ord2_q.
 Proof.
-  unfold is_order, powm. split; [lia|]. split.
-  - vm_compute. reflexivity.
-  - intros k' [Hk' Hk'lt] Hk'1.
-    assert (k' = 1 \/ k' = 2 \/ k' = 3 \/ k' = 4 \/ k' = 5 \/
-            k' = 6 \/ k' = 7) by lia.
-    repeat (destruct H as [H | H]; [subst k'; vm_compute in Hk'1; discriminate|]).
-    subst k'. vm_compute in Hk'1. discriminate.
+  apply is_order_by_vm; [lia | vm_compute; reflexivity | vm_compute; reflexivity].
 Qed.
 
 (** Same-[t] without [cyclic_units]: any two odd multiples of
@@ -476,27 +472,23 @@ Proof.
 Qed.
 
 Theorem height_is_val2_ord_textbook :
-  two_height 2 (odd_part 10) 11 (val2 10) /\
-  two_height 2 (odd_part 8) 17 (val2 8).
+  two_height 2 (odd_part pin_ord2_p) pin_p (val2 pin_ord2_p) /\
+  two_height 2 (odd_part pin_ord2_q) pin_q (val2 pin_ord2_q).
 Proof.
   split.
-  - rewrite (two_height_is_val2_ord 11 2 10 (odd_part 10) (val2 10)).
+  - rewrite (two_height_is_val2_ord pin_p 2 pin_ord2_p (odd_part pin_ord2_p) (val2 pin_ord2_p)).
     + reflexivity.
-    + exact prime_11.
+    + exact pin_p_prime.
     + exact order_2_mod_11.
-    + assert (odd_part 10 = 5) as H10 by (vm_compute; reflexivity).
-      rewrite H10. lia.
-    + assert (odd_part 10 = 5) as H10 by (vm_compute; reflexivity).
-      rewrite H10. exists 2%Z. reflexivity.
+    + apply odd_part_pos; lia.
+    + apply odd_part_odd; lia.
     + apply Z.divide_refl.
-  - rewrite (two_height_is_val2_ord 17 2 8 (odd_part 8) (val2 8)).
+  - rewrite (two_height_is_val2_ord pin_q 2 pin_ord2_q (odd_part pin_ord2_q) (val2 pin_ord2_q)).
     + reflexivity.
-    + exact prime_17.
+    + exact pin_q_prime.
     + exact order_2_mod_17.
-    + assert (odd_part 8 = 1) as H8 by (vm_compute; reflexivity).
-      rewrite H8. lia.
-    + assert (odd_part 8 = 1) as H8 by (vm_compute; reflexivity).
-      rewrite H8. exists 0%Z. reflexivity.
+    + apply odd_part_pos; lia.
+    + apply odd_part_odd; lia.
     + apply Z.divide_refl.
 Qed.
 
@@ -1000,15 +992,34 @@ Proof.
     [exact Hp | exact Hq | exact Hneq | exact HcN | exact Horpg | exact Horqg].
 Qed.
 
-Theorem exists_unit_order_lambda_pin :
-  exists a, Z.coprime a pin_N /\ is_order pin_N a 80.
+Theorem is_order_pin_3_80 :
+  is_order pin_N pin_g pin_lam.
 Proof.
-  destruct (exists_unit_order_lambda 11 17 prime_11 prime_17 ltac:(lia))
-    as [a [Hc Ho]].
-  exists a. split; [exact Hc|].
-  replace (lambda_semiprime pin_p pin_q) with pin_lam in Ho by (apply rsa_test_lambda).
-  exact Ho.
+  replace pin_lam with (Z.lcm pin_g_ord_p pin_g_ord_q) by (vm_compute; reflexivity).
+  apply (order_semiprime_from_locals pin_p pin_q pin_g pin_g_ord_p pin_g_ord_q);
+    [apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q | | apply is_order_pin_g_p | apply is_order_pin_g_q].
+  vm_compute. reflexivity.
 Qed.
+
+Theorem exists_unit_order_lambda_pin :
+  exists a, Z.coprime a pin_N /\ is_order pin_N a pin_lam.
+Proof.
+  exists pin_g. split; [vm_compute; reflexivity | apply is_order_pin_3_80].
+Qed.
+
+Theorem pin_attains_lambda :
+  Z.coprime pin_g pin_N /\ is_order pin_N pin_g pin_lam /\
+  pin_lam = lambda_semiprime pin_p pin_q.
+Proof.
+  split; [apply pin_unit_3_coprime|].
+  split; [apply is_order_pin_3_80|].
+  apply rsa_test_lambda.
+Qed.
+
+Theorem orders_generate_lambda_pin :
+  exists a, Z.coprime a pin_N /\ is_order pin_N a pin_lam /\
+    pin_lam = lambda_semiprime pin_p pin_q.
+Proof. exists pin_g. apply pin_attains_lambda. Qed.
 
 (** ** A primitive root generates [𝔽_p*]
 

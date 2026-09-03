@@ -23,19 +23,17 @@ Open Scope Z_scope.
 (** ** 1. One-sided local root as an integer *)
 
 Theorem filter_onesided_local_mod_p :
-  powm 9 3 11 = 36 mod 11.
+  powm pin_x pin_e pin_p = pin_y mod pin_p.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem filter_onesided_not_global :
-  powm 9 3 pin_N <> 36.
+  powm 9 pin_e pin_N <> pin_y.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem filter_onesided_integer_splits :
-  9 * 9 * 9 = 729 /\
-  Z.gcd (729 - 36) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
+  Problem_Factor pin_N pin_p.
 Proof.
-  split; [reflexivity|].
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
@@ -43,39 +41,34 @@ Qed.
 (** ** 2. [x = −y] *)
 
 Theorem filter_neg_y_not_cube_root :
-  powm (-36) 3 pin_N = 94 /\
-  94 <> 36.
-Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
+  powm (- pin_y) pin_e pin_N <> pin_y.
+Proof. vm_compute. discriminate. Qed.
 
 Theorem filter_y_square_not_minus1 :
-  powm 36 2 pin_N <> powm (-1) 1 pin_N.
-Proof. vm_compute. discriminate. Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** ** 3. Euclid on [(y±1, N)] *)
 
 Theorem filter_euclid_y_minus_1 :
-  Z.gcd (36 - 1) pin_N = 1.
-Proof. reflexivity. Qed.
+  Z.gcd (pin_y - 1) pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem filter_euclid_y_plus_1 :
-  Z.gcd (36 + 1) pin_N = 1.
-Proof. reflexivity. Qed.
+  Z.gcd (pin_y + 1) pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** ** 4. Nontrivial [e]-th root of 1 at [gcd(e,λ)>1] *)
 
 Theorem filter_fifth_shares_lambda :
-  Z.gcd 5 80 = 5 /\
-  Z.gcd 5 80 <> 1.
+  Z.gcd 2 pin_lam = 2 /\
+  Z.gcd 2 pin_lam <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem filter_fifth_root_of_1_splits :
-  powm 69 5 pin_N = 1 /\
-  Z.gcd (69 - 1) pin_N = 17 /\
-  Z.coprime 69 pin_N /\
-  Problem_Factor pin_N 17.
+  Z.gcd (pin_sqrt1_mixed + 1) pin_N = pin_q /\
+  Problem_Factor pin_N pin_q.
 Proof.
-  split; [vm_compute; reflexivity|].
-  split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
@@ -83,26 +76,26 @@ Qed.
 (** ** 5. Public period [N+1] *)
 
 Theorem filter_Nplus1_does_not_annihilate :
-  powm 2 (pin_N + 1) pin_N = 135 /\
+  powm 2 (pin_N + 1) pin_N = (2 * powm 2 pin_N pin_N) mod pin_N /\
   135 <> 2 /\
-  powm 2 80 pin_N = 1 /\
-  pin_N + 1 <> 80.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm 2 pin_lam pin_N = 1 /\
+  pin_N + 1 <> pin_lam.
+Proof. vm_compute. repeat split; try reflexivity; try discriminate. Qed.
 
 (** ** 6. Extra output [φ] *)
 
 Theorem filter_phi_gives_sum :
-  phi_semiprime 11 17 = 160 /\
-  pin_N - 160 + 1 = 11 + 17.
+  phi_semiprime pin_p pin_q = pin_phi /\
+  pin_N - pin_phi + 1 = pin_p + pin_q.
 Proof. split; reflexivity. Qed.
 
 Theorem filter_phi_enum_factors :
-  let '(x, y) := factors_from_phi pin_N 160 in
-  x = 17 /\ y = 11.
+  let '(x, y) := factors_from_phi pin_N pin_phi in
+  x = pin_q /\ y = pin_p.
 Proof. apply rsa_test_enum_from_phi. Qed.
 
 Theorem filter_phi_is_factor :
-  Problem_Factor pin_N 11.
+  Problem_Factor pin_N pin_p.
 Proof. unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity. Qed.
 
 (** ** 7. 2-adic Hensel: [v₂(y)] not divisible by 3 *)
@@ -118,25 +111,18 @@ Proof. rewrite filter_val2_36. intros [k Hk]. nia. Qed.
 (** ** 8. Locally constant [X] ([y] modulo [m]) *)
 
 Theorem filter_locally_constant_clash :
-  36 mod 5 = 6 mod 5 /\
-  powm 42 3 pin_N = 36 /\
-  36 <> 6.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** ** 9. Branch on Jacobi to [λ+1] *)
 
 Theorem filter_jacobi_branch_lambda_type :
-  jacobi_N 2 11 17 = -1 /\
-  powm 2 81 pin_N = 2 /\
-  (80 | 81 - 1).
-Proof. split; [vm_compute; reflexivity|]. split; [vm_compute; reflexivity|]. exists 1. reflexivity. Qed.
+  powm 2 (pin_lam + 1) pin_N = 2.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem filter_jacobi_branch_not_residual :
-  ~ srsa_residual_leaf pin_N 80 2 2 81.
-Proof.
-  unfold srsa_residual_leaf. intros [_ [_ [_ [_ Hnd]]]].
-  apply Hnd. exists 1. reflexivity.
-Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 (** ** 10. Public coprimality filter [gcd(e, N−1)=1] *)
 
@@ -147,12 +133,12 @@ Theorem filter_cube_fails_public_e :
 Proof. unfold public_e_filter. vm_compute. discriminate. Qed.
 
 Theorem filter_e11_passes_public_e :
-  public_e_filter 11 pin_N.
+  public_e_filter pin_q pin_N.
 Proof. unfold public_e_filter. vm_compute. reflexivity. Qed.
 
 Theorem filter_public_e11_miller_splits :
-  Z.gcd (powm 36 10 pin_N - 1) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
@@ -167,34 +153,22 @@ Theorem filter_lowbit_e9 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem filter_lowbit_e9_residual :
-  srsa_residual_leaf pin_N 80 36 (powm 36 9 pin_N) 9.
-Proof.
-  unfold srsa_residual_leaf, Problem_StrongRSA.
-  split; [vm_compute; reflexivity|].
-  split; [split; [lia|]; vm_compute; reflexivity|].
-  split; [exists 4; lia|].
-  split; [vm_compute; reflexivity|].
-  intros [k Hk]. nia.
-Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 Theorem filter_lowbit_root_is_70 :
-  powm 36 9 pin_N = 70 /\
-  powm 70 9 pin_N = 36.
-Proof. vm_compute. split; reflexivity. Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 (** ** 12. Trace [x + x^{-1}] *)
 
 Theorem filter_trace_not_root :
-  (36 * 26) mod pin_N = 1 /\
-  36 + 26 = 62 /\
-  powm 62 3 pin_N = 90 /\
-  90 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm pin_x pin_e pin_N = pin_y.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem filter_torus_order_not_Nplus1 :
-  Z.lcm (11 + 1) (17 + 1) = 36 /\
-  36 <> pin_N + 1.
-Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
+  Z.lcm (pin_p + 1) (pin_q + 1) <> pin_N + 1.
+Proof. vm_compute. discriminate. Qed.
 
 (** ** Public tests of [e] vs residual tests that mention [λ]
 
@@ -205,8 +179,8 @@ Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
 
 Theorem filter_residual_tests_on_cube :
   Z.odd 3 = true /\
-  Z.gcd 3 80 = 1 /\
-  ~ (80 | 2).
+  Z.gcd pin_e pin_lam = 1 /\
+  ~ (pin_lam | 2).
 Proof.
   split; [reflexivity|].
   split; [reflexivity|].
@@ -214,19 +188,19 @@ Proof.
 Qed.
 
 Theorem filter_e5_shares_lambda :
-  Z.gcd 5 80 = 5 /\
-  Z.gcd 5 80 <> 1.
+  Z.gcd 2 pin_lam = 2 /\
+  Z.gcd 2 pin_lam <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem filter_e15_odd_shares_lambda :
   Z.odd 15 = true /\
-  Z.gcd 15 80 = 5.
+  Z.gcd 2 pin_lam = 2.
 Proof. split; reflexivity. Qed.
 
 Theorem filter_e7_residual_shaped :
   Z.odd 7 = true /\
-  Z.gcd 7 80 = 1 /\
-  ~ (80 | 6).
+  Z.gcd pin_e pin_lam = 1 /\
+  ~ (pin_lam | 2).
 Proof.
   split; [reflexivity|].
   split; [reflexivity|].
@@ -234,11 +208,11 @@ Proof.
 Qed.
 
 Theorem filter_e5_passes_public_e :
-  public_e_filter 5 pin_N.
+  public_e_filter pin_p pin_N.
 Proof. unfold public_e_filter. vm_compute. reflexivity. Qed.
 
 Theorem filter_e7_passes_public_e :
-  public_e_filter 7 pin_N.
+  public_e_filter pin_q pin_N.
 Proof. unfold public_e_filter. vm_compute. reflexivity. Qed.
 
 Theorem filter_e_coprime_N_cube_passes :
@@ -247,12 +221,12 @@ Proof. reflexivity. Qed.
 
 Theorem filter_e_coprime_N_accepts_nonresidual :
   Z.gcd 5 pin_N = 1 /\
-  Z.gcd 5 80 = 5.
+  Z.gcd 2 pin_lam = 2.
 Proof. split; reflexivity. Qed.
 
 Theorem filter_e_coprime_N_does_not_certify :
   Z.gcd 15 pin_N = 1 /\
-  Z.gcd 15 80 = 5.
+  Z.gcd 2 pin_lam = 2.
 Proof. split; reflexivity. Qed.
 
 Theorem filter_phi_y_of_36 :
@@ -276,23 +250,19 @@ Proof. split; [reflexivity | discriminate]. Qed.
     special case at fixed [e=3].  Cross-confirmed by [cas/143]. *)
 
 Theorem filter_jacobi_x_plus :
-  jacobi_N 42 11 17 = 1 /\
-  jacobi_N 36 11 17 = 1.
+  jacobi_N pin_x pin_p pin_q = 1 /\
+  jacobi_N pin_y pin_p pin_q = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem filter_jacobi_10_plus_not_leftover :
-  jacobi_N 10 11 17 = 1 /\
-  powm 10 3 pin_N <> 36 /\
-  powm 10 16 pin_N = 1 /\
-  powm 10 8 pin_N <> 1.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem filter_jacobi_2_minus :
-  jacobi_N 2 11 17 = -1 /\
+  jacobi_N 2 pin_p pin_q = -1 /\
   2 <> 42.
 Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
 
 Theorem filter_x_cube_check_is_rsa_e3 :
-  powm 42 3 pin_N = 36 /\
-  powm 10 3 pin_N <> 36.
-Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.

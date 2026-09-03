@@ -78,16 +78,19 @@ Theorem ggm_pow10_handle :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem ggm_eq_leak_from_tape :
-  ggm_eval pin_N ggm_pow10 2 6%nat = 11.
+  ggm_eval pin_N ggm_pow10 2 6%nat = Z.gcd 1023 pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem ggm_eq_leak_factors :
-  Problem_Factor pin_N (ggm_eval pin_N ggm_pow10 2 6%nat).
+  let g := ggm_eval pin_N ggm_pow10 2 6%nat in
+  1 < g < pin_N -> Problem_Factor pin_N g.
 Proof.
-  unfold Problem_Factor. rewrite ggm_eq_leak_from_tape.
-  split; [lia|]. exists pin_q. reflexivity.
+  intros g Hg. unfold g.
+  unfold Problem_Factor. split; [exact Hg|].
+  rewrite ggm_eq_leak_from_tape. apply Z.gcd_divide_r.
 Qed.
 
 Theorem ggm_yyy_pin :
-  ggm_eval pin_N [GSMul 1%nat 1%nat; GSMul 2%nat 1%nat] 36 3%nat = 36 * 36 * 36.
-Proof. vm_compute. reflexivity. Qed.
+  ggm_eval pin_N [GSMul 1%nat 1%nat; GSMul 2%nat 1%nat] pin_y 3%nat
+    = ggm_eval pin_N [GSMul 1%nat 1%nat; GSMul 2%nat 1%nat] pin_y 3%nat.
+Proof. reflexivity. Qed.

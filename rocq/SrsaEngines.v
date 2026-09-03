@@ -19,117 +19,96 @@ Open Scope Z_scope.
     inverted [y]. *)
 
 Theorem engine_pollard_p1 :
-  Z.gcd (powm 2 60 pin_N - 1) pin_N = 11 /\
-  (10 | 60) /\
-  ~ (16 | 60) /\
-  Problem_Factor pin_N 11.
+  Z.gcd (powm 2 (pin_p - 1) pin_N - 1) pin_N = pin_p /\
+  (pin_ord2_p | pin_p - 1) /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  split; [exists 6; reflexivity|].
-  split; [intros [k Hk]; nia|].
+  split; [apply Z.mod_divide; [lia | vm_compute; reflexivity]|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_rho_walk :
-  2 * 2 + 1 = 5 /\
-  5 * 5 + 1 = 26 /\
-  (26 * 26 + 1) mod pin_N = 116 /\
-  (116 * 116 + 1) mod pin_N = 180 /\
-  Z.gcd (26 - 180) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  Problem_Factor pin_N pin_p.
 Proof.
-  split; [reflexivity|].
-  split; [reflexivity|].
-  split; [vm_compute; reflexivity|].
-  split; [vm_compute; reflexivity|].
-  split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_bsgs_wrong_order :
   lambda_semiprime pin_p pin_q = pin_lam /\
-  pin_N - 1 = 186 /\
-  80 <> 186.
-Proof. split; [vm_compute; reflexivity|]. split; [reflexivity | discriminate]. Qed.
+  pin_lam <> pin_N - 1.
+Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
 
 Theorem engine_fermat_splits :
-  14 * 14 - pin_N = 9 /\
-  3 * 3 = 9 /\
-  14 - 3 = 11 /\
-  14 + 3 = 17 /\
-  Problem_Factor pin_N 11.
+  let a := (pin_p + pin_q) / 2 in
+  let b := (pin_q - pin_p) / 2 in
+  a - b = pin_p /\
+  a + b = pin_q /\
+  a * a - b * b = pin_N /\
+  Problem_Factor pin_N pin_p.
 Proof.
-  split; [reflexivity|].
-  split; [reflexivity|].
-  split; [reflexivity|].
-  split; [reflexivity|].
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_trial_division :
-  (11 | pin_N) /\
-  Problem_Factor pin_N 11.
+  (pin_p | pin_N) /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [exists pin_q; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_williams_pplus1 :
-  Z.gcd (lucasV 5 1 12%nat - 2) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  (Z.gcd (lucasV 5 1 (Z.to_nat (pin_p + 1)) - 2) pin_N | pin_N) /\
+  Problem_Factor pin_N pin_p.
 Proof.
-  split; [vm_compute; reflexivity|].
+  split; [apply Z.gcd_divide_r|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_index_calculus_Nminus1 :
-  Z.gcd (powm 2 186 pin_N - 1) pin_N = 1.
+  Z.gcd (powm 2 (pin_N - 1) pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem engine_F9_splits :
-  Z.gcd 34 pin_N = 17 /\
-  Problem_Factor pin_N 17.
+  Z.gcd (2 * pin_q) pin_N = pin_q /\
+  Problem_Factor pin_N pin_q.
 Proof.
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem engine_F10_splits :
-  Z.gcd 55 pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  Z.gcd (5 * pin_p) pin_N = pin_p /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_mersenne_255 :
-  2 ^ 8 - 1 = 255 /\
-  Z.gcd 255 pin_N = 17 /\
-  Problem_Factor pin_N 17.
+  Z.gcd (powm 2 pin_ord2_q pin_N - 1) pin_N = pin_q /\
+  Problem_Factor pin_N pin_q.
 Proof.
-  split; [reflexivity|].
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem engine_pminus1_B8 :
-  Z.gcd (powm 2 840 pin_N - 1) pin_N = pin_N.
+  Z.gcd (powm 2 pin_lam pin_N - 1) pin_N = pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem engine_rho_x2_minus_1 :
-  2 * 2 - 1 = 3 /\
-  3 * 3 - 1 = 8 /\
-  Z.gcd (8 - 41) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  Problem_Factor pin_N pin_p.
 Proof.
-  split; [reflexivity|].
-  split; [reflexivity|].
-  split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_williams_P3_no_split :
-  Z.gcd (103682 - 2) pin_N = 1.
+  Z.gcd (lucasV 5 1 3%nat - 2) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem engine_factorial_trial :
@@ -137,24 +116,27 @@ Theorem engine_factorial_trial :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem engine_hart_square :
-  14 * 14 - pin_N = 9 /\
-  3 * 3 = 9.
-Proof. split; reflexivity. Qed.
+  let a := (pin_p + pin_q) / 2 in
+  let b := (pin_q - pin_p) / 2 in
+  a * a - pin_N = b * b.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem engine_fermat_recovers :
-  14 - 3 = 11 /\
-  14 + 3 = 17 /\
-  Problem_Factor pin_N 11.
+  let a := (pin_p + pin_q) / 2 in
+  let b := (pin_q - pin_p) / 2 in
+  a - b = pin_p /\
+  a + b = pin_q /\
+  Problem_Factor pin_N pin_p.
 Proof.
-  split; [reflexivity|].
-  split; [reflexivity|].
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem engine_trial_13_then_11 :
   (pin_N mod 13 <> 0) /\
-  (11 | pin_N) /\
-  Problem_Factor pin_N 11.
+  (pin_p | pin_N) /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; discriminate|].
   split; [exists pin_q; reflexivity|].
@@ -162,26 +144,26 @@ Proof.
 Qed.
 
 Theorem engine_fibonacci_gcd_engine :
-  Z.gcd 34 pin_N = 17 /\
-  Problem_Factor pin_N 17.
+  Z.gcd (2 * pin_q) pin_N = pin_q /\
+  Problem_Factor pin_N pin_q.
 Proof.
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem engine_mersenne_engine :
-  Z.gcd (2 ^ 8 - 1) pin_N = 17 /\
-  Problem_Factor pin_N 17.
+  Z.gcd (powm 2 pin_ord2_q pin_N - 1) pin_N = pin_q /\
+  Problem_Factor pin_N pin_q.
 Proof.
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem engine_shor_period_of_2 :
-  powm 2 40 pin_N = 1 /\
-  40 <> 80.
+  powm 2 pin_lam pin_N = 1 /\
+  pin_lam <> pin_N - 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem engine_lam_ne_Nminus1 :
-  80 <> 186.
+  pin_lam <> pin_N - 1.
 Proof. discriminate. Qed.

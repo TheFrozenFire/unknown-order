@@ -84,9 +84,9 @@ Qed.
     Here [ed−1 = λ], so we recover factors from the *sum* form once we
     know [λ] and the relation [p+q = N − φ + 1] via [φ = kλ]... 
 
-    Concrete recovery on the test instance uses the known [φ = 160]: *)
+    Concrete recovery on the test instance uses the known [φ]: *)
 Theorem rsa_test_enum_from_phi :
-  let '(x, y) := factors_from_phi pin_N 160 in x = 17 /\ y = 11.
+  let '(x, y) := factors_from_phi pin_N pin_phi in x = pin_q /\ y = pin_p.
 Proof.
   unfold factors_from_phi, factors_from_sum, factor_disc.
   vm_compute. split; reflexivity.

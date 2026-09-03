@@ -56,9 +56,9 @@ Proof.
 Qed.
 
 Theorem srsa_nonunit_x_pin :
-  powm 11 3 pin_N = 22 /\
-  Z.gcd 11 pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  powm pin_p pin_e pin_N = (pin_p ^ pin_e) mod pin_N /\
+  Z.gcd pin_p pin_N = pin_p /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
@@ -87,15 +87,15 @@ Proof.
 Qed.
 
 Theorem srsa_jacobi_two_is_minus1 :
-  jacobi_N 2 11 17 = -1.
+  jacobi_N 2 pin_p pin_q = -1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem srsa_lambda_type_on_jacobi_minus1 :
-  Problem_StrongRSA pin_N 2 2 81 /\ Z.Odd 81.
+  Problem_StrongRSA pin_N 2 2 (pin_lam + 1) /\ Z.Odd (pin_lam + 1).
 Proof.
   split.
   - unfold Problem_StrongRSA. split; [lia|]. vm_compute. reflexivity.
-  - exists 40. lia.
+  - exists (pin_lam / 2). vm_compute. lia.
 Qed.
 
 (** ** Even [e] is a square root *)
@@ -113,18 +113,18 @@ Proof.
 Qed.
 
 Theorem srsa_even_e_pin :
-  powm 6 2 pin_N = 36.
+  powm 6 2 pin_N = (6 * 6) mod pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem srsa_associate_neg6_does_not_split :
-  powm 181 2 pin_N = 36 /\
-  Z.gcd (181 + 6) pin_N = pin_N.
+  powm (pin_N - 6) 2 pin_N = (6 * 6) mod pin_N /\
+  Z.gcd (pin_N - 6 + 6) pin_N = pin_N.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem srsa_mixed_root_of_36_factors :
-  powm 28 2 pin_N = 36 /\
-  Z.gcd (28 - 6) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  powm pin_sqrt1_mixed 2 pin_N = 1 /\
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
@@ -179,9 +179,9 @@ Proof.
 Qed.
 
 Theorem srsa_lambda_type_annihilator_pin :
-  powm 2 81 pin_N = 2 /\
-  powm 2 80 pin_N = 1 /\
-  (80 | 80).
+  powm 2 (pin_lam + 1) pin_N = 2 /\
+  powm 2 pin_lam pin_N = 1 /\
+  (pin_lam | pin_lam).
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
@@ -189,8 +189,8 @@ Proof.
 Qed.
 
 Theorem srsa_lambda_type_miller_splits :
-  miller_splits 2 pin_N 67 /\
-  Z.gcd (67 - 1) pin_N = 11.
+  miller_splits 2 pin_N pin_sqrt1_mixed /\
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p.
 Proof.
   split.
   - unfold miller_splits. vm_compute. split; [reflexivity|].
@@ -199,10 +199,10 @@ Proof.
 Qed.
 
 Theorem srsa_lambda_type_miller_factors :
-  let f := Z.gcd (67 - 1) pin_N in
+  let f := Z.gcd (pin_sqrt1_mixed - 1) pin_N in
   1 < f /\ f < pin_N /\ (f | pin_N).
 Proof.
-  apply (nontrivial_sqrt1_splits 11 17 67 prime_11 prime_17
+  apply (nontrivial_sqrt1_splits pin_p pin_q pin_sqrt1_mixed pin_p_prime pin_q_prime
            ltac:(discriminate)).
   - vm_compute. reflexivity.
   - vm_compute. discriminate.
@@ -251,7 +251,7 @@ Definition srsa_residual_leaf (N lam y x e : Z) : Prop :=
   ~ (lam | e - 1).
 
 Theorem srsa_residual_pin :
-  srsa_residual_leaf pin_N 80 36 42 3.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
 Proof.
   unfold srsa_residual_leaf, Problem_StrongRSA.
   split; [vm_compute; reflexivity|].
@@ -291,14 +291,14 @@ Proof.
 Qed.
 
 Theorem srsa_fixed_e_rerand_pin :
-  powm (42 * 2) 3 pin_N = (36 * powm 2 3 pin_N) mod pin_N.
+  powm (pin_x * 2) pin_e pin_N = (pin_y * powm 2 pin_e pin_N) mod pin_N.
 Proof.
   apply srsa_fixed_e_rerand; [discriminate | lia |].
   vm_compute. reflexivity.
 Qed.
 
 Theorem srsa_poly_e_not_rerand_invariant :
-  poly_eval poly_X (36 * Z.pow 2 3) <> poly_eval poly_X 36.
+  poly_eval poly_X (pin_y * Z.pow 2 pin_e) <> poly_eval poly_X pin_y.
 Proof.
   rewrite poly_eval_X. rewrite poly_eval_X. vm_compute. discriminate.
 Qed.
@@ -320,7 +320,7 @@ Proof.
 Qed.
 
 Theorem srsa_related_pin :
-  powm 42 (2 * 3) pin_N = powm 36 2 pin_N.
+  powm pin_x (2 * pin_e) pin_N = powm pin_y 2 pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 (** ** SAGM handle still peels *)
@@ -332,7 +332,7 @@ Proof. vm_compute. reflexivity. Qed.
 
 Theorem srsa_sagm_lambda_type_peel :
   let y := sagm_eval pin_N sagm_pin_g sagm_pin_h {| sagm_a := 2; sagm_b := 1 |} in
-  powm y 81 pin_N = y.
+  powm y (pin_lam + 1) pin_N = y.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem srsa_sagm_product_reused :
@@ -346,30 +346,27 @@ Proof. apply sagm_product_adds_exponents. Qed.
 (** ** Four square roots of 1; mixed splits, [−1] does not *)
 
 Theorem srsa_sqrt1_120_splits :
-  powm 120 2 pin_N = 1 /\
-  Z.gcd (120 - 1) pin_N = 17 /\
-  Z.gcd (120 + 1) pin_N = 11.
+  powm pin_sqrt1_mixed2 2 pin_N = 1 /\
+  Z.gcd (pin_sqrt1_mixed2 - 1) pin_N = pin_q /\
+  Z.gcd (pin_sqrt1_mixed2 + 1) pin_N = pin_p.
 Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem srsa_minus1_no_split :
-  powm 186 2 pin_N = 1 /\
-  Z.gcd (186 - 1) pin_N = 1.
+  powm (pin_N - 1) 2 pin_N = 1 /\
+  Z.gcd (pin_N - 2) pin_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem srsa_120_plus_1 :
-  120 + 1 = 121 /\
-  11 * 11 = 121 /\
-  Z.gcd 121 pin_N = 11.
-Proof. split; [reflexivity|]. split; [reflexivity | vm_compute; reflexivity]. Qed.
+  Z.gcd (pin_p * pin_p) pin_N = pin_p.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem srsa_miller_66 :
-  67 - 1 = 66 /\
-  Z.gcd 66 pin_N = 11.
-Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem srsa_four_sqrt1 :
   powm 1 2 pin_N = 1 /\
-  powm 186 2 pin_N = 1 /\
-  powm 67 2 pin_N = 1 /\
-  powm 120 2 pin_N = 1.
+  powm (pin_N - 1) 2 pin_N = 1 /\
+  powm pin_sqrt1_mixed 2 pin_N = 1 /\
+  powm pin_sqrt1_mixed2 2 pin_N = 1.
 Proof. vm_compute. repeat split; reflexivity. Qed.

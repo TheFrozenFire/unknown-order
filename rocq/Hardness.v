@@ -401,7 +401,7 @@ Theorem lambda_solves_search_11_17 :
       (lambda_semiprime pin_p pin_q + 1).
 Proof.
   intros y Hcop.
-  apply (lambda_solves_strong_RSA pin_p pin_q y prime_11 prime_17
+  apply (lambda_solves_strong_RSA pin_p pin_q y pin_p_prime pin_q_prime
            pin_p_neq_q Hcop).
 Qed.
 

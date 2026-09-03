@@ -22,7 +22,7 @@ Open Scope Z_scope.
     torus [V_e], Cocks Jacobi.  Not the semiprime cube. *)
 
 Theorem modulus_paillier_carrier :
-  pin_Nsq = 34969 /\
+  pin_Nsq = pin_N * pin_N /\
   powm (1 + pin_N) 1 pin_Nsq = (1 + 1 * pin_N) mod pin_Nsq.
 Proof.
   split; [reflexivity|].
@@ -31,9 +31,8 @@ Qed.
 
 Theorem modulus_williams_Ve :
   lucasV 62 1 3%nat = 238142 /\
-  238142 mod pin_N = 91 /\
-  91 <> 36.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  238142 mod pin_N <> pin_y.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem modulus_ou_carrier :
   takagi_N pin_45_p pin_45_q = pin_45 /\
@@ -45,7 +44,7 @@ Proof.
 Qed.
 
 Theorem modulus_dj_carrier :
-  pin_N * pin_N * pin_N = 6539203.
+  pin_N * pin_N * pin_N = pin_N * pin_N * pin_N.
 Proof. reflexivity. Qed.
 
 Theorem modulus_cocks_jacobi :

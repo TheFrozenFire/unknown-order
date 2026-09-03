@@ -6,6 +6,7 @@ Require Import RocqProofs.NumberTheory.
 Require Import RSA.
 Require Import Miller.
 Require Import TwoPrimary.
+Require Import Order.
 
 Open Scope Z_scope.
 
@@ -121,30 +122,66 @@ Proof.
   - exact Hlt.
 Qed.
 
+Theorem miller_from_d_q :
+  forall R a kp kq,
+    Z.coprime a (rsa_N R) ->
+    two_height a (miller_t R) (rsa_p R) kp ->
+    two_height a (miller_t R) (rsa_q R) kq ->
+    (kq < kp)%nat ->
+    Z.gcd (a ^ (miller_t R * pow2n kq) - 1) (rsa_N R) = rsa_q R.
+Proof.
+  intros R a kp kq Hcop Hpht Hqht Hlt.
+  unfold rsa_N. rewrite (Z.mul_comm (rsa_p R) (rsa_q R)).
+  apply (height_mismatch_splits (rsa_q R) (rsa_p R) a (miller_t R) kq kp).
+  - apply rsa_q_prime.
+  - apply rsa_p_prime.
+  - apply not_eq_sym, rsa_distinct.
+  - unfold rsa_N in Hcop. rewrite Z.mul_comm. exact Hcop.
+  - pose proof (miller_t_pos R). lia.
+  - exact Hqht.
+  - exact Hpht.
+  - exact Hlt.
+Qed.
+
 (** Textbook instance: [M = 80 = 16·5], heights of [2] at
     [11] and [17] disagree ([cas/20]: [1] vs [3]). *)
 Theorem rsa_test_base2_heights :
-  two_height 2 (miller_t rsa_test) (rsa_p rsa_test) 1%nat /\
-  two_height 2 (miller_t rsa_test) (rsa_q rsa_test) 3%nat.
+  two_height 2 (miller_t rsa_test) (rsa_p rsa_test) (val2 pin_ord2_p) /\
+  two_height 2 (miller_t rsa_test) (rsa_q rsa_test) (val2 pin_ord2_q).
 Proof.
   rewrite rsa_test_miller_t.
-  unfold rsa_test, two_height, pow2n, powm. cbn.
   split.
-  - split; [vm_compute; reflexivity|].
-    intros j Hj. destruct j; [| lia]. vm_compute. discriminate.
-  - split; [vm_compute; reflexivity|].
-    intros j Hj.
-    destruct j as [| j]; [| destruct j as [| j]; [| destruct j; [| lia]]];
-      vm_compute; discriminate.
+  - apply (proj2 (two_height_is_val2_ord pin_p 2 pin_ord2_p (odd_part pin_lam)
+                    (val2 pin_ord2_p) pin_p_prime order_2_mod_11
+                    ltac:(apply odd_part_pos; lia)
+                    ltac:(apply odd_part_odd; lia)
+                    ltac:(apply Z.mod_divide; [vm_compute; discriminate|]; vm_compute; reflexivity))).
+    reflexivity.
+  - apply (proj2 (two_height_is_val2_ord pin_q 2 pin_ord2_q (odd_part pin_lam)
+                    (val2 pin_ord2_q) pin_q_prime order_2_mod_17
+                    ltac:(apply odd_part_pos; lia)
+                    ltac:(apply odd_part_odd; lia)
+                    ltac:(apply Z.mod_divide; [vm_compute; discriminate|]; vm_compute; reflexivity))).
+    reflexivity.
 Qed.
 
 Theorem rsa_test_miller_from_d :
-  Z.gcd (2 ^ (miller_t rsa_test * pow2n 1) - 1) (rsa_N rsa_test)
-    = rsa_p rsa_test.
+  let kp := val2 pin_ord2_p in
+  let kq := val2 pin_ord2_q in
+  (if (kp <? kq)%nat
+   then Z.gcd (2 ^ (miller_t rsa_test * pow2n kp) - 1) (rsa_N rsa_test)
+          = rsa_p rsa_test
+   else Z.gcd (2 ^ (miller_t rsa_test * pow2n kq) - 1) (rsa_N rsa_test)
+          = rsa_q rsa_test).
 Proof.
-  apply (miller_from_d rsa_test 2 1%nat 3%nat).
-  - vm_compute. reflexivity.
-  - apply rsa_test_base2_heights.
-  - apply rsa_test_base2_heights.
-  - lia.
+  intros kp kq.
+  destruct (Nat.ltb_spec kp kq) as [Hlt | Hge].
+  - apply (miller_from_d rsa_test 2 kp kq);
+      [vm_compute; reflexivity | apply rsa_test_base2_heights
+       | apply rsa_test_base2_heights | exact Hlt].
+  - assert (kq < kp)%nat as Hlt.
+    { unfold kp, kq in Hge |- *. vm_compute in Hge. vm_compute. lia. }
+    apply (miller_from_d_q rsa_test 2 kp kq);
+      [vm_compute; reflexivity | apply rsa_test_base2_heights
+       | apply rsa_test_base2_heights | exact Hlt].
 Qed.

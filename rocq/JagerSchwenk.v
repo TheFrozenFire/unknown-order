@@ -29,19 +29,19 @@ Theorem jacobi_one_pin :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem jacobi_two_pin :
-  jacobi_N 2 11 17 = -1.
+  jacobi_N 2 pin_p pin_q = -1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem jacobi_two_values :
-  jacobi_N 1 11 17 <> jacobi_N 2 11 17.
+  jacobi_N 1 11 17 <> jacobi_N 2 pin_p pin_q.
 Proof. rewrite jacobi_one_pin, jacobi_two_pin. discriminate. Qed.
 
 Theorem jacobi_is_standard_easy :
-  jacobi_N 2 11 17 = jacobi_N 2 11 17.
+  jacobi_N 2 pin_p pin_q = jacobi_N 2 pin_p pin_q.
 Proof. reflexivity. Qed.
 
 Theorem jacobi_is_not_a_constant_polynomial :
-  forall c, ~ (jacobi_N 1 11 17 = c /\ jacobi_N 2 11 17 = c).
+  forall c, ~ (jacobi_N 1 11 17 = c /\ jacobi_N 2 pin_p pin_q = c).
 Proof.
   intros c [H1 H2].
   rewrite jacobi_one_pin in H1. rewrite jacobi_two_pin in H2.
@@ -50,7 +50,7 @@ Qed.
 
 Theorem jacobi_is_not_a_ring_polynomial :
   nth 1%nat (poly_Pe_minus_X poly_X 3%nat) 0 = -1 ->
-  jacobi_N 1 11 17 <> jacobi_N 2 11 17.
+  jacobi_N 1 11 17 <> jacobi_N 2 pin_p pin_q.
 Proof. intros _. apply jacobi_two_values. Qed.
 
 Theorem jacobi_three_pin :

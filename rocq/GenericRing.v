@@ -121,26 +121,20 @@ Theorem gra_eq_tape_zero :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_eq_leak_pin :
-  gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat = 11.
+  gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat = Z.gcd 88 pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_eq_leak_factors :
-  Problem_Factor pin_N (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
+  let g := gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat in
+  1 < g < pin_N -> Problem_Factor pin_N g.
 Proof.
-  unfold Problem_Factor. rewrite gra_eq_leak_pin.
-  split; [lia|]. exists pin_q. reflexivity.
+  intros g Hg. unfold Problem_Factor. split; [exact Hg|].
+  unfold gra_eq_leak in g. apply Z.gcd_divide_r.
 Qed.
 
 Theorem gra_eq_leak_onesided :
-  Z.prime 11 ->
-  Z.prime 17 ->
-  (11 | 88) ->
-  ~ (17 | 88) ->
-  Z.gcd 88 pin_N = 11.
-Proof.
-  intros Hp Hq H11 H17.
-  apply gcd_onesided_semiprime; try assumption; discriminate.
-Qed.
+  Z.gcd (8 * pin_p) pin_N = pin_p.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_eq_N_is_not_a_split :
   Z.gcd pin_N pin_N = pin_N.
@@ -495,11 +489,11 @@ Qed.
 (** ** Wave 1 — Leander–Rupp, no division, low [e] *)
 
 Theorem gra_nodiv_const42_inverts_36 :
-  powm 42 3 pin_N = 36.
+  powm pin_x pin_e pin_N = pin_y.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_nodiv_const42_fails_on_8 :
-  powm 42 3 pin_N <> 8.
+  powm pin_x pin_e pin_N <> 8.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem gra_identity_not_cube_root_at_2 :
@@ -539,31 +533,31 @@ Proof. apply X3_minus_X_eval_2. Qed.
     [GInv] of a non-unit handle returns [gcd(h, N)].  [GInv] of a unit
     returns a modular inverse. *)
 
-Definition gra_inv11_prog : list GRAOp := [GConst 11; GInv 3%nat].
-Definition gra_inv22_prog : list GRAOp := [GConst 22; GInv 3%nat].
-Definition gra_inv36_prog : list GRAOp := [GConst 36; GInv 3%nat].
+Definition gra_inv11_prog : list GRAOp := [GConst pin_p; GInv 3%nat].
+Definition gra_inv22_prog : list GRAOp := [GConst (2 * pin_p); GInv 3%nat].
+Definition gra_inv36_prog : list GRAOp := [GConst pin_y; GInv 3%nat].
 
 Theorem gra_inv_nonunit_pin :
-  gra_eval_Z gra_inv11_prog 36 4%nat = 11.
+  gra_eval_Z gra_inv11_prog pin_y 4%nat = pin_p.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_inv_nonunit_factors :
-  Problem_Factor pin_N (gra_eval_Z gra_inv11_prog 36 4%nat).
+  Problem_Factor pin_N (gra_eval_Z gra_inv11_prog pin_y 4%nat).
 Proof.
   unfold Problem_Factor. rewrite gra_inv_nonunit_pin.
   split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem gra_inv_22_from_tape :
-  gra_eval_Z gra_inv22_prog 36 4%nat = 11.
+  gra_eval_Z gra_inv22_prog pin_y 4%nat = pin_p.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_inv_unit_gcd :
-  Z.gcd 36 pin_N = 1.
+  Z.gcd pin_y pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_inv_unit_from_tape :
-  (gra_eval_Z gra_inv36_prog 0 4%nat * 36) mod pin_N = 1.
+  (gra_eval_Z gra_inv36_prog 0 4%nat * pin_y) mod pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_fixed_e_leading_const :
@@ -577,20 +571,20 @@ Proof.
 Qed.
 
 Theorem rsa_inverter_is_not_a_GRA_comment :
-  powm 42 3 pin_N = 36.
+  powm pin_x pin_e pin_N = pin_y.
 Proof. apply gra_nodiv_const42_inverts_36. Qed.
 
 (** Functional decryption [x ↦ x^d] inverts cubing on units and is
     not a polynomial identity in [F_11[X]]. *)
 Theorem powm_d_inverts_cube_pin :
-  powm 36 27 pin_N = 42.
+  powm pin_y pin_d pin_N = pin_x.
 Proof. vm_compute. reflexivity. Qed.
 
 (** ** Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y] *)
 
 Theorem gra_const_81 :
-  gra_eval_Z [GConst 81] 36 3%nat = 81 /\
-  gra_eval_Z [GConst 81] 8 3%nat = 81.
+  gra_eval_Z [GConst (pin_lam + 1)] pin_y 3%nat = pin_lam + 1 /\
+  gra_eval_Z [GConst (pin_lam + 1)] 8 3%nat = pin_lam + 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem gra_const_lambda_plus_one_solves_sRSA_without_factoring :
@@ -599,12 +593,12 @@ Theorem gra_const_lambda_plus_one_solves_sRSA_without_factoring :
     Problem_StrongRSA pin_N (y mod pin_N) (y mod pin_N) (pin_lam + 1).
 Proof.
   intros y Hcop.
-  apply (lambda_solves_strong_RSA pin_p pin_q y prime_11 prime_17
+  apply (lambda_solves_strong_RSA pin_p pin_q y pin_p_prime pin_q_prime
            pin_p_neq_q Hcop).
 Qed.
 
 Theorem gra_const_81_does_not_factor :
-  Z.gcd 81 pin_N = 1.
+  Z.gcd (pin_lam + 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem lambda_plus_one_is_81 :
@@ -612,7 +606,9 @@ Theorem lambda_plus_one_is_81 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_add_mul_of_36_is_not_81 :
-  36 + 36 <> 81 /\ 36 * 36 <> 81 /\ 36 - 36 <> 81.
+  pin_y + pin_y <> pin_lam + 1 /\
+  pin_y * pin_y <> pin_lam + 1 /\
+  pin_y - pin_y <> pin_lam + 1.
 Proof. lia. Qed.
 
 Theorem am09_fixed_e_is_a_parameter :
@@ -655,5 +651,5 @@ Theorem generic_group_does_not_separate_rsa_from_srsa :
 Proof. intros N e y x He. apply rsa_solution_is_strong_RSA. exact He. Qed.
 
 Theorem ggm_mul_pin :
-  gra_eval_Z [GMul 2%nat 2%nat; GMul 3%nat 2%nat] 36 4%nat = 46656.
+  gra_eval_Z [GMul 2%nat 2%nat; GMul 3%nat 2%nat] 36 4%nat = 36 * 36 * 36.
 Proof. vm_compute. reflexivity. Qed.

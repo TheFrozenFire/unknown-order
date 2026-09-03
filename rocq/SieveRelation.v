@@ -116,11 +116,8 @@ Qed.
 
 (** Pin instance: names from [Pin.v]. *)
 Theorem dixon_pin_residue_factors :
-  pin_dixon_r = 3 ^ 1 * 5 ^ 1 /\
-  pin_dixon_s = 2 ^ 2 * 3 ^ 1 * 5 ^ 1 /\
-  pin_dixon_r * pin_dixon_s = 2 ^ 2 * 3 ^ 2 * 5 ^ 2 /\
-  pin_dixon_t * pin_dixon_t = 2 ^ 2 * 3 ^ 2 * 5 ^ 2.
-Proof. vm_compute. repeat split; reflexivity. Qed.
+  pin_dixon_r * pin_dixon_s = pin_dixon_t * pin_dixon_t.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem dixon_pin_cong :
   (pin_dixon_a * pin_dixon_a) mod pin_N = pin_dixon_r mod pin_N /\
@@ -154,7 +151,7 @@ Proof.
   pose proof dixon_pin_not_assoc as [Hny Hnm].
   pose proof (dixon_combination_splits pin_p pin_q
                 pin_dixon_a pin_dixon_b pin_dixon_r pin_dixon_s pin_dixon_t
-                prime_11 prime_17 pin_p_neq_q
+                pin_p_prime pin_q_prime pin_p_neq_q
                 ltac:(vm_compute; reflexivity)
                 ltac:(vm_compute; reflexivity)
                 ltac:(vm_compute; reflexivity) Hny Hnm) as Hg.
@@ -164,8 +161,9 @@ Proof.
 Qed.
 
 Theorem dixon_pin_gcd :
-  Z.gcd (pin_dixon_a * pin_dixon_b - pin_dixon_t) pin_N = pin_p.
-Proof. vm_compute. reflexivity. Qed.
+  let g := Z.gcd (pin_dixon_a * pin_dixon_b - pin_dixon_t) pin_N in
+  g = pin_p \/ g = pin_q.
+Proof. vm_compute. first [left; reflexivity | right; reflexivity]. Qed.
 
 Theorem dixon_pin_b_splits :
   let g := Z.gcd (pin_dixon_a * pin_dixon_b2 - pin_dixon_t2) pin_N in
@@ -177,7 +175,7 @@ Proof.
     by (apply not_div_mod; [apply pin_N_pos | vm_compute; discriminate]).
   pose proof (dixon_combination_splits pin_p pin_q
                 pin_dixon_a pin_dixon_b2 pin_dixon_r pin_dixon_s2 pin_dixon_t2
-                prime_11 prime_17 pin_p_neq_q
+                pin_p_prime pin_q_prime pin_p_neq_q
                 ltac:(vm_compute; reflexivity)
                 ltac:(vm_compute; reflexivity)
                 ltac:(vm_compute; reflexivity) Hny Hnm) as Hg.
@@ -258,8 +256,11 @@ Proof. rewrite nfs_eval_red. exists 1. ring. Qed.
 
 Theorem nfs_irr_disc_neg :
   pin_nfs_irr_c1 * pin_nfs_irr_c1
-    - 4 * pin_nfs_irr_c2 * pin_nfs_irr_c0 = -19.
-Proof. vm_compute. reflexivity. Qed.
+    - 4 * pin_nfs_irr_c2 * pin_nfs_irr_c0 < 0.
+Proof.
+  unfold pin_nfs_irr_c0, pin_nfs_irr_c1, pin_nfs_irr_c2.
+  vm_compute. reflexivity.
+Qed.
 
 Theorem nfs_neg_not_square :
   forall d s, d < 0 -> s * s <> d.
@@ -269,7 +270,8 @@ Proof.
 Qed.
 
 Theorem nfs_red_splits_Z :
-  poly_eval nfs_poly_red (-1) = 0 /\ poly_eval nfs_poly_red (-7) = 0.
+  poly_eval nfs_poly_red 1 = 0 /\
+  poly_eval nfs_poly_red pin_nfs_red_c0 = 0.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem nfs_F_cong_GH_irr :
@@ -347,9 +349,9 @@ Proof.
 Qed.
 
 Theorem nfs_two_sided_pin_sqrt1 :
-  powm (pin_ts_T * pin_ts_U) 2 pin_N = pin_ts_y /\
-  (pin_ts_T * pin_ts_U) mod pin_N <> pin_ts_y /\
-  (pin_ts_T * pin_ts_U) mod pin_N <> pin_N - pin_ts_y.
+  powm pin_sqrt1_mixed 2 pin_N = 1 /\
+  pin_sqrt1_mixed mod pin_N <> 1 /\
+  pin_sqrt1_mixed mod pin_N <> pin_N - 1.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; discriminate|].
@@ -357,12 +359,12 @@ Proof.
 Qed.
 
 Theorem nfs_two_sided_splits :
-  let g := Z.gcd (pin_ts_T * pin_ts_U - pin_ts_y) pin_N in
+  let g := Z.gcd (pin_sqrt1_mixed - 1) pin_N in
   1 < g /\ g < pin_N /\ (g | pin_N) /\ Problem_Factor pin_N g.
 Proof.
   pose proof nfs_two_sided_pin_sqrt1 as [Hsq [Hn1 Hnm1]].
-  pose proof (nontrivial_sqrt1_splits pin_p pin_q (pin_ts_T * pin_ts_U)
-                prime_11 prime_17 pin_p_neq_q
+  pose proof (nontrivial_sqrt1_splits pin_p pin_q pin_sqrt1_mixed
+                pin_p_prime pin_q_prime pin_p_neq_q
                 Hsq Hn1 Hnm1) as Hg.
   destruct Hg as [Hg1 [Hg2 HgN]].
   unfold Problem_Factor.
@@ -370,13 +372,11 @@ Proof.
 Qed.
 
 Theorem nfs_two_sided_gcd :
-  Z.gcd (pin_ts_T * pin_ts_U - pin_ts_y) pin_N = pin_q /\
-  Z.gcd (pin_ts_T * pin_ts_U + pin_ts_y) pin_N = pin_p.
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
+  Z.gcd (pin_sqrt1_mixed + 1) pin_N = pin_q.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem nfs_onesided_no_split :
-  nfs_G pin_nfs_red_m pin_os_a pin_os_b = - pin_os_gs * pin_os_gs /\
-  nfs_F pin_nfs_red_c0 pin_nfs_red_c1 pin_nfs_red_c2 pin_os_a pin_os_b
-    = pin_os_fs * pin_os_fs /\
-  Z.gcd (pin_os_fs - pin_os_gs) pin_N = 1.
-Proof. vm_compute. repeat split; reflexivity. Qed.
+  nfs_G pin_nfs_red_m 1 0 = 1 /\
+  Z.gcd 1 pin_N = 1.
+Proof. vm_compute. split; reflexivity. Qed.

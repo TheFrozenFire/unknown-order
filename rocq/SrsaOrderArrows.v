@@ -24,22 +24,13 @@ Open Scope Z_scope.
 (** ** Order of the pin challenge *)
 
 Theorem is_order_pin_y_40 :
-  is_order pin_N 36 40.
+  is_order pin_N pin_y pin_y_ord.
 Proof.
-  unfold is_order. split; [lia|]. split.
-  - vm_compute. reflexivity.
-  - intros k' [Hk' Hk'lt] Hk'1.
-    assert (
-      k' = 1 \/ k' = 2 \/ k' = 3 \/ k' = 4 \/ k' = 5 \/
-      k' = 6 \/ k' = 7 \/ k' = 8 \/ k' = 9 \/ k' = 10 \/
-      k' = 11 \/ k' = 12 \/ k' = 13 \/ k' = 14 \/ k' = 15 \/
-      k' = 16 \/ k' = 17 \/ k' = 18 \/ k' = 19 \/ k' = 20 \/
-      k' = 21 \/ k' = 22 \/ k' = 23 \/ k' = 24 \/ k' = 25 \/
-      k' = 26 \/ k' = 27 \/ k' = 28 \/ k' = 29 \/ k' = 30 \/
-      k' = 31 \/ k' = 32 \/ k' = 33 \/ k' = 34 \/ k' = 35 \/
-      k' = 36 \/ k' = 37 \/ k' = 38 \/ k' = 39) by lia.
-    repeat (destruct H as [H | H]; [subst k'; vm_compute in Hk'1; discriminate|]).
-    subst k'. vm_compute in Hk'1. discriminate.
+  replace pin_y_ord with (Z.lcm pin_y_ord_p pin_y_ord_q) by (vm_compute; reflexivity).
+  apply (order_semiprime_from_locals pin_p pin_q pin_y pin_y_ord_p pin_y_ord_q);
+    [apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q | vm_compute; reflexivity | | ].
+  - apply is_order_by_vm; [lia | vm_compute; reflexivity | vm_compute; reflexivity].
+  - apply is_order_by_vm; [lia | vm_compute; reflexivity | vm_compute; reflexivity].
 Qed.
 
 Theorem order_yields_residual_sRSA :
@@ -65,9 +56,9 @@ Proof.
 Qed.
 
 Theorem order_yields_residual_pin :
-  srsa_residual_leaf pin_N 80 36 (powm 36 27 pin_N) 3.
+  srsa_residual_leaf pin_N pin_lam pin_y (powm pin_y pin_d pin_N) pin_e.
 Proof.
-  apply (order_yields_residual_sRSA pin_N 36 40 3 27 80).
+  apply (order_yields_residual_sRSA pin_N pin_y pin_y_ord pin_e pin_d pin_lam).
   - lia.
   - lia.
   - apply is_order_pin_y_40.
@@ -81,8 +72,8 @@ Proof.
 Qed.
 
 Theorem order_invert_pin_is_cube_root :
-  powm 36 27 pin_N = 42 /\
-  powm 42 3 pin_N = 36.
+  powm pin_y pin_d pin_N = pin_x /\
+  powm pin_x pin_e pin_N = pin_y.
 Proof. vm_compute. split; reflexivity. Qed.
 
 (** ** Mismatch ⇒ Factor; matching local orders do not *)
@@ -104,7 +95,7 @@ Proof.
 Qed.
 
 Theorem leftover_x_one_sided_pin :
-  one_sided_low_order 11 17 42 5.
+  one_sided_low_order pin_p pin_q pin_x pin_x_k.
 Proof.
   unfold one_sided_low_order.
   split; [vm_compute; reflexivity|].
@@ -113,28 +104,28 @@ Proof.
 Qed.
 
 Theorem leftover_x_mismatch_factors_pin :
-  Z.gcd (powm 42 5 pin_N - 1) pin_N = 11 /\
-  Problem_Factor pin_N (Z.gcd (powm 42 5 pin_N - 1) pin_N).
+  Z.gcd (powm pin_x pin_x_k pin_N - 1) pin_N = pin_p /\
+  Problem_Factor pin_N (Z.gcd (powm pin_x pin_x_k pin_N - 1) pin_N).
 Proof.
 
-  apply leftover_mismatch_factors with (x := 42) (k := 5);
-    [apply prime_11 | apply prime_17 | discriminate | apply leftover_x_one_sided_pin].
+  apply leftover_mismatch_factors with (x := pin_x) (k := pin_x_k);
+    [apply pin_p_prime | apply pin_q_prime | discriminate | apply leftover_x_one_sided_pin].
 Qed.
 
 Theorem residual_mismatch_factors_pin :
-  srsa_residual_leaf pin_N 80 36 42 3 ->
-  one_sided_low_order 11 17 42 5 ->
-  Z.gcd (powm 42 5 pin_N - 1) pin_N = 11 /\
-  Problem_Factor pin_N (Z.gcd (powm 42 5 pin_N - 1) pin_N).
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e ->
+  one_sided_low_order pin_p pin_q pin_x pin_x_k ->
+  Z.gcd (powm pin_x pin_x_k pin_N - 1) pin_N = pin_p /\
+  Problem_Factor pin_N (Z.gcd (powm pin_x pin_x_k pin_N - 1) pin_N).
 Proof.
   intros _ Hone.
 
-  apply leftover_mismatch_factors with (x := 42) (k := 5);
-    [apply prime_11 | apply prime_17 | discriminate | exact Hone].
+  apply leftover_mismatch_factors with (x := pin_x) (k := pin_x_k);
+    [apply pin_p_prime | apply pin_q_prime | discriminate | exact Hone].
 Qed.
 
 Theorem leftover_y_one_sided_pin :
-  one_sided_low_order 11 17 36 5.
+  one_sided_low_order pin_p pin_q pin_y pin_x_k.
 Proof.
   unfold one_sided_low_order.
   split; [vm_compute; reflexivity|].
@@ -143,12 +134,12 @@ Proof.
 Qed.
 
 Theorem order_mismatch_factors_pin :
-  Z.gcd (powm pin_y 5 pin_N - 1) pin_N = pin_p /\
-  Problem_Factor pin_N (Z.gcd (powm pin_y 5 pin_N - 1) pin_N).
+  Z.gcd (powm pin_y pin_x_k pin_N - 1) pin_N = pin_p /\
+  Problem_Factor pin_N (Z.gcd (powm pin_y pin_x_k pin_N - 1) pin_N).
 Proof.
 
-  apply leftover_mismatch_factors with (x := pin_y) (k := 5);
-    [apply prime_11 | apply prime_17 | discriminate | apply leftover_y_one_sided_pin].
+  apply leftover_mismatch_factors with (x := pin_y) (k := pin_x_k);
+    [apply pin_p_prime | apply pin_q_prime | discriminate | apply leftover_y_one_sided_pin].
 Qed.
 
 Theorem leftover_77_one_sided :

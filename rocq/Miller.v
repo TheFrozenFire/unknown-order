@@ -100,31 +100,20 @@ Fixpoint first_n_bases (n : nat) : list Z :=
 Definition miller_try_base (R : RSAInstance) (a : Z) : Z :=
   Z.gcd (powm a (miller_t R) (rsa_N R) - 1) (rsa_N R).
 
-(** On the textbook instance [M = 80 = 16·5], so [s = 4], [t = 5]. *)
-Theorem rsa_test_miller_split : miller_M rsa_test = 80.
+(** On the pin, [M = λ], so [s = v₂(λ)] and [t] is the odd part. *)
+Theorem rsa_test_miller_split : miller_M rsa_test = pin_lam.
 Proof. vm_compute. reflexivity. Qed.
 
-Theorem rsa_test_miller_t : miller_t rsa_test = 5.
+Theorem rsa_test_miller_t : miller_t rsa_test = odd_part pin_lam.
 Proof. vm_compute. reflexivity. Qed.
 
-Theorem rsa_test_miller_s : miller_s rsa_test = 4%nat.
+Theorem rsa_test_miller_s : miller_s rsa_test = val2 pin_lam.
 Proof. vm_compute. reflexivity. Qed.
 
-(** Base [a = 2]: [2^5 = 32], and some square in the chain splits pin_N. *)
-Theorem rsa_test_base2_g0 : powm 2 5 pin_N = 32.
-Proof. vm_compute. reflexivity. Qed.
-
-(** [2^5 = 32], [32² ≡ 89], [89² ≡ 67], [67² ≡ 1].  Then [67 ≢ ±1]
-    and [gcd(66, pin_N) = 11]. *)
-Theorem rsa_test_base2_chain :
-  powm 32 2 pin_N = 89 /\
-  powm 89 2 pin_N = 67 /\
-  powm 67 2 pin_N = 1.
-Proof. vm_compute. repeat split; reflexivity. Qed.
-
+(** Mixed [√1] on the pin is a Miller splitting witness. *)
 Theorem rsa_test_base2_splits :
-  miller_splits 2 pin_N 67 /\
-  Z.gcd (67 - 1) pin_N = 11.
+  miller_splits 2 pin_N pin_sqrt1_mixed /\
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p.
 Proof.
   split.
   - unfold miller_splits. vm_compute. repeat split; discriminate.

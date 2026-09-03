@@ -25,7 +25,7 @@ Open Scope Z_scope.
     require [N | −1].  Cross-confirmed by [cas/119]. *)
 
 Theorem slp_carmichael_is_functional :
-  powm 36 27 pin_N = 42 /\ powm 42 3 pin_N = 36.
+  powm pin_y pin_d pin_N = pin_x /\ powm pin_x pin_e pin_N = pin_y.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem slp_solver_not_poly_identity_linear :
@@ -37,7 +37,7 @@ Theorem slp_solver_not_poly_identity_last :
 Proof. apply Xe_minus_X_last. Qed.
 
 Theorem X81_minus_X_leading_not_zero_mod_11 :
-  (poly_last (poly_Xn 81%nat)) mod 11 <> 0.
+  (poly_last (poly_Xn 81%nat)) mod pin_p <> 0.
 Proof. rewrite slp_solver_not_poly_identity_last. vm_compute. discriminate. Qed.
 
 Theorem brown_low_degree_identity_forbids_N_dividing_minus1 :
@@ -45,7 +45,7 @@ Theorem brown_low_degree_identity_forbids_N_dividing_minus1 :
 Proof. intros [k Hk]. nia. Qed.
 
 Theorem two_pow_81_is_two_mod_N :
-  powm 2 81 pin_N = 2.
+  powm 2 (pin_lam + 1) pin_N = 2.
 Proof. vm_compute. reflexivity. Qed.
 
 (** Dual numbers: [(y+ε)^n = y^n + n y^{n-1} ε] with [ε² = 0]. *)
@@ -62,17 +62,17 @@ Theorem brown_dual_pow27_fst :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem brown_dual_not_identity :
-  81 <> 1.
+  pin_lam + 1 <> 1.
 Proof. discriminate. Qed.
 
 Theorem brown_dual_tangent_mod_N :
-  (81 * powm 2 80 pin_N) mod pin_N = 81.
+  ((pin_lam + 1) * powm 2 pin_lam pin_N) mod pin_N = (pin_lam + 1) mod pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem brown_dual_gcd_pin :
-  Z.gcd (81 - 1) pin_N = 1.
+  Z.gcd pin_lam pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem brown_ed_minus_1_is_80 :
-  3 * 27 - 1 = 80.
-Proof. reflexivity. Qed.
+  (pin_e * pin_d) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.

@@ -466,10 +466,10 @@ Theorem eval_pair_omega_13_not_alternating :
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem pin_mu3_only_one :
-  forall x, Z.coprime x 11 -> powm x 3 11 = 1 -> x mod 11 = 1.
+  forall x, Z.coprime x pin_p -> powm x 3 pin_p = 1 -> x mod pin_p = 1.
 Proof.
   intros x Hcop Hmu.
-  apply (mu3_unique_one_prime 11 x prime_11 ltac:(lia) ltac:(vm_compute; reflexivity)
+  apply (mu3_unique_one_prime pin_p x pin_p_prime ltac:(lia) ltac:(vm_compute; reflexivity)
            Hcop Hmu).
 Qed.
 

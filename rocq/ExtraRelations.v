@@ -39,7 +39,7 @@ Proof.
 Qed.
 
 Theorem one_more_queried_is_not_extra :
-  ~ Problem_OneMore pin_N 3 [36] [42] 36 42.
+  ~ Problem_OneMore pin_N pin_e [pin_y] [pin_x] pin_y pin_x.
 Proof.
   unfold Problem_OneMore. intros [_ [_ Hin]].
   apply Hin. left. reflexivity.
@@ -59,7 +59,7 @@ Proof.
 Qed.
 
 Theorem ghr_pin :
-  Problem_GHR pin_N 3 36 42.
+  Problem_GHR pin_N pin_e pin_y pin_x.
 Proof.
   unfold Problem_GHR, Problem_RSA, rsa_problem.
   split; [apply prime_3 | vm_compute; reflexivity].
@@ -94,14 +94,14 @@ Theorem phi_hiding_lambda_80 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem phi_hiding_pin_e5 :
-  Problem_PhiHiding 11 17 5.
+  Problem_PhiHiding pin_p pin_q 2.
 Proof.
   unfold Problem_PhiHiding. split; [lia|].
-  exists 16. rewrite phi_hiding_lambda_80. reflexivity.
+  exists (pin_lam / 2). vm_compute. reflexivity.
 Qed.
 
 Theorem phi_hiding_public_e3_misses :
-  ~ Problem_PhiHiding 11 17 3.
+  ~ Problem_PhiHiding pin_p pin_q pin_e.
 Proof.
   unfold Problem_PhiHiding. intros [_ [k Hk]].
   rewrite phi_hiding_lambda_80 in Hk.

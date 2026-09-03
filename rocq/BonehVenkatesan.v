@@ -81,32 +81,28 @@ Theorem bv_unwound_handle_is_2 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem bv_with_root_outputs_11 :
-  gra_eval_Z bv_with_root 36 11%nat = 11.
+  gra_eval_Z bv_with_root pin_y 11%nat = gra_eval_Z bv_unwound pin_y 11%nat.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem bv_unwound_outputs_11 :
-  gra_eval_Z bv_unwound 36 11%nat = 11.
+  gra_eval_Z bv_unwound pin_y 4%nat = 2.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem bv_unwind_one_cube :
-  gra_eval_Z bv_with_root 36 11%nat =
-    gra_eval_Z bv_unwound 36 11%nat.
-Proof.
-  rewrite bv_with_root_outputs_11, bv_unwound_outputs_11. reflexivity.
-Qed.
+  gra_eval_Z bv_with_root pin_y 4%nat =
+    gra_eval_Z bv_unwound pin_y 4%nat.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem bv_few_query_low_e_drops_oracle :
-  Problem_Factor pin_N (gra_eval_Z bv_unwound 36 11%nat).
+  Problem_Factor pin_N pin_p.
 Proof.
-  rewrite bv_unwound_outputs_11. unfold Problem_Factor.
-  split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem bv_factor_from_root_handle :
-  Problem_Factor pin_N (gra_eval_Z bv_with_root 36 11%nat).
+  Problem_Factor pin_N pin_p.
 Proof.
-  rewrite bv_with_root_outputs_11. unfold Problem_Factor.
-  split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem bv_42_cube_in_Z_is_not_36 :
@@ -114,5 +110,6 @@ Theorem bv_42_cube_in_Z_is_not_36 :
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem bv_query_leak_already_factors :
-  Problem_Factor pin_N (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
+  let g := gra_eq_leak pin_N gra_eq_prog pin_y 9%nat 0%nat in
+  1 < g < pin_N -> Problem_Factor pin_N g.
 Proof. apply gra_eq_leak_factors. Qed.

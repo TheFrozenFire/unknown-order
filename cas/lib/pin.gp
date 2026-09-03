@@ -7,6 +7,10 @@ pin_N = pin_p*pin_q;
 pin_e = 3; pin_d = 27;
 pin_y = 36; pin_x = 42;
 pin_lam = 80; pin_phi = 160;
+pin_g = 3; pin_g_ord_p = 5; pin_g_ord_q = 16;
+pin_y_ord = 40; pin_y_ord_p = 5; pin_y_ord_q = 8; pin_x_k = 5;
+pin_inv3_p = 7; pin_inv3_q = 11;
+pin_ord2_p = 10; pin_ord2_q = 8;
 pin_sqrt1_mixed = 67; pin_sqrt1_mixed2 = 120;
 
 pin_77_p = 7; pin_77_q = 11; pin_77 = pin_77_p*pin_77_q;

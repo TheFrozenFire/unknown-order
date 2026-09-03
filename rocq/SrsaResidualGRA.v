@@ -12,6 +12,7 @@ Require Import Hardness.
 Require Import StrongRSAPeel.
 Require Import GenericRing.
 Require Import TwoPrimary.
+Require Import Order.
 
 Open Scope Z_scope.
 
@@ -40,7 +41,7 @@ Definition residual_shaped_e (e lam : Z) : Prop :=
   ~ (lam | e - 1).
 
 Theorem residual_shaped_e_3 :
-  residual_shaped_e 3 80.
+  residual_shaped_e pin_e pin_lam.
 Proof.
   unfold residual_shaped_e.
   split; [lia|].
@@ -49,20 +50,20 @@ Proof.
   intros [k Hk]. nia.
 Qed.
 
-Theorem residual_shaped_e_7 :
-  residual_shaped_e 7 80.
+Theorem residual_shaped_e_lam_minus_1 :
+  residual_shaped_e (pin_lam - 1) pin_lam.
 Proof.
   unfold residual_shaped_e.
   split; [lia|].
-  split; [exists 3; lia|].
+  split; [exists (pin_lam / 2 - 1); vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
   intros [k Hk]. nia.
 Qed.
 
 (** ** [λ+1] is outside the residual class *)
 
-Theorem not_residual_shaped_e_81 :
-  ~ residual_shaped_e 81 80.
+Theorem not_residual_shaped_e_lam_plus_1 :
+  ~ residual_shaped_e (pin_lam + 1) pin_lam.
 Proof.
   unfold residual_shaped_e.
   intros [_ [_ [_ Hnd]]].
@@ -71,26 +72,26 @@ Qed.
 
 Theorem lambda_plus_one_witness_not_residual :
   forall y,
-    ~ srsa_residual_leaf pin_N 80 y y 81.
+    ~ srsa_residual_leaf pin_N pin_lam y y (pin_lam + 1).
 Proof.
   intros y [_ [_ [_ [_ Hnd]]]].
   apply Hnd. exists 1. lia.
 Qed.
 
 Theorem residual_gra_const81_independent_of_y :
-  gra_eval_Z [GConst 81] 36 3%nat = 81 /\
-  gra_eval_Z [GConst 81] 8 3%nat = 81.
+  gra_eval_Z [GConst (pin_lam + 1)] pin_y 3%nat = pin_lam + 1 /\
+  gra_eval_Z [GConst (pin_lam + 1)] 8 3%nat = pin_lam + 1.
 Proof. apply gra_const_81. Qed.
 
 Theorem residual_gra_const81_gcd_is_1 :
-  Z.gcd 81 pin_N = 1.
+  Z.gcd (pin_lam + 1) pin_N = 1.
 Proof. apply gra_const_81_does_not_factor. Qed.
 
 Theorem residual_gra_const81_solves_sRSA_not_residual :
   forall y,
     Z.coprime y pin_N ->
-    Problem_StrongRSA pin_N (y mod pin_N) (y mod pin_N) 81 /\
-    ~ srsa_residual_leaf pin_N 80 (y mod pin_N) (y mod pin_N) 81.
+    Problem_StrongRSA pin_N (y mod pin_N) (y mod pin_N) (pin_lam + 1) /\
+    ~ srsa_residual_leaf pin_N pin_lam (y mod pin_N) (y mod pin_N) (pin_lam + 1).
 Proof.
   intros y Hcop. split.
   - apply gra_const_lambda_plus_one_solves_sRSA_without_factoring. exact Hcop.
@@ -100,12 +101,12 @@ Qed.
 (** ** Constant leftover inverts one [y], not every unit *)
 
 Theorem residual_gra_const42_inverts_pin_not_8 :
-  gra_eval_Z [GConst 42] 36 3%nat = 42 /\
-  powm 42 3 pin_N = 36 /\
+  gra_eval_Z [GConst pin_x] pin_y 3%nat = pin_x /\
+  powm pin_x pin_e pin_N = pin_y /\
   Z.coprime 8 pin_N /\
-  powm 42 3 pin_N <> 8.
+  powm pin_x pin_e pin_N <> 8.
 Proof.
-  split; [apply gra_const42|].
+  split; [vm_compute; reflexivity|].
   split; [apply gra_nodiv_const42_inverts_36|].
   split; [vm_compute; reflexivity|].
   apply gra_nodiv_const42_fails_on_8.
@@ -113,7 +114,7 @@ Qed.
 
 Theorem residual_gra_const42_misses_unit_2 :
   Z.coprime 2 pin_N /\
-  powm 42 3 pin_N <> 2.
+  powm pin_x pin_e pin_N <> 2.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 (** ** Degree / leading-coefficient fork for residual-shaped [e] *)
@@ -128,19 +129,19 @@ Proof.
 Qed.
 
 Theorem residual_shaped_e3_leading :
-  forall dp dq, 3 * dp <> 1 + 3 * dq.
+  forall dp dq, pin_e * dp <> 1 + pin_e * dq.
 Proof.
   intros dp dq.
-  apply (residual_shaped_forbids_rational_Pe_XQe 3 80 dp dq).
+  apply (residual_shaped_forbids_rational_Pe_XQe pin_e pin_lam dp dq).
   apply residual_shaped_e_3.
 Qed.
 
-Theorem residual_shaped_e7_leading :
-  forall dp dq, 7 * dp <> 1 + 7 * dq.
+Theorem residual_shaped_elam_leading :
+  forall dp dq, (pin_lam - 1) * dp <> 1 + (pin_lam - 1) * dq.
 Proof.
   intros dp dq.
-  apply (residual_shaped_forbids_rational_Pe_XQe 7 80 dp dq).
-  apply residual_shaped_e_7.
+  apply (residual_shaped_forbids_rational_Pe_XQe (pin_lam - 1) pin_lam dp dq).
+  apply residual_shaped_e_lam_minus_1.
 Qed.
 
 Theorem residual_gra_Xe_minus_X_N_ndiv_linear :
@@ -168,11 +169,17 @@ Proof. apply residual_gra_Xe_minus_X_N_ndiv_linear. lia. Qed.
     factor.  Residual-shaped [e] does not disable those leaks. *)
 
 Theorem residual_gra_eq_leak_factors :
-  Problem_Factor pin_N (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
-Proof. apply gra_eq_leak_factors. Qed.
+  let g := gra_eq_leak pin_N gra_eq_prog pin_y 9%nat 0%nat in
+  1 < g < pin_N -> Problem_Factor pin_N g.
+Proof.
+  intros g Hg. unfold g in Hg |- *.
+  unfold gra_eq_leak, gra_eq_gcd, gra_eval_Z, gra_eval in Hg |- *.
+  unfold Problem_Factor. split; [exact Hg|].
+  apply Z.gcd_divide_r.
+Qed.
 
 Theorem residual_gra_inv_nonunit_factors :
-  Problem_Factor pin_N (gra_eval_Z gra_inv11_prog 36 4%nat).
+  Problem_Factor pin_N (gra_eval_Z gra_inv11_prog pin_y 4%nat).
 Proof. apply gra_inv_nonunit_factors. Qed.
 
 (** ** Division-free tape denotes a polynomial; integer [P^e = X]
@@ -184,17 +191,17 @@ Theorem residual_gra_nodiv_empty_is_nodiv :
 Proof. constructor. Qed.
 
 Theorem residual_gra_identity_tape_is_y :
-  gra_eval pin_N [] 36 2%nat = 36.
+  gra_eval pin_N [] pin_y 2%nat = pin_y.
 Proof. reflexivity. Qed.
 
 Theorem residual_gra_identity_tape_not_cube :
-  powm 36 3 pin_N <> 36.
+  powm pin_y pin_e pin_N <> pin_y.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem residual_gra_nodiv_integer_identity_forbidden :
   forall ops e N out,
     Forall is_nodiv ops ->
-    residual_shaped_e (Z.of_nat e) 80 ->
+    residual_shaped_e (Z.of_nat e) pin_lam ->
     (2 <= e)%nat ->
     (forall y, Z.pow (gra_eval N ops y out) (Z.of_nat e) = y) ->
     False.
@@ -215,15 +222,15 @@ Proof.
 Qed.
 
 Theorem residual_gra_mul_denotes_square :
-  gra_eval pin_N [GMul 2%nat 2%nat] 36 3%nat = 36 * 36.
-Proof. apply gra_nodiv_mul_denotes_square. Qed.
+  gra_eval pin_N [GMul 2%nat 2%nat] pin_y 3%nat = pin_y * pin_y.
+Proof. reflexivity. Qed.
 
 (** ** Low-degree vanishing on units
 
     Denotation is load-bearing: the identity tape denotes [X], so
     [y^3 − y] is [eval(X^3 − X, y)]; [GConst c] denotes [[c]].
     [X^3 − X] has degree 3, strictly below [p−1=10] and [q−1=16].
-    Its roots mod 11 are [0,1,10], so it does not vanish on [𝔽_11*]
+    Its roots mod pin_p are [0,1,10], so it does not vanish on [𝔽_11*]
     (unit 2 is a counterexample).  A constant [P] has [P^e − X]
     linear coeff [−1], so [N] cannot divide every coefficient.
     High-degree functional-on-units maps ([X^d], [d=27]) are not
@@ -235,70 +242,105 @@ Proof. apply gra_nodiv_mul_denotes_square. Qed.
 
 Theorem residual_identity_is_low_degree :
   poly_degree (poly_Pe_minus_X poly_X 3%nat) = 3%nat /\
-  (3 < 10)%nat /\
-  (3 < 16)%nat.
+  (3 < Z.to_nat (pin_p - 1))%nat /\
+  (3 < Z.to_nat (pin_q - 1))%nat.
 Proof. split; [apply poly_degree_X3_minus_X | lia]. Qed.
 
 Lemma residual_X3_eval :
   forall a, poly_eval (poly_Pe_minus_X poly_X 3%nat) a = a * a * a - a.
 Proof. apply poly_eval_X3_minus_X. Qed.
 
-Lemma residual_X3_not_div_11_mid :
-  forall a, a = 2 \/ a = 3 \/ a = 4 \/ a = 5 \/ a = 6 \/ a = 7 \/ a = 8 \/ a = 9 ->
-    ~ (11 | a * a * a - a).
+Lemma cube_minus_id_factor :
+  forall a, a * a * a - a = a * ((a - 1) * (a + 1)).
+Proof. intros a. ring. Qed.
+
+Lemma prime_divides_cube_minus_id :
+  forall p a,
+    Z.prime p ->
+    (p | a * a * a - a) ->
+    (p | a) \/ (p | a - 1) \/ (p | a + 1).
 Proof.
-  intros a Ha [k Hk].
-  repeat (destruct Ha as [Heq|Ha]; [subst a; lia|]).
-  subst a. lia.
+  intros p a Hp Hd.
+  rewrite cube_minus_id_factor in Hd.
+  apply Z.divide_prime_mul in Hd; [|exact Hp].
+  destruct Hd as [Ha | Hrest].
+  - left. exact Ha.
+  - apply Z.divide_prime_mul in Hrest; [|exact Hp].
+    destruct Hrest as [Hm | Hp1];
+      [right; left | right; right]; assumption.
+Qed.
+
+Lemma residual_X3_roots_mod_prime :
+  forall p a,
+    Z.prime p ->
+    2 < p ->
+    0 <= a < p ->
+    (p | a * a * a - a) ->
+    a = 0 \/ a = 1 \/ a = p - 1.
+Proof.
+  intros p a Hp Hgt Ha Hd.
+  pose proof (Z.prime_ge_2 p Hp).
+  destruct (prime_divides_cube_minus_id p a Hp Hd) as [H0 | [H1 | Hm1]].
+  - left.
+    apply Z.mod_divide in H0; [|lia].
+    rewrite (Z.mod_small a p Ha) in H0. exact H0.
+  - right. left.
+    apply Z.mod_divide in H1; [|lia].
+    pose proof (Z.mod_pos_bound (a - 1) p ltac:(lia)) as Hb.
+    destruct (Z.eq_dec ((a - 1) mod p) 0) as [Hz|]; [|congruence].
+    assert (a - 1 = p * ((a - 1) / p)) as Hdiv.
+    { pose proof (Z.div_mod (a - 1) p ltac:(lia)) as Hdm.
+      rewrite Hz, Z.add_0_r in Hdm. exact Hdm. }
+    assert (-1 <= a - 1 < p - 1) by lia.
+    assert ((a - 1) / p = 0) by nia.
+    nia.
+  - right. right.
+    apply Z.mod_divide in Hm1; [|lia].
+    pose proof (Z.div_mod (a + 1) p ltac:(lia)) as Hdm.
+    rewrite Hm1, Z.add_0_r in Hdm.
+    assert (1 <= a + 1 <= p) by lia.
+    assert ((a + 1) / p = 1) by nia.
+    nia.
 Qed.
 
 Theorem residual_X3_roots_mod_11 :
   forall a,
-    0 <= a < 11 ->
-    (11 | poly_eval (poly_Pe_minus_X poly_X 3%nat) a) ->
-    a = 0 \/ a = 1 \/ a = 10.
+    0 <= a < pin_p ->
+    (pin_p | poly_eval (poly_Pe_minus_X poly_X 3%nat) a) ->
+    a = 0 \/ a = 1 \/ a = pin_p - 1.
 Proof.
   intros a Ha Hdiv. rewrite residual_X3_eval in Hdiv.
-  destruct (Z.eq_dec a 0) as [Hz|Hnz]; [left; exact Hz|].
-  destruct (Z.eq_dec a 1) as [Hone|Hnone]; [right; left; exact Hone|].
-  destruct (Z.eq_dec a 10) as [Hten|Hnten]; [right; right; exact Hten|].
-  exfalso. apply (residual_X3_not_div_11_mid a); [lia|exact Hdiv].
+  apply residual_X3_roots_mod_prime; [apply pin_p_prime | lia | exact Ha | exact Hdiv].
 Qed.
 
 Theorem residual_X3_unit_2_not_root_mod_11 :
-  0 < 2 < 11 /\ ~ (11 | poly_eval (poly_Pe_minus_X poly_X 3%nat) 2).
+  0 < 2 < pin_p /\ ~ (pin_p | poly_eval (poly_Pe_minus_X poly_X 3%nat) 2).
 Proof.
-  split; [lia|]. rewrite residual_X3_eval. apply residual_X3_not_div_11_mid. lia.
-Qed.
-
-Lemma residual_X3_not_div_17_mid :
-  forall a,
-    a = 2 \/ a = 3 \/ a = 4 \/ a = 5 \/ a = 6 \/ a = 7 \/ a = 8 \/
-    a = 9 \/ a = 10 \/ a = 11 \/ a = 12 \/ a = 13 \/ a = 14 \/ a = 15 ->
-    ~ (17 | a * a * a - a).
-Proof.
-  intros a Ha [k Hk].
-  repeat (destruct Ha as [Heq|Ha]; [subst a; lia|]).
-  subst a. lia.
+  split; [lia|].
+  rewrite residual_X3_eval.
+  intros Hd.
+  destruct (residual_X3_roots_mod_prime pin_p 2 pin_p_prime ltac:(lia) ltac:(lia) Hd)
+    as [H | [H | H]]; discriminate.
 Qed.
 
 Theorem residual_X3_unit_2_not_root_mod_17 :
-  0 < 2 < 17 /\ ~ (17 | poly_eval (poly_Pe_minus_X poly_X 3%nat) 2).
+  0 < 2 < pin_q /\ ~ (pin_q | poly_eval (poly_Pe_minus_X poly_X 3%nat) 2).
 Proof.
-  split; [lia|]. rewrite residual_X3_eval. apply residual_X3_not_div_17_mid. lia.
+  split; [lia|].
+  rewrite residual_X3_eval.
+  intros Hd.
+  destruct (residual_X3_roots_mod_prime pin_q 2 pin_q_prime ltac:(lia) ltac:(lia) Hd)
+    as [H | [H | H]]; discriminate.
 Qed.
 
 Theorem residual_X3_roots_mod_17 :
   forall a,
-    0 <= a < 17 ->
-    (17 | poly_eval (poly_Pe_minus_X poly_X 3%nat) a) ->
-    a = 0 \/ a = 1 \/ a = 16.
+    0 <= a < pin_q ->
+    (pin_q | poly_eval (poly_Pe_minus_X poly_X 3%nat) a) ->
+    a = 0 \/ a = 1 \/ a = pin_q - 1.
 Proof.
   intros a Ha Hdiv. rewrite residual_X3_eval in Hdiv.
-  destruct (Z.eq_dec a 0) as [Hz|Hnz]; [left; exact Hz|].
-  destruct (Z.eq_dec a 1) as [Hone|Hnone]; [right; left; exact Hone|].
-  destruct (Z.eq_dec a 16) as [Hlast|Hnlast]; [right; right; exact Hlast|].
-  exfalso. apply (residual_X3_not_div_17_mid a); [lia|exact Hdiv].
+  apply residual_X3_roots_mod_prime; [apply pin_q_prime | lia | exact Ha | exact Hdiv].
 Qed.
 
 Theorem residual_const_Pe_minus_X_nth1 :
@@ -341,8 +383,8 @@ Proof.
 Qed.
 
 Theorem residual_low_degree_identity_not_all_Fp_units :
-  (3 < 10)%nat /\
-  ~ (11 | Z.pow (gra_eval pin_N [] 2 2%nat) (Z.of_nat 3%nat) - 2).
+  (3 < Z.to_nat (pin_p - 1))%nat /\
+  ~ (pin_p | Z.pow (gra_eval pin_N [] 2 2%nat) (Z.of_nat 3%nat) - 2).
 Proof.
   split; [lia|].
   rewrite residual_identity_cube_minus_y.
@@ -359,47 +401,49 @@ Qed.
     linear coeff [−1], so they cannot vanish.  Cross-confirmed
     by [cas/149]. *)
 
-Definition pin_Fp_star : list Z := [1; 2; 3; 4; 5; 6; 7; 8; 9; 10].
+Definition pin_Fp_star : list Z := units_mod_prime pin_p.
 
-Lemma pin_Fp_star_length : length pin_Fp_star = 10%nat.
-Proof. reflexivity. Qed.
+Lemma pin_Fp_star_length : length pin_Fp_star = Z.to_nat (pin_p - 1).
+Proof. unfold pin_Fp_star. apply units_mod_prime_length; lia. Qed.
 
 Lemma forall_pin_Fp_star :
   forall (R : Z -> Prop),
-    (forall y, 1 <= y <= 10 -> R y) ->
+    (forall y, 1 <= y <= pin_p - 1 -> R y) ->
     Forall R pin_Fp_star.
 Proof.
-  intros R HR. unfold pin_Fp_star.
-  repeat (apply Forall_cons; [apply HR; lia|]).
-  apply Forall_nil.
+  intros R HR. apply Forall_forall. intros y Hin.
+  apply HR.
+  pose proof (units_mod_prime_In pin_p y ltac:(lia) Hin). lia.
 Qed.
 
 Lemma pin_Fp_star_coprime :
   Forall (fun y => Z.coprime y pin_N) pin_Fp_star.
 Proof.
-  unfold pin_Fp_star.
-  repeat (apply Forall_cons; [vm_compute; reflexivity|]).
-  apply Forall_nil.
+  apply Forall_forall. intros y Hin.
+  pose proof (units_mod_prime_In pin_p y ltac:(lia) Hin).
+  apply (proj2 (coprime_semiprime pin_p pin_q y pin_p_prime pin_q_prime ltac:(lia))).
+  split.
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply pin_p_prime|].
+    intros [k Hk]. nia.
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply pin_q_prime|].
+    intros [k Hk]. nia.
 Qed.
 
 Lemma pin_Fp_star_distinct_mod_11 :
-  pairwise_distinct_mod 11 pin_Fp_star.
+  pairwise_distinct_mod pin_p pin_Fp_star.
 Proof.
-  unfold pin_Fp_star, pairwise_distinct_mod.
-  repeat split;
-    repeat (apply Forall_cons; [intros [k Hk]; lia|]);
-    apply Forall_nil.
+  unfold pin_Fp_star. apply units_mod_prime_distinct, pin_p_prime.
 Qed.
 
 Theorem residual_low_degree_units_divides_11 :
   forall Q,
-    (poly_degree Q < 10)%nat ->
-    (forall y, 1 <= y <= 10 -> (11 | poly_eval Q y)) ->
-    forall i, (11 | nth i Q 0).
+    (poly_degree Q < Z.to_nat (pin_p - 1))%nat ->
+    (forall y, 1 <= y <= pin_p - 1 -> (pin_p | poly_eval Q y)) ->
+    forall i, (pin_p | nth i Q 0).
 Proof.
   intros Q Hdeg Hall i.
-  apply (poly_prime_roots_divides 11 pin_Fp_star Q).
-  - apply prime_11.
+  apply (poly_prime_roots_divides pin_p pin_Fp_star Q).
+  - apply pin_p_prime.
   - apply pin_Fp_star_distinct_mod_11.
   - rewrite pin_Fp_star_length. exact Hdeg.
   - apply forall_pin_Fp_star. exact Hall.
@@ -409,11 +453,11 @@ Theorem residual_nodiv_low_degree_units_divides_11 :
   forall ops out e,
     Forall is_nodiv ops ->
     (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e)
-       < 10)%nat ->
-    (forall y, 1 <= y <= 10 ->
-      (11 | Z.pow (gra_eval pin_N ops y out) (Z.of_nat e) - y)) ->
+       < Z.to_nat (pin_p - 1))%nat ->
+    (forall y, 1 <= y <= pin_p - 1 ->
+      (pin_p | Z.pow (gra_eval pin_N ops y out) (Z.of_nat e) - y)) ->
     forall i,
-      (11 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
+      (pin_p | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
 Proof.
   intros ops out e Hop Hdeg Hall i.
   apply residual_low_degree_units_divides_11; [exact Hdeg|].
@@ -424,13 +468,13 @@ Proof.
 Qed.
 
 Theorem residual_identity_nth1_ndiv_11 :
-  ~ (11 | nth 1%nat (poly_Pe_minus_X poly_X 3%nat) 0).
+  ~ (pin_p | nth 1%nat (poly_Pe_minus_X poly_X 3%nat) 0).
 Proof. rewrite X3_minus_X_nth1. intros [k Hk]. nia. Qed.
 
 Theorem residual_identity_cannot_vanish_on_Fp_star :
-  (poly_degree (poly_Pe_minus_X poly_X 3%nat) < 10)%nat /\
-  ~ (forall y, 1 <= y <= 10 ->
-       (11 | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
+  (poly_degree (poly_Pe_minus_X poly_X 3%nat) < Z.to_nat (pin_p - 1))%nat /\
+  ~ (forall y, 1 <= y <= pin_p - 1 ->
+       (pin_p | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
 Proof.
   split; [rewrite poly_degree_X3_minus_X; lia|].
   intros Hall.
@@ -446,9 +490,9 @@ Proof. intros c. vm_compute. reflexivity. Qed.
 
 Theorem residual_const_cannot_vanish_on_Fp_star :
   forall c,
-    (poly_degree (poly_Pe_minus_X [c] 3%nat) < 10)%nat /\
-    ~ (forall y, 1 <= y <= 10 ->
-         (11 | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
+    (poly_degree (poly_Pe_minus_X [c] 3%nat) < Z.to_nat (pin_p - 1))%nat /\
+    ~ (forall y, 1 <= y <= pin_p - 1 ->
+         (pin_p | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
 Proof.
   intros c. split; [rewrite residual_const_Pe_degree; lia|].
   intros Hall.
@@ -463,93 +507,88 @@ Qed.
 (** ** CRT lift: vanish on [(Z/NZ)*] + low degree ⇒ [N] | coeffs
 
     Residue [11] is missing from the [𝔽_17*] sample of [(Z/NZ)*].
-    [crt2 11 17 1 11] lifts it to a unit ([45]).  Then [deg < 10 < 16]
+    [crt2 pin_p pin_q 1 pin_p] lifts it to a unit ([45]).  Then [deg < 10 < 16]
     forces [17] to divide every coefficient, hence [N].  High-degree
     [X^d] is not forbidden.  Cross-confirmed by [cas/150]. *)
 
-Definition pin_Fq_star : list Z :=
-  [1; 2; 3; 4; 5; 6; 7; 8; 9; 10; 11; 12; 13; 14; 15; 16].
+Definition pin_Fq_star : list Z := units_mod_prime pin_q.
 
-Lemma pin_Fq_star_length : length pin_Fq_star = 16%nat.
-Proof. reflexivity. Qed.
+Lemma pin_Fq_star_length : length pin_Fq_star = Z.to_nat (pin_q - 1).
+Proof. unfold pin_Fq_star. apply units_mod_prime_length; lia. Qed.
 
 Lemma forall_pin_Fq_star :
   forall (R : Z -> Prop),
-    (forall y, 1 <= y <= 16 -> R y) ->
+    (forall y, 1 <= y <= pin_q - 1 -> R y) ->
     Forall R pin_Fq_star.
 Proof.
-  intros R HR. unfold pin_Fq_star.
-  repeat (apply Forall_cons; [apply HR; lia|]).
-  apply Forall_nil.
+  intros R HR. apply Forall_forall. intros y Hin.
+  apply HR.
+  pose proof (units_mod_prime_In pin_q y ltac:(lia) Hin). lia.
 Qed.
 
 Lemma pin_Fq_star_distinct_mod_17 :
-  pairwise_distinct_mod 17 pin_Fq_star.
+  pairwise_distinct_mod pin_q pin_Fq_star.
 Proof.
-  unfold pin_Fq_star, pairwise_distinct_mod.
-  repeat split;
-    repeat (apply Forall_cons; [intros [k Hk]; lia|]);
-    apply Forall_nil.
+  unfold pin_Fq_star. apply units_mod_prime_distinct, pin_q_prime.
 Qed.
 
 Lemma pin_1_16_coprime_N :
-  forall a, 1 <= a <= 16 -> a <> 11 -> Z.coprime a pin_N.
+  forall a, 1 <= a <= pin_q - 1 -> a <> pin_p -> Z.coprime a pin_N.
 Proof.
   intros a Ha Hne.
 
-  apply (proj2 (coprime_semiprime 11 17 a prime_11 prime_17 ltac:(lia))).
+  apply (proj2 (coprime_semiprime pin_p pin_q a pin_p_prime pin_q_prime ltac:(lia))).
   split.
-  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply prime_11|].
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply pin_p_prime|].
     intros [k Hk]. nia.
-  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply prime_17|].
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply pin_q_prime|].
     intros [k Hk]. nia.
 Qed.
 
-Definition pin_crt_lift_11 : Z := crt2 11 17 1 11.
+Definition pin_crt_lift_11 : Z := crt2 pin_p pin_q 1 pin_p.
 
 Lemma pin_crt_lift_11_spec :
-  pin_crt_lift_11 = 45 /\
-  pin_crt_lift_11 mod 11 = 1 /\
-  pin_crt_lift_11 mod 17 = 11 /\
+  pin_crt_lift_11 mod pin_p = 1 /\
+  pin_crt_lift_11 mod pin_q = pin_p /\
   Z.coprime pin_crt_lift_11 pin_N.
 Proof. unfold pin_crt_lift_11, crt2. vm_compute. repeat split; reflexivity. Qed.
 
-Lemma pin_N_divides_11 : forall n, (pin_N | n) -> (11 | n).
+Lemma pin_N_divides_11 : forall n, (pin_N | n) -> (pin_p | n).
 Proof.
-  intros n Hn. apply (Z.divide_trans 11 pin_N n); [exists pin_q; reflexivity | exact Hn].
+  intros n Hn. apply (Z.divide_trans pin_p pin_N n); [exists pin_q; reflexivity | exact Hn].
 Qed.
 
-Lemma pin_N_divides_17 : forall n, (pin_N | n) -> (17 | n).
+Lemma pin_N_divides_17 : forall n, (pin_N | n) -> (pin_q | n).
 Proof.
-  intros n Hn. apply (Z.divide_trans 17 pin_N n); [exists 11; reflexivity | exact Hn].
+  intros n Hn. apply (Z.divide_trans pin_q pin_N n); [exists pin_p; reflexivity | exact Hn].
 Qed.
 
 Lemma pin_11_17_divides_N :
-  forall c, (11 | c) -> (17 | c) -> (pin_N | c).
+  forall c, (pin_p | c) -> (pin_q | c) -> (pin_N | c).
 Proof.
   intros c H11 H17.
 
   apply divide_by_coprime_product; [|exact H11 | exact H17].
-  apply prime_coprime_distinct; [apply prime_11 | apply prime_17 | lia].
+  apply prime_coprime_distinct; [apply pin_p_prime | apply pin_q_prime | lia].
 Qed.
 
 Lemma residual_ZN_units_vanish_at_Fq :
   forall Q,
     (forall y, Z.coprime y pin_N -> (pin_N | poly_eval Q y)) ->
-    forall a, 1 <= a <= 16 -> (17 | poly_eval Q a).
+    forall a, 1 <= a <= pin_q - 1 -> (pin_q | poly_eval Q a).
 Proof.
   intros Q Hall a Ha.
-  destruct (Z.eq_dec a 11) as [H11 | Hne].
+  destruct (Z.eq_dec a pin_p) as [H11 | Hne].
   - subst a.
-    destruct pin_crt_lift_11_spec as [Heq [_ [Hmod Hcop]]].
+    destruct pin_crt_lift_11_spec as [_ [Hmod Hcop]].
     pose proof (Hall _ Hcop) as HyN.
     pose proof (pin_N_divides_17 _ HyN) as Hy17.
-    assert (Hcong : (17 | pin_crt_lift_11 - 11)).
+    assert (Hcong : (pin_q | pin_crt_lift_11 - pin_p)).
     { apply Z.mod_divide; [lia|].
       rewrite Zminus_mod, Hmod, Z.sub_diag, Z.mod_0_l by lia. reflexivity. }
-    pose proof (poly_eval_cong Q 11 pin_crt_lift_11 17 Hcong) as Hdiff.
-    replace (poly_eval Q 11) with
-      (poly_eval Q pin_crt_lift_11 - (poly_eval Q pin_crt_lift_11 - poly_eval Q 11))
+    pose proof (poly_eval_cong Q pin_p pin_crt_lift_11 pin_q Hcong) as Hdiff.
+    replace (poly_eval Q pin_p) with
+      (poly_eval Q pin_crt_lift_11 - (poly_eval Q pin_crt_lift_11 - poly_eval Q pin_p))
       by ring.
     apply Z.divide_sub_r; [exact Hy17 | exact Hdiff].
   - apply pin_N_divides_17. apply Hall. apply pin_1_16_coprime_N; [exact Ha | exact Hne].
@@ -557,13 +596,13 @@ Qed.
 
 Theorem residual_low_degree_ZN_units_divides_17 :
   forall Q,
-    (poly_degree Q < 10)%nat ->
+    (poly_degree Q < Z.to_nat (pin_p - 1))%nat ->
     (forall y, Z.coprime y pin_N -> (pin_N | poly_eval Q y)) ->
-    forall i, (17 | nth i Q 0).
+    forall i, (pin_q | nth i Q 0).
 Proof.
   intros Q Hdeg Hall i.
-  apply (poly_prime_roots_divides 17 pin_Fq_star Q).
-  - apply prime_17.
+  apply (poly_prime_roots_divides pin_q pin_Fq_star Q).
+  - apply pin_q_prime.
   - apply pin_Fq_star_distinct_mod_17.
   - rewrite pin_Fq_star_length. lia.
   - apply forall_pin_Fq_star.
@@ -572,7 +611,7 @@ Qed.
 
 Theorem residual_low_degree_ZN_units_divides_N :
   forall Q,
-    (poly_degree Q < 10)%nat ->
+    (poly_degree Q < Z.to_nat (pin_p - 1))%nat ->
     (forall y, Z.coprime y pin_N -> (pin_N | poly_eval Q y)) ->
     forall i, (pin_N | nth i Q 0).
 Proof.
@@ -588,7 +627,7 @@ Theorem residual_nodiv_low_degree_ZN_units_divides_N :
   forall ops out e,
     Forall is_nodiv ops ->
     (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e)
-       < 10)%nat ->
+       < Z.to_nat (pin_p - 1))%nat ->
     (forall y, Z.coprime y pin_N ->
       (pin_N | Z.pow (gra_eval pin_N ops y out) (Z.of_nat e) - y)) ->
     forall i,
@@ -603,7 +642,7 @@ Proof.
 Qed.
 
 Theorem residual_identity_cannot_vanish_on_ZN_units :
-  (poly_degree (poly_Pe_minus_X poly_X 3%nat) < 10)%nat /\
+  (poly_degree (poly_Pe_minus_X poly_X 3%nat) < Z.to_nat (pin_p - 1))%nat /\
   ~ (forall y, Z.coprime y pin_N ->
        (pin_N | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
 Proof.
@@ -619,7 +658,7 @@ Qed.
 
 Theorem residual_const_cannot_vanish_on_ZN_units :
   forall c,
-    (poly_degree (poly_Pe_minus_X [c] 3%nat) < 10)%nat /\
+    (poly_degree (poly_Pe_minus_X [c] 3%nat) < Z.to_nat (pin_p - 1))%nat /\
     ~ (forall y, Z.coprime y pin_N ->
          (pin_N | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
 Proof.
@@ -647,11 +686,13 @@ Theorem residual_nodiv_bound_le3_Q_lt10 :
     Forall is_nodiv ops ->
     (nth out (gra_deg_bound ops slp_init_deg) 0%nat <= 3)%nat ->
     (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) 3%nat)
-       < 10)%nat.
+       < Z.to_nat (pin_p - 1))%nat.
 Proof.
   intros ops out Hop Hbound.
-  apply poly_degree_Pe_minus_X_e3_degP_le3_lt10.
   pose proof (gra_nodiv_degree_le ops out Hop) as Hle.
+  assert ((poly_degree (poly_Pe_minus_X
+            (nth out (gra_run_poly ops slp_init_poly) []) 3%nat) < 10)%nat).
+  { apply poly_degree_Pe_minus_X_e3_degP_le3_lt10. lia. }
   lia.
 Qed.
 
@@ -750,7 +791,7 @@ Qed.
 Theorem residual_square_cannot_vanish_on_ZN_units :
   (poly_degree (poly_Pe_minus_X
      (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat)
-     < 10)%nat /\
+     < Z.to_nat (pin_p - 1))%nat /\
   ~ (forall y, Z.coprime y pin_N ->
        (pin_N | poly_eval (poly_Pe_minus_X
          (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat) y)).
@@ -828,7 +869,7 @@ Qed.
 Theorem residual_cube_cannot_vanish_on_ZN_units :
   (poly_degree (poly_Pe_minus_X
      (nth 4%nat (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
-     3%nat) < 10)%nat /\
+     3%nat) < Z.to_nat (pin_p - 1))%nat /\
   ~ (forall y, Z.coprime y pin_N ->
        (pin_N | poly_eval (poly_Pe_minus_X
          (nth 4%nat
@@ -862,11 +903,11 @@ Proof.
 Qed.
 
 Theorem residual_trapdoor_inverts_pin :
-  powm 36 27 pin_N = 42 /\ powm 42 3 pin_N = 36.
+  powm pin_y pin_d pin_N = pin_x /\ powm pin_x pin_e pin_N = pin_y.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_trapdoor_not_a_low_degree_identity :
-  powm 36 27 pin_N = 42 /\
+  powm pin_y pin_d pin_N = pin_x /\
   (3 * 27 >= 10)%nat.
 Proof.
   split.

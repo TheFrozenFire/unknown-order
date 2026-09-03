@@ -506,14 +506,12 @@ Theorem two_partners_two_dstars :
   forall d1 d2,
     d_star_spec rsa_test rsa_5_23 d1 ->
     d_star_spec rsa_test rsa_5_41 d2 ->
-    d1 mod 80 = 27 /\
-    d2 mod 80 = 27 /\
-    d1 mod 44 = 15 /\
-    d2 mod 40 = 27.
+    d1 mod rsa_lambda rsa_test = rsa_d rsa_test /\
+    d2 mod rsa_lambda rsa_test = rsa_d rsa_test /\
+    d1 mod rsa_lambda rsa_5_23 = rsa_d rsa_5_23 /\
+    d2 mod rsa_lambda rsa_5_41 = rsa_d rsa_5_41.
 Proof.
   intros d1 d2 [H1A H1B] [H2A H2B].
-  unfold rsa_lambda, lambda_semiprime, rsa_d in *.
-  cbn in *.
   repeat split; assumption.
 Qed.
 

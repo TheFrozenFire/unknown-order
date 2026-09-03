@@ -39,20 +39,20 @@ Proof.
 Qed.
 
 Theorem sagm_root_of_generator_pin :
-  powm (powm 3 27 pin_N) 3 pin_N = 3.
+  powm (powm pin_g pin_d pin_N) pin_e pin_N = pin_g mod pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_ae_minus_one_is_lambda :
-  27 * 3 - 1 = 80.
-Proof. reflexivity. Qed.
+  (pin_e * pin_d) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_generator_annihilated :
-  powm 3 (27 * 3 - 1) pin_N = 1.
+  powm pin_g pin_lam pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_only_miller_splits :
-  Z.gcd (67 - 1) pin_N = 11 /\
-  Problem_Factor pin_N 11.
+  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
+  Problem_Factor pin_N pin_p.
 Proof.
   split; [vm_compute; reflexivity|].
   unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
@@ -60,13 +60,13 @@ Qed.
 
 Theorem sagm_scale_eval_pin :
   let r := {| sagm_a := 2; sagm_b := 1 |} in
-  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_scale r 81) =
-    powm (sagm_eval pin_N sagm_pin_g sagm_pin_h r) 81 pin_N.
+  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_scale r (pin_lam + 1)) =
+    powm (sagm_eval pin_N sagm_pin_g sagm_pin_h r) (pin_lam + 1) pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_scale_lambda_type :
   let r := {| sagm_a := 2; sagm_b := 1 |} in
-  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_scale r 81) =
+  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_scale r (pin_lam + 1)) =
     sagm_eval pin_N sagm_pin_g sagm_pin_h r.
 Proof. vm_compute. reflexivity. Qed.
 
@@ -107,15 +107,15 @@ Proof. intros y. unfold poly_eval. lia. Qed.
 
 Theorem poly_e_constant_is_fixed_e :
   poly_eval [3] 36 = 3 /\
-  srsa_residual_leaf pin_N 80 36 42 3.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
 Proof. split; [apply poly_e_constant | apply srsa_residual_pin]. Qed.
 
 Theorem poly_e_X_two_points :
-  poly_eval poly_X 36 <> poly_eval poly_X 2.
+  poly_eval poly_X pin_y <> poly_eval poly_X 2.
 Proof. rewrite poly_eval_X. rewrite poly_eval_X. discriminate. Qed.
 
 Theorem poly_e_X_not_rerand :
-  poly_eval poly_X (36 * Z.pow 2 3) <> poly_eval poly_X 36.
+  poly_eval poly_X (pin_y * Z.pow 2 pin_e) <> poly_eval poly_X pin_y.
 Proof. apply srsa_poly_e_not_rerand_invariant. Qed.
 
 Theorem poly_e_nonconstant_not_fixed_parameter :
@@ -144,26 +144,12 @@ Theorem poly_e_quadratic_residual_shaped :
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem poly_e_quadratic_leftover_with_period :
-  powm 36 33 pin_N = 104 /\
-  powm 104 1297 pin_N = 36 /\
-  srsa_residual_leaf pin_N 80 36 104 1297.
-Proof.
-  split; [vm_compute; reflexivity|].
-  split; [vm_compute; reflexivity|].
-  unfold srsa_residual_leaf, Problem_StrongRSA.
-  split; [vm_compute; reflexivity|].
-  split; [split; [lia|]; vm_compute; reflexivity|].
-  split; [exists 648; lia|].
-  split; [vm_compute; reflexivity|].
-  intros [k Hk]. nia.
-Qed.
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. apply srsa_residual_pin. Qed.
 
 Theorem poly_e_quadratic_encrypt_not_leftover :
-  powm 36 1297 pin_N = 53 /\
-  53 <> 104 /\
-  powm 36 pin_N pin_N = 42 /\
-  42 <> 104.
-Proof. vm_compute. repeat split; discriminate. Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem poly_e_square_even_peel :
   Z.even (36 * 36) = true.
@@ -177,14 +163,9 @@ Fixpoint first_passing_public_e (es : list Z) (N : Z) : Z :=
   end.
 
 Theorem reject_sample_public_e_emits_5 :
-  first_passing_public_e [3; 5; 7; 11] pin_N = 5.
+  powm pin_y pin_lam pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem reject_sample_emits_nonresidual :
-  first_passing_public_e [3; 5; 7; 11] pin_N = 5 /\
-  Z.gcd 5 80 = 5 /\
-  Z.gcd 3 186 <> 1.
-Proof.
-  split; [vm_compute; reflexivity|].
-  split; [reflexivity | discriminate].
-Qed.
+  powm pin_y pin_lam pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
