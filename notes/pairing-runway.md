@@ -57,8 +57,14 @@ only with a written death in this file.
    Alternating bilinear maps on cyclic `μ₃` are the constant-1
    pairing (`alternating_bilinear_mu3_trivial`; CAS 157).
    Eval pairing is not alternating (`eval_pair_omega_13_not_alternating`).
-   A non-degenerate pairing of two hidden `μ₃` elements needs a
-   curve / extension (`Refuse_elliptic_curve_branch`).
+   A non-degenerate pairing of two hidden `μ₃` elements of cyclic
+   `𝔽_p*` needs a curve / extension (`Refuse_elliptic_curve_branch`).
+   On `N=pq` the kernel is `C₃×C₃`: determinant of local exponents
+   is alternating and `e(g_p,g_q)=ω≠1` (`mu3N_det_gp_gq`,
+   `mu3_91_kernel_not_cyclic`; CAS 158). Local `μ₃`-logs are
+   additive (`mu3_log_mul`), so the determinant is bilinear
+   (`mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`,
+   `mu3N_det_skew`; CAS 159). Trapdoor uses the factors.
 
 3. **Endomorphisms / infeasible inversion.** *(this sitting)*
    **Have** `rsa_gii_search_empty`, `power_endo_hom`,

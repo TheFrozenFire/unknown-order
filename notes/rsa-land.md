@@ -119,7 +119,9 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Cube mod `N=pq` is CRT of local cubes; `a^{λ/3}≡1` necessary, not sufficient | **Have** `cube_N_iff_both`, `cube_euler_lambda_necessary`, `cube_euler_lambda_not_sufficient_247`, `pin_units_are_cubes`; CAS 155 |
 | Cubic character in `μ₃`; kernel `{1,ω,ω²}` locally, CRT on `N`; pin kernel trivial | **Have** `cube_kernel_three`, `mu3_N_iff_locals`, `pin_cube_kernel_trivial`, `mixed_kernel_91`; CAS 156 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
-| Alternating bilinear map on cyclic `μ₃` is constant 1 | **Have** `alternating_bilinear_mu3_trivial`, `eval_pair_omega_13_not_alternating`; CAS 157. Non-degenerate pairing of two hidden `μ₃` elements stays `Refuse_elliptic_curve_branch` |
+| Alternating bilinear map on cyclic `μ₃` is constant 1 | **Have** `alternating_bilinear_mu3_trivial`, `eval_pair_omega_13_not_alternating`; CAS 157. Non-degenerate pairing of two hidden `μ₃` elements of cyclic `𝔽_p*` stays `Refuse_elliptic_curve_branch` |
+| Kernel of cubing on `N=pq` is `C₃×C₃`; det pairing `e(g_p,g_q)=ω≠1` | **Have** `mu3N_det_alternating`, `mu3N_det_gp_gq`, `mu3_91_kernel_not_cyclic`; CAS 158. Trapdoor uses the factors |
+| Local `μ₃`-logs additive; det pairing bilinear and skew | **Have** `mu3_log_mul`, `mu3_log_reconstructs`, `mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`, `mu3N_det_skew`; CAS 159. Still a trapdoor |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |
 | Inversion is public on units and on `Cl`; `x ↦ x^k` is not a pairing | **Have** `rsa_gii_search_empty`, `power_endo_next_forces_k`; CAS 89 |
 | Aux self-bilinear evaluates the string if `e(aux,g,g)=g` | **Have** `aux_eval_publishes_next`; CAS 90 (existence a hyp; iO deferred) |

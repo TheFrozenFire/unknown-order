@@ -325,6 +325,10 @@ An alternating bilinear map on cyclic `μ₃` is constantly 1
 (`alternating_bilinear_mu3_trivial`, CAS `157`). Eval pairing
 is not alternating. A pairing of two hidden `μ₃` elements
 needs a curve (`Refuse_elliptic_curve_branch`).
+On `N=pq` the kernel is `C₃×C₃`: `e(g_p,g_q)=ω≠1`
+(`mu3N_det_gp_gq`, CAS `158`). Local `μ₃`-logs are additive
+(`mu3_log_mul`), so the determinant is bilinear
+(`mu3N_det_left_bilinear`, CAS `159`). Trapdoor uses the factors.
 `orders_generate_lambda_named` stays unused sampling-completeness.
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
@@ -360,6 +364,8 @@ advice `N/17`: `PreprocessGRA.v`.
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
 | cubic character / kernel of cubing | `cube_kernel_three` / `mu3_N_iff_locals` / `pin_cube_kernel_trivial` / `mixed_kernel_91` | `CubicResidue.v` | `156` |
 | alternating bilinear on cyclic `μ₃` is trivial | `alternating_bilinear_mu3_trivial` / `eval_pair_omega_13_not_alternating` | `EvalPairing.v` | `157` |
+| `μ₃(Z/NZ)* ≅ C₃×C₃`; det pairing non-degenerate | `mu3N_det_alternating` / `mu3N_det_gp_gq` / `mu3_91_kernel_not_cyclic` | `EvalPairing.v` | `158` |
+| local `μ₃`-logs additive; det pairing bilinear | `mu3_log_mul` / `mu3N_det_left_bilinear` / `mu3N_det_right_bilinear` / `mu3N_det_skew` | `EvalPairing.v` | `159` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

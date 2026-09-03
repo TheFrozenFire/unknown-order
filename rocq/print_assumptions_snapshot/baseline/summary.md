@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2295 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2321 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2295 results across 116 files.
+Captured for 2321 results across 116 files.
 
 Counts:
 
@@ -667,31 +667,57 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `eval_pair_stays_in_mu` | 37 | 0 | 0 | OK |
-| `eval_pair_add` | 54 | 0 | 0 | OK |
-| `eval_pair_mul_base` | 67 | 0 | 0 | OK |
-| `eval_pair_reduce_mod_n` | 82 | 0 | 0 | OK |
-| `eval_pair_image_divides_n` | 105 | 0 | 0 | OK |
-| `eval_pair_mu2` | 115 | 0 | 0 | OK |
-| `eval_pair_mu2_on_mixed` | 130 | 0 | 0 | OK |
-| `omega_cube_is_one` | 145 | 0 | 0 | OK |
-| `eval_pair_mu3` | 165 | 0 | 0 | OK |
-| `mu2_is_mu6` | 178 | 0 | 0 | OK |
-| `mu3_is_mu6` | 193 | 0 | 0 | OK |
-| `eval_pair_mu6` | 208 | 0 | 0 | OK |
-| `in_mu3_one` | 240 | 0 | 0 | OK |
-| `in_mu3_mod` | 247 | 0 | 0 | OK |
-| `pairing_one_left` | 255 | 0 | 0 | OK |
-| `pairing_one_right` | 281 | 0 | 0 | OK |
-| `two_omega_is_sq` | 307 | 0 | 0 | OK |
-| `in_mu3_omega` | 319 | 0 | 0 | OK |
-| `in_mu3_omega2` | 338 | 0 | 0 | OK |
-| `pairing_omega_omega2` | 362 | 0 | 0 | OK |
-| `pairing_omega2_omega` | 377 | 0 | 0 | OK |
-| `pairing_omega2_omega2` | 392 | 0 | 0 | OK |
-| `alternating_bilinear_mu3_trivial` | 405 | 0 | 0 | OK |
-| `eval_pair_omega_13_not_alternating` | 457 | 0 | 0 | OK |
-| `pin_mu3_only_one` | 461 | 0 | 0 | OK |
+| `eval_pair_stays_in_mu` | 41 | 0 | 0 | OK |
+| `eval_pair_add` | 58 | 0 | 0 | OK |
+| `eval_pair_mul_base` | 71 | 0 | 0 | OK |
+| `eval_pair_reduce_mod_n` | 86 | 0 | 0 | OK |
+| `eval_pair_image_divides_n` | 109 | 0 | 0 | OK |
+| `eval_pair_mu2` | 119 | 0 | 0 | OK |
+| `eval_pair_mu2_on_mixed` | 134 | 0 | 0 | OK |
+| `omega_cube_is_one` | 149 | 0 | 0 | OK |
+| `eval_pair_mu3` | 169 | 0 | 0 | OK |
+| `mu2_is_mu6` | 182 | 0 | 0 | OK |
+| `mu3_is_mu6` | 197 | 0 | 0 | OK |
+| `eval_pair_mu6` | 212 | 0 | 0 | OK |
+| `in_mu3_one` | 244 | 0 | 0 | OK |
+| `in_mu3_mod` | 251 | 0 | 0 | OK |
+| `pairing_one_left` | 259 | 0 | 0 | OK |
+| `pairing_one_right` | 285 | 0 | 0 | OK |
+| `two_omega_is_sq` | 311 | 0 | 0 | OK |
+| `in_mu3_omega` | 323 | 0 | 0 | OK |
+| `in_mu3_omega2` | 342 | 0 | 0 | OK |
+| `pairing_omega_omega2` | 366 | 0 | 0 | OK |
+| `pairing_omega2_omega` | 381 | 0 | 0 | OK |
+| `pairing_omega2_omega2` | 396 | 0 | 0 | OK |
+| `alternating_bilinear_mu3_trivial` | 409 | 0 | 0 | OK |
+| `eval_pair_omega_13_not_alternating` | 461 | 0 | 0 | OK |
+| `pin_mu3_only_one` | 465 | 0 | 0 | OK |
+| `mu3_log_range` | 491 | 0 | 0 | OK |
+| `mu3N_det_alternating` | 498 | 0 | 0 | OK |
+| `gp_91_order_3` | 512 | 0 | 0 | OK |
+| `gq_91_order_3` | 520 | 0 | 0 | OK |
+| `mu3N_det_gp_gq` | 528 | 0 | 0 | OK |
+| `mu3N_det_gq_gp` | 532 | 0 | 0 | OK |
+| `mu3_91_kernel_not_cyclic` | 536 | 0 | 0 | OK |
+| `mu3_order_coprime` | 553 | 0 | 0 | OK |
+| `mu3_order_divides_pminus1` | 573 | 0 | 0 | OK |
+| `mu3_prime_ne_2` | 585 | 0 | 0 | OK |
+| `mu3_pow_1_ne_2` | 596 | 0 | 0 | OK |
+| `mu3_log_of_pow` | 620 | 0 | 0 | OK |
+| `mu3_is_omega_power` | 656 | 0 | 0 | OK |
+| `mu3_log_reconstructs` | 719 | 0 | 0 | OK |
+| `mu3_log_mul` | 741 | 0 | 0 | OK |
+| `zmod3_mul` | 782 | 0 | 0 | OK |
+| `zmod3_mul_l` | 792 | 0 | 0 | OK |
+| `det_exp_left_add` | 799 | 0 | 0 | OK |
+| `det_exp_right_add` | 814 | 0 | 0 | OK |
+| `mu3_log_mod_reduce` | 829 | 0 | 0 | OK |
+| `mu3_log_base_mod` | 843 | 0 | 0 | OK |
+| `omega_7_order_3` | 852 | 0 | 0 | OK |
+| `pin_mu3_log_one` | 860 | 0 | 0 | OK |
+| `mu3N_det_left_bilinear` | 863 | 0 | 0 | OK |
+| `mu3N_det_right_bilinear` | 925 | 0 | 0 | OK |
+| `mu3N_det_skew` | 987 | 0 | 0 | OK |
 
 ## EvalProduct.v
 

@@ -774,35 +774,63 @@ in the Rocq tree.  Do not edit by hand.
 ## `EvalPairing.v`
 
 - L14: Evaluation pairing on [μ_n]: [e(x,k) = x^k]
-  - L225: Alternating bilinear maps on cyclic [μ₃] are trivial
+  - L229: Alternating bilinear maps on cyclic [μ₃] are trivial
+  - L473: Determinant pairing on [μ₃(Z/NZ)* ≅ C₃×C₃]
+  - L546: Local [μ₃]-logs are additive, so [mu3N_det] is bilinear
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `eval_pair_stays_in_mu` | 37 |
-| Theorem | `eval_pair_add` | 54 |
-| Theorem | `eval_pair_mul_base` | 67 |
-| Theorem | `eval_pair_reduce_mod_n` | 82 |
-| Theorem | `eval_pair_image_divides_n` | 105 |
-| Theorem | `eval_pair_mu2` | 115 |
-| Theorem | `eval_pair_mu2_on_mixed` | 130 |
-| Theorem | `omega_cube_is_one` | 145 |
-| Theorem | `eval_pair_mu3` | 165 |
-| Theorem | `mu2_is_mu6` | 178 |
-| Theorem | `mu3_is_mu6` | 193 |
-| Theorem | `eval_pair_mu6` | 208 |
-| Lemma | `in_mu3_one` | 240 |
-| Lemma | `in_mu3_mod` | 247 |
-| Lemma | `pairing_one_left` | 255 |
-| Lemma | `pairing_one_right` | 281 |
-| Lemma | `two_omega_is_sq` | 307 |
-| Lemma | `in_mu3_omega` | 319 |
-| Lemma | `in_mu3_omega2` | 338 |
-| Lemma | `pairing_omega_omega2` | 362 |
-| Lemma | `pairing_omega2_omega` | 377 |
-| Lemma | `pairing_omega2_omega2` | 392 |
-| Theorem | `alternating_bilinear_mu3_trivial` | 405 |
-| Theorem | `eval_pair_omega_13_not_alternating` | 457 |
-| Theorem | `pin_mu3_only_one` | 461 |
+| Theorem | `eval_pair_stays_in_mu` | 41 |
+| Theorem | `eval_pair_add` | 58 |
+| Theorem | `eval_pair_mul_base` | 71 |
+| Theorem | `eval_pair_reduce_mod_n` | 86 |
+| Theorem | `eval_pair_image_divides_n` | 109 |
+| Theorem | `eval_pair_mu2` | 119 |
+| Theorem | `eval_pair_mu2_on_mixed` | 134 |
+| Theorem | `omega_cube_is_one` | 149 |
+| Theorem | `eval_pair_mu3` | 169 |
+| Theorem | `mu2_is_mu6` | 182 |
+| Theorem | `mu3_is_mu6` | 197 |
+| Theorem | `eval_pair_mu6` | 212 |
+| Lemma | `in_mu3_one` | 244 |
+| Lemma | `in_mu3_mod` | 251 |
+| Lemma | `pairing_one_left` | 259 |
+| Lemma | `pairing_one_right` | 285 |
+| Lemma | `two_omega_is_sq` | 311 |
+| Lemma | `in_mu3_omega` | 323 |
+| Lemma | `in_mu3_omega2` | 342 |
+| Lemma | `pairing_omega_omega2` | 366 |
+| Lemma | `pairing_omega2_omega` | 381 |
+| Lemma | `pairing_omega2_omega2` | 396 |
+| Theorem | `alternating_bilinear_mu3_trivial` | 409 |
+| Theorem | `eval_pair_omega_13_not_alternating` | 461 |
+| Theorem | `pin_mu3_only_one` | 465 |
+| Lemma | `mu3_log_range` | 491 |
+| Theorem | `mu3N_det_alternating` | 498 |
+| Theorem | `gp_91_order_3` | 512 |
+| Theorem | `gq_91_order_3` | 520 |
+| Theorem | `mu3N_det_gp_gq` | 528 |
+| Theorem | `mu3N_det_gq_gp` | 532 |
+| Theorem | `mu3_91_kernel_not_cyclic` | 536 |
+| Lemma | `mu3_order_coprime` | 553 |
+| Lemma | `mu3_order_divides_pminus1` | 573 |
+| Lemma | `mu3_prime_ne_2` | 585 |
+| Lemma | `mu3_pow_1_ne_2` | 596 |
+| Lemma | `mu3_log_of_pow` | 620 |
+| Lemma | `mu3_is_omega_power` | 656 |
+| Lemma | `mu3_log_reconstructs` | 719 |
+| Lemma | `mu3_log_mul` | 741 |
+| Lemma | `zmod3_mul` | 782 |
+| Lemma | `zmod3_mul_l` | 792 |
+| Lemma | `det_exp_left_add` | 799 |
+| Lemma | `det_exp_right_add` | 814 |
+| Lemma | `mu3_log_mod_reduce` | 829 |
+| Lemma | `mu3_log_base_mod` | 843 |
+| Theorem | `omega_7_order_3` | 852 |
+| Theorem | `pin_mu3_log_one` | 860 |
+| Theorem | `mu3N_det_left_bilinear` | 863 |
+| Theorem | `mu3N_det_right_bilinear` | 925 |
+| Theorem | `mu3N_det_skew` | 987 |
 
 ## `EvalProduct.v`
 
@@ -3336,4 +3364,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2295 theorems/lemmas/corollaries/examples across 116 files._
+_2321 theorems/lemmas/corollaries/examples across 116 files._
