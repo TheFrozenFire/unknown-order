@@ -172,7 +172,7 @@ Franklin–Reiter for `e=3` is the cube-gap identity
 | Common modulus, Bézout | **Have** |
 | Bleichenbacher/Manger interval | T11 engine **Have**; T10 wrap **Have** `bleiche_wrap_interval`; PKCS#1 type-2 is `[2B,3B)` |
 | Boneh–Durfee / Coppersmith / ROCA lattice | named |
-| NFS / QS combination (congruence of squares) | **Have** `dixon_combination_splits`, `hom_quad_remainder`, `nfs_two_sided_splits`; CAS 161–163. Cost named |
+| NFS / QS combination (congruence of squares) | **Have** `dixon_combination_splits`, `hom_quad_remainder`, `dixon_pin_splits`, `nfs_two_sided_splits`; numbers in `Pin.v`; CAS 161–163. Cost named |
 
 ## 8. Signatures and ID from the same map
 

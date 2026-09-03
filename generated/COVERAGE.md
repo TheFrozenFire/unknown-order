@@ -1627,9 +1627,9 @@ in the Rocq tree.  Do not edit by hand.
   - L82: Existence from a positive annihilator
   - L166: [ord(a^k) = ord(a) / gcd(ord(a), k)]
   - L228: [lcm] of orders divides [λ]
-  - L342: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
-  - L502: A unit of order [λ] for general [N = pq]
-  - L1011: A primitive root generates [𝔽_p*]
+  - L343: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
+  - L503: A unit of order [λ] for general [N = pq]
+  - L1013: A primitive root generates [𝔽_p*]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1645,47 +1645,47 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `minus1_order_2_rsa_test` | 271 |
 | Theorem | `mixed67_order_2_rsa_test` | 277 |
 | Theorem | `lcm_two_order2_not_lambda` | 283 |
-| Theorem | `is_order_pin_3_80` | 293 |
-| Theorem | `pin_unit_3_coprime` | 320 |
-| Theorem | `pin_attains_lambda` | 324 |
-| Theorem | `orders_generate_lambda_pin` | 337 |
-| Lemma | `powm_eq_1_iff_order_divides` | 344 |
-| Lemma | `pow2_divides_pow2` | 355 |
-| Theorem | `two_height_is_val2_ord` | 378 |
-| Theorem | `order_2_mod_11` | 437 |
-| Theorem | `order_2_mod_17` | 448 |
-| Theorem | `two_height_independent_of_odd_multiple` | 461 |
-| Theorem | `height_is_val2_ord_textbook` | 477 |
-| Lemma | `zseq_length` | 517 |
-| Lemma | `zseq_In_bounds` | 524 |
-| Lemma | `zseq_Forall_distinct_head` | 537 |
-| Lemma | `zseq_pairwise_distinct` | 557 |
-| Lemma | `units_mod_prime_length` | 573 |
-| Lemma | `units_mod_prime_In` | 577 |
-| Lemma | `units_mod_prime_coprime` | 587 |
-| Lemma | `units_mod_prime_distinct` | 599 |
-| Lemma | `units_mod_prime_nonnil` | 609 |
-| Lemma | `order_mul_coprime` | 617 |
-| Lemma | `order_of_divisor_power` | 688 |
-| Lemma | `order_lcm_attained` | 717 |
-| Lemma | `exists_max_order_in` | 748 |
-| Lemma | `zseq_In_interval` | 782 |
-| Lemma | `unit_mod_in_list` | 795 |
-| Lemma | `is_order_mod_base` | 816 |
-| Lemma | `is_order_of_mod` | 830 |
-| Lemma | `is_order_eq_mod` | 844 |
-| Theorem | `primitive_root_exists` | 857 |
-| Lemma | `order_semiprime_from_locals` | 923 |
-| Theorem | `exists_unit_order_lambda` | 966 |
-| Theorem | `exists_unit_order_lambda_pin` | 1002 |
-| Lemma | `mul_cancel_unit_mod` | 1016 |
-| Lemma | `powm_eq_pow_cancel` | 1031 |
-| Lemma | `powm_inj_lt_order` | 1055 |
-| Lemma | `nodup_incl_le` | 1084 |
-| Lemma | `powers_upto_length` | 1113 |
-| Lemma | `powers_upto_In` | 1119 |
-| Lemma | `powers_upto_NoDup` | 1132 |
-| Theorem | `primitive_root_generates` | 1152 |
+| Theorem | `is_order_pin_3_80` | 294 |
+| Theorem | `pin_unit_3_coprime` | 321 |
+| Theorem | `pin_attains_lambda` | 325 |
+| Theorem | `orders_generate_lambda_pin` | 338 |
+| Lemma | `powm_eq_1_iff_order_divides` | 345 |
+| Lemma | `pow2_divides_pow2` | 356 |
+| Theorem | `two_height_is_val2_ord` | 379 |
+| Theorem | `order_2_mod_11` | 438 |
+| Theorem | `order_2_mod_17` | 449 |
+| Theorem | `two_height_independent_of_odd_multiple` | 462 |
+| Theorem | `height_is_val2_ord_textbook` | 478 |
+| Lemma | `zseq_length` | 518 |
+| Lemma | `zseq_In_bounds` | 525 |
+| Lemma | `zseq_Forall_distinct_head` | 538 |
+| Lemma | `zseq_pairwise_distinct` | 558 |
+| Lemma | `units_mod_prime_length` | 574 |
+| Lemma | `units_mod_prime_In` | 578 |
+| Lemma | `units_mod_prime_coprime` | 588 |
+| Lemma | `units_mod_prime_distinct` | 600 |
+| Lemma | `units_mod_prime_nonnil` | 610 |
+| Lemma | `order_mul_coprime` | 618 |
+| Lemma | `order_of_divisor_power` | 689 |
+| Lemma | `order_lcm_attained` | 718 |
+| Lemma | `exists_max_order_in` | 749 |
+| Lemma | `zseq_In_interval` | 783 |
+| Lemma | `unit_mod_in_list` | 796 |
+| Lemma | `is_order_mod_base` | 817 |
+| Lemma | `is_order_of_mod` | 831 |
+| Lemma | `is_order_eq_mod` | 845 |
+| Theorem | `primitive_root_exists` | 858 |
+| Lemma | `order_semiprime_from_locals` | 924 |
+| Theorem | `exists_unit_order_lambda` | 967 |
+| Theorem | `exists_unit_order_lambda_pin` | 1003 |
+| Lemma | `mul_cancel_unit_mod` | 1018 |
+| Lemma | `powm_eq_pow_cancel` | 1033 |
+| Lemma | `powm_inj_lt_order` | 1057 |
+| Lemma | `nodup_incl_le` | 1086 |
+| Lemma | `powers_upto_length` | 1115 |
+| Lemma | `powers_upto_In` | 1121 |
+| Lemma | `powers_upto_NoDup` | 1134 |
+| Theorem | `primitive_root_generates` | 1154 |
 
 ## `Paillier.v`
 
@@ -1708,6 +1708,21 @@ in the Rocq tree.  Do not edit by hand.
 |---|---|---:|
 | Theorem | `phi_eq_lambda_times_gcd` | 17 |
 | Theorem | `phi_div_lambda_is_gcd` | 29 |
+
+## `Pin.v`
+
+- L6: Campaign pin — numerical source of truth
+  - L31: Default semiprime
+  - L52: Residual pair on the default pin
+  - L58: Named extra moduli
+  - L68: Dixon / QS witnesses on [pin_N]
+  - L87: NFS quadratics on [pin_N]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `pin_N_pos` | 43 |
+| Lemma | `pin_N_gt_1` | 46 |
+| Lemma | `pin_p_neq_q` | 49 |
 
 ## `PollardP1.v`
 
@@ -1985,33 +2000,33 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `RSA.v`
 
-- L9: RSA: instance, private exponent [d], and the RSA problem
-  - L223: Why a polynomial in [N] cannot be a handle
+- L10: RSA: instance, private exponent [d], and the RSA problem
+  - L225: Why a polynomial in [N] cannot be a handle
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `rsa_N_gt_1` | 37 |
-| Lemma | `rsa_lambda_pos` | 44 |
-| Lemma | `rsa_lambda_gt_1` | 50 |
-| Lemma | `rsa_phi_pos` | 69 |
-| Lemma | `rsa_lambda_divides_phi` | 75 |
-| Lemma | `rsa_ed_minus_1_divides` | 78 |
-| Lemma | `rsa_ed_gt_1` | 87 |
-| Theorem | `rsa_dec_enc_units` | 100 |
-| Theorem | `rsa_enc_dec_units` | 124 |
-| Lemma | `rsa_d_is_cube_root_map` | 151 |
-| Lemma | `prime_11` | 161 |
-| Lemma | `prime_17` | 170 |
-| Lemma | `rsa_test_lambda` | 180 |
-| Lemma | `rsa_test_phi` | 183 |
-| Lemma | `rsa_test_inv` | 186 |
-| Lemma | `rsa_test_coprime_e` | 189 |
-| Theorem | `rsa_test_N` | 204 |
-| Theorem | `rsa_test_vector` | 207 |
-| Theorem | `rsa_test_roundtrip` | 211 |
-| Theorem | `rsa_test_annihilator` | 215 |
-| Theorem | `N_cong_q_mod_pminus1` | 230 |
-| Theorem | `gcd_polyN_pminus1_is_gcd_at_q` | 241 |
+| Lemma | `rsa_N_gt_1` | 38 |
+| Lemma | `rsa_lambda_pos` | 45 |
+| Lemma | `rsa_lambda_gt_1` | 51 |
+| Lemma | `rsa_phi_pos` | 70 |
+| Lemma | `rsa_lambda_divides_phi` | 76 |
+| Lemma | `rsa_ed_minus_1_divides` | 79 |
+| Lemma | `rsa_ed_gt_1` | 88 |
+| Theorem | `rsa_dec_enc_units` | 101 |
+| Theorem | `rsa_enc_dec_units` | 125 |
+| Lemma | `rsa_d_is_cube_root_map` | 152 |
+| Lemma | `prime_11` | 163 |
+| Lemma | `prime_17` | 172 |
+| Lemma | `rsa_test_lambda` | 182 |
+| Lemma | `rsa_test_phi` | 185 |
+| Lemma | `rsa_test_inv` | 188 |
+| Lemma | `rsa_test_coprime_e` | 191 |
+| Theorem | `rsa_test_N` | 206 |
+| Theorem | `rsa_test_vector` | 209 |
+| Theorem | `rsa_test_roundtrip` | 213 |
+| Theorem | `rsa_test_annihilator` | 217 |
+| Theorem | `N_cong_q_mod_pminus1` | 232 |
+| Theorem | `gcd_polyN_pminus1_is_gcd_at_q` | 243 |
 
 ## `RabinWilliams.v`
 
@@ -2166,46 +2181,45 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `SieveRelation.v`
 
-- L15: Sieve relations: the algebraic engine of QS and NFS
-  - L34: Even exponents make a square
-  - L175: NFS setup: common root and homogenised remainder
-  - L271: Two-sided combination
+- L16: Sieve relations: the algebraic engine of QS and NFS
+  - L28: Even exponents make a square
+  - L200: NFS setup: common root and homogenised remainder
+  - L295: Two-sided combination
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `even_nonneg_pow_square` | 36 |
-| Lemma | `square_times_square` | 50 |
-| Theorem | `even_exp_2_3_5_square` | 57 |
-| Lemma | `mul_mod_cong` | 67 |
-| Theorem | `dixon_two_relations` | 83 |
-| Theorem | `dixon_combination_splits` | 97 |
-| Theorem | `dixon_residues_even_exponents` | 116 |
-| Theorem | `dixon_24_37_cong` | 123 |
-| Lemma | `dixon_24_37_not_assoc` | 137 |
-| Theorem | `dixon_24_37_splits` | 145 |
-| Theorem | `dixon_24_37_gcd` | 160 |
-| Theorem | `dixon_14_already_square` | 165 |
-| Theorem | `hom_quad_remainder` | 185 |
-| Theorem | `hom_quad_cong` | 192 |
-| Theorem | `nfs_eval_irr` | 213 |
-| Theorem | `nfs_eval_red` | 217 |
-| Theorem | `nfs_common_root_irr` | 222 |
-| Theorem | `nfs_common_root_red` | 226 |
-| Theorem | `nfs_f_irr_disc_neg` | 230 |
-| Theorem | `nfs_neg19_not_square` | 234 |
-| Theorem | `nfs_f_red_splits_Z` | 241 |
-| Theorem | `nfs_hom_irr_pin` | 245 |
-| Theorem | `nfs_hom_red_pin` | 250 |
-| Theorem | `nfs_F_cong_GH_irr` | 255 |
-| Theorem | `nfs_F_cong_GH_red` | 263 |
-| Theorem | `nfs_two_sided_product` | 273 |
-| Lemma | `nfs_rel_minus15` | 292 |
-| Lemma | `nfs_rel_minus6` | 298 |
-| Theorem | `nfs_two_sided_pin_squares` | 304 |
-| Theorem | `nfs_two_sided_120_is_sqrt1` | 324 |
-| Theorem | `nfs_two_sided_splits` | 334 |
-| Theorem | `nfs_two_sided_gcd` | 347 |
-| Theorem | `nfs_onesided_no_split` | 353 |
+| Lemma | `even_nonneg_pow_square` | 30 |
+| Lemma | `square_times_square` | 44 |
+| Theorem | `even_exp_2_3_5_square` | 51 |
+| Lemma | `mul_mod_cong` | 61 |
+| Lemma | `not_div_mod` | 75 |
+| Theorem | `dixon_two_relations` | 85 |
+| Theorem | `dixon_combination_splits` | 99 |
+| Theorem | `dixon_pin_residue_factors` | 118 |
+| Theorem | `dixon_pin_cong` | 125 |
+| Lemma | `dixon_pin_not_assoc` | 141 |
+| Theorem | `dixon_pin_splits` | 150 |
+| Theorem | `dixon_pin_gcd` | 166 |
+| Theorem | `dixon_pin_b_splits` | 170 |
+| Theorem | `asquare_pin_splits` | 189 |
+| Theorem | `hom_quad_remainder` | 208 |
+| Theorem | `hom_quad_cong` | 215 |
+| Lemma | `poly_eval_quad` | 238 |
+| Theorem | `nfs_eval_irr` | 243 |
+| Theorem | `nfs_eval_red` | 247 |
+| Theorem | `nfs_common_root_irr` | 251 |
+| Theorem | `nfs_common_root_red` | 255 |
+| Theorem | `nfs_irr_disc_neg` | 259 |
+| Theorem | `nfs_neg_not_square` | 264 |
+| Theorem | `nfs_red_splits_Z` | 271 |
+| Theorem | `nfs_F_cong_GH_irr` | 275 |
+| Theorem | `nfs_F_cong_GH_red` | 285 |
+| Theorem | `nfs_two_sided_product` | 297 |
+| Theorem | `nfs_two_sided_pin_squares` | 316 |
+| Theorem | `nfs_two_sided_pin_sqrt1` | 349 |
+| Theorem | `nfs_two_sided_splits` | 359 |
+| Theorem | `nfs_two_sided_gcd` | 372 |
+| Theorem | `nfs_onesided_no_split` | 377 |
 
 ## `SixthType.v`
 
@@ -3419,4 +3433,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2365 theorems/lemmas/corollaries/examples across 117 files._
+_2367 theorems/lemmas/corollaries/examples across 118 files._

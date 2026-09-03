@@ -54,6 +54,14 @@ Williams evaluation `V_{p+1} ≡ 2` when `P²−4` is a QNR is
 Hash-to-prime is two encodings (`HashSlot.v`), not a hash
 (`Refuse_hash_as_oracle`).
 
+### Campaign pin
+
+Integers for the textbook inhabitant live in `rocq/Pin.v` (twin of
+`cas/lib/pin.gp`): `pin_p`, `pin_q`, `pin_N`, residual `(pin_x, pin_y, pin_e)`,
+named extra moduli, and computed attachments (Dixon residues, NFS
+quadratics). `rsa_test` is built from those names. Algebra that should
+follow a pin change imports `Pin` and writes `pin_N`, not a literal `187`.
+
 ### RSA and the annihilator
 
 `d ≡ e⁻¹ (mod λ)`. `M = ed − 1` annihilates the units. Multiplier enumeration
@@ -94,7 +102,7 @@ Dixon combination of B-smooth squares is a congruence of squares
 polynomials and the homogenised remainder `F ≡ GH (mod N)`. Two-sided even
 combination splits the pin. Cost stays out.
 
-`rocq/SieveRelation.v`, `notes/sieve-rsa.md`. CAS `161`–`163`.
+`rocq/SieveRelation.v` consumes `Pin`. `notes/sieve-rsa.md`. CAS `161`–`163`.
 
 ### Second incarnation: `Cl(Δ)`
 

@@ -86,3 +86,21 @@ extra_Nsq_ok() = {
   extra_Nsq()[1]==34969
   && lift(Mod(1+11*17, extra_Nsq()[1])^1)==1+11*17
 };
+
+\\ Computed sieve witnesses on the default pin (twin of rocq/Pin.v).
+\\ Loaded with this file; SieveRelation.v consumes the same names.
+pin_dixon_a = 24;
+pin_dixon_b = 37;
+pin_dixon_r = 15;
+pin_dixon_s = 60;
+pin_dixon_t = 30;
+pin_dixon_b2 = 38;
+pin_dixon_s2 = 135;
+pin_dixon_t2 = 45;
+pin_asquare_a = 14;
+pin_asquare_t = 3;
+pin_nfs_irr_c0 = 5; pin_nfs_irr_c1 = 1; pin_nfs_irr_c2 = 1; pin_nfs_irr_m = 13;
+pin_nfs_red_c0 = 7; pin_nfs_red_c1 = 8; pin_nfs_red_c2 = 1; pin_nfs_red_m = 10;
+pin_ts_a1 = -15; pin_ts_b1 = 1; pin_ts_a2 = -6; pin_ts_b2 = 1;
+pin_ts_T = 20; pin_ts_U = 6; pin_ts_y = 1;
+pin_os_a = 1; pin_os_b = 1; pin_os_gs = 3; pin_os_fs = 4;

@@ -287,7 +287,8 @@ Theorem lcm_two_order2_not_lambda :
 Proof.
   split; [apply minus1_order_2_rsa_test|].
   split; [apply mixed67_order_2_rsa_test|].
-  rewrite rsa_test_lambda. vm_compute. discriminate.
+  replace (lambda_semiprime 11 17) with 80 by (apply rsa_test_lambda).
+  discriminate.
 Qed.
 
 Theorem is_order_pin_3_80 :
@@ -1005,7 +1006,8 @@ Proof.
   destruct (exists_unit_order_lambda 11 17 prime_11 prime_17 ltac:(lia))
     as [a [Hc Ho]].
   exists a. split; [exact Hc|].
-  rewrite rsa_test_lambda in Ho. exact Ho.
+  replace (lambda_semiprime 11 17) with 80 in Ho by (apply rsa_test_lambda).
+  exact Ho.
 Qed.
 
 (** ** A primitive root generates [𝔽_p*]

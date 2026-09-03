@@ -3,6 +3,7 @@ From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
+Require Import Pin.
 
 Open Scope Z_scope.
 
@@ -156,7 +157,8 @@ Proof.
   intros R c He. unfold is_cube_root, rsa_enc. rewrite He. reflexivity.
 Qed.
 
-(** Textbook instance [p = 11], [q = 17], [e = 3], [d = 27]. *)
+(** Textbook instance: numbers from [Pin.v] ([pin_p], [pin_q],
+    [pin_e], [pin_d]). *)
 
 Lemma prime_11 : Z.prime 11.
 Proof.
@@ -177,43 +179,43 @@ Proof.
   intuition subst; reflexivity.
 Qed.
 
-Lemma rsa_test_lambda : lambda_semiprime 11 17 = 80.
+Lemma rsa_test_lambda : lambda_semiprime pin_p pin_q = pin_lam.
 Proof. vm_compute. reflexivity. Qed.
 
-Lemma rsa_test_phi : phi_semiprime 11 17 = 160.
+Lemma rsa_test_phi : phi_semiprime pin_p pin_q = pin_phi.
 Proof. vm_compute. reflexivity. Qed.
 
-Lemma rsa_test_inv : (3 * 27) mod 80 = 1.
-Proof. reflexivity. Qed.
+Lemma rsa_test_inv : (pin_e * pin_d) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.
 
-Lemma rsa_test_coprime_e : Z.coprime 3 80.
+Lemma rsa_test_coprime_e : Z.coprime pin_e pin_lam.
 Proof. unfold Z.coprime. vm_compute. reflexivity. Qed.
 
 Definition rsa_test : RSAInstance.
 Proof.
   refine {|
-    rsa_p := 11; rsa_q := 17; rsa_e := 3; rsa_d := 27;
+    rsa_p := pin_p; rsa_q := pin_q; rsa_e := pin_e; rsa_d := pin_d;
     rsa_p_prime := prime_11; rsa_q_prime := prime_17;
     rsa_distinct := ltac:(discriminate);
     rsa_e_coprime := ltac:(rewrite rsa_test_lambda; exact rsa_test_coprime_e);
     rsa_d_inv := ltac:(rewrite rsa_test_lambda; exact rsa_test_inv);
-    rsa_d_pos := ltac:(lia); rsa_e_pos := ltac:(lia)
+    rsa_d_pos := ltac:(unfold pin_d; lia); rsa_e_pos := ltac:(unfold pin_e; lia)
   |}.
 Defined.
 
-Theorem rsa_test_N : rsa_N rsa_test = 187.
+Theorem rsa_test_N : rsa_N rsa_test = pin_N.
 Proof. reflexivity. Qed.
 
 Theorem rsa_test_vector :
-  rsa_enc rsa_test 42 = 36 /\ rsa_dec rsa_test 36 = 42.
+  rsa_enc rsa_test pin_x = pin_y /\ rsa_dec rsa_test pin_y = pin_x.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem rsa_test_roundtrip :
-  rsa_dec rsa_test (rsa_enc rsa_test 42) = 42.
+  rsa_dec rsa_test (rsa_enc rsa_test pin_x) = pin_x.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem rsa_test_annihilator :
-  forall a, Z.coprime a 187 -> powm a 80 187 = 1.
+  forall a, Z.coprime a pin_N -> powm a pin_lam pin_N = 1.
 Proof.
   intros a Hcop.
   rewrite <- rsa_test_lambda.

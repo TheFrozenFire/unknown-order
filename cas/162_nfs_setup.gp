@@ -1,42 +1,37 @@
-\\ NFS setup identity: two integer polynomials sharing a root m mod N.
-\\ Evaluation f(m) ≡ 0 (mod N) is the resultant of f and (x-m).
-\\ Homogenised remainder: F(a,b) − f(m) b^2 = (a−m b) H(a,b),
-\\ so F ≡ G H (mod N).  Irreducible companion x^2+x+5 at m=13
-\\ (disc −19).  Reducible x^2+8x+7 at m=10 is the two-sided pin
-\\ of cas/163; the identity does not need a field.
-\\ Mirrors SieveRelation.v nfs_eval_* / hom_quad_remainder.
+\\ NFS setup identity on the campaign pin (cas/lib/pin.gp).
+\\ Mirrors SieveRelation.v hom_quad_remainder / nfs_eval_*.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17;
-firr(x) = x^2 + x + 5;
-fred(x) = x^2 + 8*x + 7;
-Firr(a, b) = a^2 + a*b + 5*b^2;
-Fred(a, b) = a^2 + 8*a*b + 7*b^2;
-Girr(a, b) = a - 13*b;
-Hirr(a, b) = a + 14*b;
-Gred(a, b) = a - 10*b;
-Hred(a, b) = a + 18*b;
+read("lib/pin.gp");
+init_pin();
 
-check(firr(13) == N,                      "f_irr(13)=187");
-check(fred(10) == N,                      "f_red(10)=187");
-check(firr(13) % N == 0,                  "common root 13 of f_irr and x-13");
-check(fred(10) % N == 0,                  "common root 10 of f_red and x-10");
-check(issquare(1-4*5) == 0,               "disc(f_irr)=−19, no square");
-check(fred(-1) == 0 && fred(-7) == 0,     "f_red=(x+1)(x+7) over Z");
+firr(x) = pin_nfs_irr_c2*x^2 + pin_nfs_irr_c1*x + pin_nfs_irr_c0;
+fred(x) = pin_nfs_red_c2*x^2 + pin_nfs_red_c1*x + pin_nfs_red_c0;
+Firr(a, b) = pin_nfs_irr_c2*a^2 + pin_nfs_irr_c1*a*b + pin_nfs_irr_c0*b^2;
+Fred(a, b) = pin_nfs_red_c2*a^2 + pin_nfs_red_c1*a*b + pin_nfs_red_c0*b^2;
+Girr(a, b) = a - pin_nfs_irr_m*b;
+Hirr(a, b) = pin_nfs_irr_c2*a + (pin_nfs_irr_c2*pin_nfs_irr_m + pin_nfs_irr_c1)*b;
+Gred(a, b) = a - pin_nfs_red_m*b;
+Hred(a, b) = pin_nfs_red_c2*a + (pin_nfs_red_c2*pin_nfs_red_m + pin_nfs_red_c1)*b;
 
-\\ remainder identity on several (a,b)
-check(Firr(2,1) - firr(13)*1 == Girr(2,1)*Hirr(2,1), "irr remainder (2,1)");
-check(Firr(-5,1) - firr(13) == Girr(-5,1)*Hirr(-5,1), "irr remainder (−5,1)");
-check(Fred(-15,1) - fred(10) == Gred(-15,1)*Hred(-15,1), "red remainder (−15,1)");
-check(Fred(-6,1) - fred(10) == Gred(-6,1)*Hred(-6,1), "red remainder (−6,1)");
-check(Firr(3,2) % N == (Girr(3,2)*Hirr(3,2)) % N, "F ≡ GH (mod N) irr (3,2)");
-check(Fred(1,1) % N == (Gred(1,1)*Hred(1,1)) % N, "F ≡ GH (mod N) red (1,1)");
+check(N == p*q,                           "pin N = p q");
+check(firr(pin_nfs_irr_m) == N,           "f_irr(m) = N");
+check(fred(pin_nfs_red_m) == N,           "f_red(m) = N");
+check(firr(pin_nfs_irr_m) % N == 0,       "common root irr");
+check(fred(pin_nfs_red_m) % N == 0,       "common root red");
+check(issquare(pin_nfs_irr_c1^2 - 4*pin_nfs_irr_c2*pin_nfs_irr_c0) == 0, "irr disc not square");
+check(fred(-1) == 0 && fred(-7) == 0,     "f_red splits over Z");
 
-\\ evaluation map well-defined: f(m)≡0 so x↦m kills f
-check((Mod(13,N)^2 + Mod(13,N) + 5) == Mod(0,N), "eval irr at m is 0 in Z/NZ");
-check((Mod(10,N)^2 + 8*Mod(10,N) + 7) == Mod(0,N), "eval red at m is 0 in Z/NZ");
+check(Firr(2,1) - firr(pin_nfs_irr_m)*1 == Girr(2,1)*Hirr(2,1), "irr remainder (2,1)");
+check(Firr(-5,1) - N == Girr(-5,1)*Hirr(-5,1), "irr remainder (−5,1)");
+check(Fred(pin_ts_a1, pin_ts_b1) - N == Gred(pin_ts_a1, pin_ts_b1)*Hred(pin_ts_a1, pin_ts_b1), "red remainder ts1");
+check(Fred(pin_ts_a2, pin_ts_b2) - N == Gred(pin_ts_a2, pin_ts_b2)*Hred(pin_ts_a2, pin_ts_b2), "red remainder ts2");
+check(Firr(3,2) % N == (Girr(3,2)*Hirr(3,2)) % N, "F ≡ GH irr (3,2)");
+check(Fred(1,1) % N == (Gred(1,1)*Hred(1,1)) % N, "F ≡ GH red (1,1)");
+check((Mod(pin_nfs_irr_m,N)^2 + Mod(pin_nfs_irr_m,N) + pin_nfs_irr_c0) == Mod(0,N), "eval irr at m is 0");
+check((Mod(pin_nfs_red_m,N)^2 + pin_nfs_red_c1*Mod(pin_nfs_red_m,N) + pin_nfs_red_c0) == Mod(0,N), "eval red at m is 0");
 
 printf("%d ok, %d fail\n", ok, fail);
 if(fail, error("CAS failures"));

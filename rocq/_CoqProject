@@ -3,6 +3,7 @@
 -arg -native-compiler -arg no
 
 NamedSkips.v
+Pin.v
 RSA.v
 TimeLock.v
 ThresholdRSA.v

@@ -388,7 +388,7 @@ Proof. apply rsa_test_lambda. Qed.
 Theorem lambda_plus_one_11_17_not_prime :
   ~ Z.prime (lambda_semiprime 11 17 + 1).
 Proof.
-  rewrite rsa_test_lambda.
+  rewrite lambda_plus_one_11_17.
   intros [_ Hdiv].
   apply (Hdiv 3); [lia|]. exists 27. lia.
 Qed.

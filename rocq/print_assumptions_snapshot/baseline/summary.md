@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2365 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2367 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2365 results across 117 files.
+Captured for 2367 results across 118 files.
 
 Counts:
 
@@ -1409,47 +1409,47 @@ Counts:
 | `minus1_order_2_rsa_test` | 271 | 0 | 0 | OK |
 | `mixed67_order_2_rsa_test` | 277 | 0 | 0 | OK |
 | `lcm_two_order2_not_lambda` | 283 | 0 | 0 | OK |
-| `is_order_pin_3_80` | 293 | 0 | 0 | OK |
-| `pin_unit_3_coprime` | 320 | 0 | 0 | OK |
-| `pin_attains_lambda` | 324 | 0 | 0 | OK |
-| `orders_generate_lambda_pin` | 337 | 0 | 0 | OK |
-| `powm_eq_1_iff_order_divides` | 344 | 0 | 0 | OK |
-| `pow2_divides_pow2` | 355 | 0 | 0 | OK |
-| `two_height_is_val2_ord` | 378 | 0 | 0 | OK |
-| `order_2_mod_11` | 437 | 0 | 0 | OK |
-| `order_2_mod_17` | 448 | 0 | 0 | OK |
-| `two_height_independent_of_odd_multiple` | 461 | 0 | 0 | OK |
-| `height_is_val2_ord_textbook` | 477 | 0 | 0 | OK |
-| `zseq_length` | 517 | 0 | 0 | OK |
-| `zseq_In_bounds` | 524 | 0 | 0 | OK |
-| `zseq_Forall_distinct_head` | 537 | 0 | 0 | OK |
-| `zseq_pairwise_distinct` | 557 | 0 | 0 | OK |
-| `units_mod_prime_length` | 573 | 0 | 0 | OK |
-| `units_mod_prime_In` | 577 | 0 | 0 | OK |
-| `units_mod_prime_coprime` | 587 | 0 | 0 | OK |
-| `units_mod_prime_distinct` | 599 | 0 | 0 | OK |
-| `units_mod_prime_nonnil` | 609 | 0 | 0 | OK |
-| `order_mul_coprime` | 617 | 0 | 0 | OK |
-| `order_of_divisor_power` | 688 | 0 | 0 | OK |
-| `order_lcm_attained` | 717 | 0 | 0 | OK |
-| `exists_max_order_in` | 748 | 0 | 0 | OK |
-| `zseq_In_interval` | 782 | 0 | 0 | OK |
-| `unit_mod_in_list` | 795 | 0 | 0 | OK |
-| `is_order_mod_base` | 816 | 0 | 0 | OK |
-| `is_order_of_mod` | 830 | 0 | 0 | OK |
-| `is_order_eq_mod` | 844 | 0 | 0 | OK |
-| `primitive_root_exists` | 857 | 0 | 0 | OK |
-| `order_semiprime_from_locals` | 923 | 0 | 0 | OK |
-| `exists_unit_order_lambda` | 966 | 0 | 0 | OK |
-| `exists_unit_order_lambda_pin` | 1002 | 0 | 0 | OK |
-| `mul_cancel_unit_mod` | 1016 | 0 | 0 | OK |
-| `powm_eq_pow_cancel` | 1031 | 0 | 0 | OK |
-| `powm_inj_lt_order` | 1055 | 0 | 0 | OK |
-| `nodup_incl_le` | 1084 | 0 | 0 | OK |
-| `powers_upto_length` | 1113 | 0 | 0 | OK |
-| `powers_upto_In` | 1119 | 0 | 0 | OK |
-| `powers_upto_NoDup` | 1132 | 0 | 0 | OK |
-| `primitive_root_generates` | 1152 | 0 | 0 | OK |
+| `is_order_pin_3_80` | 294 | 0 | 0 | OK |
+| `pin_unit_3_coprime` | 321 | 0 | 0 | OK |
+| `pin_attains_lambda` | 325 | 0 | 0 | OK |
+| `orders_generate_lambda_pin` | 338 | 0 | 0 | OK |
+| `powm_eq_1_iff_order_divides` | 345 | 0 | 0 | OK |
+| `pow2_divides_pow2` | 356 | 0 | 0 | OK |
+| `two_height_is_val2_ord` | 379 | 0 | 0 | OK |
+| `order_2_mod_11` | 438 | 0 | 0 | OK |
+| `order_2_mod_17` | 449 | 0 | 0 | OK |
+| `two_height_independent_of_odd_multiple` | 462 | 0 | 0 | OK |
+| `height_is_val2_ord_textbook` | 478 | 0 | 0 | OK |
+| `zseq_length` | 518 | 0 | 0 | OK |
+| `zseq_In_bounds` | 525 | 0 | 0 | OK |
+| `zseq_Forall_distinct_head` | 538 | 0 | 0 | OK |
+| `zseq_pairwise_distinct` | 558 | 0 | 0 | OK |
+| `units_mod_prime_length` | 574 | 0 | 0 | OK |
+| `units_mod_prime_In` | 578 | 0 | 0 | OK |
+| `units_mod_prime_coprime` | 588 | 0 | 0 | OK |
+| `units_mod_prime_distinct` | 600 | 0 | 0 | OK |
+| `units_mod_prime_nonnil` | 610 | 0 | 0 | OK |
+| `order_mul_coprime` | 618 | 0 | 0 | OK |
+| `order_of_divisor_power` | 689 | 0 | 0 | OK |
+| `order_lcm_attained` | 718 | 0 | 0 | OK |
+| `exists_max_order_in` | 749 | 0 | 0 | OK |
+| `zseq_In_interval` | 783 | 0 | 0 | OK |
+| `unit_mod_in_list` | 796 | 0 | 0 | OK |
+| `is_order_mod_base` | 817 | 0 | 0 | OK |
+| `is_order_of_mod` | 831 | 0 | 0 | OK |
+| `is_order_eq_mod` | 845 | 0 | 0 | OK |
+| `primitive_root_exists` | 858 | 0 | 0 | OK |
+| `order_semiprime_from_locals` | 924 | 0 | 0 | OK |
+| `exists_unit_order_lambda` | 967 | 0 | 0 | OK |
+| `exists_unit_order_lambda_pin` | 1003 | 0 | 0 | OK |
+| `mul_cancel_unit_mod` | 1018 | 0 | 0 | OK |
+| `powm_eq_pow_cancel` | 1033 | 0 | 0 | OK |
+| `powm_inj_lt_order` | 1057 | 0 | 0 | OK |
+| `nodup_incl_le` | 1086 | 0 | 0 | OK |
+| `powers_upto_length` | 1115 | 0 | 0 | OK |
+| `powers_upto_In` | 1121 | 0 | 0 | OK |
+| `powers_upto_NoDup` | 1134 | 0 | 0 | OK |
+| `primitive_root_generates` | 1154 | 0 | 0 | OK |
 
 ## Paillier.v
 
@@ -1468,6 +1468,14 @@ Counts:
 |---|---:|---:|---:|---|
 | `phi_eq_lambda_times_gcd` | 17 | 0 | 0 | OK |
 | `phi_div_lambda_is_gcd` | 29 | 0 | 0 | OK |
+
+## Pin.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `pin_N_pos` | 43 | 0 | 0 | OK |
+| `pin_N_gt_1` | 46 | 0 | 0 | OK |
+| `pin_p_neq_q` | 49 | 0 | 0 | OK |
 
 ## PollardP1.v
 
@@ -1700,28 +1708,28 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `rsa_N_gt_1` | 37 | 0 | 0 | OK |
-| `rsa_lambda_pos` | 44 | 0 | 0 | OK |
-| `rsa_lambda_gt_1` | 50 | 0 | 0 | OK |
-| `rsa_phi_pos` | 69 | 0 | 0 | OK |
-| `rsa_lambda_divides_phi` | 75 | 0 | 0 | OK |
-| `rsa_ed_minus_1_divides` | 78 | 0 | 0 | OK |
-| `rsa_ed_gt_1` | 87 | 0 | 0 | OK |
-| `rsa_dec_enc_units` | 100 | 0 | 0 | OK |
-| `rsa_enc_dec_units` | 124 | 0 | 0 | OK |
-| `rsa_d_is_cube_root_map` | 151 | 0 | 0 | OK |
-| `prime_11` | 161 | 0 | 0 | OK |
-| `prime_17` | 170 | 0 | 0 | OK |
-| `rsa_test_lambda` | 180 | 0 | 0 | OK |
-| `rsa_test_phi` | 183 | 0 | 0 | OK |
-| `rsa_test_inv` | 186 | 0 | 0 | OK |
-| `rsa_test_coprime_e` | 189 | 0 | 0 | OK |
-| `rsa_test_N` | 204 | 0 | 0 | OK |
-| `rsa_test_vector` | 207 | 0 | 0 | OK |
-| `rsa_test_roundtrip` | 211 | 0 | 0 | OK |
-| `rsa_test_annihilator` | 215 | 0 | 0 | OK |
-| `N_cong_q_mod_pminus1` | 230 | 0 | 0 | OK |
-| `gcd_polyN_pminus1_is_gcd_at_q` | 241 | 0 | 0 | OK |
+| `rsa_N_gt_1` | 38 | 0 | 0 | OK |
+| `rsa_lambda_pos` | 45 | 0 | 0 | OK |
+| `rsa_lambda_gt_1` | 51 | 0 | 0 | OK |
+| `rsa_phi_pos` | 70 | 0 | 0 | OK |
+| `rsa_lambda_divides_phi` | 76 | 0 | 0 | OK |
+| `rsa_ed_minus_1_divides` | 79 | 0 | 0 | OK |
+| `rsa_ed_gt_1` | 88 | 0 | 0 | OK |
+| `rsa_dec_enc_units` | 101 | 0 | 0 | OK |
+| `rsa_enc_dec_units` | 125 | 0 | 0 | OK |
+| `rsa_d_is_cube_root_map` | 152 | 0 | 0 | OK |
+| `prime_11` | 163 | 0 | 0 | OK |
+| `prime_17` | 172 | 0 | 0 | OK |
+| `rsa_test_lambda` | 182 | 0 | 0 | OK |
+| `rsa_test_phi` | 185 | 0 | 0 | OK |
+| `rsa_test_inv` | 188 | 0 | 0 | OK |
+| `rsa_test_coprime_e` | 191 | 0 | 0 | OK |
+| `rsa_test_N` | 206 | 0 | 0 | OK |
+| `rsa_test_vector` | 209 | 0 | 0 | OK |
+| `rsa_test_roundtrip` | 213 | 0 | 0 | OK |
+| `rsa_test_annihilator` | 217 | 0 | 0 | OK |
+| `N_cong_q_mod_pminus1` | 232 | 0 | 0 | OK |
+| `gcd_polyN_pminus1_is_gcd_at_q` | 243 | 0 | 0 | OK |
 
 ## RabinWilliams.v
 
@@ -1849,39 +1857,38 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `even_nonneg_pow_square` | 36 | 0 | 0 | OK |
-| `square_times_square` | 50 | 0 | 0 | OK |
-| `even_exp_2_3_5_square` | 57 | 0 | 0 | OK |
-| `mul_mod_cong` | 67 | 0 | 0 | OK |
-| `dixon_two_relations` | 83 | 0 | 0 | OK |
-| `dixon_combination_splits` | 97 | 0 | 0 | OK |
-| `dixon_residues_even_exponents` | 116 | 0 | 0 | OK |
-| `dixon_24_37_cong` | 123 | 0 | 0 | OK |
-| `dixon_24_37_not_assoc` | 137 | 0 | 0 | OK |
-| `dixon_24_37_splits` | 145 | 0 | 0 | OK |
-| `dixon_24_37_gcd` | 160 | 0 | 0 | OK |
-| `dixon_14_already_square` | 165 | 0 | 0 | OK |
-| `hom_quad_remainder` | 185 | 0 | 0 | OK |
-| `hom_quad_cong` | 192 | 0 | 0 | OK |
-| `nfs_eval_irr` | 213 | 0 | 0 | OK |
-| `nfs_eval_red` | 217 | 0 | 0 | OK |
-| `nfs_common_root_irr` | 222 | 0 | 0 | OK |
-| `nfs_common_root_red` | 226 | 0 | 0 | OK |
-| `nfs_f_irr_disc_neg` | 230 | 0 | 0 | OK |
-| `nfs_neg19_not_square` | 234 | 0 | 0 | OK |
-| `nfs_f_red_splits_Z` | 241 | 0 | 0 | OK |
-| `nfs_hom_irr_pin` | 245 | 0 | 0 | OK |
-| `nfs_hom_red_pin` | 250 | 0 | 0 | OK |
-| `nfs_F_cong_GH_irr` | 255 | 0 | 0 | OK |
-| `nfs_F_cong_GH_red` | 263 | 0 | 0 | OK |
-| `nfs_two_sided_product` | 273 | 0 | 0 | OK |
-| `nfs_rel_minus15` | 292 | 0 | 0 | OK |
-| `nfs_rel_minus6` | 298 | 0 | 0 | OK |
-| `nfs_two_sided_pin_squares` | 304 | 0 | 0 | OK |
-| `nfs_two_sided_120_is_sqrt1` | 324 | 0 | 0 | OK |
-| `nfs_two_sided_splits` | 334 | 0 | 0 | OK |
-| `nfs_two_sided_gcd` | 347 | 0 | 0 | OK |
-| `nfs_onesided_no_split` | 353 | 0 | 0 | OK |
+| `even_nonneg_pow_square` | 30 | 0 | 0 | OK |
+| `square_times_square` | 44 | 0 | 0 | OK |
+| `even_exp_2_3_5_square` | 51 | 0 | 0 | OK |
+| `mul_mod_cong` | 61 | 0 | 0 | OK |
+| `not_div_mod` | 75 | 0 | 0 | OK |
+| `dixon_two_relations` | 85 | 0 | 0 | OK |
+| `dixon_combination_splits` | 99 | 0 | 0 | OK |
+| `dixon_pin_residue_factors` | 118 | 0 | 0 | OK |
+| `dixon_pin_cong` | 125 | 0 | 0 | OK |
+| `dixon_pin_not_assoc` | 141 | 0 | 0 | OK |
+| `dixon_pin_splits` | 150 | 0 | 0 | OK |
+| `dixon_pin_gcd` | 166 | 0 | 0 | OK |
+| `dixon_pin_b_splits` | 170 | 0 | 0 | OK |
+| `asquare_pin_splits` | 189 | 0 | 0 | OK |
+| `hom_quad_remainder` | 208 | 0 | 0 | OK |
+| `hom_quad_cong` | 215 | 0 | 0 | OK |
+| `poly_eval_quad` | 238 | 0 | 0 | OK |
+| `nfs_eval_irr` | 243 | 0 | 0 | OK |
+| `nfs_eval_red` | 247 | 0 | 0 | OK |
+| `nfs_common_root_irr` | 251 | 0 | 0 | OK |
+| `nfs_common_root_red` | 255 | 0 | 0 | OK |
+| `nfs_irr_disc_neg` | 259 | 0 | 0 | OK |
+| `nfs_neg_not_square` | 264 | 0 | 0 | OK |
+| `nfs_red_splits_Z` | 271 | 0 | 0 | OK |
+| `nfs_F_cong_GH_irr` | 275 | 0 | 0 | OK |
+| `nfs_F_cong_GH_red` | 285 | 0 | 0 | OK |
+| `nfs_two_sided_product` | 297 | 0 | 0 | OK |
+| `nfs_two_sided_pin_squares` | 316 | 0 | 0 | OK |
+| `nfs_two_sided_pin_sqrt1` | 349 | 0 | 0 | OK |
+| `nfs_two_sided_splits` | 359 | 0 | 0 | OK |
+| `nfs_two_sided_gcd` | 372 | 0 | 0 | OK |
+| `nfs_onesided_no_split` | 377 | 0 | 0 | OK |
 
 ## SixthType.v
 
