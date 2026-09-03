@@ -523,27 +523,36 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `CubicResidue.v`
 
-- L13: Cubic residuosity when cubing is not a permutation
+- L14: Cubic residuosity when cubing is not a permutation
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `cubing_invertible_on_units` | 37 |
-| Theorem | `cube_root_map_is_cube` | 66 |
-| Theorem | `cube_euler_one_direction` | 80 |
-| Theorem | `three_divides_lambda_forbids_e3` | 119 |
-| Theorem | `cube_euler_converse` | 137 |
-| Theorem | `cube_euler_iff` | 177 |
-| Lemma | `cube_N_implies_local` | 190 |
-| Lemma | `cube_N_of_local` | 215 |
-| Theorem | `cube_N_iff_both` | 242 |
-| Lemma | `cube_root_coprime` | 254 |
-| Theorem | `cube_euler_lambda_necessary` | 284 |
-| Lemma | `prime_7_cubic` | 311 |
-| Lemma | `prime_13` | 319 |
-| Lemma | `prime_19` | 329 |
-| Theorem | `cube_mixed_5_not_global` | 340 |
-| Theorem | `cube_euler_lambda_not_sufficient_247` | 359 |
-| Theorem | `pin_units_are_cubes` | 374 |
+| Theorem | `cubing_invertible_on_units` | 43 |
+| Theorem | `cube_root_map_is_cube` | 72 |
+| Theorem | `cube_euler_one_direction` | 86 |
+| Theorem | `three_divides_lambda_forbids_e3` | 125 |
+| Theorem | `cube_euler_converse` | 143 |
+| Theorem | `cube_euler_iff` | 183 |
+| Lemma | `cube_N_implies_local` | 196 |
+| Lemma | `cube_N_of_local` | 221 |
+| Theorem | `cube_N_iff_both` | 248 |
+| Lemma | `cube_root_coprime` | 260 |
+| Theorem | `cube_euler_lambda_necessary` | 290 |
+| Lemma | `prime_7_cubic` | 317 |
+| Lemma | `prime_13` | 325 |
+| Lemma | `prime_19` | 335 |
+| Theorem | `cube_mixed_5_not_global` | 346 |
+| Theorem | `cube_euler_lambda_not_sufficient_247` | 365 |
+| Theorem | `pin_units_are_cubes` | 380 |
+| Lemma | `omega_from_primitive_root` | 396 |
+| Lemma | `primitive_3rd_root_cyclotomic` | 409 |
+| Lemma | `cube_char_cubed_one` | 434 |
+| Lemma | `cube_char_mul` | 454 |
+| Lemma | `mu3_N_iff_locals` | 467 |
+| Theorem | `pin_cube_kernel_trivial` | 488 |
+| Theorem | `cube_kernel_three` | 506 |
+| Theorem | `omega_13_order_3` | 551 |
+| Theorem | `mixed_kernel_91` | 559 |
 
 ## `CyclicCount.v`
 
@@ -3312,4 +3321,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2272 theorems/lemmas/corollaries/examples across 116 files._
+_2281 theorems/lemmas/corollaries/examples across 116 files._

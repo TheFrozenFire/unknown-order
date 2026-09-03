@@ -6,6 +6,7 @@ Require Import RocqProofs.NumberTheory.
 Require Import RocqProofs.QuadRecip.
 Require Import RSA.
 Require Import Hardness.
+Require Import UnknownOrder.
 Require Import Order.
 
 Open Scope Z_scope.
@@ -28,8 +29,13 @@ Open Scope Z_scope.
     cube ([cas/155], named extra [13×19]).  On the pin, [gcd(3,λ)=1]
     so every unit is a cube.
 
+    The cubic character [a^{(p−1)/3}] takes values in [μ₃]; the
+    kernel of cubing is [{1, ω, ω²}] locally and CRT of those
+    pairs on [N=pq] ([cas/156]).  Pin kernel is trivial.
+
     Cross-confirmed by [cas/86_cubic_residue.gp],
-    [cas/154_cube_euler.gp], and [cas/155_cube_modn.gp]. *)
+    [cas/154_cube_euler.gp], [cas/155_cube_modn.gp], and
+    [cas/156_cube_char.gp]. *)
 
 Definition is_cube (a p : Z) : Prop :=
   exists x, powm x 3 p = a mod p.
@@ -383,4 +389,192 @@ Proof.
       [vm_compute; reflexivity | lia].
   - apply (cube_root_map_is_cube a 17 11 prime_17 ltac:(lia) Haq);
       [vm_compute; reflexivity | lia].
+Qed.
+
+Definition cube_char (a p : Z) : Z := powm a ((p - 1) / 3) p.
+
+Lemma omega_from_primitive_root :
+  forall p g,
+    Z.prime p ->
+    Z.coprime g p ->
+    is_order p g (p - 1) ->
+    (3 | p - 1) ->
+    is_order p (powm g ((p - 1) / 3) p) 3.
+Proof.
+  intros p g Hp Hg Hor Hdiv.
+  pose proof (Z.prime_ge_2 p Hp).
+  apply (order_of_divisor_power p g (p - 1) 3); [lia | lia | exact Hdiv | exact Hor].
+Qed.
+
+Lemma primitive_3rd_root_cyclotomic :
+  forall omega p,
+    Z.prime p ->
+    powm omega 3 p = 1 ->
+    omega mod p <> 1 ->
+    (omega * omega + omega + 1) mod p = 0.
+Proof.
+  intros omega p Hp Hmu Hne.
+  pose proof (Z.prime_ge_2 p Hp).
+  unfold powm in Hmu.
+  rewrite <- (Z.mod_1_l p) in Hmu by lia.
+  apply mods_eq_iff_divides in Hmu; [| lia].
+  assert (omega ^ 3 - 1 = (omega - 1) * (omega * omega + omega + 1)) as Hfact.
+  { change 3 with (Z.succ (Z.succ 1)).
+    rewrite !Z.pow_succ_r by lia. rewrite Z.pow_1_r. ring. }
+  rewrite Hfact in Hmu.
+  apply Z.gauss in Hmu.
+  2: { change (Z.coprime p (omega - 1)).
+       apply Z.coprime_prime_l_iff; [exact Hp|].
+       intro Hdiv. apply Hne.
+       rewrite <- (Z.mod_1_l p) by lia.
+       apply mods_eq_iff_divides; [lia | exact Hdiv]. }
+  apply Z.mod_divide in Hmu; [| lia]. exact Hmu.
+Qed.
+
+Lemma cube_char_cubed_one :
+  forall a p,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime a p ->
+    (3 | p - 1) ->
+    powm (cube_char a p) 3 p = 1.
+Proof.
+  intros a p Hp Hne Hcop Hdiv.
+  pose proof (Z.prime_ge_2 p Hp).
+  unfold cube_char.
+  destruct Hdiv as [t Ht].
+  assert ((p - 1) / 3 = t) as Hquot.
+  { rewrite Ht. apply Z.div_mul. lia. }
+  rewrite Hquot.
+  rewrite <- powm_mul_r by (try lia; nia).
+  rewrite <- Ht.
+  apply fermat_coprime; assumption.
+Qed.
+
+Lemma cube_char_mul :
+  forall a b p,
+    1 < p ->
+    (3 | p - 1) ->
+    cube_char (a * b) p = (cube_char a p * cube_char b p) mod p.
+Proof.
+  intros a b p Hp Hdiv.
+  unfold cube_char.
+  destruct Hdiv as [t Ht].
+  assert (0 <= (p - 1) / 3) by (rewrite Ht; apply Z.div_pos; nia).
+  apply powm_mul_base; lia.
+Qed.
+
+Lemma mu3_N_iff_locals :
+  forall x p q,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    powm x 3 (p * q) = 1 <-> powm x 3 p = 1 /\ powm x 3 q = 1.
+Proof.
+  intros x p q Hp Hq Hneq.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  split.
+  - intros H1. split.
+    + pose proof (powm_reduce_factor x 3 p q ltac:(lia) ltac:(lia) ltac:(lia)) as Hr.
+      rewrite H1, Z.mod_1_l in Hr by lia. symmetry; exact Hr.
+    + pose proof (powm_reduce_factor x 3 q p ltac:(lia) ltac:(lia) ltac:(lia)) as Hr.
+      rewrite Z.mul_comm in Hr.
+      rewrite H1, Z.mod_1_l in Hr by lia. symmetry; exact Hr.
+  - intros [Hp1 Hq1].
+    unfold powm in Hp1, Hq1 |- *.
+    apply crt_one; try assumption.
+Qed.
+
+Theorem pin_cube_kernel_trivial :
+  forall x, Z.coprime x 187 -> powm x 3 187 = 1 -> x mod 187 = 1.
+Proof.
+  intros x Hcop Hmu.
+  destruct (order_exists_from_annihilator x 187 3 ltac:(lia) ltac:(lia) Hmu)
+    as [k [Hord Hk3]].
+  assert (k | 80) as Hk80.
+  { change 187 with (11 * 17) in Hcop, Hord.
+    apply (order_divides_lambda 11 17 x k prime_11 prime_17 ltac:(lia) Hcop Hord). }
+  assert (k | 1) as Hk1.
+  { apply Z.gcd_greatest with (a := 3) (b := 80) in Hk3; [| exact Hk80].
+    vm_compute in Hk3. exact Hk3. }
+  apply Z.divide_1_r in Hk1.
+  assert (k = 1) by (destruct Hord as [Hkpos _]; lia).
+  subst k. destruct Hord as [_ [H1 _]].
+  rewrite powm_1_r in H1 by lia. exact H1.
+Qed.
+
+Theorem cube_kernel_three :
+  forall p g x,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime g p ->
+    is_order p g (p - 1) ->
+    (3 | p - 1) ->
+    Z.coprime x p ->
+    powm x 3 p = 1 <->
+    exists m, 0 <= m < 3 /\ powm g (m * ((p - 1) / 3)) p = x mod p.
+Proof.
+  intros p g x Hp Hne Hg Hor Hdiv Hcx.
+  pose proof (Z.prime_ge_2 p Hp).
+  destruct Hdiv as [t Ht].
+  assert (0 < t) as Htpos by nia.
+  assert ((p - 1) / 3 = t) as Hquot.
+  { rewrite Ht. apply Z.div_mul. lia. }
+  split.
+  - intros Hmu.
+    destruct (primitive_root_generates p g x Hp Hg Hor Hcx) as [k [Hk Hkpow]].
+    assert ((p - 1 | 3 * k)) as Hdivk.
+    { apply (proj2 (order_iff_divides p g (p - 1) (3 * k)
+                      ltac:(lia) ltac:(nia) Hor)).
+      rewrite (Z.mul_comm 3 k), powm_mul_r by nia.
+      rewrite Hkpow, powm_mod_base by lia.
+      exact Hmu. }
+    destruct Hdivk as [q Hq].
+    assert (k = q * t) as Hkqt.
+    { rewrite Ht in Hq. nia. }
+    exists q. split.
+    + split; [nia|].
+      assert (q * t < t * 3) by nia. nia.
+    + rewrite Hquot, <- Hkqt. exact Hkpow.
+  - intros [m [Hm Heq]].
+    rewrite <- (powm_mod_base x 3 p) by lia.
+    rewrite <- Heq.
+    rewrite <- powm_mul_r by (try lia; nia).
+    rewrite Hquot.
+    replace ((m * t) * 3) with ((p - 1) * m) by (rewrite Ht; ring).
+    rewrite powm_mul_r by nia.
+    destruct Hor as [_ [H1 _]].
+    rewrite H1, powm_1_pow by nia.
+    apply Z.mod_1_l; lia.
+Qed.
+
+Theorem omega_13_order_3 : is_order 13 3 3.
+Proof.
+  split; [lia|]. split; [vm_compute; reflexivity|].
+  intros k' [Hk' Hk'lt] Hpow.
+  assert (k' = 1 \/ k' = 2) by lia.
+  destruct H as [H | H]; subst k'; vm_compute in Hpow; discriminate.
+Qed.
+
+Theorem mixed_kernel_91 :
+  let x := Z.combinecong 13 7 3 1 in
+  powm x 3 91 = 1 /\ x mod 13 = 3 /\ x mod 7 = 1 /\ x mod 91 <> 1.
+Proof.
+  intros x.
+  pose proof (prime_coprime_distinct 13 7 prime_13 prime_7_cubic ltac:(lia)) as Hcop.
+  pose proof (Z.combinecong_sound_coprime 13 7 3 1 Hcop) as [Hp Hq].
+  unfold x. split.
+  - change 91 with (13 * 7).
+    apply (proj2 (mu3_N_iff_locals (Z.combinecong 13 7 3 1) 13 7
+                    prime_13 prime_7_cubic ltac:(lia))).
+    split.
+    + rewrite <- (powm_mod_base (Z.combinecong 13 7 3 1) 3 13) by lia.
+      rewrite Hp, Z.mod_small by lia. vm_compute. reflexivity.
+    + rewrite <- (powm_mod_base (Z.combinecong 13 7 3 1) 3 7) by lia.
+      rewrite Hq, Z.mod_small by lia. vm_compute. reflexivity.
+  - split.
+    + rewrite Hp. apply Z.mod_small. lia.
+    + split.
+      * rewrite Hq. apply Z.mod_small. lia.
+      * vm_compute. discriminate.
 Qed.

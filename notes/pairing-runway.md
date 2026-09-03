@@ -44,6 +44,10 @@ only with a written death in this file.
    (`cube_N_iff_both`). `a^{λ/3}≡1` is necessary, not sufficient
    (`cube_euler_lambda_not_sufficient_247` on named extra `13×19`);
    CAS 155. Pin: every unit is a cube (`pin_units_are_cubes`).
+   Cubic character takes values in `μ₃`; kernel of cubing is
+   `{1,ω,ω²}` locally and CRT of those pairs on `N=pq`
+   (`cube_kernel_three`, `mu3_N_iff_locals`, `mixed_kernel_91`).
+   Pin kernel is trivial (`pin_cube_kernel_trivial`); CAS 156.
 
 2. **Evaluation pairing on `μ_n` for `n=2,3,4,6`.** *(this sitting)*
    **Have** `eval_pair_reduce_mod_n`, `eval_pair_mu2_on_mixed`,

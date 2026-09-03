@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2272 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2281 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2272 results across 116 files.
+Captured for 2281 results across 116 files.
 
 Counts:
 
@@ -458,23 +458,32 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `cubing_invertible_on_units` | 37 | 0 | 0 | OK |
-| `cube_root_map_is_cube` | 66 | 0 | 0 | OK |
-| `cube_euler_one_direction` | 80 | 0 | 0 | OK |
-| `three_divides_lambda_forbids_e3` | 119 | 0 | 0 | OK |
-| `cube_euler_converse` | 137 | 0 | 0 | OK |
-| `cube_euler_iff` | 177 | 0 | 0 | OK |
-| `cube_N_implies_local` | 190 | 0 | 0 | OK |
-| `cube_N_of_local` | 215 | 0 | 0 | OK |
-| `cube_N_iff_both` | 242 | 0 | 0 | OK |
-| `cube_root_coprime` | 254 | 0 | 0 | OK |
-| `cube_euler_lambda_necessary` | 284 | 0 | 0 | OK |
-| `prime_7_cubic` | 311 | 0 | 0 | OK |
-| `prime_13` | 319 | 0 | 0 | OK |
-| `prime_19` | 329 | 0 | 0 | OK |
-| `cube_mixed_5_not_global` | 340 | 0 | 0 | OK |
-| `cube_euler_lambda_not_sufficient_247` | 359 | 0 | 0 | OK |
-| `pin_units_are_cubes` | 374 | 0 | 0 | OK |
+| `cubing_invertible_on_units` | 43 | 0 | 0 | OK |
+| `cube_root_map_is_cube` | 72 | 0 | 0 | OK |
+| `cube_euler_one_direction` | 86 | 0 | 0 | OK |
+| `three_divides_lambda_forbids_e3` | 125 | 0 | 0 | OK |
+| `cube_euler_converse` | 143 | 0 | 0 | OK |
+| `cube_euler_iff` | 183 | 0 | 0 | OK |
+| `cube_N_implies_local` | 196 | 0 | 0 | OK |
+| `cube_N_of_local` | 221 | 0 | 0 | OK |
+| `cube_N_iff_both` | 248 | 0 | 0 | OK |
+| `cube_root_coprime` | 260 | 0 | 0 | OK |
+| `cube_euler_lambda_necessary` | 290 | 0 | 0 | OK |
+| `prime_7_cubic` | 317 | 0 | 0 | OK |
+| `prime_13` | 325 | 0 | 0 | OK |
+| `prime_19` | 335 | 0 | 0 | OK |
+| `cube_mixed_5_not_global` | 346 | 0 | 0 | OK |
+| `cube_euler_lambda_not_sufficient_247` | 365 | 0 | 0 | OK |
+| `pin_units_are_cubes` | 380 | 0 | 0 | OK |
+| `omega_from_primitive_root` | 396 | 0 | 0 | OK |
+| `primitive_3rd_root_cyclotomic` | 409 | 0 | 0 | OK |
+| `cube_char_cubed_one` | 434 | 0 | 0 | OK |
+| `cube_char_mul` | 454 | 0 | 0 | OK |
+| `mu3_N_iff_locals` | 467 | 0 | 0 | OK |
+| `pin_cube_kernel_trivial` | 488 | 0 | 0 | OK |
+| `cube_kernel_three` | 506 | 0 | 0 | OK |
+| `omega_13_order_3` | 551 | 0 | 0 | OK |
+| `mixed_kernel_91` | 559 | 0 | 0 | OK |
 
 ## CyclicCount.v
 

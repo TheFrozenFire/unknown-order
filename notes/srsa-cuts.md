@@ -317,6 +317,10 @@ Euler converse: `a^{(p−1)/3}≡1` ⇒ cube when `3 | p−1`
 local cubes (`cube_N_iff_both`); `a^{λ/3}≡1` is necessary and
 not sufficient (`cube_euler_lambda_not_sufficient_247` on
 named extra `13×19`; CAS `155`). Pin: every unit is a cube.
+Cubic character takes values in `μ₃`; kernel of cubing is
+`{1,ω,ω²}` locally and CRT of those pairs on `N`
+(`cube_kernel_three`, `mixed_kernel_91`). Pin kernel is trivial
+(`pin_cube_kernel_trivial`, CAS `156`).
 `orders_generate_lambda_named` stays unused sampling-completeness.
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
@@ -350,6 +354,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
+| cubic character / kernel of cubing | `cube_kernel_three` / `mu3_N_iff_locals` / `pin_cube_kernel_trivial` / `mixed_kernel_91` | `CubicResidue.v` | `156` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |
