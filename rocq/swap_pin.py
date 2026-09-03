@@ -31,6 +31,7 @@ yop=znorder(Mod(y,p)); yoq=znorder(Mod(y,q));
 yo=znorder(Mod(y,N));
 o2p=znorder(Mod(2,p)); o2q=znorder(Mod(2,q));
 invp=lift(1/Mod(3,p-1)); invq=lift(1/Mod(3,q-1));
+ca=q*lift(1/Mod(q,p)); cb=p*lift(1/Mod(p,q));
 xk=znorder(Mod(x,p));
 print("N=",N);
 print("lam=",lam);
@@ -50,6 +51,8 @@ print("o2p=",o2p);
 print("o2q=",o2q);
 print("invp=",invp);
 print("invq=",invq);
+print("ca=",ca);
+print("cb=",cb);
 print("xk=",xk);
 print("sqrtp=",sqrtint(p));
 print("sqrtq=",sqrtint(q));
@@ -237,6 +240,8 @@ def patch_v(text, vals, p, q):
     dset("pin_dixon_b2", "dx_b2")
     dset("pin_dixon_s2", "dx_s2")
     dset("pin_dixon_t2", "dx_t2")
+    dset("pin_root_ca", "ca")
+    dset("pin_root_cb", "cb")
     dset("pin_asquare_a", "asq_a")
     dset("pin_asquare_t", "asq_t")
     dset("pin_nfs_irr_c0", "nfs_c0")
@@ -254,6 +259,7 @@ def patch_gp(text, vals, p, q):
         ("pin_g", "g"), ("pin_g_ord_p", "gop"), ("pin_g_ord_q", "goq"),
         ("pin_y_ord", "yo"), ("pin_x_k", "xk"),
         ("pin_inv3_p", "invp"), ("pin_inv3_q", "invq"),
+        ("pin_root_ca", "ca"), ("pin_root_cb", "cb"),
         ("pin_ord2_p", "o2p"), ("pin_ord2_q", "o2q"),
         ("pin_sqrt1_mixed", "s1"), ("pin_sqrt1_mixed2", "s2"),
     ]

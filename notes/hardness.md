@@ -118,6 +118,8 @@ Constructible torsion `H` is a family parameter
 | distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals` | sampling-completeness (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
+| CRT binomial `c_p X^{d_p}+c_q X^{d_q}` of the *e*-th root map | `gcd(c_p,N)` and `gcd(c_q,N)` are the factors; inverts every unit | `cong_1_mod_p_0_mod_q_gcd`, `crt_binomial_inverts_units`, `pin_root_ca_splits`, `pin_root_cb_splits` | unrestricted residual solver ⇒ factor; the TM wrote `{p,q}` into the coefficients |
+| monomial `X^d` of the *e*-th root map | agrees with the binomial on units; coefficients do not split; degree is `d` with `ed≡1 (mod λ)` | `pin_trapdoor_degree_is_d`, `pin_root_polys_agree_on_units`, `pin_crt_binomial_neq_monomial` | reading `d` from the degree is Miller-from-`(e,d)`, not a black-box solver |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

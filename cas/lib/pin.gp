@@ -10,6 +10,7 @@ pin_lam = 80; pin_phi = 160;
 pin_g = 3; pin_g_ord_p = 5; pin_g_ord_q = 16;
 pin_y_ord = 40; pin_y_ord_p = 5; pin_y_ord_q = 8; pin_x_k = 5;
 pin_inv3_p = 7; pin_inv3_q = 11;
+pin_root_ca = 34; pin_root_cb = 154;
 pin_ord2_p = 10; pin_ord2_q = 8;
 pin_sqrt1_mixed = 67; pin_sqrt1_mixed2 = 120;
 

@@ -74,6 +74,7 @@ QRModN.v
 StrongRSAPeel.v
 SrsaOrderArrows.v
 SrsaResidualGRA.v
+SrsaRootPoly.v
 SolverRestrict.v
 DozenInroads.v
 SolverShape.v

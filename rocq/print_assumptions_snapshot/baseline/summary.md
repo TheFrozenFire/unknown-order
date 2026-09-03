@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2375 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2409 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2375 results across 118 files.
+Captured for 2409 results across 119 files.
 
 Counts:
 
@@ -1477,12 +1477,12 @@ Counts:
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
 | `Zprime_sqrt` | 10 | 0 | 0 | OK |
-| `pin_N_pos` | 94 | 0 | 0 | OK |
-| `pin_N_gt_1` | 97 | 0 | 0 | OK |
-| `pin_p_neq_q` | 100 | 0 | 0 | OK |
-| `pin_p_lt_q` | 103 | 0 | 0 | OK |
-| `pin_p_prime` | 106 | 0 | 0 | OK |
-| `pin_q_prime` | 116 | 0 | 0 | OK |
+| `pin_N_pos` | 99 | 0 | 0 | OK |
+| `pin_N_gt_1` | 102 | 0 | 0 | OK |
+| `pin_p_neq_q` | 105 | 0 | 0 | OK |
+| `pin_p_lt_q` | 108 | 0 | 0 | OK |
+| `pin_p_prime` | 111 | 0 | 0 | OK |
+| `pin_q_prime` | 121 | 0 | 0 | OK |
 
 ## PollardP1.v
 
@@ -2556,6 +2556,45 @@ Counts:
 | `residual_cube_unit_2_not_root` | 893 | 0 | 0 | OK |
 | `residual_trapdoor_inverts_pin` | 905 | 0 | 0 | OK |
 | `residual_trapdoor_not_a_low_degree_identity` | 909 | 0 | 0 | OK |
+
+## SrsaRootPoly.v
+
+| Theorem | Line | total | load-bearing | status |
+|---|---:|---:|---:|---|
+| `cong_1_mod_p_0_mod_q_gcd` | 38 | 0 | 0 | OK |
+| `crt_binomial_eval` | 72 | 0 | 0 | OK |
+| `crt_binomial_mod_p` | 85 | 0 | 0 | OK |
+| `crt_binomial_mod_q` | 106 | 0 | 0 | OK |
+| `local_eth_root` | 127 | 0 | 0 | OK |
+| `crt_binomial_inverts_units` | 155 | 0 | 0 | OK |
+| `pin_root_ca_mod` | 198 | 0 | 0 | OK |
+| `pin_root_cb_mod` | 202 | 0 | 0 | OK |
+| `pin_inv3_local` | 206 | 0 | 0 | OK |
+| `pin_root_ca_splits` | 211 | 0 | 0 | OK |
+| `pin_root_cb_splits` | 224 | 0 | 0 | OK |
+| `pin_crt_binomial_inverts_units` | 237 | 0 | 0 | OK |
+| `pin_crt_binomial_eval_unit` | 260 | 0 | 0 | OK |
+| `pin_ed_minus_1_divides_lam` | 273 | 0 | 0 | OK |
+| `pin_powm_ed` | 282 | 0 | 0 | OK |
+| `pin_unique_unit_eth_root` | 298 | 0 | 0 | OK |
+| `pin_crt_binomial_at_y` | 310 | 0 | 0 | OK |
+| `pin_crt_binomial_residual` | 322 | 0 | 0 | OK |
+| `pin_crt_binomial_degree` | 329 | 0 | 0 | OK |
+| `pin_crt_binomial_outside_window` | 333 | 0 | 0 | OK |
+| `pin_crt_binomial_coeff_da` | 338 | 0 | 0 | OK |
+| `pin_crt_binomial_coeff_db` | 342 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_eval` | 350 | 0 | 0 | OK |
+| `pin_trapdoor_ed_inv` | 358 | 0 | 0 | OK |
+| `pin_powm_de` | 362 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_inverts_units` | 379 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_at_y` | 387 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_degree` | 391 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_leading` | 395 | 0 | 0 | OK |
+| `pin_trapdoor_degree_is_d` | 405 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_outside_window` | 412 | 0 | 0 | OK |
+| `pin_root_polys_agree_on_units` | 419 | 0 | 0 | OK |
+| `pin_crt_binomial_neq_monomial` | 439 | 0 | 0 | OK |
+| `pin_crt_binomial_inverts_2` | 449 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

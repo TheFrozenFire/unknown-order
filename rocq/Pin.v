@@ -90,6 +90,11 @@ Notation pin_inv3_p := 7.
 Notation pin_inv3_q := 11.
 Notation pin_ord2_p := 10.
 Notation pin_ord2_q := 8.
+(** CRT binomial [c_p X^{d_p} + c_q X^{d_q}] of the [e]-th root map:
+    [c_p ≡ 1 (mod p)], [0 (mod q)]; [c_q] swapped.  Coefficients
+    split [N]; the monomial [X^d] does not. *)
+Definition pin_root_ca : Z := 34.
+Definition pin_root_cb : Z := 154.
 
 Lemma pin_N_pos : 0 < pin_N.
 Proof. lia. Qed.
