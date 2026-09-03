@@ -329,6 +329,8 @@ On `N=pq` the kernel is `C₃×C₃`: `e(g_p,g_q)=ω≠1`
 (`mu3N_det_gp_gq`, CAS `158`). Local `μ₃`-logs are additive
 (`mu3_log_mul`), so the determinant is bilinear
 (`mu3N_det_left_bilinear`, CAS `159`). Trapdoor uses the factors.
+Mixed cube roots of 1 split `N` (`mixed_mu3_splits`, CAS `160`);
+diagonal leftover does not. Pairing formula not required.
 `orders_generate_lambda_named` stays unused sampling-completeness.
 Generic-ring inroad on
 `residual_solver_constructs_factor_open_named`, not a proof of it.
@@ -366,6 +368,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | alternating bilinear on cyclic `μ₃` is trivial | `alternating_bilinear_mu3_trivial` / `eval_pair_omega_13_not_alternating` | `EvalPairing.v` | `157` |
 | `μ₃(Z/NZ)* ≅ C₃×C₃`; det pairing non-degenerate | `mu3N_det_alternating` / `mu3N_det_gp_gq` / `mu3_91_kernel_not_cyclic` | `EvalPairing.v` | `158` |
 | local `μ₃`-logs additive; det pairing bilinear | `mu3_log_mul` / `mu3N_det_left_bilinear` / `mu3N_det_right_bilinear` / `mu3N_det_skew` | `EvalPairing.v` | `159` |
+| mixed `μ₃` splits `N`; diagonal leftover does not | `mixed_mu3_splits` / `diagonal_mu3_gcd_xminus1` / `pin_mu3_gcd_is_N` | `CubicResidue.v` | `160` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
 | public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
 | extra tapes | `extra_*` | `SrsaExtra.v` | |

@@ -112,6 +112,8 @@ Constructible torsion `H` is a family parameter
 | alternating bilinear `e` on cyclic `μ₃` | `e(x,y) ≡ 1` | `alternating_bilinear_mu3_trivial` | a non-degenerate pairing of two hidden `μ₃` elements of cyclic `𝔽_p*` (needs a curve) |
 | kernel of cubing on `N=13·7` | `C₃×C₃`, not cyclic; `e(g_p,g_q)=ω≠1` | `mu3_91_kernel_not_cyclic`, `mu3N_det_gp_gq`, `mu3N_det_alternating` | a public pairing (the formula uses `p` and `q`) |
 | local `μ₃` logs of two kernel elements | `log(xy) ≡ log x + log y (mod 3)`; det pairing bilinear and skew | `mu3_log_mul`, `mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`, `mu3N_det_skew` | a public pairing (the formula uses `p` and `q`) |
+| mixed `x³ ≡ 1`, `x ≡ 1 (mod q)` | `gcd(x−1,N)=q` and `gcd(Φ₃(x),N)=p` | `mixed_mu3_splits`, `mixed_kernel_91_splits` | a public pairing (not required; one mixed sample factors) |
+| diagonal `x³ ≡ 1`, `x ≢ 1` both sides | `gcd(x−1,N)=1` and `N \| Φ₃(x)` | `diagonal_mu3_gcd_xminus1`, `diagonal_mu3_gcd_phi3`, `diagonal_16_91_no_split` | leftover pairing data hides the factors (this subset only) |
 | pin unit, `x^3 ≡ 1` | `x ≡ 1` | `pin_cube_kernel_trivial` | — |
 | distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals` | sampling-completeness (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |

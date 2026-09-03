@@ -122,6 +122,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Alternating bilinear map on cyclic `μ₃` is constant 1 | **Have** `alternating_bilinear_mu3_trivial`, `eval_pair_omega_13_not_alternating`; CAS 157. Non-degenerate pairing of two hidden `μ₃` elements of cyclic `𝔽_p*` stays `Refuse_elliptic_curve_branch` |
 | Kernel of cubing on `N=pq` is `C₃×C₃`; det pairing `e(g_p,g_q)=ω≠1` | **Have** `mu3N_det_alternating`, `mu3N_det_gp_gq`, `mu3_91_kernel_not_cyclic`; CAS 158. Trapdoor uses the factors |
 | Local `μ₃`-logs additive; det pairing bilinear and skew | **Have** `mu3_log_mul`, `mu3_log_reconstructs`, `mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`, `mu3N_det_skew`; CAS 159. Still a trapdoor |
+| Mixed cube root of 1 splits `N`; diagonal leftover does not | **Have** `mixed_mu3_splits`, `diagonal_mu3_gcd_xminus1`, `diagonal_mu3_gcd_phi3`, `pin_mu3_gcd_is_N`; CAS 160. Pairing formula not required |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |
 | Inversion is public on units and on `Cl`; `x ↦ x^k` is not a pairing | **Have** `rsa_gii_search_empty`, `power_endo_next_forces_k`; CAS 89 |
 | Aux self-bilinear evaluates the string if `e(aux,g,g)=g` | **Have** `aux_eval_publishes_next`; CAS 90 (existence a hyp; iO deferred) |

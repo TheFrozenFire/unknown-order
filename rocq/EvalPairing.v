@@ -27,10 +27,13 @@ Open Scope Z_scope.
     exponents is alternating and [e(g_p,g_q)=ω ≠ 1] ([cas/158],
     trapdoor uses the factors).  Local [μ₃]-logs are additive
     ([mu3_log_mul], [cas/159]), so the determinant is bilinear.
+    A mixed kernel element is a 1-query factoring witness
+    ([mixed_mu3_splits], [cas/160]); a diagonal leftover does not
+    split.  The pairing formula is not required.
 
     Cross-confirmed by [cas/87_eval_pairing.gp],
     [cas/157_mu3_pairing.gp], [cas/158_mu3n_pairing.gp],
-    and [cas/159_mu3_log.gp]. *)
+    [cas/159_mu3_log.gp], and [cas/160_mu3_split.gp]. *)
 
 Definition mu (n x N : Z) : Prop :=
   powm x n N = 1.

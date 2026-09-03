@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2321 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2332 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2321 results across 116 files.
+Captured for 2332 results across 116 files.
 
 Counts:
 
@@ -458,33 +458,44 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `cubing_invertible_on_units` | 43 | 0 | 0 | OK |
-| `cube_root_map_is_cube` | 72 | 0 | 0 | OK |
-| `cube_euler_one_direction` | 86 | 0 | 0 | OK |
-| `three_divides_lambda_forbids_e3` | 125 | 0 | 0 | OK |
-| `cube_euler_converse` | 143 | 0 | 0 | OK |
-| `cube_euler_iff` | 183 | 0 | 0 | OK |
-| `cube_N_implies_local` | 196 | 0 | 0 | OK |
-| `cube_N_of_local` | 221 | 0 | 0 | OK |
-| `cube_N_iff_both` | 248 | 0 | 0 | OK |
-| `cube_root_coprime` | 260 | 0 | 0 | OK |
-| `cube_euler_lambda_necessary` | 290 | 0 | 0 | OK |
-| `prime_7_cubic` | 317 | 0 | 0 | OK |
-| `prime_13` | 325 | 0 | 0 | OK |
-| `prime_19` | 335 | 0 | 0 | OK |
-| `cube_mixed_5_not_global` | 346 | 0 | 0 | OK |
-| `cube_euler_lambda_not_sufficient_247` | 365 | 0 | 0 | OK |
-| `pin_units_are_cubes` | 380 | 0 | 0 | OK |
-| `omega_from_primitive_root` | 396 | 0 | 0 | OK |
-| `primitive_3rd_root_cyclotomic` | 409 | 0 | 0 | OK |
-| `cube_char_cubed_one` | 434 | 0 | 0 | OK |
-| `cube_char_mul` | 454 | 0 | 0 | OK |
-| `mu3_N_iff_locals` | 467 | 0 | 0 | OK |
-| `mu3_unique_one_prime` | 488 | 0 | 0 | OK |
-| `pin_cube_kernel_trivial` | 513 | 0 | 0 | OK |
-| `cube_kernel_three` | 531 | 0 | 0 | OK |
-| `omega_13_order_3` | 576 | 0 | 0 | OK |
-| `mixed_kernel_91` | 584 | 0 | 0 | OK |
+| `cubing_invertible_on_units` | 46 | 0 | 0 | OK |
+| `cube_root_map_is_cube` | 75 | 0 | 0 | OK |
+| `cube_euler_one_direction` | 89 | 0 | 0 | OK |
+| `three_divides_lambda_forbids_e3` | 128 | 0 | 0 | OK |
+| `cube_euler_converse` | 146 | 0 | 0 | OK |
+| `cube_euler_iff` | 186 | 0 | 0 | OK |
+| `cube_N_implies_local` | 199 | 0 | 0 | OK |
+| `cube_N_of_local` | 224 | 0 | 0 | OK |
+| `cube_N_iff_both` | 251 | 0 | 0 | OK |
+| `cube_root_coprime` | 263 | 0 | 0 | OK |
+| `cube_euler_lambda_necessary` | 293 | 0 | 0 | OK |
+| `prime_7_cubic` | 320 | 0 | 0 | OK |
+| `prime_13` | 328 | 0 | 0 | OK |
+| `prime_19` | 338 | 0 | 0 | OK |
+| `cube_mixed_5_not_global` | 349 | 0 | 0 | OK |
+| `cube_euler_lambda_not_sufficient_247` | 368 | 0 | 0 | OK |
+| `pin_units_are_cubes` | 383 | 0 | 0 | OK |
+| `omega_from_primitive_root` | 399 | 0 | 0 | OK |
+| `primitive_3rd_root_cyclotomic` | 412 | 0 | 0 | OK |
+| `cube_char_cubed_one` | 437 | 0 | 0 | OK |
+| `cube_char_mul` | 457 | 0 | 0 | OK |
+| `mu3_N_iff_locals` | 470 | 0 | 0 | OK |
+| `mu3_unique_one_prime` | 491 | 0 | 0 | OK |
+| `pin_cube_kernel_trivial` | 516 | 0 | 0 | OK |
+| `cube_kernel_three` | 534 | 0 | 0 | OK |
+| `omega_13_order_3` | 579 | 0 | 0 | OK |
+| `mixed_kernel_91` | 587 | 0 | 0 | OK |
+| `cube_minus_one_fact` | 621 | 0 | 0 | OK |
+| `mixed_mu3_gcd_xminus1` | 629 | 0 | 0 | OK |
+| `mixed_mu3_gcd_phi3` | 650 | 0 | 0 | OK |
+| `mixed_mu3_splits` | 685 | 0 | 0 | OK |
+| `diagonal_mu3_gcd_xminus1` | 702 | 0 | 0 | OK |
+| `diagonal_mu3_gcd_phi3` | 727 | 0 | 0 | OK |
+| `mixed_kernel_91_splits` | 750 | 0 | 0 | OK |
+| `gq_kernel_91_splits` | 754 | 0 | 0 | OK |
+| `diagonal_16_91_no_split` | 758 | 0 | 0 | OK |
+| `phi3_small_omega_is_prime` | 762 | 0 | 0 | OK |
+| `pin_mu3_gcd_is_N` | 766 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
@@ -667,57 +678,57 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `eval_pair_stays_in_mu` | 41 | 0 | 0 | OK |
-| `eval_pair_add` | 58 | 0 | 0 | OK |
-| `eval_pair_mul_base` | 71 | 0 | 0 | OK |
-| `eval_pair_reduce_mod_n` | 86 | 0 | 0 | OK |
-| `eval_pair_image_divides_n` | 109 | 0 | 0 | OK |
-| `eval_pair_mu2` | 119 | 0 | 0 | OK |
-| `eval_pair_mu2_on_mixed` | 134 | 0 | 0 | OK |
-| `omega_cube_is_one` | 149 | 0 | 0 | OK |
-| `eval_pair_mu3` | 169 | 0 | 0 | OK |
-| `mu2_is_mu6` | 182 | 0 | 0 | OK |
-| `mu3_is_mu6` | 197 | 0 | 0 | OK |
-| `eval_pair_mu6` | 212 | 0 | 0 | OK |
-| `in_mu3_one` | 244 | 0 | 0 | OK |
-| `in_mu3_mod` | 251 | 0 | 0 | OK |
-| `pairing_one_left` | 259 | 0 | 0 | OK |
-| `pairing_one_right` | 285 | 0 | 0 | OK |
-| `two_omega_is_sq` | 311 | 0 | 0 | OK |
-| `in_mu3_omega` | 323 | 0 | 0 | OK |
-| `in_mu3_omega2` | 342 | 0 | 0 | OK |
-| `pairing_omega_omega2` | 366 | 0 | 0 | OK |
-| `pairing_omega2_omega` | 381 | 0 | 0 | OK |
-| `pairing_omega2_omega2` | 396 | 0 | 0 | OK |
-| `alternating_bilinear_mu3_trivial` | 409 | 0 | 0 | OK |
-| `eval_pair_omega_13_not_alternating` | 461 | 0 | 0 | OK |
-| `pin_mu3_only_one` | 465 | 0 | 0 | OK |
-| `mu3_log_range` | 491 | 0 | 0 | OK |
-| `mu3N_det_alternating` | 498 | 0 | 0 | OK |
-| `gp_91_order_3` | 512 | 0 | 0 | OK |
-| `gq_91_order_3` | 520 | 0 | 0 | OK |
-| `mu3N_det_gp_gq` | 528 | 0 | 0 | OK |
-| `mu3N_det_gq_gp` | 532 | 0 | 0 | OK |
-| `mu3_91_kernel_not_cyclic` | 536 | 0 | 0 | OK |
-| `mu3_order_coprime` | 553 | 0 | 0 | OK |
-| `mu3_order_divides_pminus1` | 573 | 0 | 0 | OK |
-| `mu3_prime_ne_2` | 585 | 0 | 0 | OK |
-| `mu3_pow_1_ne_2` | 596 | 0 | 0 | OK |
-| `mu3_log_of_pow` | 620 | 0 | 0 | OK |
-| `mu3_is_omega_power` | 656 | 0 | 0 | OK |
-| `mu3_log_reconstructs` | 719 | 0 | 0 | OK |
-| `mu3_log_mul` | 741 | 0 | 0 | OK |
-| `zmod3_mul` | 782 | 0 | 0 | OK |
-| `zmod3_mul_l` | 792 | 0 | 0 | OK |
-| `det_exp_left_add` | 799 | 0 | 0 | OK |
-| `det_exp_right_add` | 814 | 0 | 0 | OK |
-| `mu3_log_mod_reduce` | 829 | 0 | 0 | OK |
-| `mu3_log_base_mod` | 843 | 0 | 0 | OK |
-| `omega_7_order_3` | 852 | 0 | 0 | OK |
-| `pin_mu3_log_one` | 860 | 0 | 0 | OK |
-| `mu3N_det_left_bilinear` | 863 | 0 | 0 | OK |
-| `mu3N_det_right_bilinear` | 925 | 0 | 0 | OK |
-| `mu3N_det_skew` | 987 | 0 | 0 | OK |
+| `eval_pair_stays_in_mu` | 44 | 0 | 0 | OK |
+| `eval_pair_add` | 61 | 0 | 0 | OK |
+| `eval_pair_mul_base` | 74 | 0 | 0 | OK |
+| `eval_pair_reduce_mod_n` | 89 | 0 | 0 | OK |
+| `eval_pair_image_divides_n` | 112 | 0 | 0 | OK |
+| `eval_pair_mu2` | 122 | 0 | 0 | OK |
+| `eval_pair_mu2_on_mixed` | 137 | 0 | 0 | OK |
+| `omega_cube_is_one` | 152 | 0 | 0 | OK |
+| `eval_pair_mu3` | 172 | 0 | 0 | OK |
+| `mu2_is_mu6` | 185 | 0 | 0 | OK |
+| `mu3_is_mu6` | 200 | 0 | 0 | OK |
+| `eval_pair_mu6` | 215 | 0 | 0 | OK |
+| `in_mu3_one` | 247 | 0 | 0 | OK |
+| `in_mu3_mod` | 254 | 0 | 0 | OK |
+| `pairing_one_left` | 262 | 0 | 0 | OK |
+| `pairing_one_right` | 288 | 0 | 0 | OK |
+| `two_omega_is_sq` | 314 | 0 | 0 | OK |
+| `in_mu3_omega` | 326 | 0 | 0 | OK |
+| `in_mu3_omega2` | 345 | 0 | 0 | OK |
+| `pairing_omega_omega2` | 369 | 0 | 0 | OK |
+| `pairing_omega2_omega` | 384 | 0 | 0 | OK |
+| `pairing_omega2_omega2` | 399 | 0 | 0 | OK |
+| `alternating_bilinear_mu3_trivial` | 412 | 0 | 0 | OK |
+| `eval_pair_omega_13_not_alternating` | 464 | 0 | 0 | OK |
+| `pin_mu3_only_one` | 468 | 0 | 0 | OK |
+| `mu3_log_range` | 494 | 0 | 0 | OK |
+| `mu3N_det_alternating` | 501 | 0 | 0 | OK |
+| `gp_91_order_3` | 515 | 0 | 0 | OK |
+| `gq_91_order_3` | 523 | 0 | 0 | OK |
+| `mu3N_det_gp_gq` | 531 | 0 | 0 | OK |
+| `mu3N_det_gq_gp` | 535 | 0 | 0 | OK |
+| `mu3_91_kernel_not_cyclic` | 539 | 0 | 0 | OK |
+| `mu3_order_coprime` | 556 | 0 | 0 | OK |
+| `mu3_order_divides_pminus1` | 576 | 0 | 0 | OK |
+| `mu3_prime_ne_2` | 588 | 0 | 0 | OK |
+| `mu3_pow_1_ne_2` | 599 | 0 | 0 | OK |
+| `mu3_log_of_pow` | 623 | 0 | 0 | OK |
+| `mu3_is_omega_power` | 659 | 0 | 0 | OK |
+| `mu3_log_reconstructs` | 722 | 0 | 0 | OK |
+| `mu3_log_mul` | 744 | 0 | 0 | OK |
+| `zmod3_mul` | 785 | 0 | 0 | OK |
+| `zmod3_mul_l` | 795 | 0 | 0 | OK |
+| `det_exp_left_add` | 802 | 0 | 0 | OK |
+| `det_exp_right_add` | 817 | 0 | 0 | OK |
+| `mu3_log_mod_reduce` | 832 | 0 | 0 | OK |
+| `mu3_log_base_mod` | 846 | 0 | 0 | OK |
+| `omega_7_order_3` | 855 | 0 | 0 | OK |
+| `pin_mu3_log_one` | 863 | 0 | 0 | OK |
+| `mu3N_det_left_bilinear` | 866 | 0 | 0 | OK |
+| `mu3N_det_right_bilinear` | 928 | 0 | 0 | OK |
+| `mu3N_det_skew` | 990 | 0 | 0 | OK |
 
 ## EvalProduct.v
 

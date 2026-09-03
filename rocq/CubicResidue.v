@@ -8,6 +8,7 @@ Require Import RSA.
 Require Import Hardness.
 Require Import UnknownOrder.
 Require Import Order.
+Require Import PollardP1.
 
 Open Scope Z_scope.
 
@@ -32,10 +33,12 @@ Open Scope Z_scope.
     The cubic character [a^{(p−1)/3}] takes values in [μ₃]; the
     kernel of cubing is [{1, ω, ω²}] locally and CRT of those
     pairs on [N=pq] ([cas/156]).  Pin kernel is trivial.
+    Mixed kernel elements split [N] via [(x−1)] and [Φ₃(x)];
+    diagonal leftover does not ([mixed_mu3_splits], [cas/160]).
 
     Cross-confirmed by [cas/86_cubic_residue.gp],
-    [cas/154_cube_euler.gp], [cas/155_cube_modn.gp], and
-    [cas/156_cube_char.gp]. *)
+    [cas/154_cube_euler.gp], [cas/155_cube_modn.gp],
+    [cas/156_cube_char.gp], and [cas/160_mu3_split.gp]. *)
 
 Definition is_cube (a p : Z) : Prop :=
   exists x, powm x 3 p = a mod p.
@@ -602,4 +605,174 @@ Proof.
     + split.
       * rewrite Hq. apply Z.mod_small. lia.
       * vm_compute. discriminate.
+Qed.
+
+(** ** Mixed cube roots of 1 split [N]; diagonal leftover does not
+
+    [x³ − 1 = (x − 1) Φ₃(x)].  A mixed kernel element ([x ≡ 1 (mod q)],
+    [x ≢ 1 (mod p)]) puts [q] in [(x − 1)] and [p] in [Φ₃(x)].  A
+    diagonal one ([x ≢ 1] both locally) has [gcd(x − 1, N) = 1] and
+    [N | Φ₃(x)].  One mixed sample is a factoring query; the pairing
+    formula is not required.  Cross-confirmed by
+    [cas/160_mu3_split.gp]. *)
+
+Definition phi3 (x : Z) : Z := x * x + x + 1.
+
+Lemma cube_minus_one_fact :
+  forall x, x ^ 3 - 1 = (x - 1) * phi3 x.
+Proof.
+  intros x. unfold phi3.
+  change 3 with (Z.succ (Z.succ 1)).
+  rewrite !Z.pow_succ_r by lia. rewrite Z.pow_1_r. ring.
+Qed.
+
+Theorem mixed_mu3_gcd_xminus1 :
+  forall p q x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    x mod q = 1 ->
+    x mod p <> 1 ->
+    Z.gcd (x - 1) (p * q) = q.
+Proof.
+  intros p q x Hp Hq Hneq Hq1 Hpne.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  rewrite (Z.mul_comm p q).
+  apply gcd_onesided_semiprime; try assumption.
+  - apply not_eq_sym. exact Hneq.
+  - apply Z.mod_divide; [lia|].
+    rewrite Zminus_mod, Hq1, Z.mod_1_l, Z.sub_diag, Z.mod_0_l by lia. reflexivity.
+  - intro Hdiv. apply Hpne.
+    rewrite <- (Z.mod_1_l p) by lia.
+    apply mods_eq_iff_divides; [lia | exact Hdiv].
+Qed.
+
+Theorem mixed_mu3_gcd_phi3 :
+  forall p q x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    q <> 3 ->
+    powm x 3 p = 1 ->
+    x mod p <> 1 ->
+    x mod q = 1 ->
+    Z.gcd (phi3 x) (p * q) = p.
+Proof.
+  intros p q x Hp Hq Hneq Hq3 Hmu Hpne Hq1.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  apply gcd_onesided_semiprime; try assumption.
+  - apply Z.mod_divide; [lia|].
+    unfold phi3.
+    pose proof (primitive_3rd_root_cyclotomic x p Hp Hmu Hpne) as Hphi.
+    exact Hphi.
+  - intro Hdiv.
+    assert (q | (x - 1)) as Hxm1.
+    { apply Z.mod_divide; [lia|].
+      rewrite Zminus_mod, Hq1, Z.mod_1_l, Z.sub_diag, Z.mod_0_l by lia. reflexivity. }
+    assert (q | (phi3 x - 3)) as Hm3.
+    { unfold phi3. replace (x * x + x + 1 - 3) with ((x - 1) * (x + 2)) by ring.
+      apply Z.divide_mul_l. exact Hxm1. }
+    destruct Hdiv as [a Ha]. destruct Hm3 as [b Hb].
+    rewrite Ha in Hb.
+    assert (3 = (a - b) * q) as H3eq.
+    { replace ((a - b) * q) with (a * q - b * q) by ring.
+      rewrite <- Hb. ring. }
+    assert (a - b = 1) as Hab by nia.
+    rewrite Hab, Z.mul_1_l in H3eq.
+    lia.
+Qed.
+
+Theorem mixed_mu3_splits :
+  forall p q x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    q <> 3 ->
+    powm x 3 p = 1 ->
+    x mod p <> 1 ->
+    x mod q = 1 ->
+    Z.gcd (x - 1) (p * q) = q /\ Z.gcd (phi3 x) (p * q) = p.
+Proof.
+  intros p q x Hp Hq Hneq Hq3 Hmu Hpne Hq1.
+  split.
+  - apply mixed_mu3_gcd_xminus1; assumption.
+  - apply mixed_mu3_gcd_phi3; assumption.
+Qed.
+
+Theorem diagonal_mu3_gcd_xminus1 :
+  forall p q x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    x mod p <> 1 ->
+    x mod q <> 1 ->
+    Z.gcd (x - 1) (p * q) = 1.
+Proof.
+  intros p q x Hp Hq Hneq Hpne Hqne.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  apply coprime_semiprime; try assumption.
+  split.
+  - unfold Z.coprime. rewrite Z.gcd_comm.
+    apply Z.coprime_prime_l_iff; [exact Hp|].
+    intro Hdiv. apply Hpne.
+    rewrite <- (Z.mod_1_l p) by lia.
+    apply mods_eq_iff_divides; [lia | exact Hdiv].
+  - unfold Z.coprime. rewrite Z.gcd_comm.
+    apply Z.coprime_prime_l_iff; [exact Hq|].
+    intro Hdiv. apply Hqne.
+    rewrite <- (Z.mod_1_l q) by lia.
+    apply mods_eq_iff_divides; [lia | exact Hdiv].
+Qed.
+
+Theorem diagonal_mu3_gcd_phi3 :
+  forall p q x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    powm x 3 (p * q) = 1 ->
+    x mod p <> 1 ->
+    x mod q <> 1 ->
+    Z.gcd (phi3 x) (p * q) = p * q.
+Proof.
+  intros p q x Hp Hq Hneq Hmu Hpne Hqne.
+  pose proof (Z.prime_ge_2 p Hp). pose proof (Z.prime_ge_2 q Hq).
+  pose proof (diagonal_mu3_gcd_xminus1 p q x Hp Hq Hneq Hpne Hqne) as Hg1.
+  unfold powm in Hmu.
+  rewrite <- (Z.mod_1_l (p * q)) in Hmu by nia.
+  apply mods_eq_iff_divides in Hmu; [| nia].
+  rewrite cube_minus_one_fact in Hmu.
+  apply Z.gauss in Hmu.
+  2: { unfold Z.coprime. rewrite Z.gcd_comm. exact Hg1. }
+  destruct Hmu as [k Hk].
+  rewrite Hk, (Z.mul_comm k), Z.gcd_comm, Z.gcd_mul_diag_l; nia.
+Qed.
+
+Theorem mixed_kernel_91_splits :
+  Z.gcd (29 - 1) 91 = 7 /\ Z.gcd (phi3 29) 91 = 13.
+Proof. split; vm_compute; reflexivity. Qed.
+
+Theorem gq_kernel_91_splits :
+  Z.gcd (79 - 1) 91 = 13 /\ Z.gcd (phi3 79) 91 = 7.
+Proof. split; vm_compute; reflexivity. Qed.
+
+Theorem diagonal_16_91_no_split :
+  Z.gcd (16 - 1) 91 = 1 /\ Z.gcd (phi3 16) 91 = 91.
+Proof. split; vm_compute; reflexivity. Qed.
+
+Theorem phi3_small_omega_is_prime :
+  phi3 3 = 13 /\ phi3 2 = 7.
+Proof. split; vm_compute; reflexivity. Qed.
+
+Theorem pin_mu3_gcd_is_N :
+  forall x,
+    Z.coprime x 187 ->
+    powm x 3 187 = 1 ->
+    Z.gcd (x - 1) 187 = 187.
+Proof.
+  intros x Hcop Hmu.
+  pose proof (pin_cube_kernel_trivial x Hcop Hmu) as H1.
+  rewrite <- (Z.mod_1_l 187) in H1 by lia.
+  apply mods_eq_iff_divides in H1; [| lia].
+  destruct H1 as [k Hk].
+  rewrite Hk, (Z.mul_comm k), Z.gcd_comm, Z.gcd_mul_diag_l; lia.
 Qed.

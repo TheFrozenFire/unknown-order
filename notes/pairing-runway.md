@@ -65,6 +65,11 @@ only with a written death in this file.
    additive (`mu3_log_mul`), so the determinant is bilinear
    (`mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`,
    `mu3N_det_skew`; CAS 159). Trapdoor uses the factors.
+   Mixed cube roots of 1 split `N` by `gcd(x−1,N)` and
+   `gcd(Φ₃(x),N)` (`mixed_mu3_splits`; CAS 160). Diagonal
+   leftover does not (`diagonal_mu3_gcd_xminus1`). One mixed
+   sample is a factoring query; the pairing formula is not
+   required. Pin kernel `{1}` has no mixed leftover.
 
 3. **Endomorphisms / infeasible inversion.** *(this sitting)*
    **Have** `rsa_gii_search_empty`, `power_endo_hom`,

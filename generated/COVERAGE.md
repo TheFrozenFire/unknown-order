@@ -523,37 +523,49 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `CubicResidue.v`
 
-- L14: Cubic residuosity when cubing is not a permutation
+- L15: Cubic residuosity when cubing is not a permutation
+  - L610: Mixed cube roots of 1 split [N]; diagonal leftover does not
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `cubing_invertible_on_units` | 43 |
-| Theorem | `cube_root_map_is_cube` | 72 |
-| Theorem | `cube_euler_one_direction` | 86 |
-| Theorem | `three_divides_lambda_forbids_e3` | 125 |
-| Theorem | `cube_euler_converse` | 143 |
-| Theorem | `cube_euler_iff` | 183 |
-| Lemma | `cube_N_implies_local` | 196 |
-| Lemma | `cube_N_of_local` | 221 |
-| Theorem | `cube_N_iff_both` | 248 |
-| Lemma | `cube_root_coprime` | 260 |
-| Theorem | `cube_euler_lambda_necessary` | 290 |
-| Lemma | `prime_7_cubic` | 317 |
-| Lemma | `prime_13` | 325 |
-| Lemma | `prime_19` | 335 |
-| Theorem | `cube_mixed_5_not_global` | 346 |
-| Theorem | `cube_euler_lambda_not_sufficient_247` | 365 |
-| Theorem | `pin_units_are_cubes` | 380 |
-| Lemma | `omega_from_primitive_root` | 396 |
-| Lemma | `primitive_3rd_root_cyclotomic` | 409 |
-| Lemma | `cube_char_cubed_one` | 434 |
-| Lemma | `cube_char_mul` | 454 |
-| Lemma | `mu3_N_iff_locals` | 467 |
-| Lemma | `mu3_unique_one_prime` | 488 |
-| Theorem | `pin_cube_kernel_trivial` | 513 |
-| Theorem | `cube_kernel_three` | 531 |
-| Theorem | `omega_13_order_3` | 576 |
-| Theorem | `mixed_kernel_91` | 584 |
+| Theorem | `cubing_invertible_on_units` | 46 |
+| Theorem | `cube_root_map_is_cube` | 75 |
+| Theorem | `cube_euler_one_direction` | 89 |
+| Theorem | `three_divides_lambda_forbids_e3` | 128 |
+| Theorem | `cube_euler_converse` | 146 |
+| Theorem | `cube_euler_iff` | 186 |
+| Lemma | `cube_N_implies_local` | 199 |
+| Lemma | `cube_N_of_local` | 224 |
+| Theorem | `cube_N_iff_both` | 251 |
+| Lemma | `cube_root_coprime` | 263 |
+| Theorem | `cube_euler_lambda_necessary` | 293 |
+| Lemma | `prime_7_cubic` | 320 |
+| Lemma | `prime_13` | 328 |
+| Lemma | `prime_19` | 338 |
+| Theorem | `cube_mixed_5_not_global` | 349 |
+| Theorem | `cube_euler_lambda_not_sufficient_247` | 368 |
+| Theorem | `pin_units_are_cubes` | 383 |
+| Lemma | `omega_from_primitive_root` | 399 |
+| Lemma | `primitive_3rd_root_cyclotomic` | 412 |
+| Lemma | `cube_char_cubed_one` | 437 |
+| Lemma | `cube_char_mul` | 457 |
+| Lemma | `mu3_N_iff_locals` | 470 |
+| Lemma | `mu3_unique_one_prime` | 491 |
+| Theorem | `pin_cube_kernel_trivial` | 516 |
+| Theorem | `cube_kernel_three` | 534 |
+| Theorem | `omega_13_order_3` | 579 |
+| Theorem | `mixed_kernel_91` | 587 |
+| Lemma | `cube_minus_one_fact` | 621 |
+| Theorem | `mixed_mu3_gcd_xminus1` | 629 |
+| Theorem | `mixed_mu3_gcd_phi3` | 650 |
+| Theorem | `mixed_mu3_splits` | 685 |
+| Theorem | `diagonal_mu3_gcd_xminus1` | 702 |
+| Theorem | `diagonal_mu3_gcd_phi3` | 727 |
+| Theorem | `mixed_kernel_91_splits` | 750 |
+| Theorem | `gq_kernel_91_splits` | 754 |
+| Theorem | `diagonal_16_91_no_split` | 758 |
+| Theorem | `phi3_small_omega_is_prime` | 762 |
+| Theorem | `pin_mu3_gcd_is_N` | 766 |
 
 ## `CyclicCount.v`
 
@@ -774,63 +786,63 @@ in the Rocq tree.  Do not edit by hand.
 ## `EvalPairing.v`
 
 - L14: Evaluation pairing on [μ_n]: [e(x,k) = x^k]
-  - L229: Alternating bilinear maps on cyclic [μ₃] are trivial
-  - L473: Determinant pairing on [μ₃(Z/NZ)* ≅ C₃×C₃]
-  - L546: Local [μ₃]-logs are additive, so [mu3N_det] is bilinear
+  - L232: Alternating bilinear maps on cyclic [μ₃] are trivial
+  - L476: Determinant pairing on [μ₃(Z/NZ)* ≅ C₃×C₃]
+  - L549: Local [μ₃]-logs are additive, so [mu3N_det] is bilinear
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `eval_pair_stays_in_mu` | 41 |
-| Theorem | `eval_pair_add` | 58 |
-| Theorem | `eval_pair_mul_base` | 71 |
-| Theorem | `eval_pair_reduce_mod_n` | 86 |
-| Theorem | `eval_pair_image_divides_n` | 109 |
-| Theorem | `eval_pair_mu2` | 119 |
-| Theorem | `eval_pair_mu2_on_mixed` | 134 |
-| Theorem | `omega_cube_is_one` | 149 |
-| Theorem | `eval_pair_mu3` | 169 |
-| Theorem | `mu2_is_mu6` | 182 |
-| Theorem | `mu3_is_mu6` | 197 |
-| Theorem | `eval_pair_mu6` | 212 |
-| Lemma | `in_mu3_one` | 244 |
-| Lemma | `in_mu3_mod` | 251 |
-| Lemma | `pairing_one_left` | 259 |
-| Lemma | `pairing_one_right` | 285 |
-| Lemma | `two_omega_is_sq` | 311 |
-| Lemma | `in_mu3_omega` | 323 |
-| Lemma | `in_mu3_omega2` | 342 |
-| Lemma | `pairing_omega_omega2` | 366 |
-| Lemma | `pairing_omega2_omega` | 381 |
-| Lemma | `pairing_omega2_omega2` | 396 |
-| Theorem | `alternating_bilinear_mu3_trivial` | 409 |
-| Theorem | `eval_pair_omega_13_not_alternating` | 461 |
-| Theorem | `pin_mu3_only_one` | 465 |
-| Lemma | `mu3_log_range` | 491 |
-| Theorem | `mu3N_det_alternating` | 498 |
-| Theorem | `gp_91_order_3` | 512 |
-| Theorem | `gq_91_order_3` | 520 |
-| Theorem | `mu3N_det_gp_gq` | 528 |
-| Theorem | `mu3N_det_gq_gp` | 532 |
-| Theorem | `mu3_91_kernel_not_cyclic` | 536 |
-| Lemma | `mu3_order_coprime` | 553 |
-| Lemma | `mu3_order_divides_pminus1` | 573 |
-| Lemma | `mu3_prime_ne_2` | 585 |
-| Lemma | `mu3_pow_1_ne_2` | 596 |
-| Lemma | `mu3_log_of_pow` | 620 |
-| Lemma | `mu3_is_omega_power` | 656 |
-| Lemma | `mu3_log_reconstructs` | 719 |
-| Lemma | `mu3_log_mul` | 741 |
-| Lemma | `zmod3_mul` | 782 |
-| Lemma | `zmod3_mul_l` | 792 |
-| Lemma | `det_exp_left_add` | 799 |
-| Lemma | `det_exp_right_add` | 814 |
-| Lemma | `mu3_log_mod_reduce` | 829 |
-| Lemma | `mu3_log_base_mod` | 843 |
-| Theorem | `omega_7_order_3` | 852 |
-| Theorem | `pin_mu3_log_one` | 860 |
-| Theorem | `mu3N_det_left_bilinear` | 863 |
-| Theorem | `mu3N_det_right_bilinear` | 925 |
-| Theorem | `mu3N_det_skew` | 987 |
+| Theorem | `eval_pair_stays_in_mu` | 44 |
+| Theorem | `eval_pair_add` | 61 |
+| Theorem | `eval_pair_mul_base` | 74 |
+| Theorem | `eval_pair_reduce_mod_n` | 89 |
+| Theorem | `eval_pair_image_divides_n` | 112 |
+| Theorem | `eval_pair_mu2` | 122 |
+| Theorem | `eval_pair_mu2_on_mixed` | 137 |
+| Theorem | `omega_cube_is_one` | 152 |
+| Theorem | `eval_pair_mu3` | 172 |
+| Theorem | `mu2_is_mu6` | 185 |
+| Theorem | `mu3_is_mu6` | 200 |
+| Theorem | `eval_pair_mu6` | 215 |
+| Lemma | `in_mu3_one` | 247 |
+| Lemma | `in_mu3_mod` | 254 |
+| Lemma | `pairing_one_left` | 262 |
+| Lemma | `pairing_one_right` | 288 |
+| Lemma | `two_omega_is_sq` | 314 |
+| Lemma | `in_mu3_omega` | 326 |
+| Lemma | `in_mu3_omega2` | 345 |
+| Lemma | `pairing_omega_omega2` | 369 |
+| Lemma | `pairing_omega2_omega` | 384 |
+| Lemma | `pairing_omega2_omega2` | 399 |
+| Theorem | `alternating_bilinear_mu3_trivial` | 412 |
+| Theorem | `eval_pair_omega_13_not_alternating` | 464 |
+| Theorem | `pin_mu3_only_one` | 468 |
+| Lemma | `mu3_log_range` | 494 |
+| Theorem | `mu3N_det_alternating` | 501 |
+| Theorem | `gp_91_order_3` | 515 |
+| Theorem | `gq_91_order_3` | 523 |
+| Theorem | `mu3N_det_gp_gq` | 531 |
+| Theorem | `mu3N_det_gq_gp` | 535 |
+| Theorem | `mu3_91_kernel_not_cyclic` | 539 |
+| Lemma | `mu3_order_coprime` | 556 |
+| Lemma | `mu3_order_divides_pminus1` | 576 |
+| Lemma | `mu3_prime_ne_2` | 588 |
+| Lemma | `mu3_pow_1_ne_2` | 599 |
+| Lemma | `mu3_log_of_pow` | 623 |
+| Lemma | `mu3_is_omega_power` | 659 |
+| Lemma | `mu3_log_reconstructs` | 722 |
+| Lemma | `mu3_log_mul` | 744 |
+| Lemma | `zmod3_mul` | 785 |
+| Lemma | `zmod3_mul_l` | 795 |
+| Lemma | `det_exp_left_add` | 802 |
+| Lemma | `det_exp_right_add` | 817 |
+| Lemma | `mu3_log_mod_reduce` | 832 |
+| Lemma | `mu3_log_base_mod` | 846 |
+| Theorem | `omega_7_order_3` | 855 |
+| Theorem | `pin_mu3_log_one` | 863 |
+| Theorem | `mu3N_det_left_bilinear` | 866 |
+| Theorem | `mu3N_det_right_bilinear` | 928 |
+| Theorem | `mu3N_det_skew` | 990 |
 
 ## `EvalProduct.v`
 
@@ -3364,4 +3376,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2321 theorems/lemmas/corollaries/examples across 116 files._
+_2332 theorems/lemmas/corollaries/examples across 116 files._
