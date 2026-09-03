@@ -71,7 +71,7 @@ Qed.
 
 Theorem lambda_plus_one_witness_not_residual :
   forall y,
-    ~ srsa_residual_leaf 187 80 y y 81.
+    ~ srsa_residual_leaf pin_N 80 y y 81.
 Proof.
   intros y [_ [_ [_ [_ Hnd]]]].
   apply Hnd. exists 1. lia.
@@ -83,14 +83,14 @@ Theorem residual_gra_const81_independent_of_y :
 Proof. apply gra_const_81. Qed.
 
 Theorem residual_gra_const81_gcd_is_1 :
-  Z.gcd 81 187 = 1.
+  Z.gcd 81 pin_N = 1.
 Proof. apply gra_const_81_does_not_factor. Qed.
 
 Theorem residual_gra_const81_solves_sRSA_not_residual :
   forall y,
-    Z.coprime y 187 ->
-    Problem_StrongRSA 187 (y mod 187) (y mod 187) 81 /\
-    ~ srsa_residual_leaf 187 80 (y mod 187) (y mod 187) 81.
+    Z.coprime y pin_N ->
+    Problem_StrongRSA pin_N (y mod pin_N) (y mod pin_N) 81 /\
+    ~ srsa_residual_leaf pin_N 80 (y mod pin_N) (y mod pin_N) 81.
 Proof.
   intros y Hcop. split.
   - apply gra_const_lambda_plus_one_solves_sRSA_without_factoring. exact Hcop.
@@ -101,9 +101,9 @@ Qed.
 
 Theorem residual_gra_const42_inverts_pin_not_8 :
   gra_eval_Z [GConst 42] 36 3%nat = 42 /\
-  powm 42 3 187 = 36 /\
-  Z.coprime 8 187 /\
-  powm 42 3 187 <> 8.
+  powm 42 3 pin_N = 36 /\
+  Z.coprime 8 pin_N /\
+  powm 42 3 pin_N <> 8.
 Proof.
   split; [apply gra_const42|].
   split; [apply gra_nodiv_const42_inverts_36|].
@@ -112,8 +112,8 @@ Proof.
 Qed.
 
 Theorem residual_gra_const42_misses_unit_2 :
-  Z.coprime 2 187 /\
-  powm 42 3 187 <> 2.
+  Z.coprime 2 pin_N /\
+  powm 42 3 pin_N <> 2.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 (** ** Degree / leading-coefficient fork for residual-shaped [e] *)
@@ -147,7 +147,7 @@ Theorem residual_gra_Xe_minus_X_N_ndiv_linear :
   forall e,
     (2 <= e)%nat ->
     nth 1%nat (poly_sub (poly_Xn e) poly_X) 0 = -1 /\
-    ~ (187 | -1).
+    ~ (pin_N | -1).
 Proof.
   intros e He. split.
   - apply Xe_minus_X_linear_coeff. exact He.
@@ -156,23 +156,23 @@ Qed.
 
 Theorem residual_gra_X3_minus_X_N_ndiv_linear :
   nth 1%nat (poly_sub (poly_Xn 3) poly_X) 0 = -1 /\
-  ~ (187 | -1).
+  ~ (pin_N | -1).
 Proof. apply residual_gra_Xe_minus_X_N_ndiv_linear. lia. Qed.
 
 Theorem residual_gra_X7_minus_X_N_ndiv_linear :
   nth 1%nat (poly_sub (poly_Xn 7) poly_X) 0 = -1 /\
-  ~ (187 | -1).
+  ~ (pin_N | -1).
 Proof. apply residual_gra_Xe_minus_X_N_ndiv_linear. lia. Qed.
 
 (** Equality-test and [GInv] of a non-unit still leak a proper
     factor.  Residual-shaped [e] does not disable those leaks. *)
 
 Theorem residual_gra_eq_leak_factors :
-  Problem_Factor 187 (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
+  Problem_Factor pin_N (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
 Proof. apply gra_eq_leak_factors. Qed.
 
 Theorem residual_gra_inv_nonunit_factors :
-  Problem_Factor 187 (gra_eval_Z gra_inv11_prog 36 4%nat).
+  Problem_Factor pin_N (gra_eval_Z gra_inv11_prog 36 4%nat).
 Proof. apply gra_inv_nonunit_factors. Qed.
 
 (** ** Division-free tape denotes a polynomial; integer [P^e = X]
@@ -184,11 +184,11 @@ Theorem residual_gra_nodiv_empty_is_nodiv :
 Proof. constructor. Qed.
 
 Theorem residual_gra_identity_tape_is_y :
-  gra_eval 187 [] 36 2%nat = 36.
+  gra_eval pin_N [] 36 2%nat = 36.
 Proof. reflexivity. Qed.
 
 Theorem residual_gra_identity_tape_not_cube :
-  powm 36 3 187 <> 36.
+  powm 36 3 pin_N <> 36.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem residual_gra_nodiv_integer_identity_forbidden :
@@ -215,7 +215,7 @@ Proof.
 Qed.
 
 Theorem residual_gra_mul_denotes_square :
-  gra_eval 187 [GMul 2%nat 2%nat] 36 3%nat = 36 * 36.
+  gra_eval pin_N [GMul 2%nat 2%nat] 36 3%nat = 36 * 36.
 Proof. apply gra_nodiv_mul_denotes_square. Qed.
 
 (** ** Low-degree vanishing on units
@@ -306,18 +306,18 @@ Theorem residual_const_Pe_minus_X_nth1 :
 Proof. intros c. apply const_Pe_minus_X_nth1. Qed.
 
 Theorem residual_const_N_ndiv_linear :
-  forall c, ~ (187 | nth 1%nat (poly_Pe_minus_X [c] 3%nat) 0).
+  forall c, ~ (pin_N | nth 1%nat (poly_Pe_minus_X [c] 3%nat) 0).
 Proof.
   intros c. rewrite residual_const_Pe_minus_X_nth1. intros [k Hk]. nia.
 Qed.
 
 Theorem residual_nodiv_identity_denotes_X :
-  forall y, gra_eval 187 [] y 2%nat = poly_eval poly_X y.
+  forall y, gra_eval pin_N [] y 2%nat = poly_eval poly_X y.
 Proof. intros y. rewrite gra_nodiv_denotes by constructor. reflexivity. Qed.
 
 Theorem residual_identity_cube_minus_y :
   forall y,
-    Z.pow (gra_eval 187 [] y 2%nat) (Z.of_nat 3%nat) - y =
+    Z.pow (gra_eval pin_N [] y 2%nat) (Z.of_nat 3%nat) - y =
       poly_eval (poly_Pe_minus_X poly_X 3%nat) y.
 Proof.
   intros y.
@@ -330,7 +330,7 @@ Theorem residual_nodiv_const_is_nodiv :
 Proof. intros c. repeat constructor. Qed.
 
 Theorem residual_nodiv_const_denotes :
-  forall c y, gra_eval 187 [GConst c] y 3%nat = poly_eval [c] y.
+  forall c y, gra_eval pin_N [GConst c] y 3%nat = poly_eval [c] y.
 Proof.
   intros c y.
   rewrite gra_nodiv_denotes by apply residual_nodiv_const_is_nodiv.
@@ -342,7 +342,7 @@ Qed.
 
 Theorem residual_low_degree_identity_not_all_Fp_units :
   (3 < 10)%nat /\
-  ~ (11 | Z.pow (gra_eval 187 [] 2 2%nat) (Z.of_nat 3%nat) - 2).
+  ~ (11 | Z.pow (gra_eval pin_N [] 2 2%nat) (Z.of_nat 3%nat) - 2).
 Proof.
   split; [lia|].
   rewrite residual_identity_cube_minus_y.
@@ -375,7 +375,7 @@ Proof.
 Qed.
 
 Lemma pin_Fp_star_coprime :
-  Forall (fun y => Z.coprime y 187) pin_Fp_star.
+  Forall (fun y => Z.coprime y pin_N) pin_Fp_star.
 Proof.
   unfold pin_Fp_star.
   repeat (apply Forall_cons; [vm_compute; reflexivity|]).
@@ -411,7 +411,7 @@ Theorem residual_nodiv_low_degree_units_divides_11 :
     (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e)
        < 10)%nat ->
     (forall y, 1 <= y <= 10 ->
-      (11 | Z.pow (gra_eval 187 ops y out) (Z.of_nat e) - y)) ->
+      (11 | Z.pow (gra_eval pin_N ops y out) (Z.of_nat e) - y)) ->
     forall i,
       (11 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
 Proof.
@@ -419,7 +419,7 @@ Proof.
   apply residual_low_degree_units_divides_11; [exact Hdeg|].
   intros y Hy.
   rewrite poly_eval_Pe_minus_X.
-  rewrite <- (gra_nodiv_denotes ops 187 y out Hop).
+  rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
   apply Hall. exact Hy.
 Qed.
 
@@ -493,10 +493,10 @@ Proof.
 Qed.
 
 Lemma pin_1_16_coprime_N :
-  forall a, 1 <= a <= 16 -> a <> 11 -> Z.coprime a 187.
+  forall a, 1 <= a <= 16 -> a <> 11 -> Z.coprime a pin_N.
 Proof.
   intros a Ha Hne.
-  change 187 with (11 * 17).
+
   apply (proj2 (coprime_semiprime 11 17 a prime_11 prime_17 ltac:(lia))).
   split.
   - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply prime_11|].
@@ -511,31 +511,31 @@ Lemma pin_crt_lift_11_spec :
   pin_crt_lift_11 = 45 /\
   pin_crt_lift_11 mod 11 = 1 /\
   pin_crt_lift_11 mod 17 = 11 /\
-  Z.coprime pin_crt_lift_11 187.
+  Z.coprime pin_crt_lift_11 pin_N.
 Proof. unfold pin_crt_lift_11, crt2. vm_compute. repeat split; reflexivity. Qed.
 
-Lemma pin_N_divides_11 : forall n, (187 | n) -> (11 | n).
+Lemma pin_N_divides_11 : forall n, (pin_N | n) -> (11 | n).
 Proof.
-  intros n Hn. apply (Z.divide_trans 11 187 n); [exists 17; reflexivity | exact Hn].
+  intros n Hn. apply (Z.divide_trans 11 pin_N n); [exists pin_q; reflexivity | exact Hn].
 Qed.
 
-Lemma pin_N_divides_17 : forall n, (187 | n) -> (17 | n).
+Lemma pin_N_divides_17 : forall n, (pin_N | n) -> (17 | n).
 Proof.
-  intros n Hn. apply (Z.divide_trans 17 187 n); [exists 11; reflexivity | exact Hn].
+  intros n Hn. apply (Z.divide_trans 17 pin_N n); [exists 11; reflexivity | exact Hn].
 Qed.
 
 Lemma pin_11_17_divides_N :
-  forall c, (11 | c) -> (17 | c) -> (187 | c).
+  forall c, (11 | c) -> (17 | c) -> (pin_N | c).
 Proof.
   intros c H11 H17.
-  change 187 with (11 * 17).
+
   apply divide_by_coprime_product; [|exact H11 | exact H17].
   apply prime_coprime_distinct; [apply prime_11 | apply prime_17 | lia].
 Qed.
 
 Lemma residual_ZN_units_vanish_at_Fq :
   forall Q,
-    (forall y, Z.coprime y 187 -> (187 | poly_eval Q y)) ->
+    (forall y, Z.coprime y pin_N -> (pin_N | poly_eval Q y)) ->
     forall a, 1 <= a <= 16 -> (17 | poly_eval Q a).
 Proof.
   intros Q Hall a Ha.
@@ -558,7 +558,7 @@ Qed.
 Theorem residual_low_degree_ZN_units_divides_17 :
   forall Q,
     (poly_degree Q < 10)%nat ->
-    (forall y, Z.coprime y 187 -> (187 | poly_eval Q y)) ->
+    (forall y, Z.coprime y pin_N -> (pin_N | poly_eval Q y)) ->
     forall i, (17 | nth i Q 0).
 Proof.
   intros Q Hdeg Hall i.
@@ -573,8 +573,8 @@ Qed.
 Theorem residual_low_degree_ZN_units_divides_N :
   forall Q,
     (poly_degree Q < 10)%nat ->
-    (forall y, Z.coprime y 187 -> (187 | poly_eval Q y)) ->
-    forall i, (187 | nth i Q 0).
+    (forall y, Z.coprime y pin_N -> (pin_N | poly_eval Q y)) ->
+    forall i, (pin_N | nth i Q 0).
 Proof.
   intros Q Hdeg Hall i.
   apply pin_11_17_divides_N.
@@ -589,23 +589,23 @@ Theorem residual_nodiv_low_degree_ZN_units_divides_N :
     Forall is_nodiv ops ->
     (poly_degree (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e)
        < 10)%nat ->
-    (forall y, Z.coprime y 187 ->
-      (187 | Z.pow (gra_eval 187 ops y out) (Z.of_nat e) - y)) ->
+    (forall y, Z.coprime y pin_N ->
+      (pin_N | Z.pow (gra_eval pin_N ops y out) (Z.of_nat e) - y)) ->
     forall i,
-      (187 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
+      (pin_N | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) e) 0).
 Proof.
   intros ops out e Hop Hdeg Hall i.
   apply residual_low_degree_ZN_units_divides_N; [exact Hdeg|].
   intros y Hy.
   rewrite poly_eval_Pe_minus_X.
-  rewrite <- (gra_nodiv_denotes ops 187 y out Hop).
+  rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
   apply Hall. exact Hy.
 Qed.
 
 Theorem residual_identity_cannot_vanish_on_ZN_units :
   (poly_degree (poly_Pe_minus_X poly_X 3%nat) < 10)%nat /\
-  ~ (forall y, Z.coprime y 187 ->
-       (187 | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
+  ~ (forall y, Z.coprime y pin_N ->
+       (pin_N | poly_eval (poly_Pe_minus_X poly_X 3%nat) y)).
 Proof.
   split; [rewrite poly_degree_X3_minus_X; lia|].
   intros Hall.
@@ -620,8 +620,8 @@ Qed.
 Theorem residual_const_cannot_vanish_on_ZN_units :
   forall c,
     (poly_degree (poly_Pe_minus_X [c] 3%nat) < 10)%nat /\
-    ~ (forall y, Z.coprime y 187 ->
-         (187 | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
+    ~ (forall y, Z.coprime y pin_N ->
+         (pin_N | poly_eval (poly_Pe_minus_X [c] 3%nat) y)).
 Proof.
   intros c. split; [rewrite residual_const_Pe_degree; lia|].
   intros Hall.
@@ -659,10 +659,10 @@ Theorem residual_nodiv_short_ZN_units_divides_N :
   forall ops out,
     Forall is_nodiv ops ->
     (nth out (gra_deg_bound ops slp_init_deg) 0%nat <= 3)%nat ->
-    (forall y, Z.coprime y 187 ->
-      (187 | Z.pow (gra_eval 187 ops y out) 3 - y)) ->
+    (forall y, Z.coprime y pin_N ->
+      (pin_N | Z.pow (gra_eval pin_N ops y out) 3 - y)) ->
     forall i,
-      (187 | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) 3%nat) 0).
+      (pin_N | nth i (poly_Pe_minus_X (nth out (gra_run_poly ops slp_init_poly) []) 3%nat) 0).
 Proof.
   intros ops out Hop Hbound Hall i.
   apply residual_nodiv_low_degree_ZN_units_divides_N.
@@ -723,7 +723,7 @@ Proof.
 Qed.
 
 Theorem residual_square_eval :
-  forall y, gra_eval 187 [GMul 2%nat 2%nat] y 3%nat = y * y.
+  forall y, gra_eval pin_N [GMul 2%nat 2%nat] y 3%nat = y * y.
 Proof.
   intros y.
   rewrite gra_nodiv_denotes by apply gra_nodiv_mul_is_nodiv.
@@ -751,8 +751,8 @@ Theorem residual_square_cannot_vanish_on_ZN_units :
   (poly_degree (poly_Pe_minus_X
      (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat)
      < 10)%nat /\
-  ~ (forall y, Z.coprime y 187 ->
-       (187 | poly_eval (poly_Pe_minus_X
+  ~ (forall y, Z.coprime y pin_N ->
+       (pin_N | poly_eval (poly_Pe_minus_X
          (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat) y)).
 Proof.
   split; [rewrite residual_square_Q_degree_is_6; lia|].
@@ -768,8 +768,8 @@ Proof.
 Qed.
 
 Theorem residual_square_unit_2_not_root :
-  Z.coprime 2 187 /\
-  ~ (187 | poly_eval (poly_Pe_minus_X
+  Z.coprime 2 pin_N /\
+  ~ (pin_N | poly_eval (poly_Pe_minus_X
        (nth 3%nat (gra_run_poly [GMul 2%nat 2%nat] slp_init_poly) []) 3%nat) 2).
 Proof.
   split; [vm_compute; reflexivity|].
@@ -800,7 +800,7 @@ Qed.
 
 Theorem residual_cube_eval :
   forall y,
-    gra_eval 187 [GMul 2%nat 2%nat; GMul 3%nat 2%nat] y 4%nat = y * y * y.
+    gra_eval pin_N [GMul 2%nat 2%nat; GMul 3%nat 2%nat] y 4%nat = y * y * y.
 Proof.
   intros y.
   rewrite gra_nodiv_denotes by apply residual_cube_is_nodiv.
@@ -829,8 +829,8 @@ Theorem residual_cube_cannot_vanish_on_ZN_units :
   (poly_degree (poly_Pe_minus_X
      (nth 4%nat (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
      3%nat) < 10)%nat /\
-  ~ (forall y, Z.coprime y 187 ->
-       (187 | poly_eval (poly_Pe_minus_X
+  ~ (forall y, Z.coprime y pin_N ->
+       (pin_N | poly_eval (poly_Pe_minus_X
          (nth 4%nat
             (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
          3%nat) y)).
@@ -850,8 +850,8 @@ Proof.
 Qed.
 
 Theorem residual_cube_unit_2_not_root :
-  Z.coprime 2 187 /\
-  ~ (187 | poly_eval (poly_Pe_minus_X
+  Z.coprime 2 pin_N /\
+  ~ (pin_N | poly_eval (poly_Pe_minus_X
        (nth 4%nat
           (gra_run_poly [GMul 2%nat 2%nat; GMul 3%nat 2%nat] slp_init_poly) [])
        3%nat) 2).
@@ -862,11 +862,11 @@ Proof.
 Qed.
 
 Theorem residual_trapdoor_inverts_pin :
-  powm 36 27 187 = 42 /\ powm 42 3 187 = 36.
+  powm 36 27 pin_N = 42 /\ powm 42 3 pin_N = 36.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_trapdoor_not_a_low_degree_identity :
-  powm 36 27 187 = 42 /\
+  powm 36 27 pin_N = 42 /\
   (3 * 27 >= 10)%nat.
 Proof.
   split.

@@ -3,6 +3,7 @@ From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 From Stdlib Require Import List.
 From Stdlib Require Import Bool.
+Require Import Pin.
 Import ListNotations.
 
 Require Import RocqProofs.NumberTheory.
@@ -445,7 +446,6 @@ Qed.
 
 (** ** Representative pin: the check is not the group law *)
 
-Definition pin_N : Z := 11 * 17.
 Definition pin_g : Z := 3.
 Definition pin_tau : Z := 5.
 Definition pin_bound : Z := 5.

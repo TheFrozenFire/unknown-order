@@ -8,7 +8,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; ee = 3; d = 27; lam = 80;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; ee = 3; d = 27; lam = 80;
 
 \\ functional: 36^{27} ≡ 42, 42^3 ≡ 36
 check(lift(Mod(36,N)^d) == 42,          "X^d is a cube-root map on the test vector");

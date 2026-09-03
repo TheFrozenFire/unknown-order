@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3;
+read("lib/pin.gp");
+
+N = pin_N; g = 3;
 b0 = 1; b1 = 1; v = b0 + 2*b1;
 check(v == 3, "1 + 2*1 = 3");
 check(lift(Mod(g,N)^v) == (lift(Mod(g,N)^b0) * lift(Mod(g,N)^b1)^2) % N, \

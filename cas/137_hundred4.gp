@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36; o=40;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; o=40;
 
 \\ ----- S 301-320 dictionary and cubing automorphism -----
 check(lift(Mod(93,N)^67)==y,            "301 93^{67} ≡ 36 leftover k=3");

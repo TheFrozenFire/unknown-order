@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q;
 phi = (p-1)*(q-1); lam = lcm(p-1, q-1); g = gcd(p-1, q-1);
 check(phi == 160 && lam == 80 && g == 2, "11·17: φ=160, λ=80, gcd=2");
 check(phi == lam * g, "φ = λ · gcd");

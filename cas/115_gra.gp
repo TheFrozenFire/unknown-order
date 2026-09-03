@@ -1,11 +1,13 @@
 \\ GRA tape, Z[X] eval, equality-test gcd leak.
 \\ Mirrors ZPoly.v / GenericRing.v wave 0.
-\\ Pin N=11*17=187, e=3.
+\\ Pin N = pin_N=187, e=3.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17;
+read("lib/pin.gp");
+
+N = pin_N;
 
 \\ Horner, low term first (PARI 1-indexed)
 peval(cs, x) = {

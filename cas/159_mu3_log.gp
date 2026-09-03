@@ -7,8 +7,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 13; q = 7; N = p*q;
-om_p = 3; om_q = 2;
+read("lib/pin.gp");
+
+p = pin_91_p; q = pin_91_q; N = pin_91;
+om_p = pin_91_om_p; om_q = pin_91_om_q;
 
 mu3_log(om, x, m) = if((x % m) == lift(Mod(om, m)^0), 0, if((x % m) == lift(Mod(om, m)^1), 1, 2));
 
@@ -73,7 +75,7 @@ skew_ok(L) = {
 };
 check(skew_ok(ker),                       "e(y,x) = e(x,y)^2 (skew, order 3)");
 
-Npin = 11*17;
+Npin = pin_N;
 check(#ker_of(Npin) == 1,                 "pin kernel {1}");
 check(mu3_log(2, 1, 11) == 0,             "pin log of 1 is 0");
 check(add_ok(2, [1], 11),                 "pin log additive on {1}");

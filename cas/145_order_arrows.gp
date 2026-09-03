@@ -7,8 +7,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-\\ --- Order then invert on N=187 (equality / multiply, no gcd) ---
-p=11; q=17; N=p*q; y=36; e=3; d=27; k=40;
+read("lib/pin.gp");
+
+\\ --- Order then invert on N = pin_N (equality / multiply, no gcd) ---
+p=pin_p; q=pin_q; N=pin_N; y=pin_y; e=pin_e; d=pin_d; k=40;
 check(znorder(Mod(y,N)) == k,           "is_order: ord(y)=40");
 check((e*d) % k == 1,                   "3·27 ≡ 1 (mod 40): inverse in <y>");
 check(lift(Mod(y,N)^d) == 42,           "x = y^{e^{-1} mod ord} ≡ 42");
@@ -24,13 +26,13 @@ check(gcd(lift(Mod(x,N)^5)-1, N)==11,   "leftover x + mismatch → factor 11");
 check(gcd(lift(Mod(y,N)^5)-1, N)==11,   "order of y + mismatch k=5 → factor 11");
 
 \\ --- mismatch pin 77: leftover x=2, k=3 ---
-Ns=7*11;
+Ns=pin_77;
 check(lift(Mod(2,7)^3)==1,              "77 mismatch: 2^3 ≡ 1 (mod 7)");
 check(lift(Mod(2,11)^3)!=1,             "77 mismatch: 2^3 ≢ 1 (mod 11)");
 check(gcd(lift(Mod(2,Ns)^3)-1, Ns)==7,  "77 leftover x + mismatch → factor 7");
 
 \\ --- matching local orders on N=247: same k does not split ---
-p2=13; q2=19; N2=p2*q2; x2=179; y2=69;
+p2=pin_247_p; q2=pin_247_q; N2=pin_247; x2=pin_247_x; y2=pin_247_y;
 check(znorder(Mod(x2,p2))==6 && znorder(Mod(x2,q2))==6, "247 matching: ord_p(x)=ord_q(x)=6");
 check(lift(Mod(x2,p2)^5)!=1,            "247: x^5 ≢ 1 (mod p) — 6 does not divide 5");
 check(lift(Mod(x2,q2)^5)!=1,            "247: x^5 ≢ 1 (mod q) — not one-sided");

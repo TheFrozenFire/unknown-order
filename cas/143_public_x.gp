@@ -7,7 +7,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; y=36; x=42;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; y=36; x=42;
 
 check(kronecker(x, N) == 1,             "leftover x has Jacobi +1");
 check(kronecker(y, N) == 1,             "challenge y has Jacobi +1");

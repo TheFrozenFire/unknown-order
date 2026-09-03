@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; e = 3; d = 27;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27;
 c = 36;
 dp = d % (p-1); dq = d % (q-1);
 mp = lift(Mod(c,p)^dp); mq = lift(Mod(c,q)^dq);

@@ -382,33 +382,34 @@ Proof.
 Qed.
 
 Theorem lambda_plus_one_11_17 :
-  lambda_semiprime 11 17 = 80.
+  lambda_semiprime pin_p pin_q = pin_lam.
 Proof. apply rsa_test_lambda. Qed.
 
 Theorem lambda_plus_one_11_17_not_prime :
-  ~ Z.prime (lambda_semiprime 11 17 + 1).
+  ~ Z.prime (lambda_semiprime pin_p pin_q + 1).
 Proof.
   rewrite lambda_plus_one_11_17.
   intros [_ Hdiv].
-  apply (Hdiv 3); [lia|]. exists 27. lia.
+  apply (Hdiv pin_e); [lia|].
+  exists pin_d. lia.
 Qed.
 
 Theorem lambda_solves_search_11_17 :
   forall y,
-    Z.coprime y (11 * 17) ->
-    Problem_StrongRSA (11 * 17) (y mod (11 * 17)) (y mod (11 * 17))
-      (lambda_semiprime 11 17 + 1).
+    Z.coprime y pin_N ->
+    Problem_StrongRSA pin_N (y mod pin_N) (y mod pin_N)
+      (lambda_semiprime pin_p pin_q + 1).
 Proof.
   intros y Hcop.
-  apply (lambda_solves_strong_RSA 11 17 y prime_11 prime_17);
-    [lia | exact Hcop].
+  apply (lambda_solves_strong_RSA pin_p pin_q y prime_11 prime_17
+           pin_p_neq_q Hcop).
 Qed.
 
 Theorem search_lambda_plus_one_misses_prime_AR :
   forall y,
-    ~ Problem_AdaptiveRoot_C (11 * 17) C_primes
-        (y mod (11 * 17)) (y mod (11 * 17))
-        (lambda_semiprime 11 17 + 1).
+    ~ Problem_AdaptiveRoot_C pin_N C_primes
+        (y mod pin_N) (y mod pin_N)
+        (lambda_semiprime pin_p pin_q + 1).
 Proof.
   intros y Har.
   apply ar_C_requires_C in Har.

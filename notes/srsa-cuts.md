@@ -325,7 +325,7 @@ not sufficient (`cube_euler_lambda_not_sufficient_247` on
 named extra `13×19`; CAS `155`). Pin: every unit is a cube.
 Cubic character takes values in `μ₃`; kernel of cubing is
 `{1,ω,ω²}` locally and CRT of those pairs on `N`
-(`cube_kernel_three`, `mixed_kernel_91`). Pin kernel is trivial
+(`cube_kernel_three`, `mixed_kernel_pin_91`). Pin kernel is trivial
 (`pin_cube_kernel_trivial`, CAS `156`).
 An alternating bilinear map on cyclic `μ₃` is constantly 1
 (`alternating_bilinear_mu3_trivial`, CAS `157`). Eval pairing
@@ -370,9 +370,9 @@ advice `N/17`: `PreprocessGRA.v`.
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
-| cubic character / kernel of cubing | `cube_kernel_three` / `mu3_N_iff_locals` / `pin_cube_kernel_trivial` / `mixed_kernel_91` | `CubicResidue.v` | `156` |
+| cubic character / kernel of cubing | `cube_kernel_three` / `mu3_N_iff_locals` / `pin_cube_kernel_trivial` / `mixed_kernel_pin_91` | `CubicResidue.v` | `156` |
 | alternating bilinear on cyclic `μ₃` is trivial | `alternating_bilinear_mu3_trivial` / `eval_pair_omega_13_not_alternating` | `EvalPairing.v` | `157` |
-| `μ₃(Z/NZ)* ≅ C₃×C₃`; det pairing non-degenerate | `mu3N_det_alternating` / `mu3N_det_gp_gq` / `mu3_91_kernel_not_cyclic` | `EvalPairing.v` | `158` |
+| `μ₃(Z/NZ)* ≅ C₃×C₃`; det pairing non-degenerate | `mu3N_det_alternating` / `mu3N_det_gp_gq` / `mu3_pin_91_kernel_not_cyclic` | `EvalPairing.v` | `158` |
 | local `μ₃`-logs additive; det pairing bilinear | `mu3_log_mul` / `mu3N_det_left_bilinear` / `mu3N_det_right_bilinear` / `mu3N_det_skew` | `EvalPairing.v` | `159` |
 | mixed `μ₃` splits `N`; diagonal leftover does not | `mixed_mu3_splits` / `diagonal_mu3_gcd_xminus1` / `pin_mu3_gcd_is_N` | `CubicResidue.v` | `160` |
 | public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |

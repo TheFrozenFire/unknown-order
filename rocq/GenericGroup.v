@@ -82,10 +82,10 @@ Theorem ggm_eq_leak_from_tape :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem ggm_eq_leak_factors :
-  Problem_Factor 187 (ggm_eval pin_N ggm_pow10 2 6%nat).
+  Problem_Factor pin_N (ggm_eval pin_N ggm_pow10 2 6%nat).
 Proof.
   unfold Problem_Factor. rewrite ggm_eq_leak_from_tape.
-  split; [lia|]. exists 17. reflexivity.
+  split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem ggm_yyy_pin :

@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; e = 3; d = 27;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27;
 x = 5; h = 6; m = 4;
 y = lift(Mod(x * lift(Mod(h,N)^m), N)^d);
 check(lift(Mod(y,N)^e) == (x * lift(Mod(h,N)^m)) % N, "y^e ≡ x h^m (mod N)");

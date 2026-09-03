@@ -2,12 +2,14 @@
 \\ Mirrors Succinct.v.
 \\ Posted proof is 13 log2(n) + 2 residues/integers, not one
 \\ encoding per private slot.  Fold challenge x=2.
-\\ Pin N=11*17=187, g=3, tau=5.
+\\ Pin N = pin_N=187, g=3, tau=5.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3; tau = 5; Xch = 2;
+read("lib/pin.gp");
+
+N = pin_N; g = 3; tau = 5; Xch = 2;
 
 evalp(cs, x) = {
   my(s = 0, p = 1, ii);

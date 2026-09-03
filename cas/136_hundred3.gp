@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36; x=42; e=3; o=40;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; x=pin_x; e=pin_e; o=40;
 
 \\ ----- N 201-220 residual output language -----
 check(lift(Mod(x,N)^o)==1,              "201 42^{40} ≡ 1 in <y>");

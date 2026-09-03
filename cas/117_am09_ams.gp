@@ -1,11 +1,13 @@
 \\ AM09 inversion leak + fixed-e leading term; AMS flexible-e / λ+1.
 \\ Mirrors GenericRing.v wave 2.
-\\ Pin N=187, e=3, d=27, λ=80.
+\\ Pin N = pin_N, e=3, d=27, λ=80.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; ee = 3; d = 27; lam = lcm(p-1, q-1);
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; ee = 3; d = 27; lam = lcm(p-1, q-1);
 
 \\ GInv on a tape: init [0,1,y], GConst 11 at handle 3, GInv of that
 invtape = [0, 1, 36];

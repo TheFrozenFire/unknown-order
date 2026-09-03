@@ -9,8 +9,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 \\ --- mismatch pin 187: leftover x=42, e=3, y=36 ---
-p=11; q=17; N=p*q; lam=80; y=36; x=42;
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; x=pin_x;
 check(gcd(p-1, q-1) == 2,               "187 gcd(p-1,q-1)=2");
 check(znorder(Mod(x,p)) == 5,           "187 ord_p(x)=5");
 check(znorder(Mod(x,q)) == 8,           "187 ord_q(x)=8 mismatch");
@@ -19,7 +21,7 @@ check(gcd(lift(Mod(x,N)^8)-1, N) == 17, "187 gcd(x^8-1,N)=17 splits");
 check(lift(Mod(x,N)^3) == y,            "187 leftover 42^3 ≡ 36");
 
 \\ --- mismatch pin 77: leftover x=2, e=7, y=51 ---
-Ns=7*11;
+Ns=pin_77;
 check(gcd(6, 10) == 2,                  "77 gcd(p-1,q-1)=2");
 check(znorder(Mod(2,7)) == 3,           "77 ord_p(2)=3");
 check(znorder(Mod(2,11)) == 10,         "77 ord_q(2)=10 mismatch");
@@ -27,7 +29,7 @@ check(lift(Mod(2,Ns)^7) == 51,          "77 leftover 2^7 ≡ 51");
 check(gcd(lift(Mod(2,Ns)^3)-1, Ns) == 7,"77 gcd(x^3-1,N)=7 splits");
 
 \\ --- match pin 247: leftover x=179, e=5, y=69, ord=6 both sides ---
-p2=13; q2=19; N2=p2*q2; lam2=lcm(12,18); y2=69; x2=179; e2=5;
+p2=pin_247_p; q2=pin_247_q; N2=pin_247; lam2=pin_247_lam; y2=pin_247_y; x2=pin_247_x; e2=pin_247_e;
 check(N2 == 247,                        "247 = 13·19");
 check(lam2 == 36,                       "λ(247)=36");
 check(gcd(p2-1, q2-1) == 6,             "247 gcd(p-1,q-1)=6");

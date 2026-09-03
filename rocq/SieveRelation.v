@@ -160,7 +160,7 @@ Proof.
                 ltac:(vm_compute; reflexivity) Hny Hnm) as Hg.
   destruct Hg as [Hg1 [Hg2 HgN]].
   unfold Problem_Factor.
-  repeat split; try assumption; try (unfold pin_N, pin_p, pin_q; lia).
+  repeat split; try assumption; try (lia).
 Qed.
 
 Theorem dixon_pin_gcd :
@@ -183,7 +183,7 @@ Proof.
                 ltac:(vm_compute; reflexivity) Hny Hnm) as Hg.
   destruct Hg as [Hg1 [Hg2 HgN]].
   unfold Problem_Factor.
-  repeat split; try assumption; try (unfold pin_N, pin_p, pin_q; lia).
+  repeat split; try assumption; try (lia).
 Qed.
 
 Theorem asquare_pin_splits :
@@ -194,7 +194,7 @@ Theorem asquare_pin_splits :
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [unfold pin_N, pin_p, pin_q; lia | exists pin_q; reflexivity].
+  unfold Problem_Factor. split; [lia | exists pin_q; reflexivity].
 Qed.
 
 (** ** NFS setup: common root and homogenised remainder *)
@@ -366,7 +366,7 @@ Proof.
                 Hsq Hn1 Hnm1) as Hg.
   destruct Hg as [Hg1 [Hg2 HgN]].
   unfold Problem_Factor.
-  repeat split; try assumption; try (unfold pin_N, pin_p, pin_q; lia).
+  repeat split; try assumption; try (lia).
 Qed.
 
 Theorem nfs_two_sided_gcd :

@@ -5,8 +5,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 23; N = p*q;
-check(N == 253,                         "N = 11*23 = 253");
+read("lib/pin.gp");
+
+p = pin_253_p; q = pin_253_q; N = pin_253;
+check(N == pin_253,                     "N = pin_253");
 check(p % 8 == 3 && q % 8 == 7,         "Williams shape p≡3, q≡7 (mod 8)");
 check(p % 4 == 3 && q % 4 == 3,         "both Blum (≡3 mod 4)");
 check(((p-1)/2) % 2 == 1,               "v2(p-1)=1: (p-1)/2 odd");

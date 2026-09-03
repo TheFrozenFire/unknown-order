@@ -524,7 +524,7 @@ in the Rocq tree.  Do not edit by hand.
 ## `CubicResidue.v`
 
 - L15: Cubic residuosity when cubing is not a permutation
-  - L610: Mixed cube roots of 1 split [N]; diagonal leftover does not
+  - L612: Mixed cube roots of 1 split [N]; diagonal leftover does not
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -554,18 +554,18 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_cube_kernel_trivial` | 516 |
 | Theorem | `cube_kernel_three` | 534 |
 | Theorem | `omega_13_order_3` | 579 |
-| Theorem | `mixed_kernel_91` | 587 |
-| Lemma | `cube_minus_one_fact` | 621 |
-| Theorem | `mixed_mu3_gcd_xminus1` | 629 |
-| Theorem | `mixed_mu3_gcd_phi3` | 650 |
-| Theorem | `mixed_mu3_splits` | 685 |
-| Theorem | `diagonal_mu3_gcd_xminus1` | 702 |
-| Theorem | `diagonal_mu3_gcd_phi3` | 727 |
-| Theorem | `mixed_kernel_91_splits` | 750 |
-| Theorem | `gq_kernel_91_splits` | 754 |
-| Theorem | `diagonal_16_91_no_split` | 758 |
-| Theorem | `phi3_small_omega_is_prime` | 762 |
-| Theorem | `pin_mu3_gcd_is_N` | 766 |
+| Theorem | `mixed_kernel_pin_91` | 587 |
+| Lemma | `cube_minus_one_fact` | 623 |
+| Theorem | `mixed_mu3_gcd_xminus1` | 631 |
+| Theorem | `mixed_mu3_gcd_phi3` | 652 |
+| Theorem | `mixed_mu3_splits` | 687 |
+| Theorem | `diagonal_mu3_gcd_xminus1` | 704 |
+| Theorem | `diagonal_mu3_gcd_phi3` | 729 |
+| Theorem | `mixed_kernel_pin_91_splits` | 752 |
+| Theorem | `gq_kernel_pin_91_splits` | 757 |
+| Theorem | `diagonal_pin_91_no_split` | 762 |
+| Theorem | `phi3_small_omega_is_prime` | 767 |
+| Theorem | `pin_mu3_gcd_is_N` | 771 |
 
 ## `CyclicCount.v`
 
@@ -707,10 +707,10 @@ in the Rocq tree.  Do not edit by hand.
   - L96: 6. Short [e] vs long [e] on this pin
   - L106: 7. Bounded advice on [N]
   - L119: 8. Blum modulus [N=11·23], [λ=110]
-  - L146: 9. Census: every unit is an [e=3] residual witness
-  - L164: 10. GQ extract is residual, not a factor
-  - L175: 11. Integer polynomial in [N]
-  - L185: 12. [gcd(e−1, λ)] proper, not [λ] and not [2]
+  - L147: 9. Census: every unit is an [e=3] residual witness
+  - L165: 10. GQ extract is residual, not a factor
+  - L176: 11. Integer polynomial in [N]
+  - L186: 12. [gcd(e−1, λ)] proper, not [λ] and not [2]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -732,13 +732,13 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `dozen_blum_shape` | 133 |
 | Theorem | `dozen_blum_e5_names_p` | 138 |
 | Theorem | `dozen_blum_e11_names_q` | 142 |
-| Theorem | `dozen_phi_160` | 148 |
-| Theorem | `dozen_every_unit_is_cube` | 152 |
-| Theorem | `dozen_gq_extract_is_residual` | 166 |
-| Theorem | `dozen_gq_complete_still` | 171 |
-| Theorem | `dozen_N_cong_q` | 177 |
-| Theorem | `dozen_gcd_Nminus1_pminus1` | 181 |
-| Theorem | `dozen_e11_minus1_shares_lambda` | 187 |
+| Theorem | `dozen_phi_160` | 149 |
+| Theorem | `dozen_every_unit_is_cube` | 153 |
+| Theorem | `dozen_gq_extract_is_residual` | 167 |
+| Theorem | `dozen_gq_complete_still` | 172 |
+| Theorem | `dozen_N_cong_q` | 178 |
+| Theorem | `dozen_gcd_Nminus1_pminus1` | 182 |
+| Theorem | `dozen_e11_minus1_shares_lambda` | 188 |
 
 ## `Endo.v`
 
@@ -788,7 +788,7 @@ in the Rocq tree.  Do not edit by hand.
 - L14: Evaluation pairing on [μ_n]: [e(x,k) = x^k]
   - L232: Alternating bilinear maps on cyclic [μ₃] are trivial
   - L476: Determinant pairing on [μ₃(Z/NZ)* ≅ C₃×C₃]
-  - L549: Local [μ₃]-logs are additive, so [mu3N_det] is bilinear
+  - L550: Local [μ₃]-logs are additive, so [mu3N_det] is bilinear
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -819,30 +819,30 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_mu3_only_one` | 468 |
 | Lemma | `mu3_log_range` | 494 |
 | Theorem | `mu3N_det_alternating` | 501 |
-| Theorem | `gp_91_order_3` | 515 |
-| Theorem | `gq_91_order_3` | 523 |
+| Theorem | `gp_pin_91_order_3` | 515 |
+| Theorem | `gq_pin_91_order_3` | 523 |
 | Theorem | `mu3N_det_gp_gq` | 531 |
 | Theorem | `mu3N_det_gq_gp` | 535 |
-| Theorem | `mu3_91_kernel_not_cyclic` | 539 |
-| Lemma | `mu3_order_coprime` | 556 |
-| Lemma | `mu3_order_divides_pminus1` | 576 |
-| Lemma | `mu3_prime_ne_2` | 588 |
-| Lemma | `mu3_pow_1_ne_2` | 599 |
-| Lemma | `mu3_log_of_pow` | 623 |
-| Lemma | `mu3_is_omega_power` | 659 |
-| Lemma | `mu3_log_reconstructs` | 722 |
-| Lemma | `mu3_log_mul` | 744 |
-| Lemma | `zmod3_mul` | 785 |
-| Lemma | `zmod3_mul_l` | 795 |
-| Lemma | `det_exp_left_add` | 802 |
-| Lemma | `det_exp_right_add` | 817 |
-| Lemma | `mu3_log_mod_reduce` | 832 |
-| Lemma | `mu3_log_base_mod` | 846 |
-| Theorem | `omega_7_order_3` | 855 |
-| Theorem | `pin_mu3_log_one` | 863 |
-| Theorem | `mu3N_det_left_bilinear` | 866 |
-| Theorem | `mu3N_det_right_bilinear` | 928 |
-| Theorem | `mu3N_det_skew` | 990 |
+| Theorem | `mu3_pin_91_kernel_not_cyclic` | 540 |
+| Lemma | `mu3_order_coprime` | 557 |
+| Lemma | `mu3_order_divides_pminus1` | 577 |
+| Lemma | `mu3_prime_ne_2` | 589 |
+| Lemma | `mu3_pow_1_ne_2` | 600 |
+| Lemma | `mu3_log_of_pow` | 624 |
+| Lemma | `mu3_is_omega_power` | 660 |
+| Lemma | `mu3_log_reconstructs` | 723 |
+| Lemma | `mu3_log_mul` | 745 |
+| Lemma | `zmod3_mul` | 786 |
+| Lemma | `zmod3_mul_l` | 796 |
+| Lemma | `det_exp_left_add` | 803 |
+| Lemma | `det_exp_right_add` | 818 |
+| Lemma | `mu3_log_mod_reduce` | 833 |
+| Lemma | `mu3_log_base_mod` | 847 |
+| Theorem | `omega_7_order_3` | 856 |
+| Theorem | `pin_mu3_log_one` | 864 |
+| Theorem | `mu3N_det_left_bilinear` | 867 |
+| Theorem | `mu3N_det_right_bilinear` | 929 |
+| Theorem | `mu3N_det_skew` | 991 |
 
 ## `EvalProduct.v`
 
@@ -959,23 +959,23 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `FiatShamir.v`
 
-- L16: Fiat–Shamir compilation of the public-coin Sigma
-  - L29: Deterministic challenge map (not a hash oracle)
-  - L160: Slot Sigma of the proving system
-  - L194: Representative pin: challenge depends on the first message
+- L17: Fiat–Shamir compilation of the public-coin Sigma
+  - L30: Deterministic challenge map (not a hash oracle)
+  - L161: Slot Sigma of the proving system
+  - L195: Representative pin: challenge depends on the first message
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `fs_step_nonneg` | 42 |
-| Lemma | `fs_fold_nonneg` | 51 |
-| Lemma | `fs_challenge_nonneg` | 64 |
-| Lemma | `fs_eqdl_challenge_nonneg` | 78 |
-| Lemma | `eqdl_verifyb_iff` | 113 |
-| Lemma | `fs_eqdl_verifyb_iff` | 123 |
-| Theorem | `fs_eqdl_complete` | 132 |
-| Theorem | `fs_eqdl_complete_b` | 147 |
-| Theorem | `fs_slot_complete` | 162 |
-| Theorem | `fs_wire_complete` | 179 |
+| Lemma | `fs_step_nonneg` | 43 |
+| Lemma | `fs_fold_nonneg` | 52 |
+| Lemma | `fs_challenge_nonneg` | 65 |
+| Lemma | `fs_eqdl_challenge_nonneg` | 79 |
+| Lemma | `eqdl_verifyb_iff` | 114 |
+| Lemma | `fs_eqdl_verifyb_iff` | 124 |
+| Theorem | `fs_eqdl_complete` | 133 |
+| Theorem | `fs_eqdl_complete_b` | 148 |
+| Theorem | `fs_slot_complete` | 163 |
+| Theorem | `fs_wire_complete` | 180 |
 | Theorem | `fs_pin_accepts` | 209 |
 | Theorem | `fs_pin_rejects_wrong_challenge` | 213 |
 | Theorem | `fs_pin_challenge_depends_on_commit` | 222 |
@@ -1173,59 +1173,59 @@ in the Rocq tree.  Do not edit by hand.
 
 - L18: Generic ring algorithms (GRA) on [Z/NZ]
   - L26: The machine
-  - L102: Wave 0 — equality leak and the tape
-  - L195: Division-free tapes denote polynomials
-  - L348: Degree bound of a nodiv tape
-  - L496: Wave 1 — Leander–Rupp, no division, low [e]
+  - L101: Wave 0 — equality leak and the tape
+  - L194: Division-free tapes denote polynomials
+  - L347: Degree bound of a nodiv tape
+  - L495: Wave 1 — Leander–Rupp, no division, low [e]
   - L537: Wave 2a — AM09 inversion leak and leading term
   - L589: Wave 2b — AMS flexible [e]; [λ+1] is a constant, not a ring op on [y]
   - L624: Wave 6a — Damgård–Koprowski signature contrast
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `gra_eq_tape_88` | 116 |
-| Theorem | `gra_eq_tape_zero` | 120 |
-| Theorem | `gra_eq_leak_pin` | 124 |
-| Theorem | `gra_eq_leak_factors` | 128 |
-| Theorem | `gra_eq_leak_onesided` | 135 |
-| Theorem | `gra_eq_N_is_not_a_split` | 146 |
-| Theorem | `gra_mul_y_pin` | 150 |
-| Theorem | `gra_const42` | 154 |
-| Theorem | `slp_init_eval` | 179 |
-| Theorem | `slp_to_poly_mul_pin` | 190 |
-| Lemma | `nth_app_last` | 208 |
-| Lemma | `nth_app_lt` | 215 |
-| Lemma | `step_length` | 223 |
-| Lemma | `step_poly_length` | 227 |
-| Lemma | `step_nodiv_prefix` | 231 |
-| Lemma | `step_nodiv_new` | 245 |
-| Lemma | `step_nodiv_overflow` | 265 |
-| Lemma | `step_nodiv_agree` | 278 |
-| Lemma | `gra_run_nodiv_agree` | 298 |
-| Lemma | `slp_init_length` | 315 |
-| Lemma | `gra_init_length` | 318 |
-| Lemma | `gra_init_agrees` | 321 |
-| Theorem | `gra_nodiv_denotes` | 334 |
-| Lemma | `slp_init_deg_le` | 373 |
-| Lemma | `step_deg_bound_length` | 385 |
-| Lemma | `step_nodiv_degree_le` | 389 |
-| Lemma | `gra_run_poly_length` | 420 |
-| Lemma | `gra_nodiv_degree_le` | 428 |
-| Theorem | `gra_deg_bound_identity` | 453 |
-| Theorem | `gra_deg_bound_square` | 457 |
-| Theorem | `gra_deg_bound_x3` | 461 |
-| Theorem | `gra_deg_bound_x4` | 465 |
-| Theorem | `gra_nodiv_mul_is_nodiv` | 469 |
-| Theorem | `gra_nodiv_mul_denotes_square` | 473 |
-| Theorem | `gra_nodiv_integer_eth_root_forbidden` | 480 |
-| Theorem | `gra_nodiv_const42_inverts_36` | 498 |
-| Theorem | `gra_nodiv_const42_fails_on_8` | 502 |
-| Theorem | `gra_identity_not_cube_root_at_2` | 506 |
-| Theorem | `gra_identity_at_one` | 510 |
-| Theorem | `gra_identity_gcd_at_2` | 514 |
-| Theorem | `gra_nodiv_identical_X3_linear` | 518 |
-| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 522 |
-| Theorem | `gra_nodiv_identical_root_impossible_X3` | 526 |
+| Theorem | `gra_eq_tape_88` | 115 |
+| Theorem | `gra_eq_tape_zero` | 119 |
+| Theorem | `gra_eq_leak_pin` | 123 |
+| Theorem | `gra_eq_leak_factors` | 127 |
+| Theorem | `gra_eq_leak_onesided` | 134 |
+| Theorem | `gra_eq_N_is_not_a_split` | 145 |
+| Theorem | `gra_mul_y_pin` | 149 |
+| Theorem | `gra_const42` | 153 |
+| Theorem | `slp_init_eval` | 178 |
+| Theorem | `slp_to_poly_mul_pin` | 189 |
+| Lemma | `nth_app_last` | 207 |
+| Lemma | `nth_app_lt` | 214 |
+| Lemma | `step_length` | 222 |
+| Lemma | `step_poly_length` | 226 |
+| Lemma | `step_nodiv_prefix` | 230 |
+| Lemma | `step_nodiv_new` | 244 |
+| Lemma | `step_nodiv_overflow` | 264 |
+| Lemma | `step_nodiv_agree` | 277 |
+| Lemma | `gra_run_nodiv_agree` | 297 |
+| Lemma | `slp_init_length` | 314 |
+| Lemma | `gra_init_length` | 317 |
+| Lemma | `gra_init_agrees` | 320 |
+| Theorem | `gra_nodiv_denotes` | 333 |
+| Lemma | `slp_init_deg_le` | 372 |
+| Lemma | `step_deg_bound_length` | 384 |
+| Lemma | `step_nodiv_degree_le` | 388 |
+| Lemma | `gra_run_poly_length` | 419 |
+| Lemma | `gra_nodiv_degree_le` | 427 |
+| Theorem | `gra_deg_bound_identity` | 452 |
+| Theorem | `gra_deg_bound_square` | 456 |
+| Theorem | `gra_deg_bound_x3` | 460 |
+| Theorem | `gra_deg_bound_x4` | 464 |
+| Theorem | `gra_nodiv_mul_is_nodiv` | 468 |
+| Theorem | `gra_nodiv_mul_denotes_square` | 472 |
+| Theorem | `gra_nodiv_integer_eth_root_forbidden` | 479 |
+| Theorem | `gra_nodiv_const42_inverts_36` | 497 |
+| Theorem | `gra_nodiv_const42_fails_on_8` | 501 |
+| Theorem | `gra_identity_not_cube_root_at_2` | 505 |
+| Theorem | `gra_identity_at_one` | 509 |
+| Theorem | `gra_identity_gcd_at_2` | 513 |
+| Theorem | `gra_nodiv_identical_X3_linear` | 517 |
+| Theorem | `gra_nodiv_N_does_not_divide_minus1` | 521 |
+| Theorem | `gra_nodiv_identical_root_impossible_X3` | 525 |
 | Theorem | `Pe_minus_X_eval2_is_six_on_X` | 533 |
 | Theorem | `gra_inv_nonunit_pin` | 546 |
 | Theorem | `gra_inv_nonunit_factors` | 550 |
@@ -1258,7 +1258,7 @@ in the Rocq tree.  Do not edit by hand.
   - L136: Order divides the exponent
   - L183: One-sided small exponent (the Type-B winning condition)
   - L245: Order assumption and fractional root
-  - L458: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L459: Order → Strong RSA by invert in the cyclic (equality / multiply)
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1285,14 +1285,14 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `strong_RSA_is_ar_C_iff` | 373 |
 | Theorem | `lambda_plus_one_11_17` | 384 |
 | Theorem | `lambda_plus_one_11_17_not_prime` | 388 |
-| Theorem | `lambda_solves_search_11_17` | 396 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 407 |
-| Theorem | `adaptive_root_known_product_breaks` | 425 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 441 |
-| Theorem | `order_inverts_in_cyclic` | 464 |
-| Theorem | `order_yields_strong_RSA` | 489 |
-| Lemma | `gcd_powm_minus_1` | 512 |
-| Theorem | `leftover_mismatch_factors` | 525 |
+| Theorem | `lambda_solves_search_11_17` | 397 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 408 |
+| Theorem | `adaptive_root_known_product_breaks` | 426 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 442 |
+| Theorem | `order_inverts_in_cyclic` | 465 |
+| Theorem | `order_yields_strong_RSA` | 490 |
+| Lemma | `gcd_powm_minus_1` | 513 |
+| Theorem | `leftover_mismatch_factors` | 526 |
 
 ## `HashSlot.v`
 
@@ -1713,16 +1713,17 @@ in the Rocq tree.  Do not edit by hand.
 
 - L6: Campaign pin — numerical source of truth
   - L31: Default semiprime
-  - L52: Residual pair on the default pin
-  - L58: Named extra moduli
-  - L68: Dixon / QS witnesses on [pin_N]
-  - L87: NFS quadratics on [pin_N]
+  - L55: Residual pair on the default pin
+  - L61: Mixed square roots of 1 on [pin_N]
+  - L66: Named extra moduli (p, q, N, λ, and shared witnesses)
+  - L125: Dixon / QS witnesses on [pin_N]
+  - L144: NFS quadratics on [pin_N]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `pin_N_pos` | 43 |
-| Lemma | `pin_N_gt_1` | 46 |
-| Lemma | `pin_p_neq_q` | 49 |
+| Lemma | `pin_N_pos` | 46 |
+| Lemma | `pin_N_gt_1` | 49 |
+| Lemma | `pin_p_neq_q` | 52 |
 
 ## `PollardP1.v`
 
@@ -1828,16 +1829,16 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `PreprocessGRA.v`
 
-- L14: Preprocessing GRA (Dachman-Soled–Loss–O'Neill shape)
+- L15: Preprocessing GRA (Dachman-Soled–Loss–O'Neill shape)
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `prep_advice_depends_on_N` | 26 |
-| Theorem | `prep_advice_ignores_y` | 30 |
-| Theorem | `prep_factor_advice` | 34 |
-| Theorem | `prep_id_advice_not_a_split` | 42 |
-| Theorem | `prep_ginv_of_factor_advice` | 54 |
-| Theorem | `prep_then_gra_factors` | 58 |
+| Theorem | `prep_advice_depends_on_N` | 27 |
+| Theorem | `prep_advice_ignores_y` | 31 |
+| Theorem | `prep_factor_advice` | 35 |
+| Theorem | `prep_id_advice_not_a_split` | 43 |
+| Theorem | `prep_ginv_of_factor_advice` | 55 |
+| Theorem | `prep_then_gra_factors` | 59 |
 
 ## `Presentation.v`
 
@@ -1884,31 +1885,31 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `PublicQuad.v`
 
-- L16: Public quadratic check of two committed evaluations
-  - L41: Bounded exponent search against a public base
-  - L139: Recover a coefficient list from slot encodings vs CRS
-  - L160: Public CRS list [P_0,…,P_{n-1}]
-  - L258: Bilinear combine [∏_{i,j} P_{i+j}^{a_i b_j}]
-  - L365: The public check: encodings and CRS only
-  - L446: Representative pin: the check is not the group law
+- L17: Public quadratic check of two committed evaluations
+  - L42: Bounded exponent search against a public base
+  - L140: Recover a coefficient list from slot encodings vs CRS
+  - L161: Public CRS list [P_0,…,P_{n-1}]
+  - L259: Bilinear combine [∏_{i,j} P_{i+j}^{a_i b_j}]
+  - L366: The public check: encodings and CRS only
+  - L447: Representative pin: the check is not the group law
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `find_exp_from_sound` | 54 |
-| Lemma | `find_exp_from_complete` | 84 |
-| Lemma | `find_exp_complete` | 107 |
-| Lemma | `find_exp_sound` | 123 |
-| Lemma | `pot_crs_from_length` | 171 |
-| Lemma | `pot_crs_length` | 181 |
-| Lemma | `pot_crs_from_nth` | 188 |
-| Lemma | `pot_crs_nth` | 205 |
-| Lemma | `recover_honest` | 230 |
-| Lemma | `quad_row_spec` | 277 |
-| Lemma | `quad_combine_spec` | 313 |
-| Theorem | `quad_combine_is_product` | 348 |
-| Lemma | `first_exps_nn` | 378 |
-| Theorem | `public_quad_complete` | 390 |
-| Theorem | `public_quad_qap` | 420 |
+| Lemma | `find_exp_from_sound` | 55 |
+| Lemma | `find_exp_from_complete` | 85 |
+| Lemma | `find_exp_complete` | 108 |
+| Lemma | `find_exp_sound` | 124 |
+| Lemma | `pot_crs_from_length` | 172 |
+| Lemma | `pot_crs_length` | 182 |
+| Lemma | `pot_crs_from_nth` | 189 |
+| Lemma | `pot_crs_nth` | 206 |
+| Lemma | `recover_honest` | 231 |
+| Lemma | `quad_row_spec` | 278 |
+| Lemma | `quad_combine_spec` | 314 |
+| Theorem | `quad_combine_is_product` | 349 |
+| Lemma | `first_exps_nn` | 379 |
+| Theorem | `public_quad_complete` | 391 |
+| Theorem | `public_quad_qap` | 421 |
 | Theorem | `public_quad_pin_accepts` | 455 |
 | Theorem | `public_quad_pin_rejects_group_mul` | 466 |
 | Theorem | `public_quad_pin_sum_neq_prod` | 478 |
@@ -2000,33 +2001,33 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `RSA.v`
 
-- L10: RSA: instance, private exponent [d], and the RSA problem
-  - L225: Why a polynomial in [N] cannot be a handle
+- L11: RSA: instance, private exponent [d], and the RSA problem
+  - L226: Why a polynomial in [N] cannot be a handle
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `rsa_N_gt_1` | 38 |
-| Lemma | `rsa_lambda_pos` | 45 |
-| Lemma | `rsa_lambda_gt_1` | 51 |
-| Lemma | `rsa_phi_pos` | 70 |
-| Lemma | `rsa_lambda_divides_phi` | 76 |
-| Lemma | `rsa_ed_minus_1_divides` | 79 |
-| Lemma | `rsa_ed_gt_1` | 88 |
-| Theorem | `rsa_dec_enc_units` | 101 |
-| Theorem | `rsa_enc_dec_units` | 125 |
-| Lemma | `rsa_d_is_cube_root_map` | 152 |
-| Lemma | `prime_11` | 163 |
-| Lemma | `prime_17` | 172 |
-| Lemma | `rsa_test_lambda` | 182 |
-| Lemma | `rsa_test_phi` | 185 |
-| Lemma | `rsa_test_inv` | 188 |
-| Lemma | `rsa_test_coprime_e` | 191 |
-| Theorem | `rsa_test_N` | 206 |
-| Theorem | `rsa_test_vector` | 209 |
-| Theorem | `rsa_test_roundtrip` | 213 |
-| Theorem | `rsa_test_annihilator` | 217 |
-| Theorem | `N_cong_q_mod_pminus1` | 232 |
-| Theorem | `gcd_polyN_pminus1_is_gcd_at_q` | 243 |
+| Lemma | `rsa_N_gt_1` | 39 |
+| Lemma | `rsa_lambda_pos` | 46 |
+| Lemma | `rsa_lambda_gt_1` | 52 |
+| Lemma | `rsa_phi_pos` | 71 |
+| Lemma | `rsa_lambda_divides_phi` | 77 |
+| Lemma | `rsa_ed_minus_1_divides` | 80 |
+| Lemma | `rsa_ed_gt_1` | 89 |
+| Theorem | `rsa_dec_enc_units` | 102 |
+| Theorem | `rsa_enc_dec_units` | 126 |
+| Lemma | `rsa_d_is_cube_root_map` | 153 |
+| Lemma | `prime_11` | 164 |
+| Lemma | `prime_17` | 173 |
+| Lemma | `rsa_test_lambda` | 183 |
+| Lemma | `rsa_test_phi` | 186 |
+| Lemma | `rsa_test_inv` | 189 |
+| Lemma | `rsa_test_coprime_e` | 192 |
+| Theorem | `rsa_test_N` | 207 |
+| Theorem | `rsa_test_vector` | 210 |
+| Theorem | `rsa_test_roundtrip` | 214 |
+| Theorem | `rsa_test_annihilator` | 218 |
+| Theorem | `N_cong_q_mod_pminus1` | 233 |
+| Theorem | `gcd_polyN_pminus1_is_gcd_at_q` | 244 |
 
 ## `RabinWilliams.v`
 
@@ -2073,13 +2074,13 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `SAGM.v`
 
-- L9: Strong algebraic group model (representation)
+- L10: Strong algebraic group model (representation)
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `sagm_eval_21` | 30 |
-| Theorem | `sagm_product_adds_exponents` | 35 |
-| Theorem | `sagm_mul_exps` | 43 |
+| Theorem | `sagm_eval_21` | 31 |
+| Theorem | `sagm_product_adds_exponents` | 36 |
+| Theorem | `sagm_mul_exps` | 44 |
 
 ## `SameW.v`
 
@@ -2267,7 +2268,7 @@ in the Rocq tree.  Do not edit by hand.
 
 - L18: Algorithm restrictions: SAGM-only, safeprime residual, polynomial [e(y)]
   - L25: SAGM-only: known exponents of public bases
-  - L73: Safeprime residual on [N = 77], [λ = 30 = 2 p' q']
+  - L73: Safeprime residual on [N = pin_77], [λ = 30 = 2 p' q']
   - L102: Polynomial [e] of the challenge
   - L125: Degree-[≥2] polynomial [e = P(y)], rejection sample, write-[e] then [x]
 
@@ -2547,21 +2548,21 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `modulus_paillier_carrier` | 24 |
 | Theorem | `modulus_williams_Ve` | 32 |
 | Theorem | `modulus_ou_carrier` | 38 |
-| Theorem | `modulus_dj_carrier` | 46 |
-| Theorem | `modulus_cocks_jacobi` | 50 |
-| Theorem | `modulus_prime_power_field` | 54 |
-| Theorem | `modulus_two_safeprimes` | 60 |
-| Theorem | `modulus_rw_shape_odd_e` | 71 |
-| Theorem | `modulus_twins` | 76 |
-| Theorem | `modulus_unbalanced` | 81 |
-| Theorem | `modulus_triprime_cube_not_residual` | 91 |
-| Theorem | `modulus_prime_field` | 102 |
-| Theorem | `modulus_N55_cube_residual_shaped` | 108 |
-| Theorem | `modulus_N119_cube_shares` | 114 |
-| Theorem | `modulus_N209_cube_shares` | 120 |
-| Theorem | `modulus_N221_cube_shares` | 126 |
-| Theorem | `modulus_N323_cube_shares` | 132 |
-| Theorem | `modulus_prime_cube` | 138 |
+| Theorem | `modulus_dj_carrier` | 47 |
+| Theorem | `modulus_cocks_jacobi` | 51 |
+| Theorem | `modulus_prime_power_field` | 55 |
+| Theorem | `modulus_two_safeprimes` | 61 |
+| Theorem | `modulus_rw_shape_odd_e` | 72 |
+| Theorem | `modulus_twins` | 77 |
+| Theorem | `modulus_unbalanced` | 82 |
+| Theorem | `modulus_triprime_cube_not_residual` | 92 |
+| Theorem | `modulus_prime_field` | 103 |
+| Theorem | `modulus_N55_cube_residual_shaped` | 109 |
+| Theorem | `modulus_N119_cube_shares` | 115 |
+| Theorem | `modulus_N209_cube_shares` | 121 |
+| Theorem | `modulus_N221_cube_shares` | 127 |
+| Theorem | `modulus_N323_cube_shares` | 133 |
+| Theorem | `modulus_prime_cube` | 139 |
 
 ## `SrsaOrderArrows.v`
 
@@ -3096,10 +3097,10 @@ in the Rocq tree.  Do not edit by hand.
   - L68: Jacobi [−1] forces odd [e]
   - L101: Even [e] is a square root
   - L149: [λ]-type: [x = y] is an annihilator
-  - L243: Residual leaf (open: solver ⇒ factor is the live target)
-  - L277: Self-randomization and related queries
-  - L325: SAGM handle still peels
-  - L345: Four square roots of 1; mixed splits, [−1] does not
+  - L244: Residual leaf (open: solver ⇒ factor is the live target)
+  - L278: Self-randomization and related queries
+  - L326: SAGM handle still peels
+  - L346: Four square roots of 1; mixed splits, [−1] does not
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3121,51 +3122,51 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `prime_7` | 212 |
 | Theorem | `srsa_safeprime_lambda_30` | 220 |
 | Theorem | `srsa_safeprime_lambda_type` | 224 |
-| Theorem | `srsa_safeprime_g0_square` | 228 |
-| Theorem | `srsa_safeprime_miller_gcd` | 232 |
-| Theorem | `srsa_safeprime_miller_factors` | 236 |
-| Theorem | `srsa_residual_pin` | 252 |
-| Theorem | `srsa_fixed_e_rerand` | 279 |
-| Theorem | `srsa_fixed_e_rerand_pin` | 292 |
-| Theorem | `srsa_poly_e_not_rerand_invariant` | 299 |
-| Theorem | `srsa_related_y_square` | 305 |
-| Theorem | `srsa_related_pin` | 321 |
-| Theorem | `srsa_sagm_handle_unit` | 327 |
-| Theorem | `srsa_sagm_lambda_type_peel` | 332 |
-| Theorem | `srsa_sagm_product_reused` | 337 |
-| Theorem | `srsa_sqrt1_120_splits` | 347 |
-| Theorem | `srsa_minus1_no_split` | 353 |
-| Theorem | `srsa_120_plus_1` | 358 |
-| Theorem | `srsa_miller_66` | 364 |
-| Theorem | `srsa_four_sqrt1` | 369 |
+| Theorem | `srsa_safeprime_g0_square` | 229 |
+| Theorem | `srsa_safeprime_miller_gcd` | 233 |
+| Theorem | `srsa_safeprime_miller_factors` | 237 |
+| Theorem | `srsa_residual_pin` | 253 |
+| Theorem | `srsa_fixed_e_rerand` | 280 |
+| Theorem | `srsa_fixed_e_rerand_pin` | 293 |
+| Theorem | `srsa_poly_e_not_rerand_invariant` | 300 |
+| Theorem | `srsa_related_y_square` | 306 |
+| Theorem | `srsa_related_pin` | 322 |
+| Theorem | `srsa_sagm_handle_unit` | 328 |
+| Theorem | `srsa_sagm_lambda_type_peel` | 333 |
+| Theorem | `srsa_sagm_product_reused` | 338 |
+| Theorem | `srsa_sqrt1_120_splits` | 348 |
+| Theorem | `srsa_minus1_no_split` | 354 |
+| Theorem | `srsa_120_plus_1` | 359 |
+| Theorem | `srsa_miller_66` | 365 |
+| Theorem | `srsa_four_sqrt1` | 370 |
 
 ## `Succinct.v`
 
-- L16: Logarithmic fold of the bilinear CRS combine
-  - L35: List halves and the fold [a_L + 2 a_R]
-  - L135: One round of the posted proof (13 residues)
-  - L146: Prover
-  - L227: Verifier: no slot list, no per-slot bound search
-  - L261: Size: [13 log2 n + 2]
-  - L299: Completeness on the pin family and QAP
+- L17: Logarithmic fold of the bilinear CRS combine
+  - L36: List halves and the fold [a_L + 2 a_R]
+  - L136: One round of the posted proof (13 residues)
+  - L147: Prover
+  - L228: Verifier: no slot list, no per-slot bound search
+  - L262: Size: [13 log2 n + 2]
+  - L300: Completeness on the pin family and QAP
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `poly_eval_app` | 44 |
-| Lemma | `nn_app` | 61 |
-| Lemma | `nn_firstn` | 70 |
-| Lemma | `nn_skipn` | 82 |
-| Lemma | `nn_map_mul_nonneg` | 94 |
-| Lemma | `nn_poly_add` | 103 |
-| Lemma | `nn_succ_fold` | 115 |
-| Lemma | `poly_eval_succ_fold` | 124 |
-| Lemma | `succ_round_pack_length` | 199 |
-| Lemma | `succ_prove_cons_length` | 205 |
-| Lemma | `succ_prove_rounds_log` | 212 |
-| Theorem | `succ_proof_len_is_log` | 263 |
-| Theorem | `succ_proof_len_n4` | 274 |
-| Theorem | `succ_proof_len_n16` | 284 |
-| Theorem | `succ_proof_len_bound_pin` | 294 |
+| Lemma | `poly_eval_app` | 45 |
+| Lemma | `nn_app` | 62 |
+| Lemma | `nn_firstn` | 71 |
+| Lemma | `nn_skipn` | 83 |
+| Lemma | `nn_map_mul_nonneg` | 95 |
+| Lemma | `nn_poly_add` | 104 |
+| Lemma | `nn_succ_fold` | 116 |
+| Lemma | `poly_eval_succ_fold` | 125 |
+| Lemma | `succ_round_pack_length` | 200 |
+| Lemma | `succ_prove_cons_length` | 206 |
+| Lemma | `succ_prove_rounds_log` | 213 |
+| Theorem | `succ_proof_len_is_log` | 264 |
+| Theorem | `succ_proof_len_n4` | 275 |
+| Theorem | `succ_proof_len_n16` | 285 |
+| Theorem | `succ_proof_len_bound_pin` | 295 |
 | Theorem | `succ_pin_n2_accepts` | 305 |
 | Theorem | `succ_pin_n2_rejects_group_mul` | 317 |
 | Theorem | `succ_pin_n2_sum_neq_prod` | 327 |

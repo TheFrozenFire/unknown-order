@@ -15,7 +15,7 @@ Open Scope Z_scope.
 
     Invert in [⟨y⟩] from [ord(y)] always (equality / multiply).
     A leftover pair factors [N] only under KeyGen mismatch
-    ([one_sided_low_order]).  Matching local orders on [N=247] do
+    ([one_sided_low_order]).  Matching local orders on [N=pin_247] do
     not yield a proper factor.  A leftover pair is not a residual
     *solver*; solver ⇒ factor is
     [residual_solver_constructs_factor_open_named].
@@ -24,7 +24,7 @@ Open Scope Z_scope.
 (** ** Order of the pin challenge *)
 
 Theorem is_order_pin_y_40 :
-  is_order 187 36 40.
+  is_order pin_N 36 40.
 Proof.
   unfold is_order. split; [lia|]. split.
   - vm_compute. reflexivity.
@@ -65,9 +65,9 @@ Proof.
 Qed.
 
 Theorem order_yields_residual_pin :
-  srsa_residual_leaf 187 80 36 (powm 36 27 187) 3.
+  srsa_residual_leaf pin_N 80 36 (powm 36 27 pin_N) 3.
 Proof.
-  apply (order_yields_residual_sRSA 187 36 40 3 27 80).
+  apply (order_yields_residual_sRSA pin_N 36 40 3 27 80).
   - lia.
   - lia.
   - apply is_order_pin_y_40.
@@ -81,8 +81,8 @@ Proof.
 Qed.
 
 Theorem order_invert_pin_is_cube_root :
-  powm 36 27 187 = 42 /\
-  powm 42 3 187 = 36.
+  powm 36 27 pin_N = 42 /\
+  powm 42 3 pin_N = 36.
 Proof. vm_compute. split; reflexivity. Qed.
 
 (** ** Mismatch ⇒ Factor; matching local orders do not *)
@@ -113,22 +113,22 @@ Proof.
 Qed.
 
 Theorem leftover_x_mismatch_factors_pin :
-  Z.gcd (powm 42 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 (Z.gcd (powm 42 5 187 - 1) 187).
+  Z.gcd (powm 42 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N (Z.gcd (powm 42 5 pin_N - 1) pin_N).
 Proof.
-  change 187 with (11 * 17).
+
   apply leftover_mismatch_factors with (x := 42) (k := 5);
     [apply prime_11 | apply prime_17 | discriminate | apply leftover_x_one_sided_pin].
 Qed.
 
 Theorem residual_mismatch_factors_pin :
-  srsa_residual_leaf 187 80 36 42 3 ->
+  srsa_residual_leaf pin_N 80 36 42 3 ->
   one_sided_low_order 11 17 42 5 ->
-  Z.gcd (powm 42 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 (Z.gcd (powm 42 5 187 - 1) 187).
+  Z.gcd (powm 42 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N (Z.gcd (powm 42 5 pin_N - 1) pin_N).
 Proof.
   intros _ Hone.
-  change 187 with (11 * 17).
+
   apply leftover_mismatch_factors with (x := 42) (k := 5);
     [apply prime_11 | apply prime_17 | discriminate | exact Hone].
 Qed.
@@ -143,16 +143,16 @@ Proof.
 Qed.
 
 Theorem order_mismatch_factors_pin :
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 (Z.gcd (powm 36 5 187 - 1) 187).
+  Z.gcd (powm pin_y 5 pin_N - 1) pin_N = pin_p /\
+  Problem_Factor pin_N (Z.gcd (powm pin_y 5 pin_N - 1) pin_N).
 Proof.
-  change 187 with (11 * 17).
-  apply leftover_mismatch_factors with (x := 36) (k := 5);
+
+  apply leftover_mismatch_factors with (x := pin_y) (k := 5);
     [apply prime_11 | apply prime_17 | discriminate | apply leftover_y_one_sided_pin].
 Qed.
 
 Theorem leftover_77_one_sided :
-  one_sided_low_order 7 11 2 3.
+  one_sided_low_order pin_77_p pin_77_q pin_77_x 3.
 Proof.
   unfold one_sided_low_order.
   split; [vm_compute; reflexivity|].
@@ -161,20 +161,20 @@ Proof.
 Qed.
 
 Theorem leftover_77_mismatch_factors :
-  Z.gcd (powm 2 3 77 - 1) 77 = 7 /\
-  Problem_Factor 77 (Z.gcd (powm 2 3 77 - 1) 77).
+  Z.gcd (powm pin_77_x 3 pin_77 - 1) pin_77 = pin_77_p /\
+  Problem_Factor pin_77 (Z.gcd (powm pin_77_x 3 pin_77 - 1) pin_77).
 Proof.
-  change 77 with (7 * 11).
-  apply leftover_mismatch_factors with (x := 2) (k := 3);
+
+  apply leftover_mismatch_factors with (x := pin_77_x) (k := 3);
     [apply prime_7 | apply prime_11 | discriminate | apply leftover_77_one_sided].
 Qed.
 
 (** Matching local orders: the [k=5] that splits leftover [x] on
-    [N=187] is not one-sided on [N=247], and the gcd is not a
+    [N=pin_N] is not one-sided on [N=pin_247], and the gcd is not a
     proper factor. *)
 
 Theorem matching_247_not_one_sided :
-  ~ one_sided_low_order 13 19 179 5.
+  ~ one_sided_low_order pin_247_p pin_247_q pin_247_x pin_247_e.
 Proof.
   unfold one_sided_low_order.
   intros [_ [_ [Hp Hq]]].
@@ -182,18 +182,18 @@ Proof.
 Qed.
 
 Theorem matching_247_gcd_not_proper :
-  Z.gcd (powm 179 5 247 - 1) 247 = 1 /\
-  ~ Problem_Factor 247 (Z.gcd (powm 179 5 247 - 1) 247).
+  Z.gcd (powm pin_247_x pin_247_e pin_247 - 1) pin_247 = 1 /\
+  ~ Problem_Factor pin_247 (Z.gcd (powm pin_247_x pin_247_e pin_247 - 1) pin_247).
 Proof.
-  assert (Hg : Z.gcd (powm 179 5 247 - 1) 247 = 1)
+  assert (Hg : Z.gcd (powm pin_247_x pin_247_e pin_247 - 1) pin_247 = 1)
     by (vm_compute; reflexivity).
   split; [exact Hg|].
   intros [Hlt _]. rewrite Hg in Hlt. lia.
 Qed.
 
 Theorem matching_247_two_sided_gcd_is_N :
-  Z.gcd (powm 179 6 247 - 1) 247 = 247 /\
-  ~ Problem_Factor 247 247.
+  Z.gcd (powm pin_247_x 6 pin_247 - 1) pin_247 = pin_247 /\
+  ~ Problem_Factor pin_247 pin_247.
 Proof.
   split; [vm_compute; reflexivity|].
   intros [Hlt _]. lia.

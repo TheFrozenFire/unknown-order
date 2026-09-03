@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; ee = 3; lam = lcm(p-1, q-1);
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; ee = 3; lam = lcm(p-1, q-1);
 
 \\ one-more: one queried inversion (36,42) plus unqueried 8=2^3
 check(lift(Mod(42,N)^ee) == 36,         "queried: 42^3 ≡ 36");

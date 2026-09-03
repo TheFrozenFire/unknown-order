@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 13; q = 7; N = p*q;
+read("lib/pin.gp");
+
+p = pin_91_p; q = pin_91_q; N = pin_91;
 check((p-1) % 3 == 0, "3 | p-1");
 check((q-1) % 3 == 0, "3 | q-1");
 lam = lcm(p-1, q-1);

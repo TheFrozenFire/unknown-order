@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y;
 
 \\ ========== I 101-120 x=f(y) ==========
 check(lift(Mod(y,N)^7)==9,              "101 y^7 ≡ 9");

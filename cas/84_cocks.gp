@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 23; N = p*q;
+read("lib/pin.gp");
+
+p = pin_253_p; q = pin_253_q; N = pin_253;
 
 \\ pick a with Jacobi +1 that is a global square (the PKG-extractable one)
 a = 3;

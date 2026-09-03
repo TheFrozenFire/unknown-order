@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 factors_from_phi(N, phi) = {
   s = N - phi + 1;
   disc = s^2 - 4*N;
@@ -12,7 +14,7 @@ factors_from_phi(N, phi) = {
 };
 
 \\ textbook instance: φ = 160 recovers {17,11}
-N = 187; phi = 160;
+N = pin_N; phi = 160;
 pq = factors_from_phi(N, phi);
 check(pq[1]*pq[2] == N,                 "product of recovered roots is N");
 check(Set(pq) == Set([11,17]),          "roots are {11,17}");

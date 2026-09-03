@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; lam = 80;
+read("lib/pin.gp");
+
+N = pin_N; lam = 80;
 
 \\ SAGM: y=g=3, x=g^{27}, e=3.  znorder(3)=80=λ.  ae-1=80.
 g = 3; a = 27; ee = 3;
@@ -24,7 +26,7 @@ check(lift(Mod(v,N)^e81) == vs,         "SAGM scale: eval(ae,be) = eval^e");
 check(vs == v,                          "e=81 is λ-type on this handle");
 
 \\ safeprime N=77, λ=30=2*3*5
-Ns = 7*11; lams = 30;
+Ns = pin_77; lams = pin_77_lam;
 check(lams == lcm(6,10),                "λ(77)=30");
 check(gcd(3, lams) == 3,                "e=3 shares p'=3 with λ");
 check(2*3+1 == 7 && Ns % 7 == 0,        "2 p'+1 = 7 divides N");

@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; d = 27;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; d = 27;
 check((3*d) % lcm(p-1,q-1) == 1, "d is the rsa_test inverse");
 
 s1 = lift(Mod(2,N)^d); s2 = lift(Mod(3,N)^d); s3 = lift(Mod(5,N)^d);

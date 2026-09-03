@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam;
 
 \\ ========== A 1-12 ==========
 check(lift(Mod(36,N)^3)==93,            "01 y^3 ≡ 93");

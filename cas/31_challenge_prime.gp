@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 M = 103740; a = 13099;
 check(2*0 + 1 == 1,                      "ch_encode(0) = 1");
 check((2*0 + 1) % M != a,                "challenge image is not the constructor residue");
@@ -14,7 +16,7 @@ check(all_odd,                           "challenge encode is odd");
 check(n_odd_pr >= 3,                     "several odd primes in seeds 1..30");
 check(!all_on_ap,                        "accepted challenges are not all on the constructor AP");
 
-N = 11*17;
+N = pin_N;
 W = 2; x = 15;
 A = lift(Mod(W, N)^x);
 check(A == lift(Mod(2, N)^15),           "A = 2^15 (mod 187)");

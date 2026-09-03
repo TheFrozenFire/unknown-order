@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 check(znorder(Mod(2,11))==10,           "ord_11(2)=10");
 check(znorder(Mod(2,17))==8,            "ord_17(2)=8");
 check(valuation(10,2)==1,               "v2(ord_11(2))=1 = height");
@@ -18,7 +20,7 @@ lcm_unit_orders(N) = {
   L
 };
 
-check(lcm_unit_orders(187)==lcm(10,16), "11×17: lcm of orders is λ=80");
+check(lcm_unit_orders(pin_N)==lcm(10,16), "11×17: lcm of orders is λ=80");
 check(lcm_unit_orders(209)==lcm(10,18), "11×19: lcm of orders is λ=90");
 check(lcm_unit_orders(41*73)==lcm(40,72), "41×73: lcm of orders is λ");
 

@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 D = -31;
 id = qfbred(Qfb(1, D%2, (D%2-D)/4));
 gg = Qfb(2,1,4);
@@ -25,7 +27,7 @@ rho = 2;
 check(qfbred(P0^(rho^0)) == P0, "contribute at slot 0 is identity");
 
 \\ RSA presentation of the same string
-N = 11*17; gZ = 3;
+N = pin_N; gZ = 3;
 check(lift(Mod(gZ, N)^(tau^0)) == gZ % N, "RSA P_0 = g");
 check(lift(Mod(gZ, N)^(tau^1)) == lift(Mod(gZ, N)^tau), "RSA P_1 = g^tau");
 left = lift(Mod(lift(Mod(gZ, N)^(tau^2)), N)^(rho^2));

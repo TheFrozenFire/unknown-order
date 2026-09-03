@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N;
 g = 3; h = 9;
 check(gcd(g,N)==1 && gcd(h,N)==1, "g,h units");
 check(lift(Mod(h,N)) == lift(Mod(g,N)^2), "h = g^2 so Δx=2, Δr=1 binds");

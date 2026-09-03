@@ -10,8 +10,8 @@ read("lib/pin.gp");
 read("lib/classes.gp");
 
 init_pin();
-check(N==187 && y==36 && x==42 && e==3 && lam==80, "default pin 187,36,42,3,80");
-check(Pin==[187,36,42,3,80],             "Pin vector");
+check(N==pin_N && y==pin_y && x==pin_x && e==pin_e && lam==pin_lam, "default pin");
+check(Pin==[pin_N, pin_y, pin_x, pin_e, pin_lam], "Pin vector");
 
 check(residual(),                        "residual cube 42^3 == 36");
 check(!factor_from_x(),                  "x is not a factor of N");
@@ -32,7 +32,7 @@ check(classes_all(),                     "classes 01-100 conjunction");
 check(whole(),                           "whole identity on the default pin");
 
 \\ Named extra pins: in-corpus second moduli, not a replacement of 187.
-check(extra_77()==[77,51,2,7,30],        "extra pin 77 vector");
+check(extra_77()==[pin_77, pin_77_y, pin_77_x, pin_77_e, pin_77_lam], "extra pin 77 vector");
 check(extra_77_residual(),               "extra pin 77 residual 2^7 == 51");
 check(extra_253_ok(),                    "extra pin 253 Williams pair");
 check(extra_45_ok(),                     "extra pin 45 Takagi / OU");

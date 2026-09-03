@@ -7,7 +7,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N;
 
 y11 = lift(chinese(Mod(1,p), Mod(11,q)));
 check(y11 % p == 1,                         "CRT lift ≡ 1 (mod 11)");

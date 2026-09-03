@@ -512,7 +512,7 @@ Proof.
   unfold powm. rewrite Z.pow_0_r. apply Z.mod_1_l; lia.
 Qed.
 
-Theorem gp_91_order_3 : is_order 91 29 3.
+Theorem gp_pin_91_order_3 : is_order pin_91 pin_91_gp 3.
 Proof.
   split; [lia|]. split; [vm_compute; reflexivity|].
   intros k' [Hk' Hk'lt] Hpow.
@@ -520,7 +520,7 @@ Proof.
   destruct H as [H | H]; subst k'; vm_compute in Hpow; discriminate.
 Qed.
 
-Theorem gq_91_order_3 : is_order 91 79 3.
+Theorem gq_pin_91_order_3 : is_order pin_91 pin_91_gq 3.
 Proof.
   split; [lia|]. split; [vm_compute; reflexivity|].
   intros k' [Hk' Hk'lt] Hpow.
@@ -529,18 +529,19 @@ Proof.
 Qed.
 
 Theorem mu3N_det_gp_gq :
-  mu3N_det 3 2 13 7 29 79 = 3.
+  mu3N_det pin_91_om_p pin_91_om_q pin_91_p pin_91_q pin_91_gp pin_91_gq = pin_91_om_p.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem mu3N_det_gq_gp :
-  mu3N_det 3 2 13 7 79 29 = 9.
+  mu3N_det pin_91_om_p pin_91_om_q pin_91_p pin_91_q pin_91_gq pin_91_gp =
+    powm pin_91_om_p 2 pin_91_p.
 Proof. vm_compute. reflexivity. Qed.
 
-Theorem mu3_91_kernel_not_cyclic :
+Theorem mu3_pin_91_kernel_not_cyclic :
   forall x,
-    Z.coprime x 91 ->
-    powm x 3 91 = 1 ->
-    ~ is_order 91 x 9.
+    Z.coprime x pin_91 ->
+    powm x 3 pin_91 = 1 ->
+    ~ is_order pin_91 x 9.
 Proof.
   intros x Hcop Hmu [Hk [H9 Hmin]].
   apply (Hmin 3); [lia | exact Hmu].

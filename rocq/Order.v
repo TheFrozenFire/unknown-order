@@ -269,30 +269,30 @@ Proof.
 Qed.
 
 Theorem minus1_order_2_rsa_test :
-  is_order 187 186 2.
+  is_order pin_N 186 2.
 Proof.
   apply is_order_2_of; [lia | vm_compute; reflexivity | vm_compute; discriminate].
 Qed.
 
 Theorem mixed67_order_2_rsa_test :
-  is_order 187 67 2.
+  is_order pin_N 67 2.
 Proof.
   apply is_order_2_of; [lia | vm_compute; reflexivity | vm_compute; discriminate].
 Qed.
 
 Theorem lcm_two_order2_not_lambda :
-  is_order 187 186 2 /\
-  is_order 187 67 2 /\
-  Z.lcm 2 2 <> lambda_semiprime 11 17.
+  is_order pin_N 186 2 /\
+  is_order pin_N 67 2 /\
+  Z.lcm 2 2 <> lambda_semiprime pin_p pin_q.
 Proof.
   split; [apply minus1_order_2_rsa_test|].
   split; [apply mixed67_order_2_rsa_test|].
-  replace (lambda_semiprime 11 17) with 80 by (apply rsa_test_lambda).
+  replace (lambda_semiprime pin_p pin_q) with pin_lam by (apply rsa_test_lambda).
   discriminate.
 Qed.
 
 Theorem is_order_pin_3_80 :
-  is_order 187 3 80.
+  is_order pin_N 3 80.
 Proof.
   unfold is_order. split; [lia|]. split.
   - vm_compute. reflexivity.
@@ -319,12 +319,12 @@ Proof.
 Qed.
 
 Theorem pin_unit_3_coprime :
-  Z.coprime 3 187.
+  Z.coprime 3 pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem pin_attains_lambda :
-  Z.coprime 3 187 /\ is_order 187 3 80 /\
-  80 = lambda_semiprime 11 17.
+  Z.coprime 3 pin_N /\ is_order pin_N 3 80 /\
+  pin_lam = lambda_semiprime pin_p pin_q.
 Proof.
   split; [apply pin_unit_3_coprime|].
   split; [apply is_order_pin_3_80|].
@@ -336,8 +336,8 @@ Qed.
     remains the general density statement. *)
 
 Theorem orders_generate_lambda_pin :
-  exists a, Z.coprime a 187 /\ is_order 187 a 80 /\
-    80 = lambda_semiprime 11 17.
+  exists a, Z.coprime a pin_N /\ is_order pin_N a 80 /\
+    pin_lam = lambda_semiprime pin_p pin_q.
 Proof. exists 3. apply pin_attains_lambda. Qed.
 
 (** ** 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)] *)
@@ -1001,12 +1001,12 @@ Proof.
 Qed.
 
 Theorem exists_unit_order_lambda_pin :
-  exists a, Z.coprime a 187 /\ is_order 187 a 80.
+  exists a, Z.coprime a pin_N /\ is_order pin_N a 80.
 Proof.
   destruct (exists_unit_order_lambda 11 17 prime_11 prime_17 ltac:(lia))
     as [a [Hc Ho]].
   exists a. split; [exact Hc|].
-  replace (lambda_semiprime 11 17) with 80 in Ho by (apply rsa_test_lambda).
+  replace (lambda_semiprime pin_p pin_q) with pin_lam in Ho by (apply rsa_test_lambda).
   exact Ho.
 Qed.
 

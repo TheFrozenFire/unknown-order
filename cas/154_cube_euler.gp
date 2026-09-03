@@ -8,6 +8,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 covers(g, p) = {
   okc = 1;
   for(a = 1, p-1,
@@ -59,7 +61,7 @@ perm_cubes(p) = {
   okc
 };
 
-p = 13;
+p = pin_91_p;
 check((p-1) % 3 == 0,                 "3 | 12");
 check(znorder(Mod(2,p)) == p-1,       "2 generates F_13*");
 check(covers(2, p),                   "every unit of F_13* is a power of 2");
@@ -73,7 +75,7 @@ check(lift(Mod(3,p)^3) == 1,          "3^3 ≡ 1 (mod 13)");
 check(lift(Mod(3,p)^2) == 9,          "3^2 ≡ 9, the other 3rd root");
 check(n_cube_roots(1, p) == 3,        "1 has three cube roots");
 
-q = 7;
+q = pin_91_q;
 check((q-1) % 3 == 0,                 "3 | 6");
 check(znorder(Mod(3,q)) == q-1,       "3 generates F_7*");
 check(covers(3, q),                   "every unit of F_7* is a power of 3");

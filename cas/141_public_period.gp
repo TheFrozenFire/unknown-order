@@ -6,7 +6,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36; x=42;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; x=pin_x;
 
 check(N-1 == 186,                       "N-1=186");
 check(186 == 2*3*31,                    "N-1=2·3·31 public factorization");

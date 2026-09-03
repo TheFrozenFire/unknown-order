@@ -8,7 +8,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N;
 
 check(znorder(Mod(2,p))==p-1,           "2 generates F_11*");
 check(znorder(Mod(3,q))==q-1,           "3 generates F_17*");

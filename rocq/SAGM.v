@@ -3,6 +3,7 @@ From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
+Require Import Pin.
 
 Open Scope Z_scope.
 
@@ -28,16 +29,16 @@ Definition sagm_pin_g : Z := 3.
 Definition sagm_pin_h : Z := 5.
 
 Theorem sagm_eval_21 :
-  sagm_eval 187 sagm_pin_g sagm_pin_h {| sagm_a := 2; sagm_b := 1 |} =
-    (9 * 5) mod 187.
+  sagm_eval pin_N sagm_pin_g sagm_pin_h {| sagm_a := 2; sagm_b := 1 |} =
+    (9 * 5) mod pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_product_adds_exponents :
   let r := {| sagm_a := 2; sagm_b := 1 |} in
   let s := {| sagm_a := 1; sagm_b := 3 |} in
-  sagm_eval 187 sagm_pin_g sagm_pin_h (sagm_mul r s) =
-    (sagm_eval 187 sagm_pin_g sagm_pin_h r *
-     sagm_eval 187 sagm_pin_g sagm_pin_h s) mod 187.
+  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_mul r s) =
+    (sagm_eval pin_N sagm_pin_g sagm_pin_h r *
+     sagm_eval pin_N sagm_pin_g sagm_pin_h s) mod pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_mul_exps :

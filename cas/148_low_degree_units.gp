@@ -6,7 +6,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N;
 Q3 = x^3 - x;
 check(poldegree(Q3)==3,                 "deg(X^3−X)=3");
 check(3 < p-1,                          "3 < p−1=10: identity is low-degree on this pin");

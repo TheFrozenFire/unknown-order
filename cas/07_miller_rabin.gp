@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 oddpart(n) = { while(n%2==0, n = n/2); n };
 
 \\ On a prime, a^{p−1} ≡ 1 (Fermat) — the sequence must reach 1
@@ -17,8 +19,8 @@ M = 80; n = M+1;
 check(oddpart(n-1) == oddpart(M),       "mr_t(M+1) = miller_t");
 check(valuation(n-1,2) == valuation(M,2), "mr_s(M+1) = miller_s");
 
-\\ A composite N=187 with exponent N−1 (true MR) vs exponent M=80 (factoring)
-N = 187;
+\\ A composite N = pin_N with exponent N−1 (true MR) vs exponent M=80 (factoring)
+N = pin_N;
 \\ MR on N with a=2: 2^{186} ≡ 1, but the chain from 2^{oddpart(186)} may misbehave
 tN = oddpart(N-1);
 g = lift(Mod(2,N)^tN);

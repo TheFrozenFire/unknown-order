@@ -29,7 +29,7 @@ Open Scope Z_scope.
 Definition gra_jacobi_gate (a p q : Z) : Z := jacobi_N a p q.
 
 Theorem dozen_jacobi_gate_minus1 :
-  gra_jacobi_gate 2 11 17 = -1.
+  gra_jacobi_gate 2 pin_p pin_q = -1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dozen_jacobi_gate_forces_odd :
@@ -39,21 +39,21 @@ Proof. exists 40. lia. Qed.
 (** ** 2. SAGM on both [x] and [y] in base [g=3] *)
 
 Theorem dozen_sagm_both_pin :
-  powm (powm 3 54 187) 3 187 = powm 3 2 187 /\
-  powm 3 2 187 = 9.
+  powm (powm 3 54 pin_N) 3 pin_N = powm 3 2 pin_N /\
+  powm 3 2 pin_N = 9.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem dozen_sagm_ae_eq_c_mod_lambda :
-  (54 * 3 - 2) mod 80 = 0.
+  (54 * 3 - 2) mod pin_lam = 0.
 Proof. vm_compute. reflexivity. Qed.
 
 (** ** 3. Related queries with coprime exponents (Shamir) *)
 
 Theorem dozen_related_coprime_exps :
-  powm 32 3 187 = 43 /\
-  powm 64 5 187 = powm 43 2 187 /\
+  powm 32 3 pin_N = 43 /\
+  powm 64 5 pin_N = powm 43 2 pin_N /\
   Z.gcd 3 5 = 1 /\
-  powm 32 (2 * 3) 187 = powm 64 5 187.
+  powm 32 (2 * 3) pin_N = powm 64 5 pin_N.
 Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem dozen_related_shamir_gcd :
@@ -75,15 +75,15 @@ Proof. vm_compute. reflexivity. Qed.
 (** ** 5. One-sided [a^{e-1}] *)
 
 Theorem dozen_onesided_e11 :
-  Z.gcd (2 ^ 10 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (2 ^ 10 - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem dozen_e11_residual_shaped :
-  srsa_residual_leaf 187 80 (powm 2 11 187) 2 11.
+  srsa_residual_leaf pin_N 80 (powm 2 11 pin_N) 2 11.
 Proof.
   unfold srsa_residual_leaf, Problem_StrongRSA.
   split; [vm_compute; reflexivity|].
@@ -100,20 +100,20 @@ Theorem dozen_short_e3 :
 Proof. split; lia. Qed.
 
 Theorem dozen_short_e_is_residual_cube :
-  srsa_residual_leaf 187 80 36 42 3.
+  srsa_residual_leaf pin_N 80 36 42 3.
 Proof. apply srsa_residual_pin. Qed.
 
 (** ** 7. Bounded advice on [N] *)
 
 Theorem dozen_advice_bit_no_split :
-  187 mod 2 = 1 /\ Z.gcd 1 187 = 1.
+  pin_N mod 2 = 1 /\ Z.gcd 1 pin_N = 1.
 Proof. split; reflexivity. Qed.
 
 Theorem dozen_advice_div_splits :
-  187 / 17 = 11 /\ Problem_Factor 187 11.
+  pin_N / 17 = 11 /\ Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 (** ** 8. Blum modulus [N=11·23], [λ=110] *)
@@ -131,31 +131,32 @@ Proof.
 Qed.
 
 Theorem dozen_blum_shape :
-  11 mod 4 = 3 /\ 23 mod 4 = 3 /\
-  lambda_semiprime 11 23 = 110.
+  pin_253_p mod 4 = 3 /\ pin_253_q mod 4 = 3 /\
+  lambda_semiprime pin_253_p pin_253_q = pin_253_lam.
 Proof. split; [reflexivity|]. split; [reflexivity|]. vm_compute. reflexivity. Qed.
 
 Theorem dozen_blum_e5_names_p :
-  Z.gcd 5 110 = 5 /\ 2 * 5 + 1 = 11 /\ (11 | 253).
-Proof. split; [reflexivity|]. split; [reflexivity|]. exists 23. reflexivity. Qed.
+  Z.gcd 5 pin_253_lam = 5 /\ 2 * 5 + 1 = pin_253_p /\ (pin_253_p | pin_253).
+Proof. split; [reflexivity|]. split; [reflexivity|]. exists pin_253_q. reflexivity. Qed.
 
 Theorem dozen_blum_e11_names_q :
-  Z.gcd 11 110 = 11 /\ 2 * 11 + 1 = 23 /\ (23 | 253).
-Proof. split; [vm_compute; reflexivity|]. split; [reflexivity|]. exists 11. reflexivity. Qed.
+  Z.gcd pin_253_p pin_253_lam = pin_253_p /\ 2 * pin_253_p + 1 = pin_253_q /\
+  (pin_253_q | pin_253).
+Proof. split; [vm_compute; reflexivity|]. split; [reflexivity|]. exists pin_253_p. reflexivity. Qed.
 
 (** ** 9. Census: every unit is an [e=3] residual witness *)
 
 Theorem dozen_phi_160 :
-  phi_semiprime 11 17 = 160.
+  phi_semiprime pin_p pin_q = pin_phi.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dozen_every_unit_is_cube :
   forall y,
-    Z.coprime y 187 ->
-    powm (powm y 27 187) 3 187 = y mod 187.
+    Z.coprime y pin_N ->
+    powm (powm y 27 pin_N) 3 pin_N = y mod pin_N.
 Proof.
   intros y Hcop.
-  change 187 with (rsa_N rsa_test).
+  change pin_N with (rsa_N rsa_test).
   change 27 with (rsa_d rsa_test).
   change 3 with (rsa_e rsa_test).
   apply rsa_units_are_eth_powers. exact Hcop.
@@ -164,22 +165,22 @@ Qed.
 (** ** 10. GQ extract is residual, not a factor *)
 
 Theorem dozen_gq_extract_is_residual :
-  srsa_residual_leaf 187 80 36 42 3 /\
-  Z.gcd 42 187 = 1.
+  srsa_residual_leaf pin_N 80 36 42 3 /\
+  Z.gcd 42 pin_N = 1.
 Proof. split; [apply srsa_residual_pin | vm_compute; reflexivity]. Qed.
 
 Theorem dozen_gq_complete_still :
-  gq_verify 36 3 (gq_commit 1 3 187) 1 (gq_response 1 42 1 187) 187.
+  gq_verify 36 3 (gq_commit 1 3 pin_N) 1 (gq_response 1 42 1 pin_N) pin_N.
 Proof. apply cpp17_complete_pin. Qed.
 
 (** ** 11. Integer polynomial in [N] *)
 
 Theorem dozen_N_cong_q :
-  187 mod 10 = 17 mod 10.
+  pin_N mod 10 = 17 mod 10.
 Proof. apply (N_cong_q_mod_pminus1 11 17). lia. Qed.
 
 Theorem dozen_gcd_Nminus1_pminus1 :
-  Z.gcd (187 - 1) 10 = 2.
+  Z.gcd (pin_N - 1) 10 = 2.
 Proof. vm_compute. reflexivity. Qed.
 
 (** ** 12. [gcd(e−1, λ)] proper, not [λ] and not [2] *)

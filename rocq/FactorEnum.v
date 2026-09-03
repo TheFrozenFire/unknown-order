@@ -86,7 +86,7 @@ Qed.
 
     Concrete recovery on the test instance uses the known [φ = 160]: *)
 Theorem rsa_test_enum_from_phi :
-  let '(x, y) := factors_from_phi 187 160 in x = 17 /\ y = 11.
+  let '(x, y) := factors_from_phi pin_N 160 in x = 17 /\ y = 11.
 Proof.
   unfold factors_from_phi, factors_from_sum, factor_disc.
   vm_compute. split; reflexivity.

@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 v2(n) = valuation(n, 2);
 
 height(a, p) = {
@@ -31,7 +33,7 @@ check(v2(41-1) == 3,                    "v2(40)=3  (41≡1 mod 8)");
 check(v2(lcm(10,16)) == 4,              "v2(λ(11*17))=max(1,4)=4");
 
 \\ four square roots of 1 on 187
-N = 187; p = 11; q = 17;
+N = pin_N; p = pin_p; q = pin_q;
 rts = [];
 for(x = 0, N-1, if(lift(Mod(x,N)^2)==1, rts = concat(rts, [x])));
 check(#rts == 4,                        "exactly four square roots of 1");
@@ -46,7 +48,7 @@ check(height(2,11) == 1,                "2-height of 2 mod 11 is 1");
 check(height(2,17) == 3,                "2-height of 2 mod 17 is 3 (ord=8)");
 check(height(2,11) != height(2,17),     "mismatch ⇒ Miller splits 187");
 
-\\ exhaustive mismatch on N=187, units in 1..N-1
+\\ exhaustive mismatch on N = pin_N, units in 1..N-1
 mis = 0; tot = 0; matchpm1 = 0;
 for(a = 1, N-1, \
   if(gcd(a,N)==1, \

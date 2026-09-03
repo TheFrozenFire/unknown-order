@@ -4,6 +4,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 oddpart(n) = { while(n%2==0, n = n/2); n };
 val2(n) = valuation(n, 2);
 miller_factor(N, M, a) = {
@@ -31,7 +33,7 @@ seq_miller(N, M, nprimes) = {
   [0,0]
 };
 
-N = 187; M = 80;
+N = pin_N; M = 80;
 res = seq_miller(N, M, 10);
 check(res[1] == 2,                      "first successful prime base is 2");
 check(res[2]==11 || res[2]==17,         "it returns a prime factor of 187");

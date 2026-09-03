@@ -1,11 +1,13 @@
 \\ Generic-group interpreter: multiply/invert/eq, no add.
-\\ Mirrors GenericGroup.v.  Pin N=187, start [1, y] with y=2.
+\\ Mirrors GenericGroup.v.  Pin N = pin_N, start [1, y] with y=2.
 \\ One-sided product eq-test: gcd(2^10-1, N)=11.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; y = 2;
+read("lib/pin.gp");
+
+N = pin_N; y = 2;
 
 \\ PARI 1-indexed: tape[1]=1, tape[2]=y
 gtape = [1, y];

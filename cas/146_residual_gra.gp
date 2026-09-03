@@ -6,7 +6,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=lcm(p-1,q-1); y=36; xx=42; e=3;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; xx=pin_x; e=pin_e;
 check(lam == 80,                        "λ=80");
 check(e%2==1 && gcd(e,lam)==1 && (e-1)%lam!=0, "e=3 is residual-shaped");
 check(lift(Mod(xx,N)^e)==y,             "leftover cube 42^3 ≡ 36");

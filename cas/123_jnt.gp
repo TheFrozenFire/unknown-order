@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17;
+read("lib/pin.gp");
+
+N = pin_N;
 
 \\ affine oracle: cube root of (x+c).  x=7, c=1 → 8, root 2
 check(2^3 == 8,                         "2^3=8");

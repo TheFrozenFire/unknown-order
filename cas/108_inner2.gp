@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3;
+read("lib/pin.gp");
+
+N = pin_N; g = 3;
 x0 = 2; y0 = 3; x1 = 4; y1 = 5;
 s = x0*y0 + x1*y1;
 check(s == 26, "2*3+4*5=26");

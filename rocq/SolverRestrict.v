@@ -39,7 +39,7 @@ Proof.
 Qed.
 
 Theorem sagm_root_of_generator_pin :
-  powm (powm 3 27 187) 3 187 = 3.
+  powm (powm 3 27 pin_N) 3 pin_N = 3.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_ae_minus_one_is_lambda :
@@ -47,49 +47,49 @@ Theorem sagm_ae_minus_one_is_lambda :
 Proof. reflexivity. Qed.
 
 Theorem sagm_generator_annihilated :
-  powm 3 (27 * 3 - 1) 187 = 1.
+  powm 3 (27 * 3 - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_only_miller_splits :
-  Z.gcd (67 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (67 - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem sagm_scale_eval_pin :
   let r := {| sagm_a := 2; sagm_b := 1 |} in
-  sagm_eval 187 sagm_pin_g sagm_pin_h (sagm_scale r 81) =
-    powm (sagm_eval 187 sagm_pin_g sagm_pin_h r) 81 187.
+  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_scale r 81) =
+    powm (sagm_eval pin_N sagm_pin_g sagm_pin_h r) 81 pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem sagm_scale_lambda_type :
   let r := {| sagm_a := 2; sagm_b := 1 |} in
-  sagm_eval 187 sagm_pin_g sagm_pin_h (sagm_scale r 81) =
-    sagm_eval 187 sagm_pin_g sagm_pin_h r.
+  sagm_eval pin_N sagm_pin_g sagm_pin_h (sagm_scale r 81) =
+    sagm_eval pin_N sagm_pin_g sagm_pin_h r.
 Proof. vm_compute. reflexivity. Qed.
 
-(** ** Safeprime residual on [N = 77], [λ = 30 = 2 p' q'] *)
+(** ** Safeprime residual on [N = pin_77], [λ = 30 = 2 p' q'] *)
 
 Theorem safeprime_e3_names_p :
-  Z.gcd 3 30 = 3 /\
-  2 * 3 + 1 = 7 /\
-  (7 | 77).
-Proof. split; [reflexivity|]. split; [reflexivity|]. exists 11. reflexivity. Qed.
+  Z.gcd 3 pin_77_lam = 3 /\
+  2 * 3 + 1 = pin_77_p /\
+  (pin_77_p | pin_77).
+Proof. split; [reflexivity|]. split; [reflexivity|]. exists pin_77_q. reflexivity. Qed.
 
 Theorem safeprime_e5_names_q :
-  Z.gcd 5 30 = 5 /\
-  2 * 5 + 1 = 11 /\
-  (11 | 77).
-Proof. split; [reflexivity|]. split; [reflexivity|]. exists 7. reflexivity. Qed.
+  Z.gcd 5 pin_77_lam = 5 /\
+  2 * 5 + 1 = pin_77_q /\
+  (pin_77_q | pin_77).
+Proof. split; [reflexivity|]. split; [reflexivity|]. exists pin_77_p. reflexivity. Qed.
 
 Theorem safeprime_e3_not_residual :
-  Z.gcd 3 30 <> 1.
+  Z.gcd 3 pin_77_lam <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem safeprime_residual_e7 :
-  srsa_residual_leaf 77 30 51 2 7.
+  srsa_residual_leaf pin_77 pin_77_lam pin_77_y pin_77_x pin_77_e.
 Proof.
   unfold srsa_residual_leaf, Problem_StrongRSA.
   split; [vm_compute; reflexivity|].
@@ -107,7 +107,7 @@ Proof. intros y. unfold poly_eval. lia. Qed.
 
 Theorem poly_e_constant_is_fixed_e :
   poly_eval [3] 36 = 3 /\
-  srsa_residual_leaf 187 80 36 42 3.
+  srsa_residual_leaf pin_N 80 36 42 3.
 Proof. split; [apply poly_e_constant | apply srsa_residual_pin]. Qed.
 
 Theorem poly_e_X_two_points :
@@ -144,9 +144,9 @@ Theorem poly_e_quadratic_residual_shaped :
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem poly_e_quadratic_leftover_with_period :
-  powm 36 33 187 = 104 /\
-  powm 104 1297 187 = 36 /\
-  srsa_residual_leaf 187 80 36 104 1297.
+  powm 36 33 pin_N = 104 /\
+  powm 104 1297 pin_N = 36 /\
+  srsa_residual_leaf pin_N 80 36 104 1297.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
@@ -159,9 +159,9 @@ Proof.
 Qed.
 
 Theorem poly_e_quadratic_encrypt_not_leftover :
-  powm 36 1297 187 = 53 /\
+  powm 36 1297 pin_N = 53 /\
   53 <> 104 /\
-  powm 36 187 187 = 42 /\
+  powm 36 pin_N pin_N = 42 /\
   42 <> 104.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
@@ -177,11 +177,11 @@ Fixpoint first_passing_public_e (es : list Z) (N : Z) : Z :=
   end.
 
 Theorem reject_sample_public_e_emits_5 :
-  first_passing_public_e [3; 5; 7; 11] 187 = 5.
+  first_passing_public_e [3; 5; 7; 11] pin_N = 5.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem reject_sample_emits_nonresidual :
-  first_passing_public_e [3; 5; 7; 11] 187 = 5 /\
+  first_passing_public_e [3; 5; 7; 11] pin_N = 5 /\
   Z.gcd 5 80 = 5 /\
   Z.gcd 3 186 <> 1.
 Proof.

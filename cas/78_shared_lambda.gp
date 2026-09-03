@@ -4,12 +4,14 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-pA = 11; qA = 17; NA = pA*qA; e = 3; dA = 27; lA = lcm(pA-1, qA-1);
+read("lib/pin.gp");
+
+pA = pin_p; qA = pin_q; NA = pin_N; e = pin_e; dA = pin_d; lA = pin_lam;
 pB = 5; qB = 23; NB = pB*qB; dB = 15; lB = lcm(pB-1, qB-1);
 Ns = NA*NB; ls = lcm(lA, lB);
-check(NA == 187 && NB == 115, "N_A=187, N_B=115");
+check(NA == pin_N && NB == 115, "N_A=pin_N, N_B=115");
 check(gcd(NA, NB) == 1, "coprime moduli");
-check(lA == 80 && lB == 44, "λ_A=80, λ_B=44");
+check(lA == pin_lam && lB == 44, "λ_A=pin_lam, λ_B=44");
 check(ls == 880, "λ* = lcm(80,44) = 880");
 check((e*dA) % lA == 1 && (e*dB) % lB == 1, "local inverses of e");
 check((dA - dB) % gcd(lA, lB) == 0, "d_A ≡ d_B (mod gcd(λ_A,λ_B))");

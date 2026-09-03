@@ -26,7 +26,7 @@ Open Scope Z_scope.
 
     Cubic residuosity of [N = pq] is CRT of the local cubes
     ([cube_N_iff_both]).  [a^{λ/3} ≡ 1] is necessary when [3 | λ]
-    and not sufficient: [7^{12} ≡ 1 (mod 247)] but [7] is not a
+    and not sufficient: [7^{12} ≡ 1 (mod pin_247)] but [7] is not a
     cube ([cas/155], named extra [13×19]).  On the pin, [gcd(3,λ)=1]
     so every unit is a cube.
 
@@ -347,7 +347,7 @@ Proof.
 Qed.
 
 Theorem cube_mixed_5_not_global :
-  is_cube 5 13 /\ ~ is_cube 5 7 /\ ~ is_cube 5 91.
+  is_cube 5 pin_91_p /\ ~ is_cube 5 pin_91_q /\ ~ is_cube 5 pin_91.
 Proof.
   split.
   - apply cube_euler_converse; [exact prime_13 | lia | vm_compute; reflexivity | exists 4; lia |].
@@ -357,7 +357,7 @@ Proof.
       apply (proj1 (cube_euler_iff 5 7 prime_7_cubic ltac:(lia)
                       ltac:(vm_compute; reflexivity) ltac:(exists 2; lia))) in Hc.
       vm_compute in Hc. discriminate.
-    + intro Hc. change 91 with (13 * 7) in Hc.
+    + intro Hc. 
       apply cube_N_implies_local in Hc; [| exact prime_13 | exact prime_7_cubic].
       destruct Hc as [_ Hq5].
       apply (proj1 (cube_euler_iff 5 7 prime_7_cubic ltac:(lia)
@@ -366,13 +366,13 @@ Proof.
 Qed.
 
 Theorem cube_euler_lambda_not_sufficient_247 :
-  Z.coprime 7 247 /\
-  powm 7 (lambda_semiprime 13 19 / 3) 247 = 1 /\
-  ~ is_cube 7 247.
+  Z.coprime pin_247_noncube pin_247 /\
+  powm pin_247_noncube (lambda_semiprime pin_247_p pin_247_q / 3) pin_247 = 1 /\
+  ~ is_cube pin_247_noncube pin_247.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  intro Hc. change 247 with (13 * 19) in Hc.
+  intro Hc. 
   apply cube_N_implies_local in Hc; [| exact prime_13 | exact prime_19].
   destruct Hc as [Hp7 _].
   apply (proj1 (cube_euler_iff 7 13 prime_13 ltac:(lia)
@@ -381,10 +381,10 @@ Proof.
 Qed.
 
 Theorem pin_units_are_cubes :
-  forall a, Z.coprime a 187 -> is_cube a 187.
+  forall a, Z.coprime a pin_N -> is_cube a pin_N.
 Proof.
   intros a Hcop.
-  change 187 with (11 * 17) in Hcop |- *.
+  
   apply coprime_semiprime in Hcop; [| exact prime_11 | exact prime_17 | lia].
   destruct Hcop as [Hap Haq].
   apply cube_N_of_local; [exact prime_11 | exact prime_17 | lia | | ].
@@ -514,13 +514,13 @@ Proof.
 Qed.
 
 Theorem pin_cube_kernel_trivial :
-  forall x, Z.coprime x 187 -> powm x 3 187 = 1 -> x mod 187 = 1.
+  forall x, Z.coprime x pin_N -> powm x 3 pin_N = 1 -> x mod pin_N = 1.
 Proof.
   intros x Hcop Hmu.
-  destruct (order_exists_from_annihilator x 187 3 ltac:(lia) ltac:(lia) Hmu)
+  destruct (order_exists_from_annihilator x pin_N 3 ltac:(lia) ltac:(lia) Hmu)
     as [k [Hord Hk3]].
   assert (k | 80) as Hk80.
-  { change 187 with (11 * 17) in Hcop, Hord.
+  { 
     apply (order_divides_lambda 11 17 x k prime_11 prime_17 ltac:(lia) Hcop Hord). }
   assert (k | 1) as Hk1.
   { apply Z.gcd_greatest with (a := 3) (b := 80) in Hk3; [| exact Hk80].
@@ -576,7 +576,7 @@ Proof.
     apply Z.mod_1_l; lia.
 Qed.
 
-Theorem omega_13_order_3 : is_order 13 3 3.
+Theorem omega_13_order_3 : is_order pin_91_p pin_91_om_p 3.
 Proof.
   split; [lia|]. split; [vm_compute; reflexivity|].
   intros k' [Hk' Hk'lt] Hpow.
@@ -584,21 +584,23 @@ Proof.
   destruct H as [H | H]; subst k'; vm_compute in Hpow; discriminate.
 Qed.
 
-Theorem mixed_kernel_91 :
-  let x := Z.combinecong 13 7 3 1 in
-  powm x 3 91 = 1 /\ x mod 13 = 3 /\ x mod 7 = 1 /\ x mod 91 <> 1.
+Theorem mixed_kernel_pin_91 :
+  let x := Z.combinecong pin_91_p pin_91_q pin_91_om_p 1 in
+  powm x 3 pin_91 = 1 /\
+  x mod pin_91_p = pin_91_om_p /\
+  x mod pin_91_q = 1 /\
+  x mod pin_91 <> 1.
 Proof.
   intros x.
-  pose proof (prime_coprime_distinct 13 7 prime_13 prime_7_cubic ltac:(lia)) as Hcop.
-  pose proof (Z.combinecong_sound_coprime 13 7 3 1 Hcop) as [Hp Hq].
+  pose proof (prime_coprime_distinct pin_91_p pin_91_q prime_13 prime_7_cubic ltac:(lia)) as Hcop.
+  pose proof (Z.combinecong_sound_coprime pin_91_p pin_91_q pin_91_om_p 1 Hcop) as [Hp Hq].
   unfold x. split.
-  - change 91 with (13 * 7).
-    apply (proj2 (mu3_N_iff_locals (Z.combinecong 13 7 3 1) 13 7
-                    prime_13 prime_7_cubic ltac:(lia))).
+  - apply (proj2 (mu3_N_iff_locals (Z.combinecong pin_91_p pin_91_q pin_91_om_p 1)
+                    pin_91_p pin_91_q prime_13 prime_7_cubic ltac:(lia))).
     split.
-    + rewrite <- (powm_mod_base (Z.combinecong 13 7 3 1) 3 13) by lia.
+    + rewrite <- (powm_mod_base (Z.combinecong pin_91_p pin_91_q pin_91_om_p 1) 3 pin_91_p) by lia.
       rewrite Hp, Z.mod_small by lia. vm_compute. reflexivity.
-    + rewrite <- (powm_mod_base (Z.combinecong 13 7 3 1) 3 7) by lia.
+    + rewrite <- (powm_mod_base (Z.combinecong pin_91_p pin_91_q pin_91_om_p 1) 3 pin_91_q) by lia.
       rewrite Hq, Z.mod_small by lia. vm_compute. reflexivity.
   - split.
     + rewrite Hp. apply Z.mod_small. lia.
@@ -747,31 +749,34 @@ Proof.
   rewrite Hk, (Z.mul_comm k), Z.gcd_comm, Z.gcd_mul_diag_l; nia.
 Qed.
 
-Theorem mixed_kernel_91_splits :
-  Z.gcd (29 - 1) 91 = 7 /\ Z.gcd (phi3 29) 91 = 13.
+Theorem mixed_kernel_pin_91_splits :
+  Z.gcd (pin_91_gp - 1) pin_91 = pin_91_q /\
+  Z.gcd (phi3 pin_91_gp) pin_91 = pin_91_p.
 Proof. split; vm_compute; reflexivity. Qed.
 
-Theorem gq_kernel_91_splits :
-  Z.gcd (79 - 1) 91 = 13 /\ Z.gcd (phi3 79) 91 = 7.
+Theorem gq_kernel_pin_91_splits :
+  Z.gcd (pin_91_gq - 1) pin_91 = pin_91_p /\
+  Z.gcd (phi3 pin_91_gq) pin_91 = pin_91_q.
 Proof. split; vm_compute; reflexivity. Qed.
 
-Theorem diagonal_16_91_no_split :
-  Z.gcd (16 - 1) 91 = 1 /\ Z.gcd (phi3 16) 91 = 91.
+Theorem diagonal_pin_91_no_split :
+  Z.gcd (pin_91_diag - 1) pin_91 = 1 /\
+  Z.gcd (phi3 pin_91_diag) pin_91 = pin_91.
 Proof. split; vm_compute; reflexivity. Qed.
 
 Theorem phi3_small_omega_is_prime :
-  phi3 3 = 13 /\ phi3 2 = 7.
+  phi3 pin_91_om_p = pin_91_p /\ phi3 pin_91_om_q = pin_91_q.
 Proof. split; vm_compute; reflexivity. Qed.
 
 Theorem pin_mu3_gcd_is_N :
   forall x,
-    Z.coprime x 187 ->
-    powm x 3 187 = 1 ->
-    Z.gcd (x - 1) 187 = 187.
+    Z.coprime x pin_N ->
+    powm x 3 pin_N = 1 ->
+    Z.gcd (x - 1) pin_N = pin_N.
 Proof.
   intros x Hcop Hmu.
   pose proof (pin_cube_kernel_trivial x Hcop Hmu) as H1.
-  rewrite <- (Z.mod_1_l 187) in H1 by lia.
+  rewrite <- (Z.mod_1_l pin_N) in H1 by lia.
   apply mods_eq_iff_divides in H1; [| lia].
   destruct H1 as [k Hk].
   rewrite Hk, (Z.mul_comm k), Z.gcd_comm, Z.gcd_mul_diag_l; lia.

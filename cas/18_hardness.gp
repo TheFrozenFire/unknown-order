@@ -1,11 +1,13 @@
 \\ CAS witnesses — relation-level hardness structure.
 \\ Mirrors Hardness.v.  Winning conditions, not assumptions.
-\\ N=187, e=3, d=27, λ=80: the textbook instance.
+\\ N = pin_N, e=3, d=27, λ=80: the textbook instance.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; e = 3; d = 27;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27;
 lam = lcm(p-1, q-1);
 
 \\ the e-power map is a permutation of the units

@@ -28,26 +28,29 @@ Open Scope Z_scope.
     because they are *data of this inhabitant*, not a different
     modulus class. *)
 
-(** ** Default semiprime *)
+(** ** Default semiprime
 
-Definition pin_p : Z := 11.
-Definition pin_q : Z := 17.
-Definition pin_N : Z := pin_p * pin_q.
-Definition pin_e : Z := 3.
-Definition pin_d : Z := 27.
-Definition pin_y : Z := 36.
-Definition pin_x : Z := 42.
-Definition pin_lam : Z := 80.
-Definition pin_phi : Z := 160.
+    Abbreviations so [lia] sees the integers (a [Definition] stays
+    opaque to [lia]).  Edit these lines to change the inhabitant. *)
+
+Notation pin_p := 11.
+Notation pin_q := 17.
+Notation pin_N := (pin_p * pin_q).
+Notation pin_e := 3.
+Notation pin_d := 27.
+Notation pin_y := 36.
+Notation pin_x := 42.
+Notation pin_lam := 80.
+Notation pin_phi := 160.
 
 Lemma pin_N_pos : 0 < pin_N.
-Proof. unfold pin_N, pin_p, pin_q. lia. Qed.
+Proof. lia. Qed.
 
 Lemma pin_N_gt_1 : 1 < pin_N.
-Proof. unfold pin_N, pin_p, pin_q. lia. Qed.
+Proof. lia. Qed.
 
 Lemma pin_p_neq_q : pin_p <> pin_q.
-Proof. unfold pin_p, pin_q. discriminate. Qed.
+Proof. discriminate. Qed.
 
 (** ** Residual pair on the default pin *)
 
@@ -55,15 +58,69 @@ Definition pin_residual_y : Z := pin_y.
 Definition pin_residual_x : Z := pin_x.
 Definition pin_residual_e : Z := pin_e.
 
-(** ** Named extra moduli *)
+(** ** Mixed square roots of 1 on [pin_N] *)
 
-Definition pin_extra_77 : Z := 7 * 11.
-Definition pin_extra_91 : Z := 13 * 7.
-Definition pin_extra_247 : Z := 13 * 19.
-Definition pin_extra_253 : Z := 11 * 23.
-Definition pin_extra_45 : Z := 3 * 3 * 5.
-Definition pin_extra_105 : Z := 3 * 5 * 7.
-Definition pin_extra_Nsq : Z := pin_N * pin_N.
+Definition pin_sqrt1_mixed : Z := 67.
+Definition pin_sqrt1_mixed2 : Z := 120.
+
+(** ** Named extra moduli (p, q, N, λ, and shared witnesses)
+
+    Each extra is a second inhabitant of the same *class* (odd
+    distinct-prime product, except Takagi / triprime / [N²]).
+    Consumers import these names rather than restating [13*7]. *)
+
+Notation pin_77_p := 7.
+Notation pin_77_q := 11.
+Notation pin_77 := (pin_77_p * pin_77_q).
+Notation pin_77_lam := 30.
+Notation pin_77_y := 51.
+Notation pin_77_x := 2.
+Notation pin_77_e := 7.
+
+Notation pin_91_p := 13.
+Notation pin_91_q := 7.
+Notation pin_91 := (pin_91_p * pin_91_q).
+Notation pin_91_lam := 12.
+Notation pin_91_om_p := 3.
+Notation pin_91_om_q := 2.
+Notation pin_91_gp := 29.
+Notation pin_91_gq := 79.
+Notation pin_91_diag := 16.
+
+Notation pin_247_p := 13.
+Notation pin_247_q := 19.
+Notation pin_247 := (pin_247_p * pin_247_q).
+Notation pin_247_lam := 36.
+Notation pin_247_y := 69.
+Notation pin_247_x := 179.
+Notation pin_247_e := 5.
+Notation pin_247_noncube := 7.
+
+Notation pin_253_p := 11.
+Notation pin_253_q := 23.
+Notation pin_253 := (pin_253_p * pin_253_q).
+Notation pin_253_lam := 110.
+
+Notation pin_45_p := 3.
+Notation pin_45_q := 5.
+Notation pin_45 := (pin_45_p * pin_45_p * pin_45_q).
+Notation pin_45_lam := 12.
+
+Notation pin_105_p := 3.
+Notation pin_105_q := 5.
+Notation pin_105_r := 7.
+Notation pin_105 := (pin_105_p * pin_105_q * pin_105_r).
+Notation pin_105_lam := 12.
+
+Notation pin_Nsq := (pin_N * pin_N).
+
+Definition pin_extra_77 : Z := pin_77.
+Definition pin_extra_91 : Z := pin_91.
+Definition pin_extra_247 : Z := pin_247.
+Definition pin_extra_253 : Z := pin_253.
+Definition pin_extra_45 : Z := pin_45.
+Definition pin_extra_105 : Z := pin_105.
+Definition pin_extra_Nsq : Z := pin_Nsq.
 
 (** ** Dixon / QS witnesses on [pin_N]
 

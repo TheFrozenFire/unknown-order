@@ -3,6 +3,8 @@
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
+
+read("lib/pin.gp");
 setrand(57);
 nbit_prime(n) = nextprime(2^(n-1) + random(2^(n-1)));
 far_pair(n, gap) = {
@@ -14,7 +16,7 @@ far_pair(n, gap) = {
 };
 
 \\ ---------- T5: (c/N)=(m/N) for odd e ----------
-p = 11; q = 17; N = 187; e = 3; d = 27;
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27;
 m = 42; c = lift(Mod(m,N)^e);
 check(kronecker(c,N)==kronecker(m,N), "(c/N)=(m/N) on rsa_test");
 kr = 0;
@@ -27,7 +29,7 @@ for(t = 1, 40, \
 check(kr>=35, "(c/N)=(m/N) on far 16-bit pairs, e=65537");
 
 \\ ---------- T24 / T25: homomorphism and blinding ----------
-p = 11; q = 17; N = 187; e = 3; d = 27;
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27;
 m1 = 4; m2 = 9;
 s1 = lift(Mod(m1,N)^d); s2 = lift(Mod(m2,N)^d);
 check(lift(Mod(m1*m2,N)^d)==(s1*s2)%N, "sign homomorphism");
@@ -61,7 +63,7 @@ for(t = 1, 40, \
 check(recok==40, "comparison-oracle binary search recovers m");
 
 \\ ---------- T29: Bellcore ----------
-p = 11; q = 17; N = 187; e = 3; d = 27; m = 42;
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27; m = 42;
 sig_good = lift(Mod(m,N)^d);
 sig_p = lift(Mod(sig_good, p));
 sig_bad = lift(chinese(Mod(sig_p,p), Mod(3,q)));
@@ -73,18 +75,18 @@ check(lift(Mod(sig_bad,q)^e)!=m%q, "faulty sig wrong mod q");
 \\ ---------- T4: common modulus ----------
 e1 = 3; e2 = 5; a = 2; k = 1;
 check(e1*a == 1+e2*k, "3*2 = 1+5*1");
-m = 42; N = 187;
+m = 42; N = pin_N;
 c1 = lift(Mod(m,N)^e1); c2 = lift(Mod(m,N)^e2);
 w = lift(1/Mod(lift(Mod(c2,N)^k), N));
 check((lift(Mod(c1,N)^a)*w)%N == m%N, "common-modulus recovers m");
 
 \\ ---------- K1: one-sided congruence ----------
-p = 11; q = 17; N = 187; mm = 1+p;
+p = pin_p; q = pin_q; N = pin_N; mm = 1+p;
 check(gcd(mm-1, N)==p, "m≡1 (mod p), m≢1 (mod q) ⇒ gcd(m-1,N)=p");
 
 \\ ---------- K5: Williams (2/p) is shape, not N mod 8 ----------
-check(11%8==3 && 23%8==7 && (11*23)%8==5, "Williams pair N≡5 (mod 8)");
-check(kronecker(2,11)==-1 && kronecker(2,23)==1, "Williams (2/p),(2/q)");
+check(pin_253_p%8==3 && pin_253_q%8==7 && pin_253%8==5, "Williams pair N≡5 (mod 8)");
+check(kronecker(2,pin_253_p)==-1 && kronecker(2,pin_253_q)==1, "Williams (2/p),(2/q)");
 check((5*17)%8==5 && 5%8==5 && 17%8==1, "5·17≡5 (mod 8) is not Williams");
 check(kronecker(2,5)==-1 && kronecker(2,17)==1, "non-Williams two-chars");
 

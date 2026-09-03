@@ -2,12 +2,14 @@
 \\ Mirrors FiatShamir.v.
 \\ Challenge is derived from public statement + commitment.
 \\ The NI verifier does not take a free coin c.
-\\ Pin N=11*17=187, slot-1 from cas/97: P=g^tau, a=3, s=4.
+\\ Pin N = pin_N=187, slot-1 from cas/97: P=g^tau, a=3, s=4.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3; tau = 5;
+read("lib/pin.gp");
+
+N = pin_N; g = 3; tau = 5;
 
 \\ Horner-at-2 modulo m.  Same map as Rocq fs_challenge.
 fs_challenge(m, xs) = {

@@ -1,10 +1,12 @@
-\\ Strong-RSA witness peel on N=187 (and safeprime-shaped N=77).
+\\ Strong-RSA witness peel on N = pin_N (and safeprime-shaped N=77).
 \\ Mirrors StrongRSAPeel.v.  Residual leaf is named, not solved.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; lam = lcm(p-1, q-1);
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; lam = lcm(p-1, q-1);
 
 \\ non-unit x: 11^3 ≡ 22, gcd(11,N)=11
 check(lift(Mod(11,N)^3) == 22,          "non-unit x=11, 11^3 ≡ 22");
@@ -57,7 +59,7 @@ check(y * r^ee != y,                    "poly e=X: e(y r^e) ≠ e(y) at this pin
 check(lift(Mod(42,N)^(2*3)) == lift(Mod(36,N)^2), "x1^{2 e1} ≡ y^2");
 
 \\ safeprime-shaped N=7*11=77, λ=lcm(6,10)=30=2*3*5
-ps = 7; qs = 11; Ns = ps*qs; lams = lcm(ps-1, qs-1);
+ps = pin_77_p; qs = pin_77_q; Ns = pin_77; lams = pin_77_lam;
 check(Ns == 77 && lams == 30,           "safeprime pin N=77, λ=30=2 p' q'");
 check(isprime((ps-1)/2) && isprime((qs-1)/2), "p'=3, q'=5 prime");
 check(lift(Mod(2,Ns)^(lams+1)) == 2,    "λ-type on 77: 2^{31} ≡ 2");

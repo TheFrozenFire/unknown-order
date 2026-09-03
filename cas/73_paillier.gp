@@ -3,8 +3,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; N2 = N*N;
-check(N == 187 && N2 == 34969, "N=187, N²=34969");
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; N2 = pin_Nsq;
+check(N == pin_N && N2 == pin_Nsq, "N = pin_N, N²=pin_Nsq");
 
 m = 5;
 check(lift(Mod(1+N, N2)^m) == (1 + m*N) % N2, "(1+N)^m ≡ 1+mN (mod N²)");

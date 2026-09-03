@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; lam = lcm(10,16);
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; lam = lcm(10,16);
 a = 3; T = 10;
 slow = lift(Mod(a,N)^(2^T));
 fast = lift(Mod(a,N)^((2^T) % lam));

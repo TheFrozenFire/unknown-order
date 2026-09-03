@@ -5,12 +5,14 @@
 \\ public_quad_check(Ps, CA, CB, CAB, QA, QB, bound): encodings
 \\ and public CRS slots only -- no tau, no coefficient lists,
 \\ no integer h(tau).
-\\ Pin N=11*17=187, g=3, tau=5, a=[2,3], b=[1,4] from cas/95.
+\\ Pin N = pin_N=187, g=3, tau=5, a=[2,3], b=[1,4] from cas/95.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3; tau = 5;
+read("lib/pin.gp");
+
+N = pin_N; g = 3; tau = 5;
 evalp(cs, x) = {
   my(s = 0, p = 1, ii);
   for(ii = 1, length(cs), s += cs[ii]*p; p *= x);

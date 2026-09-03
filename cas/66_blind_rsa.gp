@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; e = 3; d = 27;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27;
 m = 42; r = 5;
 check(gcd(r,N)==1, "blinder is a unit");
 blinded = lift(Mod(m,N) * Mod(r,N)^e);

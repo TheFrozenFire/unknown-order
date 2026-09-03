@@ -6,7 +6,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; y=36; x=42;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; y=36; x=42;
 
 \\ --- public addition chain for public e=3 (Hamming 2) ---
 check(3 == 2+1,                         "public e=3 has Hamming 2");

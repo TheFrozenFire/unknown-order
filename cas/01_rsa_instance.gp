@@ -1,17 +1,19 @@
 \\ CAS witnesses — RSA instance, private exponent d, encrypt/decrypt.
 \\ Mirrors unknown-order/rocq/RSA.v (rsa_test: p=11, q=17, e=3, d=27).
-\\ Ground truth: N = 187, λ = lcm(10,16) = 80, 3*27 = 81 ≡ 1 (mod 80).
+\\ Ground truth: N = pin_N, λ = lcm(10,16) = 80, 3*27 = 81 ≡ 1 (mod 80).
 \\ d is the inverse of e modulo λ, not "a cube root".  Exponentiation
 \\ by d *is* the cube-root map on units.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; e = 3; d = 27;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; e = pin_e; d = pin_d;
 lam = lcm(p-1, q-1);
 phi = (p-1)*(q-1);
 
-check(N == 187,                         "N = 11*17 = 187");
+check(N == pin_p*pin_q,                 "N = pin_p pin_q");
 check(lam == 80,                        "λ(N) = lcm(10,16) = 80");
 check(phi == 160,                       "φ(N) = 10*16 = 160");
 check((e*d) % lam == 1,                 "e*d ≡ 1 (mod λ)");

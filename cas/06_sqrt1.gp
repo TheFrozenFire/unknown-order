@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 187;
+read("lib/pin.gp");
+
+N = pin_N;
 \\ 67² ≡ 1 (mod 187), 67 ≢ ±1
 check(lift(Mod(67,N)^2) == 1,           "67² ≡ 1 (mod 187)");
 check(67 % N != 1 && 67 % N != N-1,     "67 ≢ ±1");

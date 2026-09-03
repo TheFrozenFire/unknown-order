@@ -5,6 +5,7 @@ From Stdlib Require Import List.
 Import ListNotations.
 
 Require Import RocqProofs.NumberTheory.
+Require Import Pin.
 Require Import UnknownOrder.
 Require Import Hardness.
 Require Import GenericRing.
@@ -19,28 +20,28 @@ Open Scope Z_scope.
     cost and not “RSA is easier than factoring.”  Cross-confirmed
     by [cas/124]. *)
 
-Definition prep_advice_factor (N : Z) : Z := N / 17.
+Definition prep_advice_factor (N : Z) : Z := N / pin_q.
 
 Definition prep_advice_id (N : Z) : Z := N.
 
 Theorem prep_advice_depends_on_N :
-  prep_advice_factor 187 = 11.
+  prep_advice_factor pin_N = pin_p.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem prep_advice_ignores_y :
-  forall y : Z, prep_advice_factor 187 = 11.
+  forall y : Z, prep_advice_factor pin_N = pin_p.
 Proof. intros y. apply prep_advice_depends_on_N. Qed.
 
 Theorem prep_factor_advice :
-  Problem_Factor 187 (prep_advice_factor 187).
+  Problem_Factor pin_N (prep_advice_factor pin_N).
 Proof.
   unfold Problem_Factor, prep_advice_factor.
-  change (187 / 17) with 11.
-  split; [lia|]. exists 17. reflexivity.
+  change (pin_N / pin_q) with pin_p.
+  split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem prep_id_advice_not_a_split :
-  Z.gcd (prep_advice_id 187) 187 = 187.
+  Z.gcd (prep_advice_id pin_N) pin_N = pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 (** Tape [[0]; 1; y; advice].  [GInv] of the advice handle. *)
@@ -52,13 +53,13 @@ Definition prep_eval (y advice : Z) (ops : list GRAOp) (out : nat) : Z :=
   nth out (gra_run pin_N ops (prep_init y advice)) 0.
 
 Theorem prep_ginv_of_factor_advice :
-  prep_eval 36 (prep_advice_factor 187) prep_inv_prog 4%nat = 11.
+  prep_eval 36 (prep_advice_factor pin_N) prep_inv_prog 4%nat = pin_p.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem prep_then_gra_factors :
-  Problem_Factor 187
-    (prep_eval 36 (prep_advice_factor 187) prep_inv_prog 4%nat).
+  Problem_Factor pin_N
+    (prep_eval 36 (prep_advice_factor pin_N) prep_inv_prog 4%nat).
 Proof.
   unfold Problem_Factor. rewrite prep_ginv_of_factor_advice.
-  split; [lia|]. exists 17. reflexivity.
+  split; [lia|]. exists pin_q. reflexivity.
 Qed.

@@ -5,11 +5,13 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 m = 42; cube = m*m*m;
 check(cube == 74088,                    "42^3 = 74088");
 
-N1 = 11*17; N2 = 13*19; N3 = 23*29;
-check(N1 == 187 && N2 == 247 && N3 == 667, "three textbook moduli");
+N1 = pin_N; N2 = pin_247; N3 = 23*29;
+check(N1 == pin_N && N2 == pin_247 && N3 == 667, "three textbook moduli");
 check(gcd(N1,N2)==1 && gcd(N1,N3)==1 && gcd(N2,N3)==1, "pairwise coprime");
 
 c1 = lift(Mod(m, N1)^3);

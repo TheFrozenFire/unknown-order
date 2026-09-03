@@ -7,8 +7,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 13; q = 7; N = p*q;
-om_p = 3; om_q = 2;
+read("lib/pin.gp");
+
+p = pin_91_p; q = pin_91_q; N = pin_91;
+om_p = pin_91_om_p; om_q = pin_91_om_q;
 g_p = lift(chinese(Mod(om_p, p), Mod(1, q)));
 g_q = lift(chinese(Mod(1, p), Mod(om_q, q)));
 
@@ -77,7 +79,7 @@ n_nz(L) = {
 };
 check(n_nz(ker) > 0,                      "pairing is non-degenerate: some e(x,y)≠1");
 
-Npin = 11*17;
+Npin = pin_N;
 check(#ker_of(Npin) == 1,                 "pin kernel is {1}: pairing vacuous");
 
 printf("%d ok, %d fail\n", ok, fail);

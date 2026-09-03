@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam;
 
 \\ 1. Newton cube step in (Z/NZ)
 inv3 = lift(1/Mod(3,N));
@@ -52,7 +54,7 @@ check((37*13)%lam==1,                   "7 37^{-1} ≡ 13 (mod λ)");
 check(lift(Mod(x37,N)^37)==36,          "7 (36^{13})^{37} ≡ 36");
 
 \\ 8. Continued fraction of y/N
-check(187 == 5*36 + 7,                  "8 187 = 5*36 + 7");
+check(pin_N == 5*pin_y + 7,                  "8 187 = 5*36 + 7");
 check(36 == 5*7 + 1,                    "8 36 = 5*7 + 1");
 check(7 == 7*1 + 0,                     "8 7 = 7*1");
 check(lift(Mod(5,N)^3) != 36,           "8 convergent num 5 is not a root");
@@ -60,14 +62,14 @@ check(lift(Mod(26,N)^3)==185,           "8 denominator 26 cubes to 185");
 check(185 != 36,                        "8 26 is the inverse, not the root");
 
 \\ 9. Same x, two coprime moduli
-N2=13*19;
+N2=pin_247;
 check(gcd(N,N2)==1,                     "9 187 and 247 are coprime");
 check(lift(Mod(42,N)^3)==36,            "9 42^3 ≡ 36 (mod 187)");
 check(lift(Mod(42,N2)^3)==235,          "9 42^3 ≡ 235 (mod 247)");
 check(gcd(36,N)==1,                     "9 neither ciphertext splits 187");
 
 \\ 10. Multiprime N=pqr, mixed √1
-N3=3*5*7;
+N3=pin_105;
 check(N3==105,                          "10 N=105");
 \\ mixed (1, -1, 1) via CRT: x≡1 mod 3, x≡-1 mod 5, x≡1 mod 7
 xm = lift(chinese(chinese(Mod(1,3), Mod(4,5)), Mod(1,7)));

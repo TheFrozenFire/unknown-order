@@ -6,7 +6,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36; x=42; ee=3;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; x=pin_x; ee=pin_e;
 
 \\ --- residual tests mention λ ---
 check(ee % 2 == 1,                      "residual: e=3 is odd");

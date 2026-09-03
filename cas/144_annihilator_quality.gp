@@ -7,7 +7,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y;
 
 check(lam == 16*5,                      "λ=16·5: v2=4, odd part 5");
 check(16 == 2^4,                        "2-primary of λ is 16");

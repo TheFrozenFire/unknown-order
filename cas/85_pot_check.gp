@@ -1,10 +1,12 @@
 \\ Equal-DL public check of a tau-update.  Mirrors PotCheck.v.
-\\ N=11*17=187, g=3, tau=3, rho=7.
+\\ N = pin_N=187, g=3, tau=3, rho=7.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3; tau = 3; rho = 7;
+read("lib/pin.gp");
+
+N = pin_N; g = 3; tau = 3; rho = 7;
 pot(t, i) = lift(Mod(g, N)^(t^i));
 P1 = pot(tau, 1);
 Pp1 = pot(tau*rho, 1);

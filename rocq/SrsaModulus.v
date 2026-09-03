@@ -22,8 +22,8 @@ Open Scope Z_scope.
     torus [V_e], Cocks Jacobi.  Not the semiprime cube. *)
 
 Theorem modulus_paillier_carrier :
-  187 * 187 = 34969 /\
-  powm (1 + 187) 1 (187 * 187) = (1 + 1 * 187) mod (187 * 187).
+  pin_Nsq = 34969 /\
+  powm (1 + pin_N) 1 pin_Nsq = (1 + 1 * pin_N) mod pin_Nsq.
 Proof.
   split; [reflexivity|].
   apply one_plus_N_pow; lia.
@@ -31,24 +31,25 @@ Qed.
 
 Theorem modulus_williams_Ve :
   lucasV 62 1 3%nat = 238142 /\
-  238142 mod 187 = 91 /\
+  238142 mod pin_N = 91 /\
   91 <> 36.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem modulus_ou_carrier :
-  takagi_N 3 5 = 45 /\
-  powm (1 + 3) 2 (3 * 3) = (1 + 2 * 3) mod (3 * 3).
+  takagi_N pin_45_p pin_45_q = pin_45 /\
+  powm (1 + pin_45_p) 2 (pin_45_p * pin_45_p) =
+    (1 + 2 * pin_45_p) mod (pin_45_p * pin_45_p).
 Proof.
   split; [reflexivity|].
   apply one_plus_p_pow; lia.
 Qed.
 
 Theorem modulus_dj_carrier :
-  187 * 187 * 187 = 6539203.
+  pin_N * pin_N * pin_N = 6539203.
 Proof. reflexivity. Qed.
 
 Theorem modulus_cocks_jacobi :
-  jacobi_N 36 11 17 = 1.
+  jacobi_N pin_y pin_p pin_q = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem modulus_prime_power_field :
@@ -69,8 +70,8 @@ Proof.
 Qed.
 
 Theorem modulus_rw_shape_odd_e :
-  11 mod 8 = 3 /\
-  23 mod 8 = 7.
+  pin_253_p mod 8 = 3 /\
+  pin_253_q mod 8 = 7.
 Proof. split; reflexivity. Qed.
 
 Theorem modulus_twins :
@@ -89,10 +90,10 @@ Proof.
 Qed.
 
 Theorem modulus_triprime_cube_not_residual :
-  3 * 5 * 7 = 105 /\
-  Z.lcm (Z.lcm 2 4) 6 = 12 /\
-  Z.gcd 3 12 = 3 /\
-  Z.gcd 3 12 <> 1.
+  pin_105_p * pin_105_q * pin_105_r = pin_105 /\
+  Z.lcm (Z.lcm 2 4) 6 = pin_105_lam /\
+  Z.gcd 3 pin_105_lam = 3 /\
+  Z.gcd 3 pin_105_lam <> 1.
 Proof.
   split; [reflexivity|].
   split; [vm_compute; reflexivity|].

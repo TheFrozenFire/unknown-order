@@ -6,6 +6,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 setrand(43);
 
 nbit_prime(n) = nextprime(2^(n-1) + random(2^(n-1)));
@@ -24,7 +26,7 @@ powN(a, N) = lift(Mod(a, N)^(N+1));
 powS(a, s, N) = lift(Mod(a, N)^s);
 
 \\ ---------- 1. Identity ----------
-p = 11; q = 17; N = p*q; s = p+q;
+p = pin_p; q = pin_q; N = pin_N; s = p+q;
 id_fail = 0;
 for(a = -N-3, 2*N+3, if(powN(a,N) != powS(a,s,N), id_fail++));
 check(id_fail == 0, "a^{N+1} ≡ a^{p+q} (mod 187) for a in [-190,377]");
@@ -186,7 +188,7 @@ printf("  [fermat-exp] far 24-bit gap=20: recovered k in ±2^12 on %d/%d\n", far
 check(far_hit == 0, "Fermat-in-exponent fails on kg_far (not a sixth type)");
 
 \\ ---------- 5. Constructible torsion only yields s even ----------
-p = 11; q = 17; N = p*q;
+p = pin_p; q = pin_q; N = pin_N;
 check(powN(-1, N) == 1, "(-1)^{N+1} ≡ 1");
 check((p+q)%2 == 0, "matches (-1)^s for even s");
 

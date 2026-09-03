@@ -1,12 +1,14 @@
 \\ Division-free low-e GRA (Leander-Rupp).
 \\ Mirrors GenericRing.v wave 1.
-\\ Pin N=187, e=3.  A polynomial solver for one y does not factor;
+\\ Pin N = pin_N, e=3.  A polynomial solver for one y does not factor;
 \\ a polynomial identity P^e = X is forbidden by a coeff ±1.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; ee = 3;
+read("lib/pin.gp");
+
+N = pin_N; ee = 3;
 
 peval(cs, x) = {
   my(s = 0, pw = 1, ii);

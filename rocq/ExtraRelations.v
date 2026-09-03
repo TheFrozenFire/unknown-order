@@ -28,7 +28,7 @@ Definition Problem_OneMore (N e : Z) (ys xs : list Z) (y' x' : Z) : Prop :=
   ~ In y' ys.
 
 Theorem one_more_pin :
-  Problem_OneMore 187 3 [36] [42] 8 2.
+  Problem_OneMore pin_N pin_e [pin_y] [pin_x] 8 2.
 Proof.
   unfold Problem_OneMore, answers_queries.
   split.
@@ -39,7 +39,7 @@ Proof.
 Qed.
 
 Theorem one_more_queried_is_not_extra :
-  ~ Problem_OneMore 187 3 [36] [42] 36 42.
+  ~ Problem_OneMore pin_N 3 [36] [42] 36 42.
 Proof.
   unfold Problem_OneMore. intros [_ [_ Hin]].
   apply Hin. left. reflexivity.
@@ -59,7 +59,7 @@ Proof.
 Qed.
 
 Theorem ghr_pin :
-  Problem_GHR 187 3 36 42.
+  Problem_GHR pin_N 3 36 42.
 Proof.
   unfold Problem_GHR, Problem_RSA, rsa_problem.
   split; [apply prime_3 | vm_compute; reflexivity].
@@ -90,7 +90,7 @@ Definition Problem_PhiHiding (p q e : Z) : Prop :=
   1 < e /\ (e | lambda_semiprime p q).
 
 Theorem phi_hiding_lambda_80 :
-  lambda_semiprime 11 17 = 80.
+  lambda_semiprime pin_p pin_q = pin_lam.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem phi_hiding_pin_e5 :

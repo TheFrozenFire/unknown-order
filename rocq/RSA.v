@@ -4,6 +4,7 @@ From Stdlib Require Import Lia.
 
 Require Import RocqProofs.NumberTheory.
 Require Import Pin.
+Export Pin.
 
 Open Scope Z_scope.
 
@@ -199,7 +200,7 @@ Proof.
     rsa_distinct := ltac:(discriminate);
     rsa_e_coprime := ltac:(rewrite rsa_test_lambda; exact rsa_test_coprime_e);
     rsa_d_inv := ltac:(rewrite rsa_test_lambda; exact rsa_test_inv);
-    rsa_d_pos := ltac:(unfold pin_d; lia); rsa_e_pos := ltac:(unfold pin_e; lia)
+    rsa_d_pos := ltac:(lia); rsa_e_pos := ltac:(lia)
   |}.
 Defined.
 

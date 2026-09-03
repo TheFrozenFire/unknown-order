@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam;
 
 \\ 1. GRA + Jacobi gate: Jacobi of 2 is -1, so e odd
 check(kronecker(2,N) == -1,             "1 Jacobi gate on 2 is -1");
@@ -48,7 +50,7 @@ check(adv_small == 1 && gcd(adv_small,N)==1, "7 1-bit advice N mod 2 does not sp
 check(adv_split == 11 && gcd(adv_split,N)==11, "7 advice N/17 splits");
 
 \\ 8. Blum N=11*23=253, λ=110=2*5*11
-Nb=11*23; lamb=lcm(10,22);
+Nb=pin_253; lamb=pin_253_lam;
 check(11%4==3 && 23%4==3,               "8 both Blum");
 check(lamb==110,                        "8 λ=110");
 check(gcd(5,lamb)==5 && 2*5+1==11 && Nb%11==0, "8 e=5 names p=11");

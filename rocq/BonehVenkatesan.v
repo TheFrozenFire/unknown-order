@@ -48,7 +48,7 @@ Theorem bv_root_gate_is_not_rsa_inverter :
 Proof. split; [apply integer_cube_root_8 | reflexivity]. Qed.
 
 (** Query [GRoot(8)] getting [r=2], then [r^{10}−1], then [GInv]
-    which returns [gcd(1023, 187)=11]. *)
+    which returns [gcd(1023, pin_N)=11]. *)
 Definition bv_with_root : list GRAOp :=
   [GConst 8;
    GRoot 3%nat;
@@ -96,17 +96,17 @@ Proof.
 Qed.
 
 Theorem bv_few_query_low_e_drops_oracle :
-  Problem_Factor 187 (gra_eval_Z bv_unwound 36 11%nat).
+  Problem_Factor pin_N (gra_eval_Z bv_unwound 36 11%nat).
 Proof.
   rewrite bv_unwound_outputs_11. unfold Problem_Factor.
-  split; [lia|]. exists 17. reflexivity.
+  split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem bv_factor_from_root_handle :
-  Problem_Factor 187 (gra_eval_Z bv_with_root 36 11%nat).
+  Problem_Factor pin_N (gra_eval_Z bv_with_root 36 11%nat).
 Proof.
   rewrite bv_with_root_outputs_11. unfold Problem_Factor.
-  split; [lia|]. exists 17. reflexivity.
+  split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem bv_42_cube_in_Z_is_not_36 :
@@ -114,5 +114,5 @@ Theorem bv_42_cube_in_Z_is_not_36 :
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem bv_query_leak_already_factors :
-  Problem_Factor 187 (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
+  Problem_Factor pin_N (gra_eq_leak pin_N gra_eq_prog 36 9%nat 0%nat).
 Proof. apply gra_eq_leak_factors. Qed.

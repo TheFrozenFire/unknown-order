@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; N3 = N*N*N;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; N3 = N*N*N;
 m = 5; t = m*(m-1)/2;
 check(m*(m-1) == 2*t, "C(m,2) is integral");
 lhs = lift(Mod(1+N, N3)^m);

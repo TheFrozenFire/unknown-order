@@ -4,6 +4,7 @@ From Stdlib Require Import Lia.
 From Stdlib Require Import List.
 From Stdlib Require Import Bool.
 From Stdlib Require Import PeanoNat.
+Require Import Pin.
 Import ListNotations.
 
 Require Import RocqProofs.NumberTheory.
@@ -274,7 +275,7 @@ Qed.
 Theorem succ_proof_len_n4 :
   let a := [2; 3; 1; 0] in
   let b := [1; 4; 0; 1] in
-  succ_proof_len (fst (fst (succ_prove_of 187 3 5 a b))) = 28%nat.
+  succ_proof_len (fst (fst (succ_prove_of pin_N 3 5 a b))) = 28%nat.
 Proof.
   unfold succ_proof_len, succ_prove_of.
   rewrite succ_prove_rounds_log.
@@ -284,7 +285,7 @@ Qed.
 Theorem succ_proof_len_n16 :
   let a := [2; 3; 1; 0; 1; 0; 2; 1; 0; 3; 1; 0; 2; 0; 1; 0] in
   let b := [1; 4; 0; 1; 0; 1; 0; 2; 1; 0; 1; 0; 0; 1; 2; 1] in
-  succ_proof_len (fst (fst (succ_prove_of 187 3 5 a b))) = 54%nat.
+  succ_proof_len (fst (fst (succ_prove_of pin_N 3 5 a b))) = 54%nat.
 Proof.
   unfold succ_proof_len, succ_prove_of.
   rewrite succ_prove_rounds_log.
@@ -298,37 +299,36 @@ Proof. lia. Qed.
 
 (** ** Completeness on the pin family and QAP *)
 
-Definition pinN : Z := 11 * 17.
 Definition ping : Z := 3.
 Definition pintau : Z := 5.
 
 Theorem succ_pin_n2_accepts :
   let a := [2; 3] in
   let b := [1; 4] in
-  let Ps := pot_crs pinN ping pintau 4%nat in
-  let pr := succ_prove_of pinN ping pintau a b in
-  succ_verify_of pinN Ps
-    (pot_poly pinN ping pintau a)
-    (pot_poly pinN ping pintau b)
-    (pot_poly pinN ping pintau (poly_conv a b))
+  let Ps := pot_crs pin_N ping pintau 4%nat in
+  let pr := succ_prove_of pin_N ping pintau a b in
+  succ_verify_of pin_N Ps
+    (pot_poly pin_N ping pintau a)
+    (pot_poly pin_N ping pintau b)
+    (pot_poly pin_N ping pintau (poly_conv a b))
     pr 2%nat = true.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem succ_pin_n2_rejects_group_mul :
   let a := [2; 3] in
   let b := [1; 4] in
-  let Ps := pot_crs pinN ping pintau 4%nat in
-  let pr := succ_prove_of pinN ping pintau a b in
-  let CA := pot_poly pinN ping pintau a in
-  let CB := pot_poly pinN ping pintau b in
-  succ_verify_of pinN Ps CA CB ((CA * CB) mod pinN) pr 2%nat = false.
+  let Ps := pot_crs pin_N ping pintau 4%nat in
+  let pr := succ_prove_of pin_N ping pintau a b in
+  let CA := pot_poly pin_N ping pintau a in
+  let CB := pot_poly pin_N ping pintau b in
+  succ_verify_of pin_N Ps CA CB ((CA * CB) mod pin_N) pr 2%nat = false.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem succ_pin_n2_sum_neq_prod :
   let a := [2; 3] in
   let b := [1; 4] in
-  (pot_poly pinN ping pintau a * pot_poly pinN ping pintau b) mod pinN <>
-    pot_poly pinN ping pintau (poly_conv a b).
+  (pot_poly pin_N ping pintau a * pot_poly pin_N ping pintau b) mod pin_N <>
+    pot_poly pin_N ping pintau (poly_conv a b).
 Proof. vm_compute. discriminate. Qed.
 
 Theorem succ_pin_qap :
@@ -337,12 +337,12 @@ Theorem succ_pin_qap :
   let C := [2; 2] in
   let Hh := [0] in
   let van := [0; 1] in
-  let Ps := pot_crs pinN ping pintau 4%nat in
-  let pr := succ_prove_of pinN ping pintau A B in
-  succ_verify_of pinN Ps
-    (pot_poly pinN ping pintau A)
-    (pot_poly pinN ping pintau B)
-    ((pot_poly pinN ping pintau C *
-        pot_poly pinN ping pintau (poly_conv Hh van)) mod pinN)
+  let Ps := pot_crs pin_N ping pintau 4%nat in
+  let pr := succ_prove_of pin_N ping pintau A B in
+  succ_verify_of pin_N Ps
+    (pot_poly pin_N ping pintau A)
+    (pot_poly pin_N ping pintau B)
+    ((pot_poly pin_N ping pintau C *
+        pot_poly pin_N ping pintau (poly_conv Hh van)) mod pin_N)
     pr 2%nat = true.
 Proof. vm_compute. reflexivity. Qed.

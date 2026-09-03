@@ -3,9 +3,11 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 m = 5; delta = 3;
 check((m+delta)^3 - m^3 == 3*delta*m*(m+delta) + delta^3, "cube gap identity");
-N = 187;
+N = pin_N;
 check(((m+delta)^3 - m^3) % N == (3*delta*m*(m+delta)+delta^3) % N, "cube gap mod N");
 
 p = 23; q = 47;

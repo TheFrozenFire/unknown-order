@@ -484,18 +484,18 @@ Counts:
 | `pin_cube_kernel_trivial` | 516 | 0 | 0 | OK |
 | `cube_kernel_three` | 534 | 0 | 0 | OK |
 | `omega_13_order_3` | 579 | 0 | 0 | OK |
-| `mixed_kernel_91` | 587 | 0 | 0 | OK |
-| `cube_minus_one_fact` | 621 | 0 | 0 | OK |
-| `mixed_mu3_gcd_xminus1` | 629 | 0 | 0 | OK |
-| `mixed_mu3_gcd_phi3` | 650 | 0 | 0 | OK |
-| `mixed_mu3_splits` | 685 | 0 | 0 | OK |
-| `diagonal_mu3_gcd_xminus1` | 702 | 0 | 0 | OK |
-| `diagonal_mu3_gcd_phi3` | 727 | 0 | 0 | OK |
-| `mixed_kernel_91_splits` | 750 | 0 | 0 | OK |
-| `gq_kernel_91_splits` | 754 | 0 | 0 | OK |
-| `diagonal_16_91_no_split` | 758 | 0 | 0 | OK |
-| `phi3_small_omega_is_prime` | 762 | 0 | 0 | OK |
-| `pin_mu3_gcd_is_N` | 766 | 0 | 0 | OK |
+| `mixed_kernel_pin_91` | 587 | 0 | 0 | OK |
+| `cube_minus_one_fact` | 623 | 0 | 0 | OK |
+| `mixed_mu3_gcd_xminus1` | 631 | 0 | 0 | OK |
+| `mixed_mu3_gcd_phi3` | 652 | 0 | 0 | OK |
+| `mixed_mu3_splits` | 687 | 0 | 0 | OK |
+| `diagonal_mu3_gcd_xminus1` | 704 | 0 | 0 | OK |
+| `diagonal_mu3_gcd_phi3` | 729 | 0 | 0 | OK |
+| `mixed_kernel_pin_91_splits` | 752 | 0 | 0 | OK |
+| `gq_kernel_pin_91_splits` | 757 | 0 | 0 | OK |
+| `diagonal_pin_91_no_split` | 762 | 0 | 0 | OK |
+| `phi3_small_omega_is_prime` | 767 | 0 | 0 | OK |
+| `pin_mu3_gcd_is_N` | 771 | 0 | 0 | OK |
 
 ## CyclicCount.v
 
@@ -629,13 +629,13 @@ Counts:
 | `dozen_blum_shape` | 133 | 0 | 0 | OK |
 | `dozen_blum_e5_names_p` | 138 | 0 | 0 | OK |
 | `dozen_blum_e11_names_q` | 142 | 0 | 0 | OK |
-| `dozen_phi_160` | 148 | 0 | 0 | OK |
-| `dozen_every_unit_is_cube` | 152 | 0 | 0 | OK |
-| `dozen_gq_extract_is_residual` | 166 | 0 | 0 | OK |
-| `dozen_gq_complete_still` | 171 | 0 | 0 | OK |
-| `dozen_N_cong_q` | 177 | 0 | 0 | OK |
-| `dozen_gcd_Nminus1_pminus1` | 181 | 0 | 0 | OK |
-| `dozen_e11_minus1_shares_lambda` | 187 | 0 | 0 | OK |
+| `dozen_phi_160` | 149 | 0 | 0 | OK |
+| `dozen_every_unit_is_cube` | 153 | 0 | 0 | OK |
+| `dozen_gq_extract_is_residual` | 167 | 0 | 0 | OK |
+| `dozen_gq_complete_still` | 172 | 0 | 0 | OK |
+| `dozen_N_cong_q` | 178 | 0 | 0 | OK |
+| `dozen_gcd_Nminus1_pminus1` | 182 | 0 | 0 | OK |
+| `dozen_e11_minus1_shares_lambda` | 188 | 0 | 0 | OK |
 
 ## Endo.v
 
@@ -705,30 +705,30 @@ Counts:
 | `pin_mu3_only_one` | 468 | 0 | 0 | OK |
 | `mu3_log_range` | 494 | 0 | 0 | OK |
 | `mu3N_det_alternating` | 501 | 0 | 0 | OK |
-| `gp_91_order_3` | 515 | 0 | 0 | OK |
-| `gq_91_order_3` | 523 | 0 | 0 | OK |
+| `gp_pin_91_order_3` | 515 | 0 | 0 | OK |
+| `gq_pin_91_order_3` | 523 | 0 | 0 | OK |
 | `mu3N_det_gp_gq` | 531 | 0 | 0 | OK |
 | `mu3N_det_gq_gp` | 535 | 0 | 0 | OK |
-| `mu3_91_kernel_not_cyclic` | 539 | 0 | 0 | OK |
-| `mu3_order_coprime` | 556 | 0 | 0 | OK |
-| `mu3_order_divides_pminus1` | 576 | 0 | 0 | OK |
-| `mu3_prime_ne_2` | 588 | 0 | 0 | OK |
-| `mu3_pow_1_ne_2` | 599 | 0 | 0 | OK |
-| `mu3_log_of_pow` | 623 | 0 | 0 | OK |
-| `mu3_is_omega_power` | 659 | 0 | 0 | OK |
-| `mu3_log_reconstructs` | 722 | 0 | 0 | OK |
-| `mu3_log_mul` | 744 | 0 | 0 | OK |
-| `zmod3_mul` | 785 | 0 | 0 | OK |
-| `zmod3_mul_l` | 795 | 0 | 0 | OK |
-| `det_exp_left_add` | 802 | 0 | 0 | OK |
-| `det_exp_right_add` | 817 | 0 | 0 | OK |
-| `mu3_log_mod_reduce` | 832 | 0 | 0 | OK |
-| `mu3_log_base_mod` | 846 | 0 | 0 | OK |
-| `omega_7_order_3` | 855 | 0 | 0 | OK |
-| `pin_mu3_log_one` | 863 | 0 | 0 | OK |
-| `mu3N_det_left_bilinear` | 866 | 0 | 0 | OK |
-| `mu3N_det_right_bilinear` | 928 | 0 | 0 | OK |
-| `mu3N_det_skew` | 990 | 0 | 0 | OK |
+| `mu3_pin_91_kernel_not_cyclic` | 540 | 0 | 0 | OK |
+| `mu3_order_coprime` | 557 | 0 | 0 | OK |
+| `mu3_order_divides_pminus1` | 577 | 0 | 0 | OK |
+| `mu3_prime_ne_2` | 589 | 0 | 0 | OK |
+| `mu3_pow_1_ne_2` | 600 | 0 | 0 | OK |
+| `mu3_log_of_pow` | 624 | 0 | 0 | OK |
+| `mu3_is_omega_power` | 660 | 0 | 0 | OK |
+| `mu3_log_reconstructs` | 723 | 0 | 0 | OK |
+| `mu3_log_mul` | 745 | 0 | 0 | OK |
+| `zmod3_mul` | 786 | 0 | 0 | OK |
+| `zmod3_mul_l` | 796 | 0 | 0 | OK |
+| `det_exp_left_add` | 803 | 0 | 0 | OK |
+| `det_exp_right_add` | 818 | 0 | 0 | OK |
+| `mu3_log_mod_reduce` | 833 | 0 | 0 | OK |
+| `mu3_log_base_mod` | 847 | 0 | 0 | OK |
+| `omega_7_order_3` | 856 | 0 | 0 | OK |
+| `pin_mu3_log_one` | 864 | 0 | 0 | OK |
+| `mu3N_det_left_bilinear` | 867 | 0 | 0 | OK |
+| `mu3N_det_right_bilinear` | 929 | 0 | 0 | OK |
+| `mu3N_det_skew` | 991 | 0 | 0 | OK |
 
 ## EvalProduct.v
 
@@ -828,16 +828,16 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `fs_step_nonneg` | 42 | 0 | 0 | OK |
-| `fs_fold_nonneg` | 51 | 0 | 0 | OK |
-| `fs_challenge_nonneg` | 64 | 0 | 0 | OK |
-| `fs_eqdl_challenge_nonneg` | 78 | 0 | 0 | OK |
-| `eqdl_verifyb_iff` | 113 | 0 | 0 | OK |
-| `fs_eqdl_verifyb_iff` | 123 | 0 | 0 | OK |
-| `fs_eqdl_complete` | 132 | 0 | 0 | OK |
-| `fs_eqdl_complete_b` | 147 | 0 | 0 | OK |
-| `fs_slot_complete` | 162 | 0 | 0 | OK |
-| `fs_wire_complete` | 179 | 0 | 0 | OK |
+| `fs_step_nonneg` | 43 | 0 | 0 | OK |
+| `fs_fold_nonneg` | 52 | 0 | 0 | OK |
+| `fs_challenge_nonneg` | 65 | 0 | 0 | OK |
+| `fs_eqdl_challenge_nonneg` | 79 | 0 | 0 | OK |
+| `eqdl_verifyb_iff` | 114 | 0 | 0 | OK |
+| `fs_eqdl_verifyb_iff` | 124 | 0 | 0 | OK |
+| `fs_eqdl_complete` | 133 | 0 | 0 | OK |
+| `fs_eqdl_complete_b` | 148 | 0 | 0 | OK |
+| `fs_slot_complete` | 163 | 0 | 0 | OK |
+| `fs_wire_complete` | 180 | 0 | 0 | OK |
 | `fs_pin_accepts` | 209 | 0 | 0 | OK |
 | `fs_pin_rejects_wrong_challenge` | 213 | 0 | 0 | OK |
 | `fs_pin_challenge_depends_on_commit` | 222 | 0 | 0 | OK |
@@ -1012,49 +1012,49 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `gra_eq_tape_88` | 116 | 0 | 0 | OK |
-| `gra_eq_tape_zero` | 120 | 0 | 0 | OK |
-| `gra_eq_leak_pin` | 124 | 0 | 0 | OK |
-| `gra_eq_leak_factors` | 128 | 0 | 0 | OK |
-| `gra_eq_leak_onesided` | 135 | 0 | 0 | OK |
-| `gra_eq_N_is_not_a_split` | 146 | 0 | 0 | OK |
-| `gra_mul_y_pin` | 150 | 0 | 0 | OK |
-| `gra_const42` | 154 | 0 | 0 | OK |
-| `slp_init_eval` | 179 | 0 | 0 | OK |
-| `slp_to_poly_mul_pin` | 190 | 0 | 0 | OK |
-| `nth_app_last` | 208 | 0 | 0 | OK |
-| `nth_app_lt` | 215 | 0 | 0 | OK |
-| `step_length` | 223 | 0 | 0 | OK |
-| `step_poly_length` | 227 | 0 | 0 | OK |
-| `step_nodiv_prefix` | 231 | 0 | 0 | OK |
-| `step_nodiv_new` | 245 | 0 | 0 | OK |
-| `step_nodiv_overflow` | 265 | 0 | 0 | OK |
-| `step_nodiv_agree` | 278 | 0 | 0 | OK |
-| `gra_run_nodiv_agree` | 298 | 0 | 0 | OK |
-| `slp_init_length` | 315 | 0 | 0 | OK |
-| `gra_init_length` | 318 | 0 | 0 | OK |
-| `gra_init_agrees` | 321 | 0 | 0 | OK |
-| `gra_nodiv_denotes` | 334 | 0 | 0 | OK |
-| `slp_init_deg_le` | 373 | 0 | 0 | OK |
-| `step_deg_bound_length` | 385 | 0 | 0 | OK |
-| `step_nodiv_degree_le` | 389 | 0 | 0 | OK |
-| `gra_run_poly_length` | 420 | 0 | 0 | OK |
-| `gra_nodiv_degree_le` | 428 | 0 | 0 | OK |
-| `gra_deg_bound_identity` | 453 | 0 | 0 | OK |
-| `gra_deg_bound_square` | 457 | 0 | 0 | OK |
-| `gra_deg_bound_x3` | 461 | 0 | 0 | OK |
-| `gra_deg_bound_x4` | 465 | 0 | 0 | OK |
-| `gra_nodiv_mul_is_nodiv` | 469 | 0 | 0 | OK |
-| `gra_nodiv_mul_denotes_square` | 473 | 0 | 0 | OK |
-| `gra_nodiv_integer_eth_root_forbidden` | 480 | 0 | 0 | OK |
-| `gra_nodiv_const42_inverts_36` | 498 | 0 | 0 | OK |
-| `gra_nodiv_const42_fails_on_8` | 502 | 0 | 0 | OK |
-| `gra_identity_not_cube_root_at_2` | 506 | 0 | 0 | OK |
-| `gra_identity_at_one` | 510 | 0 | 0 | OK |
-| `gra_identity_gcd_at_2` | 514 | 0 | 0 | OK |
-| `gra_nodiv_identical_X3_linear` | 518 | 0 | 0 | OK |
-| `gra_nodiv_N_does_not_divide_minus1` | 522 | 0 | 0 | OK |
-| `gra_nodiv_identical_root_impossible_X3` | 526 | 0 | 0 | OK |
+| `gra_eq_tape_88` | 115 | 0 | 0 | OK |
+| `gra_eq_tape_zero` | 119 | 0 | 0 | OK |
+| `gra_eq_leak_pin` | 123 | 0 | 0 | OK |
+| `gra_eq_leak_factors` | 127 | 0 | 0 | OK |
+| `gra_eq_leak_onesided` | 134 | 0 | 0 | OK |
+| `gra_eq_N_is_not_a_split` | 145 | 0 | 0 | OK |
+| `gra_mul_y_pin` | 149 | 0 | 0 | OK |
+| `gra_const42` | 153 | 0 | 0 | OK |
+| `slp_init_eval` | 178 | 0 | 0 | OK |
+| `slp_to_poly_mul_pin` | 189 | 0 | 0 | OK |
+| `nth_app_last` | 207 | 0 | 0 | OK |
+| `nth_app_lt` | 214 | 0 | 0 | OK |
+| `step_length` | 222 | 0 | 0 | OK |
+| `step_poly_length` | 226 | 0 | 0 | OK |
+| `step_nodiv_prefix` | 230 | 0 | 0 | OK |
+| `step_nodiv_new` | 244 | 0 | 0 | OK |
+| `step_nodiv_overflow` | 264 | 0 | 0 | OK |
+| `step_nodiv_agree` | 277 | 0 | 0 | OK |
+| `gra_run_nodiv_agree` | 297 | 0 | 0 | OK |
+| `slp_init_length` | 314 | 0 | 0 | OK |
+| `gra_init_length` | 317 | 0 | 0 | OK |
+| `gra_init_agrees` | 320 | 0 | 0 | OK |
+| `gra_nodiv_denotes` | 333 | 0 | 0 | OK |
+| `slp_init_deg_le` | 372 | 0 | 0 | OK |
+| `step_deg_bound_length` | 384 | 0 | 0 | OK |
+| `step_nodiv_degree_le` | 388 | 0 | 0 | OK |
+| `gra_run_poly_length` | 419 | 0 | 0 | OK |
+| `gra_nodiv_degree_le` | 427 | 0 | 0 | OK |
+| `gra_deg_bound_identity` | 452 | 0 | 0 | OK |
+| `gra_deg_bound_square` | 456 | 0 | 0 | OK |
+| `gra_deg_bound_x3` | 460 | 0 | 0 | OK |
+| `gra_deg_bound_x4` | 464 | 0 | 0 | OK |
+| `gra_nodiv_mul_is_nodiv` | 468 | 0 | 0 | OK |
+| `gra_nodiv_mul_denotes_square` | 472 | 0 | 0 | OK |
+| `gra_nodiv_integer_eth_root_forbidden` | 479 | 0 | 0 | OK |
+| `gra_nodiv_const42_inverts_36` | 497 | 0 | 0 | OK |
+| `gra_nodiv_const42_fails_on_8` | 501 | 0 | 0 | OK |
+| `gra_identity_not_cube_root_at_2` | 505 | 0 | 0 | OK |
+| `gra_identity_at_one` | 509 | 0 | 0 | OK |
+| `gra_identity_gcd_at_2` | 513 | 0 | 0 | OK |
+| `gra_nodiv_identical_X3_linear` | 517 | 0 | 0 | OK |
+| `gra_nodiv_N_does_not_divide_minus1` | 521 | 0 | 0 | OK |
+| `gra_nodiv_identical_root_impossible_X3` | 525 | 0 | 0 | OK |
 | `Pe_minus_X_eval2_is_six_on_X` | 533 | 0 | 0 | OK |
 | `gra_inv_nonunit_pin` | 546 | 0 | 0 | OK |
 | `gra_inv_nonunit_factors` | 550 | 0 | 0 | OK |
@@ -1105,14 +1105,14 @@ Counts:
 | `strong_RSA_is_ar_C_iff` | 373 | 0 | 0 | OK |
 | `lambda_plus_one_11_17` | 384 | 0 | 0 | OK |
 | `lambda_plus_one_11_17_not_prime` | 388 | 0 | 0 | OK |
-| `lambda_solves_search_11_17` | 396 | 0 | 0 | OK |
-| `search_lambda_plus_one_misses_prime_AR` | 407 | 0 | 0 | OK |
-| `adaptive_root_known_product_breaks` | 425 | 0 | 0 | OK |
-| `adaptive_root_smooth_power_breaks` | 441 | 0 | 0 | OK |
-| `order_inverts_in_cyclic` | 464 | 0 | 0 | OK |
-| `order_yields_strong_RSA` | 489 | 0 | 0 | OK |
-| `gcd_powm_minus_1` | 512 | 0 | 0 | OK |
-| `leftover_mismatch_factors` | 525 | 0 | 0 | OK |
+| `lambda_solves_search_11_17` | 397 | 0 | 0 | OK |
+| `search_lambda_plus_one_misses_prime_AR` | 408 | 0 | 0 | OK |
+| `adaptive_root_known_product_breaks` | 426 | 0 | 0 | OK |
+| `adaptive_root_smooth_power_breaks` | 442 | 0 | 0 | OK |
+| `order_inverts_in_cyclic` | 465 | 0 | 0 | OK |
+| `order_yields_strong_RSA` | 490 | 0 | 0 | OK |
+| `gcd_powm_minus_1` | 513 | 0 | 0 | OK |
+| `leftover_mismatch_factors` | 526 | 0 | 0 | OK |
 
 ## HashSlot.v
 
@@ -1473,9 +1473,9 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `pin_N_pos` | 43 | 0 | 0 | OK |
-| `pin_N_gt_1` | 46 | 0 | 0 | OK |
-| `pin_p_neq_q` | 49 | 0 | 0 | OK |
+| `pin_N_pos` | 46 | 0 | 0 | OK |
+| `pin_N_gt_1` | 49 | 0 | 0 | OK |
+| `pin_p_neq_q` | 52 | 0 | 0 | OK |
 
 ## PollardP1.v
 
@@ -1564,12 +1564,12 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `prep_advice_depends_on_N` | 26 | 0 | 0 | OK |
-| `prep_advice_ignores_y` | 30 | 0 | 0 | OK |
-| `prep_factor_advice` | 34 | 0 | 0 | OK |
-| `prep_id_advice_not_a_split` | 42 | 0 | 0 | OK |
-| `prep_ginv_of_factor_advice` | 54 | 0 | 0 | OK |
-| `prep_then_gra_factors` | 58 | 0 | 0 | OK |
+| `prep_advice_depends_on_N` | 27 | 0 | 0 | OK |
+| `prep_advice_ignores_y` | 31 | 0 | 0 | OK |
+| `prep_factor_advice` | 35 | 0 | 0 | OK |
+| `prep_id_advice_not_a_split` | 43 | 0 | 0 | OK |
+| `prep_ginv_of_factor_advice` | 55 | 0 | 0 | OK |
+| `prep_then_gra_factors` | 59 | 0 | 0 | OK |
 
 ## Presentation.v
 
@@ -1610,21 +1610,21 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `find_exp_from_sound` | 54 | 0 | 0 | OK |
-| `find_exp_from_complete` | 84 | 0 | 0 | OK |
-| `find_exp_complete` | 107 | 0 | 0 | OK |
-| `find_exp_sound` | 123 | 0 | 0 | OK |
-| `pot_crs_from_length` | 171 | 0 | 0 | OK |
-| `pot_crs_length` | 181 | 0 | 0 | OK |
-| `pot_crs_from_nth` | 188 | 0 | 0 | OK |
-| `pot_crs_nth` | 205 | 0 | 0 | OK |
-| `recover_honest` | 230 | 0 | 0 | OK |
-| `quad_row_spec` | 277 | 0 | 0 | OK |
-| `quad_combine_spec` | 313 | 0 | 0 | OK |
-| `quad_combine_is_product` | 348 | 0 | 0 | OK |
-| `first_exps_nn` | 378 | 0 | 0 | OK |
-| `public_quad_complete` | 390 | 0 | 0 | OK |
-| `public_quad_qap` | 420 | 0 | 0 | OK |
+| `find_exp_from_sound` | 55 | 0 | 0 | OK |
+| `find_exp_from_complete` | 85 | 0 | 0 | OK |
+| `find_exp_complete` | 108 | 0 | 0 | OK |
+| `find_exp_sound` | 124 | 0 | 0 | OK |
+| `pot_crs_from_length` | 172 | 0 | 0 | OK |
+| `pot_crs_length` | 182 | 0 | 0 | OK |
+| `pot_crs_from_nth` | 189 | 0 | 0 | OK |
+| `pot_crs_nth` | 206 | 0 | 0 | OK |
+| `recover_honest` | 231 | 0 | 0 | OK |
+| `quad_row_spec` | 278 | 0 | 0 | OK |
+| `quad_combine_spec` | 314 | 0 | 0 | OK |
+| `quad_combine_is_product` | 349 | 0 | 0 | OK |
+| `first_exps_nn` | 379 | 0 | 0 | OK |
+| `public_quad_complete` | 391 | 0 | 0 | OK |
+| `public_quad_qap` | 421 | 0 | 0 | OK |
 | `public_quad_pin_accepts` | 455 | 0 | 0 | OK |
 | `public_quad_pin_rejects_group_mul` | 466 | 0 | 0 | OK |
 | `public_quad_pin_sum_neq_prod` | 478 | 0 | 0 | OK |
@@ -1708,28 +1708,28 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `rsa_N_gt_1` | 38 | 0 | 0 | OK |
-| `rsa_lambda_pos` | 45 | 0 | 0 | OK |
-| `rsa_lambda_gt_1` | 51 | 0 | 0 | OK |
-| `rsa_phi_pos` | 70 | 0 | 0 | OK |
-| `rsa_lambda_divides_phi` | 76 | 0 | 0 | OK |
-| `rsa_ed_minus_1_divides` | 79 | 0 | 0 | OK |
-| `rsa_ed_gt_1` | 88 | 0 | 0 | OK |
-| `rsa_dec_enc_units` | 101 | 0 | 0 | OK |
-| `rsa_enc_dec_units` | 125 | 0 | 0 | OK |
-| `rsa_d_is_cube_root_map` | 152 | 0 | 0 | OK |
-| `prime_11` | 163 | 0 | 0 | OK |
-| `prime_17` | 172 | 0 | 0 | OK |
-| `rsa_test_lambda` | 182 | 0 | 0 | OK |
-| `rsa_test_phi` | 185 | 0 | 0 | OK |
-| `rsa_test_inv` | 188 | 0 | 0 | OK |
-| `rsa_test_coprime_e` | 191 | 0 | 0 | OK |
-| `rsa_test_N` | 206 | 0 | 0 | OK |
-| `rsa_test_vector` | 209 | 0 | 0 | OK |
-| `rsa_test_roundtrip` | 213 | 0 | 0 | OK |
-| `rsa_test_annihilator` | 217 | 0 | 0 | OK |
-| `N_cong_q_mod_pminus1` | 232 | 0 | 0 | OK |
-| `gcd_polyN_pminus1_is_gcd_at_q` | 243 | 0 | 0 | OK |
+| `rsa_N_gt_1` | 39 | 0 | 0 | OK |
+| `rsa_lambda_pos` | 46 | 0 | 0 | OK |
+| `rsa_lambda_gt_1` | 52 | 0 | 0 | OK |
+| `rsa_phi_pos` | 71 | 0 | 0 | OK |
+| `rsa_lambda_divides_phi` | 77 | 0 | 0 | OK |
+| `rsa_ed_minus_1_divides` | 80 | 0 | 0 | OK |
+| `rsa_ed_gt_1` | 89 | 0 | 0 | OK |
+| `rsa_dec_enc_units` | 102 | 0 | 0 | OK |
+| `rsa_enc_dec_units` | 126 | 0 | 0 | OK |
+| `rsa_d_is_cube_root_map` | 153 | 0 | 0 | OK |
+| `prime_11` | 164 | 0 | 0 | OK |
+| `prime_17` | 173 | 0 | 0 | OK |
+| `rsa_test_lambda` | 183 | 0 | 0 | OK |
+| `rsa_test_phi` | 186 | 0 | 0 | OK |
+| `rsa_test_inv` | 189 | 0 | 0 | OK |
+| `rsa_test_coprime_e` | 192 | 0 | 0 | OK |
+| `rsa_test_N` | 207 | 0 | 0 | OK |
+| `rsa_test_vector` | 210 | 0 | 0 | OK |
+| `rsa_test_roundtrip` | 214 | 0 | 0 | OK |
+| `rsa_test_annihilator` | 218 | 0 | 0 | OK |
+| `N_cong_q_mod_pminus1` | 233 | 0 | 0 | OK |
+| `gcd_polyN_pminus1_is_gcd_at_q` | 244 | 0 | 0 | OK |
 
 ## RabinWilliams.v
 
@@ -1768,9 +1768,9 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `sagm_eval_21` | 30 | 0 | 0 | OK |
-| `sagm_product_adds_exponents` | 35 | 0 | 0 | OK |
-| `sagm_mul_exps` | 43 | 0 | 0 | OK |
+| `sagm_eval_21` | 31 | 0 | 0 | OK |
+| `sagm_product_adds_exponents` | 36 | 0 | 0 | OK |
+| `sagm_mul_exps` | 44 | 0 | 0 | OK |
 
 ## SameW.v
 
@@ -2179,21 +2179,21 @@ Counts:
 | `modulus_paillier_carrier` | 24 | 0 | 0 | OK |
 | `modulus_williams_Ve` | 32 | 0 | 0 | OK |
 | `modulus_ou_carrier` | 38 | 0 | 0 | OK |
-| `modulus_dj_carrier` | 46 | 0 | 0 | OK |
-| `modulus_cocks_jacobi` | 50 | 0 | 0 | OK |
-| `modulus_prime_power_field` | 54 | 0 | 0 | OK |
-| `modulus_two_safeprimes` | 60 | 0 | 0 | OK |
-| `modulus_rw_shape_odd_e` | 71 | 0 | 0 | OK |
-| `modulus_twins` | 76 | 0 | 0 | OK |
-| `modulus_unbalanced` | 81 | 0 | 0 | OK |
-| `modulus_triprime_cube_not_residual` | 91 | 0 | 0 | OK |
-| `modulus_prime_field` | 102 | 0 | 0 | OK |
-| `modulus_N55_cube_residual_shaped` | 108 | 0 | 0 | OK |
-| `modulus_N119_cube_shares` | 114 | 0 | 0 | OK |
-| `modulus_N209_cube_shares` | 120 | 0 | 0 | OK |
-| `modulus_N221_cube_shares` | 126 | 0 | 0 | OK |
-| `modulus_N323_cube_shares` | 132 | 0 | 0 | OK |
-| `modulus_prime_cube` | 138 | 0 | 0 | OK |
+| `modulus_dj_carrier` | 47 | 0 | 0 | OK |
+| `modulus_cocks_jacobi` | 51 | 0 | 0 | OK |
+| `modulus_prime_power_field` | 55 | 0 | 0 | OK |
+| `modulus_two_safeprimes` | 61 | 0 | 0 | OK |
+| `modulus_rw_shape_odd_e` | 72 | 0 | 0 | OK |
+| `modulus_twins` | 77 | 0 | 0 | OK |
+| `modulus_unbalanced` | 82 | 0 | 0 | OK |
+| `modulus_triprime_cube_not_residual` | 92 | 0 | 0 | OK |
+| `modulus_prime_field` | 103 | 0 | 0 | OK |
+| `modulus_N55_cube_residual_shaped` | 109 | 0 | 0 | OK |
+| `modulus_N119_cube_shares` | 115 | 0 | 0 | OK |
+| `modulus_N209_cube_shares` | 121 | 0 | 0 | OK |
+| `modulus_N221_cube_shares` | 127 | 0 | 0 | OK |
+| `modulus_N323_cube_shares` | 133 | 0 | 0 | OK |
+| `modulus_prime_cube` | 139 | 0 | 0 | OK |
 
 ## SrsaOrderArrows.v
 
@@ -2709,43 +2709,43 @@ Counts:
 | `prime_7` | 212 | 0 | 0 | OK |
 | `srsa_safeprime_lambda_30` | 220 | 0 | 0 | OK |
 | `srsa_safeprime_lambda_type` | 224 | 0 | 0 | OK |
-| `srsa_safeprime_g0_square` | 228 | 0 | 0 | OK |
-| `srsa_safeprime_miller_gcd` | 232 | 0 | 0 | OK |
-| `srsa_safeprime_miller_factors` | 236 | 0 | 0 | OK |
-| `srsa_residual_pin` | 252 | 0 | 0 | OK |
-| `srsa_fixed_e_rerand` | 279 | 0 | 0 | OK |
-| `srsa_fixed_e_rerand_pin` | 292 | 0 | 0 | OK |
-| `srsa_poly_e_not_rerand_invariant` | 299 | 0 | 0 | OK |
-| `srsa_related_y_square` | 305 | 0 | 0 | OK |
-| `srsa_related_pin` | 321 | 0 | 0 | OK |
-| `srsa_sagm_handle_unit` | 327 | 0 | 0 | OK |
-| `srsa_sagm_lambda_type_peel` | 332 | 0 | 0 | OK |
-| `srsa_sagm_product_reused` | 337 | 0 | 0 | OK |
-| `srsa_sqrt1_120_splits` | 347 | 0 | 0 | OK |
-| `srsa_minus1_no_split` | 353 | 0 | 0 | OK |
-| `srsa_120_plus_1` | 358 | 0 | 0 | OK |
-| `srsa_miller_66` | 364 | 0 | 0 | OK |
-| `srsa_four_sqrt1` | 369 | 0 | 0 | OK |
+| `srsa_safeprime_g0_square` | 229 | 0 | 0 | OK |
+| `srsa_safeprime_miller_gcd` | 233 | 0 | 0 | OK |
+| `srsa_safeprime_miller_factors` | 237 | 0 | 0 | OK |
+| `srsa_residual_pin` | 253 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand` | 280 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand_pin` | 293 | 0 | 0 | OK |
+| `srsa_poly_e_not_rerand_invariant` | 300 | 0 | 0 | OK |
+| `srsa_related_y_square` | 306 | 0 | 0 | OK |
+| `srsa_related_pin` | 322 | 0 | 0 | OK |
+| `srsa_sagm_handle_unit` | 328 | 0 | 0 | OK |
+| `srsa_sagm_lambda_type_peel` | 333 | 0 | 0 | OK |
+| `srsa_sagm_product_reused` | 338 | 0 | 0 | OK |
+| `srsa_sqrt1_120_splits` | 348 | 0 | 0 | OK |
+| `srsa_minus1_no_split` | 354 | 0 | 0 | OK |
+| `srsa_120_plus_1` | 359 | 0 | 0 | OK |
+| `srsa_miller_66` | 365 | 0 | 0 | OK |
+| `srsa_four_sqrt1` | 370 | 0 | 0 | OK |
 
 ## Succinct.v
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `poly_eval_app` | 44 | 0 | 0 | OK |
-| `nn_app` | 61 | 0 | 0 | OK |
-| `nn_firstn` | 70 | 0 | 0 | OK |
-| `nn_skipn` | 82 | 0 | 0 | OK |
-| `nn_map_mul_nonneg` | 94 | 0 | 0 | OK |
-| `nn_poly_add` | 103 | 0 | 0 | OK |
-| `nn_succ_fold` | 115 | 0 | 0 | OK |
-| `poly_eval_succ_fold` | 124 | 0 | 0 | OK |
-| `succ_round_pack_length` | 199 | 0 | 0 | OK |
-| `succ_prove_cons_length` | 205 | 0 | 0 | OK |
-| `succ_prove_rounds_log` | 212 | 0 | 0 | OK |
-| `succ_proof_len_is_log` | 263 | 0 | 0 | OK |
-| `succ_proof_len_n4` | 274 | 0 | 0 | OK |
-| `succ_proof_len_n16` | 284 | 0 | 0 | OK |
-| `succ_proof_len_bound_pin` | 294 | 0 | 0 | OK |
+| `poly_eval_app` | 45 | 0 | 0 | OK |
+| `nn_app` | 62 | 0 | 0 | OK |
+| `nn_firstn` | 71 | 0 | 0 | OK |
+| `nn_skipn` | 83 | 0 | 0 | OK |
+| `nn_map_mul_nonneg` | 95 | 0 | 0 | OK |
+| `nn_poly_add` | 104 | 0 | 0 | OK |
+| `nn_succ_fold` | 116 | 0 | 0 | OK |
+| `poly_eval_succ_fold` | 125 | 0 | 0 | OK |
+| `succ_round_pack_length` | 200 | 0 | 0 | OK |
+| `succ_prove_cons_length` | 206 | 0 | 0 | OK |
+| `succ_prove_rounds_log` | 213 | 0 | 0 | OK |
+| `succ_proof_len_is_log` | 264 | 0 | 0 | OK |
+| `succ_proof_len_n4` | 275 | 0 | 0 | OK |
+| `succ_proof_len_n16` | 285 | 0 | 0 | OK |
+| `succ_proof_len_bound_pin` | 295 | 0 | 0 | OK |
 | `succ_pin_n2_accepts` | 305 | 0 | 0 | OK |
 | `succ_pin_n2_rejects_group_mul` | 317 | 0 | 0 | OK |
 | `succ_pin_n2_sum_neq_prod` | 327 | 0 | 0 | OK |

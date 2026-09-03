@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; ee = 3; x = 42; z = 36;
+read("lib/pin.gp");
+
+N = pin_N; ee = 3; x = 42; z = 36;
 
 check(lift(Mod(x,N)^ee) == z,           "witness: 42^3 ≡ 36 (fixed e=3)");
 

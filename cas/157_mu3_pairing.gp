@@ -7,7 +7,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 13;
+read("lib/pin.gp");
+
+p = pin_91_p;
 w = [1, 3, 9];
 check(#w == 3,                            "mu_3(F_13*) has 3 elements");
 check(lift(Mod(1,p)^3)==1,                "1 is in mu_3");

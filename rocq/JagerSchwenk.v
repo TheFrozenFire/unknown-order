@@ -18,7 +18,7 @@ Open Scope Z_scope.
 
     [jacobi_N] is a total Gallina function of the integer
     representation (quadratic reciprocity).  It takes two values on
-    units of [187], so it is not a constant ring polynomial.  A
+    units of [pin_N], so it is not a constant ring polynomial.  A
     GRA-hardness result is therefore not evidence of standard-model
     hardness — which is why [Refuse_AM09_generic_ring_as_standard_model]
     remains unused.  Wave 2 theorems stay true *in the model*.

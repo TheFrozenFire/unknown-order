@@ -5,7 +5,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q; lam=80; y=36; x=42;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N; lam=pin_lam; y=pin_y; x=pin_x;
 
 \\ ----- X 401-420 Pohlig on leftover x, cubing 4-cycle -----
 check(gcd(lift(Mod(x,N)^5)-1,N)==11,    "401 gcd(x^5-1,N)=11 Pohlig leftover x");

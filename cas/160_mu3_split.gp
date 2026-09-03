@@ -10,8 +10,10 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 13; q = 7; N = p*q;
-om_p = 3; om_q = 2;
+read("lib/pin.gp");
+
+p = pin_91_p; q = pin_91_q; N = pin_91;
+om_p = pin_91_om_p; om_q = pin_91_om_q;
 g_p = lift(chinese(Mod(om_p, p), Mod(1, q)));
 g_q = lift(chinese(Mod(1, p), Mod(om_q, q)));
 diag = lift(chinese(Mod(om_p, p), Mod(om_q, q)));
@@ -55,7 +57,7 @@ n_both(L, m) = {
 };
 check(n_both(ker, N) == 4,                "each mixed sample returns both primes");
 
-Npin = 11*17;
+Npin = pin_N;
 kpin = ker_of(Npin);
 check(#kpin == 1,                         "pin kernel {1}");
 check(kpin[1] == 1,                       "pin only residue is 1");

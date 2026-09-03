@@ -7,6 +7,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 n_cube_roots(a, m) = {
   my(c = 0);
   for(x = 1, m-1, if(gcd(x,m)==1 && lift(Mod(x,m)^3)==a, c++));
@@ -53,8 +55,8 @@ all_units_cubes(N) = {
   okc
 };
 
-p = 13; q = 7; N = p*q; lam = lcm(p-1, q-1);
-check(N == 91,                            "named extra N=13*7=91");
+p = pin_91_p; q = pin_91_q; N = pin_91; lam = pin_91_lam;
+check(N == pin_91,                          "named extra pin_91");
 check(lam == 12,                          "λ(91)=12");
 check(lam % 3 == 0,                       "3 | λ(91)");
 
@@ -76,8 +78,8 @@ check(count_units(N) == 72,               "φ(91)=72");
 check(count_cubes(N) == 8,                "exactly φ/9=8 cubes");
 check(count_euler(N, lam/3) == 8,         "on 91, a^{λ/3}≡1 matches cubes");
 
-p2 = 13; q2 = 19; N2 = p2*q2; lam2 = lcm(12,18);
-check(N2 == 247,                          "named extra N=13*19=247");
+p2 = pin_247_p; q2 = pin_247_q; N2 = pin_247; lam2 = pin_247_lam;
+check(N2 == pin_247,                        "named extra pin_247");
 check(lam2 == 36,                         "λ(247)=36");
 check(lam2 % 3 == 0,                      "3 | λ(247)");
 check(gcd(7, N2)==1,                      "7 is a unit of Z/247Z");

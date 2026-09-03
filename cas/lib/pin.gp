@@ -1,12 +1,33 @@
-\\ Shared Strong-RSA pin and peel predicates.
-\\ Loaded by cas/134_whole_identity.gp (not globbed by run-check).
-\\ Pin vector P = [N, y, x, e, lam].
+\\ Shared Strong-RSA pin — twin of rocq/Pin.v.
+\\ File-level names so consumers can read this without clobbering
+\\ local p/q/N until they call init_pin().
+
+pin_p = 11; pin_q = 17;
+pin_N = pin_p*pin_q;
+pin_e = 3; pin_d = 27;
+pin_y = 36; pin_x = 42;
+pin_lam = 80; pin_phi = 160;
+pin_sqrt1_mixed = 67; pin_sqrt1_mixed2 = 120;
+
+pin_77_p = 7; pin_77_q = 11; pin_77 = pin_77_p*pin_77_q;
+pin_77_lam = 30; pin_77_y = 51; pin_77_x = 2; pin_77_e = 7;
+pin_91_p = 13; pin_91_q = 7; pin_91 = pin_91_p*pin_91_q;
+pin_91_lam = 12; pin_91_om_p = 3; pin_91_om_q = 2;
+pin_91_gp = 29; pin_91_gq = 79; pin_91_diag = 16;
+pin_247_p = 13; pin_247_q = 19; pin_247 = pin_247_p*pin_247_q;
+pin_247_lam = 36; pin_247_y = 69; pin_247_x = 179; pin_247_e = 5;
+pin_247_noncube = 7;
+pin_253_p = 11; pin_253_q = 23; pin_253 = pin_253_p*pin_253_q; pin_253_lam = 110;
+pin_45_p = 3; pin_45_q = 5; pin_45 = pin_45_p^2*pin_45_q; pin_45_lam = 12;
+pin_105_p = 3; pin_105_q = 5; pin_105_r = 7;
+pin_105 = pin_105_p*pin_105_q*pin_105_r; pin_105_lam = 12;
+pin_Nsq = pin_N^2;
 
 init_pin() = {
-  p = 11; q = 17;
-  N = p*q;
-  y = 36; x = 42; e = 3;
-  lam = lcm(p-1, q-1);
+  p = pin_p; q = pin_q;
+  N = pin_N;
+  y = pin_y; x = pin_x; e = pin_e;
+  lam = pin_lam;
   Pin = [N, y, x, e, lam];
 };
 
@@ -41,7 +62,7 @@ peel_all() = {
 \\ otherwise [N, lam] (or [N^2] for the Paillier carrier).
 
 \\ Safeprime-shaped residual (SolverRestrict): 2^7 \equiv 51 (mod 77).
-extra_77() = [7*11, 51, 2, 7, lcm(6,10)];
+extra_77() = [pin_77, pin_77_y, pin_77_x, pin_77_e, pin_77_lam];
 extra_77_residual() = {
   my(P=extra_77(), Ns=P[1], ys=P[2], xs=P[3], es=P[4], lams=P[5]);
   gcd(ys,Ns)==1
@@ -53,38 +74,38 @@ extra_77_residual() = {
 };
 
 \\ Williams pair p=11 \equiv 3 (mod 8), q=23 \equiv 7 (mod 8).
-extra_253() = [11*23, lcm(10,22)];
+extra_253() = [pin_253, pin_253_lam];
 extra_253_ok() = {
-  extra_253()[1]==253 && extra_253()[2]==110
-  && 11%8==3 && 23%8==7
+  extra_253()[1]==pin_253 && extra_253()[2]==pin_253_lam
+  && pin_253_p%8==3 && pin_253_q%8==7
 };
 
 \\ Takagi / Okamoto-Uchiyama p^2 q.
-extra_45() = [3^2*5, lcm(6,4)];
+extra_45() = [pin_45, pin_45_lam];
 extra_45_ok() = {
-  extra_45()[1]==45 && extra_45()[2]==12
-  && lift(Mod(1+3,9)^2)==(1+2*3)%9
+  extra_45()[1]==pin_45 && extra_45()[2]==pin_45_lam
+  && lift(Mod(1+pin_45_p, pin_45_p^2)^2)==(1+2*pin_45_p)%(pin_45_p^2)
 };
 
 \\ Triprime.
-extra_105() = [3*5*7, lcm(lcm(2,4),6)];
+extra_105() = [pin_105, pin_105_lam];
 extra_105_ok() = {
-  extra_105()[1]==105 && extra_105()[2]==12
+  extra_105()[1]==pin_105 && extra_105()[2]==pin_105_lam
   && gcd(3, extra_105()[2])==3
 };
 
 \\ Coprime second modulus, same y.
-extra_247() = [13*19, lcm(12,18)];
+extra_247() = [pin_247, pin_247_lam];
 extra_247_ok() = {
-  extra_247()[1]==247 && extra_247()[2]==36
-  && gcd(11*17, extra_247()[1])==1 && 36%247==36
+  extra_247()[1]==pin_247 && extra_247()[2]==pin_247_lam
+  && gcd(pin_N, extra_247()[1])==1 && pin_y%pin_247==pin_y
 };
 
 \\ Paillier carrier N^2 of the default pin.
-extra_Nsq() = [(11*17)^2];
+extra_Nsq() = [pin_Nsq];
 extra_Nsq_ok() = {
-  extra_Nsq()[1]==34969
-  && lift(Mod(1+11*17, extra_Nsq()[1])^1)==1+11*17
+  extra_Nsq()[1]==pin_Nsq
+  && lift(Mod(1+pin_N, extra_Nsq()[1])^1)==1+pin_N
 };
 
 \\ Computed sieve witnesses on the default pin (twin of rocq/Pin.v).

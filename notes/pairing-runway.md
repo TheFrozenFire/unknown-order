@@ -46,7 +46,7 @@ only with a written death in this file.
    CAS 155. Pin: every unit is a cube (`pin_units_are_cubes`).
    Cubic character takes values in `μ₃`; kernel of cubing is
    `{1,ω,ω²}` locally and CRT of those pairs on `N=pq`
-   (`cube_kernel_three`, `mu3_N_iff_locals`, `mixed_kernel_91`).
+   (`cube_kernel_three`, `mu3_N_iff_locals`, `mixed_kernel_pin_91`).
    Pin kernel is trivial (`pin_cube_kernel_trivial`); CAS 156.
 
 2. **Evaluation pairing on `μ_n` for `n=2,3,4,6`.** *(this sitting)*
@@ -61,7 +61,7 @@ only with a written death in this file.
    `𝔽_p*` needs a curve / extension (`Refuse_elliptic_curve_branch`).
    On `N=pq` the kernel is `C₃×C₃`: determinant of local exponents
    is alternating and `e(g_p,g_q)=ω≠1` (`mu3N_det_gp_gq`,
-   `mu3_91_kernel_not_cyclic`; CAS 158). Local `μ₃`-logs are
+   `mu3_pin_91_kernel_not_cyclic`; CAS 158). Local `μ₃`-logs are
    additive (`mu3_log_mul`), so the determinant is bilinear
    (`mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`,
    `mu3N_det_skew`; CAS 159). Trapdoor uses the factors.

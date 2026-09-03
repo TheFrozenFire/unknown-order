@@ -117,10 +117,10 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | All-bits + 3-bit encoding unfold | **Have** `all_bits_qap`, `three_bit_encoding`; CAS 111 |
 | Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `cube_euler_converse`, `three_divides_lambda_forbids_e3`; CAS 86, 154 |
 | Cube mod `N=pq` is CRT of local cubes; `a^{λ/3}≡1` necessary, not sufficient | **Have** `cube_N_iff_both`, `cube_euler_lambda_necessary`, `cube_euler_lambda_not_sufficient_247`, `pin_units_are_cubes`; CAS 155 |
-| Cubic character in `μ₃`; kernel `{1,ω,ω²}` locally, CRT on `N`; pin kernel trivial | **Have** `cube_kernel_three`, `mu3_N_iff_locals`, `pin_cube_kernel_trivial`, `mixed_kernel_91`; CAS 156 |
+| Cubic character in `μ₃`; kernel `{1,ω,ω²}` locally, CRT on `N`; pin kernel trivial | **Have** `cube_kernel_three`, `mu3_N_iff_locals`, `pin_cube_kernel_trivial`, `mixed_kernel_pin_91`; CAS 156 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
 | Alternating bilinear map on cyclic `μ₃` is constant 1 | **Have** `alternating_bilinear_mu3_trivial`, `eval_pair_omega_13_not_alternating`; CAS 157. Non-degenerate pairing of two hidden `μ₃` elements of cyclic `𝔽_p*` stays `Refuse_elliptic_curve_branch` |
-| Kernel of cubing on `N=pq` is `C₃×C₃`; det pairing `e(g_p,g_q)=ω≠1` | **Have** `mu3N_det_alternating`, `mu3N_det_gp_gq`, `mu3_91_kernel_not_cyclic`; CAS 158. Trapdoor uses the factors |
+| Kernel of cubing on `N=pq` is `C₃×C₃`; det pairing `e(g_p,g_q)=ω≠1` | **Have** `mu3N_det_alternating`, `mu3N_det_gp_gq`, `mu3_pin_91_kernel_not_cyclic`; CAS 158. Trapdoor uses the factors |
 | Local `μ₃`-logs additive; det pairing bilinear and skew | **Have** `mu3_log_mul`, `mu3_log_reconstructs`, `mu3N_det_left_bilinear`, `mu3N_det_right_bilinear`, `mu3N_det_skew`; CAS 159. Still a trapdoor |
 | Mixed cube root of 1 splits `N`; diagonal leftover does not | **Have** `mixed_mu3_splits`, `diagonal_mu3_gcd_xminus1`, `diagonal_mu3_gcd_phi3`, `pin_mu3_gcd_is_N`; CAS 160. Pairing formula not required |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |

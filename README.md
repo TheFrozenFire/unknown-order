@@ -56,11 +56,13 @@ Hash-to-prime is two encodings (`HashSlot.v`), not a hash
 
 ### Campaign pin
 
-Integers for the textbook inhabitant live in `rocq/Pin.v` (twin of
-`cas/lib/pin.gp`): `pin_p`, `pin_q`, `pin_N`, residual `(pin_x, pin_y, pin_e)`,
-named extra moduli, and computed attachments (Dixon residues, NFS
-quadratics). `rsa_test` is built from those names. Algebra that should
-follow a pin change imports `Pin` and writes `pin_N`, not a literal `187`.
+Integers for campaign moduli live in `rocq/Pin.v` (twin of `cas/lib/pin.gp`).
+Default semiprime: `pin_p`, `pin_q`, `pin_N`, residual `(pin_x, pin_y, pin_e)`.
+Named extras: `pin_77` (safeprime-shaped), `pin_91` (cubic kernel), `pin_247`
+(matching orders), `pin_253` (Williams), `pin_45` (Takagi), `pin_105` (triprime),
+`pin_Nsq` (Paillier). Computed attachments (Dixon residues, NFS quadratics,
+mixed `√1`) sit with the default pin. `rsa_test` is built from those names.
+RSA exports `Pin`; other files import it. Write `pin_N`, not a literal `187`.
 
 ### RSA and the annihilator
 

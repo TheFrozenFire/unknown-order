@@ -110,21 +110,21 @@ Proof. vm_compute. reflexivity. Qed.
 Theorem rsa_test_miller_s : miller_s rsa_test = 4%nat.
 Proof. vm_compute. reflexivity. Qed.
 
-(** Base [a = 2]: [2^5 = 32], and some square in the chain splits 187. *)
-Theorem rsa_test_base2_g0 : powm 2 5 187 = 32.
+(** Base [a = 2]: [2^5 = 32], and some square in the chain splits pin_N. *)
+Theorem rsa_test_base2_g0 : powm 2 5 pin_N = 32.
 Proof. vm_compute. reflexivity. Qed.
 
 (** [2^5 = 32], [32² ≡ 89], [89² ≡ 67], [67² ≡ 1].  Then [67 ≢ ±1]
-    and [gcd(66, 187) = 11]. *)
+    and [gcd(66, pin_N) = 11]. *)
 Theorem rsa_test_base2_chain :
-  powm 32 2 187 = 89 /\
-  powm 89 2 187 = 67 /\
-  powm 67 2 187 = 1.
+  powm 32 2 pin_N = 89 /\
+  powm 89 2 pin_N = 67 /\
+  powm 67 2 pin_N = 1.
 Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem rsa_test_base2_splits :
-  miller_splits 2 187 67 /\
-  Z.gcd (67 - 1) 187 = 11.
+  miller_splits 2 pin_N 67 /\
+  Z.gcd (67 - 1) pin_N = 11.
 Proof.
   split.
   - unfold miller_splits. vm_compute. repeat split; discriminate.

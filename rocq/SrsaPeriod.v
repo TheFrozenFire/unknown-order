@@ -16,94 +16,94 @@ Open Scope Z_scope.
     splits; equality [y^k≡1] finds [ord=40] and does not split, then
     [x=y^{27}] leftover-inverts.  Leftover [x] is the same Pohlig
     oracle.  On this pin [gcd(p−1,q−1)=2], so matching local orders
-    exist only at [{1,2}].  Extra pin [N=247] has matching leftover
+    exist only at [{1,2}].  Extra pin [N=pin_247] has matching leftover
     orders and the same gcd is not a proper factor. *)
 
 Theorem period_base3_period :
-  Z.gcd (powm 3 8 187 - 1) 187 = 1 /\
-  Z.gcd (powm 3 10 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 3 8 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 3 10 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_y32_splits :
-  powm 36 32 187 = 86 /\
-  powm 86 3 187 = 69 /\
-  Z.gcd (69 - 36) 187 = 11 /\
-  Problem_Factor 187 11.
+  powm 36 32 pin_N = 86 /\
+  powm 86 3 pin_N = 69 /\
+  Z.gcd (69 - 36) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_y5_minus_1_splits :
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_y8_minus_1_splits :
-  Z.gcd (powm 36 8 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 36 8 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_y10_minus_1_splits :
-  Z.gcd (powm 36 10 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 10 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_phi8_y_splits :
-  Z.gcd ((powm 36 4 187 + 1) mod 187) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd ((powm 36 4 pin_N + 1) mod pin_N) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_y2_plus_1_gcd :
-  Z.gcd ((powm 36 2 187 + 1) mod 187) 187 = 1.
+  Z.gcd ((powm 36 2 pin_N + 1) mod pin_N) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_phi5_y_splits :
-  (36 * 36 * 36 * 36 + 36 * 36 * 36 + 36 * 36 + 36 + 1) mod 187 = 99 /\
-  Z.gcd 99 187 = 11 /\
-  Problem_Factor 187 11.
+  (36 * 36 * 36 * 36 + 36 * 36 * 36 + 36 * 36 + 36 + 1) mod pin_N = 99 /\
+  Z.gcd 99 pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_x2_minus_1_int :
-  Z.gcd (42 * 42 - 1) 187 = 1.
+  Z.gcd (42 * 42 - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_full_period_no_split :
-  powm 36 40 187 = 1 /\
-  Z.gcd (powm 36 40 187 - 1) 187 = 187.
+  powm 36 40 pin_N = 1 /\
+  Z.gcd (powm 36 40 pin_N - 1) pin_N = pin_N.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_miller_on_period2 :
-  powm 67 2 187 = 1 /\
-  Z.gcd (67 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  powm 67 2 pin_N = 1 /\
+  Z.gcd (67 - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_local_orders :
@@ -119,12 +119,12 @@ Proof. reflexivity. Qed.
 
 Theorem period_public_d5_pohlig :
   (5 | 40) /\
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [exists 8; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_mismatched_local_orders :
@@ -142,73 +142,73 @@ Theorem period_v2_local_orders :
 Proof. split; reflexivity. Qed.
 
 Theorem period_gcd_path_splits :
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_exp_path_leftover :
-  powm 36 27 187 = 42 /\
-  srsa_residual_leaf 187 80 36 42 3.
+  powm 36 27 pin_N = 42 /\
+  srsa_residual_leaf pin_N 80 36 42 3.
 Proof.
   split; [vm_compute; reflexivity|].
   apply srsa_residual_pin.
 Qed.
 
 Theorem period_eq_order_40 :
-  powm 36 40 187 = 1 /\
-  powm 36 20 187 <> 1.
+  powm 36 40 pin_N = 1 /\
+  powm 36 20 pin_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem period_eq_not_8 :
-  powm 36 8 187 <> 1.
+  powm 36 8 pin_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_not_5 :
-  powm 36 5 187 <> 1.
+  powm 36 5 pin_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_y40 :
-  powm 36 40 187 = 1.
+  powm 36 40 pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_eq_y20 :
-  powm 36 20 187 <> 1.
+  powm 36 20 pin_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_y8 :
-  powm 36 8 187 <> 1.
+  powm 36 8 pin_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_y5 :
-  powm 36 5 187 <> 1.
+  powm 36 5 pin_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem period_gcd_y5_splits :
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_gcd_y8_splits :
-  Z.gcd (powm 36 8 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 36 8 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_gcd_full_period :
-  Z.gcd (powm 36 40 187 - 1) 187 = 187.
+  Z.gcd (powm 36 40 pin_N - 1) pin_N = pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_after_ord_invert :
-  powm 36 27 187 = 42 /\
-  srsa_residual_leaf 187 80 36 42 3.
+  powm 36 27 pin_N = 42 /\
+  srsa_residual_leaf pin_N 80 36 42 3.
 Proof.
   split; [vm_compute; reflexivity|].
   apply srsa_residual_pin.
@@ -233,215 +233,215 @@ Theorem period_v2_lam_bigger :
 Proof. split; reflexivity. Qed.
 
 Theorem period_x5_minus_1_splits :
-  Z.gcd (powm 42 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 42 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_x8_minus_1_splits :
-  Z.gcd (powm 42 8 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 42 8 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_x10_minus_1_splits :
-  Z.gcd (powm 42 10 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 42 10 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_x16_minus_1_splits :
-  Z.gcd (powm 42 16 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 42 16 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_x4_minus_1 :
-  Z.gcd (powm 42 4 187 - 1) 187 = 1.
+  Z.gcd (powm 42 4 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_x2_minus_1 :
-  Z.gcd (powm 42 2 187 - 1) 187 = 1.
+  Z.gcd (powm 42 2 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_same_oracle :
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Z.gcd (powm 42 5 187 - 1) 187 = 11.
+  Z.gcd (powm 36 5 pin_N - 1) pin_N = 11 /\
+  Z.gcd (powm 42 5 pin_N - 1) pin_N = 11.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_ten_order_16 :
-  powm 10 16 187 = 1 /\
-  powm 10 8 187 <> 1.
+  powm 10 16 pin_N = 1 /\
+  powm 10 8 pin_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem period_ten_pow8_miller :
-  powm 10 8 187 = 67.
+  powm 10 8 pin_N = 67.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_ten_pow8_splits :
-  Z.gcd (powm 10 8 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 10 8 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_ten_pow16 :
-  powm 10 16 187 = 1.
+  powm 10 16 pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_21_order_4 :
-  powm 21 4 187 = 1 /\
-  powm 21 2 187 = 67.
+  powm 21 4 pin_N = 1 /\
+  powm 21 2 pin_N = 67.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_21_sq_splits :
-  Z.gcd (powm 21 2 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 21 2 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_89_order_4 :
-  powm 36 10 187 = 89 /\
-  powm 89 4 187 = 1.
+  powm 36 10 pin_N = 89 /\
+  powm 89 4 pin_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_77_pminus1 :
-  Z.gcd (2 ^ 6 - 1) 77 = 7 /\
-  Problem_Factor 77 7.
+  Z.gcd (pin_77_x ^ 6 - 1) pin_77 = pin_77_p /\
+  Problem_Factor pin_77 pin_77_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_77_q. reflexivity.
 Qed.
 
 Theorem period_77_qminus1 :
-  Z.gcd (2 ^ 10 - 1) 77 = 11 /\
-  Problem_Factor 77 11.
+  Z.gcd (pin_77_x ^ 10 - 1) pin_77 = pin_77_q /\
+  Problem_Factor pin_77 pin_77_q.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 7. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_77_p. reflexivity.
 Qed.
 
 Theorem period_77_leftover_pohlig :
-  Z.gcd (powm 51 3 77 - 1) 77 = 7 /\
-  Problem_Factor 77 7.
+  Z.gcd (powm pin_77_y 3 pin_77 - 1) pin_77 = pin_77_p /\
+  Problem_Factor pin_77 pin_77_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_77_q. reflexivity.
 Qed.
 
 Theorem period_77_ord2_is_lam :
-  powm 2 30 77 = 1 /\
-  Z.lcm 6 10 = 30.
+  powm pin_77_x pin_77_lam pin_77 = 1 /\
+  Z.lcm 6 10 = pin_77_lam.
 Proof. split; [vm_compute; reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem period_two_subgroups_split :
-  Z.gcd (161 - 42) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (161 - 42) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_three_pohlig_5 :
-  Z.gcd (powm 3 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 3 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_three_pohlig_16 :
-  Z.gcd (powm 3 16 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 3 16 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_three_pow8_no_split :
-  Z.gcd (powm 3 8 187 - 1) 187 = 1.
+  Z.gcd (powm 3 8 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_cbrt2_cbrt36_split :
-  Z.gcd (161 - 42) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (161 - 42) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_cbrt3_cbrt36_split :
-  Z.gcd (75 - 42) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (75 - 42) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_cbrt3_cbrt2 :
-  Z.gcd (75 - 161) 187 = 1.
+  Z.gcd (75 - 161) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_five_max_order :
-  powm 5 80 187 = 1 /\
-  powm 5 40 187 <> 1.
+  powm 5 80 pin_N = 1 /\
+  powm 5 40 pin_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem period_five_pohlig_5 :
-  Z.gcd (powm 5 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 5 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.
 
 Theorem period_five_pohlig_16 :
-  Z.gcd (powm 5 16 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 5 16 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_ord16_to_miller :
-  powm 10 8 187 = 67.
+  powm 10 8 pin_N = 67.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_77_51_is_2_pow7 :
-  powm 2 7 77 = 51.
+  powm pin_77_x pin_77_e pin_77 = pin_77_y.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_77_lambda :
-  Z.lcm 6 10 = 30.
+  Z.lcm 6 10 = pin_77_lam.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_77_two_pow3 :
-  Z.gcd (2 ^ 3 - 1) 77 = 7 /\
-  Problem_Factor 77 7.
+  Z.gcd (pin_77_x ^ 3 - 1) pin_77 = pin_77_p /\
+  Problem_Factor pin_77 pin_77_p.
 Proof.
   split; [reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_77_q. reflexivity.
 Qed.
 
 Theorem period_77_two_pow5 :
-  Z.gcd (2 ^ 5 - 1) 77 = 1.
+  Z.gcd (pin_77_x ^ 5 - 1) pin_77 = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 (** ** KeyGen shape: leftover [x] splits iff local orders mismatch
 
-    [N=187] and [N=77]: [gcd(p−1,q−1)=2], leftover [x] is a
-    [gcd(x^k−1,N)] proper-factor oracle.  [N=13·19=247]: leftover
+    [N=pin_N] and [N=pin_77]: [gcd(p−1,q−1)=2], leftover [x] is a
+    [gcd(x^k−1,N)] proper-factor oracle.  [N=13·19=pin_247]: leftover
     [x=179] of [y=69] at [e=5] has matching local orders [6], and
     the same [k∈{5,8}] do not split.  Residual leaf named, not
     [Problem_Factor].  Cross-confirmed by [cas/140]. *)
@@ -455,19 +455,19 @@ Theorem period_77_mismatch_gcd :
 Proof. reflexivity. Qed.
 
 Theorem period_247_match_gcd :
-  13 * 19 = 247 /\
+  pin_247_p * pin_247_q = pin_247 /\
   Z.gcd 12 18 = 6 /\
   Z.lcm 12 18 = 36.
 Proof. split; [reflexivity|]. split; [reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem period_247_leftover_pair :
-  powm 179 5 247 = 69 /\
-  Z.gcd 69 247 = 1 /\
-  Z.gcd 179 247 = 1.
+  powm pin_247_x pin_247_e pin_247 = pin_247_y /\
+  Z.gcd pin_247_y pin_247 = 1 /\
+  Z.gcd pin_247_x pin_247 = 1.
 Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem period_247_residual_leaf :
-  srsa_residual_leaf 247 36 69 179 5.
+  srsa_residual_leaf pin_247 pin_247_lam pin_247_y pin_247_x pin_247_e.
 Proof.
   unfold srsa_residual_leaf, Problem_StrongRSA.
   split; [vm_compute; reflexivity|].
@@ -490,16 +490,16 @@ Theorem period_247_matching_local_orders :
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem period_247_x5_minus_1_no_split :
-  Z.gcd (powm 179 5 247 - 1) 247 = 1.
+  Z.gcd (powm pin_247_x pin_247_e pin_247 - 1) pin_247 = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_247_x8_minus_1_no_split :
-  Z.gcd (powm 179 8 247 - 1) 247 = 1.
+  Z.gcd (powm pin_247_x 8 pin_247 - 1) pin_247 = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_247_x6_minus_1_is_N :
-  powm 179 6 247 = 1 /\
-  Z.gcd (powm 179 6 247 - 1) 247 = 247.
+  powm pin_247_x 6 pin_247 = 1 /\
+  Z.gcd (powm pin_247_x 6 pin_247 - 1) pin_247 = pin_247.
 Proof. vm_compute. split; reflexivity. Qed.
 
 (** ** Public exponent lattice [N−1], [N+1] vs trapdoor period
@@ -526,24 +526,24 @@ Theorem period_ord_ndiv_Nminus1 :
 Proof. repeat split; reflexivity. Qed.
 
 Theorem period_Nminus1_divisors_no_split :
-  Z.gcd (powm 36 2 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 3 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 6 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 31 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 62 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 93 187 - 1) 187 = 1.
+  Z.gcd (powm 36 2 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 3 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 6 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 31 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 62 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 93 pin_N - 1) pin_N = 1.
 Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem period_y_Nminus1_no_annihilator :
-  powm 36 186 187 = 157 /\
+  powm 36 186 pin_N = 157 /\
   157 <> 1 /\
-  Z.gcd (157 - 1) 187 = 1.
+  Z.gcd (157 - 1) pin_N = 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem period_x_Nminus1_no_membership :
-  powm 42 186 187 = 64 /\
+  powm 42 186 pin_N = 64 /\
   64 <> 1 /\
-  Z.gcd (64 - 1) 187 = 1.
+  Z.gcd (64 - 1) pin_N = 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem period_Nplus1_factors :
@@ -551,15 +551,15 @@ Theorem period_Nplus1_factors :
 Proof. reflexivity. Qed.
 
 Theorem period_Nplus1_divisors_no_split :
-  Z.gcd (powm 36 4 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 47 187 - 1) 187 = 1 /\
-  Z.gcd (powm 36 94 187 - 1) 187 = 1.
+  Z.gcd (powm 36 4 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 47 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm 36 94 pin_N - 1) pin_N = 1.
 Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem period_y_Nplus1_no_annihilator :
-  powm 36 188 187 = 16 /\
+  powm 36 188 pin_N = 16 /\
   16 <> 1 /\
-  Z.gcd (16 - 1) 187 = 1.
+  Z.gcd (16 - 1) pin_N = 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 (** ** Annihilator quality short of [λ]
@@ -575,42 +575,42 @@ Theorem period_lam_v2_odd_part :
 Proof. split; reflexivity. Qed.
 
 Theorem period_M2_no_split :
-  Z.gcd (powm 36 2 187 - 1) 187 = 1.
+  Z.gcd (powm 36 2 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_M4_no_split :
-  Z.gcd (powm 36 4 187 - 1) 187 = 1.
+  Z.gcd (powm 36 4 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_advice_odd_part_splits :
-  Z.gcd (powm 36 5 187 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  Z.gcd (powm 36 5 pin_N - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof. apply period_y5_minus_1_splits. Qed.
 
 Theorem period_advice_v2_8_splits :
-  Z.gcd (powm 36 8 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 36 8 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof. apply period_y8_minus_1_splits. Qed.
 
 Theorem period_advice_v2_16_splits :
-  Z.gcd (powm 36 16 187 - 1) 187 = 17 /\
-  Problem_Factor 187 17.
+  Z.gcd (powm 36 16 pin_N - 1) pin_N = 17 /\
+  Problem_Factor pin_N 17.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 11. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_p. reflexivity.
 Qed.
 
 Theorem period_advice_ord_invert_no_proper :
-  powm 36 40 187 = 1 /\
-  Z.gcd (powm 36 40 187 - 1) 187 = 187.
+  powm 36 40 pin_N = 1 /\
+  Z.gcd (powm 36 40 pin_N - 1) pin_N = pin_N.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_advice_lam_miller :
-  powm 36 80 187 = 1 /\
-  Z.gcd (67 - 1) 187 = 11 /\
-  Problem_Factor 187 11.
+  powm 36 80 pin_N = 1 /\
+  Z.gcd (67 - 1) pin_N = 11 /\
+  Problem_Factor pin_N 11.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists 17. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
 Qed.

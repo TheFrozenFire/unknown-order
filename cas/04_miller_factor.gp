@@ -6,6 +6,8 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
+read("lib/pin.gp");
+
 oddpart(n) = { while(n%2==0, n = n/2); n };
 val2(n) = valuation(n, 2);
 
@@ -23,7 +25,7 @@ miller_factor(N, M, a) = {
   0
 };
 
-N = 187; M = 80;
+N = pin_N; M = 80;
 check(oddpart(M) == 5,                  "t = 5");
 check(val2(M) == 4,                     "s = 4");
 check(lift(Mod(2,N)^5) == 32,           "g0 = 2^5 = 32");
@@ -43,7 +45,7 @@ for(a = 2, N-2, \
     if(f>1 && f<N && N%f==0, split++) \
   ) \
 );
-check(split * 2 >= units,               "≥ 1/2 of units split N=187 (exhaustive)");
+check(split * 2 >= units,               "≥ 1/2 of units split N = pin_N (exhaustive)");
 printf("  [density] %d / %d units split\n", split, units);
 
 \\ a second modulus

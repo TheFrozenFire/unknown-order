@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q; e = 3; d = 27; lam = lcm(10,16);
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N; e = 3; d = 27; lam = lcm(10,16);
 m = 42;
 d1 = 10; d2 = 17;
 check(d1+d2 == d, "additive split of d");

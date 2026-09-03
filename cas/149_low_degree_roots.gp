@@ -8,7 +8,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p=11; q=17; N=p*q;
+read("lib/pin.gp");
+
+p=pin_p; q=pin_q; N=pin_N;
 
 units10 = 1;
 for(a=1, 10, \

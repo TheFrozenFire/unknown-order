@@ -4,6 +4,8 @@
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
+
+read("lib/pin.gp");
 setrand(58);
 nbit_prime(n) = nextprime(2^(n-1) + random(2^(n-1)));
 far_pair(n, gap) = {
@@ -33,11 +35,11 @@ for(t = 1, 40, \
 check(cjac>=30, "(c/N)=(m/N) public product, odd e");
 
 \\ ---------- T8: cube below N is a raw e=3 signature ----------
-p = 11; q = 17; N = 187; s = 5; mcube = s^3;
+p = pin_p; q = pin_q; N = pin_N; s = 5; mcube = s^3;
 check(mcube < N && lift(Mod(s,N)^3)==mcube, "5^3=125 < 187 is a raw signature of 125");
 
 \\ ---------- constructor slot r|p-1, one-sided ≡1 (mod r) need not factor ----------
-p = 11; q = 17; N = 187; r = 5; m = 138;
+p = pin_p; q = pin_q; N = pin_N; r = 5; m = 138;
 check((p-1)%r==0 && (q-1)%r!=0, "r=5 divides p-1 not q-1");
 check((m%p)%r==1 && (m%q)%r!=1, "m_p≡1 (mod r), m_q not");
 check(gcd(m-1,N)==1, "gcd(m-1,N)=1 — not a factor");
@@ -47,7 +49,7 @@ m1 = 1+p;
 check(gcd(m1-1,N)==p, "m≡1 (mod p), not (mod q) ⇒ factor");
 
 \\ ---------- Rabin: non-associate square roots factor ----------
-p = 11; q = 23; N = p*q; r = 5;
+p = pin_253_p; q = pin_253_q; N = pin_253; r = 5;
 y = lift(Mod(r,N)^2);
 \\ CRT mix: (r mod p, -r mod q) is a non-associate root
 x = lift(chinese(Mod(r,p), Mod(-r,q)));

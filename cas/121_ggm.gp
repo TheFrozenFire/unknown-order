@@ -6,7 +6,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; ee = 3;
+read("lib/pin.gp");
+
+N = pin_N; ee = 3;
 
 \\ multiply-only tape: init [1, y], three muls y*y*y
 y = 36;

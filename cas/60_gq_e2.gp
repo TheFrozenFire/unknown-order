@@ -4,7 +4,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-p = 11; q = 17; N = p*q;
+read("lib/pin.gp");
+
+p = pin_p; q = pin_q; N = pin_N;
 x = 5; z = lift(Mod(x,N)^2); k = 3; c = 4;
 t = lift(Mod(k,N)^2);
 resp = lift(Mod(k,N) * Mod(x,N)^c);

@@ -3,7 +3,9 @@
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
 
-N = 11*17; g = 3;
+read("lib/pin.gp");
+
+N = pin_N; g = 3;
 b0 = 1; rest = 3; \\ rest = 1 + 2*1, value of remaining bits
 v = b0 + 2*rest;
 check(v == 7, "1 + 2*3 = 7");
