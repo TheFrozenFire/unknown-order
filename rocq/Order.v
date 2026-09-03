@@ -28,7 +28,8 @@ Open Scope Z_scope.
     again a unit order ([order_lcm_attained]).  [𝔽_p*] has a
     primitive root ([primitive_root_exists]); CRT of local
     generators is a unit of order [λ] ([exists_unit_order_lambda],
-    [cas/153]). *)
+    [cas/153]).  A primitive root generates: every unit is [g^k]
+    ([primitive_root_generates], [cas/154]). *)
 
 (** ** Uniqueness and the divide criterion *)
 
@@ -1005,4 +1006,185 @@ Proof.
     as [a [Hc Ho]].
   exists a. split; [exact Hc|].
   rewrite rsa_test_lambda in Ho. exact Ho.
+Qed.
+
+(** ** A primitive root generates [𝔽_p*]
+
+    Powers [g^0,…,g^{p−2}] are pairwise distinct units, hence every
+    unit is one of them.  Not a named iso [(Z/pZ)* ≅ C_{p−1}]. *)
+
+Lemma mul_cancel_unit_mod :
+  forall n u x y,
+    1 < n ->
+    Z.coprime u n ->
+    (u * x) mod n = (u * y) mod n ->
+    x mod n = y mod n.
+Proof.
+  intros n u x y Hn Hu Heq.
+  apply mods_eq_iff_divides in Heq; [| lia].
+  replace (u * x - u * y) with (u * (x - y)) in Heq by ring.
+  apply Z.gauss in Heq.
+  2: { unfold Z.coprime in Hu. rewrite Z.gcd_comm. exact Hu. }
+  apply mods_eq_iff_divides; [lia | exact Heq].
+Qed.
+
+Lemma powm_eq_pow_cancel :
+  forall n a i d,
+    1 < n ->
+    Z.coprime a n ->
+    0 <= i ->
+    0 <= d ->
+    powm a (i + d) n = powm a i n ->
+    powm a d n = 1.
+Proof.
+  intros n a i d Hn Hcop Hi Hd Hadd.
+  pose proof (powm_add_r a i d n ltac:(lia) ltac:(lia) ltac:(lia)) as Hsum.
+  rewrite Hadd in Hsum.
+  assert (Hcu : Z.coprime (powm a i n) n).
+  { apply coprime_powm; [lia | lia | exact Hcop]. }
+  assert ((powm a i n * powm a d n) mod n = (powm a i n * 1) mod n)
+    as Hmul.
+  { rewrite <- Hsum. rewrite Z.mul_1_r.
+    unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+  apply mul_cancel_unit_mod in Hmul; [| lia | exact Hcu].
+  rewrite Z.mod_1_l in Hmul by lia.
+  unfold powm in Hmul. rewrite Z.mod_mod in Hmul by lia.
+  fold (powm a d n) in Hmul. exact Hmul.
+Qed.
+
+Lemma powm_inj_lt_order :
+  forall n a k i j,
+    1 < n ->
+    Z.coprime a n ->
+    is_order n a k ->
+    0 <= i < k ->
+    0 <= j < k ->
+    powm a i n = powm a j n ->
+    i = j.
+Proof.
+  intros n a k i j Hn Hcop Hor Hi Hj Heq.
+  destruct Hor as [Hk [H1 Hmin]].
+  destruct (Z.le_ge_cases i j) as [Hle | Hge].
+  - destruct (Z.eq_dec i j) as [Heqij | Hne]; [exact Heqij|].
+    exfalso.
+    assert (powm a (j - i) n = 1) as Hd1.
+    { apply (powm_eq_pow_cancel n a i (j - i)
+        ltac:(lia) Hcop ltac:(lia) ltac:(lia)).
+      replace (i + (j - i)) with j by ring. symmetry; exact Heq. }
+    apply (Hmin (j - i)); [lia | exact Hd1].
+  - destruct (Z.eq_dec i j) as [Heqij | Hne]; [exact Heqij|].
+    exfalso.
+    assert (powm a (i - j) n = 1) as Hd1.
+    { apply (powm_eq_pow_cancel n a j (i - j)
+        ltac:(lia) Hcop ltac:(lia) ltac:(lia)).
+      replace (j + (i - j)) with i by ring. exact Heq. }
+    apply (Hmin (i - j)); [lia | exact Hd1].
+Qed.
+
+Lemma nodup_incl_le :
+  forall (l l' : list Z),
+    NoDup l ->
+    (forall x, In x l -> In x l') ->
+    (length l <= length l')%nat.
+Proof.
+  intros l. induction l as [|x xs IH]; intros l' Hnd Hincl.
+  - simpl. lia.
+  - inversion Hnd as [|? ? Hni Hnd']. subst.
+    assert (In x l') as Hx by (apply Hincl; left; reflexivity).
+    apply in_split in Hx. destruct Hx as [l1 [l2 Heq]]. subst l'.
+    assert ((length xs <= length (l1 ++ l2))%nat).
+    { apply IH; [exact Hnd'|].
+      intros y Hy.
+      assert (In y (l1 ++ x :: l2)) by (apply Hincl; right; exact Hy).
+      rewrite in_app_iff in H. destruct H as [Hin1 | Hin2].
+      - rewrite in_app_iff. left. exact Hin1.
+      - simpl in Hin2. destruct Hin2 as [Heqy | Hin2].
+        + subst y. contradiction.
+        + rewrite in_app_iff. right. exact Hin2. }
+    rewrite length_app in *. simpl in *. lia.
+Qed.
+
+Fixpoint powers_upto (g p : Z) (n : nat) : list Z :=
+  match n with
+  | O => []
+  | S n' => powm g (Z.of_nat n') p :: powers_upto g p n'
+  end.
+
+Lemma powers_upto_length :
+  forall g p n, length (powers_upto g p n) = n.
+Proof.
+  intros g p n. induction n as [|n IH]; simpl; [reflexivity | rewrite IH; reflexivity].
+Qed.
+
+Lemma powers_upto_In :
+  forall g p n x,
+    In x (powers_upto g p n) ->
+    exists i, (i < n)%nat /\ x = powm g (Z.of_nat i) p.
+Proof.
+  intros g p n. induction n as [|n IH]; intros x Hin; simpl in Hin.
+  - contradiction.
+  - destruct Hin as [Heq | Hin].
+    + exists n. split; [lia | symmetry; exact Heq].
+    + destruct (IH x Hin) as [i [Hi Hx]].
+      exists i. split; [lia | exact Hx].
+Qed.
+
+Lemma powers_upto_NoDup :
+  forall p g n,
+    1 < p ->
+    Z.coprime g p ->
+    is_order p g (p - 1) ->
+    (Z.of_nat n <= p - 1) ->
+    NoDup (powers_upto g p n).
+Proof.
+  intros p g n Hp Hg Hor Hn. induction n as [|n IH]; simpl.
+  - constructor.
+  - constructor.
+    + intros Hin.
+      destruct (powers_upto_In g p n _ Hin) as [i [Hi Heq]].
+      assert (Z.of_nat n = Z.of_nat i) as Hii.
+      { apply (powm_inj_lt_order p g (p - 1) (Z.of_nat n) (Z.of_nat i));
+          try lia; try assumption. }
+      apply Nat2Z.inj in Hii. lia.
+    + apply IH. lia.
+Qed.
+
+Theorem primitive_root_generates :
+  forall p g a,
+    Z.prime p ->
+    Z.coprime g p ->
+    is_order p g (p - 1) ->
+    Z.coprime a p ->
+    exists k, 0 <= k < p - 1 /\ powm g k p = a mod p.
+Proof.
+  intros p g a Hp Hg Hor Ha.
+  pose proof (Z.prime_ge_2 p Hp).
+  set (n := Z.to_nat (p - 1)).
+  assert (Z.of_nat n = p - 1) as HnZ by (apply Z2Nat.id; lia).
+  set (ps := powers_upto g p n).
+  assert (length ps = n) as Hlen by apply powers_upto_length.
+  assert (NoDup ps) as Hnd.
+  { unfold ps, n. apply powers_upto_NoDup; try assumption; lia. }
+  destruct (in_dec Z.eq_dec (a mod p) ps) as [Hin | Hnin].
+  - destruct (powers_upto_In g p n _ Hin) as [i [Hi Heq]].
+    exists (Z.of_nat i). split; [| symmetry; exact Heq].
+    split; [lia|]. rewrite <- HnZ. apply Nat2Z.inj_lt. exact Hi.
+  - exfalso.
+    assert (NoDup (a mod p :: ps)) as Hnda.
+    { constructor; [exact Hnin | exact Hnd]. }
+    assert (forall x, In x (a mod p :: ps) -> In x (units_mod_prime p))
+      as Hall.
+    { intros x Hx. destruct Hx as [Heq | Hx].
+      - subst x. apply unit_mod_in_list; assumption.
+      - destruct (powers_upto_In g p n _ Hx) as [i [Hi Hiq]].
+        rewrite Hiq. unfold powm. apply unit_mod_in_list; [exact Hp|].
+        unfold Z.coprime.
+        rewrite <- (Z.gcd_mod_l (g ^ Z.of_nat i) p) by lia.
+        fold (powm g (Z.of_nat i) p).
+        apply coprime_powm; [lia | lia | exact Hg]. }
+    assert (Nat.le (length ((a mod p) :: ps)) (length (units_mod_prime p)))
+      as Hle.
+    { apply nodup_incl_le; [exact Hnda | exact Hall]. }
+    rewrite units_mod_prime_length in Hle by lia.
+    simpl in Hle. rewrite Hlen in Hle. unfold n in Hle. lia.
 Qed.

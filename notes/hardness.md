@@ -103,6 +103,8 @@ Constructible torsion `H` is a family parameter
 | pin unit `3` | `ord(3)=λ=80` | `is_order_pin_3_80`, `orders_generate_lambda_pin` | sampling-completeness for every `N` (`orders_generate_lambda_named`) |
 | lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | sampling enough orders to recover `λ` (`orders_generate_lambda_named`) |
 | prime `p` | a generator of `𝔽_p*` | `primitive_root_exists` | a named iso `(Z/pZ)* ≅ C_{p-1}` (`pratt_complete_named`) |
+| primitive root `g` of `𝔽_p*` | every unit is `g^k` | `primitive_root_generates` | a named iso `(Z/pZ)* ≅ C_{p-1}` (`pratt_complete_named`) |
+| `3 \| p−1`, unit `a` | `a` is a cube iff `a^{(p−1)/3} ≡ 1` | `cube_euler_one_direction`, `cube_euler_converse`, `cube_euler_iff` | cubic residuosity of `N=pq` (CRT of local cubes) |
 | distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals` | sampling-completeness (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |

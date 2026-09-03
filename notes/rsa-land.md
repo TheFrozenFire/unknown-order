@@ -115,7 +115,7 @@ test without revealing `p+q` (publishing `p+q` *is* factoring).
 | Bit less-than `(1−x)·y` | **Have** `bit_lt_table`, `bit_lt_is_and`; CAS 109 |
 | Conditional swap from two muxes | **Have** `cswap_select`, `cswap_involution`; CAS 110 |
 | All-bits + 3-bit encoding unfold | **Have** `all_bits_qap`, `three_bit_encoding`; CAS 111 |
-| Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `three_divides_lambda_forbids_e3`; CAS 86 |
+| Cubic residue when `3 \| p−1`; `e=3` forbidden iff `3 \| λ` | **Have** `cube_euler_one_direction`, `cube_euler_converse`, `three_divides_lambda_forbids_e3`; CAS 86, 154 |
 | Eval pairing on `μ_n`, `n=2,3,6` | **Have** `eval_pair_reduce_mod_n`, `omega_cube_is_one`; CAS 87 |
 | 2-of-2 root oracle is raise-to-`d*`, not sampled `τ` | **Have** `two_party_next_forces_dstar`; CAS 88 |
 | Inversion is public on units and on `Cl`; `x ↦ x^k` is not a pairing | **Have** `rsa_gii_search_empty`, `power_endo_next_forces_k`; CAS 89 |

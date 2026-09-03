@@ -38,8 +38,8 @@ only with a written death in this file.
    is a permutation. It is 3-to-1 when `3` divides `λ`. **Have**
    `cube_euler_one_direction`, `cubing_invertible_on_units`,
    `three_divides_lambda_forbids_e3`; CAS 86. Converse
-   (Euler `=1` ⇒ cube) still open; needs a primitive root or
-   a Blum-style extractor.
+   (Euler `=1` ⇒ cube): **Have** `primitive_root_generates`,
+   `cube_euler_converse`, `cube_euler_iff`; CAS 154.
 
 2. **Evaluation pairing on `μ_n` for `n=2,3,4,6`.** *(this sitting)*
    **Have** `eval_pair_reduce_mod_n`, `eval_pair_mu2_on_mixed`,

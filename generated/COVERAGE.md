@@ -523,14 +523,16 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `CubicResidue.v`
 
-- L12: Cubic residuosity when cubing is not a permutation
+- L13: Cubic residuosity when cubing is not a permutation
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `cubing_invertible_on_units` | 27 |
-| Theorem | `cube_root_map_is_cube` | 56 |
-| Theorem | `cube_euler_one_direction` | 70 |
-| Theorem | `three_divides_lambda_forbids_e3` | 109 |
+| Theorem | `cubing_invertible_on_units` | 31 |
+| Theorem | `cube_root_map_is_cube` | 60 |
+| Theorem | `cube_euler_one_direction` | 74 |
+| Theorem | `three_divides_lambda_forbids_e3` | 113 |
+| Theorem | `cube_euler_converse` | 131 |
+| Theorem | `cube_euler_iff` | 171 |
 
 ## `CyclicCount.v`
 
@@ -1546,60 +1548,69 @@ in the Rocq tree.  Do not edit by hand.
 ## `Order.v`
 
 - L16: Orders of units, as objects
-  - L33: Uniqueness and the divide criterion
-  - L81: Existence from a positive annihilator
-  - L165: [ord(a^k) = ord(a) / gcd(ord(a), k)]
-  - L227: [lcm] of orders divides [λ]
-  - L341: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
-  - L501: A unit of order [λ] for general [N = pq]
+  - L34: Uniqueness and the divide criterion
+  - L82: Existence from a positive annihilator
+  - L166: [ord(a^k) = ord(a) / gcd(ord(a), k)]
+  - L228: [lcm] of orders divides [λ]
+  - L342: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
+  - L502: A unit of order [λ] for general [N = pq]
+  - L1011: A primitive root generates [𝔽_p*]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `is_order_unique` | 35 |
-| Lemma | `powm_one_of_divide` | 48 |
-| Theorem | `order_iff_divides` | 64 |
-| Lemma | `order_exists_from_annihilator` | 86 |
-| Theorem | `order_exists_prime` | 136 |
-| Theorem | `order_exists_semiprime` | 150 |
-| Theorem | `order_of_power` | 167 |
-| Theorem | `lcm_orders_divides_lambda` | 229 |
-| Lemma | `is_order_2_of` | 256 |
-| Theorem | `minus1_order_2_rsa_test` | 270 |
-| Theorem | `mixed67_order_2_rsa_test` | 276 |
-| Theorem | `lcm_two_order2_not_lambda` | 282 |
-| Theorem | `is_order_pin_3_80` | 292 |
-| Theorem | `pin_unit_3_coprime` | 319 |
-| Theorem | `pin_attains_lambda` | 323 |
-| Theorem | `orders_generate_lambda_pin` | 336 |
-| Lemma | `powm_eq_1_iff_order_divides` | 343 |
-| Lemma | `pow2_divides_pow2` | 354 |
-| Theorem | `two_height_is_val2_ord` | 377 |
-| Theorem | `order_2_mod_11` | 436 |
-| Theorem | `order_2_mod_17` | 447 |
-| Theorem | `two_height_independent_of_odd_multiple` | 460 |
-| Theorem | `height_is_val2_ord_textbook` | 476 |
-| Lemma | `zseq_length` | 516 |
-| Lemma | `zseq_In_bounds` | 523 |
-| Lemma | `zseq_Forall_distinct_head` | 536 |
-| Lemma | `zseq_pairwise_distinct` | 556 |
-| Lemma | `units_mod_prime_length` | 572 |
-| Lemma | `units_mod_prime_In` | 576 |
-| Lemma | `units_mod_prime_coprime` | 586 |
-| Lemma | `units_mod_prime_distinct` | 598 |
-| Lemma | `units_mod_prime_nonnil` | 608 |
-| Lemma | `order_mul_coprime` | 616 |
-| Lemma | `order_of_divisor_power` | 687 |
-| Lemma | `order_lcm_attained` | 716 |
-| Lemma | `exists_max_order_in` | 747 |
-| Lemma | `zseq_In_interval` | 781 |
-| Lemma | `unit_mod_in_list` | 794 |
-| Lemma | `is_order_mod_base` | 815 |
-| Lemma | `is_order_of_mod` | 829 |
-| Lemma | `is_order_eq_mod` | 843 |
-| Theorem | `primitive_root_exists` | 856 |
-| Lemma | `order_semiprime_from_locals` | 922 |
-| Theorem | `exists_unit_order_lambda` | 965 |
-| Theorem | `exists_unit_order_lambda_pin` | 1001 |
+| Lemma | `is_order_unique` | 36 |
+| Lemma | `powm_one_of_divide` | 49 |
+| Theorem | `order_iff_divides` | 65 |
+| Lemma | `order_exists_from_annihilator` | 87 |
+| Theorem | `order_exists_prime` | 137 |
+| Theorem | `order_exists_semiprime` | 151 |
+| Theorem | `order_of_power` | 168 |
+| Theorem | `lcm_orders_divides_lambda` | 230 |
+| Lemma | `is_order_2_of` | 257 |
+| Theorem | `minus1_order_2_rsa_test` | 271 |
+| Theorem | `mixed67_order_2_rsa_test` | 277 |
+| Theorem | `lcm_two_order2_not_lambda` | 283 |
+| Theorem | `is_order_pin_3_80` | 293 |
+| Theorem | `pin_unit_3_coprime` | 320 |
+| Theorem | `pin_attains_lambda` | 324 |
+| Theorem | `orders_generate_lambda_pin` | 337 |
+| Lemma | `powm_eq_1_iff_order_divides` | 344 |
+| Lemma | `pow2_divides_pow2` | 355 |
+| Theorem | `two_height_is_val2_ord` | 378 |
+| Theorem | `order_2_mod_11` | 437 |
+| Theorem | `order_2_mod_17` | 448 |
+| Theorem | `two_height_independent_of_odd_multiple` | 461 |
+| Theorem | `height_is_val2_ord_textbook` | 477 |
+| Lemma | `zseq_length` | 517 |
+| Lemma | `zseq_In_bounds` | 524 |
+| Lemma | `zseq_Forall_distinct_head` | 537 |
+| Lemma | `zseq_pairwise_distinct` | 557 |
+| Lemma | `units_mod_prime_length` | 573 |
+| Lemma | `units_mod_prime_In` | 577 |
+| Lemma | `units_mod_prime_coprime` | 587 |
+| Lemma | `units_mod_prime_distinct` | 599 |
+| Lemma | `units_mod_prime_nonnil` | 609 |
+| Lemma | `order_mul_coprime` | 617 |
+| Lemma | `order_of_divisor_power` | 688 |
+| Lemma | `order_lcm_attained` | 717 |
+| Lemma | `exists_max_order_in` | 748 |
+| Lemma | `zseq_In_interval` | 782 |
+| Lemma | `unit_mod_in_list` | 795 |
+| Lemma | `is_order_mod_base` | 816 |
+| Lemma | `is_order_of_mod` | 830 |
+| Lemma | `is_order_eq_mod` | 844 |
+| Theorem | `primitive_root_exists` | 857 |
+| Lemma | `order_semiprime_from_locals` | 923 |
+| Theorem | `exists_unit_order_lambda` | 966 |
+| Theorem | `exists_unit_order_lambda_pin` | 1002 |
+| Lemma | `mul_cancel_unit_mod` | 1016 |
+| Lemma | `powm_eq_pow_cancel` | 1031 |
+| Lemma | `powm_inj_lt_order` | 1055 |
+| Lemma | `nodup_incl_le` | 1084 |
+| Lemma | `powers_upto_length` | 1113 |
+| Lemma | `powers_upto_In` | 1119 |
+| Lemma | `powers_upto_NoDup` | 1132 |
+| Theorem | `primitive_root_generates` | 1152 |
 
 ## `Paillier.v`
 
@@ -3290,4 +3301,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2251 theorems/lemmas/corollaries/examples across 116 files._
+_2261 theorems/lemmas/corollaries/examples across 116 files._

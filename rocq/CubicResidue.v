@@ -6,6 +6,7 @@ Require Import RocqProofs.NumberTheory.
 Require Import RocqProofs.QuadRecip.
 Require Import RSA.
 Require Import Hardness.
+Require Import Order.
 
 Open Scope Z_scope.
 
@@ -14,12 +15,15 @@ Open Scope Z_scope.
     If [gcd(3, p−1) = 1] then [x ↦ x³] is invertible on [(Z/pZ)*]
     (Bézout).  If [3 | p−1] then a cube [x³] satisfies
     [a^{(p−1)/3} ≡ 1 (mod p)] by Fermat.  That is the cubic
-    analogue of Euler's criterion in one direction.  On an RSA
-    instance [e = 3] is *forbidden* precisely when [3 | λ], so
-    the cubic decision problem is live exactly when textbook RSA
-    at [e = 3] is not.
+    analogue of Euler's criterion in one direction.  The converse
+    ([a^{(p−1)/3} ≡ 1] ⇒ cube) uses a primitive root
+    ([primitive_root_generates], [cas/154]).  On an RSA instance
+    [e = 3] is *forbidden* precisely when [3 | λ], so the cubic
+    decision problem is live exactly when textbook RSA at [e = 3]
+    is not.
 
-    Cross-confirmed by [cas/86_cubic_residue.gp]. *)
+    Cross-confirmed by [cas/86_cubic_residue.gp] and
+    [cas/154_cube_euler.gp]. *)
 
 Definition is_cube (a p : Z) : Prop :=
   exists x, powm x 3 p = a mod p.
@@ -122,4 +126,57 @@ Proof.
   assert (3 | Z.gcd 3 (3 * k)).
   { apply Z.gcd_greatest; [apply Z.divide_refl | exists k; ring]. }
   rewrite Hcop in H. apply Z.divide_1_r in H. lia.
+Qed.
+
+Theorem cube_euler_converse :
+  forall a p,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime a p ->
+    (3 | p - 1) ->
+    powm a ((p - 1) / 3) p = 1 ->
+    is_cube a p.
+Proof.
+  intros a p Hp Hne Hcop Hdiv Heul.
+  pose proof (Z.prime_ge_2 p Hp).
+  destruct Hdiv as [t Ht].
+  assert (0 < t) as Htpos by nia.
+  assert ((p - 1) / 3 = t) as Hquot.
+  { rewrite Ht. apply Z.div_mul. lia. }
+  destruct (primitive_root_exists p Hp) as [g [Hg Hor]].
+  destruct (primitive_root_generates p g a Hp Hg Hor Hcop)
+    as [k [Hk Hkpow]].
+  assert (0 <= (p - 1) / 3) as Hn by (rewrite Hquot; lia).
+  assert (powm g (k * ((p - 1) / 3)) p = 1) as Hg1.
+  { rewrite powm_mul_r by lia.
+    rewrite Hkpow.
+    rewrite powm_mod_base by lia.
+    exact Heul. }
+  assert ((p - 1 | k * ((p - 1) / 3))) as Hdivk.
+  { apply (proj2 (order_iff_divides p g (p - 1) (k * ((p - 1) / 3))
+                    ltac:(lia) ltac:(nia) Hor)).
+    exact Hg1. }
+  rewrite Hquot in Hdivk.
+  destruct Hdivk as [q Hq].
+  assert (k = 3 * q) as Hk3.
+  { enough (k * t = (3 * q) * t) by nia.
+    rewrite Hq. nia. }
+  assert (0 <= q) as Hqpos by nia.
+  exists (powm g q p).
+  rewrite <- powm_mul_r by lia.
+  rewrite Z.mul_comm, <- Hk3.
+  rewrite Hkpow. reflexivity.
+Qed.
+
+Theorem cube_euler_iff :
+  forall a p,
+    Z.prime p ->
+    p <> 2 ->
+    Z.coprime a p ->
+    (3 | p - 1) ->
+    is_cube a p <-> powm a ((p - 1) / 3) p = 1.
+Proof.
+  intros a p Hp Hne Hcop Hdiv. split.
+  - intros [x Hx]. apply (cube_euler_one_direction a p x); assumption.
+  - apply cube_euler_converse; assumption.
 Qed.
