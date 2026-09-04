@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2436 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2442 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2436 results across 119 files.
+Captured for 2442 results across 119 files.
 
 Counts:
 
@@ -2622,6 +2622,12 @@ Counts:
 | `nodiv_gra_short_dq_splits` | 929 | 0 | 0 | OK |
 | `nodiv_identity_bound_lt_dq` | 949 | 0 | 0 | OK |
 | `nodiv_square_bound_lt_dq` | 954 | 0 | 0 | OK |
+| `trapdoor_monomial_inverts_all_units` | 968 | 0 | 0 | OK |
+| `monomial_all_units_invert_is_trapdoor` | 996 | 0 | 0 | OK |
+| `pin_d_monomial_is_trapdoor` | 1037 | 0 | 0 | OK |
+| `pin_dp_monomial_not_trapdoor` | 1041 | 0 | 0 | OK |
+| `pin_dq_monomial_not_trapdoor` | 1045 | 0 | 0 | OK |
+| `pin_d_plus_lam_is_trapdoor` | 1049 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

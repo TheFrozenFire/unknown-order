@@ -123,6 +123,7 @@ Constructible torsion `H` is a family parameter
 | polynomial `P` of `deg ≤ d_q` that inverts every unit | some coeff `c` has `1 < gcd(c,N) < N` | `short_root_poly_some_coeff_splits`, `pin_crt_root_poly_short_splits` | high-degree `X^d`; unrestricted residual solver ⇒ factor |
 | `deg P < d_q` | no all-units *e*-th-root polynomial (`q ∤ −1`) | `no_root_poly_deg_lt_dq`, `pin_Xn_dp_does_not_invert_all_units` | the bound `d_q` itself (CRT binomial) |
 | nodiv GRA, `deg_bound ≤ d_q`, inverts every unit | denoted poly has a splitting coeff | `nodiv_gra_short_dq_splits` | high-degree tapes (`X^d`); `GInv`; residual-solver ⇒ factor |
+| monomial `X^k` inverts every unit | `e k ≡ 1 (mod λ)`; `k` is a decryption exponent | `monomial_all_units_invert_is_trapdoor`, `trapdoor_monomial_inverts_all_units`, `pin_d_plus_lam_is_trapdoor` | local inverses `d_p`, `d_q`; residual-solver ⇒ factor |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

@@ -2103,6 +2103,12 @@ SrsaRootPoly.v,pin_Xn_dp_does_not_invert_all_units,918,0,0,OK
 SrsaRootPoly.v,nodiv_gra_short_dq_splits,929,0,0,OK
 SrsaRootPoly.v,nodiv_identity_bound_lt_dq,949,0,0,OK
 SrsaRootPoly.v,nodiv_square_bound_lt_dq,954,0,0,OK
+SrsaRootPoly.v,trapdoor_monomial_inverts_all_units,968,0,0,OK
+SrsaRootPoly.v,monomial_all_units_invert_is_trapdoor,996,0,0,OK
+SrsaRootPoly.v,pin_d_monomial_is_trapdoor,1037,0,0,OK
+SrsaRootPoly.v,pin_dp_monomial_not_trapdoor,1041,0,0,OK
+SrsaRootPoly.v,pin_dq_monomial_not_trapdoor,1045,0,0,OK
+SrsaRootPoly.v,pin_d_plus_lam_is_trapdoor,1049,0,0,OK
 SrsaWriteE.v,emap_phi_y_even,21,0,0,OK
 SrsaWriteE.v,emap_hamming_even,26,0,0,OK
 SrsaWriteE.v,emap_lsb_y_even,31,0,0,OK

@@ -955,3 +955,97 @@ Theorem nodiv_square_bound_lt_dq :
   (nth 3%nat (gra_deg_bound [GMul 2%nat 2%nat] slp_init_deg) 0%nat
      < Z.to_nat pin_inv3_q)%nat.
 Proof. vm_compute. lia. Qed.
+
+(** ** Monomial all-units invert iff the exponent is trapdoor
+
+    [X^k] inverts every unit iff [e k ≡ 1 (mod λ)]: [k] is a
+    decryption exponent ([d], or [d+tλ]).  Local inverses [d_p],
+    [d_q] invert one prime field, not [(Z/NZ)*].  Knowing such a
+    [k] is Miller-from-[(e,k)]; the [d] case is [miller_from_d].
+    Not [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/167]. *)
+
+Theorem trapdoor_monomial_inverts_all_units :
+  forall k y,
+    0 <= k ->
+    (pin_e * k) mod pin_lam = 1 ->
+    Z.coprime y pin_N ->
+    powm (powm y k pin_N) pin_e pin_N = y mod pin_N.
+Proof.
+  intros k y Hk Hinv Hcop.
+  assert (Hek : 0 <= pin_e * k - 1).
+  { pose proof (Z.div_mod (pin_e * k) pin_lam ltac:(lia)) as Hdm.
+    rewrite Hinv in Hdm.
+    assert (0 <= (pin_e * k) / pin_lam) by (apply Z.div_pos; lia).
+    nia. }
+  rewrite <- powm_mul_r by lia.
+  rewrite (Z.mul_comm k pin_e).
+  replace (pin_e * k) with (pin_e * k - 1 + 1) by lia.
+  rewrite powm_add_r by lia.
+  rewrite powm_1_r by lia.
+  rewrite (annihilates_units pin_p pin_q y (pin_e * k - 1));
+    [| apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q
+     | exact Hcop | exact Hek |].
+  - rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
+  - rewrite rsa_test_lambda.
+    apply Z.mod_divide; [lia|].
+    rewrite Zminus_mod, Hinv, Z.mod_1_l, Z.sub_diag, Z.mod_0_l by lia.
+    reflexivity.
+Qed.
+
+Theorem monomial_all_units_invert_is_trapdoor :
+  forall k,
+    0 <= k ->
+    (forall y, Z.coprime y pin_N ->
+       powm (powm y k pin_N) pin_e pin_N = y mod pin_N) ->
+    (pin_e * k) mod pin_lam = 1.
+Proof.
+  intros k Hk Hall.
+  assert (Hkpos : 1 <= k).
+  { destruct (Z.le_gt_cases 1 k) as [Hle | Hlt]; [exact Hle|].
+    assert (k = 0) by lia. subst k.
+    pose proof (Hall 2 ltac:(vm_compute; reflexivity)) as H2.
+    unfold powm in H2. rewrite Z.pow_0_r in H2.
+    vm_compute in H2. discriminate. }
+  pose proof pin_unit_3_coprime as Hgcop.
+  pose proof (Hall pin_g Hgcop) as Hg.
+  assert (Hek : 0 <= pin_e * k - 1) by lia.
+  rewrite <- powm_mul_r in Hg by lia.
+  rewrite (Z.mul_comm k pin_e) in Hg.
+  replace (pin_e * k) with (pin_e * k - 1 + 1) in Hg by lia.
+  rewrite powm_add_r in Hg by lia.
+  rewrite powm_1_r in Hg by lia.
+  assert (Hann : powm pin_g (pin_e * k - 1) pin_N = 1).
+  { transitivity (powm pin_g (pin_e * k - 1) pin_N mod pin_N).
+    - unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+    - transitivity (1 mod pin_N).
+      + apply (mul_cancel_r_coprime
+                 (powm pin_g (pin_e * k - 1) pin_N) 1
+                 (pin_g mod pin_N) pin_N);
+          [apply pin_N_gt_1 | |].
+        * rewrite Z.gcd_mod_l. exact Hgcop.
+        * rewrite Z.mul_1_l, Z.mod_mod by lia. exact Hg.
+      + apply Z.mod_1_l. apply pin_N_gt_1. }
+  pose proof (order_divides_annihilator pin_N pin_g pin_lam (pin_e * k - 1)
+                pin_N_gt_1 ltac:(lia) is_order_pin_3_80 Hann) as Hdiv.
+  apply Z.mod_divide in Hdiv; [|lia].
+  replace (pin_e * k) with (pin_e * k - 1 + 1) by lia.
+  rewrite Z.add_mod, Hdiv, Z.add_0_l, Z.mod_mod, Z.mod_1_l by lia.
+  reflexivity.
+Qed.
+
+Theorem pin_d_monomial_is_trapdoor :
+  (pin_e * pin_d) mod pin_lam = 1.
+Proof. apply pin_trapdoor_ed_inv. Qed.
+
+Theorem pin_dp_monomial_not_trapdoor :
+  (pin_e * pin_inv3_p) mod pin_lam <> 1.
+Proof. vm_compute. discriminate. Qed.
+
+Theorem pin_dq_monomial_not_trapdoor :
+  (pin_e * pin_inv3_q) mod pin_lam <> 1.
+Proof. vm_compute. discriminate. Qed.
+
+Theorem pin_d_plus_lam_is_trapdoor :
+  (pin_e * (pin_d + pin_lam)) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.

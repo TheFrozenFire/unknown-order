@@ -2964,6 +2964,7 @@ in the Rocq tree.  Do not edit by hand.
   - L429: They agree on units and differ as polynomials
   - L470: Short [e]-th-root polynomials: a coefficient splits [N]
   - L899: The window is sharp; nodiv GRA in it splits
+  - L959: Monomial all-units invert iff the exponent is trapdoor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3028,6 +3029,12 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `nodiv_gra_short_dq_splits` | 929 |
 | Theorem | `nodiv_identity_bound_lt_dq` | 949 |
 | Theorem | `nodiv_square_bound_lt_dq` | 954 |
+| Theorem | `trapdoor_monomial_inverts_all_units` | 968 |
+| Theorem | `monomial_all_units_invert_is_trapdoor` | 996 |
+| Theorem | `pin_d_monomial_is_trapdoor` | 1037 |
+| Theorem | `pin_dp_monomial_not_trapdoor` | 1041 |
+| Theorem | `pin_dq_monomial_not_trapdoor` | 1045 |
+| Theorem | `pin_d_plus_lam_is_trapdoor` | 1049 |
 
 ## `SrsaWriteE.v`
 
@@ -3517,4 +3524,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2436 theorems/lemmas/corollaries/examples across 119 files._
+_2442 theorems/lemmas/corollaries/examples across 119 files._
