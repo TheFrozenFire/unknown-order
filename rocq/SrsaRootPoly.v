@@ -13,6 +13,7 @@ Require Import UnknownOrder.
 Require Import Hardness.
 Require Import StrongRSAPeel.
 Require Import Order.
+Require Import GenericRing.
 
 Open Scope Z_scope.
 
@@ -37,7 +38,12 @@ Open Scope Z_scope.
     Neither is a proof of
     [residual_solver_constructs_factor_open_named]: the TM wrote
     the factors into the coefficients, or [d] into the degree.
-    Cross-confirmed by [cas/164] and [cas/165]. *)
+    The window is sharp: no polynomial of degree [< d_q] inverts
+    every unit ([q] would divide [−1]).  A nodiv GRA whose degree
+    bound is [≤ d_q] and that inverts every unit denotes a short
+    root polynomial, so a coefficient splits.  Not a proof of
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/164], [cas/165], and [cas/166]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -889,3 +895,63 @@ Proof.
   - apply pin_crt_root_poly_is_short.
   - apply pin_crt_binomial_inverts_units.
 Qed.
+
+(** ** The window is sharp; nodiv GRA in it splits *)
+
+Theorem no_root_poly_deg_lt_dq :
+  forall P,
+    (poly_degree P < Z.to_nat pin_inv3_q)%nat ->
+    ~ (forall y, Z.coprime y pin_N ->
+         powm (poly_eval P y) pin_e pin_N = y mod pin_N).
+Proof.
+  intros P Hdeg Hall.
+  pose proof (short_root_q_divides_diff P ltac:(lia) Hall
+                (Z.to_nat pin_inv3_q)) as Hq.
+  rewrite nth_poly_sub, nth_Xn in Hq.
+  destruct (Nat.eq_dec (Z.to_nat pin_inv3_q) (Z.to_nat pin_inv3_q));
+    [|lia].
+  rewrite (poly_nth_above P (Z.to_nat pin_inv3_q) Hdeg) in Hq.
+  replace (0 - 1) with (-1) in Hq by lia.
+  destruct Hq as [k Hk]. nia.
+Qed.
+
+Theorem pin_Xn_dp_does_not_invert_all_units :
+  (poly_degree (poly_Xn (Z.to_nat pin_inv3_p)) < Z.to_nat pin_inv3_q)%nat /\
+  ~ (forall y, Z.coprime y pin_N ->
+       powm (poly_eval (poly_Xn (Z.to_nat pin_inv3_p)) y) pin_e pin_N
+         = y mod pin_N).
+Proof.
+  split.
+  - rewrite poly_degree_Xn. vm_compute. lia.
+  - apply no_root_poly_deg_lt_dq. rewrite poly_degree_Xn. vm_compute. lia.
+Qed.
+
+Theorem nodiv_gra_short_dq_splits :
+  forall ops out,
+    Forall is_nodiv ops ->
+    (nth out (gra_deg_bound ops slp_init_deg) 0%nat
+       <= Z.to_nat pin_inv3_q)%nat ->
+    (forall y, Z.coprime y pin_N ->
+       powm (gra_eval pin_N ops y out) pin_e pin_N = y mod pin_N) ->
+    exists i,
+      1 < Z.gcd (nth i (nth out (gra_run_poly ops slp_init_poly) []) 0)
+            pin_N
+        < pin_N.
+Proof.
+  intros ops out Hop Hbound Hall.
+  apply short_root_poly_some_coeff_splits.
+  - pose proof (gra_nodiv_degree_le ops out Hop). lia.
+  - intros y Hy.
+    rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
+    apply Hall. exact Hy.
+Qed.
+
+Theorem nodiv_identity_bound_lt_dq :
+  (nth 2%nat (gra_deg_bound [] slp_init_deg) 0%nat
+     < Z.to_nat pin_inv3_q)%nat.
+Proof. vm_compute. lia. Qed.
+
+Theorem nodiv_square_bound_lt_dq :
+  (nth 3%nat (gra_deg_bound [GMul 2%nat 2%nat] slp_init_deg) 0%nat
+     < Z.to_nat pin_inv3_q)%nat.
+Proof. vm_compute. lia. Qed.

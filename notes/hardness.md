@@ -121,6 +121,8 @@ Constructible torsion `H` is a family parameter
 | CRT binomial `c_p X^{d_p}+c_q X^{d_q}` of the *e*-th root map | `gcd(c_p,N)` and `gcd(c_q,N)` are the factors; inverts every unit | `cong_1_mod_p_0_mod_q_gcd`, `crt_binomial_inverts_units`, `pin_root_ca_splits`, `pin_root_cb_splits` | unrestricted residual solver ⇒ factor; the TM wrote `{p,q}` into the coefficients |
 | monomial `X^d` of the *e*-th root map | agrees with the binomial on units; coefficients do not split; degree is `d` with `ed≡1 (mod λ)` | `pin_trapdoor_degree_is_d`, `pin_root_polys_agree_on_units`, `pin_crt_binomial_neq_monomial` | reading `d` from the degree is Miller-from-`(e,d)`, not a black-box solver |
 | polynomial `P` of `deg ≤ d_q` that inverts every unit | some coeff `c` has `1 < gcd(c,N) < N` | `short_root_poly_some_coeff_splits`, `pin_crt_root_poly_short_splits` | high-degree `X^d`; unrestricted residual solver ⇒ factor |
+| `deg P < d_q` | no all-units *e*-th-root polynomial (`q ∤ −1`) | `no_root_poly_deg_lt_dq`, `pin_Xn_dp_does_not_invert_all_units` | the bound `d_q` itself (CRT binomial) |
+| nodiv GRA, `deg_bound ≤ d_q`, inverts every unit | denoted poly has a splitting coeff | `nodiv_gra_short_dq_splits` | high-degree tapes (`X^d`); `GInv`; residual-solver ⇒ factor |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

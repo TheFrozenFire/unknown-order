@@ -327,6 +327,10 @@ coefficient whose gcd with `N` is a proper factor
 (`short_root_poly_some_coeff_splits`, CAS `165`): on `𝔽_q*` minus
 residue `p` it matches `X^{d_q}`, and a leftover monomial
 `c X^{d_q}` is `c X` on `𝔽_p*` and cannot invert both `1` and `2`.
+No polynomial of degree `< d_q` inverts every unit (`q` would divide
+`−1`). A nodiv GRA whose degree bound is `≤ d_q` and that inverts
+every unit denotes a short root polynomial, so a coefficient splits
+(`no_root_poly_deg_lt_dq`, `nodiv_gra_short_dq_splits`, CAS `166`).
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -382,6 +386,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | exact deg; square/cube miss units | `poly_degree_mul` / `residual_square_*` / `residual_cube_*` / `residual_trapdoor_inverts_pin` | `ZPoly.v`, `SrsaResidualGRA.v` | `152` |
 | *e*-th root polynomial on units: CRT binomial vs monomial `X^d` | `crt_binomial_inverts_units` / `pin_root_ca_splits` / `pin_root_cb_splits` / `pin_trapdoor_degree_is_d` / `pin_root_polys_agree_on_units` | `SrsaRootPoly.v` | `164` |
 | short *e*-th-root poly (`deg ≤ d_q`) has a coeff that splits `N` | `short_root_poly_some_coeff_splits` / `pin_crt_root_poly_short_splits` | `SrsaRootPoly.v` | `165` |
+| window sharp: no root poly of `deg < d_q`; nodiv GRA in the window splits | `no_root_poly_deg_lt_dq` / `nodiv_gra_short_dq_splits` | `SrsaRootPoly.v` | `166` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
