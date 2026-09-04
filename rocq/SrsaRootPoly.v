@@ -31,7 +31,8 @@ Open Scope Z_scope.
       splits ([miller_from_d]).
 
     They agree as functions on [(Z/NZ)*] (unique unit [e]-th root)
-    and differ as polynomials.  Any polynomial of degree [≤ d_q]
+    and differ as polynomials.  Any all-units invert poly is that
+    same trapdoor map ([all_units_root_poly_is_trapdoor_map]).  Any polynomial of degree [≤ d_q]
     that inverts every unit has a coefficient whose [gcd] with [N]
     is a proper factor: on [𝔽_q*] minus residue [p] it must match
     [X^{d_q}], and [d_q < q−2] so the roots bound applies.
@@ -43,7 +44,7 @@ Open Scope Z_scope.
     bound is [≤ d_q] and that inverts every unit denotes a short
     root polynomial, so a coefficient splits.  Not a proof of
     [residual_solver_constructs_factor_open_named].
-    Cross-confirmed by [cas/164], [cas/165], and [cas/166]. *)
+    Cross-confirmed by [cas/164], [cas/165], [cas/166], and [cas/172]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -446,6 +447,61 @@ Proof.
   - rewrite (pin_crt_binomial_inverts_units y Hcop).
     rewrite (pin_powm_de y Hcop).
     reflexivity.
+Qed.
+
+Theorem root_poly_eval_coprime :
+  forall P y,
+    (forall z, Z.coprime z pin_N ->
+       powm (poly_eval P z) pin_e pin_N = z mod pin_N) ->
+    Z.coprime y pin_N ->
+    Z.coprime (poly_eval P y) pin_N.
+Proof.
+  intros P y Hall Hcop.
+  apply (powm_unit_is_coprime (poly_eval P y) pin_e pin_N);
+    [apply pin_N_gt_1 | lia |].
+  rewrite Hall by exact Hcop.
+  rewrite Z.gcd_mod_l. exact Hcop.
+Qed.
+
+Theorem all_units_root_poly_is_trapdoor_map :
+  forall P y,
+    (forall z, Z.coprime z pin_N ->
+       powm (poly_eval P z) pin_e pin_N = z mod pin_N) ->
+    Z.coprime y pin_N ->
+    poly_eval P y mod pin_N = powm y pin_d pin_N.
+Proof.
+  intros P y Hall Hcop.
+  assert (Hz : Z.coprime (powm y pin_d pin_N) pin_N).
+  { unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Hcop]. }
+  replace (powm y pin_d pin_N) with (powm y pin_d pin_N mod pin_N).
+  2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+  apply (pin_unique_unit_eth_root (poly_eval P y) (powm y pin_d pin_N)).
+  - apply (root_poly_eval_coprime P y Hall Hcop).
+  - exact Hz.
+  - rewrite (Hall y Hcop).
+    rewrite (pin_powm_de y Hcop).
+    reflexivity.
+Qed.
+
+Theorem all_units_root_poly_eval_g :
+  forall P,
+    (forall z, Z.coprime z pin_N ->
+       powm (poly_eval P z) pin_e pin_N = z mod pin_N) ->
+    poly_eval P pin_g mod pin_N = powm pin_g pin_d pin_N.
+Proof.
+  intros P Hall.
+  apply (all_units_root_poly_is_trapdoor_map P pin_g Hall pin_unit_3_coprime).
+Qed.
+
+Theorem pin_trapdoor_monomial_is_trapdoor_map :
+  forall y,
+    Z.coprime y pin_N ->
+    poly_eval pin_trapdoor_monomial y mod pin_N = powm y pin_d pin_N.
+Proof.
+  intros y _Hcop.
+  rewrite pin_trapdoor_monomial_eval.
+  unfold powm. reflexivity.
 Qed.
 
 Theorem pin_crt_binomial_neq_monomial :
