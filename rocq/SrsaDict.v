@@ -27,12 +27,13 @@ Theorem dict_e43_same_x_leaf :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem dict_N_mod_40_is_d :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  pin_N mod pin_y_ord = pin_d.
+Proof. reflexivity. Qed.
 
 Theorem dict_public_N_mod_40 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  pin_N mod pin_y_ord = pin_d /\
+  powm pin_y pin_d pin_N = pin_x.
+Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem dict_y_to_d :
   powm pin_y pin_d pin_N = pin_x.
@@ -109,8 +110,9 @@ Theorem dict_cube_bij_on_cyc :
 Proof. reflexivity. Qed.
 
 Theorem dict_27th_is_inverse_auto :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  Z.gcd pin_d pin_y_ord = 1 /\
+  (pin_e * pin_d) mod pin_y_ord = 1.
+Proof. split; reflexivity. Qed.
 
 Theorem dict_compose_autos :
   powm pin_y pin_d pin_N = pin_x /\
@@ -126,19 +128,22 @@ Theorem dict_bits_of_27 :
 Proof. reflexivity. Qed.
 
 Theorem dict_binary_product :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 16 pin_N = 69 /\
+  powm pin_y 8 pin_N = 137 /\
+  powm pin_y 2 pin_N = 174 /\
+  (69 * 137 * 174 * pin_y) mod pin_N = pin_x.
+Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem dict_add_chain_y6 :
-  powm pin_y pin_lam pin_N = 1.
+  powm pin_y 6 pin_N = 47.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_add_chain_y12 :
-  powm pin_y pin_lam pin_N = 1.
+  powm pin_y 12 pin_N = 152.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_add_chain_y24 :
-  powm pin_y pin_lam pin_N = 1.
+  powm pin_y 24 pin_N = 103.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_k_odd :
@@ -150,16 +155,19 @@ Theorem dict_hamming_27 :
 Proof. reflexivity. Qed.
 
 Theorem dict_naf_shape :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  32 - 4 - 1 = pin_d /\
+  powm pin_y 32 pin_N = 86 /\
+  powm pin_y 4 pin_N = 169.
+Proof. split; [reflexivity|]. vm_compute. split; reflexivity. Qed.
 
 Theorem dict_y25 :
-  powm pin_y pin_lam pin_N = 1.
+  powm pin_y 25 pin_N = 155.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_y16_is_g5sq :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 16 pin_N = 69 /\
+  powm 137 2 pin_N = 69.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem dict_sagm_on_y :
   27 * 3 - 1 = 80.
@@ -234,7 +242,7 @@ Theorem dict_inv_mod_lam :
 Proof. reflexivity. Qed.
 
 Theorem dict_cycle_70_cube :
-  powm pin_y pin_lam pin_N = 1.
+  powm 70 pin_e pin_N = pin_x.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle_42_cube :
@@ -242,11 +250,11 @@ Theorem dict_cycle_42_cube :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle_36_cube :
-  powm pin_y pin_lam pin_N = 1.
+  powm pin_y pin_e pin_N = 93.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle_93_cube :
-  powm pin_y pin_lam pin_N = 1.
+  powm 93 pin_e pin_N = 70.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_three_order_4_mod_40 :
@@ -258,15 +266,15 @@ Theorem dict_27_order_4_mod_40 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle2_9 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 9 pin_e pin_N = 168.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle2_168 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 168 pin_e pin_N = 60.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle2_15 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 15 pin_e pin_N = 9.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_k27_coords :
@@ -285,60 +293,64 @@ Theorem dict_3_order_4_mod_40 :
 Proof. split; [reflexivity | vm_compute; discriminate]. Qed.
 
 Theorem dict_cube_root_of_2 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm 2 pin_d pin_N = 161 /\
+  powm 161 pin_e pin_N = 2.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem dict_sagm_of_3 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_g pin_d pin_N = 75 /\
+  powm 75 pin_e pin_N = 3.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem dict_75_not_42 :
   75 <> 42.
 Proof. discriminate. Qed.
 
 Theorem dict_cycle2_60 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 60 pin_e pin_N = 15.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle3_25 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 25 pin_e pin_N = 104.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle3_104 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 104 pin_e pin_N = 59.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle3_59 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 59 pin_e pin_N = 53.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle3_53 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 53 pin_e pin_N = 25.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle4_49 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 49 pin_e pin_N = 26.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle4_26 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 26 pin_e pin_N = 185.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle4_185 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 185 pin_e pin_N = 179.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cycle4_179 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 179 pin_e pin_N = 49.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem dict_cbrt_2_in_ltwo :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm 2 pin_d pin_N = 161 /\
+  powm 161 pin_e pin_N = 2.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem dict_cbrt_3_in_lthree :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_g pin_d pin_N = 75 /\
+  powm 75 pin_e pin_N = 3.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem dict_cbrt_36_in_ly :
   powm pin_y pin_d pin_N = pin_x /\

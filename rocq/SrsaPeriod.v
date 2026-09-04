@@ -68,7 +68,7 @@ Proof.
 Qed.
 
 Theorem period_y2_plus_1_gcd :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd ((powm pin_y 2 pin_N + 1) mod pin_N) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_phi5_y_splits :
@@ -80,12 +80,13 @@ Proof.
 Qed.
 
 Theorem period_x2_minus_1_int :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (pin_x * pin_x - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_full_period_no_split :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y pin_y_ord pin_N = 1 /\
+  Z.gcd (powm pin_y pin_y_ord pin_N - 1) pin_N = pin_N.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_miller_on_period2 :
   Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
@@ -145,32 +146,33 @@ Proof.
 Qed.
 
 Theorem period_eq_order_40 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y pin_y_ord pin_N = 1 /\
+  powm pin_y 20 pin_N <> 1.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem period_eq_not_8 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 8 pin_N <> 1.
+Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_not_5 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 5 pin_N <> 1.
+Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_y40 :
-  powm pin_y pin_lam pin_N = 1.
+  powm pin_y pin_y_ord pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_eq_y20 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 20 pin_N <> 1.
+Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_y8 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 8 pin_N <> 1.
+Proof. vm_compute. discriminate. Qed.
 
 Theorem period_eq_y5 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 5 pin_N <> 1.
+Proof. vm_compute. discriminate. Qed.
 
 Theorem period_gcd_y5_splits :
   Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
@@ -189,7 +191,7 @@ Proof.
 Qed.
 
 Theorem period_gcd_full_period :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (powm pin_y pin_y_ord pin_N - 1) pin_N = pin_N.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_after_ord_invert :
@@ -251,11 +253,11 @@ Proof.
 Qed.
 
 Theorem period_x4_minus_1 :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (powm pin_x 4 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_x2_minus_1 :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (powm pin_x 2 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_same_oracle :
@@ -280,7 +282,7 @@ Proof.
 Qed.
 
 Theorem period_ten_pow16 :
-  powm pin_y pin_lam pin_N = 1.
+  powm 10 16 pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_21_order_4 :
@@ -296,8 +298,9 @@ Proof.
 Qed.
 
 Theorem period_89_order_4 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 10 pin_N = 89 /\
+  powm 89 4 pin_N = 1.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_77_pminus1 :
   Z.gcd (pin_77_x ^ 6 - 1) pin_77 = pin_77_p /\
@@ -353,7 +356,7 @@ Proof.
 Qed.
 
 Theorem period_three_pow8_no_split :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (powm pin_g 8 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_cbrt2_cbrt36_split :
@@ -377,8 +380,9 @@ Theorem period_cbrt3_cbrt2 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_five_max_order :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm 5 pin_lam pin_N = 1 /\
+  powm 5 pin_y_ord pin_N <> 1.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem period_five_pohlig_5 :
   Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
@@ -397,7 +401,7 @@ Proof.
 Qed.
 
 Theorem period_ord16_to_miller :
-  powm pin_y pin_lam pin_N = 1.
+  powm 10 8 pin_N = pin_sqrt1_mixed.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_77_51_is_2_pow7 :
@@ -508,28 +512,41 @@ Theorem period_ord_ndiv_Nminus1 :
 Proof. repeat split; reflexivity. Qed.
 
 Theorem period_Nminus1_divisors_no_split :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  Z.gcd (powm pin_y 2 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y pin_e pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y 6 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y 31 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y 62 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y 93 pin_N - 1) pin_N = 1.
+Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem period_y_Nminus1_no_annihilator :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y (pin_N - 1) pin_N = 157 /\
+  157 <> 1 /\
+  Z.gcd (157 - 1) pin_N = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem period_x_Nminus1_no_membership :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_x (pin_N - 1) pin_N = 64 /\
+  64 <> 1 /\
+  Z.gcd (64 - 1) pin_N = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem period_Nplus1_factors :
   188 = 4 * 47.
 Proof. reflexivity. Qed.
 
 Theorem period_Nplus1_divisors_no_split :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  Z.gcd (powm pin_y 4 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y 47 pin_N - 1) pin_N = 1 /\
+  Z.gcd (powm pin_y 94 pin_N - 1) pin_N = 1.
+Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem period_y_Nplus1_no_annihilator :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y (pin_N + 1) pin_N = 16 /\
+  16 <> 1 /\
+  Z.gcd (16 - 1) pin_N = 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 (** ** Annihilator quality short of [λ]
 
@@ -544,11 +561,11 @@ Theorem period_lam_v2_odd_part :
 Proof. split; reflexivity. Qed.
 
 Theorem period_M2_no_split :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (powm pin_y 2 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_M4_no_split :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (powm pin_y 4 pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem period_advice_odd_part_splits :
@@ -576,8 +593,9 @@ Proof.
 Qed.
 
 Theorem period_advice_ord_invert_no_proper :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y pin_y_ord pin_N = 1 /\
+  Z.gcd (powm pin_y pin_y_ord pin_N - 1) pin_N = pin_N.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem period_advice_lam_miller :
   Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\

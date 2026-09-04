@@ -370,15 +370,15 @@ advice `N/17`: `PreprocessGRA.v`.
 | Cut | Prefix | Rocq | CAS |
 |---|---|---|---|
 | peel a witness | `srsa_*` | `StrongRSAPeel.v` | `127` |
-| SAGM / safeprime / poly `e` | `sagm_*` / `safeprime_*` / `poly_e_*` / `reject_sample_*` | `SolverRestrict.v` | `128`, `139` |
+| SAGM / safeprime / poly `e` | `sagm_*` / `safeprime_*` / `poly_e_*` / `reject_sample_*` | `SolverRestrict.v` | `128`, `139`, `168` |
 | first dozen inroads | `dozen_*` | `DozenInroads.v` | `129` |
-| solver shapes | `shape_*` | `SolverShape.v` | `130`, `142` |
-| public filters | `filter_*` | `FilterShape.v` | `131`, `139`, `143` |
-| arithmetic maps | `arith_*` | `ArithShape.v` | `132` |
-| leftover language of `(x,e)` | `residual_*` | `SrsaResidual.v` | `143` |
+| solver shapes | `shape_*` | `SolverShape.v` | `130`, `142`, `168` |
+| public filters | `filter_*` | `FilterShape.v` | `131`, `139`, `143`, `168` |
+| arithmetic maps | `arith_*` | `ArithShape.v` | `132`, `168` |
+| leftover language of `(x,e)` | `residual_*` | `SrsaResidual.v` | `143`, `168` |
 | `⟨y⟩ ≅ C₈×C₅` | `primary_*` | `SrsaPrimary.v` | |
-| dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | |
-| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141`, `144` |
+| dictionary / cubing cycles / SAGM-on-`y` | `dict_*` | `SrsaDict.v` | `168` |
+| gcd vs multiply | `period_*` | `SrsaPeriod.v` | `140`, `141`, `144`, `168` |
 | Order / residual sRSA / Factor arrows | `order_yields_*` / `leftover_*_mismatch_*` / `matching_247_*` | `Hardness.v`, `SrsaOrderArrows.v` | `145` |
 | residual GRA dichotomy | `residual_shaped_*` / `residual_gra_*` | `SrsaResidualGRA.v` | `146` |
 | nodiv GRA denotation / pin attains `λ` | `gra_nodiv_*` / `orders_generate_lambda_pin` | `GenericRing.v`, `Order.v` | `147` |
@@ -391,6 +391,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | short *e*-th-root poly (`deg ≤ d_q`) has a coeff that splits `N` | `short_root_poly_some_coeff_splits` / `pin_crt_root_poly_short_splits` | `SrsaRootPoly.v` | `165` |
 | window sharp: no root poly of `deg < d_q`; nodiv GRA in the window splits | `no_root_poly_deg_lt_dq` / `nodiv_gra_short_dq_splits` | `SrsaRootPoly.v` | `166` |
 | monomial `X^k` inverts every unit iff `e k ≡ 1 (mod λ)` | `monomial_all_units_invert_is_trapdoor` / `trapdoor_monomial_inverts_all_units` | `SrsaRootPoly.v` | `167` |
+| restored inhabitant maps from `pin_y` (names match claims; not residual-solver ⇒ factor) | `xmap_*` / `emap_*` / `residual_*` / `dict_*` / `period_*` / `shape_*` / `filter_*` / `arith_*` / `extra_*` | `SrsaWriteX.v` and siblings | `168` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
@@ -399,9 +400,9 @@ advice `N/17`: `PreprocessGRA.v`.
 | `μ₃(Z/NZ)* ≅ C₃×C₃`; det pairing non-degenerate | `mu3N_det_alternating` / `mu3N_det_gp_gq` / `mu3_pin_91_kernel_not_cyclic` | `EvalPairing.v` | `158` |
 | local `μ₃`-logs additive; det pairing bilinear | `mu3_log_mul` / `mu3N_det_left_bilinear` / `mu3N_det_right_bilinear` / `mu3N_det_skew` | `EvalPairing.v` | `159` |
 | mixed `μ₃` splits `N`; diagonal leftover does not | `mixed_mu3_splits` / `diagonal_mu3_gcd_xminus1` / `pin_mu3_gcd_is_N` | `CubicResidue.v` | `160` |
-| public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | |
-| public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | |
-| extra tapes | `extra_*` | `SrsaExtra.v` | |
+| public `X(N,y)` | `xmap_*` | `SrsaWriteX.v` | `168` |
+| public `E(N,y)` | `emap_*` | `SrsaWriteE.v` | `168` |
+| extra tapes | `extra_*` | `SrsaExtra.v` | `168` |
 | named factoring engines | `engine_*` | `SrsaEngines.v` | |
 | different group / modulus | `modulus_*` | `SrsaModulus.v` | |
 

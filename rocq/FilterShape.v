@@ -45,8 +45,8 @@ Theorem filter_neg_y_not_cube_root :
 Proof. vm_compute. discriminate. Qed.
 
 Theorem filter_y_square_not_minus1 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 2 pin_N <> powm (-1) 1 pin_N.
+Proof. vm_compute. discriminate. Qed.
 
 (** ** 3. Euclid on [(y±1, N)] *)
 
@@ -111,8 +111,10 @@ Proof. rewrite filter_val2_36. intros [k Hk]. nia. Qed.
 (** ** 8. Locally constant [X] ([y] modulo [m]) *)
 
 Theorem filter_locally_constant_clash :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  pin_y mod 5 = 6 mod 5 /\
+  powm pin_x pin_e pin_N = pin_y /\
+  pin_y <> 6.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 (** ** 9. Branch on Jacobi to [λ+1] *)
 
@@ -255,8 +257,11 @@ Theorem filter_jacobi_x_plus :
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem filter_jacobi_10_plus_not_leftover :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  jacobi_N 10 pin_p pin_q = 1 /\
+  powm 10 pin_e pin_N <> pin_y /\
+  powm 10 16 pin_N = 1 /\
+  powm 10 8 pin_N <> 1.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem filter_jacobi_2_minus :
   jacobi_N 2 pin_p pin_q = -1 /\
@@ -264,5 +269,6 @@ Theorem filter_jacobi_2_minus :
 Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
 
 Theorem filter_x_cube_check_is_rsa_e3 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_x pin_e pin_N = pin_y /\
+  powm 10 pin_e pin_N <> pin_y.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.

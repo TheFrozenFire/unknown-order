@@ -148,8 +148,11 @@ Theorem poly_e_quadratic_leftover_with_period :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem poly_e_quadratic_encrypt_not_leftover :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y 1297 pin_N = 53 /\
+  53 <> 104 /\
+  powm pin_y pin_N pin_N = pin_x /\
+  pin_x <> 104.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem poly_e_square_even_peel :
   Z.even (36 * 36) = true.
@@ -163,9 +166,14 @@ Fixpoint first_passing_public_e (es : list Z) (N : Z) : Z :=
   end.
 
 Theorem reject_sample_public_e_emits_5 :
-  powm pin_y pin_lam pin_N = 1.
+  first_passing_public_e [3; 5; 7; pin_p] pin_N = 5.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem reject_sample_emits_nonresidual :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  first_passing_public_e [3; 5; 7; pin_p] pin_N = 5 /\
+  Z.gcd 5 pin_lam = 5 /\
+  Z.gcd pin_e (pin_N - 1) <> 1.
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [reflexivity | discriminate].
+Qed.

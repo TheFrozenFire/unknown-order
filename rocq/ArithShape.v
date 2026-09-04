@@ -55,14 +55,20 @@ Theorem arith_xy_period_residual :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem arith_xy_period_no_split :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y pin_y_ord pin_N = 1 /\
+  Z.gcd (powm pin_y pin_y_ord pin_N - 1) pin_N = pin_N /\
+  ~ Problem_Factor pin_N pin_N.
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [vm_compute; reflexivity|].
+  unfold Problem_Factor. intros [H _]. lia.
+Qed.
 
 (** ** 4. Fermat-on-the-witness [gcd(x−y, N)] *)
 
 Theorem arith_witness_gap_no_split :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  Z.gcd (pin_x - pin_y) pin_N = 1.
+Proof. reflexivity. Qed.
 
 (** ** 5. Takagi [N=p²q], Hensel tape *)
 

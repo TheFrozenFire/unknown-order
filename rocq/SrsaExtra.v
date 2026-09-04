@@ -56,7 +56,7 @@ Theorem extra_wiener_d_not_small :
 Proof. lia. Qed.
 
 Theorem extra_sequential_square_period :
-  powm pin_y pin_lam pin_N = 1.
+  powm 2 pin_lam pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem extra_height_mismatch :
@@ -95,16 +95,17 @@ Theorem extra_three_powers_gcd :
 Proof. reflexivity. Qed.
 
 Theorem extra_y_plus_1_root :
-  powm pin_y pin_lam pin_N = 1.
+  powm 126 pin_e pin_N = 37.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem extra_batch_gcd_of_roots :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (pin_x - 60) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem extra_adaptive_lambda_plus_one :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  pin_lam + 1 = 81 /\
+  powm 2 81 pin_N = 2.
+Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem extra_same_y_two_moduli :
   Z.gcd pin_N pin_247 = 1 /\
@@ -116,8 +117,10 @@ Theorem extra_twin_exponents :
 Proof. reflexivity. Qed.
 
 Theorem extra_product_of_leftovers :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  (pin_x * 60) mod pin_N = 89 /\
+  powm 89 pin_e pin_N = 166 /\
+  166 <> pin_y.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem extra_rerand_forces_fixed_e :
   rsa_e rsa_test = 3.
@@ -129,8 +132,10 @@ Theorem extra_coins_independent_fixed_e :
 Proof. split; [reflexivity | apply srsa_residual_pin]. Qed.
 
 Theorem extra_squaring_only :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm 2 8 pin_N = 69 /\
+  2 ^ 8 = 256 /\
+  256 mod pin_N = 69.
+Proof. vm_compute. repeat split; reflexivity. Qed.
 
 Theorem extra_advice_on_y_lsb :
   Z.even 36 = true.
@@ -165,12 +170,13 @@ Proof.
 Qed.
 
 Theorem extra_digits_of_N :
-  powm pin_y pin_lam pin_N = 1.
+  pin_N =
+  (pin_N / 100) * 100 + ((pin_N / 10) mod 10) * 10 + (pin_N mod 10).
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem extra_N_mod_100 :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  pin_N mod 100 = 87.
+Proof. reflexivity. Qed.
 
 Theorem extra_nextprime_N :
   Z.odd pin_N = true.
@@ -181,12 +187,15 @@ Theorem extra_prevprime_associate :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem extra_xor_leftovers :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  Z.lxor pin_x 60 = 22 /\
+  powm 22 pin_e pin_N = 176 /\
+  176 <> pin_y.
+Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem extra_related_y_cube :
-  powm pin_y pin_lam pin_N = 1.
-Proof. vm_compute. reflexivity. Qed.
+  powm pin_y pin_e pin_N = 93 /\
+  93 <> pin_y.
+Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem extra_leftover_pair_splits :
   Z.gcd (pin_sqrt1_mixed + 1) pin_N = pin_q /\
@@ -237,7 +246,7 @@ Proof.
 Qed.
 
 Theorem extra_y_minus_x :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (pin_y - pin_x) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem extra_advice_five_div_lam :
@@ -249,7 +258,7 @@ Theorem extra_advice_local_9 :
 Proof. reflexivity. Qed.
 
 Theorem extra_euclid_x_minus_y :
-  powm pin_y pin_lam pin_N = 1.
+  Z.gcd (pin_x - pin_y) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem extra_low_bits_y :
@@ -281,5 +290,5 @@ Theorem extra_shamir_3_7 :
 Proof. reflexivity. Qed.
 
 Theorem extra_rerand_fixed_e :
-  powm pin_y pin_lam pin_N = 1.
+  powm 84 pin_e pin_N = (pin_y * 8) mod pin_N.
 Proof. vm_compute. reflexivity. Qed.
