@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2465 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2496 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2465 results across 119 files.
+Captured for 2496 results across 119 files.
 
 Counts:
 
@@ -336,6 +336,11 @@ Counts:
 | `short_dq_short_annihilator` | 135 | 0 | 0 | OK |
 | `powm_reduce_pminus1` | 151 | 0 | 0 | OK |
 | `crt_decrypt_eq_rsa_dec` | 179 | 0 | 0 | OK |
+| `cong_mod_lcm` | 237 | 0 | 0 | OK |
+| `crt_dp_dq_recover_d` | 255 | 0 | 0 | OK |
+| `inverse_unique_mod` | 270 | 0 | 0 | OK |
+| `local_inv_is_crt_dp` | 297 | 0 | 0 | OK |
+| `local_inv_is_crt_dq` | 312 | 0 | 0 | OK |
 
 ## ChallengePrime.v
 
@@ -1315,6 +1320,13 @@ Counts:
 | `miller_from_d_q` | 125 | 0 | 0 | OK |
 | `rsa_test_base2_heights` | 148 | 0 | 0 | OK |
 | `rsa_test_miller_from_d` | 168 | 0 | 0 | OK |
+| `miller_multiple_annihilates` | 200 | 0 | 0 | OK |
+| `miller_height_exists_multiple` | 218 | 0 | 0 | OK |
+| `miller_from_multiple` | 256 | 0 | 0 | OK |
+| `miller_from_multiple_q` | 279 | 0 | 0 | OK |
+| `trapdoor_exponent_divides_lambda` | 302 | 0 | 0 | OK |
+| `miller_from_trapdoor_exponent` | 313 | 0 | 0 | OK |
+| `miller_from_trapdoor_exponent_q` | 330 | 0 | 0 | OK |
 
 ## MillerRabin.v
 
@@ -2579,77 +2591,96 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `cong_1_mod_p_0_mod_q_gcd` | 51 | 0 | 0 | OK |
-| `crt_binomial_eval` | 85 | 0 | 0 | OK |
-| `crt_binomial_mod_p` | 98 | 0 | 0 | OK |
-| `crt_binomial_mod_q` | 119 | 0 | 0 | OK |
-| `local_eth_root` | 140 | 0 | 0 | OK |
-| `crt_binomial_inverts_units` | 168 | 0 | 0 | OK |
-| `pin_root_ca_mod` | 211 | 0 | 0 | OK |
-| `pin_root_cb_mod` | 215 | 0 | 0 | OK |
-| `pin_inv3_local` | 219 | 0 | 0 | OK |
-| `pin_root_ca_splits` | 224 | 0 | 0 | OK |
-| `pin_root_cb_splits` | 237 | 0 | 0 | OK |
-| `pin_crt_binomial_inverts_units` | 250 | 0 | 0 | OK |
-| `pin_crt_binomial_eval_unit` | 273 | 0 | 0 | OK |
-| `pin_ed_minus_1_divides_lam` | 286 | 0 | 0 | OK |
-| `pin_powm_ed` | 295 | 0 | 0 | OK |
-| `pin_unique_unit_eth_root` | 311 | 0 | 0 | OK |
-| `pin_crt_binomial_at_y` | 323 | 0 | 0 | OK |
-| `pin_crt_binomial_residual` | 335 | 0 | 0 | OK |
-| `pin_crt_binomial_degree` | 342 | 0 | 0 | OK |
-| `pin_crt_binomial_outside_window` | 346 | 0 | 0 | OK |
-| `pin_crt_binomial_coeff_da` | 351 | 0 | 0 | OK |
-| `pin_crt_binomial_coeff_db` | 355 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_eval` | 363 | 0 | 0 | OK |
-| `pin_trapdoor_ed_inv` | 371 | 0 | 0 | OK |
-| `pin_powm_de` | 375 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_inverts_units` | 392 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_at_y` | 400 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_degree` | 404 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_leading` | 408 | 0 | 0 | OK |
-| `pin_trapdoor_degree_is_d` | 418 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_outside_window` | 425 | 0 | 0 | OK |
-| `pin_root_polys_agree_on_units` | 432 | 0 | 0 | OK |
-| `root_poly_eval_coprime` | 452 | 0 | 0 | OK |
-| `all_units_root_poly_is_trapdoor_map` | 466 | 0 | 0 | OK |
-| `all_units_root_poly_eval_g` | 487 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_is_trapdoor_map` | 497 | 0 | 0 | OK |
-| `pin_crt_binomial_neq_monomial` | 507 | 0 | 0 | OK |
-| `pin_crt_binomial_inverts_2` | 517 | 0 | 0 | OK |
-| `unique_eth_root_mod_prime` | 538 | 0 | 0 | OK |
-| `pin_Fq_units_of_N_length` | 562 | 0 | 0 | OK |
-| `pairwise_distinct_mod_filter` | 566 | 0 | 0 | OK |
-| `pin_Fq_units_of_N_distinct` | 584 | 0 | 0 | OK |
-| `pin_Fq_units_of_N_coprime` | 591 | 0 | 0 | OK |
-| `pin_inv3_q_lt_window` | 608 | 0 | 0 | OK |
-| `nth_poly_sub` | 612 | 0 | 0 | OK |
-| `poly_degree_sub_le` | 620 | 0 | 0 | OK |
-| `mod_product_r` | 631 | 0 | 0 | OK |
-| `mod_product_l` | 643 | 0 | 0 | OK |
-| `short_root_local_mod_q` | 649 | 0 | 0 | OK |
-| `short_root_diff_vanishes` | 689 | 0 | 0 | OK |
-| `short_root_q_divides_diff` | 711 | 0 | 0 | OK |
-| `poly_eval_all_div` | 729 | 0 | 0 | OK |
-| `poly_eval_single_support` | 743 | 0 | 0 | OK |
-| `pin_two_pow_dbe_neq_2` | 775 | 0 | 0 | OK |
-| `gcd_q_not_p` | 779 | 0 | 0 | OK |
-| `powm_div_cong` | 806 | 0 | 0 | OK |
-| `finite_support_cases` | 820 | 0 | 0 | OK |
-| `short_root_poly_some_coeff_splits` | 844 | 0 | 0 | OK |
-| `pin_crt_root_poly_is_short` | 927 | 0 | 0 | OK |
-| `pin_crt_root_poly_short_splits` | 931 | 0 | 0 | OK |
-| `no_root_poly_deg_lt_dq` | 941 | 0 | 0 | OK |
-| `pin_Xn_dp_does_not_invert_all_units` | 958 | 0 | 0 | OK |
-| `nodiv_gra_short_dq_splits` | 969 | 0 | 0 | OK |
-| `nodiv_identity_bound_lt_dq` | 989 | 0 | 0 | OK |
-| `nodiv_square_bound_lt_dq` | 994 | 0 | 0 | OK |
-| `trapdoor_monomial_inverts_all_units` | 1008 | 0 | 0 | OK |
-| `monomial_all_units_invert_is_trapdoor` | 1036 | 0 | 0 | OK |
-| `pin_d_monomial_is_trapdoor` | 1077 | 0 | 0 | OK |
-| `pin_dp_monomial_not_trapdoor` | 1081 | 0 | 0 | OK |
-| `pin_dq_monomial_not_trapdoor` | 1085 | 0 | 0 | OK |
-| `pin_d_plus_lam_is_trapdoor` | 1089 | 0 | 0 | OK |
+| `cong_1_mod_p_0_mod_q_gcd` | 59 | 0 | 0 | OK |
+| `crt_binomial_eval` | 93 | 0 | 0 | OK |
+| `crt_binomial_mod_p` | 106 | 0 | 0 | OK |
+| `crt_binomial_mod_q` | 127 | 0 | 0 | OK |
+| `local_eth_root` | 148 | 0 | 0 | OK |
+| `crt_binomial_inverts_units` | 176 | 0 | 0 | OK |
+| `pin_root_ca_mod` | 219 | 0 | 0 | OK |
+| `pin_root_cb_mod` | 223 | 0 | 0 | OK |
+| `pin_inv3_local` | 227 | 0 | 0 | OK |
+| `pin_root_ca_splits` | 232 | 0 | 0 | OK |
+| `pin_root_cb_splits` | 245 | 0 | 0 | OK |
+| `pin_crt_binomial_inverts_units` | 258 | 0 | 0 | OK |
+| `pin_crt_binomial_eval_unit` | 281 | 0 | 0 | OK |
+| `pin_ed_minus_1_divides_lam` | 294 | 0 | 0 | OK |
+| `pin_powm_ed` | 303 | 0 | 0 | OK |
+| `pin_unique_unit_eth_root` | 319 | 0 | 0 | OK |
+| `pin_crt_binomial_at_y` | 331 | 0 | 0 | OK |
+| `pin_crt_binomial_residual` | 343 | 0 | 0 | OK |
+| `pin_crt_binomial_degree` | 350 | 0 | 0 | OK |
+| `pin_crt_binomial_outside_window` | 354 | 0 | 0 | OK |
+| `pin_crt_binomial_coeff_da` | 359 | 0 | 0 | OK |
+| `pin_crt_binomial_coeff_db` | 363 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_eval` | 371 | 0 | 0 | OK |
+| `pin_trapdoor_ed_inv` | 379 | 0 | 0 | OK |
+| `pin_powm_de` | 383 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_inverts_units` | 400 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_at_y` | 408 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_degree` | 412 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_leading` | 416 | 0 | 0 | OK |
+| `pin_trapdoor_degree_is_d` | 426 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_outside_window` | 433 | 0 | 0 | OK |
+| `pin_root_polys_agree_on_units` | 440 | 0 | 0 | OK |
+| `root_poly_eval_coprime` | 460 | 0 | 0 | OK |
+| `all_units_root_poly_is_trapdoor_map` | 474 | 0 | 0 | OK |
+| `all_units_root_poly_eval_g` | 495 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_is_trapdoor_map` | 505 | 0 | 0 | OK |
+| `pin_crt_binomial_neq_monomial` | 515 | 0 | 0 | OK |
+| `pin_crt_binomial_inverts_2` | 525 | 0 | 0 | OK |
+| `unique_eth_root_mod_prime` | 548 | 0 | 0 | OK |
+| `pin_Fq_units_of_N_length` | 572 | 0 | 0 | OK |
+| `pairwise_distinct_mod_filter` | 576 | 0 | 0 | OK |
+| `pin_Fq_units_of_N_distinct` | 594 | 0 | 0 | OK |
+| `pin_Fq_units_of_N_coprime` | 601 | 0 | 0 | OK |
+| `pin_inv3_q_lt_window` | 618 | 0 | 0 | OK |
+| `nth_poly_sub` | 622 | 0 | 0 | OK |
+| `poly_degree_sub_le` | 630 | 0 | 0 | OK |
+| `mod_product_r` | 641 | 0 | 0 | OK |
+| `mod_product_l` | 653 | 0 | 0 | OK |
+| `short_root_local_mod_q` | 659 | 0 | 0 | OK |
+| `short_root_diff_vanishes` | 699 | 0 | 0 | OK |
+| `short_root_q_divides_diff` | 721 | 0 | 0 | OK |
+| `poly_eval_all_div` | 740 | 0 | 0 | OK |
+| `poly_eval_single_support` | 754 | 0 | 0 | OK |
+| `pin_two_pow_dbe_neq_2` | 786 | 0 | 0 | OK |
+| `gcd_q_not_p` | 790 | 0 | 0 | OK |
+| `powm_div_cong` | 817 | 0 | 0 | OK |
+| `finite_support_cases` | 831 | 0 | 0 | OK |
+| `short_root_poly_some_coeff_splits` | 855 | 0 | 0 | OK |
+| `pin_crt_root_poly_is_short` | 939 | 0 | 0 | OK |
+| `pin_crt_root_poly_short_splits` | 943 | 0 | 0 | OK |
+| `no_root_poly_deg_lt_dq` | 955 | 0 | 0 | OK |
+| `pin_Xn_dp_does_not_invert_all_units` | 972 | 0 | 0 | OK |
+| `nodiv_gra_short_dq_splits` | 983 | 0 | 0 | OK |
+| `nodiv_identity_bound_lt_dq` | 1005 | 0 | 0 | OK |
+| `nodiv_square_bound_lt_dq` | 1010 | 0 | 0 | OK |
+| `trapdoor_monomial_inverts_all_units` | 1026 | 0 | 0 | OK |
+| `monomial_all_units_invert_is_trapdoor` | 1054 | 0 | 0 | OK |
+| `pin_d_monomial_is_trapdoor` | 1095 | 0 | 0 | OK |
+| `pin_dp_monomial_not_trapdoor` | 1099 | 0 | 0 | OK |
+| `pin_dq_monomial_not_trapdoor` | 1103 | 0 | 0 | OK |
+| `pin_d_plus_lam_is_trapdoor` | 1107 | 0 | 0 | OK |
+| `pin_d_plus_2lam_is_trapdoor` | 1111 | 0 | 0 | OK |
+| `pin_trapdoor_k_M_pos` | 1115 | 0 | 0 | OK |
+| `monomial_all_units_invert_miller` | 1128 | 0 | 0 | OK |
+| `pin_miller_from_d_plus_lam` | 1159 | 0 | 0 | OK |
+| `pin_base2_height_p_at_35` | 1181 | 0 | 0 | OK |
+| `pin_base2_height_q_at_35` | 1189 | 0 | 0 | OK |
+| `pin_odd_part_d_plus_2lam` | 1199 | 0 | 0 | OK |
+| `pin_miller_from_d_plus_2lam` | 1203 | 0 | 0 | OK |
+| `pin_d_mod_pminus1` | 1227 | 0 | 0 | OK |
+| `pin_d_mod_qminus1` | 1231 | 0 | 0 | OK |
+| `pin_inv3_p_is_crt_dp` | 1235 | 0 | 0 | OK |
+| `pin_inv3_q_is_crt_dq` | 1239 | 0 | 0 | OK |
+| `pin_local_inverses_recover_d` | 1243 | 0 | 0 | OK |
+| `pin_local_inv_unique_p` | 1261 | 0 | 0 | OK |
+| `pin_local_inv_unique_q` | 1273 | 0 | 0 | OK |
+| `pin_mid_root_poly_degree` | 1294 | 0 | 0 | OK |
+| `pin_mid_root_poly_in_window` | 1298 | 0 | 0 | OK |
+| `pin_mid_root_poly_inverts_units` | 1302 | 0 | 0 | OK |
+| `pin_mid_root_poly_splits` | 1316 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

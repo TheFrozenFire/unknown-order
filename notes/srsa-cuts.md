@@ -322,18 +322,24 @@ agrees as a function on units, its coefficients do not split, and
 the degree is the trapdoor `(e,d)` (Miller). Neither is
 `residual_solver_constructs_factor_open_named` — the TM wrote
 `{p,q}` into the coefficients or `d` into the degree.
-Any polynomial of degree `≤ d_q` that inverts every unit has a
+Any polynomial of degree `< q−2` that inverts every unit has a
 coefficient whose gcd with `N` is a proper factor
-(`short_root_poly_some_coeff_splits`, CAS `165`): on `𝔽_q*` minus
+(`short_root_poly_some_coeff_splits`, CAS `165`, `175`): on `𝔽_q*` minus
 residue `p` it matches `X^{d_q}`, and a leftover monomial
-`c X^{d_q}` is `c X` on `𝔽_p*` and cannot invert both `1` and `2`.
+`c X^{d_q}` cannot invert both `1` and `2`. The old window was
+`deg ≤ d_q`; the roots bound only needs `deg < q−2`. CRT binomial
+plus `N X^{12}` is a mid-degree inhabitant (`pin_mid_root_poly_splits`).
 No polynomial of degree `< d_q` inverts every unit (`q` would divide
 `−1`). A nodiv GRA whose degree bound is `≤ d_q` and that inverts
 every unit denotes a short root polynomial, so a coefficient splits
 (`no_root_poly_deg_lt_dq`, `nodiv_gra_short_dq_splits`, CAS `166`).
 A monomial `X^k` inverts every unit iff `e k ≡ 1 (mod λ)`: `k` is a
 decryption exponent (`d` or `d+tλ`). Local inverses `d_p`, `d_q` do
-not (`monomial_all_units_invert_is_trapdoor`, CAS `167`).
+not (`monomial_all_units_invert_is_trapdoor`, CAS `167`). Miller on
+`M = e k − 1` splits when heights mismatch, including when
+`odd_part(M)` differs from `odd_part(λ)` (`miller_from_trapdoor_exponent`,
+`pin_miller_from_d_plus_2lam`, CAS `173`). CRT of the local inverses
+recovers `d` mod `λ` (`pin_local_inverses_recover_d`, CAS `174`).
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -388,7 +394,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | nodiv tape degree bound | `gra_nodiv_degree_le` / `residual_nodiv_bound_le3_Q_lt10` / `residual_nodiv_short_ZN_units_divides_N` | `GenericRing.v`, `SrsaResidualGRA.v` | `151` |
 | exact deg; square/cube miss units | `poly_degree_mul` / `residual_square_*` / `residual_cube_*` / `residual_trapdoor_inverts_pin` | `ZPoly.v`, `SrsaResidualGRA.v` | `152` |
 | *e*-th root polynomial on units: CRT binomial vs monomial `X^d` | `crt_binomial_inverts_units` / `pin_root_ca_splits` / `pin_root_cb_splits` / `pin_trapdoor_degree_is_d` / `pin_root_polys_agree_on_units` | `SrsaRootPoly.v` | `164`, `172` |
-| short *e*-th-root poly (`deg ≤ d_q`) has a coeff that splits `N` | `short_root_poly_some_coeff_splits` / `pin_crt_root_poly_short_splits` | `SrsaRootPoly.v` | `165`, `170` |
+| short *e*-th-root poly (`deg < q−2`) has a coeff that splits `N` | `short_root_poly_some_coeff_splits` / `pin_crt_root_poly_short_splits` / `pin_mid_root_poly_splits` | `SrsaRootPoly.v` | `165`, `170`, `175` |
 | window sharp: no root poly of `deg < d_q`; nodiv GRA in the window splits | `no_root_poly_deg_lt_dq` / `nodiv_gra_short_dq_splits` | `SrsaRootPoly.v` | `166` |
 | monomial `X^k` inverts every unit iff `e k ≡ 1 (mod λ)` | `monomial_all_units_invert_is_trapdoor` / `trapdoor_monomial_inverts_all_units` | `SrsaRootPoly.v` | `167` |
 | restored inhabitant maps from `pin_y` (names match claims; not residual-solver ⇒ factor) | `xmap_*` / `emap_*` / `residual_*` / `dict_*` / `period_*` / `shape_*` / `filter_*` / `arith_*` / `extra_*` | `SrsaWriteX.v` and siblings | `168` |
@@ -396,6 +402,9 @@ advice `N/17`: `PreprocessGRA.v`.
 | leftover short monomial on `𝔽_p*` fails by `2^{d_q e}≢2`, not `d_q=p` | `pin_two_pow_dbe_neq_2` / `short_root_poly_some_coeff_splits` | `SrsaRootPoly.v` | `170` |
 | Chaum unblind / cube-root on campaign `rsa_test`, not `pin187` | `shape_chaum_unblind` / `shape_chaum_recovers_cube_root` | `SolverShape.v` | `171` |
 | all-units *e*-th-root poly is the trapdoor map `y ↦ y^d` | `all_units_root_poly_is_trapdoor_map` / `all_units_root_poly_eval_g` | `SrsaRootPoly.v` | `172` |
+| invert-all-units monomial `X^k` is Miller on `M=ek−1` | `miller_from_trapdoor_exponent` / `monomial_all_units_invert_miller` / `pin_miller_from_d_plus_2lam` | `MillerHeight.v`, `SrsaRootPoly.v` | `173` |
+| local inverses CRT to `d` mod `λ` | `crt_dp_dq_recover_d` / `pin_local_inverses_recover_d` / `pin_local_inv_unique_p` | `CRTRSA.v`, `SrsaRootPoly.v` | `174` |
+| short window widens to `deg < q−2`; mid-degree binomial `+ N X^{12}` splits | `short_root_poly_some_coeff_splits` / `pin_mid_root_poly_splits` | `SrsaRootPoly.v` | `175` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

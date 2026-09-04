@@ -185,3 +185,161 @@ Proof.
       [vm_compute; reflexivity | apply rsa_test_base2_heights
        | apply rsa_test_base2_heights | exact Hlt].
 Qed.
+
+(** ** Miller from any multiple of [λ], including [e k − 1]
+
+    [miller_from_d] is the [M = e d − 1] case.  Any invert-all-units
+    monomial [X^k] gives [e k ≡ 1 (mod λ)], so [M = e k − 1] is
+    another multiple of [λ].  Heights are read at [odd_part(M)],
+    which may differ from [odd_part(λ)] ([k = d + 2λ] on this pin).
+    Mismatch still splits.  Not
+    [residual_solver_constructs_factor_open_named]: writing [k]
+    wrote a multiple of [λ].
+    Cross-confirmed by [cas/173]. *)
+
+Theorem miller_multiple_annihilates :
+  forall R M a,
+    0 < M ->
+    Z.divide (rsa_lambda R) M ->
+    Z.coprime a (rsa_N R) ->
+    powm a M (rsa_N R) = 1.
+Proof.
+  intros R M a HMpos Hdiv Hcop.
+  unfold rsa_N.
+  apply annihilates_units.
+  - apply rsa_p_prime.
+  - apply rsa_q_prime.
+  - apply rsa_distinct.
+  - exact Hcop.
+  - lia.
+  - exact Hdiv.
+Qed.
+
+Theorem miller_height_exists_multiple :
+  forall R M a,
+    0 < M ->
+    Z.divide (rsa_lambda R) M ->
+    Z.coprime a (rsa_N R) ->
+    exists kp kq,
+      (kp <= val2 M)%nat /\
+      two_height a (odd_part M) (rsa_p R) kp /\
+      (kq <= val2 M)%nat /\
+      two_height a (odd_part M) (rsa_q R) kq.
+Proof.
+  intros R M a HMpos Hdiv Hcop.
+  pose proof (miller_multiple_annihilates R M a HMpos Hdiv Hcop) as Hann.
+  pose proof (Z.prime_ge_2 _ (rsa_p_prime R)).
+  pose proof (Z.prime_ge_2 _ (rsa_q_prime R)).
+  pose proof (split2_of_reconstructs M ltac:(lia)) as Hsplit.
+  rewrite Hsplit, (Z.mul_comm (2 ^ Z.of_nat (val2 M))) in Hann.
+  unfold rsa_N in Hann.
+  assert (powm a (odd_part M * pow2n (val2 M)) (rsa_p R) = 1) as Hp1.
+  { unfold pow2n. apply (powm_one_mod_factor _ _ (rsa_p R) (rsa_q R));
+      [lia | lia | exact Hann]. }
+  assert (powm a (odd_part M * pow2n (val2 M)) (rsa_q R) = 1) as Hq1.
+  { unfold pow2n.
+    rewrite (Z.mul_comm (rsa_p R)) in Hann.
+    apply (powm_one_mod_factor _ _ (rsa_q R) (rsa_p R));
+      [lia | lia | exact Hann]. }
+  pose proof (odd_part_nonneg M ltac:(lia)).
+  destruct (two_height_exists a (odd_part M) (rsa_p R) (val2 M)
+              ltac:(lia) ltac:(lia) Hp1) as [kp [Hlep Hpht]].
+  destruct (two_height_exists a (odd_part M) (rsa_q R) (val2 M)
+              ltac:(lia) ltac:(lia) Hq1) as [kq [Hleq Hqht]].
+  exists kp, kq.
+  split; [exact Hlep|].
+  split; [exact Hpht|].
+  split; [exact Hleq|].
+  exact Hqht.
+Qed.
+
+Theorem miller_from_multiple :
+  forall R M a kp kq,
+    0 < M ->
+    Z.divide (rsa_lambda R) M ->
+    Z.coprime a (rsa_N R) ->
+    two_height a (odd_part M) (rsa_p R) kp ->
+    two_height a (odd_part M) (rsa_q R) kq ->
+    (kp < kq)%nat ->
+    Z.gcd (a ^ (odd_part M * pow2n kp) - 1) (rsa_N R) = rsa_p R.
+Proof.
+  intros R M a kp kq HMpos Hdiv Hcop Hpht Hqht Hlt.
+  unfold rsa_N.
+  apply (height_mismatch_splits (rsa_p R) (rsa_q R) a (odd_part M) kp kq).
+  - apply rsa_p_prime.
+  - apply rsa_q_prime.
+  - apply rsa_distinct.
+  - exact Hcop.
+  - apply odd_part_nonneg. lia.
+  - exact Hpht.
+  - exact Hqht.
+  - exact Hlt.
+Qed.
+
+Theorem miller_from_multiple_q :
+  forall R M a kp kq,
+    0 < M ->
+    Z.divide (rsa_lambda R) M ->
+    Z.coprime a (rsa_N R) ->
+    two_height a (odd_part M) (rsa_p R) kp ->
+    two_height a (odd_part M) (rsa_q R) kq ->
+    (kq < kp)%nat ->
+    Z.gcd (a ^ (odd_part M * pow2n kq) - 1) (rsa_N R) = rsa_q R.
+Proof.
+  intros R M a kp kq HMpos Hdiv Hcop Hpht Hqht Hlt.
+  unfold rsa_N. rewrite (Z.mul_comm (rsa_p R) (rsa_q R)).
+  apply (height_mismatch_splits (rsa_q R) (rsa_p R) a (odd_part M) kq kp).
+  - apply rsa_q_prime.
+  - apply rsa_p_prime.
+  - apply not_eq_sym, rsa_distinct.
+  - unfold rsa_N in Hcop. rewrite Z.mul_comm. exact Hcop.
+  - apply odd_part_nonneg. lia.
+  - exact Hqht.
+  - exact Hpht.
+  - exact Hlt.
+Qed.
+
+Lemma trapdoor_exponent_divides_lambda :
+  forall R k,
+    (rsa_e R * k) mod (rsa_lambda R) = 1 ->
+    (rsa_lambda R | rsa_e R * k - 1).
+Proof.
+  intros R k Hinv.
+  pose proof (rsa_lambda_gt_1 R).
+  apply mods_eq_iff_divides; [lia|].
+  rewrite Hinv. symmetry. apply Z.mod_1_l. lia.
+Qed.
+
+Theorem miller_from_trapdoor_exponent :
+  forall R k a kp kq,
+    0 < rsa_e R * k - 1 ->
+    (rsa_e R * k) mod (rsa_lambda R) = 1 ->
+    Z.coprime a (rsa_N R) ->
+    two_height a (odd_part (rsa_e R * k - 1)) (rsa_p R) kp ->
+    two_height a (odd_part (rsa_e R * k - 1)) (rsa_q R) kq ->
+    (kp < kq)%nat ->
+    Z.gcd (a ^ (odd_part (rsa_e R * k - 1) * pow2n kp) - 1) (rsa_N R)
+      = rsa_p R.
+Proof.
+  intros R k a kp kq HMpos Hinv Hcop Hpht Hqht Hlt.
+  apply (miller_from_multiple R (rsa_e R * k - 1) a kp kq);
+    [lia | apply trapdoor_exponent_divides_lambda; exact Hinv
+     | exact Hcop | exact Hpht | exact Hqht | exact Hlt].
+Qed.
+
+Theorem miller_from_trapdoor_exponent_q :
+  forall R k a kp kq,
+    0 < rsa_e R * k - 1 ->
+    (rsa_e R * k) mod (rsa_lambda R) = 1 ->
+    Z.coprime a (rsa_N R) ->
+    two_height a (odd_part (rsa_e R * k - 1)) (rsa_p R) kp ->
+    two_height a (odd_part (rsa_e R * k - 1)) (rsa_q R) kq ->
+    (kq < kp)%nat ->
+    Z.gcd (a ^ (odd_part (rsa_e R * k - 1) * pow2n kq) - 1) (rsa_N R)
+      = rsa_q R.
+Proof.
+  intros R k a kp kq HMpos Hinv Hcop Hpht Hqht Hlt.
+  apply (miller_from_multiple_q R (rsa_e R * k - 1) a kp kq);
+    [lia | apply trapdoor_exponent_divides_lambda; exact Hinv
+     | exact Hcop | exact Hpht | exact Hqht | exact Hlt].
+Qed.

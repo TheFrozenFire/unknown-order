@@ -14,6 +14,10 @@ Require Import Hardness.
 Require Import StrongRSAPeel.
 Require Import Order.
 Require Import GenericRing.
+Require Import TwoPrimary.
+Require Import Miller.
+Require Import MillerHeight.
+Require Import CRTRSA.
 
 Open Scope Z_scope.
 
@@ -40,11 +44,15 @@ Open Scope Z_scope.
     [residual_solver_constructs_factor_open_named]: the TM wrote
     the factors into the coefficients, or [d] into the degree.
     The window is sharp: no polynomial of degree [< d_q] inverts
-    every unit ([q] would divide [−1]).  A nodiv GRA whose degree
-    bound is [≤ d_q] and that inverts every unit denotes a short
-    root polynomial, so a coefficient splits.  Not a proof of
+    every unit ([q] would divide [−1]).  The same roots bound
+    widens the split from [deg ≤ d_q] to [deg < q−2].  A nodiv GRA
+    whose degree bound is [≤ d_q] and that inverts every unit
+    denotes a short root polynomial, so a coefficient splits.
+    An invert-all-units monomial [X^k] is Miller-from-[(e,k)].
+    Local inverses CRT to [d] mod [λ].  Not a proof of
     [residual_solver_constructs_factor_open_named].
-    Cross-confirmed by [cas/164], [cas/165], [cas/166], and [cas/172]. *)
+    Cross-confirmed by [cas/164], [cas/165], [cas/166], [cas/172],
+    [cas/173], [cas/174], and [cas/175]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -525,7 +533,7 @@ Qed.
 
 (** ** Short [e]-th-root polynomials: a coefficient splits [N]
 
-    [d_q < q−2], so [deg P ≤ d_q] is strictly below the number of
+    [d_q < q−2], so [deg P < q−2] is strictly below the number of
     residues in [𝔽_q*] that are units of [Z/NZ] (all of [1..q−1]
     except [p]).  An all-units root map must match [X^{d_q}] on
     those residues, hence [q] divides [P − X^{d_q}].  If the other
@@ -533,7 +541,9 @@ Qed.
     [c X^{d_q}] inverts [1] only if [c^e ≡ 1], then inverts [2]
     only if [2^{d_q e} ≡ 2 (mod p)], which is false (does not
     need [d_q ≡ 1 (mod p−1)]; that was [11×17] accident).
-    Cross-confirmed by [cas/165] and [cas/170]. *)
+    The bound [deg ≤ d_q] is the old window; [deg < q−2] is the
+    same argument.  Cross-confirmed by [cas/165], [cas/170], and
+    [cas/175]. *)
 
 Lemma unique_eth_root_mod_prime :
   forall r e d x z,
@@ -710,7 +720,7 @@ Qed.
 
 Lemma short_root_q_divides_diff :
   forall P,
-    (poly_degree P <= Z.to_nat pin_inv3_q)%nat ->
+    (poly_degree P < Z.to_nat (pin_q - 2))%nat ->
     (forall y, Z.coprime y pin_N ->
        powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
     forall i, (pin_q | nth i (poly_sub P (poly_Xn (Z.to_nat pin_inv3_q))) 0).
@@ -722,6 +732,7 @@ Proof.
   - pose proof (poly_degree_sub_le P (poly_Xn (Z.to_nat pin_inv3_q))) as Hs.
     rewrite poly_degree_Xn in Hs.
     rewrite pin_Fq_units_of_N_length.
+    pose proof pin_inv3_q_lt_window.
     lia.
   - apply short_root_diff_vanishes. exact Hall.
 Qed.
@@ -843,14 +854,14 @@ Qed.
 
 Theorem short_root_poly_some_coeff_splits :
   forall P,
-    (poly_degree P <= Z.to_nat pin_inv3_q)%nat ->
+    (poly_degree P < Z.to_nat (pin_q - 2))%nat ->
     (forall y, Z.coprime y pin_N ->
        powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
     exists i, 1 < Z.gcd (nth i P 0) pin_N < pin_N.
 Proof.
   intros P Hdeg Hall.
   pose proof (short_root_q_divides_diff P Hdeg Hall) as Hqdiv.
-  destruct (finite_support_cases (Z.to_nat pin_inv3_q)
+  destruct (finite_support_cases (Nat.pred (Z.to_nat (pin_q - 2)))
               (Z.to_nat pin_inv3_q) P pin_p) as [Hex | Hallp].
   - destruct Hex as [i [_ [Hne Hnp]]].
     exists i.
@@ -868,7 +879,8 @@ Proof.
     assert (HNdiv : forall i, i <> Z.to_nat pin_inv3_q ->
                       (pin_N | nth i P 0)).
     { intros i Hne.
-      destruct (Nat.le_gt_cases i (Z.to_nat pin_inv3_q)) as [Hle | Hgt].
+      destruct (Nat.le_gt_cases i (Nat.pred (Z.to_nat (pin_q - 2))))
+        as [Hle | Hgt].
       - pose proof (Hqdiv i) as HqQ.
         rewrite nth_poly_sub, nth_Xn in HqQ.
         destruct (Nat.eq_dec i (Z.to_nat pin_inv3_q)); [lia|].
@@ -932,7 +944,9 @@ Theorem pin_crt_root_poly_short_splits :
   exists i, 1 < Z.gcd (nth i pin_crt_root_poly 0) pin_N < pin_N.
 Proof.
   apply short_root_poly_some_coeff_splits.
-  - apply pin_crt_root_poly_is_short.
+  - pose proof pin_crt_root_poly_is_short.
+    pose proof pin_inv3_q_lt_window.
+    lia.
   - apply pin_crt_binomial_inverts_units.
 Qed.
 
@@ -980,7 +994,9 @@ Theorem nodiv_gra_short_dq_splits :
 Proof.
   intros ops out Hop Hbound Hall.
   apply short_root_poly_some_coeff_splits.
-  - pose proof (gra_nodiv_degree_le ops out Hop). lia.
+  - pose proof (gra_nodiv_degree_le ops out Hop).
+    pose proof pin_inv3_q_lt_window.
+    lia.
   - intros y Hy.
     rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
     apply Hall. exact Hy.
@@ -1001,9 +1017,11 @@ Proof. vm_compute. lia. Qed.
     [X^k] inverts every unit iff [e k ≡ 1 (mod λ)]: [k] is a
     decryption exponent ([d], or [d+tλ]).  Local inverses [d_p],
     [d_q] invert one prime field, not [(Z/NZ)*].  Knowing such a
-    [k] is Miller-from-[(e,k)]; the [d] case is [miller_from_d].
-    Not [residual_solver_constructs_factor_open_named].
-    Cross-confirmed by [cas/167]. *)
+    [k] is Miller-from-[(e,k)] ([miller_from_trapdoor_exponent]);
+    the [d] case is [miller_from_d].  [k = d+2λ] changes
+    [odd_part(M)] and still splits.  Not
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/167] and [cas/173]. *)
 
 Theorem trapdoor_monomial_inverts_all_units :
   forall k y,
@@ -1089,3 +1107,216 @@ Proof. vm_compute. discriminate. Qed.
 Theorem pin_d_plus_lam_is_trapdoor :
   (pin_e * (pin_d + pin_lam)) mod pin_lam = 1.
 Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_d_plus_2lam_is_trapdoor :
+  (pin_e * (pin_d + 2 * pin_lam)) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Lemma pin_trapdoor_k_M_pos :
+  forall k,
+    0 <= k ->
+    (pin_e * k) mod pin_lam = 1 ->
+    0 < pin_e * k - 1.
+Proof.
+  intros k Hk Hinv.
+  destruct (Z.le_gt_cases k 0) as [Hle | Hgt].
+  - assert (k = 0) by lia. subst k.
+    vm_compute in Hinv. discriminate.
+  - nia.
+Qed.
+
+Theorem monomial_all_units_invert_miller :
+  forall k a kp kq,
+    0 <= k ->
+    (forall y, Z.coprime y pin_N ->
+       powm (powm y k pin_N) pin_e pin_N = y mod pin_N) ->
+    Z.coprime a pin_N ->
+    two_height a (odd_part (pin_e * k - 1)) pin_p kp ->
+    two_height a (odd_part (pin_e * k - 1)) pin_q kq ->
+    (kp < kq)%nat ->
+    Z.gcd (a ^ (odd_part (pin_e * k - 1) * pow2n kp) - 1) pin_N = pin_p.
+Proof.
+  intros k a kp kq Hk Hall Hcop Hpht Hqht Hlt.
+  pose proof (monomial_all_units_invert_is_trapdoor k Hk Hall) as Hinv.
+  pose proof (pin_trapdoor_k_M_pos k Hk Hinv) as HMpos.
+  change pin_N with (rsa_N rsa_test).
+  change pin_p with (rsa_p rsa_test).
+  apply (miller_from_trapdoor_exponent rsa_test k a kp kq).
+  - change (rsa_e rsa_test) with pin_e. exact HMpos.
+  - change (rsa_e rsa_test) with pin_e.
+    unfold rsa_lambda.
+    change (rsa_p rsa_test) with pin_p.
+    change (rsa_q rsa_test) with pin_q.
+    rewrite rsa_test_lambda. exact Hinv.
+  - rewrite <- rsa_test_N in Hcop. exact Hcop.
+  - change (rsa_e rsa_test) with pin_e.
+    change (rsa_p rsa_test) with pin_p. exact Hpht.
+  - change (rsa_e rsa_test) with pin_e.
+    change (rsa_q rsa_test) with pin_q. exact Hqht.
+  - exact Hlt.
+Qed.
+
+Theorem pin_miller_from_d_plus_lam :
+  Z.gcd (2 ^ (odd_part (pin_e * (pin_d + pin_lam) - 1)
+                * pow2n (val2 pin_ord2_p)) - 1) pin_N
+    = pin_p.
+Proof.
+  pose proof pin_d_plus_lam_is_trapdoor as Hinv.
+  apply (monomial_all_units_invert_miller (pin_d + pin_lam) 2
+           (val2 pin_ord2_p) (val2 pin_ord2_q)).
+  - lia.
+  - intros y Hy. apply trapdoor_monomial_inverts_all_units; [lia | exact Hinv | exact Hy].
+  - vm_compute. reflexivity.
+  - replace (odd_part (pin_e * (pin_d + pin_lam) - 1))
+      with (miller_t rsa_test) by (rewrite rsa_test_miller_t; vm_compute; reflexivity).
+    change pin_p with (rsa_p rsa_test).
+    apply rsa_test_base2_heights.
+  - replace (odd_part (pin_e * (pin_d + pin_lam) - 1))
+      with (miller_t rsa_test) by (rewrite rsa_test_miller_t; vm_compute; reflexivity).
+    change pin_q with (rsa_q rsa_test).
+    apply rsa_test_base2_heights.
+  - vm_compute. lia.
+Qed.
+
+Lemma pin_base2_height_p_at_35 :
+  two_height 2 35 pin_p 1%nat.
+Proof.
+  split.
+  - vm_compute. reflexivity.
+  - intros j Hj. assert (j = 0)%nat by lia. subst. vm_compute. discriminate.
+Qed.
+
+Lemma pin_base2_height_q_at_35 :
+  two_height 2 35 pin_q 3%nat.
+Proof.
+  split.
+  - vm_compute. reflexivity.
+  - intros j Hj.
+    assert (j = 0 \/ j = 1 \/ j = 2)%nat by lia.
+    destruct H as [H|[H|H]]; subst; vm_compute; discriminate.
+Qed.
+
+Theorem pin_odd_part_d_plus_2lam :
+  odd_part (pin_e * (pin_d + 2 * pin_lam) - 1) = 35.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_miller_from_d_plus_2lam :
+  Z.gcd (2 ^ (odd_part (pin_e * (pin_d + 2 * pin_lam) - 1)
+                * pow2n 1) - 1) pin_N
+    = pin_p.
+Proof.
+  pose proof pin_d_plus_2lam_is_trapdoor as Hinv.
+  rewrite pin_odd_part_d_plus_2lam.
+  apply (monomial_all_units_invert_miller (pin_d + 2 * pin_lam) 2 1%nat 3%nat).
+  - lia.
+  - intros y Hy. apply trapdoor_monomial_inverts_all_units; [lia | exact Hinv | exact Hy].
+  - vm_compute. reflexivity.
+  - rewrite pin_odd_part_d_plus_2lam. apply pin_base2_height_p_at_35.
+  - rewrite pin_odd_part_d_plus_2lam. apply pin_base2_height_q_at_35.
+  - lia.
+Qed.
+
+(** ** Local inverses CRT to the trapdoor exponent
+
+    [d ≡ d_p (mod p−1)] and [d ≡ d_q (mod q−1)].  Any [x] with
+    those residues is [x ≡ d (mod λ)].  Writing both local
+    inverses writes [d].  Not
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/174]. *)
+
+Theorem pin_d_mod_pminus1 :
+  pin_d mod (pin_p - 1) = pin_inv3_p.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_d_mod_qminus1 :
+  pin_d mod (pin_q - 1) = pin_inv3_q.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_inv3_p_is_crt_dp :
+  pin_inv3_p = crt_dp pin_d pin_p.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_inv3_q_is_crt_dq :
+  pin_inv3_q = crt_dq pin_d pin_q.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_local_inverses_recover_d :
+  forall x,
+    x mod (pin_p - 1) = pin_inv3_p ->
+    x mod (pin_q - 1) = pin_inv3_q ->
+    x mod pin_lam = pin_d.
+Proof.
+  intros x Hp Hq.
+  transitivity (pin_d mod pin_lam); [| vm_compute; reflexivity].
+  rewrite <- rsa_test_lambda.
+  apply (crt_dp_dq_recover_d pin_p pin_q pin_d x).
+  - apply pin_p_prime.
+  - apply pin_q_prime.
+  - lia.
+  - lia.
+  - unfold crt_dp. rewrite pin_d_mod_pminus1. exact Hp.
+  - unfold crt_dq. rewrite pin_d_mod_qminus1. exact Hq.
+Qed.
+
+Theorem pin_local_inv_unique_p :
+  forall da,
+    (pin_e * da) mod (pin_p - 1) = 1 ->
+    da mod (pin_p - 1) = pin_inv3_p.
+Proof.
+  intros da Hda.
+  rewrite pin_inv3_p_is_crt_dp.
+  apply (local_inv_is_crt_dp pin_e pin_d da pin_p pin_q);
+    [apply pin_p_prime | apply pin_q_prime | lia | | exact Hda].
+  rewrite rsa_test_lambda. apply pin_trapdoor_ed_inv.
+Qed.
+
+Theorem pin_local_inv_unique_q :
+  forall db,
+    (pin_e * db) mod (pin_q - 1) = 1 ->
+    db mod (pin_q - 1) = pin_inv3_q.
+Proof.
+  intros db Hdb.
+  rewrite pin_inv3_q_is_crt_dq.
+  apply (local_inv_is_crt_dq pin_e pin_d db pin_p pin_q);
+    [apply pin_p_prime | apply pin_q_prime | lia | | exact Hdb].
+  rewrite rsa_test_lambda. apply pin_trapdoor_ed_inv.
+Qed.
+
+(** ** Mid-degree inhabitant of the widened window
+
+    [P =] CRT binomial [+ N X^{12}] has degree 12, which sits in
+    [d_q < deg < q−2], inverts every unit (the extra term is [0]
+    mod [N]), and still splits.  Cross-confirmed by [cas/175]. *)
+
+Definition pin_mid_root_poly : list Z :=
+  poly_add pin_crt_root_poly (map_mul pin_N (poly_Xn 12%nat)).
+
+Theorem pin_mid_root_poly_degree :
+  poly_degree pin_mid_root_poly = 12%nat.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_mid_root_poly_in_window :
+  (poly_degree pin_mid_root_poly < Z.to_nat (pin_q - 2))%nat.
+Proof. rewrite pin_mid_root_poly_degree. vm_compute. lia. Qed.
+
+Theorem pin_mid_root_poly_inverts_units :
+  forall y,
+    Z.coprime y pin_N ->
+    powm (poly_eval pin_mid_root_poly y) pin_e pin_N = y mod pin_N.
+Proof.
+  intros y Hcop.
+  unfold pin_mid_root_poly.
+  rewrite poly_eval_add, poly_eval_map_mul, poly_eval_Xn.
+  transitivity (powm (poly_eval pin_crt_root_poly y) pin_e pin_N).
+  - apply powm_div_cong; [lia | lia |].
+    exists (y ^ Z.of_nat 12%nat). ring.
+  - apply pin_crt_binomial_inverts_units. exact Hcop.
+Qed.
+
+Theorem pin_mid_root_poly_splits :
+  exists i, 1 < Z.gcd (nth i pin_mid_root_poly 0) pin_N < pin_N.
+Proof.
+  apply short_root_poly_some_coeff_splits.
+  - apply pin_mid_root_poly_in_window.
+  - apply pin_mid_root_poly_inverts_units.
+Qed.

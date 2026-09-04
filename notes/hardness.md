@@ -120,10 +120,11 @@ Constructible torsion `H` is a family parameter
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
 | CRT binomial `c_p X^{d_p}+c_q X^{d_q}` of the *e*-th root map | `gcd(c_p,N)` and `gcd(c_q,N)` are the factors; inverts every unit | `cong_1_mod_p_0_mod_q_gcd`, `crt_binomial_inverts_units`, `pin_root_ca_splits`, `pin_root_cb_splits` | unrestricted residual solver ⇒ factor; the TM wrote `{p,q}` into the coefficients |
 | monomial `X^d` of the *e*-th root map | agrees with the binomial on units; coefficients do not split; degree is `d` with `ed≡1 (mod λ)` | `pin_trapdoor_degree_is_d`, `pin_root_polys_agree_on_units`, `pin_crt_binomial_neq_monomial` | reading `d` from the degree is Miller-from-`(e,d)`, not a black-box solver |
-| polynomial `P` of `deg ≤ d_q` that inverts every unit | some coeff `c` has `1 < gcd(c,N) < N` | `short_root_poly_some_coeff_splits`, `pin_crt_root_poly_short_splits` | high-degree `X^d`; unrestricted residual solver ⇒ factor |
+| polynomial `P` of `deg < q−2` that inverts every unit | some coeff `c` has `1 < gcd(c,N) < N` | `short_root_poly_some_coeff_splits`, `pin_crt_root_poly_short_splits`, `pin_mid_root_poly_splits` | high-degree `X^d`; unrestricted residual solver ⇒ factor |
 | `deg P < d_q` | no all-units *e*-th-root polynomial (`q ∤ −1`) | `no_root_poly_deg_lt_dq`, `pin_Xn_dp_does_not_invert_all_units` | the bound `d_q` itself (CRT binomial) |
 | nodiv GRA, `deg_bound ≤ d_q`, inverts every unit | denoted poly has a splitting coeff | `nodiv_gra_short_dq_splits` | high-degree tapes (`X^d`); `GInv`; residual-solver ⇒ factor |
-| monomial `X^k` inverts every unit | `e k ≡ 1 (mod λ)`; `k` is a decryption exponent | `monomial_all_units_invert_is_trapdoor`, `trapdoor_monomial_inverts_all_units`, `pin_d_plus_lam_is_trapdoor` | local inverses `d_p`, `d_q`; residual-solver ⇒ factor |
+| monomial `X^k` inverts every unit | `e k ≡ 1 (mod λ)`; `k` is a decryption exponent; Miller on `M=ek−1` splits on height mismatch | `monomial_all_units_invert_is_trapdoor`, `miller_from_trapdoor_exponent`, `pin_miller_from_d_plus_2lam` | residual-solver ⇒ factor |
+| local inverses `d_p`, `d_q` of residual `e` | CRT recovers `d` mod `λ` | `crt_dp_dq_recover_d`, `pin_local_inverses_recover_d` | writing one local inverse; residual-solver ⇒ factor |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

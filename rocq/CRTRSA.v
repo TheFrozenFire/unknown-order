@@ -224,3 +224,102 @@ Proof.
   - rewrite Hdq. unfold mq. unfold powm. rewrite Z.mod_mod by lia. reflexivity.
   - nia.
 Qed.
+
+(** ** CRT of local inverses recovers [d] mod [λ]
+
+    [d_p = d mod (p−1)] and [d_q = d mod (q−1)] are the CRT-RSA
+    local exponents.  Any [x] with those two residues is
+    [x ≡ d (mod λ)].  A TM that writes both local inverses of [e]
+    wrote the trapdoor.  Not
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/174]. *)
+
+Lemma cong_mod_lcm :
+  forall a b m n,
+    0 < m ->
+    0 < n ->
+    a mod m = b mod m ->
+    a mod n = b mod n ->
+    a mod (Z.lcm m n) = b mod (Z.lcm m n).
+Proof.
+  intros a b m n Hm Hn Hm_eq Hn_eq.
+  assert (0 < Z.lcm m n) as Hlcm.
+  { pose proof (Z.lcm_nonneg m n).
+    pose proof (proj1 (Z.lcm_eq_0 m n)). lia. }
+  apply mods_eq_iff_divides; [lia|].
+  apply Z.lcm_least.
+  - apply mods_eq_iff_divides; [lia | exact Hm_eq].
+  - apply mods_eq_iff_divides; [lia | exact Hn_eq].
+Qed.
+
+Theorem crt_dp_dq_recover_d :
+  forall p q d x,
+    Z.prime p ->
+    Z.prime q ->
+    3 <= p ->
+    3 <= q ->
+    x mod (p - 1) = crt_dp d p ->
+    x mod (q - 1) = crt_dq d q ->
+    x mod (lambda_semiprime p q) = d mod (lambda_semiprime p q).
+Proof.
+  intros p q d x Hp Hq Hp3 Hq3 Hxp Hxq.
+  unfold crt_dp, crt_dq, lambda_semiprime in *.
+  apply cong_mod_lcm; [lia | lia | exact Hxp | exact Hxq].
+Qed.
+
+Lemma inverse_unique_mod :
+  forall e x y m,
+    1 < m ->
+    (e * x) mod m = 1 ->
+    (e * y) mod m = 1 ->
+    x mod m = y mod m.
+Proof.
+  intros e x y m Hm Hx Hy.
+  assert (Z.gcd e m = 1) as Hcop.
+  { pose proof (Z.gcd_divide_l e m) as Hel.
+    pose proof (Z.gcd_divide_r e m) as Hem.
+    assert (Z.gcd e m | 1) as H1.
+    { assert (Hex : (Z.gcd e m | e * x)) by (apply Z.divide_mul_l; exact Hel).
+      assert (Hmx : (m | e * x - 1)).
+      { apply Z.mod_divide; [lia|].
+        rewrite Zminus_mod, Hx, Z.mod_1_l, Z.sub_diag, Z.mod_0_l by lia.
+        reflexivity. }
+      assert (Hgx : (Z.gcd e m | e * x - 1))
+        by (apply Z.divide_trans with m; [exact Hem | exact Hmx]).
+      replace 1 with (e * x - (e * x - 1)) by ring.
+      apply Z.divide_sub_r; [exact Hex | exact Hgx]. }
+    apply Z.divide_1_r in H1.
+    pose proof (Z.gcd_nonneg e m). lia. }
+  apply (mul_cancel_r_coprime x y e m Hm Hcop).
+  rewrite Z.mul_comm, Hx, Z.mul_comm, Hy. reflexivity.
+Qed.
+
+Theorem local_inv_is_crt_dp :
+  forall e d da p q,
+    Z.prime p ->
+    Z.prime q ->
+    3 <= p ->
+    (e * d) mod (lambda_semiprime p q) = 1 ->
+    (e * da) mod (p - 1) = 1 ->
+    da mod (p - 1) = crt_dp d p.
+Proof.
+  intros e d da p q Hp Hq Hp3 Hinv Hda.
+  pose proof (ed_one_mod_pminus1_of e d p q Hp Hq Hp3 Hinv) as Hed.
+  unfold crt_dp.
+  apply inverse_unique_mod with e; [lia | exact Hda | exact Hed].
+Qed.
+
+Theorem local_inv_is_crt_dq :
+  forall e d db p q,
+    Z.prime p ->
+    Z.prime q ->
+    3 <= q ->
+    (e * d) mod (lambda_semiprime p q) = 1 ->
+    (e * db) mod (q - 1) = 1 ->
+    db mod (q - 1) = crt_dq d q.
+Proof.
+  intros e d db p q Hp Hq Hq3 Hinv Hdb.
+  rewrite lambda_semiprime_comm in Hinv.
+  pose proof (local_inv_is_crt_dp e d db q p Hq Hp Hq3 Hinv Hdb) as H.
+  unfold crt_dp, crt_dq in *. exact H.
+Qed.
