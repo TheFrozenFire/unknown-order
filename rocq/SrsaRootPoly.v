@@ -474,8 +474,10 @@ Qed.
     except [p]).  An all-units root map must match [X^{d_q}] on
     those residues, hence [q] divides [P − X^{d_q}].  If the other
     coefficients are also [0] mod [p], the leftover monomial
-    [c X^{d_q}] is [c X] on [𝔽_p*] and cannot cube-invert both
-    [1] and [2].  Cross-confirmed by [cas/165]. *)
+    [c X^{d_q}] inverts [1] only if [c^e ≡ 1], then inverts [2]
+    only if [2^{d_q e} ≡ 2 (mod p)], which is false (does not
+    need [d_q ≡ 1 (mod p−1)]; that was [11×17] accident).
+    Cross-confirmed by [cas/165] and [cas/170]. *)
 
 Lemma unique_eth_root_mod_prime :
   forall r e d x z,
@@ -714,15 +716,9 @@ Proof.
         intros Heq. apply Hi. congruence.
 Qed.
 
-Lemma pin_two_pow_db_mod_p :
-  powm 2 pin_inv3_q pin_p = 2 mod pin_p.
-Proof.
-  replace pin_inv3_q with (pin_p - 1 + 1) by lia.
-  rewrite powm_add_r by lia.
-  rewrite fermat_coprime; [| apply pin_p_prime | vm_compute; reflexivity].
-  rewrite powm_1_r by lia.
-  rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
-Qed.
+Lemma pin_two_pow_dbe_neq_2 :
+  powm 2 (pin_inv3_q * pin_e) pin_p <> 2 mod pin_p.
+Proof. vm_compute. discriminate. Qed.
 
 Lemma gcd_q_not_p :
   forall p q a,
@@ -862,26 +858,14 @@ Proof.
       rewrite <- (mod_product_l ((c * 2 ^ pin_inv3_q) ^ pin_e)
                    pin_p pin_q) by lia.
       rewrite H2c. vm_compute. reflexivity. }
-    assert (Hcong : (c * 2 ^ pin_inv3_q) mod pin_p = (c * 2) mod pin_p).
-    { apply (proj2 (mods_eq_iff_divides (c * 2 ^ pin_inv3_q) (c * 2) pin_p
-                      ltac:(lia))).
-      replace (c * 2 ^ pin_inv3_q - c * 2)
-        with (c * (2 ^ pin_inv3_q - 2)) by ring.
-      apply Z.divide_mul_r, Z.mod_divide; [lia|].
-      vm_compute. reflexivity. }
-    assert (H8 : powm (c * 2) pin_e pin_p = 2 mod pin_p).
-    { unfold powm in H2p |- *.
-      rewrite <- Z.mod_pow_l by lia.
-      rewrite <- Hcong.
-      rewrite Z.mod_pow_l by lia. exact H2p. }
-    unfold powm in H8, Hcp.
-    rewrite Z.pow_mul_l in H8.
-    replace (2 ^ pin_e) with 8 in H8 by (vm_compute; reflexivity).
-    rewrite Z.mul_mod in H8 by lia.
-    rewrite Hcp in H8.
-    replace (8 mod pin_p) with 8 in H8 by (vm_compute; reflexivity).
-    rewrite Z.mul_1_l in H8.
-    vm_compute in H8. discriminate.
+    rewrite (powm_mul_base c (2 ^ pin_inv3_q) pin_e pin_p) in H2p by lia.
+    rewrite Hcp, Z.mul_1_l in H2p.
+    unfold powm in H2p.
+    rewrite Z.mod_mod in H2p by lia.
+    rewrite <- Z.pow_mul_r in H2p by lia.
+    change ((2 ^ (pin_inv3_q * pin_e)) mod pin_p)
+      with (powm 2 (pin_inv3_q * pin_e) pin_p) in H2p.
+    contradict H2p. exact pin_two_pow_dbe_neq_2.
 Qed.
 
 Theorem pin_crt_root_poly_is_short :

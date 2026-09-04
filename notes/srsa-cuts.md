@@ -388,11 +388,12 @@ advice `N/17`: `PreprocessGRA.v`.
 | nodiv tape degree bound | `gra_nodiv_degree_le` / `residual_nodiv_bound_le3_Q_lt10` / `residual_nodiv_short_ZN_units_divides_N` | `GenericRing.v`, `SrsaResidualGRA.v` | `151` |
 | exact deg; square/cube miss units | `poly_degree_mul` / `residual_square_*` / `residual_cube_*` / `residual_trapdoor_inverts_pin` | `ZPoly.v`, `SrsaResidualGRA.v` | `152` |
 | *e*-th root polynomial on units: CRT binomial vs monomial `X^d` | `crt_binomial_inverts_units` / `pin_root_ca_splits` / `pin_root_cb_splits` / `pin_trapdoor_degree_is_d` / `pin_root_polys_agree_on_units` | `SrsaRootPoly.v` | `164` |
-| short *e*-th-root poly (`deg ≤ d_q`) has a coeff that splits `N` | `short_root_poly_some_coeff_splits` / `pin_crt_root_poly_short_splits` | `SrsaRootPoly.v` | `165` |
+| short *e*-th-root poly (`deg ≤ d_q`) has a coeff that splits `N` | `short_root_poly_some_coeff_splits` / `pin_crt_root_poly_short_splits` | `SrsaRootPoly.v` | `165`, `170` |
 | window sharp: no root poly of `deg < d_q`; nodiv GRA in the window splits | `no_root_poly_deg_lt_dq` / `nodiv_gra_short_dq_splits` | `SrsaRootPoly.v` | `166` |
 | monomial `X^k` inverts every unit iff `e k ≡ 1 (mod λ)` | `monomial_all_units_invert_is_trapdoor` / `trapdoor_monomial_inverts_all_units` | `SrsaRootPoly.v` | `167` |
 | restored inhabitant maps from `pin_y` (names match claims; not residual-solver ⇒ factor) | `xmap_*` / `emap_*` / `residual_*` / `dict_*` / `period_*` / `shape_*` / `filter_*` / `arith_*` / `extra_*` | `SrsaWriteX.v` and siblings | `168` |
 | campaign alias vs frozen pins (`pin_*` → `pin187_*`; 1363/2491 test pins) | `pin187_*` / `pin1363_*` / `pin2491_*` / `srsa_residual_pin187` | `Pin.v` | `169` |
+| leftover short monomial on `𝔽_p*` fails by `2^{d_q e}≢2`, not `d_q=p` | `pin_two_pow_dbe_neq_2` / `short_root_poly_some_coeff_splits` | `SrsaRootPoly.v` | `170` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

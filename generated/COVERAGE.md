@@ -2981,8 +2981,8 @@ in the Rocq tree.  Do not edit by hand.
   - L358: Trapdoor monomial [X^d]: degree is [d], coefficients do not split
   - L429: They agree on units and differ as polynomials
   - L470: Short [e]-th-root polynomials: a coefficient splits [N]
-  - L899: The window is sharp; nodiv GRA in it splits
-  - L959: Monomial all-units invert iff the exponent is trapdoor
+  - L883: The window is sharp; nodiv GRA in it splits
+  - L943: Monomial all-units invert iff the exponent is trapdoor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3020,39 +3020,39 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_root_polys_agree_on_units` | 431 |
 | Theorem | `pin_crt_binomial_neq_monomial` | 451 |
 | Theorem | `pin_crt_binomial_inverts_2` | 461 |
-| Lemma | `unique_eth_root_mod_prime` | 480 |
-| Lemma | `pin_Fq_units_of_N_length` | 504 |
-| Lemma | `pairwise_distinct_mod_filter` | 508 |
-| Lemma | `pin_Fq_units_of_N_distinct` | 526 |
-| Lemma | `pin_Fq_units_of_N_coprime` | 533 |
-| Lemma | `pin_inv3_q_lt_window` | 550 |
-| Lemma | `nth_poly_sub` | 554 |
-| Lemma | `poly_degree_sub_le` | 562 |
-| Lemma | `mod_product_r` | 573 |
-| Lemma | `mod_product_l` | 585 |
-| Lemma | `short_root_local_mod_q` | 591 |
-| Lemma | `short_root_diff_vanishes` | 631 |
-| Lemma | `short_root_q_divides_diff` | 653 |
-| Lemma | `poly_eval_all_div` | 671 |
-| Lemma | `poly_eval_single_support` | 685 |
-| Lemma | `pin_two_pow_db_mod_p` | 717 |
-| Lemma | `gcd_q_not_p` | 727 |
-| Lemma | `powm_div_cong` | 754 |
-| Lemma | `finite_support_cases` | 768 |
-| Theorem | `short_root_poly_some_coeff_splits` | 792 |
-| Theorem | `pin_crt_root_poly_is_short` | 887 |
-| Theorem | `pin_crt_root_poly_short_splits` | 891 |
-| Theorem | `no_root_poly_deg_lt_dq` | 901 |
-| Theorem | `pin_Xn_dp_does_not_invert_all_units` | 918 |
-| Theorem | `nodiv_gra_short_dq_splits` | 929 |
-| Theorem | `nodiv_identity_bound_lt_dq` | 949 |
-| Theorem | `nodiv_square_bound_lt_dq` | 954 |
-| Theorem | `trapdoor_monomial_inverts_all_units` | 968 |
-| Theorem | `monomial_all_units_invert_is_trapdoor` | 996 |
-| Theorem | `pin_d_monomial_is_trapdoor` | 1037 |
-| Theorem | `pin_dp_monomial_not_trapdoor` | 1041 |
-| Theorem | `pin_dq_monomial_not_trapdoor` | 1045 |
-| Theorem | `pin_d_plus_lam_is_trapdoor` | 1049 |
+| Lemma | `unique_eth_root_mod_prime` | 482 |
+| Lemma | `pin_Fq_units_of_N_length` | 506 |
+| Lemma | `pairwise_distinct_mod_filter` | 510 |
+| Lemma | `pin_Fq_units_of_N_distinct` | 528 |
+| Lemma | `pin_Fq_units_of_N_coprime` | 535 |
+| Lemma | `pin_inv3_q_lt_window` | 552 |
+| Lemma | `nth_poly_sub` | 556 |
+| Lemma | `poly_degree_sub_le` | 564 |
+| Lemma | `mod_product_r` | 575 |
+| Lemma | `mod_product_l` | 587 |
+| Lemma | `short_root_local_mod_q` | 593 |
+| Lemma | `short_root_diff_vanishes` | 633 |
+| Lemma | `short_root_q_divides_diff` | 655 |
+| Lemma | `poly_eval_all_div` | 673 |
+| Lemma | `poly_eval_single_support` | 687 |
+| Lemma | `pin_two_pow_dbe_neq_2` | 719 |
+| Lemma | `gcd_q_not_p` | 723 |
+| Lemma | `powm_div_cong` | 750 |
+| Lemma | `finite_support_cases` | 764 |
+| Theorem | `short_root_poly_some_coeff_splits` | 788 |
+| Theorem | `pin_crt_root_poly_is_short` | 871 |
+| Theorem | `pin_crt_root_poly_short_splits` | 875 |
+| Theorem | `no_root_poly_deg_lt_dq` | 885 |
+| Theorem | `pin_Xn_dp_does_not_invert_all_units` | 902 |
+| Theorem | `nodiv_gra_short_dq_splits` | 913 |
+| Theorem | `nodiv_identity_bound_lt_dq` | 933 |
+| Theorem | `nodiv_square_bound_lt_dq` | 938 |
+| Theorem | `trapdoor_monomial_inverts_all_units` | 952 |
+| Theorem | `monomial_all_units_invert_is_trapdoor` | 980 |
+| Theorem | `pin_d_monomial_is_trapdoor` | 1021 |
+| Theorem | `pin_dp_monomial_not_trapdoor` | 1025 |
+| Theorem | `pin_dq_monomial_not_trapdoor` | 1029 |
+| Theorem | `pin_d_plus_lam_is_trapdoor` | 1033 |
 
 ## `SrsaWriteE.v`
 
