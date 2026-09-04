@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2409 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2431 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2409 results across 119 files.
+Captured for 2431 results across 119 files.
 
 Counts:
 
@@ -2561,40 +2561,62 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `cong_1_mod_p_0_mod_q_gcd` | 38 | 0 | 0 | OK |
-| `crt_binomial_eval` | 72 | 0 | 0 | OK |
-| `crt_binomial_mod_p` | 85 | 0 | 0 | OK |
-| `crt_binomial_mod_q` | 106 | 0 | 0 | OK |
-| `local_eth_root` | 127 | 0 | 0 | OK |
-| `crt_binomial_inverts_units` | 155 | 0 | 0 | OK |
-| `pin_root_ca_mod` | 198 | 0 | 0 | OK |
-| `pin_root_cb_mod` | 202 | 0 | 0 | OK |
-| `pin_inv3_local` | 206 | 0 | 0 | OK |
-| `pin_root_ca_splits` | 211 | 0 | 0 | OK |
-| `pin_root_cb_splits` | 224 | 0 | 0 | OK |
-| `pin_crt_binomial_inverts_units` | 237 | 0 | 0 | OK |
-| `pin_crt_binomial_eval_unit` | 260 | 0 | 0 | OK |
-| `pin_ed_minus_1_divides_lam` | 273 | 0 | 0 | OK |
-| `pin_powm_ed` | 282 | 0 | 0 | OK |
-| `pin_unique_unit_eth_root` | 298 | 0 | 0 | OK |
-| `pin_crt_binomial_at_y` | 310 | 0 | 0 | OK |
-| `pin_crt_binomial_residual` | 322 | 0 | 0 | OK |
-| `pin_crt_binomial_degree` | 329 | 0 | 0 | OK |
-| `pin_crt_binomial_outside_window` | 333 | 0 | 0 | OK |
-| `pin_crt_binomial_coeff_da` | 338 | 0 | 0 | OK |
-| `pin_crt_binomial_coeff_db` | 342 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_eval` | 350 | 0 | 0 | OK |
-| `pin_trapdoor_ed_inv` | 358 | 0 | 0 | OK |
-| `pin_powm_de` | 362 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_inverts_units` | 379 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_at_y` | 387 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_degree` | 391 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_leading` | 395 | 0 | 0 | OK |
-| `pin_trapdoor_degree_is_d` | 405 | 0 | 0 | OK |
-| `pin_trapdoor_monomial_outside_window` | 412 | 0 | 0 | OK |
-| `pin_root_polys_agree_on_units` | 419 | 0 | 0 | OK |
-| `pin_crt_binomial_neq_monomial` | 439 | 0 | 0 | OK |
-| `pin_crt_binomial_inverts_2` | 449 | 0 | 0 | OK |
+| `cong_1_mod_p_0_mod_q_gcd` | 44 | 0 | 0 | OK |
+| `crt_binomial_eval` | 78 | 0 | 0 | OK |
+| `crt_binomial_mod_p` | 91 | 0 | 0 | OK |
+| `crt_binomial_mod_q` | 112 | 0 | 0 | OK |
+| `local_eth_root` | 133 | 0 | 0 | OK |
+| `crt_binomial_inverts_units` | 161 | 0 | 0 | OK |
+| `pin_root_ca_mod` | 204 | 0 | 0 | OK |
+| `pin_root_cb_mod` | 208 | 0 | 0 | OK |
+| `pin_inv3_local` | 212 | 0 | 0 | OK |
+| `pin_root_ca_splits` | 217 | 0 | 0 | OK |
+| `pin_root_cb_splits` | 230 | 0 | 0 | OK |
+| `pin_crt_binomial_inverts_units` | 243 | 0 | 0 | OK |
+| `pin_crt_binomial_eval_unit` | 266 | 0 | 0 | OK |
+| `pin_ed_minus_1_divides_lam` | 279 | 0 | 0 | OK |
+| `pin_powm_ed` | 288 | 0 | 0 | OK |
+| `pin_unique_unit_eth_root` | 304 | 0 | 0 | OK |
+| `pin_crt_binomial_at_y` | 316 | 0 | 0 | OK |
+| `pin_crt_binomial_residual` | 328 | 0 | 0 | OK |
+| `pin_crt_binomial_degree` | 335 | 0 | 0 | OK |
+| `pin_crt_binomial_outside_window` | 339 | 0 | 0 | OK |
+| `pin_crt_binomial_coeff_da` | 344 | 0 | 0 | OK |
+| `pin_crt_binomial_coeff_db` | 348 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_eval` | 356 | 0 | 0 | OK |
+| `pin_trapdoor_ed_inv` | 364 | 0 | 0 | OK |
+| `pin_powm_de` | 368 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_inverts_units` | 385 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_at_y` | 393 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_degree` | 397 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_leading` | 401 | 0 | 0 | OK |
+| `pin_trapdoor_degree_is_d` | 411 | 0 | 0 | OK |
+| `pin_trapdoor_monomial_outside_window` | 418 | 0 | 0 | OK |
+| `pin_root_polys_agree_on_units` | 425 | 0 | 0 | OK |
+| `pin_crt_binomial_neq_monomial` | 445 | 0 | 0 | OK |
+| `pin_crt_binomial_inverts_2` | 455 | 0 | 0 | OK |
+| `unique_eth_root_mod_prime` | 474 | 0 | 0 | OK |
+| `pin_Fq_units_of_N_length` | 498 | 0 | 0 | OK |
+| `pairwise_distinct_mod_filter` | 502 | 0 | 0 | OK |
+| `pin_Fq_units_of_N_distinct` | 520 | 0 | 0 | OK |
+| `pin_Fq_units_of_N_coprime` | 527 | 0 | 0 | OK |
+| `pin_inv3_q_lt_window` | 544 | 0 | 0 | OK |
+| `nth_poly_sub` | 548 | 0 | 0 | OK |
+| `poly_degree_sub_le` | 556 | 0 | 0 | OK |
+| `mod_product_r` | 567 | 0 | 0 | OK |
+| `mod_product_l` | 579 | 0 | 0 | OK |
+| `short_root_local_mod_q` | 585 | 0 | 0 | OK |
+| `short_root_diff_vanishes` | 625 | 0 | 0 | OK |
+| `short_root_q_divides_diff` | 647 | 0 | 0 | OK |
+| `poly_eval_all_div` | 665 | 0 | 0 | OK |
+| `poly_eval_single_support` | 679 | 0 | 0 | OK |
+| `pin_two_pow_db_mod_p` | 711 | 0 | 0 | OK |
+| `gcd_q_not_p` | 721 | 0 | 0 | OK |
+| `powm_div_cong` | 748 | 0 | 0 | OK |
+| `finite_support_cases` | 762 | 0 | 0 | OK |
+| `short_root_poly_some_coeff_splits` | 786 | 0 | 0 | OK |
+| `pin_crt_root_poly_is_short` | 881 | 0 | 0 | OK |
+| `pin_crt_root_poly_short_splits` | 885 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 
