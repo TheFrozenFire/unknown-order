@@ -45,9 +45,9 @@ Proof.
 Qed.
 
 Theorem shape_monomial_k2_pin :
-  powm pin_y 2 pin_N = 174 /\
-  powm 174 pin_e pin_N <> pin_y /\
-  powm pin_y pin_y_ord pin_N = 1.
+  powm pin187_y 2 pin187_N = 174 /\
+  powm 174 pin187_e pin187_N <> pin187_y /\
+  powm pin187_y pin187_y_ord pin187_N = 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 (** ** 2. Inverse [x = y^{-1}] *)
@@ -57,23 +57,23 @@ Theorem shape_inverse_of_36_residual_shaped :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem shape_inverse_of_generator :
-  (powm pin_g (pin_lam - 1) pin_N * pin_g) mod pin_N = 1 /\
-  pin_lam - 1 + 1 = pin_lam.
+  (powm pin187_g (pin187_lam - 1) pin187_N * pin187_g) mod pin187_N = 1 /\
+  pin187_lam - 1 + 1 = pin187_lam.
 Proof. vm_compute. split; [reflexivity | lia]. Qed.
 
 Theorem shape_inverse_generator_miller :
-  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
-  Problem_Factor pin_N pin_p.
+  Z.gcd (pin187_sqrt1_mixed - 1) pin187_N = pin187_p /\
+  Problem_Factor pin187_N pin187_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin187_q. reflexivity.
 Qed.
 
 (** ** 3. Affine identity [x = a y + b] for all [y] *)
 
 Theorem shape_affine_identity_forbidden :
   nth 1%nat (poly_Pe_minus_X poly_X 3%nat) 0 = -1 /\
-  ~ (pin_N | -1).
+  ~ (pin187_N | -1).
 Proof.
   split.
   - apply X3_minus_X_nth1.
@@ -152,8 +152,8 @@ Qed.
 Theorem shape_fr_small_integer :
   4 * 4 * 4 = 64 /\
   5 * 5 * 5 = 125 /\
-  64 < pin_N /\
-  125 < pin_N /\
+  64 < pin187_N /\
+  125 < pin187_N /\
   5 * 5 * 5 - 4 * 4 * 4 = 3 * 1 * 4 * 5 + 1.
 Proof. repeat split; lia. Qed.
 
@@ -163,23 +163,23 @@ Theorem shape_fr_cube_gap_small :
 Proof. apply fr_cube_gap. Qed.
 
 Theorem shape_fr_residual_not_integer_cube :
-  pin_x * pin_x * pin_x = 74088 /\
-  74088 > pin_N /\
-  powm pin_x pin_e pin_N = pin_y /\
-  74088 <> pin_y.
+  pin187_x * pin187_x * pin187_x = 74088 /\
+  74088 > pin187_N /\
+  powm pin187_x pin187_e pin187_N = pin187_y /\
+  74088 <> pin187_y.
 Proof. vm_compute. repeat split; lia || discriminate. Qed.
 
 Theorem shape_fr_reduced_offset_not_integer :
-  powm pin_x pin_e pin_N = pin_y /\
-  pin_x * pin_x * pin_x <> pin_y.
+  powm pin187_x pin187_e pin187_N = pin187_y /\
+  pin187_x * pin187_x * pin187_x <> pin187_y.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 (** ** 6. Chaum-blind: sees [y r^e], returns [x r] *)
 
 Theorem shape_chaum_unblind :
-  rsa_unblind rsa_test (rsa_dec rsa_test (rsa_blind rsa_test pin_y 2))
-    ((pin_N + 1) / 2) =
-    rsa_dec rsa_test pin_y.
+  rsa_unblind rsa_test (rsa_dec rsa_test (rsa_blind rsa_test pin187_y 2))
+    ((pin187_N + 1) / 2) =
+    rsa_dec rsa_test pin187_y.
 Proof.
   apply chaum_unblind_is_raw_sign.
   - vm_compute. reflexivity.
@@ -187,11 +187,11 @@ Proof.
 Qed.
 
 Theorem shape_chaum_recovers_cube_root :
-  rsa_dec rsa_test pin_y = pin_x.
+  rsa_dec rsa_test pin187_y = pin187_x.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem shape_chaum_e_is_protocol :
-  rsa_e rsa_test = pin_e.
+  rsa_e rsa_test = pin187_e.
 Proof. reflexivity. Qed.
 
 (** ** 7. Jacobi-discrete [e(y) ∈ {3,5}] *)
@@ -200,22 +200,22 @@ Definition jacobi_discrete_e (y p q : Z) : Z :=
   if jacobi_N y p q =? 1 then 3 else 5.
 
 Theorem shape_jacobi_e_on_square :
-  jacobi_discrete_e pin_y pin_p pin_q = 3 /\
-  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
-Proof. split; [vm_compute; reflexivity | apply srsa_residual_pin]. Qed.
+  jacobi_discrete_e pin187_y pin187_p pin187_q = 3 /\
+  srsa_residual_leaf pin187_N pin187_lam pin187_y pin187_x pin187_e.
+Proof. split; [vm_compute; reflexivity | apply srsa_residual_pin187]. Qed.
 
 Theorem shape_jacobi_e_on_nonsquare :
-  jacobi_discrete_e 2 pin_p pin_q = 5 /\
-  Z.gcd 2 pin_lam = 2 /\
-  Z.gcd 2 pin_lam <> 1.
+  jacobi_discrete_e 2 pin187_p pin187_q = 5 /\
+  Z.gcd 2 pin187_lam = 2 /\
+  Z.gcd 2 pin187_lam <> 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 (** ** 8. Extra annihilator output [M] with [y^M ≡ 1] *)
 
 Theorem shape_short_period_of_y_no_split :
-  powm pin_y pin_y_ord pin_N = 1 /\
-  Z.gcd (powm pin_y pin_y_ord pin_N - 1) pin_N = pin_N /\
-  ~ Problem_Factor pin_N pin_N.
+  powm pin187_y pin187_y_ord pin187_N = 1 /\
+  Z.gcd (powm pin187_y pin187_y_ord pin187_N - 1) pin187_N = pin187_N /\
+  ~ Problem_Factor pin187_N pin187_N.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
@@ -223,41 +223,41 @@ Proof.
 Qed.
 
 Theorem shape_lambda_quality_miller :
-  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
-  Problem_Factor pin_N pin_p.
+  Z.gcd (pin187_sqrt1_mixed - 1) pin187_N = pin187_p /\
+  Problem_Factor pin187_N pin187_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin187_q. reflexivity.
 Qed.
 
 (** ** 9. Extra [d] with [e d ≡ 1 (mod λ)] *)
 
 Theorem shape_ed_minus_one_is_lambda :
-  (pin_e * pin_d) mod pin_lam = 1 /\
-  (pin_e * pin_d) mod pin_lam = 1.
+  (pin187_e * pin187_d) mod pin187_lam = 1 /\
+  (pin187_e * pin187_d) mod pin187_lam = 1.
 Proof. split; reflexivity. Qed.
 
 Theorem shape_ed_miller :
-  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
-  Problem_Factor pin_N pin_p.
+  Z.gcd (pin187_sqrt1_mixed - 1) pin187_N = pin187_p /\
+  Problem_Factor pin187_N pin187_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin187_q. reflexivity.
 Qed.
 
 (** ** 10. Euler inverse modulo [N−1], not [λ] *)
 
 Theorem shape_e3_not_invertible_mod_Nminus1 :
-  Z.gcd pin_e (pin_N - 1) = 3 /\
-  Z.gcd pin_e (pin_N - 1) <> 1.
+  Z.gcd pin187_e (pin187_N - 1) = 3 /\
+  Z.gcd pin187_e (pin187_N - 1) <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem shape_wrong_euler_inv :
-  Z.gcd pin_p (pin_N - 1) = 1 /\
-  pin_N mod (pin_N - 1) = 1 /\
-  powm pin_y pin_q pin_N = 53 /\
-  powm pin_y pin_d pin_N = pin_x /\
-  53 <> pin_x.
+  Z.gcd pin187_p (pin187_N - 1) = 1 /\
+  pin187_N mod (pin187_N - 1) = 1 /\
+  powm pin187_y pin187_q pin187_N = 53 /\
+  powm pin187_y pin187_d pin187_N = pin187_x /\
+  53 <> pin187_x.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 (** ** 11. CRT-tape: [x = CRT(x_p, x_q)] *)
@@ -283,11 +283,11 @@ Qed.
 (** ** 12. Miller on [e−1] against the challenge [y] *)
 
 Theorem shape_miller_e11_on_y_splits :
-  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
-  Problem_Factor pin_N pin_p.
+  Z.gcd (pin187_sqrt1_mixed - 1) pin187_N = pin187_p /\
+  Problem_Factor pin187_N pin187_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin187_q. reflexivity.
 Qed.
 
 Theorem shape_miller_e3_on_y_survives :
@@ -303,46 +303,46 @@ Proof. apply srsa_residual_pin. Qed.
     for [d=27].  Cross-confirmed by [cas/142]. *)
 
 Theorem shape_public_chain_e3 :
-  pin_e = 2 + 1 /\
-  powm pin_y 2 pin_N = 174 /\
-  (174 * pin_y) mod pin_N = 93 /\
-  93 <> pin_x /\
-  powm 93 pin_e pin_N <> pin_y.
+  pin187_e = 2 + 1 /\
+  powm pin187_y 2 pin187_N = 174 /\
+  (174 * pin187_y) mod pin187_N = 93 /\
+  93 <> pin187_x /\
+  powm 93 pin187_e pin187_N <> pin187_y.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem shape_trapdoor_chain_d27 :
-  pin_d = 16 + 8 + 2 + 1 /\
-  powm pin_y pin_d pin_N = pin_x.
+  pin187_d = 16 + 8 + 2 + 1 /\
+  powm pin187_y pin187_d pin187_N = pin187_x.
 Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem shape_poly_x_quadratic :
-  poly_eval [1; 0; 1] pin_y = 1297 /\
-  1297 mod pin_N = 175 /\
-  powm 175 pin_e pin_N = 142 /\
-  142 <> pin_y /\
-  Z.gcd (142 - pin_y) pin_N = 1.
+  poly_eval [1; 0; 1] pin187_y = 1297 /\
+  1297 mod pin187_N = 175 /\
+  powm 175 pin187_e pin187_N = 142 /\
+  142 <> pin187_y /\
+  Z.gcd (142 - pin187_y) pin187_N = 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem shape_public_bases_2_3 :
-  (2 * 3) mod pin_N = 6 /\
-  powm 6 pin_e pin_N = 29 /\
-  29 <> pin_y /\
-  powm 2 pin_e pin_N = 8 /\
-  8 <> pin_x /\
-  powm 2 pin_d pin_N = 161 /\
-  161 <> pin_x.
+  (2 * 3) mod pin187_N = 6 /\
+  powm 6 pin187_e pin187_N = 29 /\
+  29 <> pin187_y /\
+  powm 2 pin187_e pin187_N = 8 /\
+  8 <> pin187_x /\
+  powm 2 pin187_d pin187_N = 161 /\
+  161 <> pin187_x.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem shape_gcdfree_bounded_from_y :
-  pin_y <> pin_x /\
-  (pin_y * pin_y) mod pin_N = 174 /\
-  174 <> pin_x /\
-  (174 * pin_y) mod pin_N = 93 /\
-  93 <> pin_x.
+  pin187_y <> pin187_x /\
+  (pin187_y * pin187_y) mod pin187_N = 174 /\
+  174 <> pin187_x /\
+  (174 * pin187_y) mod pin187_N = 93 /\
+  93 <> pin187_x.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem shape_public_exp_not_membership :
-  powm pin_x pin_y_ord pin_N = 1 /\
-  powm pin_x (pin_N - 1) pin_N = 64 /\
+  powm pin187_x pin187_y_ord pin187_N = 1 /\
+  powm pin187_x (pin187_N - 1) pin187_N = 64 /\
   64 <> 1.
 Proof. vm_compute. repeat split; discriminate. Qed.

@@ -24,15 +24,15 @@ Open Scope Z_scope.
 (** ** Pin geometry of [N] and of [⟨2⟩] *)
 
 Theorem residual_phi_over_lambda :
-  pin_phi / pin_lam = pin_phi / pin_lam.
+  pin187_phi / pin187_lam = pin187_phi / pin187_lam.
 Proof. reflexivity. Qed.
 
 Theorem residual_N_mod_8 :
-  pin_N mod 2 = 1.
+  pin187_N mod 2 = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_bitlength_N :
-  2 <= pin_N.
+  2 <= pin187_N.
 Proof. lia. Qed.
 
 Theorem residual_v2_N_minus_1 :
@@ -42,7 +42,7 @@ Proof. split; reflexivity. Qed.
 
 Theorem residual_units_not_cyclic :
   Z.gcd 10 16 = 2 /\
-  pin_lam <> pin_phi.
+  pin187_lam <> pin187_phi.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_mod4_shape :
@@ -51,7 +51,7 @@ Theorem residual_mod4_shape :
 Proof. split; reflexivity. Qed.
 
 Theorem residual_N_mod_8_two_sylow :
-  pin_N mod 8 = 3.
+  pin187_N mod 8 = 3.
 Proof. reflexivity. Qed.
 
 Theorem residual_y_to_lambda :
@@ -63,8 +63,8 @@ Theorem residual_y_to_phi :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_ord2_is_40 :
-  powm 2 pin_y_ord pin_N = 1 /\
-  powm 2 20 pin_N <> 1.
+  powm 2 pin187_y_ord pin187_N = 1 /\
+  powm 2 20 pin187_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_phi_is_product :
@@ -83,9 +83,9 @@ Theorem residual_x_in_cyc_y :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_x_generates :
-  powm pin_x pin_y_ord pin_N = 1 /\
-  powm pin_x 20 pin_N = pin_sqrt1_mixed /\
-  pin_sqrt1_mixed <> 1.
+  powm pin187_x pin187_y_ord pin187_N = 1 /\
+  powm pin187_x 20 pin187_N = pin187_sqrt1_mixed /\
+  pin187_sqrt1_mixed <> 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem residual_x_is_y_to_27 :
@@ -94,9 +94,9 @@ Theorem residual_x_is_y_to_27 :
 Proof. split; [vm_compute; reflexivity | reflexivity]. Qed.
 
 Theorem residual_cube_root_of_1 :
-  powm 1 pin_e pin_N = 1 /\
-  powm pin_sqrt1_mixed pin_e pin_N = pin_sqrt1_mixed /\
-  pin_sqrt1_mixed <> 1.
+  powm 1 pin187_e pin187_N = 1 /\
+  powm pin187_sqrt1_mixed pin187_e pin187_N = pin187_sqrt1_mixed /\
+  pin187_sqrt1_mixed <> 1.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem residual_unique_unit_cube :
@@ -122,8 +122,8 @@ Theorem residual_crt_e_inverse :
 Proof. repeat split; reflexivity. Qed.
 
 Theorem residual_five_divides_lambda :
-  Z.gcd 2 pin_lam = 2 /\
-  Z.gcd 2 pin_lam <> 1.
+  Z.gcd 2 pin187_lam = 2 /\
+  Z.gcd 2 pin187_lam <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_local_squares :
@@ -139,14 +139,14 @@ Theorem residual_qr_both_sides :
 Proof. split; reflexivity. Qed.
 
 Theorem residual_not_in_ltwo :
-  powm 2 pin_y_ord pin_N = 1 /\
-  powm 2 1 pin_N <> pin_x /\
-  powm 2 20 pin_N <> pin_x.
+  powm 2 pin187_y_ord pin187_N = 1 /\
+  powm 2 1 pin187_N <> pin187_x /\
+  powm 2 20 pin187_N <> pin187_x.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem residual_in_lthree_and_lfive :
-  powm pin_g pin_x pin_N = pin_x /\
-  powm 5 34 pin_N = pin_x.
+  powm pin187_g pin187_x pin187_N = pin187_x /\
+  powm 5 34 pin187_N = pin187_x.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_local_cube_mod_p :
@@ -173,11 +173,11 @@ Theorem residual_x_mod_8 :
 Proof. reflexivity. Qed.
 
 Theorem residual_x_minus_1_prime :
-  Z.gcd 41 pin_N = 1.
+  Z.gcd 41 pin187_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_x_plus_1_prime :
-  Z.gcd 43 pin_N = 1.
+  Z.gcd 43 pin187_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_sixteen_generators :
@@ -185,35 +185,35 @@ Theorem residual_sixteen_generators :
 Proof. reflexivity. Qed.
 
 Theorem residual_even_k_not_generator :
-  Z.gcd (pin_sqrt1_mixed - 1) pin_N = pin_p /\
-  Problem_Factor pin_N pin_p.
+  Z.gcd (pin187_sqrt1_mixed - 1) pin187_N = pin187_p /\
+  Problem_Factor pin187_N pin187_p.
 Proof.
   split; [vm_compute; reflexivity|].
-  unfold Problem_Factor. split; [lia|]. exists pin_q. reflexivity.
+  unfold Problem_Factor. split; [lia|]. exists pin187_q. reflexivity.
 Qed.
 
 Theorem residual_y_inv_generator :
-  powm pin_y 39 pin_N = 26 /\
-  (pin_y * 26) mod pin_N = 1.
+  powm pin187_y 39 pin187_N = 26 /\
+  (pin187_y * 26) mod pin187_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_x_inv_generator :
-  powm pin_y 13 pin_N = 49 /\
-  (pin_x * 49) mod pin_N = 1.
+  powm pin187_y 13 pin187_N = 49 /\
+  (pin187_x * 49) mod pin187_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_y29 :
-  powm pin_y 29 pin_N = 15.
+  powm pin187_y 29 pin187_N = 15.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_y3_generator :
-  powm pin_y pin_e pin_N = 93 /\
-  Z.gcd pin_e pin_y_ord = 1.
+  powm pin187_y pin187_e pin187_N = 93 /\
+  Z.gcd pin187_e pin187_y_ord = 1.
 Proof. split; [vm_compute; reflexivity | reflexivity]. Qed.
 
 Theorem residual_y9_generator :
-  powm pin_y 9 pin_N = 70 /\
-  Z.gcd 9 pin_y_ord = 1.
+  powm pin187_y 9 pin187_N = 70 /\
+  Z.gcd 9 pin187_y_ord = 1.
 Proof. split; [vm_compute; reflexivity | reflexivity]. Qed.
 
 Theorem residual_five_divides_ord :
@@ -225,7 +225,7 @@ Theorem residual_eight_divides_ord :
 Proof. exists 5. reflexivity. Qed.
 
 Theorem residual_three_index_two :
-  powm pin_g pin_lam pin_N = 1.
+  powm pin187_g pin187_lam pin187_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_dl_even :
@@ -246,7 +246,7 @@ Theorem residual_ord_divides_lam :
 Proof. exists 2. reflexivity. Qed.
 
 Theorem residual_y_to_ord :
-  powm pin_y pin_y_ord pin_N = 1.
+  powm pin187_y pin187_y_ord pin187_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_phi_over_lam :
@@ -283,13 +283,13 @@ Theorem residual_lambda_lcm :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_y_to_e_inv :
-  powm pin_y pin_d pin_N = pin_x /\
+  powm pin187_y pin187_d pin187_N = pin187_x /\
   Z.gcd 27 40 = 1 /\
-  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+  srsa_residual_leaf pin187_N pin187_lam pin187_y pin187_x pin187_e.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [reflexivity|].
-  apply srsa_residual_pin.
+  apply srsa_residual_pin187.
 Qed.
 
 Theorem residual_k1_is_y :
@@ -297,8 +297,8 @@ Theorem residual_k1_is_y :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem residual_k3_is_y_cube :
-  powm pin_y pin_e pin_N = 93 /\
-  93 <> pin_x.
+  powm pin187_y pin187_e pin187_N = 93 /\
+  93 <> pin187_x.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_even_k_shares_ord :
@@ -307,18 +307,18 @@ Theorem residual_even_k_shares_ord :
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_crt_is_residual_x :
-  9 + pin_p * 3 = pin_x /\
-  powm pin_x pin_e pin_N = pin_y.
+  9 + pin187_p * 3 = pin187_x /\
+  powm pin187_x pin187_e pin187_N = pin187_y.
 Proof. split; [reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem residual_ratio_five_torsion :
-  (pin_x * 15) mod pin_N = 69 /\
-  powm 69 5 pin_N = 1.
+  (pin187_x * 15) mod pin187_N = 69 /\
+  powm 69 5 pin187_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_ratio_y4 :
-  (pin_x * 53) mod pin_N = 169 /\
-  powm pin_y 4 pin_N = 169.
+  (pin187_x * 53) mod pin187_N = 169 /\
+  powm pin187_y 4 pin187_N = 169.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_ord_5_smooth :
@@ -330,16 +330,16 @@ Theorem residual_index_lam_over_ord :
 Proof. reflexivity. Qed.
 
 Theorem residual_x_order_40_not_20 :
-  powm pin_x pin_y_ord pin_N = 1 /\
-  powm pin_x 20 pin_N <> 1.
+  powm pin187_x pin187_y_ord pin187_N = 1 /\
+  powm pin187_x 20 pin187_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_three_not_in_cyc_y :
-  powm pin_g pin_y_ord pin_N <> 1.
+  powm pin187_g pin187_y_ord pin187_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem residual_three_full_lambda :
-  powm pin_g pin_lam pin_N = 1.
+  powm pin187_g pin187_lam pin187_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_y_even_power_of_3 :
@@ -347,7 +347,7 @@ Theorem residual_y_even_power_of_3 :
 Proof. reflexivity. Qed.
 
 Theorem residual_product_primaries :
-  (155 * 69) mod pin_N = pin_y.
+  (155 * 69) mod pin187_N = pin187_y.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_cube_of_x :
@@ -359,14 +359,14 @@ Theorem residual_y_to_27 :
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_jacobi_x_vs_2 :
-  pin_N mod 8 = 3 /\
-  pin_x mod pin_p = 9 /\
+  pin187_N mod 8 = 3 /\
+  pin187_x mod pin187_p = 9 /\
   3 * 3 = 9.
 Proof. repeat split; reflexivity. Qed.
 
 Theorem residual_x_not_in_lten :
-  powm 10 1 pin_N <> pin_x /\
-  powm 10 8 pin_N <> pin_x.
+  powm 10 1 pin187_N <> pin187_x /\
+  powm 10 8 pin187_N <> pin187_x.
 Proof. vm_compute. split; discriminate. Qed.
 
 Theorem residual_pminus1_qminus1 :
@@ -383,8 +383,8 @@ Theorem residual_index_four :
 Proof. reflexivity. Qed.
 
 Theorem residual_x_order_40 :
-  powm pin_x pin_y_ord pin_N = 1 /\
-  powm pin_x 16 pin_N <> 1.
+  powm pin187_x pin187_y_ord pin187_N = 1 /\
+  powm pin187_x 16 pin187_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_v2_ord_x :
@@ -398,12 +398,12 @@ Theorem residual_v2_lam :
 Proof. split; reflexivity. Qed.
 
 Theorem residual_x_generates_5_sylow :
-  powm pin_x 8 pin_N = 69 /\
-  powm 69 5 pin_N = 1.
+  powm pin187_x 8 pin187_N = 69 /\
+  powm 69 5 pin187_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_N_mod_8_for_2 :
-  pin_N mod 8 = 3.
+  pin187_N mod 8 = 3.
 Proof. reflexivity. Qed.
 
 Theorem residual_ten_jacobi_plus :
@@ -411,8 +411,8 @@ Theorem residual_ten_jacobi_plus :
 Proof. reflexivity. Qed.
 
 Theorem residual_ten_not_ord40 :
-  powm 10 16 pin_N = 1 /\
-  powm 10 8 pin_N <> 1.
+  powm 10 16 pin187_N = 1 /\
+  powm 10 8 pin187_N <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_21_mod_8 :
@@ -420,7 +420,7 @@ Theorem residual_21_mod_8 :
 Proof. reflexivity. Qed.
 
 Theorem residual_ltwo_ord40 :
-  powm 2 pin_y_ord pin_N = 1.
+  powm 2 pin187_y_ord pin187_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem residual_two_ne_y :
@@ -451,23 +451,23 @@ Theorem residual_phi40_generators :
 Proof. repeat split; reflexivity. Qed.
 
 Theorem residual_coset_10_no_split :
-  Z.gcd (pin_x - 10) pin_N = 1 /\
-  powm 10 16 pin_N = 1.
+  Z.gcd (pin187_x - 10) pin187_N = 1 /\
+  powm 10 16 pin187_N = 1.
 Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem residual_coset_2_no_split :
-  Z.gcd (pin_x - 2) pin_N = 1 /\
-  powm 2 pin_y_ord pin_N = 1 /\
-  2 <> pin_y.
+  Z.gcd (pin187_x - 2) pin187_N = 1 /\
+  powm 2 pin187_y_ord pin187_N = 1 /\
+  2 <> pin187_y.
 Proof. vm_compute. repeat split; discriminate. Qed.
 
 Theorem residual_x16_not_1 :
-  powm pin_x 16 pin_N = 86 /\
+  powm pin187_x 16 pin187_N = 86 /\
   86 <> 1.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 Theorem residual_x8_not_1 :
-  powm pin_x 8 pin_N <> 1.
+  powm pin187_x 8 pin187_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem residual_lam_bitlength :
@@ -485,9 +485,9 @@ Theorem residual_161_mod_8 :
 Proof. split; reflexivity. Qed.
 
 Theorem residual_x_not_ord16 :
-  powm pin_x 16 pin_N <> 1.
+  powm pin187_x 16 pin187_N <> 1.
 Proof. vm_compute. discriminate. Qed.
 
 Theorem residual_x_not_ord10 :
-  powm pin_x 10 pin_N <> 1.
+  powm pin187_x 10 pin187_N <> 1.
 Proof. vm_compute. discriminate. Qed.

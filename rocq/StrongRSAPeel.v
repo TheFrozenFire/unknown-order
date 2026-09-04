@@ -261,6 +261,17 @@ Proof.
   intros [k Hk]. nia.
 Qed.
 
+Theorem srsa_residual_pin187 :
+  srsa_residual_leaf pin187_N pin187_lam pin187_y pin187_x pin187_e.
+Proof.
+  unfold srsa_residual_leaf, Problem_StrongRSA.
+  split; [vm_compute; reflexivity|].
+  split; [split; [lia|]; vm_compute; reflexivity|].
+  split; [exists 1; lia|].
+  split; [vm_compute; reflexivity|].
+  intros [k Hk]. nia.
+Qed.
+
 (** A residual solver returns a leftover pair for every unit [y].
     A single leftover pair does not always split ([matching_247_*]).
     Whether the *solver* constructs a factor is unproved and on-goal.

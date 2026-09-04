@@ -502,7 +502,7 @@ Definition pin_Fq_units_of_N : list Z :=
   filter (fun a => negb (a =? pin_p)) (units_mod_prime pin_q).
 
 Lemma pin_Fq_units_of_N_length :
-  length pin_Fq_units_of_N = 15%nat.
+  length pin_Fq_units_of_N = Z.to_nat (pin_q - 2).
 Proof. vm_compute. reflexivity. Qed.
 
 Lemma pairwise_distinct_mod_filter :
@@ -548,7 +548,7 @@ Proof.
 Qed.
 
 Lemma pin_inv3_q_lt_window :
-  (Z.to_nat pin_inv3_q < 15)%nat.
+  (Z.to_nat pin_inv3_q < Z.to_nat (pin_q - 2))%nat.
 Proof. vm_compute. lia. Qed.
 
 Lemma nth_poly_sub :

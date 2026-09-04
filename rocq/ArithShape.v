@@ -26,22 +26,22 @@ Open Scope Z_scope.
 (** ** 1. Newton iteration in [(Z/NZ)] *)
 
 Theorem arith_newton_inv3 :
-  (pin_e * pin_d) mod pin_lam = 1.
+  (pin187_e * pin187_d) mod pin187_lam = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem arith_newton_from_one :
-  powm pin_x pin_e pin_N = pin_y /\
-  pin_e <> pin_y.
+  powm pin187_x pin187_e pin187_N = pin187_y /\
+  pin187_e <> pin187_y.
 Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 
 (** ** 2. [e | (y−1)] *)
 
 Theorem arith_e5_divides_yminus1 :
-  (5 | 35) /\ Z.gcd 2 pin_lam = 2.
+  (5 | 35) /\ Z.gcd 2 pin187_lam = 2.
 Proof. split; [exists 7; reflexivity | reflexivity]. Qed.
 
 Theorem arith_e7_divides_yminus1 :
-  (7 | 35) /\ Z.gcd pin_e pin_lam = 1.
+  (7 | 35) /\ Z.gcd pin187_e pin187_lam = 1.
 Proof. split; [exists 5; reflexivity | reflexivity]. Qed.
 
 Theorem arith_e7_residual :
@@ -55,9 +55,9 @@ Theorem arith_xy_period_residual :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem arith_xy_period_no_split :
-  powm pin_y pin_y_ord pin_N = 1 /\
-  Z.gcd (powm pin_y pin_y_ord pin_N - 1) pin_N = pin_N /\
-  ~ Problem_Factor pin_N pin_N.
+  powm pin187_y pin187_y_ord pin187_N = 1 /\
+  Z.gcd (powm pin187_y pin187_y_ord pin187_N - 1) pin187_N = pin187_N /\
+  ~ Problem_Factor pin187_N pin187_N.
 Proof.
   split; [vm_compute; reflexivity|].
   split; [vm_compute; reflexivity|].
@@ -67,7 +67,7 @@ Qed.
 (** ** 4. Fermat-on-the-witness [gcd(x−y, N)] *)
 
 Theorem arith_witness_gap_no_split :
-  Z.gcd (pin_x - pin_y) pin_N = 1.
+  Z.gcd (pin187_x - pin187_y) pin187_N = 1.
 Proof. reflexivity. Qed.
 
 (** ** 5. Takagi [N=p²q], Hensel tape *)
@@ -89,7 +89,7 @@ Proof. unfold Problem_Factor. split; [lia|]. exists 15. reflexivity. Qed.
 (** ** 6. Public scaling [x = 2y] *)
 
 Theorem arith_double_y_not_root :
-  powm (2 * pin_y) pin_e pin_N <> pin_y.
+  powm (2 * pin187_y) pin187_e pin187_N <> pin187_y.
 Proof. vm_compute. discriminate. Qed.
 
 (** ** 7. [e = nextprime(y)] *)
@@ -110,9 +110,9 @@ Proof.
 Qed.
 
 Theorem arith_nextprime_e37 :
-  pin_y < pin_y + 1 /\
-  Z.gcd pin_e pin_lam = 1 /\
-  (pin_e * pin_d) mod pin_lam = 1.
+  pin187_y < pin187_y + 1 /\
+  Z.gcd pin187_e pin187_lam = 1 /\
+  (pin187_e * pin187_d) mod pin187_lam = 1.
 Proof. split; [lia|]. split; [vm_compute; reflexivity | vm_compute; reflexivity]. Qed.
 
 Theorem arith_nextprime_residual :
@@ -126,11 +126,11 @@ Proof. apply srsa_residual_pin. Qed.
 (** ** 8. Continued fraction of [y/N] *)
 
 Theorem arith_cf_euclidean :
-  pin_N = pin_p * pin_q.
+  pin187_N = pin187_p * pin187_q.
 Proof. reflexivity. Qed.
 
 Theorem arith_cf_convergents_not_root :
-  powm pin_x pin_e pin_N = pin_y.
+  powm pin187_x pin187_e pin187_N = pin187_y.
 Proof. vm_compute. reflexivity. Qed.
 
 (** ** 9. Same [x], two coprime moduli *)
@@ -167,26 +167,26 @@ Qed.
 
 Theorem arith_composite_e15_shares_lambda :
   15 = 3 * 5 /\
-  Z.gcd 2 pin_lam = 2 /\
-  Z.gcd 2 pin_lam <> 1.
+  Z.gcd 2 pin187_lam = 2 /\
+  Z.gcd 2 pin187_lam <> 1.
 Proof. split; [reflexivity|]. split; [reflexivity | discriminate]. Qed.
 
 (** ** 12. DL of [y] in public base [2] *)
 
 Fixpoint arith_pow2_hits (fuel : nat) (y : Z) : bool :=
   match fuel with
-  | O => powm 2 0 pin_N =? y
+  | O => powm 2 0 pin187_N =? y
   | S n =>
-      if powm 2 (Z.of_nat (S n)) pin_N =? y then true
+      if powm 2 (Z.of_nat (S n)) pin187_N =? y then true
       else arith_pow2_hits n y
   end.
 
 Theorem arith_36_not_in_ltwo :
-  arith_pow2_hits 8%nat pin_y = false.
+  arith_pow2_hits 8%nat pin187_y = false.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem arith_two_and_thirtysix_same_order_period :
-  powm 2 pin_lam pin_N = 1 /\
-  powm pin_y pin_lam pin_N = 1 /\
-  powm 2 1 pin_N <> pin_y.
+  powm 2 pin187_lam pin187_N = 1 /\
+  powm pin187_y pin187_lam pin187_N = 1 /\
+  powm 2 1 pin187_N <> pin187_y.
 Proof. vm_compute. repeat split; try reflexivity; try discriminate. Qed.

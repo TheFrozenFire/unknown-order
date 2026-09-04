@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2442 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2461 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2442 results across 119 files.
+Captured for 2461 results across 119 files.
 
 Counts:
 
@@ -1476,13 +1476,31 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `Zprime_sqrt` | 10 | 0 | 0 | OK |
-| `pin_N_pos` | 99 | 0 | 0 | OK |
-| `pin_N_gt_1` | 102 | 0 | 0 | OK |
-| `pin_p_neq_q` | 105 | 0 | 0 | OK |
-| `pin_p_lt_q` | 108 | 0 | 0 | OK |
-| `pin_p_prime` | 111 | 0 | 0 | OK |
-| `pin_q_prime` | 121 | 0 | 0 | OK |
+| `Zprime_sqrt` | 11 | 0 | 0 | OK |
+| `pin187_N_pos` | 120 | 0 | 0 | OK |
+| `pin187_N_gt_1` | 123 | 0 | 0 | OK |
+| `pin187_p_neq_q` | 126 | 0 | 0 | OK |
+| `pin187_p_lt_q` | 129 | 0 | 0 | OK |
+| `pin187_p_prime` | 132 | 0 | 0 | OK |
+| `pin187_q_prime` | 142 | 0 | 0 | OK |
+| `pin1363_N_pos` | 210 | 0 | 0 | OK |
+| `pin1363_N_gt_1` | 213 | 0 | 0 | OK |
+| `pin1363_p_neq_q` | 216 | 0 | 0 | OK |
+| `pin1363_p_lt_q` | 219 | 0 | 0 | OK |
+| `pin1363_p_prime` | 222 | 0 | 0 | OK |
+| `pin1363_q_prime` | 232 | 0 | 0 | OK |
+| `pin2491_N_pos` | 300 | 0 | 0 | OK |
+| `pin2491_N_gt_1` | 303 | 0 | 0 | OK |
+| `pin2491_p_neq_q` | 306 | 0 | 0 | OK |
+| `pin2491_p_lt_q` | 309 | 0 | 0 | OK |
+| `pin2491_p_prime` | 312 | 0 | 0 | OK |
+| `pin2491_q_prime` | 322 | 0 | 0 | OK |
+| `pin_p_prime` | 439 | 0 | 0 | OK |
+| `pin_q_prime` | 442 | 0 | 0 | OK |
+| `pin_N_pos` | 445 | 0 | 0 | OK |
+| `pin_N_gt_1` | 448 | 0 | 0 | OK |
+| `pin_p_neq_q` | 451 | 0 | 0 | OK |
+| `pin_p_lt_q` | 454 | 0 | 0 | OK |
 
 ## PollardP1.v
 
@@ -2793,19 +2811,20 @@ Counts:
 | `srsa_safeprime_miller_gcd` | 233 | 0 | 0 | OK |
 | `srsa_safeprime_miller_factors` | 237 | 0 | 0 | OK |
 | `srsa_residual_pin` | 253 | 0 | 0 | OK |
-| `srsa_fixed_e_rerand` | 280 | 0 | 0 | OK |
-| `srsa_fixed_e_rerand_pin` | 293 | 0 | 0 | OK |
-| `srsa_poly_e_not_rerand_invariant` | 300 | 0 | 0 | OK |
-| `srsa_related_y_square` | 306 | 0 | 0 | OK |
-| `srsa_related_pin` | 322 | 0 | 0 | OK |
-| `srsa_sagm_handle_unit` | 328 | 0 | 0 | OK |
-| `srsa_sagm_lambda_type_peel` | 333 | 0 | 0 | OK |
-| `srsa_sagm_product_reused` | 338 | 0 | 0 | OK |
-| `srsa_sqrt1_120_splits` | 348 | 0 | 0 | OK |
-| `srsa_minus1_no_split` | 354 | 0 | 0 | OK |
-| `srsa_120_plus_1` | 359 | 0 | 0 | OK |
-| `srsa_miller_66` | 363 | 0 | 0 | OK |
-| `srsa_four_sqrt1` | 367 | 0 | 0 | OK |
+| `srsa_residual_pin187` | 264 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand` | 291 | 0 | 0 | OK |
+| `srsa_fixed_e_rerand_pin` | 304 | 0 | 0 | OK |
+| `srsa_poly_e_not_rerand_invariant` | 311 | 0 | 0 | OK |
+| `srsa_related_y_square` | 317 | 0 | 0 | OK |
+| `srsa_related_pin` | 333 | 0 | 0 | OK |
+| `srsa_sagm_handle_unit` | 339 | 0 | 0 | OK |
+| `srsa_sagm_lambda_type_peel` | 344 | 0 | 0 | OK |
+| `srsa_sagm_product_reused` | 349 | 0 | 0 | OK |
+| `srsa_sqrt1_120_splits` | 359 | 0 | 0 | OK |
+| `srsa_minus1_no_split` | 365 | 0 | 0 | OK |
+| `srsa_120_plus_1` | 370 | 0 | 0 | OK |
+| `srsa_miller_66` | 374 | 0 | 0 | OK |
+| `srsa_four_sqrt1` | 378 | 0 | 0 | OK |
 
 ## Succinct.v
 

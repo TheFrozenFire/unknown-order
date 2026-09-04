@@ -33,8 +33,8 @@ Theorem emap_lsb_y_even :
 Proof. reflexivity. Qed.
 
 Theorem emap_e25_shares_lambda :
-  Z.gcd 25 pin_lam = 5 /\
-  Z.gcd 25 pin_lam <> 1.
+  Z.gcd 25 pin187_lam = 5 /\
+  Z.gcd 25 pin187_lam <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem emap_lambda_y_even :
@@ -79,17 +79,17 @@ Theorem emap_y_plus_1_is_nextprime :
 Proof. split; [reflexivity|]. split; [lia | reflexivity]. Qed.
 
 Theorem emap_odd_part_e9 :
-  pin_y / 4 = 9 /\
-  Z.gcd 9 pin_lam = 1.
+  pin187_y / 4 = 9 /\
+  Z.gcd 9 pin187_lam = 1.
 Proof. split; reflexivity. Qed.
 
 Theorem emap_odd_hamming_shares :
   2 * 2 + 1 = 5 /\
-  Z.gcd 2 pin_lam = 2.
+  Z.gcd 2 pin187_lam = 2.
 Proof. split; reflexivity. Qed.
 
 Theorem emap_gcd_yminus1_Nminus1 :
-  Z.gcd (pin_y - 1) (pin_N - 1) = 1.
+  Z.gcd (pin187_y - 1) (pin187_N - 1) = 1.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem emap_phi3_y_leftover_shaped :
@@ -105,7 +105,7 @@ Qed.
 Theorem emap_v2_yminus1 :
   35 mod 2 = 1 /\
   2 * 2 + 1 = 5 /\
-  Z.gcd 2 pin_lam = 2.
+  Z.gcd 2 pin187_lam = 2.
 Proof. split; [reflexivity|]. split; reflexivity. Qed.
 
 Theorem emap_mersenne_leftover :
@@ -126,18 +126,18 @@ Theorem emap_smooth_even :
 Proof. split; reflexivity. Qed.
 
 Theorem emap_e_eq_N :
-  Z.gcd pin_N pin_lam = 1 /\
-  ~ (pin_lam | (pin_N - 1)).
+  Z.gcd pin187_N pin187_lam = 1 /\
+  ~ (pin187_lam | (pin187_N - 1)).
 Proof. split; [reflexivity|]. intros [k Hk]. nia. Qed.
 
 Theorem emap_e_eq_Nminus2 :
-  Z.gcd (pin_N - 2) pin_lam = 5 /\
-  Z.gcd (pin_N - 2) pin_lam <> 1.
+  Z.gcd (pin187_N - 2) pin187_lam = 5 /\
+  Z.gcd (pin187_N - 2) pin187_lam <> 1.
 Proof. split; [vm_compute; reflexivity | discriminate]. Qed.
 
 Theorem emap_e_y_minus_1_shares :
-  Z.gcd 35 pin_lam = 5 /\
-  Z.gcd 35 pin_lam <> 1.
+  Z.gcd 35 pin187_lam = 5 /\
+  Z.gcd 35 pin187_lam <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem emap_e_two_y_plus_1 :
@@ -158,8 +158,8 @@ Theorem emap_dedekind_psi_even :
 Proof. split; reflexivity. Qed.
 
 Theorem emap_ord_y_even :
-  powm pin_y pin_y_ord pin_N = 1 /\
-  Z.even pin_y_ord = true.
+  powm pin187_y pin187_y_ord pin187_N = 1 /\
+  Z.even pin187_y_ord = true.
 Proof. split; [vm_compute; reflexivity | reflexivity]. Qed.
 
 Theorem emap_phi_N_even :
@@ -176,11 +176,11 @@ Theorem emap_e17_leftover :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem emap_e_N_plus_1_even :
-  Z.even (pin_N + 1) = true.
+  Z.even (pin187_N + 1) = true.
 Proof. reflexivity. Qed.
 
 Theorem emap_e_N_minus_1_even :
-  Z.even (pin_N - 1) = true.
+  Z.even (pin187_N - 1) = true.
 Proof. reflexivity. Qed.
 
 Theorem emap_e_lam_minus_1 :
@@ -205,8 +205,8 @@ Theorem emap_primorial_even :
 Proof. split; reflexivity. Qed.
 
 Theorem emap_fermat_5_shares :
-  Z.gcd 2 pin_lam = 2 /\
-  Z.gcd 2 pin_lam <> 1.
+  Z.gcd 2 pin187_lam = 2 /\
+  Z.gcd 2 pin187_lam <> 1.
 Proof. split; [reflexivity | discriminate]. Qed.
 
 Theorem emap_collatz_e21 :
@@ -214,8 +214,8 @@ Theorem emap_collatz_e21 :
 Proof. apply srsa_residual_pin. Qed.
 
 Theorem emap_squarefree_core_e9 :
-  pin_y / 4 = 9 /\
-  Z.gcd 9 pin_lam = 1.
+  pin187_y / 4 = 9 /\
+  Z.gcd 9 pin187_lam = 1.
 Proof. split; reflexivity. Qed.
 
 Theorem emap_e47_second_leftover :
@@ -249,7 +249,7 @@ Proof. apply srsa_residual_pin. Qed.
 
 Theorem emap_e_prime :
   Z.odd 3 = true /\
-  Z.gcd pin_e pin_lam = 1.
+  Z.gcd pin187_e pin187_lam = 1.
 Proof. split; reflexivity. Qed.
 
 Theorem emap_prime_e7 :

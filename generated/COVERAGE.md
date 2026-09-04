@@ -1714,23 +1714,41 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Pin.v`
 
-- L41: Campaign pin — numerical source of truth
-  - L66: Default semiprime
-  - L131: Residual pair on the default pin
-  - L137: Mixed square roots of 1 on [pin_N]
-  - L142: Named extra moduli (p, q, N, λ, and shared witnesses)
-  - L201: Dixon / QS witnesses on [pin_N]
-  - L220: NFS quadratics on [pin_N]
+- L42: Pins
+  - L63: pin187 — textbook inhabitant [11·17=187]
+  - L153: pin1363 — swap-test [29·47=1363]
+  - L243: pin2491 — swap-test [47·53=2491]
+  - L333: Named extra moduli
+  - L378: Campaign alias
+  - L457: Residual pair on the campaign pin
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `Zprime_sqrt` | 10 |
-| Lemma | `pin_N_pos` | 99 |
-| Lemma | `pin_N_gt_1` | 102 |
-| Lemma | `pin_p_neq_q` | 105 |
-| Lemma | `pin_p_lt_q` | 108 |
-| Lemma | `pin_p_prime` | 111 |
-| Lemma | `pin_q_prime` | 121 |
+| Lemma | `Zprime_sqrt` | 11 |
+| Lemma | `pin187_N_pos` | 120 |
+| Lemma | `pin187_N_gt_1` | 123 |
+| Lemma | `pin187_p_neq_q` | 126 |
+| Lemma | `pin187_p_lt_q` | 129 |
+| Lemma | `pin187_p_prime` | 132 |
+| Lemma | `pin187_q_prime` | 142 |
+| Lemma | `pin1363_N_pos` | 210 |
+| Lemma | `pin1363_N_gt_1` | 213 |
+| Lemma | `pin1363_p_neq_q` | 216 |
+| Lemma | `pin1363_p_lt_q` | 219 |
+| Lemma | `pin1363_p_prime` | 222 |
+| Lemma | `pin1363_q_prime` | 232 |
+| Lemma | `pin2491_N_pos` | 300 |
+| Lemma | `pin2491_N_gt_1` | 303 |
+| Lemma | `pin2491_p_neq_q` | 306 |
+| Lemma | `pin2491_p_lt_q` | 309 |
+| Lemma | `pin2491_p_prime` | 312 |
+| Lemma | `pin2491_q_prime` | 322 |
+| Lemma | `pin_p_prime` | 439 |
+| Lemma | `pin_q_prime` | 442 |
+| Lemma | `pin_N_pos` | 445 |
+| Lemma | `pin_N_gt_1` | 448 |
+| Lemma | `pin_p_neq_q` | 451 |
+| Lemma | `pin_p_lt_q` | 454 |
 
 ## `PollardP1.v`
 
@@ -3188,9 +3206,9 @@ in the Rocq tree.  Do not edit by hand.
   - L101: Even [e] is a square root
   - L149: [λ]-type: [x = y] is an annihilator
   - L244: Residual leaf (open: solver ⇒ factor is the live target)
-  - L278: Self-randomization and related queries
-  - L326: SAGM handle still peels
-  - L346: Four square roots of 1; mixed splits, [−1] does not
+  - L289: Self-randomization and related queries
+  - L337: SAGM handle still peels
+  - L357: Four square roots of 1; mixed splits, [−1] does not
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3216,19 +3234,20 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `srsa_safeprime_miller_gcd` | 233 |
 | Theorem | `srsa_safeprime_miller_factors` | 237 |
 | Theorem | `srsa_residual_pin` | 253 |
-| Theorem | `srsa_fixed_e_rerand` | 280 |
-| Theorem | `srsa_fixed_e_rerand_pin` | 293 |
-| Theorem | `srsa_poly_e_not_rerand_invariant` | 300 |
-| Theorem | `srsa_related_y_square` | 306 |
-| Theorem | `srsa_related_pin` | 322 |
-| Theorem | `srsa_sagm_handle_unit` | 328 |
-| Theorem | `srsa_sagm_lambda_type_peel` | 333 |
-| Theorem | `srsa_sagm_product_reused` | 338 |
-| Theorem | `srsa_sqrt1_120_splits` | 348 |
-| Theorem | `srsa_minus1_no_split` | 354 |
-| Theorem | `srsa_120_plus_1` | 359 |
-| Theorem | `srsa_miller_66` | 363 |
-| Theorem | `srsa_four_sqrt1` | 367 |
+| Theorem | `srsa_residual_pin187` | 264 |
+| Theorem | `srsa_fixed_e_rerand` | 291 |
+| Theorem | `srsa_fixed_e_rerand_pin` | 304 |
+| Theorem | `srsa_poly_e_not_rerand_invariant` | 311 |
+| Theorem | `srsa_related_y_square` | 317 |
+| Theorem | `srsa_related_pin` | 333 |
+| Theorem | `srsa_sagm_handle_unit` | 339 |
+| Theorem | `srsa_sagm_lambda_type_peel` | 344 |
+| Theorem | `srsa_sagm_product_reused` | 349 |
+| Theorem | `srsa_sqrt1_120_splits` | 359 |
+| Theorem | `srsa_minus1_no_split` | 365 |
+| Theorem | `srsa_120_plus_1` | 370 |
+| Theorem | `srsa_miller_66` | 374 |
+| Theorem | `srsa_four_sqrt1` | 378 |
 
 ## `Succinct.v`
 
@@ -3524,4 +3543,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2442 theorems/lemmas/corollaries/examples across 119 files._
+_2461 theorems/lemmas/corollaries/examples across 119 files._
