@@ -125,6 +125,9 @@ Constructible torsion `H` is a family parameter
 | nodiv GRA, `deg_bound ≤ d_q`, inverts every unit | denoted poly has a splitting coeff | `nodiv_gra_short_dq_splits` | high-degree tapes (`X^d`); `GInv`; residual-solver ⇒ factor |
 | monomial `X^k` inverts every unit | `e k ≡ 1 (mod λ)`; `k` is a decryption exponent; Miller on `M=ek−1` splits on height mismatch | `monomial_all_units_invert_is_trapdoor`, `miller_from_trapdoor_exponent`, `pin_miller_from_d_plus_2lam` | residual-solver ⇒ factor |
 | local inverses `d_p`, `d_q` of residual `e` | CRT recovers `d` mod `λ` | `crt_dp_dq_recover_d`, `pin_local_inverses_recover_d` | writing one local inverse; residual-solver ⇒ factor |
+| all-units invert poly, any degree | matches `X^{d_p}` on all of `𝔽_p*` (`p<q`) | `invert_all_units_local_p`, `invert_all_units_local_q` | a map that inverts units without matching the local inverse |
+| Fermat fold of an invert poly on `𝔽_p*` | class sums are `X^{d_p}` as a polynomial | `invert_all_units_fold_p_is_local_monomial` | leftover at the Fermat boundary on the `p`-side |
+| Fermat correction `p(X^{q−1}−1)` | inverts every unit; coeff `p` splits | `pin_fermat_root_poly_splits`, `pin_gcd_add_mul_N` | hiding a splitting coeff by adding a multiple of `N` |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

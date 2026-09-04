@@ -340,6 +340,16 @@ not (`monomial_all_units_invert_is_trapdoor`, CAS `167`). Miller on
 `odd_part(M)` differs from `odd_part(λ)` (`miller_from_trapdoor_exponent`,
 `pin_miller_from_d_plus_2lam`, CAS `173`). CRT of the local inverses
 recovers `d` mod `λ` (`pin_local_inverses_recover_d`, CAS `174`).
+Campaign pins have `p < q`, so every residue of `𝔽_p*` is a unit of
+`N`. An all-units invert poly matches `X^{d_p}` on that complete
+sample set, any degree (`invert_all_units_local_p`, CAS `176`).
+Fermat fold on `𝔽_p*` (coeff classes mod `p−1`) is exactly
+`X^{d_p}` as a polynomial mod `p` (`invert_all_units_fold_p`,
+CAS `177`): `p−1` samples, fold degree `< p−1`, no leftover.
+Fermat correction `p(X^{q−1}−1)` is `0` on units, so binomial plus
+that term inverts at degree `q−1` and the new coeff `p` splits
+(`pin_fermat_root_poly_splits`, CAS `178`). `N`-multiples do not
+hide a splitting gcd (`pin_gcd_add_mul_N`).
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -405,6 +415,9 @@ advice `N/17`: `PreprocessGRA.v`.
 | invert-all-units monomial `X^k` is Miller on `M=ek−1` | `miller_from_trapdoor_exponent` / `monomial_all_units_invert_miller` / `pin_miller_from_d_plus_2lam` | `MillerHeight.v`, `SrsaRootPoly.v` | `173` |
 | local inverses CRT to `d` mod `λ` | `crt_dp_dq_recover_d` / `pin_local_inverses_recover_d` / `pin_local_inv_unique_p` | `CRTRSA.v`, `SrsaRootPoly.v` | `174` |
 | short window widens to `deg < q−2`; mid-degree binomial `+ N X^{12}` splits | `short_root_poly_some_coeff_splits` / `pin_mid_root_poly_splits` | `SrsaRootPoly.v` | `175` |
+| all-units invert poly matches `X^{d_p}` on every `𝔽_p*` residue | `invert_all_units_local_p` / `pin_Fp_units_of_N_coprime` | `SrsaRootPoly.v` | `176` |
+| Fermat fold on `𝔽_p*` is `X^{d_p}` as a polynomial | `invert_all_units_fold_p` / `invert_all_units_fold_p_is_local_monomial` | `SrsaRootPoly.v` | `177` |
+| Fermat correction `p(X^{q−1}−1)` inverts and splits | `pin_fermat_root_poly_inverts_units` / `pin_fermat_root_poly_splits` / `pin_gcd_add_mul_N` | `SrsaRootPoly.v` | `178` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

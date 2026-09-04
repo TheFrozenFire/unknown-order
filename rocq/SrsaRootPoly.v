@@ -52,7 +52,8 @@ Open Scope Z_scope.
     Local inverses CRT to [d] mod [λ].  Not a proof of
     [residual_solver_constructs_factor_open_named].
     Cross-confirmed by [cas/164], [cas/165], [cas/166], [cas/172],
-    [cas/173], [cas/174], and [cas/175]. *)
+    [cas/173], [cas/174], [cas/175], [cas/176], [cas/177], and
+    [cas/178]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -1320,3 +1321,510 @@ Proof.
   - apply pin_mid_root_poly_in_window.
   - apply pin_mid_root_poly_inverts_units.
 Qed.
+
+(** ** Local match on [𝔽_p*], any degree
+
+    Campaign pins have [p < q], so every residue of [𝔽_p*] is a
+    unit of [Z/NZ].  An all-units invert poly matches [X^{d_p}]
+    on that complete sample set, with no degree bound.
+    Cross-confirmed by [cas/176]. *)
+
+Theorem pin_p_lt_q : pin_p < pin_q.
+Proof. lia. Qed.
+
+Definition pin_Fp_units_of_N : list Z := units_mod_prime pin_p.
+
+Lemma pin_Fp_units_of_N_length :
+  length pin_Fp_units_of_N = Z.to_nat (pin_p - 1).
+Proof. apply units_mod_prime_length. lia. Qed.
+
+Lemma pin_Fp_units_of_N_distinct :
+  pairwise_distinct_mod pin_p pin_Fp_units_of_N.
+Proof. apply units_mod_prime_distinct, pin_p_prime. Qed.
+
+Lemma pin_Fp_units_of_N_coprime :
+  forall a, In a pin_Fp_units_of_N -> Z.coprime a pin_N.
+Proof.
+  intros a Hin.
+  pose proof (units_mod_prime_In pin_p a ltac:(lia) Hin) as Hb.
+  pose proof pin_p_lt_q.
+  apply (proj2 (coprime_semiprime pin_p pin_q a
+                   pin_p_prime pin_q_prime pin_p_neq_q)).
+  split.
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply pin_p_prime|].
+    intros [k Hk]. nia.
+  - rewrite coprime_comm. apply Z.coprime_prime_l_iff; [apply pin_q_prime|].
+    intros [k Hk]. nia.
+Qed.
+
+Lemma short_root_local_mod_p :
+  forall P y,
+    Z.coprime y pin_N ->
+    powm (poly_eval P y) pin_e pin_N = y mod pin_N ->
+    poly_eval P y mod pin_p = powm y pin_inv3_p pin_p.
+Proof.
+  intros P y Hcop Hinv.
+  pose proof pin_q_prime as Hq.
+  pose proof pin_p_prime as Hp.
+  pose proof (Z.prime_ge_2 _ Hq). pose proof (Z.prime_ge_2 _ Hp).
+  apply coprime_semiprime in Hcop;
+    [|exact Hp|exact Hq|apply pin_p_neq_q].
+  destruct Hcop as [Hcopp _].
+  assert (Hred : powm (poly_eval P y) pin_e pin_p = y mod pin_p).
+  { unfold powm in Hinv |- *.
+    rewrite <- (mod_product_l (poly_eval P y ^ pin_e) pin_p pin_q) by lia.
+    rewrite Hinv.
+    apply mod_product_l; lia. }
+  assert (Hloc : powm (powm y pin_inv3_p pin_p) pin_e pin_p = y mod pin_p).
+  { apply local_eth_root; [exact Hp | exact Hcopp | lia | lia |].
+    apply (proj1 pin_inv3_local). }
+  assert (Hxcop : Z.coprime (poly_eval P y) pin_p).
+  { apply (powm_unit_is_coprime (poly_eval P y) pin_e pin_p); [lia | lia |].
+    rewrite Hred. rewrite Z.gcd_mod_l. exact Hcopp. }
+  assert (Hzcop : Z.coprime (powm y pin_inv3_p pin_p) pin_p).
+  { unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Hcopp]. }
+  transitivity (powm y pin_inv3_p pin_p mod pin_p).
+  - apply (unique_eth_root_mod_prime pin_p pin_e pin_inv3_p
+             (poly_eval P y) (powm y pin_inv3_p pin_p)).
+    -- apply pin_p_prime.
+    -- lia.
+    -- lia.
+    -- apply (proj1 pin_inv3_local).
+    -- exact Hxcop.
+    -- exact Hzcop.
+    -- rewrite Hred, Hloc. reflexivity.
+  - unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Theorem invert_all_units_local_p :
+  forall P y,
+    (forall z, Z.coprime z pin_N ->
+       powm (poly_eval P z) pin_e pin_N = z mod pin_N) ->
+    Z.coprime y pin_N ->
+    poly_eval P y mod pin_p = powm y pin_inv3_p pin_p.
+Proof.
+  intros P y Hall Hcop.
+  apply (short_root_local_mod_p P y Hcop (Hall y Hcop)).
+Qed.
+
+Theorem invert_all_units_local_q :
+  forall P y,
+    (forall z, Z.coprime z pin_N ->
+       powm (poly_eval P z) pin_e pin_N = z mod pin_N) ->
+    Z.coprime y pin_N ->
+    poly_eval P y mod pin_q = powm y pin_inv3_q pin_q.
+Proof.
+  intros P y Hall Hcop.
+  apply (short_root_local_mod_q P y Hcop (Hall y Hcop)).
+Qed.
+
+(** ** Fermat fold on [𝔽_p*] is [X^{d_p}]
+
+    Sum coefficients in each residue class modulo [p−1].  Fold
+    degree is [< p−1] and [𝔽_p*] supplies [p−1] samples, so an
+    all-units invert poly has [fold_p(P) ≡ X^{d_p}] as polynomials
+    modulo [p].  No leftover at the Fermat boundary on this side.
+    Cross-confirmed by [cas/177]. *)
+
+Lemma powm_reduce_period :
+  forall y k m n,
+    1 < n ->
+    0 <= k ->
+    0 < m ->
+    powm y m n = 1 ->
+    powm y k n = powm y (k mod m) n.
+Proof.
+  intros y k m n Hn Hk Hm Hper.
+  pose proof (Z.div_mod k m ltac:(lia)) as Hdm.
+  rewrite Hdm at 1.
+  assert (0 <= k mod m) by (apply Z.mod_pos_bound; lia).
+  assert (0 <= k / m) by (apply Z.div_pos; lia).
+  rewrite powm_add_r by nia.
+  rewrite powm_mul_r by nia.
+  rewrite Hper.
+  rewrite powm_1_pow by nia.
+  unfold powm.
+  rewrite Z.mod_1_l by lia.
+  rewrite Z.mul_1_l, Z.mod_mod by lia. reflexivity.
+Qed.
+
+Fixpoint class_sum_from (P : list Z) (m r i : nat) : Z :=
+  match P with
+  | [] => 0
+  | c :: rest =>
+      (if Nat.eqb r (Nat.modulo i m) then c else 0)
+      + class_sum_from rest m r (S i)
+  end.
+
+Definition class_sum (P : list Z) (m r : nat) : Z :=
+  class_sum_from P m r 0%nat.
+
+Definition poly_fold (P : list Z) (m : nat) : list Z :=
+  map (fun r => class_sum P m r) (seq 0 m).
+
+Lemma nth_map_seq_Z :
+  forall (f : nat -> Z) (start len i : nat) (d : Z),
+    (i < len)%nat ->
+    nth i (map f (seq start len)) d = f (start + i)%nat.
+Proof.
+  intros f start len. revert start.
+  induction len as [|len' IH]; intros start i d Hi.
+  - lia.
+  - simpl seq. rewrite map_cons.
+    destruct i as [|i'].
+    + simpl. f_equal. lia.
+    + simpl nth. rewrite IH by lia. f_equal. lia.
+Qed.
+
+Lemma nth_poly_fold :
+  forall P m r,
+    (0 < m)%nat ->
+    (r < m)%nat ->
+    nth r (poly_fold P m) 0 = class_sum P m r.
+Proof.
+  intros P m r Hm Hr.
+  unfold poly_fold, class_sum.
+  rewrite nth_map_seq_Z by lia. reflexivity.
+Qed.
+
+Lemma poly_fold_length :
+  forall P m, length (poly_fold P m) = m.
+Proof.
+  intros P m. unfold poly_fold. rewrite length_map, length_seq. reflexivity.
+Qed.
+
+Lemma poly_degree_fold_lt :
+  forall P m,
+    (0 < m)%nat ->
+    (poly_degree (poly_fold P m) < m)%nat.
+Proof.
+  intros P m Hm.
+  destruct (poly_is_zero (poly_fold P m)) eqn:Hz.
+  - rewrite poly_degree_zero by exact Hz. lia.
+  - pose proof (poly_degree_leading (poly_fold P m) Hz) as Hnz.
+    destruct (Nat.lt_ge_cases (poly_degree (poly_fold P m)) m) as [Hlt | Hge];
+      [exact Hlt|].
+    rewrite nth_overflow in Hnz; [contradiction|].
+    rewrite poly_fold_length. exact Hge.
+Qed.
+
+Lemma map_plus_is_poly_add :
+  forall (f g : nat -> Z) (xs : list nat),
+    map (fun r => f r + g r) xs = poly_add (map f xs) (map g xs).
+Proof.
+  intros f g xs.
+  induction xs as [|x rest IH]; simpl.
+  - reflexivity.
+  - rewrite IH. reflexivity.
+Qed.
+
+Lemma map_seq_succ :
+  forall (f : nat -> Z) k m,
+    map f (seq (S k) m) = map (fun r => f (S r)) (seq k m).
+Proof.
+  intros f k m. revert k.
+  induction m as [|m IH]; intros k; simpl.
+  - reflexivity.
+  - f_equal. apply IH.
+Qed.
+
+Lemma poly_eval_map_seq_S :
+  forall f m y,
+    poly_eval (map f (seq 0 (S m))) y
+      = f 0%nat + y * poly_eval (map (fun r => f (S r)) (seq 0 m)) y.
+Proof.
+  intros f m y.
+  simpl seq. rewrite map_cons. simpl poly_eval.
+  f_equal. f_equal.
+  rewrite map_seq_succ. reflexivity.
+Qed.
+
+Lemma poly_eval_zeros_seq :
+  forall m y,
+    poly_eval (map (fun _ : nat => 0) (seq 0 m)) y = 0.
+Proof.
+  intros m y. induction m as [|m IH].
+  - reflexivity.
+  - rewrite poly_eval_map_seq_S, IH. ring.
+Qed.
+
+Lemma poly_eval_delta_seq :
+  forall m k c y,
+    (k < m)%nat ->
+    poly_eval (map (fun r => if Nat.eqb r k then c else 0) (seq 0 m)) y
+      = c * y ^ Z.of_nat k.
+Proof.
+  intros m k c y.
+  revert k.
+  induction m as [|m IH]; intros k Hk.
+  - lia.
+  - rewrite poly_eval_map_seq_S.
+    destruct k as [|k'].
+    + replace (Nat.eqb 0%nat 0%nat) with true by reflexivity.
+      replace (map (fun r => if Nat.eqb (S r) 0%nat then c else 0) (seq 0 m))
+        with (map (fun _ : nat => 0) (seq 0 m))
+        by (apply map_ext; intros r; reflexivity).
+      rewrite poly_eval_zeros_seq. rewrite Z.pow_0_r. ring.
+    + replace (Nat.eqb 0%nat (S k')) with false by reflexivity.
+      replace (map (fun r => if Nat.eqb (S r) (S k') then c else 0) (seq 0 m))
+        with (map (fun r => if Nat.eqb r k' then c else 0) (seq 0 m))
+        by (apply map_ext; intros r; reflexivity).
+      rewrite (IH k') by lia.
+      rewrite Nat2Z.inj_succ, Z.pow_succ_r by lia. ring.
+Qed.
+
+Fixpoint poly_eval_from (P : list Z) (y : Z) (i : nat) : Z :=
+  match P with
+  | [] => 0
+  | c :: rest => c * y ^ Z.of_nat i + poly_eval_from rest y (S i)
+  end.
+
+Lemma poly_eval_from_scale :
+  forall P y i,
+    poly_eval_from P y i = y ^ Z.of_nat i * poly_eval P y.
+Proof.
+  intros P y i.
+  revert i.
+  induction P as [|c rest IH]; intros i; simpl.
+  - ring.
+  - rewrite IH. rewrite Nat2Z.inj_succ, Z.pow_succ_r by lia. ring.
+Qed.
+
+Lemma poly_eval_from_0 :
+  forall P y, poly_eval_from P y 0 = poly_eval P y.
+Proof.
+  intros P y. rewrite poly_eval_from_scale. rewrite Z.pow_0_r. ring.
+Qed.
+
+Lemma poly_eval_fold_from :
+  forall P m i y n,
+    1 < n ->
+    (0 < m)%nat ->
+    powm y (Z.of_nat m) n = 1 ->
+    poly_eval_from P y i mod n
+      = poly_eval (map (fun r => class_sum_from P m r i) (seq 0 m)) y mod n.
+Proof.
+  intros P m i y n Hn Hm Hper.
+  revert i.
+  induction P as [|c rest IH]; intros i.
+  - simpl class_sum_from. rewrite poly_eval_zeros_seq. reflexivity.
+  - simpl poly_eval_from. simpl class_sum_from.
+    set (k := Nat.modulo i m).
+    assert (Hk : (k < m)%nat) by (apply Nat.mod_upper_bound; lia).
+    rewrite map_plus_is_poly_add, poly_eval_add.
+    rewrite poly_eval_delta_seq by exact Hk.
+    pose proof (IH (S i)) as IHs.
+    apply (proj2 (mods_eq_iff_divides
+                    (c * y ^ Z.of_nat i + poly_eval_from rest y (S i))
+                    (c * y ^ Z.of_nat k
+                       + poly_eval (map (fun r => class_sum_from rest m r (S i))
+                                      (seq 0 m)) y)
+                    n ltac:(lia))).
+    replace (c * y ^ Z.of_nat i + poly_eval_from rest y (S i)
+               - (c * y ^ Z.of_nat k
+                    + poly_eval (map (fun r => class_sum_from rest m r (S i))
+                                   (seq 0 m)) y))
+      with ((c * y ^ Z.of_nat i - c * y ^ Z.of_nat k)
+              + (poly_eval_from rest y (S i)
+                   - poly_eval (map (fun r => class_sum_from rest m r (S i))
+                                  (seq 0 m)) y)) by ring.
+    apply Z.divide_add_r.
+    + replace (c * y ^ Z.of_nat i - c * y ^ Z.of_nat k)
+        with (c * (y ^ Z.of_nat i - y ^ Z.of_nat k)) by ring.
+      apply Z.divide_mul_r.
+      apply (proj1 (mods_eq_iff_divides (y ^ Z.of_nat i) (y ^ Z.of_nat k)
+                      n ltac:(lia))).
+      change ((y ^ Z.of_nat i) mod n) with (powm y (Z.of_nat i) n).
+      change ((y ^ Z.of_nat k) mod n) with (powm y (Z.of_nat k) n).
+      unfold k.
+      transitivity (powm y (Z.of_nat i mod Z.of_nat m) n).
+      -- apply powm_reduce_period; [lia | lia | lia | exact Hper].
+      -- rewrite <- Nat2Z.inj_mod by lia. reflexivity.
+    + apply (proj1 (mods_eq_iff_divides (poly_eval_from rest y (S i))
+                      (poly_eval (map (fun r => class_sum_from rest m r (S i))
+                                    (seq 0 m)) y)
+                      n ltac:(lia))).
+      exact IHs.
+Qed.
+
+Lemma poly_eval_fold_mod :
+  forall P m y n,
+    1 < n ->
+    (0 < m)%nat ->
+    powm y (Z.of_nat m) n = 1 ->
+    poly_eval P y mod n = poly_eval (poly_fold P m) y mod n.
+Proof.
+  intros P m y n Hn Hm Hper.
+  unfold poly_fold, class_sum.
+  rewrite <- poly_eval_from_0.
+  apply poly_eval_fold_from; assumption.
+Qed.
+
+Lemma pin_inv3_p_lt_pminus1 :
+  (Z.to_nat pin_inv3_p < Z.to_nat (pin_p - 1))%nat.
+Proof. vm_compute. lia. Qed.
+
+Lemma invert_fold_p_diff_vanishes :
+  forall P,
+    (forall y, Z.coprime y pin_N ->
+       powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
+    Forall (fun a => (pin_p | poly_eval
+      (poly_sub (poly_fold P (Z.to_nat (pin_p - 1)))
+                (poly_Xn (Z.to_nat pin_inv3_p))) a))
+      pin_Fp_units_of_N.
+Proof.
+  intros P Hall.
+  apply Forall_forall. intros a Hin.
+  pose proof (pin_Fp_units_of_N_coprime a Hin) as Hcop.
+  pose proof (invert_all_units_local_p P a Hall Hcop) as Hloc.
+  pose proof (units_mod_prime_In pin_p a ltac:(lia) Hin) as Hb.
+  pose proof pin_p_prime as Hp.
+  pose proof (Z.prime_ge_2 _ Hp).
+  assert (Hper : powm a (Z.of_nat (Z.to_nat (pin_p - 1))) pin_p = 1).
+  { rewrite Z2Nat.id by lia. apply fermat_coprime; [exact Hp|].
+    rewrite coprime_comm. apply Z.coprime_prime_l_iff; [exact Hp|].
+    intros [k Hk]. nia. }
+  unfold poly_sub.
+  rewrite poly_eval_add, poly_eval_map_mul, poly_eval_Xn, Z2Nat.id by lia.
+  replace (poly_eval (poly_fold P (Z.to_nat (pin_p - 1))) a
+             + -1 * a ^ pin_inv3_p)
+    with (poly_eval (poly_fold P (Z.to_nat (pin_p - 1))) a - a ^ pin_inv3_p)
+    by ring.
+  apply Z.mod_divide; [lia|].
+  rewrite Zminus_mod.
+  rewrite <- (poly_eval_fold_mod P (Z.to_nat (pin_p - 1)) a pin_p);
+    [| lia | vm_compute; lia | exact Hper].
+  rewrite Hloc. unfold powm. rewrite Z.sub_diag, Z.mod_0_l by lia.
+  reflexivity.
+Qed.
+
+Theorem invert_all_units_fold_p :
+  forall P r,
+    (r < Z.to_nat (pin_p - 1))%nat ->
+    (forall y, Z.coprime y pin_N ->
+       powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
+    (pin_p | nth r (poly_sub (poly_fold P (Z.to_nat (pin_p - 1)))
+                              (poly_Xn (Z.to_nat pin_inv3_p))) 0).
+Proof.
+  intros P r Hr Hall.
+  apply (poly_prime_roots_divides pin_p pin_Fp_units_of_N
+           (poly_sub (poly_fold P (Z.to_nat (pin_p - 1)))
+                     (poly_Xn (Z.to_nat pin_inv3_p)))
+           pin_p_prime pin_Fp_units_of_N_distinct).
+  - pose proof (poly_degree_sub_le
+                  (poly_fold P (Z.to_nat (pin_p - 1)))
+                  (poly_Xn (Z.to_nat pin_inv3_p))) as Hs.
+    rewrite poly_degree_Xn in Hs.
+    rewrite pin_Fp_units_of_N_length.
+    pose proof (poly_degree_fold_lt P (Z.to_nat (pin_p - 1))
+                  ltac:(vm_compute; lia)).
+    pose proof pin_inv3_p_lt_pminus1.
+    lia.
+  - apply invert_fold_p_diff_vanishes. exact Hall.
+Qed.
+
+Theorem invert_all_units_fold_p_is_local_monomial :
+  forall P r,
+    (r < Z.to_nat (pin_p - 1))%nat ->
+    (forall y, Z.coprime y pin_N ->
+       powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
+    class_sum P (Z.to_nat (pin_p - 1)) r mod pin_p
+      = (if Nat.eqb r (Z.to_nat pin_inv3_p) then 1 else 0).
+Proof.
+  intros P r Hr Hall.
+  pose proof (invert_all_units_fold_p P r Hr Hall) as Hdiv.
+  rewrite nth_poly_sub, nth_Xn in Hdiv.
+  rewrite nth_poly_fold in Hdiv; [| vm_compute; lia | exact Hr].
+  destruct (Nat.eq_dec r (Z.to_nat pin_inv3_p)) as [Heq | Hne].
+  - replace (Nat.eqb r (Z.to_nat pin_inv3_p)) with true
+      by (symmetry; apply Nat.eqb_eq; exact Heq).
+    apply (proj2 (mods_eq_iff_divides (class_sum P (Z.to_nat (pin_p - 1)) r) 1
+                    pin_p ltac:(lia))).
+    exact Hdiv.
+  - replace (Nat.eqb r (Z.to_nat pin_inv3_p)) with false
+      by (symmetry; apply Nat.eqb_neq; exact Hne).
+    replace (class_sum P (Z.to_nat (pin_p - 1)) r - 0)
+      with (class_sum P (Z.to_nat (pin_p - 1)) r) in Hdiv by lia.
+    apply (proj2 (Z.mod_divide (class_sum P (Z.to_nat (pin_p - 1)) r)
+                    pin_p ltac:(lia))) in Hdiv.
+    exact Hdiv.
+Qed.
+
+(** ** Fermat correction [p(X^{q−1}−1)] splits
+
+    The extra term is [0] on units of [N] ([p] divides it, and
+    Fermat on [𝔽_q*] kills [X^{q−1}−1]), so the binomial plus
+    this correction still inverts.  Degree is [q−1]; the new
+    coefficient is [p], which splits.  [N]-multiples do not hide
+    a splitting [gcd].  Cross-confirmed by [cas/178]. *)
+
+Lemma gcd_add_mul :
+  forall c k M, Z.gcd (c + k * M) M = Z.gcd c M.
+Proof.
+  intros c k M.
+  rewrite (Z.gcd_comm (c + k * M) M), (Z.gcd_comm c M).
+  apply Z.gcd_add_mult_diag_r.
+Qed.
+
+Definition pin_fermat_root_poly : list Z :=
+  poly_add pin_crt_root_poly
+    (map_mul pin_p (poly_Xn_minus_1 (Z.to_nat (pin_q - 1)))).
+
+Lemma pin_fermat_extra_divides_N :
+  forall y,
+    Z.coprime y pin_N ->
+    (pin_N | pin_p * (y ^ (pin_q - 1) - 1)).
+Proof.
+  intros y Hcop.
+  pose proof pin_p_prime as Hp.
+  pose proof pin_q_prime as Hq.
+  pose proof (Z.prime_ge_2 _ Hp). pose proof (Z.prime_ge_2 _ Hq).
+  apply coprime_semiprime in Hcop;
+    [|exact Hp|exact Hq|apply pin_p_neq_q].
+  destruct Hcop as [_ Hcopq].
+  change pin_N with (pin_p * pin_q).
+  apply divide_by_coprime_product.
+  - apply prime_coprime_distinct; [exact Hp | exact Hq | apply pin_p_neq_q].
+  - apply Z.divide_mul_l, Z.divide_refl.
+  - apply Z.divide_mul_r.
+    apply (proj1 (mods_eq_iff_divides (y ^ (pin_q - 1)) 1 pin_q ltac:(lia))).
+    change ((y ^ (pin_q - 1)) mod pin_q) with (powm y (pin_q - 1) pin_q).
+    rewrite (fermat_coprime pin_q y Hq Hcopq).
+    symmetry. apply Z.mod_1_l. lia.
+Qed.
+
+Theorem pin_fermat_root_poly_inverts_units :
+  forall y,
+    Z.coprime y pin_N ->
+    powm (poly_eval pin_fermat_root_poly y) pin_e pin_N = y mod pin_N.
+Proof.
+  intros y Hcop.
+  unfold pin_fermat_root_poly.
+  rewrite poly_eval_add, poly_eval_map_mul, poly_eval_Xn_minus_1, Z2Nat.id by lia.
+  transitivity (powm (poly_eval pin_crt_root_poly y) pin_e pin_N).
+  - apply powm_div_cong; [lia | lia |].
+    replace (poly_eval pin_crt_root_poly y + pin_p * (y ^ (pin_q - 1) - 1)
+               - poly_eval pin_crt_root_poly y)
+      with (pin_p * (y ^ (pin_q - 1) - 1)) by ring.
+    apply pin_fermat_extra_divides_N. exact Hcop.
+  - apply pin_crt_binomial_inverts_units. exact Hcop.
+Qed.
+
+Theorem pin_fermat_root_poly_degree :
+  poly_degree pin_fermat_root_poly = Z.to_nat (pin_q - 1).
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_fermat_root_poly_splits :
+  exists i, 1 < Z.gcd (nth i pin_fermat_root_poly 0) pin_N < pin_N.
+Proof.
+  exists (Z.to_nat (pin_q - 1)).
+  assert (Hg : Z.gcd (nth (Z.to_nat (pin_q - 1)) pin_fermat_root_poly 0) pin_N
+                 = pin_p)
+    by (vm_compute; reflexivity).
+  rewrite Hg. split; lia.
+Qed.
+
+Theorem pin_gcd_add_mul_N :
+  forall c k, Z.gcd (c + k * pin_N) pin_N = Z.gcd c pin_N.
+Proof. intros c k. apply gcd_add_mul. Qed.
