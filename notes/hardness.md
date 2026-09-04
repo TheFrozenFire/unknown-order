@@ -128,6 +128,9 @@ Constructible torsion `H` is a family parameter
 | all-units invert poly, any degree | matches `X^{d_p}` on all of `𝔽_p*` (`p<q`) | `invert_all_units_local_p`, `invert_all_units_local_q` | a map that inverts units without matching the local inverse |
 | Fermat fold of an invert poly on `𝔽_p*` | class sums are `X^{d_p}` as a polynomial | `invert_all_units_fold_p_is_local_monomial` | leftover at the Fermat boundary on the `p`-side |
 | Fermat correction `p(X^{q−1}−1)` | inverts every unit; coeff `p` splits | `pin_fermat_root_poly_splits`, `pin_gcd_add_mul_N` | hiding a splitting coeff by adding a multiple of `N` |
+| Fermat fold on `𝔽_q*` samples | agrees with `X^{d_q}` as a function | `invert_all_units_fold_q_eval` | polynomial identity; leftover at class `q−2` |
+| top fold class `q−2` is `0` mod `q` | `fold_q ≡ X^{d_q}` as a polynomial | `invert_all_units_fold_q_top_zero` | leftover kernel of degree `q−2` |
+| invert-all-units monomial `X^k` | `k ≡ d (mod λ)` | `invert_all_units_monomial_degree_mod_lam` | residual-solver ⇒ factor |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

@@ -2193,6 +2193,14 @@ SrsaRootPoly.v,pin_fermat_root_poly_inverts_units,1797,0,0,OK
 SrsaRootPoly.v,pin_fermat_root_poly_degree,1814,0,0,OK
 SrsaRootPoly.v,pin_fermat_root_poly_splits,1818,0,0,OK
 SrsaRootPoly.v,pin_gcd_add_mul_N,1828,0,0,OK
+SrsaRootPoly.v,pin_inv3_q_lt_qminus1,1838,0,0,OK
+SrsaRootPoly.v,invert_fold_q_diff_vanishes,1842,0,0,OK
+SrsaRootPoly.v,invert_all_units_fold_q_eval,1878,0,0,OK
+SrsaRootPoly.v,poly_degree_below_if_high_zero,1911,0,0,OK
+SrsaRootPoly.v,pin_inv3_q_neq_qminus2,1926,0,0,OK
+SrsaRootPoly.v,invert_all_units_fold_q_top_zero,1930,0,0,OK
+SrsaRootPoly.v,invert_all_units_fold_q_is_local_monomial,2004,0,0,OK
+SrsaRootPoly.v,invert_all_units_monomial_degree_mod_lam,2039,0,0,OK
 SrsaWriteE.v,emap_phi_y_even,21,0,0,OK
 SrsaWriteE.v,emap_hamming_even,26,0,0,OK
 SrsaWriteE.v,emap_lsb_y_even,31,0,0,OK

@@ -3002,6 +3002,9 @@ in the Rocq tree.  Do not edit by hand.
   - L1325: Local match on [𝔽_p*], any degree
   - L1422: Fermat fold on [𝔽_p*] is [X^{d_p}]
   - L1754: Fermat correction [p(X^{q−1}−1)] splits
+  - L1832: Fermat fold on [𝔽_q*] agrees on samples
+  - L1903: Top fold class [q−2] zero kills the [𝔽_q*] leftover
+  - L2032: Invert-all-units monomial degree is [d] mod [λ]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3126,6 +3129,14 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_fermat_root_poly_degree` | 1814 |
 | Theorem | `pin_fermat_root_poly_splits` | 1818 |
 | Theorem | `pin_gcd_add_mul_N` | 1828 |
+| Lemma | `pin_inv3_q_lt_qminus1` | 1838 |
+| Lemma | `invert_fold_q_diff_vanishes` | 1842 |
+| Theorem | `invert_all_units_fold_q_eval` | 1878 |
+| Lemma | `poly_degree_below_if_high_zero` | 1911 |
+| Lemma | `pin_inv3_q_neq_qminus2` | 1926 |
+| Theorem | `invert_all_units_fold_q_top_zero` | 1930 |
+| Theorem | `invert_all_units_fold_q_is_local_monomial` | 2004 |
+| Theorem | `invert_all_units_monomial_degree_mod_lam` | 2039 |
 
 ## `SrsaWriteE.v`
 
@@ -3616,4 +3627,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2527 theorems/lemmas/corollaries/examples across 119 files._
+_2535 theorems/lemmas/corollaries/examples across 119 files._

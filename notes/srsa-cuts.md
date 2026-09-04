@@ -350,6 +350,13 @@ Fermat correction `p(X^{q−1}−1)` is `0` on units, so binomial plus
 that term inverts at degree `q−1` and the new coeff `p` splits
 (`pin_fermat_root_poly_splits`, CAS `178`). `N`-multiples do not
 hide a splitting gcd (`pin_gcd_add_mul_N`).
+Fermat fold on `𝔽_q*` agrees with `X^{d_q}` on the `q−2` samples
+(`invert_all_units_fold_q_eval`, CAS `179`); that is functional,
+not a polynomial identity. If `q` divides the top class `r=q−2`,
+the leftover is stripped and `fold_q ≡ X^{d_q}` as polynomials
+(`invert_all_units_fold_q_top_zero`, CAS `180`). An invert-all-units
+monomial `X^k` has `k ≡ d (mod λ)` by uniqueness of the inverse
+(`invert_all_units_monomial_degree_mod_lam`, CAS `181`).
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -418,6 +425,9 @@ advice `N/17`: `PreprocessGRA.v`.
 | all-units invert poly matches `X^{d_p}` on every `𝔽_p*` residue | `invert_all_units_local_p` / `pin_Fp_units_of_N_coprime` | `SrsaRootPoly.v` | `176` |
 | Fermat fold on `𝔽_p*` is `X^{d_p}` as a polynomial | `invert_all_units_fold_p` / `invert_all_units_fold_p_is_local_monomial` | `SrsaRootPoly.v` | `177` |
 | Fermat correction `p(X^{q−1}−1)` inverts and splits | `pin_fermat_root_poly_inverts_units` / `pin_fermat_root_poly_splits` / `pin_gcd_add_mul_N` | `SrsaRootPoly.v` | `178` |
+| Fermat fold on `𝔽_q*` agrees with `X^{d_q}` on samples | `invert_all_units_fold_q_eval` | `SrsaRootPoly.v` | `179` |
+| top fold class `q−2` zero ⇒ `fold_q = X^{d_q}` as a polynomial | `invert_all_units_fold_q_top_zero` / `invert_all_units_fold_q_is_local_monomial` | `SrsaRootPoly.v` | `180` |
+| invert-all-units monomial `X^k` has `k ≡ d (mod λ)` | `invert_all_units_monomial_degree_mod_lam` | `SrsaRootPoly.v` | `181` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

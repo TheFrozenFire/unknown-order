@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2527 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2535 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2527 results across 119 files.
+Captured for 2535 results across 119 files.
 
 Counts:
 
@@ -2712,6 +2712,14 @@ Counts:
 | `pin_fermat_root_poly_degree` | 1814 | 0 | 0 | OK |
 | `pin_fermat_root_poly_splits` | 1818 | 0 | 0 | OK |
 | `pin_gcd_add_mul_N` | 1828 | 0 | 0 | OK |
+| `pin_inv3_q_lt_qminus1` | 1838 | 0 | 0 | OK |
+| `invert_fold_q_diff_vanishes` | 1842 | 0 | 0 | OK |
+| `invert_all_units_fold_q_eval` | 1878 | 0 | 0 | OK |
+| `poly_degree_below_if_high_zero` | 1911 | 0 | 0 | OK |
+| `pin_inv3_q_neq_qminus2` | 1926 | 0 | 0 | OK |
+| `invert_all_units_fold_q_top_zero` | 1930 | 0 | 0 | OK |
+| `invert_all_units_fold_q_is_local_monomial` | 2004 | 0 | 0 | OK |
+| `invert_all_units_monomial_degree_mod_lam` | 2039 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 
