@@ -127,9 +127,9 @@ Theorem extra_rerand_forces_fixed_e :
 Proof. reflexivity. Qed.
 
 Theorem extra_coins_independent_fixed_e :
-  rsa_e rsa_test = pin187_e /\
-  srsa_residual_leaf pin187_N pin187_lam pin187_y pin187_x pin187_e.
-Proof. split; [reflexivity | apply srsa_residual_pin187]. Qed.
+  rsa_e rsa_test = pin_e /\
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x pin_e.
+Proof. split; [reflexivity | apply srsa_residual_pin]. Qed.
 
 Theorem extra_squaring_only :
   powm 2 8 pin187_N = 69 /\

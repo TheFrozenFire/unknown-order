@@ -92,7 +92,7 @@ Proof. split; reflexivity. Qed.
 Theorem filter_phi_enum_factors :
   let '(x, y) := factors_from_phi pin187_N pin187_phi in
   x = pin187_q /\ y = pin187_p.
-Proof. apply rsa_test_enum_from_phi. Qed.
+Proof. vm_compute. split; reflexivity. Qed.
 
 Theorem filter_phi_is_factor :
   Problem_Factor pin187_N pin187_p.

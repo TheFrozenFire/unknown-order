@@ -177,9 +177,9 @@ Proof. vm_compute. split; [reflexivity | discriminate]. Qed.
 (** ** 6. Chaum-blind: sees [y r^e], returns [x r] *)
 
 Theorem shape_chaum_unblind :
-  rsa_unblind rsa_test (rsa_dec rsa_test (rsa_blind rsa_test pin187_y 2))
-    ((pin187_N + 1) / 2) =
-    rsa_dec rsa_test pin187_y.
+  rsa_unblind rsa_test (rsa_dec rsa_test (rsa_blind rsa_test pin_y 2))
+    ((pin_N + 1) / 2) =
+    rsa_dec rsa_test pin_y.
 Proof.
   apply chaum_unblind_is_raw_sign.
   - vm_compute. reflexivity.
@@ -187,11 +187,11 @@ Proof.
 Qed.
 
 Theorem shape_chaum_recovers_cube_root :
-  rsa_dec rsa_test pin187_y = pin187_x.
+  rsa_dec rsa_test pin_y = pin_x.
 Proof. vm_compute. reflexivity. Qed.
 
 Theorem shape_chaum_e_is_protocol :
-  rsa_e rsa_test = pin187_e.
+  rsa_e rsa_test = pin_e.
 Proof. reflexivity. Qed.
 
 (** ** 7. Jacobi-discrete [e(y) ∈ {3,5}] *)
