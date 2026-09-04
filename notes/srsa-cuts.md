@@ -357,6 +357,23 @@ the leftover is stripped and `fold_q ≡ X^{d_q}` as polynomials
 (`invert_all_units_fold_q_top_zero`, CAS `180`). An invert-all-units
 monomial `X^k` has `k ≡ d (mod λ)` by uniqueness of the inverse
 (`invert_all_units_monomial_degree_mod_lam`, CAS `181`).
+The missing `𝔽_q*` sample is the unit `p+q` (`p+q ≡ p (mod q)`);
+any unit `p+kq` with `gcd(k,p)=1` also lifts residue `p`
+(`pin_p_plus_q_coprime`, `p_plus_k_q_coprime`, CAS `182`, `187`).
+The geometric kernel `K=Σ p^j X^{q−2−j}` vanishes on `𝔽_q*\{p}`
+and is monic of degree `q−2`; binomial `+K` misses the unit `p+q`
+(`pin_geo_kernel_vanishes`, `pin_binomial_plus_kernel_misses_lift`,
+CAS `183`). Invert-all-units at that lift fills the missing sample,
+so `fold_q ≡ X^{d_q}` as polynomials with no extra top-zero
+hypothesis (`invert_all_units_fold_q`, `invert_all_units_fold_q_classes`,
+CAS `184`, `185`). Both Fermat folds are the local inverse monomials,
+and CRT of those degrees is `d` mod `λ`
+(`invert_all_units_both_folds_are_local_monomials`, CAS `186`).
+`K ≡ X^{q−2} (mod p)` as polynomials (`pin_geo_kernel_lower_div_p`,
+CAS `190`). The CRT binomial inhabitant has both folds
+(`pin_crt_binomial_both_folds`, CAS `191`). Writing the invert poly
+wrote the local inverse maps, hence wrote `d`. Not
+`residual_solver_constructs_factor_open_named`.
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -428,6 +445,16 @@ advice `N/17`: `PreprocessGRA.v`.
 | Fermat fold on `𝔽_q*` agrees with `X^{d_q}` on samples | `invert_all_units_fold_q_eval` | `SrsaRootPoly.v` | `179` |
 | top fold class `q−2` zero ⇒ `fold_q = X^{d_q}` as a polynomial | `invert_all_units_fold_q_top_zero` / `invert_all_units_fold_q_is_local_monomial` | `SrsaRootPoly.v` | `180` |
 | invert-all-units monomial `X^k` has `k ≡ d (mod λ)` | `invert_all_units_monomial_degree_mod_lam` | `SrsaRootPoly.v` | `181` |
+| `p+q` is a unit of `N` lifting residue `p` | `pin_p_plus_q_coprime` / `pin_p_plus_q_mod_q` | `SrsaRootPoly.v` | `182` |
+| geometric kernel vanishes on `𝔽_q*\{p}`; binomial `+K` misses `p+q` | `geo_kernel_identity` / `pin_geo_kernel_vanishes` / `pin_binomial_plus_kernel_misses_lift` | `SrsaRootPoly.v` | `183` |
+| invert-all-units ⇒ `fold_q = X^{d_q}` on all of `𝔽_q*` | `invert_all_units_fold_q` / `invert_fold_q_at_lift` | `SrsaRootPoly.v` | `184` |
+| invert-all-units ⇒ `fold_q = X^{d_q}` as a polynomial (no top-zero hyp) | `invert_all_units_fold_q_classes` | `SrsaRootPoly.v` | `185` |
+| both Fermat folds are the local inverse monomials; CRT recovers `d` | `invert_all_units_both_folds_are_local_monomials` / `invert_all_units_fold_degrees_crt_d` | `SrsaRootPoly.v` | `186` |
+| any unit `p+kq` with `gcd(k,p)=1` lifts residue `p` | `p_plus_k_q_coprime` / `pin_p_plus_2q_coprime` | `SrsaRootPoly.v` | `187` |
+| invert-all-units at any lift of residue `p` fills the missing sample | `invert_fold_q_at_lift` / `invert_fold_q_at_2q` | `SrsaRootPoly.v` | `188` |
+| `K` is the unique monic degree `q−2` leftover kernel | `pin_geo_kernel_degree` / `pin_geo_kernel_leading` / `pin_geo_kernel_plus_q_cong` | `SrsaRootPoly.v` | `189` |
+| `K ≡ X^{q−2} (mod p)` as polynomials | `geo_kernel_nth` / `pin_geo_kernel_lower_div_p` | `SrsaRootPoly.v` | `190` |
+| CRT binomial inhabitant has both Fermat folds | `pin_crt_binomial_both_folds` | `SrsaRootPoly.v` | `191` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

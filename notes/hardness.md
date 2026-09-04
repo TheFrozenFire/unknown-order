@@ -131,6 +131,11 @@ Constructible torsion `H` is a family parameter
 | Fermat fold on `𝔽_q*` samples | agrees with `X^{d_q}` as a function | `invert_all_units_fold_q_eval` | polynomial identity; leftover at class `q−2` |
 | top fold class `q−2` is `0` mod `q` | `fold_q ≡ X^{d_q}` as a polynomial | `invert_all_units_fold_q_top_zero` | leftover kernel of degree `q−2` |
 | invert-all-units monomial `X^k` | `k ≡ d (mod λ)` | `invert_all_units_monomial_degree_mod_lam` | residual-solver ⇒ factor |
+| unit `p+q` (or `p+kq` with `gcd(k,p)=1`) | lifts residue `p` as a unit of `N` | `pin_p_plus_q_coprime`, `p_plus_k_q_coprime` | a residue of `𝔽_q*` that is not a unit of `N` |
+| geometric kernel `K=Σ p^j X^{q−2−j}` | vanishes on `𝔽_q*\{p}`; binomial `+K` misses `p+q` | `geo_kernel_identity`, `pin_geo_kernel_vanishes`, `pin_binomial_plus_kernel_misses_lift` | binomial `+K` as an invert-all-units poly |
+| invert-all-units poly, any degree | `fold_q ≡ X^{d_q}` as a polynomial (missing sample filled) | `invert_all_units_fold_q`, `invert_all_units_fold_q_classes` | leftover kernel of degree `q−2`; residual-solver ⇒ factor |
+| both Fermat folds of an invert poly | local inverse monomials; CRT recovers `d` mod `λ` | `invert_all_units_both_folds_are_local_monomials`, `pin_crt_binomial_both_folds` | residual-solver ⇒ factor |
+| `K` as a polynomial mod `p` | `K ≡ X^{q−2}` (lower coeffs are powers of `p`) | `geo_kernel_nth`, `pin_geo_kernel_lower_div_p` | leftover visible on `𝔽_p*` |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |
