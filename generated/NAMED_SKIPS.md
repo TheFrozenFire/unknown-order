@@ -186,6 +186,11 @@ comments; do not maintain this table by hand.
 | Closed result | File | Line |
 |---|---|---:|
 | `rabin_oracle_nonassociate_factors` | `RabinWilliams.v` | 272 |
+| `eth_root_nonunit_factors` | `SrsaInverter.v` | 61 |
+| `pin_eth_root_p_factors` | `SrsaInverter.v` | 129 |
+| `rsa_inverter_reduced_units_is_trapdoor` | `SrsaInverter.v` | 187 |
+| `rsa_inverter_reduced_units_constructs_factor` | `SrsaInverter.v` | 204 |
+| `inverter_as_residual_returns_e` | `SrsaInverter.v` | 230 |
 | `rsa_inverter_recovers_message` | `TranscriptOracle.v` | 592 |
 
 ### `strong_rsa_solver_constructs_factor_open_named`
@@ -200,6 +205,10 @@ comments; do not maintain this table by hand.
 | `order_yields_strong_RSA` | `Hardness.v` | 492 |
 | `gcd_powm_minus_1` | `Hardness.v` | 518 |
 | `leftover_mismatch_factors` | `Hardness.v` | 531 |
+| `pin_lambda_strong_solver_output_is_unit` | `SrsaInverter.v` | 257 |
+| `pin_lambda_plus_one_does_not_split` | `SrsaInverter.v` | 265 |
+| `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 269 |
+| `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | 299 |
 | `residual_mismatch_factors` | `SrsaOrderArrows.v` | 94 |
 | `leftover_x_one_sided_pin` | `SrsaOrderArrows.v` | 106 |
 | `leftover_x_mismatch_factors_pin` | `SrsaOrderArrows.v` | 115 |
@@ -212,4 +221,4 @@ comments; do not maintain this table by hand.
 | `matching_247_gcd_not_proper` | `SrsaOrderArrows.v` | 184 |
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 124 does-not-discharge rows._
+_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 133 does-not-discharge rows._

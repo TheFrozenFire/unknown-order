@@ -151,6 +151,10 @@ Constructible torsion `H` is a family parameter
 | modular cube-root of a reduced unit | residual leaf at public `e=3` | `mod_cbrt_unit_is_residual_leaf` | leftover pair is a solver |
 | reduced residual solver at public `e` | trapdoor map `y ↦ y^d`; Miller-from-`d` splits | `residual_solver_reduced_pin_e_constructs_factor` | residual-solver ⇒ factor (varying `e`; Miller uses `d`) |
 | `N+1` as a Strong-RSA challenge | coprime but not a residue, so not a leaf | `pin_N_plus_1_not_a_leaf` / `residual_leaf_y_is_residue` | vacuous `Solve (N+1)` inhabiting the open named |
+| `e`-th root of a non-unit | output gcd equals input gcd | `eth_root_nonunit_factors` | inverter ⇒ factor (a solver is not a non-unit query) |
+| reduced-units public-`e` inverter | trapdoor map; Miller-from-`d` splits | `rsa_inverter_reduced_units_constructs_factor` | inverter ⇒ factor (Miller uses `d`) |
+| Strong-RSA solver on units via `λ+1` | inhabits, `gcd(λ+1,N)=1`, not a residual leaf | `pin_lambda_strong_solver` / `pin_lambda_plus_one_does_not_split` | Strong-RSA solver ⇒ factor |
+| Strong-RSA solver that returns public `e` | is the public-`e` inverter; Miller splits | `strong_rsa_solver_pin_e_constructs_factor` | Strong-RSA solver ⇒ factor (varying `e`; `λ+1` does not miller) |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

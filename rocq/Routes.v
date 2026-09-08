@@ -6,6 +6,7 @@ Require Import StrongRSAPeel.
 Require Import GenericRing.
 Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
+Require Import SrsaInverter.
 
 Open Scope Z_scope.
 
@@ -48,3 +49,13 @@ Check trapdoor_inhabits_residual_leaf.
 Check pin_trapdoor_residual_solver.
 Check residual_solver_reduced_pin_e_is_trapdoor.
 Check residual_solver_reduced_pin_e_constructs_factor.
+Check eth_root_nonunit_factors.
+Check rsa_inverter_reduced_units_constructs_factor.
+Check pin_dec_inverter.
+Check inverter_as_residual.
+Check pin_lambda_strong_solver.
+Check pin_lambda_plus_one_does_not_split.
+Check pin_lambda_strong_solver_not_residual.
+Check strong_rsa_solver_pin_e_constructs_factor.
+Check pin_N_plus_1_not_rsa_problem.
+Check pin_N_plus_1_not_strong_RSA.

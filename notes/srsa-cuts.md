@@ -409,7 +409,16 @@ of a reduced unit is a residual leaf at public `e`
 on reduced residues that always returns that `e` is the trapdoor
 map (`residual_solver_reduced_pin_e_constructs_factor`, CAS `220`,
 `221`). `N+1` is coprime but not a leaf
-(`pin_N_plus_1_not_a_leaf`). Not
+(`pin_N_plus_1_not_a_leaf`). An `e`-th root of a non-unit carries
+the input gcd (`eth_root_nonunit_factors`, CAS `222`). A
+reduced-units public-`e` inverter is the trapdoor map
+(`rsa_inverter_reduced_units_constructs_factor`, CAS `223`,
+`227`). A Strong-RSA solver on units is inhabited by `λ+1` and
+does not split (`pin_lambda_strong_solver`, CAS `225`, `226`).
+That solver returning public `e` is the inverter
+(`strong_rsa_solver_pin_e_constructs_factor`). Not
+`rsa_inverter_constructs_factor_open_named`. Not
+`strong_rsa_solver_constructs_factor_open_named`. Not
 `residual_solver_constructs_factor_open_named`.
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
@@ -512,6 +521,11 @@ advice `N/17`: `PreprocessGRA.v`.
 | modular cube-root of a reduced unit is a residual leaf | `mod_cbrt_unit_is_residual_leaf` / `trapdoor_inhabits_residual_leaf` | `SrsaModCbrt.v` | `217`, `221` |
 | reduced residual solver at public `e` is the trapdoor map | `residual_solver_reduced_pin_e_is_trapdoor` / `residual_solver_reduced_pin_e_constructs_factor` | `SrsaModCbrt.v` | `220`, `221` |
 | leftover `y` is a residue; `N+1` is not a leaf | `residual_leaf_y_is_residue` / `pin_N_plus_1_not_a_leaf` | `SrsaModCbrt.v` | `221` |
+| `e`-th root of a non-unit carries the input gcd | `eth_root_nonunit_factors` / `pin_eth_root_p_factors` | `SrsaInverter.v` | `222` |
+| reduced-units public-`e` inverter is the trapdoor map | `rsa_inverter_reduced_units_is_trapdoor` / `rsa_inverter_reduced_units_constructs_factor` | `SrsaInverter.v` | `223`, `227` |
+| `N+1` is not an RSA / Strong-RSA problem | `pin_N_plus_1_not_rsa_problem` / `pin_N_plus_1_not_strong_RSA` | `SrsaInverter.v` | `224` |
+| Strong-RSA solver on units via `λ+1` does not split | `pin_lambda_strong_solver` / `pin_lambda_plus_one_does_not_split` | `SrsaInverter.v` | `225`, `226` |
+| Strong-RSA solver returning public `e` is the inverter | `strong_solver_as_inverter` / `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | `227` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

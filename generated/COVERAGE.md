@@ -2146,7 +2146,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L12: Live-target route pins
+- L13: Live-target route pins
 
 ## `SAGM.v`
 
@@ -2614,6 +2614,31 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `extra_edq_minus_1` | 284 |
 | Theorem | `extra_shamir_3_7` | 288 |
 | Theorem | `extra_rerand_fixed_e` | 292 |
+
+## `SrsaInverter.v`
+
+- L15: Restricted RSA inverter and Strong-RSA solver shapes
+  - L28: [e]-th root of a non-unit
+  - L56: Non-unit [e]-th root carries the input gcd
+  - L138: RSA problem [y] is a residue
+  - L167: Reduced-units public-[e] inverter is the trapdoor map
+  - L235: Strong-RSA solver on units: [λ+1] inhabits, does not factor
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `prime_divides_pow` | 33 |
+| Theorem | `eth_root_nonunit_factors` | 61 |
+| Theorem | `pin_eth_root_p_factors` | 129 |
+| Theorem | `rsa_problem_y_is_residue` | 140 |
+| Theorem | `pin_N_plus_1_not_rsa_problem` | 151 |
+| Theorem | `pin_N_plus_1_not_strong_RSA` | 159 |
+| Theorem | `rsa_inverter_reduced_units_is_trapdoor` | 187 |
+| Theorem | `rsa_inverter_reduced_units_constructs_factor` | 204 |
+| Theorem | `inverter_as_residual_returns_e` | 230 |
+| Theorem | `pin_lambda_strong_solver_output_is_unit` | 257 |
+| Theorem | `pin_lambda_plus_one_does_not_split` | 265 |
+| Theorem | `pin_lambda_strong_solver_not_residual` | 269 |
+| Theorem | `strong_rsa_solver_pin_e_constructs_factor` | 299 |
 
 ## `SrsaModCbrt.v`
 
@@ -3787,4 +3812,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2662 theorems/lemmas/corollaries/examples across 120 files._
+_2675 theorems/lemmas/corollaries/examples across 121 files._
