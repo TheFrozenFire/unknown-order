@@ -20,7 +20,9 @@ smart contracts. Read these before adding a definition, a proof, or a witness.
 
 This is a **dedicated theory repo**, not a contract target. Work lives at the repo root
 (`rocq/`, `cas/`), the same layout as `ciphering`. Do not introduce a
-`formal-verification/` subtree.
+`formal-verification/` subtree. Harness skills live in
+`../formal-verification/.agents/skills/` (`lamport-audit`, `cas-witness`,
+`rocq-sim`, `print-assumptions`, `adversarial-review`). Do not copy them.
 
 ## Core disciplines
 
@@ -54,6 +56,12 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
    does **not** forbid proving a precise reduction (an inverter or Strong-RSA
    solver constructs a factor).  Those are `*_open_named` live targets.
    `NamedRefuse` is out of *model* (no PPT, hash, NFS) — not a ban on nearby algebra.
+   A **new** paper/plan/cut freezes its route with the harness `lamport-audit`
+   skill before CAS/Rocq: convert without repair, forward hierarchy, reverse from
+   the *headline*. Reverse `FOLLOWS` on a weaker sentence ⇒ that weaker sentence
+   is the theorem; the strong name stays `*_open_named` or “not a claim of.”
+   Lamport is not a confirming tool and not a kernel. Existing theorems are
+   grandfathered. Artifacts: `notes/lamport/<claim-id>/`.
 
 6. **Record why a tier was skipped.** Certora, Halmos, and the Rocq equivalence (Gallina ↔ solc-Yul)
    tiers are EVM-bound and skipped-by-construction. CAS + Rocq-SIM are the two differently-failing
@@ -85,6 +93,7 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
   `formal-verification/.agents/skills/cas-witness/reference/pari-objects.md`.
   Do not add OSCAR / Julia to this gate.
 - `bash run-check.sh` runs both; each track SKIPs cleanly if its tool is absent.
+  It also runs `lamport-gate` when `notes/lamport/` contains `STATUS.yaml`.
 
 The one local Rocq toolchain is the opam `rocq-lsp` switch (same one `rocq-mcp` / pet uses).
 `rocq/run-check.sh` selects `opam exec --switch=rocq-lsp -- rocq compile` so `.vo` artifacts stay

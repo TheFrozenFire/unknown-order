@@ -15,6 +15,13 @@ bash rocq/run-check.sh || fail=1
 echo
 echo "===================== Coverage (generated map) =========="
 bash rocq/gen-coverage.sh || fail=1
+echo
+echo "===================== Lamport route STATUS =============="
+if [[ -x ../formal-verification/tooling/lamport-gate ]]; then
+  bash ../formal-verification/tooling/lamport-gate --root . || fail=1
+else
+  echo "lamport-gate: harness tooling not found — SKIP"
+fi
 
 echo
 if [[ $fail -eq 0 ]]; then echo "unknown-order: all present tracks OK"; else echo "unknown-order: a track FAILED" >&2; exit 1; fi
