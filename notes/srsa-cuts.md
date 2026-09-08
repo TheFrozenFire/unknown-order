@@ -566,6 +566,8 @@ advice `N/17`: `PreprocessGRA.v`.
 | residual leaf at generator `g` extracts `d'` and Millers; every reduced residual solver on this pin factors | `residual_leaf_at_g_extracts_and_factors` / `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | `241` |
 | trapdoor is a hom on units; mixed cube/7th-root table is not | `pin_trapdoor_solver_x_homomorphic` / `residual_x_homomorphic_constructs_factor` | `SrsaHom.v` | `242` |
 | Strong-RSA with `λ \| e−1` Millers from `e−1`; residual forbids the class | `strong_rsa_solver_annihilator_e_constructs_factor` / `residual_solver_not_annihilator_e` | `SrsaHom.v` | `243` |
+| attained unit orders generate `λ` for general distinct primes | `orders_attained_generate_lambda` | `Order.v` | `25`, `153` |
+| Pratt check on `p=11`: `g=2`, `p−1=2·5` | `pratt_generator_ok_11` / `pratt_factors_ok_11` | `Pratt.v` | `244` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

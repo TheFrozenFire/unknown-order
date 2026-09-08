@@ -26,7 +26,16 @@ Every reduced residual solver on this pin factors; homomorphic
 solvers and public-`e` inverters are corollaries. Not the
 forall-`RSAInstance` open named (height mismatch is pin-specific).
 Annihilator-`e` Strong-RSA solvers Miller from `e−1`; residual
-forbids that class. Three `*_open_named` still unused.
+forbids that class.
+
+P7: the `RSAInstance` nameds are commented as instance-vacuous.
+Extraction nameds (`residual_solver_extracts_factor_open_named`
+and siblings) quantify over `N` and the solver, no instance.
+Do not inhabit. P8: attained orders generate `λ` (theorem);
+Pratt completeness and Dirichlet composition retargeted to
+`*_open_named`. Pin Pratt check on 11. The original three
+RSAInstance nameds plus the three extraction nameds plus Pratt
+and compose opens stay unused.
 
 ---
 
@@ -34,15 +43,15 @@ forbids that class. Three `*_open_named` still unused.
 
 | ID | Slice | Status | Depends |
 |---|---|---|---|
-| P0 | Framing: do not re-refuse live targets; comments on vacuity of the nameds as written | pending | — |
+| P0 | Framing: do not re-refuse live targets; comments on vacuity of the nameds as written | done | — |
 | P1 | Uniqueness of unit `e`-th roots from `gcd(e,λ)=1`, no handed inverse | done | — |
 | P2 | Bézout `d'` from `(e,λ)`; drop `d'` hyp from the fixed-`e` theorem | done | P1 |
 | P3 | Generalize Win B off `pin_e` (uniqueness + Bézout; folds of that `e` still open) | done | P1 |
 | P4 | Recover `d` / `d'` from the solver’s `x`-values (local dlog or interpolant), then Miller | done | P1, P3 |
 | P5 | Homomorphic residual solver ⇒ factor | done | P1, P3 |
 | P6 | Lattice arrows among the three nameds; `λ \| e−1` Miller-from-`(e−1)` class | done | P2 or P4 |
-| P7 | Re-type / re-comment the live targets so `exists f` is not instance-vacuous | pending | P0 |
-| P8 | Stale `*_named` refuses that are deferred algebra (Pratt, orders, Dirichlet compose) | pending | — |
+| P7 | Re-type / re-comment the live targets so `exists f` is not instance-vacuous | done | P0 |
+| P8 | Stale `*_named` refuses that are deferred algebra (Pratt, orders, Dirichlet compose) | done | — |
 
 Pick **one slice per turn** unless the user says otherwise.
 Do not skip a “Depends” cell. Do not invent a new leftover/fold/K

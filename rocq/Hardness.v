@@ -77,9 +77,21 @@ Qed.
 Definition strong_rsa_solver (N : Z) : Type :=
   forall y, { xe : Z * Z | let '(x, e) := xe in Problem_StrongRSA N y x e }.
 
+(** Instance-vacuous: [exists f] ignores [Solve]; [rsa_p R]
+    inhabits it.  Do not inhabit.  Unused means unproved, on-goal.
+    The intended extraction is
+    [strong_rsa_solver_extracts_factor_open_named].
+    [λ+1] inhabits the solver type when [λ] is known and does
+    not gcd-split ([pin_lambda_strong_solver]). *)
 Definition strong_rsa_solver_constructs_factor_open_named : Prop :=
   forall (R : RSAInstance) (Solve : strong_rsa_solver (rsa_N R)),
     exists f, Problem_Factor (rsa_N R) f.
+
+(** From [N] and the graph of [Solve] — no [RSAInstance], no [λ]
+    in the type.  Unused means unproved, on-goal.  Do not inhabit. *)
+Definition strong_rsa_solver_extracts_factor_open_named : Prop :=
+  forall (N : Z) (Solve : strong_rsa_solver N),
+    exists f, Problem_Factor N f.
 
 Theorem rsa_solution_is_strong_RSA :
   forall N e y x,

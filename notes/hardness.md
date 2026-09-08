@@ -100,10 +100,10 @@ Constructible torsion `H` is a family parameter
 | low-degree `Q` vanishing on `(Z/NZ)*` | CRT-lifts `11` mod `17` to unit `45`; `11` and `17` divide every coeff, hence `N` | `residual_low_degree_ZN_units_divides_N`, `residual_nodiv_low_degree_ZN_units_divides_N` | high-degree `X^d`; eval-at-2 for a general large `P` (can be a multiple of `N` without `P=0` over `Z`) |
 | nodiv tape `gra_deg_bound ≤ 3` | `deg P ≤ 3`, so `deg(P^3−X) < 10`; vanishing on units ⇒ `N \|` coeffs | `gra_nodiv_degree_le`, `residual_nodiv_bound_le3_Q_lt10`, `residual_nodiv_short_ZN_units_divides_N` | two squarings (bound 4); trapdoor `X^{27}` |
 | exact `deg(PQ)` / square `X^2` / cube `X^3` | `deg(PQ)=deg P+deg Q` when both nonzero; `X^6−X` and `X^9−X` linear `−1`, unit 2 not a root | `poly_degree_mul`, `residual_square_cannot_vanish_on_ZN_units`, `residual_cube_cannot_vanish_on_ZN_units`, `residual_trapdoor_inverts_pin` | forbidding `X^{27}` as a map on units; `N\|`all coeffs contradicts eval-at-2 for a general large `P` |
-| pin unit `3` | `ord(3)=λ=80` | `is_order_pin_3_80`, `orders_generate_lambda_pin` | sampling-completeness for every `N` (`orders_generate_lambda_named`) |
-| lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | sampling enough orders to recover `λ` (`orders_generate_lambda_named`) |
-| prime `p` | a generator of `𝔽_p*` | `primitive_root_exists` | a named iso `(Z/pZ)* ≅ C_{p-1}` (`pratt_complete_named`) |
-| primitive root `g` of `𝔽_p*` | every unit is `g^k` | `primitive_root_generates` | a named iso `(Z/pZ)* ≅ C_{p-1}` (`pratt_complete_named`) |
+| pin unit `3` | `ord(3)=λ=80` | `is_order_pin_3_80`, `orders_generate_lambda_pin` | arbitrary-`ks` sampling (`orders_generate_lambda_named`); attained instance is a theorem |
+| lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | arbitrary-`ks` sampling (`orders_generate_lambda_named`) |
+| prime `p` | a generator of `𝔽_p*` | `primitive_root_exists` | verified Pratt completeness (`pratt_complete_open_named`) |
+| primitive root `g` of `𝔽_p*` | every unit is `g^k` | `primitive_root_generates` | verified Pratt completeness (`pratt_complete_open_named`) |
 | `3 \| p−1`, unit `a` | `a` is a cube iff `a^{(p−1)/3} ≡ 1` | `cube_euler_one_direction`, `cube_euler_converse`, `cube_euler_iff` | cubic residuosity of `N=pq` (CRT of local cubes) |
 | distinct primes `p≠q` | cube mod `pq` iff cube mod `p` and mod `q` | `cube_N_iff_both`, `pin_units_are_cubes` | a cubic Jacobi pairing into cube roots of 1 |
 | `3 \| λ`, cube mod `N` | `a^{λ/3} ≡ 1` | `cube_euler_lambda_necessary` | `a^{λ/3}≡1` ⇒ cube (false: `cube_euler_lambda_not_sufficient_247`) |
@@ -115,7 +115,7 @@ Constructible torsion `H` is a family parameter
 | mixed `x³ ≡ 1`, `x ≡ 1 (mod q)` | `gcd(x−1,N)=q` and `gcd(Φ₃(x),N)=p` | `mixed_mu3_splits`, `mixed_kernel_pin_91_splits` | a public pairing (not required; one mixed sample factors) |
 | diagonal `x³ ≡ 1`, `x ≢ 1` both sides | `gcd(x−1,N)=1` and `N \| Φ₃(x)` | `diagonal_mu3_gcd_xminus1`, `diagonal_mu3_gcd_phi3`, `diagonal_pin_91_no_split` | leftover pairing data hides the factors (this subset only) |
 | pin unit, `x^3 ≡ 1` | `x ≡ 1` | `pin_cube_kernel_trivial` | — |
-| distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals` | sampling-completeness (`orders_generate_lambda_named`) |
+| distinct primes `p ≠ q` | a unit of `(Z/pqZ)*` of order `λ` | `exists_unit_order_lambda`, `exists_unit_order_lambda_pin`, `order_semiprime_from_locals`, `orders_attained_generate_lambda` | arbitrary-`ks` sampling (`orders_generate_lambda_named`) |
 | `e=λ+1=81` | not residual-shaped; `GConst 81` solves sRSA on units without splitting | `not_residual_shaped_e_81`, `residual_gra_const81_solves_sRSA_not_residual` | AMS constant as a residual GRA |
 | `GConst 42` leftover cube | inverts pin `y=36`, misses units `8` and `2` | `residual_gra_const42_inverts_pin_not_8`, `residual_gra_const42_misses_unit_2` | an all-units residual GRA |
 | CRT binomial `c_p X^{d_p}+c_q X^{d_q}` of the *e*-th root map | `gcd(c_p,N)` and `gcd(c_q,N)` are the factors; inverts every unit | `cong_1_mod_p_0_mod_q_gcd`, `crt_binomial_inverts_units`, `pin_root_ca_splits`, `pin_root_cb_splits` | unrestricted residual solver ⇒ factor; the TM wrote `{p,q}` into the coefficients |

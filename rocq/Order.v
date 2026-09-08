@@ -23,12 +23,14 @@ Open Scope Z_scope.
     [v₂(ord)].
 
     Completeness of sampling orders to recover [λ] is
-    [orders_generate_lambda_named], unused refuse of a density
-    statement ([cas/25_order.gp]).  The lcm of two unit orders is
-    again a unit order ([order_lcm_attained]).  [𝔽_p*] has a
-    primitive root ([primitive_root_exists]); CRT of local
-    generators is a unit of order [λ] ([exists_unit_order_lambda],
-    [cas/153]).  A primitive root generates: every unit is [g^k]
+    [orders_generate_lambda_named] for an arbitrary predicate [ks]
+    (false in general: [lcm_two_order2_not_lambda]).  The attained
+    instance is a theorem ([orders_attained_generate_lambda]).
+    The lcm of two unit orders is again a unit order
+    ([order_lcm_attained]).  [𝔽_p*] has a primitive root
+    ([primitive_root_exists]); CRT of local generators is a unit
+    of order [λ] ([exists_unit_order_lambda], [cas/153]).  A
+    primitive root generates: every unit is [g^k]
     ([primitive_root_generates], [cas/154]). *)
 
 (** ** Uniqueness and the divide criterion *)
@@ -291,6 +293,12 @@ Definition orders_generate_lambda_named (p q : Z) (ks : Z -> Prop) : Prop :=
   (forall k, ks k -> (k | lambda_semiprime p q)) /\
   (exists K, ks K /\ K = lambda_semiprime p q).
 
+(** [ks] ranges over an arbitrary predicate.  The interesting
+    instance is "is the order of some unit."  That instance is
+    [orders_attained_generate_lambda], not a refuse. *)
+Definition orders_attained (p q k : Z) : Prop :=
+  exists a, Z.coprime a (p * q) /\ is_order (p * q) a k.
+
 (** Two orders' lcm need not be [λ].  Both [−1] and a mixed [√1]
     have order 2; [lcm(2,2)=2 ≠ 80] on [rsa_test].  The refuse is
     the general sampling-completeness claim, not this negative. *)
@@ -494,8 +502,9 @@ Qed.
 
 (** ** A unit of order [λ] for general [N = pq]
 
-    [orders_generate_lambda_named] stays unused: it is sampling
-    completeness, not existence.  [order_lcm_attained]: the lcm
+    [orders_generate_lambda_named] on an arbitrary [ks] stays
+    unused (it is false for some [ks]).  The attained instance
+    is [orders_attained_generate_lambda].  [order_lcm_attained]: the lcm
     of two unit orders is the order of a unit.  A maximal-order
     unit of [𝔽_p*] is a primitive root: [X^d−1] cannot vanish on
     all of [𝔽_p*] for [d < p−1].  CRT of two local generators
@@ -1020,6 +1029,23 @@ Theorem orders_generate_lambda_pin :
   exists a, Z.coprime a pin_N /\ is_order pin_N a pin_lam /\
     pin_lam = lambda_semiprime pin_p pin_q.
 Proof. exists pin_g. apply pin_attains_lambda. Qed.
+
+Theorem orders_attained_generate_lambda :
+  forall p q,
+    Z.prime p -> Z.prime q -> p <> q ->
+    (forall k, orders_attained p q k -> (k | lambda_semiprime p q)) /\
+    (exists K, orders_attained p q K /\ K = lambda_semiprime p q).
+Proof.
+  intros p q Hp Hq Hneq.
+  split.
+  - intros k [a [Hcop Hord]].
+    apply (order_divides_lambda p q a k); assumption.
+  - destruct (exists_unit_order_lambda p q Hp Hq Hneq) as [a [Hcop Hord]].
+    exists (lambda_semiprime p q).
+    split.
+    + exists a. split; [exact Hcop | exact Hord].
+    + reflexivity.
+Qed.
 
 (** ** A primitive root generates [𝔽_p*]
 

@@ -22,7 +22,7 @@ Open Scope Z_scope.
     Contribute at slot [0] is the identity on any presentation
     whose [Pexp _ 1] is the element.  The general Cl contribute
     identity [f^{ρ^i} = g^{(τρ)^i}] needs associativity of
-    Dirichlet composition ([compose_assoc_named]); it is not
+    Dirichlet composition ([compose_assoc_open_named]); it is not
     taken as a hypothesis here.  The RSA instance is the theorem
     [pot_contribute_multiplies_tau].
 

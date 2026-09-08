@@ -13,21 +13,24 @@ Generated.  Do not edit by hand.
 
 | Name | File | Line | Status | Used at |
 |---|---|---:|---|---|
-| `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 80 | open | — |
-| `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 289 | open | — |
-| `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 588 | open | — |
-| `compose_preserves_disc_named` | `BinForms.v` | 677 | refuse | — |
-| `compose_assoc_named` | `BinForms.v` | 803 | refuse | — |
-| `compose_left_compat_named` | `BinForms.v` | 812 | refuse | — |
+| `compose_preserves_disc_open_named` | `BinForms.v` | 679 | open | — |
+| `compose_assoc_open_named` | `BinForms.v` | 806 | open | — |
+| `compose_left_compat_open_named` | `BinForms.v` | 816 | open | — |
+| `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 86 | open | — |
+| `strong_rsa_solver_extracts_factor_open_named` | `Hardness.v` | 92 | open | — |
+| `pratt_complete_open_named` | `Pratt.v` | 115 | open | — |
+| `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 297 | open | — |
+| `residual_solver_extracts_factor_open_named` | `StrongRSAPeel.v` | 305 | open | — |
+| `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 595 | open | — |
+| `rsa_inverter_extracts_factor_open_named` | `TranscriptOracle.v` | 601 | open | — |
 | `cocks_hash_named` | `Cocks.v` | 30 | refuse | — |
 | `cocks_ind_id_cpa_named` | `Cocks.v` | 33 | refuse | — |
 | `eval_pair_needs_integer_named` | `EvalPairing.v` | 229 | refuse | — |
 | `coppersmith_named` | `Lattice.v` | 67 | refuse | — |
 | `dirichlet_ap_prime_named` | `NamedSkips.v` | 73 | refuse | — |
-| `orders_generate_lambda_named` | `Order.v` | 290 | refuse | — |
+| `orders_generate_lambda_named` | `Order.v` | 292 | refuse | — |
 | `pot_bilinear_verify_named` | `PowersOfTau.v` | 36 | refuse | — |
 | `pot_hvzk_eqdl_named` | `PowersOfTau.v` | 41 | refuse | — |
-| `pratt_complete_named` | `Pratt.v` | 110 | refuse | — |
 | `dstar_is_zk_like_tau_named` | `SharedKey.v` | 636 | refuse | — |
 | `pot_bilinear_crs_named` | `SharedKey.v` | 641 | refuse | — |
 | `boneh_durfee_named` | `Wiener.v` | 158 | refuse | — |
@@ -82,8 +85,8 @@ comments; do not maintain this table by hand.
 | `inverse_unique_mod` | `CRTRSA.v` | 270 |
 | `local_inv_is_crt_dp` | `CRTRSA.v` | 297 |
 | `local_inv_is_crt_dq` | `CRTRSA.v` | 312 |
-| `gcd_powm_minus_1` | `Hardness.v` | 518 |
-| `leftover_mismatch_factors` | `Hardness.v` | 531 |
+| `gcd_powm_minus_1` | `Hardness.v` | 530 |
+| `leftover_mismatch_factors` | `Hardness.v` | 543 |
 | `miller_multiple_annihilates` | `MillerHeight.v` | 200 |
 | `miller_height_exists_multiple` | `MillerHeight.v` | 218 |
 | `miller_from_multiple` | `MillerHeight.v` | 256 |
@@ -273,20 +276,20 @@ comments; do not maintain this table by hand.
 | `rsa_inverter_reduced_units_is_trapdoor` | `SrsaInverter.v` | 187 |
 | `rsa_inverter_reduced_units_constructs_factor` | `SrsaInverter.v` | 204 |
 | `inverter_as_residual_returns_e` | `SrsaInverter.v` | 230 |
-| `rsa_inverter_recovers_message` | `TranscriptOracle.v` | 592 |
+| `rsa_inverter_recovers_message` | `TranscriptOracle.v` | 605 |
 
 ### `strong_rsa_solver_constructs_factor_open_named`
 
 | Closed result | File | Line |
 |---|---|---:|
-| `rsa_solution_is_strong_RSA` | `Hardness.v` | 84 |
-| `lambda_solves_strong_RSA` | `Hardness.v` | 98 |
-| `strong_RSA_trivial_at_one` | `Hardness.v` | 122 |
-| `rsa_trivial_at_one` | `Hardness.v` | 130 |
-| `order_inverts_in_cyclic` | `Hardness.v` | 467 |
-| `order_yields_strong_RSA` | `Hardness.v` | 492 |
-| `gcd_powm_minus_1` | `Hardness.v` | 518 |
-| `leftover_mismatch_factors` | `Hardness.v` | 531 |
+| `rsa_solution_is_strong_RSA` | `Hardness.v` | 96 |
+| `lambda_solves_strong_RSA` | `Hardness.v` | 110 |
+| `strong_RSA_trivial_at_one` | `Hardness.v` | 134 |
+| `rsa_trivial_at_one` | `Hardness.v` | 142 |
+| `order_inverts_in_cyclic` | `Hardness.v` | 479 |
+| `order_yields_strong_RSA` | `Hardness.v` | 504 |
+| `gcd_powm_minus_1` | `Hardness.v` | 530 |
+| `leftover_mismatch_factors` | `Hardness.v` | 543 |
 | `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 100 |
 | `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 117 |
 | `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 123 |
@@ -309,4 +312,4 @@ comments; do not maintain this table by hand.
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 | `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | 55 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 221 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 221 does-not-discharge rows._

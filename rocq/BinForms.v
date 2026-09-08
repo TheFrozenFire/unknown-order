@@ -673,8 +673,10 @@ Qed.
     ambiguous form ([b = 0] or [a = ±b]) has leading coefficient 1
     and is therefore principal.  The remaining two-form branch
     (neither leading coefficient a unit, not an inverse pair) is
-    [compose_preserves_disc_named]. *)
-Definition compose_preserves_disc_named (f g : bqf) : Prop :=
+    [compose_preserves_disc_open_named].  Inverse pairs, unit
+    leading coefficient, and ambiguous self-composition are
+    theorems.  Unused means unproved, on-goal. *)
+Definition compose_preserves_disc_open_named (f g : bqf) : Prop :=
   bqf_disc (bqf_compose f g) = bqf_disc f /\
   bqf_primitive (bqf_compose f g).
 
@@ -798,18 +800,20 @@ Proof.
     [apply (of_disc_a_nz f D Hof (proj1 Hiq)) | exact Hdiv].
 Qed.
 
-(** Associativity of Dirichlet composition is named, except on
-    the triple [{id, f, f⁻¹}] where the identity laws suffice. *)
-Definition compose_assoc_named (D : Z) : Prop :=
+(** Associativity of Dirichlet composition.  The triple
+    [{id, f, f⁻¹}] is a theorem ([compose_assoc_id_inv]).
+    Unused means unproved, on-goal. *)
+Definition compose_assoc_open_named (D : Z) : Prop :=
   forall f g h,
     of_disc f D -> of_disc g D -> of_disc h D ->
     bqf_equiv (bqf_compose (bqf_compose f g) h)
               (bqf_compose f (bqf_compose g h)).
 
-(** Left-compatibility of composition with equivalence.  Unused
-    refuse: blocks [y^h = 1 ⇒ y^{h+1} = y] on unreduced
-    representatives ([ClassGroupWall]). *)
-Definition compose_left_compat_named (D : Z) : Prop :=
+(** Left-compatibility of composition with equivalence.
+    Unused means unproved, on-goal: blocks
+    [y^h = 1 ⇒ y^{h+1} = y] on unreduced representatives
+    ([ClassGroupWall]). *)
+Definition compose_left_compat_open_named (D : Z) : Prop :=
   forall f g h,
     of_disc f D -> of_disc g D -> of_disc h D ->
     bqf_equiv f g ->

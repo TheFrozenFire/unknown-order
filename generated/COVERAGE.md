@@ -153,8 +153,8 @@ in the Rocq tree.  Do not edit by hand.
   - L166: SL2 action and proper equivalence
   - L335: Represented values: a reduced form with [a > 1] is not principal
   - L419: Dirichlet composition
-  - L832: Ambiguous forms from a divisor of [Δ]
-  - L883: Catalog: [Δ ∈ {−23, −47, −87, −403, −455}]
+  - L836: Ambiguous forms from a divisor of [Δ]
+  - L887: Catalog: [Δ ∈ {−23, −47, −87, −403, −455}]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -207,53 +207,53 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `compose_inv_of_disc` | 561 |
 | Theorem | `form_a_one_equiv_id` | 581 |
 | Theorem | `compose_inv_equiv_id` | 658 |
-| Lemma | `ambiguous_div_is_ambiguous` | 684 |
-| Lemma | `solve_cong_target_0` | 688 |
-| Lemma | `compose_self_gcd_div` | 699 |
-| Lemma | `dirichlet_B_self_div` | 716 |
-| Theorem | `compose_self_leading_one` | 725 |
-| Lemma | `compose_self_b` | 737 |
-| Lemma | `compose_self_c` | 743 |
-| Lemma | `four_divides_b2_minus_disc` | 759 |
-| Theorem | `compose_self_of_disc` | 766 |
-| Theorem | `compose_self_ambiguous_equiv_id` | 788 |
-| Theorem | `compose_assoc_id_inv` | 818 |
-| Lemma | `amb_from_div_ambiguous` | 840 |
-| Lemma | `amb_from_div_disc_mod0` | 848 |
-| Lemma | `amb_from_div_disc_mod1` | 866 |
-| Lemma | `iq_neg23` | 906 |
-| Lemma | `iq_neg47` | 909 |
-| Lemma | `iq_neg87` | 912 |
-| Lemma | `iq_neg403` | 915 |
-| Lemma | `iq_neg455` | 918 |
-| Theorem | `form_neg87_amb_of_disc` | 921 |
-| Theorem | `form_neg403_amb_of_disc` | 924 |
-| Theorem | `form_neg403_amb_red_of_disc` | 927 |
-| Theorem | `form_neg455_5_of_disc` | 930 |
-| Theorem | `form_neg455_7_of_disc` | 933 |
-| Theorem | `form_neg455_13_red_of_disc` | 936 |
-| Theorem | `form_neg87_amb_reduced` | 939 |
-| Theorem | `form_neg403_amb_red_reduced` | 942 |
-| Theorem | `form_neg455_5_reduced` | 945 |
-| Theorem | `form_neg455_7_reduced` | 948 |
-| Theorem | `form_neg455_13_red_reduced` | 951 |
-| Theorem | `form_neg87_amb_is_ambiguous` | 954 |
-| Theorem | `form_neg403_amb_is_ambiguous` | 957 |
-| Theorem | `form_neg403_amb_red_is_ambiguous` | 960 |
-| Theorem | `form_neg455_5_is_ambiguous` | 963 |
-| Theorem | `form_neg455_7_is_ambiguous` | 966 |
-| Theorem | `form_neg455_13_red_is_ambiguous` | 969 |
-| Theorem | `form_neg87_not_principal` | 972 |
-| Theorem | `form_neg403_not_principal` | 981 |
-| Theorem | `form_neg455_5_not_principal` | 990 |
-| Theorem | `form_neg455_7_not_principal` | 999 |
-| Theorem | `form_neg455_13_not_principal` | 1008 |
-| Theorem | `catalog_compose_inv_is_principal` | 1026 |
-| Theorem | `catalog_wins_LowOrder_B2` | 1037 |
-| Lemma | `bqf_exp_0` | 1070 |
-| Lemma | `bqf_exp_1` | 1073 |
-| Lemma | `bqf_exp_2` | 1083 |
-| Theorem | `bqf_exp_2_ambiguous_div` | 1093 |
+| Lemma | `ambiguous_div_is_ambiguous` | 686 |
+| Lemma | `solve_cong_target_0` | 690 |
+| Lemma | `compose_self_gcd_div` | 701 |
+| Lemma | `dirichlet_B_self_div` | 718 |
+| Theorem | `compose_self_leading_one` | 727 |
+| Lemma | `compose_self_b` | 739 |
+| Lemma | `compose_self_c` | 745 |
+| Lemma | `four_divides_b2_minus_disc` | 761 |
+| Theorem | `compose_self_of_disc` | 768 |
+| Theorem | `compose_self_ambiguous_equiv_id` | 790 |
+| Theorem | `compose_assoc_id_inv` | 822 |
+| Lemma | `amb_from_div_ambiguous` | 844 |
+| Lemma | `amb_from_div_disc_mod0` | 852 |
+| Lemma | `amb_from_div_disc_mod1` | 870 |
+| Lemma | `iq_neg23` | 910 |
+| Lemma | `iq_neg47` | 913 |
+| Lemma | `iq_neg87` | 916 |
+| Lemma | `iq_neg403` | 919 |
+| Lemma | `iq_neg455` | 922 |
+| Theorem | `form_neg87_amb_of_disc` | 925 |
+| Theorem | `form_neg403_amb_of_disc` | 928 |
+| Theorem | `form_neg403_amb_red_of_disc` | 931 |
+| Theorem | `form_neg455_5_of_disc` | 934 |
+| Theorem | `form_neg455_7_of_disc` | 937 |
+| Theorem | `form_neg455_13_red_of_disc` | 940 |
+| Theorem | `form_neg87_amb_reduced` | 943 |
+| Theorem | `form_neg403_amb_red_reduced` | 946 |
+| Theorem | `form_neg455_5_reduced` | 949 |
+| Theorem | `form_neg455_7_reduced` | 952 |
+| Theorem | `form_neg455_13_red_reduced` | 955 |
+| Theorem | `form_neg87_amb_is_ambiguous` | 958 |
+| Theorem | `form_neg403_amb_is_ambiguous` | 961 |
+| Theorem | `form_neg403_amb_red_is_ambiguous` | 964 |
+| Theorem | `form_neg455_5_is_ambiguous` | 967 |
+| Theorem | `form_neg455_7_is_ambiguous` | 970 |
+| Theorem | `form_neg455_13_red_is_ambiguous` | 973 |
+| Theorem | `form_neg87_not_principal` | 976 |
+| Theorem | `form_neg403_not_principal` | 985 |
+| Theorem | `form_neg455_5_not_principal` | 994 |
+| Theorem | `form_neg455_7_not_principal` | 1003 |
+| Theorem | `form_neg455_13_not_principal` | 1012 |
+| Theorem | `catalog_compose_inv_is_principal` | 1030 |
+| Theorem | `catalog_wins_LowOrder_B2` | 1041 |
+| Lemma | `bqf_exp_0` | 1074 |
+| Lemma | `bqf_exp_1` | 1077 |
+| Lemma | `bqf_exp_2` | 1087 |
+| Theorem | `bqf_exp_2_ambiguous_div` | 1097 |
 
 ## `BitLeak.v`
 
@@ -1292,45 +1292,45 @@ in the Rocq tree.  Do not edit by hand.
   - L28: Factoring as a relation
   - L33: RSA is a one-way permutation on units, not a predicate
   - L62: RSA vs strong RSA (relations)
-  - L137: Order divides the exponent
-  - L184: One-sided small exponent (the Type-B winning condition)
-  - L246: Order assumption and fractional root
-  - L460: Order → Strong RSA by invert in the cyclic (equality / multiply)
-  - L507: Leftover mismatch splits; a pair is not a solver
+  - L149: Order divides the exponent
+  - L196: One-sided small exponent (the Type-B winning condition)
+  - L258: Order assumption and fractional root
+  - L472: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L519: Leftover mismatch splits; a pair is not a solver
 
 | Kind | Name | Line |
 |---|---|---:|
 | Theorem | `rsa_units_are_eth_powers` | 39 |
 | Theorem | `trapdoor_inverts_RSA` | 50 |
-| Theorem | `rsa_solution_is_strong_RSA` | 84 |
-| Theorem | `lambda_solves_strong_RSA` | 98 |
-| Lemma | `strong_RSA_trivial_at_one` | 122 |
-| Lemma | `rsa_trivial_at_one` | 130 |
-| Lemma | `order_divides_annihilator` | 139 |
-| Theorem | `order_divides_lambda` | 168 |
-| Theorem | `one_sided_low_order_factors` | 196 |
-| Theorem | `one_sided_low_order_is_factor` | 228 |
-| Lemma | `adaptive_root_is_strong_RSA` | 241 |
-| Theorem | `order_is_annihilator` | 252 |
-| Theorem | `low_order_is_annihilator` | 261 |
-| Theorem | `lambda_is_annihilator_on_units` | 270 |
-| Theorem | `annihilator_plus_one_is_strong_RSA` | 283 |
-| Theorem | `rsa_is_fractional_root` | 300 |
-| Theorem | `strong_RSA_is_fractional_root` | 316 |
-| Theorem | `annihilator_is_fractional_root_of_one` | 331 |
-| Theorem | `ar_C_implies_strong_RSA` | 360 |
-| Theorem | `ar_C_requires_C` | 369 |
-| Theorem | `strong_RSA_is_ar_C_iff` | 374 |
-| Theorem | `lambda_plus_one_11_17` | 385 |
-| Theorem | `lambda_plus_one_11_17_not_prime` | 389 |
-| Theorem | `lambda_solves_search_11_17` | 398 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 409 |
-| Theorem | `adaptive_root_known_product_breaks` | 427 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 443 |
-| Theorem | `order_inverts_in_cyclic` | 467 |
-| Theorem | `order_yields_strong_RSA` | 492 |
-| Lemma | `gcd_powm_minus_1` | 518 |
-| Theorem | `leftover_mismatch_factors` | 531 |
+| Theorem | `rsa_solution_is_strong_RSA` | 96 |
+| Theorem | `lambda_solves_strong_RSA` | 110 |
+| Lemma | `strong_RSA_trivial_at_one` | 134 |
+| Lemma | `rsa_trivial_at_one` | 142 |
+| Lemma | `order_divides_annihilator` | 151 |
+| Theorem | `order_divides_lambda` | 180 |
+| Theorem | `one_sided_low_order_factors` | 208 |
+| Theorem | `one_sided_low_order_is_factor` | 240 |
+| Lemma | `adaptive_root_is_strong_RSA` | 253 |
+| Theorem | `order_is_annihilator` | 264 |
+| Theorem | `low_order_is_annihilator` | 273 |
+| Theorem | `lambda_is_annihilator_on_units` | 282 |
+| Theorem | `annihilator_plus_one_is_strong_RSA` | 295 |
+| Theorem | `rsa_is_fractional_root` | 312 |
+| Theorem | `strong_RSA_is_fractional_root` | 328 |
+| Theorem | `annihilator_is_fractional_root_of_one` | 343 |
+| Theorem | `ar_C_implies_strong_RSA` | 372 |
+| Theorem | `ar_C_requires_C` | 381 |
+| Theorem | `strong_RSA_is_ar_C_iff` | 386 |
+| Theorem | `lambda_plus_one_11_17` | 397 |
+| Theorem | `lambda_plus_one_11_17_not_prime` | 401 |
+| Theorem | `lambda_solves_search_11_17` | 410 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 421 |
+| Theorem | `adaptive_root_known_product_breaks` | 439 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 455 |
+| Theorem | `order_inverts_in_cyclic` | 479 |
+| Theorem | `order_yields_strong_RSA` | 504 |
+| Lemma | `gcd_powm_minus_1` | 530 |
+| Theorem | `leftover_mismatch_factors` | 543 |
 
 ## `HashSlot.v`
 
@@ -1668,73 +1668,74 @@ in the Rocq tree.  Do not edit by hand.
 ## `Order.v`
 
 - L16: Orders of units, as objects
-  - L34: Uniqueness and the divide criterion
-  - L123: Existence from a positive annihilator
-  - L207: [ord(a^k) = ord(a) / gcd(ord(a), k)]
-  - L269: [lcm] of orders divides [λ]
-  - L351: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
-  - L495: A unit of order [λ] for general [N = pq]
-  - L1024: A primitive root generates [𝔽_p*]
+  - L36: Uniqueness and the divide criterion
+  - L125: Existence from a positive annihilator
+  - L209: [ord(a^k) = ord(a) / gcd(ord(a), k)]
+  - L271: [lcm] of orders divides [λ]
+  - L359: 2-height is [v₂(ord)] at a common odd multiple of [odd_part(ord)]
+  - L503: A unit of order [λ] for general [N = pq]
+  - L1050: A primitive root generates [𝔽_p*]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `is_order_unique` | 36 |
-| Lemma | `no_smaller_order_sound` | 55 |
-| Lemma | `is_order_by_vm` | 78 |
-| Lemma | `powm_one_of_divide` | 90 |
-| Theorem | `order_iff_divides` | 106 |
-| Lemma | `order_exists_from_annihilator` | 128 |
-| Theorem | `order_exists_prime` | 178 |
-| Theorem | `order_exists_semiprime` | 192 |
-| Theorem | `order_of_power` | 209 |
-| Theorem | `lcm_orders_divides_lambda` | 271 |
-| Lemma | `is_order_2_of` | 298 |
-| Theorem | `minus1_order_2_rsa_test` | 312 |
-| Theorem | `mixed67_order_2_rsa_test` | 318 |
-| Theorem | `lcm_two_order2_not_lambda` | 324 |
-| Lemma | `is_order_pin_g_p` | 335 |
-| Lemma | `is_order_pin_g_q` | 340 |
-| Theorem | `pin_unit_3_coprime` | 347 |
-| Lemma | `powm_eq_1_iff_order_divides` | 353 |
-| Lemma | `pow2_divides_pow2` | 364 |
-| Theorem | `two_height_is_val2_ord` | 387 |
-| Theorem | `order_2_mod_11` | 446 |
-| Theorem | `order_2_mod_17` | 451 |
-| Theorem | `two_height_independent_of_odd_multiple` | 458 |
-| Theorem | `height_is_val2_ord_textbook` | 474 |
-| Lemma | `zseq_length` | 510 |
-| Lemma | `zseq_In_bounds` | 517 |
-| Lemma | `zseq_Forall_distinct_head` | 530 |
-| Lemma | `zseq_pairwise_distinct` | 550 |
-| Lemma | `units_mod_prime_length` | 566 |
-| Lemma | `units_mod_prime_In` | 570 |
-| Lemma | `units_mod_prime_coprime` | 580 |
-| Lemma | `units_mod_prime_distinct` | 592 |
-| Lemma | `units_mod_prime_nonnil` | 602 |
-| Lemma | `order_mul_coprime` | 610 |
-| Lemma | `order_of_divisor_power` | 681 |
-| Lemma | `order_lcm_attained` | 710 |
-| Lemma | `exists_max_order_in` | 741 |
-| Lemma | `zseq_In_interval` | 775 |
-| Lemma | `unit_mod_in_list` | 788 |
-| Lemma | `is_order_mod_base` | 809 |
-| Lemma | `is_order_of_mod` | 823 |
-| Lemma | `is_order_eq_mod` | 837 |
-| Theorem | `primitive_root_exists` | 850 |
-| Lemma | `order_semiprime_from_locals` | 916 |
-| Theorem | `exists_unit_order_lambda` | 959 |
-| Theorem | `is_order_pin_3_80` | 995 |
-| Theorem | `exists_unit_order_lambda_pin` | 1004 |
-| Theorem | `pin_attains_lambda` | 1010 |
-| Theorem | `orders_generate_lambda_pin` | 1019 |
-| Lemma | `mul_cancel_unit_mod` | 1029 |
-| Lemma | `powm_eq_pow_cancel` | 1044 |
-| Lemma | `powm_inj_lt_order` | 1068 |
-| Lemma | `nodup_incl_le` | 1097 |
-| Lemma | `powers_upto_length` | 1126 |
-| Lemma | `powers_upto_In` | 1132 |
-| Lemma | `powers_upto_NoDup` | 1145 |
-| Theorem | `primitive_root_generates` | 1165 |
+| Lemma | `is_order_unique` | 38 |
+| Lemma | `no_smaller_order_sound` | 57 |
+| Lemma | `is_order_by_vm` | 80 |
+| Lemma | `powm_one_of_divide` | 92 |
+| Theorem | `order_iff_divides` | 108 |
+| Lemma | `order_exists_from_annihilator` | 130 |
+| Theorem | `order_exists_prime` | 180 |
+| Theorem | `order_exists_semiprime` | 194 |
+| Theorem | `order_of_power` | 211 |
+| Theorem | `lcm_orders_divides_lambda` | 273 |
+| Lemma | `is_order_2_of` | 306 |
+| Theorem | `minus1_order_2_rsa_test` | 320 |
+| Theorem | `mixed67_order_2_rsa_test` | 326 |
+| Theorem | `lcm_two_order2_not_lambda` | 332 |
+| Lemma | `is_order_pin_g_p` | 343 |
+| Lemma | `is_order_pin_g_q` | 348 |
+| Theorem | `pin_unit_3_coprime` | 355 |
+| Lemma | `powm_eq_1_iff_order_divides` | 361 |
+| Lemma | `pow2_divides_pow2` | 372 |
+| Theorem | `two_height_is_val2_ord` | 395 |
+| Theorem | `order_2_mod_11` | 454 |
+| Theorem | `order_2_mod_17` | 459 |
+| Theorem | `two_height_independent_of_odd_multiple` | 466 |
+| Theorem | `height_is_val2_ord_textbook` | 482 |
+| Lemma | `zseq_length` | 519 |
+| Lemma | `zseq_In_bounds` | 526 |
+| Lemma | `zseq_Forall_distinct_head` | 539 |
+| Lemma | `zseq_pairwise_distinct` | 559 |
+| Lemma | `units_mod_prime_length` | 575 |
+| Lemma | `units_mod_prime_In` | 579 |
+| Lemma | `units_mod_prime_coprime` | 589 |
+| Lemma | `units_mod_prime_distinct` | 601 |
+| Lemma | `units_mod_prime_nonnil` | 611 |
+| Lemma | `order_mul_coprime` | 619 |
+| Lemma | `order_of_divisor_power` | 690 |
+| Lemma | `order_lcm_attained` | 719 |
+| Lemma | `exists_max_order_in` | 750 |
+| Lemma | `zseq_In_interval` | 784 |
+| Lemma | `unit_mod_in_list` | 797 |
+| Lemma | `is_order_mod_base` | 818 |
+| Lemma | `is_order_of_mod` | 832 |
+| Lemma | `is_order_eq_mod` | 846 |
+| Theorem | `primitive_root_exists` | 859 |
+| Lemma | `order_semiprime_from_locals` | 925 |
+| Theorem | `exists_unit_order_lambda` | 968 |
+| Theorem | `is_order_pin_3_80` | 1004 |
+| Theorem | `exists_unit_order_lambda_pin` | 1013 |
+| Theorem | `pin_attains_lambda` | 1019 |
+| Theorem | `orders_generate_lambda_pin` | 1028 |
+| Theorem | `orders_attained_generate_lambda` | 1033 |
+| Lemma | `mul_cancel_unit_mod` | 1055 |
+| Lemma | `powm_eq_pow_cancel` | 1070 |
+| Lemma | `powm_inj_lt_order` | 1094 |
+| Lemma | `nodup_incl_le` | 1123 |
+| Lemma | `powers_upto_length` | 1152 |
+| Lemma | `powers_upto_In` | 1158 |
+| Lemma | `powers_upto_NoDup` | 1171 |
+| Theorem | `primitive_root_generates` | 1191 |
 
 ## `Paillier.v`
 
@@ -1894,9 +1895,13 @@ in the Rocq tree.  Do not edit by hand.
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `pratt_2_prime` | 48 |
-| Theorem | `pratt_fermat_side` | 53 |
-| Theorem | `duality_unique_order_2_on_prime` | 66 |
+| Theorem | `pratt_2_prime` | 51 |
+| Theorem | `pratt_fermat_side` | 56 |
+| Theorem | `duality_unique_order_2_on_prime` | 69 |
+| Lemma | `prime_5` | 123 |
+| Theorem | `pratt_generator_ok_11` | 131 |
+| Theorem | `pratt_factors_ok_11` | 141 |
+| Theorem | `pratt_qs_prime_11` | 145 |
 
 ## `PreprocessGRA.v`
 
@@ -2146,7 +2151,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L16: Live-target route pins
+- L19: Live-target route pins
 
 ## `SAGM.v`
 
@@ -3588,9 +3593,9 @@ in the Rocq tree.  Do not edit by hand.
   - L101: Even [e] is a square root
   - L149: [λ]-type: [x = y] is an annihilator
   - L244: Residual leaf (open: solver ⇒ factor is the live target)
-  - L293: Self-randomization and related queries
-  - L341: SAGM handle still peels
-  - L361: Four square roots of 1; mixed splits, [−1] does not
+  - L309: Self-randomization and related queries
+  - L357: SAGM handle still peels
+  - L377: Four square roots of 1; mixed splits, [−1] does not
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3617,19 +3622,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `srsa_safeprime_miller_factors` | 237 |
 | Theorem | `srsa_residual_pin` | 257 |
 | Theorem | `srsa_residual_pin187` | 268 |
-| Theorem | `srsa_fixed_e_rerand` | 295 |
-| Theorem | `srsa_fixed_e_rerand_pin` | 308 |
-| Theorem | `srsa_poly_e_not_rerand_invariant` | 315 |
-| Theorem | `srsa_related_y_square` | 321 |
-| Theorem | `srsa_related_pin` | 337 |
-| Theorem | `srsa_sagm_handle_unit` | 343 |
-| Theorem | `srsa_sagm_lambda_type_peel` | 348 |
-| Theorem | `srsa_sagm_product_reused` | 353 |
-| Theorem | `srsa_sqrt1_120_splits` | 363 |
-| Theorem | `srsa_minus1_no_split` | 369 |
-| Theorem | `srsa_120_plus_1` | 374 |
-| Theorem | `srsa_miller_66` | 378 |
-| Theorem | `srsa_four_sqrt1` | 382 |
+| Theorem | `srsa_fixed_e_rerand` | 311 |
+| Theorem | `srsa_fixed_e_rerand_pin` | 324 |
+| Theorem | `srsa_poly_e_not_rerand_invariant` | 331 |
+| Theorem | `srsa_related_y_square` | 337 |
+| Theorem | `srsa_related_pin` | 353 |
+| Theorem | `srsa_sagm_handle_unit` | 359 |
+| Theorem | `srsa_sagm_lambda_type_peel` | 364 |
+| Theorem | `srsa_sagm_product_reused` | 369 |
+| Theorem | `srsa_sqrt1_120_splits` | 379 |
+| Theorem | `srsa_minus1_no_split` | 385 |
+| Theorem | `srsa_120_plus_1` | 390 |
+| Theorem | `srsa_miller_66` | 394 |
+| Theorem | `srsa_four_sqrt1` | 398 |
 
 ## `Succinct.v`
 
@@ -3737,11 +3742,11 @@ in the Rocq tree.  Do not edit by hand.
   - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
   - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
   - L574: RSA inverter vs Rabin inverter
-  - L618: T7 — finite products of raw signatures
-  - L690: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
-  - L769: Constructor slot vs K1
-  - L807: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
-  - L837: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
+  - L631: T7 — finite products of raw signatures
+  - L703: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
+  - L782: Constructor slot vs K1
+  - L820: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
+  - L850: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3778,22 +3783,22 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `non_williams_two_chars` | 535 |
 | Theorem | `sign_neg1_odd` | 547 |
 | Theorem | `odd_exp_preserves_minus1` | 559 |
-| Theorem | `rsa_inverter_recovers_message` | 592 |
-| Theorem | `sign_hom_3` | 624 |
-| Theorem | `sign_of_msg_product_one` | 640 |
-| Theorem | `sign_weighted_commute` | 657 |
-| Theorem | `sign_weighted_product` | 671 |
-| Lemma | `euler_sign_of_pm1` | 698 |
-| Lemma | `euler_sign_sq` | 715 |
-| Theorem | `other_legendre_from_product` | 726 |
-| Theorem | `cipher_jacobi_eq_message` | 739 |
-| Theorem | `onesided_plain_one_factors` | 774 |
-| Theorem | `ctor_slot_mod_r_need_not_factor` | 789 |
-| Theorem | `cube_below_N` | 809 |
-| Theorem | `e3_small_cube_verifies` | 824 |
-| Theorem | `bleiche_wrap_interval` | 839 |
-| Theorem | `pkcs15_prefix_is_type2` | 865 |
-| Theorem | `manger_is_stricter_than_type2` | 875 |
+| Theorem | `rsa_inverter_recovers_message` | 605 |
+| Theorem | `sign_hom_3` | 637 |
+| Theorem | `sign_of_msg_product_one` | 653 |
+| Theorem | `sign_weighted_commute` | 670 |
+| Theorem | `sign_weighted_product` | 684 |
+| Lemma | `euler_sign_of_pm1` | 711 |
+| Lemma | `euler_sign_sq` | 728 |
+| Theorem | `other_legendre_from_product` | 739 |
+| Theorem | `cipher_jacobi_eq_message` | 752 |
+| Theorem | `onesided_plain_one_factors` | 787 |
+| Theorem | `ctor_slot_mod_r_need_not_factor` | 802 |
+| Theorem | `cube_below_N` | 822 |
+| Theorem | `e3_small_cube_verifies` | 837 |
+| Theorem | `bleiche_wrap_interval` | 852 |
+| Theorem | `pkcs15_prefix_is_type2` | 878 |
+| Theorem | `manger_is_stricter_than_type2` | 888 |
 
 ## `TwoPartyPair.v`
 
@@ -3925,4 +3930,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2753 theorems/lemmas/corollaries/examples across 124 files._
+_2758 theorems/lemmas/corollaries/examples across 124 files._

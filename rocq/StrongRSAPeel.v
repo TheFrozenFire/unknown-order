@@ -286,9 +286,25 @@ Definition residual_solver (N lam : Z) : Type :=
   forall y, Z.coprime y N ->
     { xe : Z * Z | let '(x, e) := xe in srsa_residual_leaf N lam y x e }.
 
+(** Instance-vacuous: [exists f] does not mention [Solve], and
+    [RSAInstance] already contains [p,q,d,λ].  Projecting [rsa_p]
+    or Miller-from-[λ] inhabits this Prop.  Do not inhabit.
+    Unused means unproved, on-goal.  The intended extraction
+    (no factors in the type) is
+    [residual_solver_extracts_factor_open_named].  On this pin
+    the reduced solver does factor
+    ([residual_solver_reduced_constructs_factor_pin]). *)
 Definition residual_solver_constructs_factor_open_named : Prop :=
   forall (R : RSAInstance) (Solve : residual_solver (rsa_N R) (rsa_lambda R)),
     exists f, Problem_Factor (rsa_N R) f.
+
+(** From [N], [lam], and the graph of [Solve] — no [RSAInstance].
+    [lam] is still in the solver type.  Do not inhabit by
+    Miller-from-[lam] while pretending the solver constructed
+    the multiple.  Unused means unproved, on-goal. *)
+Definition residual_solver_extracts_factor_open_named : Prop :=
+  forall (N lam : Z) (Solve : residual_solver N lam),
+    exists f, Problem_Factor N f.
 
 (** ** Self-randomization and related queries *)
 

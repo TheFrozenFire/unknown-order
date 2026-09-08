@@ -25,8 +25,8 @@ Open Scope Z_scope.
     (an inverter or Strong-RSA solver constructs a factor, etc.).
 
     File-local mathematical skips live next to the algebra they
-    bound ([compose_assoc_named], [coppersmith_named],
-    [pratt_complete_named], …).  Cross-cutting refuses live here.
+    bound ([compose_assoc_open_named], [coppersmith_named],
+    [pratt_complete_open_named], …).  Cross-cutting refuses live here.
     Live reductions live next to the objects ([*_open_named]).
 
     Do not cite a hand-written theory map from other [.v] files.

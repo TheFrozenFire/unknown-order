@@ -585,9 +585,22 @@ Qed.
     non-associate root
     ([RabinWilliams.rabin_oracle_nonassociate_factors]). *)
 
+(** Instance-vacuous: [exists f] ignores [Inv]; [rsa_p R]
+    inhabits it.  Do not inhabit.  Unused means unproved, on-goal.
+    Rabin [e=2] is a different theorem
+    ([rabin_oracle_nonassociate_factors]).  The intended
+    extraction is [rsa_inverter_extracts_factor_open_named].
+    On this pin the reduced-units inverter factors
+    ([rsa_inverter_reduced_units_constructs_factor_pin]). *)
 Definition rsa_inverter_constructs_factor_open_named : Prop :=
   forall (R : RSAInstance) (Inv : rsa_inverter (rsa_N R) (rsa_e R)),
     exists f, 1 < f < rsa_N R /\ (f | rsa_N R).
+
+(** From [N], [e], and the graph of [Inv] — no [RSAInstance].
+    Unused means unproved, on-goal.  Do not inhabit. *)
+Definition rsa_inverter_extracts_factor_open_named : Prop :=
+  forall (N e : Z) (Inv : rsa_inverter N e),
+    exists f, 1 < f < N /\ (f | N).
 
 Theorem rsa_inverter_recovers_message :
   forall R (Inv : rsa_inverter (rsa_N R) (rsa_e R)) m,

@@ -3,6 +3,9 @@ From Stdlib Require Import ZArith.
 Require Import Hardness.
 Require Import TranscriptOracle.
 Require Import StrongRSAPeel.
+Require Import Pratt.
+Require Import Order.
+Require Import BinForms.
 Require Import GenericRing.
 Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
@@ -15,22 +18,30 @@ Open Scope Z_scope.
 
 (** * Live-target route pins
 
-    Compile-time names for the three unused live targets and the
+    Compile-time names for the unused live targets and the
     reverse-closed sentences that must not inhabit them.
     [named-skips] harvests the [Not] join from subsection comments
     into [generated/NAMED_SKIPS.md].  This file fails to compile if
     a pinned identifier is renamed or deleted.
 
-    [Check] is not a hypothesis.  The open nameds stay unused. *)
+    The [RSAInstance] forms ([residual_solver_constructs_factor_open_named]
+    and siblings) are instance-vacuous: [exists f] ignores the solver
+    and [rsa_p] inhabits them.  Do not inhabit.  The extraction forms
+    ([residual_solver_extracts_factor_open_named] and siblings) quantify
+    over [N] and the solver graph, with no [RSAInstance].  Unused means
+    unproved, on-goal.  [Check] is not a hypothesis. *)
 
 Check residual_solver_constructs_factor_open_named.
+Check residual_solver_extracts_factor_open_named.
 Check invert_all_units_both_folds_are_local_monomials.
 Check leftover_kernel_span.
 
 Check rsa_inverter_constructs_factor_open_named.
+Check rsa_inverter_extracts_factor_open_named.
 Check rsa_inverter_recovers_message.
 
 Check strong_rsa_solver_constructs_factor_open_named.
+Check strong_rsa_solver_extracts_factor_open_named.
 Check rsa_solution_is_strong_RSA.
 Check leftover_mismatch_factors.
 Check invert_all_units_poly_constructs_factor.
@@ -102,3 +113,10 @@ Check rsa_inverter_reduced_units_constructs_factor_pin.
 Check strong_rsa_solver_annihilator_e_constructs_factor.
 Check pin_lambda_strong_solver_annihilator_e.
 Check residual_solver_not_annihilator_e.
+Check pratt_complete_open_named.
+Check pratt_generator_ok_11.
+Check pratt_factors_ok_11.
+Check orders_attained_generate_lambda.
+Check compose_preserves_disc_open_named.
+Check compose_assoc_open_named.
+Check compose_left_compat_open_named.

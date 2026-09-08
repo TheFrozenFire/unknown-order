@@ -22,9 +22,12 @@ Open Scope Z_scope.
       2-torsion is larger than a field's; here is the splitting."
 
     We formalize the certificate type, its verifier, and soundness
-    (a verified certificate implies primality).  Completeness is
-    [pratt_complete_named] (unused refuse: needs a primitive root
-    in every [(Z/pZ)*]). *)
+    (a verified certificate implies primality).  Completeness of a
+    *verified* certificate (generator plus prime factors of [p−1],
+    recursively) is [pratt_complete_open_named].  A primitive root
+    in every [(Z/pZ)*] is a theorem ([primitive_root_exists]); that
+    is no longer a blocker.  The inductive [pratt] type does not
+    store the check — inhabiting it is not Pratt completeness. *)
 
 Inductive pratt : Z -> Type :=
 | pratt_2 : pratt 2
@@ -105,7 +108,44 @@ Proof.
     rewrite Z.mod_1_l by lia. reflexivity.
 Qed.
 
-(** Completeness: every prime has a Pratt certificate.  Needs a
-    primitive root.  Unused refuse. *)
-Definition pratt_complete_named : Prop :=
-  forall p, Z.prime p -> inhabited (pratt p).
+(** Completeness of a verified Pratt certificate.  [primitive_root_exists]
+    is a theorem; the remaining work is the prime factorization of
+    [p−1] and recursion.  Unused means unproved, on-goal — not a
+    refuse of nearby algebra.  Pin check: [pratt_generator_ok_11]. *)
+Definition pratt_complete_open_named : Prop :=
+  forall p, Z.prime p ->
+    exists (g : Z) (qs : list Z),
+      pratt_generator_ok p g qs /\
+      pratt_factors_ok p qs /\
+      (forall q, In q qs -> Z.prime q) /\
+      inhabited (pratt p).
+
+Lemma prime_5 : Z.prime 5.
+Proof.
+  apply prime_alt. apply prime_intro; [lia|].
+  intros n Hn. apply rel_prime_iff_coprime. unfold Z.coprime.
+  assert (n = 1 \/ n = 2 \/ n = 3 \/ n = 4) by lia.
+  intuition subst; reflexivity.
+Qed.
+
+Theorem pratt_generator_ok_11 :
+  pratt_generator_ok 11 2 [2; 5].
+Proof.
+  unfold pratt_generator_ok. split.
+  - vm_compute. reflexivity.
+  - intros q Hin. cbn in Hin. destruct Hin as [H2 | [H5 | []]].
+    + subst q. vm_compute. discriminate.
+    + subst q. vm_compute. discriminate.
+Qed.
+
+Theorem pratt_factors_ok_11 :
+  pratt_factors_ok 11 [2; 5].
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pratt_qs_prime_11 :
+  forall q, In q [2; 5] -> Z.prime q.
+Proof.
+  intros q Hin. cbn in Hin. destruct Hin as [H2 | [H5 | []]].
+  - subst q. apply prime_alt. apply prime_2.
+  - subst q. apply prime_5.
+Qed.
