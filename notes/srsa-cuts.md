@@ -371,8 +371,20 @@ and CRT of those degrees is `d` mod `λ`
 (`invert_all_units_both_folds_are_local_monomials`, CAS `186`).
 `K ≡ X^{q−2} (mod p)` as polynomials (`pin_geo_kernel_lower_div_p`,
 CAS `190`). The CRT binomial inhabitant has both folds
-(`pin_crt_binomial_both_folds`, CAS `191`). Writing the invert poly
-wrote the local inverse maps, hence wrote `d`. Not
+(`pin_crt_binomial_both_folds`, CAS `191`). Any poly of degree
+`< q−1` vanishing on `𝔽_q*\{p}` is a scalar multiple of `K`
+(`leftover_kernel_span`, `leftover_kernel_exists_scalar`, CAS `192`);
+a monic such poly of degree `q−2` is `K` (`leftover_monic_is_kernel`,
+CAS `193`). Binomial `+ c K` agrees with the binomial on
+`𝔽_q*\{p}`; extra at the lift is `c K(p)` and extra on `𝔽_p*` is
+`c X^{q−2}` (CAS `194`–`196`). Invert-all-units for this family
+needs `N | c`: `p K` misses the lift, `q K` misses unit `2`,
+`N K` is the same function (`pin_binomial_plus_N_kernel_inverts`,
+CAS `197`). Any two invert-all-units polys have both Fermat folds
+of their difference zero (`invert_all_units_diff_fold_p_zero`,
+`pin_crt_vs_NX20_diff_folds_zero`, `pin_crt_vs_monomial_diff_folds_zero`,
+CAS `198`, `199`). Writing the invert poly wrote the local inverse
+maps, hence wrote `d`. Not
 `residual_solver_constructs_factor_open_named`.
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
@@ -455,6 +467,14 @@ advice `N/17`: `PreprocessGRA.v`.
 | `K` is the unique monic degree `q−2` leftover kernel | `pin_geo_kernel_degree` / `pin_geo_kernel_leading` / `pin_geo_kernel_plus_q_cong` | `SrsaRootPoly.v` | `189` |
 | `K ≡ X^{q−2} (mod p)` as polynomials | `geo_kernel_nth` / `pin_geo_kernel_lower_div_p` | `SrsaRootPoly.v` | `190` |
 | CRT binomial inhabitant has both Fermat folds | `pin_crt_binomial_both_folds` | `SrsaRootPoly.v` | `191` |
+| leftover kernel is 1-dimensional: vanish on `𝔽_q*\{p}` ⇒ scalar × `K` | `leftover_kernel_span` / `leftover_kernel_exists_scalar` | `SrsaRootPoly.v` | `192` |
+| unique monic degree `q−2` leftover kernel is `K` | `leftover_monic_is_kernel` | `SrsaRootPoly.v` | `193` |
+| binomial `+ c K` agrees on `𝔽_q*\{p}`; extra at `p` is `c K(p)` | `pin_ck_agrees_canonical` | `SrsaRootPoly.v` | `194` |
+| extra at the lift `p+q` is `c K(p)` (mod `q`) | `pin_ck_extra_at_lift` | `SrsaRootPoly.v` | `195` |
+| extra on `𝔽_p*` is `c · X^{q−2}` | `pin_ck_extra_at_2_mod_p` | `SrsaRootPoly.v` | `196` |
+| binomial `+ c K` inverts all units iff `N \| c` | `pin_binomial_plus_p_kernel_misses_lift` / `pin_binomial_plus_q_kernel_misses_2` / `pin_binomial_plus_N_kernel_inverts` | `SrsaRootPoly.v` | `197` |
+| invert-poly difference has both Fermat folds zero (`+ N X^{20}`) | `invert_all_units_diff_fold_p_zero` / `pin_crt_vs_NX20_diff_folds_zero` | `SrsaRootPoly.v` | `198` |
+| CRT binomial vs `X^d` have both Fermat folds of the difference zero | `pin_crt_vs_monomial_diff_folds_zero` | `SrsaRootPoly.v` | `199` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

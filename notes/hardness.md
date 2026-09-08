@@ -136,6 +136,9 @@ Constructible torsion `H` is a family parameter
 | invert-all-units poly, any degree | `fold_q ≡ X^{d_q}` as a polynomial (missing sample filled) | `invert_all_units_fold_q`, `invert_all_units_fold_q_classes` | leftover kernel of degree `q−2`; residual-solver ⇒ factor |
 | both Fermat folds of an invert poly | local inverse monomials; CRT recovers `d` mod `λ` | `invert_all_units_both_folds_are_local_monomials`, `pin_crt_binomial_both_folds` | residual-solver ⇒ factor |
 | `K` as a polynomial mod `p` | `K ≡ X^{q−2}` (lower coeffs are powers of `p`) | `geo_kernel_nth`, `pin_geo_kernel_lower_div_p` | leftover visible on `𝔽_p*` |
+| deg `< q−1` vanishing on `𝔽_q*\{p}` | scalar multiple of `K` mod `q`; monic is `K` | `leftover_kernel_span`, `leftover_monic_is_kernel` | leftover of degree `≥ q−1` |
+| binomial `+ c K` | extra `c K(p)` at the lift, `c X^{q−2}` on `𝔽_p*`; inverts iff `N \| c` | `pin_ck_extra_at_lift`, `pin_binomial_plus_N_kernel_inverts` | binomial `+ p K` as invert-all-units (misses the lift) |
+| two invert-all-units polys | both Fermat folds of the difference are `0` | `invert_all_units_diff_fold_p_zero`, `pin_crt_vs_monomial_diff_folds_zero` | residual-solver ⇒ factor |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

@@ -2989,195 +2989,220 @@ in the Rocq tree.  Do not edit by hand.
 ## `SrsaRootPoly.v`
 
 - L24: Two writings of an [e]-th root polynomial on units
-  - L67: Coefficient of a mixed CRT monomial splits
-  - L97: CRT binomial
-  - L224: Pin CRT binomial: coefficients split
-  - L377: Trapdoor monomial [X^d]: degree is [d], coefficients do not split
-  - L448: They agree on units and differ as polynomials
-  - L544: Short [e]-th-root polynomials: a coefficient splits [N]
-  - L963: The window is sharp; nodiv GRA in it splits
-  - L1025: Monomial all-units invert iff the exponent is trapdoor
-  - L1229: Local inverses CRT to the trapdoor exponent
-  - L1295: Mid-degree inhabitant of the widened window
-  - L1334: Local match on [𝔽_p*], any degree
-  - L1431: Fermat fold on [𝔽_p*] is [X^{d_p}]
-  - L1763: Fermat correction [p(X^{q−1}−1)] splits
-  - L1841: Fermat fold on [𝔽_q*] agrees on samples
-  - L1912: Top fold class [q−2] zero kills the [𝔽_q*] leftover
-  - L2041: Invert-all-units monomial degree is [d] mod [λ]
-  - L2062: Evaluation congruence and the geometric kernel
-  - L2162: [p+q] is a unit of [N] lifting residue [p]
-  - L2270: Invert-all-units fills the missing [𝔽_q*] sample
-  - L2439: Both Fermat folds are the local inverse monomials
-  - L2473: Other lifts of residue [p]
-  - L2541: Unique monic leftover kernel, and [K ≡ X^{q−2} (mod p)]
-  - L2617: CRT binomial inhabitant writes both local inverse folds
+  - L69: Coefficient of a mixed CRT monomial splits
+  - L99: CRT binomial
+  - L226: Pin CRT binomial: coefficients split
+  - L379: Trapdoor monomial [X^d]: degree is [d], coefficients do not split
+  - L450: They agree on units and differ as polynomials
+  - L546: Short [e]-th-root polynomials: a coefficient splits [N]
+  - L965: The window is sharp; nodiv GRA in it splits
+  - L1027: Monomial all-units invert iff the exponent is trapdoor
+  - L1231: Local inverses CRT to the trapdoor exponent
+  - L1297: Mid-degree inhabitant of the widened window
+  - L1336: Local match on [𝔽_p*], any degree
+  - L1433: Fermat fold on [𝔽_p*] is [X^{d_p}]
+  - L1765: Fermat correction [p(X^{q−1}−1)] splits
+  - L1843: Fermat fold on [𝔽_q*] agrees on samples
+  - L1914: Top fold class [q−2] zero kills the [𝔽_q*] leftover
+  - L2043: Invert-all-units monomial degree is [d] mod [λ]
+  - L2064: Evaluation congruence and the geometric kernel
+  - L2164: [p+q] is a unit of [N] lifting residue [p]
+  - L2280: Invert-all-units fills the missing [𝔽_q*] sample
+  - L2449: Both Fermat folds are the local inverse monomials
+  - L2483: Other lifts of residue [p]
+  - L2551: Unique monic leftover kernel, and [K ≡ X^{q−2} (mod p)]
+  - L2627: CRT binomial inhabitant writes both local inverse folds
+  - L2646: Leftover kernel is 1-dimensional
+  - L2752: Binomial [+ c K]: leftover extra, invert iff [N | c]
+  - L2903: Difference of invert polys has both Fermat folds zero
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `cong_1_mod_p_0_mod_q_gcd` | 69 |
-| Lemma | `crt_binomial_eval` | 103 |
-| Lemma | `crt_binomial_mod_p` | 116 |
-| Lemma | `crt_binomial_mod_q` | 137 |
-| Lemma | `local_eth_root` | 158 |
-| Theorem | `crt_binomial_inverts_units` | 186 |
-| Theorem | `pin_root_ca_mod` | 229 |
-| Theorem | `pin_root_cb_mod` | 233 |
-| Theorem | `pin_inv3_local` | 237 |
-| Theorem | `pin_root_ca_splits` | 242 |
-| Theorem | `pin_root_cb_splits` | 255 |
-| Theorem | `pin_crt_binomial_inverts_units` | 268 |
-| Theorem | `pin_crt_binomial_eval_unit` | 291 |
-| Lemma | `pin_ed_minus_1_divides_lam` | 304 |
-| Lemma | `pin_powm_ed` | 313 |
-| Theorem | `pin_unique_unit_eth_root` | 329 |
-| Theorem | `pin_crt_binomial_at_y` | 341 |
-| Theorem | `pin_crt_binomial_residual` | 353 |
-| Theorem | `pin_crt_binomial_degree` | 360 |
-| Theorem | `pin_crt_binomial_outside_window` | 364 |
-| Theorem | `pin_crt_binomial_coeff_da` | 369 |
-| Theorem | `pin_crt_binomial_coeff_db` | 373 |
-| Theorem | `pin_trapdoor_monomial_eval` | 381 |
-| Theorem | `pin_trapdoor_ed_inv` | 389 |
-| Lemma | `pin_powm_de` | 393 |
-| Theorem | `pin_trapdoor_monomial_inverts_units` | 410 |
-| Theorem | `pin_trapdoor_monomial_at_y` | 418 |
-| Theorem | `pin_trapdoor_monomial_degree` | 422 |
-| Theorem | `pin_trapdoor_monomial_leading` | 426 |
-| Theorem | `pin_trapdoor_degree_is_d` | 436 |
-| Theorem | `pin_trapdoor_monomial_outside_window` | 443 |
-| Theorem | `pin_root_polys_agree_on_units` | 450 |
-| Theorem | `root_poly_eval_coprime` | 470 |
-| Theorem | `all_units_root_poly_is_trapdoor_map` | 484 |
-| Theorem | `all_units_root_poly_eval_g` | 505 |
-| Theorem | `pin_trapdoor_monomial_is_trapdoor_map` | 515 |
-| Theorem | `pin_crt_binomial_neq_monomial` | 525 |
-| Theorem | `pin_crt_binomial_inverts_2` | 535 |
-| Lemma | `unique_eth_root_mod_prime` | 558 |
-| Lemma | `pin_Fq_units_of_N_length` | 582 |
-| Lemma | `pairwise_distinct_mod_filter` | 586 |
-| Lemma | `pin_Fq_units_of_N_distinct` | 604 |
-| Lemma | `pin_Fq_units_of_N_coprime` | 611 |
-| Lemma | `pin_inv3_q_lt_window` | 628 |
-| Lemma | `nth_poly_sub` | 632 |
-| Lemma | `poly_degree_sub_le` | 640 |
-| Lemma | `mod_product_r` | 651 |
-| Lemma | `mod_product_l` | 663 |
-| Lemma | `short_root_local_mod_q` | 669 |
-| Lemma | `short_root_diff_vanishes` | 709 |
-| Lemma | `short_root_q_divides_diff` | 731 |
-| Lemma | `poly_eval_all_div` | 750 |
-| Lemma | `poly_eval_single_support` | 764 |
-| Lemma | `pin_two_pow_dbe_neq_2` | 796 |
-| Lemma | `gcd_q_not_p` | 800 |
-| Lemma | `powm_div_cong` | 827 |
-| Lemma | `finite_support_cases` | 841 |
-| Theorem | `short_root_poly_some_coeff_splits` | 865 |
-| Theorem | `pin_crt_root_poly_is_short` | 949 |
-| Theorem | `pin_crt_root_poly_short_splits` | 953 |
-| Theorem | `no_root_poly_deg_lt_dq` | 965 |
-| Theorem | `pin_Xn_dp_does_not_invert_all_units` | 982 |
-| Theorem | `nodiv_gra_short_dq_splits` | 993 |
-| Theorem | `nodiv_identity_bound_lt_dq` | 1015 |
-| Theorem | `nodiv_square_bound_lt_dq` | 1020 |
-| Theorem | `trapdoor_monomial_inverts_all_units` | 1036 |
-| Theorem | `monomial_all_units_invert_is_trapdoor` | 1064 |
-| Theorem | `pin_d_monomial_is_trapdoor` | 1105 |
-| Theorem | `pin_dp_monomial_not_trapdoor` | 1109 |
-| Theorem | `pin_dq_monomial_not_trapdoor` | 1113 |
-| Theorem | `pin_d_plus_lam_is_trapdoor` | 1117 |
-| Theorem | `pin_d_plus_2lam_is_trapdoor` | 1121 |
-| Lemma | `pin_trapdoor_k_M_pos` | 1125 |
-| Theorem | `monomial_all_units_invert_miller` | 1138 |
-| Theorem | `pin_miller_from_d_plus_lam` | 1169 |
-| Lemma | `pin_base2_height_p_at_35` | 1191 |
-| Lemma | `pin_base2_height_q_at_35` | 1199 |
-| Theorem | `pin_odd_part_d_plus_2lam` | 1209 |
-| Theorem | `pin_miller_from_d_plus_2lam` | 1213 |
-| Theorem | `pin_d_mod_pminus1` | 1237 |
-| Theorem | `pin_d_mod_qminus1` | 1241 |
-| Theorem | `pin_inv3_p_is_crt_dp` | 1245 |
-| Theorem | `pin_inv3_q_is_crt_dq` | 1249 |
-| Theorem | `pin_local_inverses_recover_d` | 1253 |
-| Theorem | `pin_local_inv_unique_p` | 1271 |
-| Theorem | `pin_local_inv_unique_q` | 1283 |
-| Theorem | `pin_mid_root_poly_degree` | 1304 |
-| Theorem | `pin_mid_root_poly_in_window` | 1308 |
-| Theorem | `pin_mid_root_poly_inverts_units` | 1312 |
-| Theorem | `pin_mid_root_poly_splits` | 1326 |
-| Theorem | `pin_p_lt_q` | 1341 |
-| Lemma | `pin_Fp_units_of_N_length` | 1346 |
-| Lemma | `pin_Fp_units_of_N_distinct` | 1350 |
-| Lemma | `pin_Fp_units_of_N_coprime` | 1354 |
-| Lemma | `short_root_local_mod_p` | 1369 |
-| Theorem | `invert_all_units_local_p` | 1409 |
-| Theorem | `invert_all_units_local_q` | 1420 |
-| Lemma | `powm_reduce_period` | 1439 |
-| Lemma | `nth_map_seq_Z` | 1475 |
-| Lemma | `nth_poly_fold` | 1489 |
-| Lemma | `poly_fold_length` | 1500 |
-| Lemma | `poly_degree_fold_lt` | 1506 |
-| Lemma | `map_plus_is_poly_add` | 1521 |
-| Lemma | `map_seq_succ` | 1531 |
-| Lemma | `poly_eval_map_seq_S` | 1541 |
-| Lemma | `poly_eval_zeros_seq` | 1552 |
-| Lemma | `poly_eval_delta_seq` | 1561 |
-| Lemma | `poly_eval_from_scale` | 1592 |
-| Lemma | `poly_eval_from_0` | 1603 |
-| Lemma | `poly_eval_fold_from` | 1609 |
-| Lemma | `poly_eval_fold_mod` | 1660 |
-| Lemma | `pin_inv3_p_lt_pminus1` | 1673 |
-| Lemma | `invert_fold_p_diff_vanishes` | 1677 |
-| Theorem | `invert_all_units_fold_p` | 1711 |
-| Theorem | `invert_all_units_fold_p_is_local_monomial` | 1736 |
-| Lemma | `gcd_add_mul` | 1771 |
-| Lemma | `pin_fermat_extra_divides_N` | 1783 |
-| Theorem | `pin_fermat_root_poly_inverts_units` | 1806 |
-| Theorem | `pin_fermat_root_poly_degree` | 1823 |
-| Theorem | `pin_fermat_root_poly_splits` | 1827 |
-| Theorem | `pin_gcd_add_mul_N` | 1837 |
-| Lemma | `pin_inv3_q_lt_qminus1` | 1847 |
-| Lemma | `invert_fold_q_diff_vanishes` | 1851 |
-| Theorem | `invert_all_units_fold_q_eval` | 1887 |
-| Lemma | `poly_degree_below_if_high_zero` | 1920 |
-| Lemma | `pin_inv3_q_neq_qminus2` | 1935 |
-| Theorem | `invert_all_units_fold_q_top_zero` | 1939 |
-| Theorem | `invert_all_units_fold_q_is_local_monomial` | 2013 |
-| Theorem | `invert_all_units_monomial_degree_mod_lam` | 2048 |
-| Lemma | `poly_eval_cong` | 2069 |
-| Lemma | `poly_eval_app` | 2086 |
-| Lemma | `map_mul_length` | 2100 |
-| Lemma | `geo_kernel_length` | 2112 |
-| Lemma | `geo_kernel_identity` | 2121 |
-| Lemma | `geo_kernel_at_base` | 2143 |
-| Lemma | `p_plus_q_coprime` | 2169 |
-| Lemma | `p_plus_q_mod_q` | 2189 |
-| Lemma | `pin_p_plus_q_coprime` | 2196 |
-| Lemma | `pin_p_plus_q_mod_q` | 2204 |
-| Lemma | `pin_geo_kernel_vanishes` | 2213 |
-| Theorem | `pin_geo_kernel_at_p_nonzero` | 2254 |
-| Theorem | `pin_geo_kernel_at_2_mod_p` | 2258 |
-| Theorem | `pin_binomial_plus_kernel_misses_lift` | 2265 |
-| Lemma | `pin_Fq_units_or_p` | 2279 |
-| Lemma | `invert_fold_q_at_lift` | 2292 |
-| Lemma | `invert_fold_q_at_p` | 2357 |
-| Lemma | `invert_fold_q_diff_vanishes_all` | 2370 |
-| Theorem | `invert_all_units_fold_q` | 2387 |
-| Theorem | `invert_all_units_fold_q_classes` | 2412 |
-| Theorem | `invert_all_units_both_folds_are_local_monomials` | 2448 |
-| Theorem | `invert_all_units_fold_degrees_crt_d` | 2464 |
-| Lemma | `p_plus_k_q_mod_q` | 2479 |
-| Lemma | `p_plus_k_q_coprime` | 2487 |
-| Lemma | `pin_p_plus_2q_coprime` | 2509 |
-| Lemma | `pin_p_plus_2q_mod_q` | 2518 |
-| Lemma | `pin_p_plus_pq_shares_p` | 2524 |
-| Lemma | `invert_fold_q_at_2q` | 2528 |
-| Lemma | `geo_kernel_nth` | 2548 |
-| Theorem | `pin_geo_kernel_degree` | 2580 |
-| Theorem | `pin_geo_kernel_leading` | 2584 |
-| Theorem | `pin_geo_kernel_lower_div_p` | 2593 |
-| Theorem | `pin_geo_kernel_plus_q_cong` | 2606 |
-| Theorem | `pin_crt_binomial_both_folds` | 2624 |
+| Lemma | `cong_1_mod_p_0_mod_q_gcd` | 71 |
+| Lemma | `crt_binomial_eval` | 105 |
+| Lemma | `crt_binomial_mod_p` | 118 |
+| Lemma | `crt_binomial_mod_q` | 139 |
+| Lemma | `local_eth_root` | 160 |
+| Theorem | `crt_binomial_inverts_units` | 188 |
+| Theorem | `pin_root_ca_mod` | 231 |
+| Theorem | `pin_root_cb_mod` | 235 |
+| Theorem | `pin_inv3_local` | 239 |
+| Theorem | `pin_root_ca_splits` | 244 |
+| Theorem | `pin_root_cb_splits` | 257 |
+| Theorem | `pin_crt_binomial_inverts_units` | 270 |
+| Theorem | `pin_crt_binomial_eval_unit` | 293 |
+| Lemma | `pin_ed_minus_1_divides_lam` | 306 |
+| Lemma | `pin_powm_ed` | 315 |
+| Theorem | `pin_unique_unit_eth_root` | 331 |
+| Theorem | `pin_crt_binomial_at_y` | 343 |
+| Theorem | `pin_crt_binomial_residual` | 355 |
+| Theorem | `pin_crt_binomial_degree` | 362 |
+| Theorem | `pin_crt_binomial_outside_window` | 366 |
+| Theorem | `pin_crt_binomial_coeff_da` | 371 |
+| Theorem | `pin_crt_binomial_coeff_db` | 375 |
+| Theorem | `pin_trapdoor_monomial_eval` | 383 |
+| Theorem | `pin_trapdoor_ed_inv` | 391 |
+| Lemma | `pin_powm_de` | 395 |
+| Theorem | `pin_trapdoor_monomial_inverts_units` | 412 |
+| Theorem | `pin_trapdoor_monomial_at_y` | 420 |
+| Theorem | `pin_trapdoor_monomial_degree` | 424 |
+| Theorem | `pin_trapdoor_monomial_leading` | 428 |
+| Theorem | `pin_trapdoor_degree_is_d` | 438 |
+| Theorem | `pin_trapdoor_monomial_outside_window` | 445 |
+| Theorem | `pin_root_polys_agree_on_units` | 452 |
+| Theorem | `root_poly_eval_coprime` | 472 |
+| Theorem | `all_units_root_poly_is_trapdoor_map` | 486 |
+| Theorem | `all_units_root_poly_eval_g` | 507 |
+| Theorem | `pin_trapdoor_monomial_is_trapdoor_map` | 517 |
+| Theorem | `pin_crt_binomial_neq_monomial` | 527 |
+| Theorem | `pin_crt_binomial_inverts_2` | 537 |
+| Lemma | `unique_eth_root_mod_prime` | 560 |
+| Lemma | `pin_Fq_units_of_N_length` | 584 |
+| Lemma | `pairwise_distinct_mod_filter` | 588 |
+| Lemma | `pin_Fq_units_of_N_distinct` | 606 |
+| Lemma | `pin_Fq_units_of_N_coprime` | 613 |
+| Lemma | `pin_inv3_q_lt_window` | 630 |
+| Lemma | `nth_poly_sub` | 634 |
+| Lemma | `poly_degree_sub_le` | 642 |
+| Lemma | `mod_product_r` | 653 |
+| Lemma | `mod_product_l` | 665 |
+| Lemma | `short_root_local_mod_q` | 671 |
+| Lemma | `short_root_diff_vanishes` | 711 |
+| Lemma | `short_root_q_divides_diff` | 733 |
+| Lemma | `poly_eval_all_div` | 752 |
+| Lemma | `poly_eval_single_support` | 766 |
+| Lemma | `pin_two_pow_dbe_neq_2` | 798 |
+| Lemma | `gcd_q_not_p` | 802 |
+| Lemma | `powm_div_cong` | 829 |
+| Lemma | `finite_support_cases` | 843 |
+| Theorem | `short_root_poly_some_coeff_splits` | 867 |
+| Theorem | `pin_crt_root_poly_is_short` | 951 |
+| Theorem | `pin_crt_root_poly_short_splits` | 955 |
+| Theorem | `no_root_poly_deg_lt_dq` | 967 |
+| Theorem | `pin_Xn_dp_does_not_invert_all_units` | 984 |
+| Theorem | `nodiv_gra_short_dq_splits` | 995 |
+| Theorem | `nodiv_identity_bound_lt_dq` | 1017 |
+| Theorem | `nodiv_square_bound_lt_dq` | 1022 |
+| Theorem | `trapdoor_monomial_inverts_all_units` | 1038 |
+| Theorem | `monomial_all_units_invert_is_trapdoor` | 1066 |
+| Theorem | `pin_d_monomial_is_trapdoor` | 1107 |
+| Theorem | `pin_dp_monomial_not_trapdoor` | 1111 |
+| Theorem | `pin_dq_monomial_not_trapdoor` | 1115 |
+| Theorem | `pin_d_plus_lam_is_trapdoor` | 1119 |
+| Theorem | `pin_d_plus_2lam_is_trapdoor` | 1123 |
+| Lemma | `pin_trapdoor_k_M_pos` | 1127 |
+| Theorem | `monomial_all_units_invert_miller` | 1140 |
+| Theorem | `pin_miller_from_d_plus_lam` | 1171 |
+| Lemma | `pin_base2_height_p_at_35` | 1193 |
+| Lemma | `pin_base2_height_q_at_35` | 1201 |
+| Theorem | `pin_odd_part_d_plus_2lam` | 1211 |
+| Theorem | `pin_miller_from_d_plus_2lam` | 1215 |
+| Theorem | `pin_d_mod_pminus1` | 1239 |
+| Theorem | `pin_d_mod_qminus1` | 1243 |
+| Theorem | `pin_inv3_p_is_crt_dp` | 1247 |
+| Theorem | `pin_inv3_q_is_crt_dq` | 1251 |
+| Theorem | `pin_local_inverses_recover_d` | 1255 |
+| Theorem | `pin_local_inv_unique_p` | 1273 |
+| Theorem | `pin_local_inv_unique_q` | 1285 |
+| Theorem | `pin_mid_root_poly_degree` | 1306 |
+| Theorem | `pin_mid_root_poly_in_window` | 1310 |
+| Theorem | `pin_mid_root_poly_inverts_units` | 1314 |
+| Theorem | `pin_mid_root_poly_splits` | 1328 |
+| Theorem | `pin_p_lt_q` | 1343 |
+| Lemma | `pin_Fp_units_of_N_length` | 1348 |
+| Lemma | `pin_Fp_units_of_N_distinct` | 1352 |
+| Lemma | `pin_Fp_units_of_N_coprime` | 1356 |
+| Lemma | `short_root_local_mod_p` | 1371 |
+| Theorem | `invert_all_units_local_p` | 1411 |
+| Theorem | `invert_all_units_local_q` | 1422 |
+| Lemma | `powm_reduce_period` | 1441 |
+| Lemma | `nth_map_seq_Z` | 1477 |
+| Lemma | `nth_poly_fold` | 1491 |
+| Lemma | `poly_fold_length` | 1502 |
+| Lemma | `poly_degree_fold_lt` | 1508 |
+| Lemma | `map_plus_is_poly_add` | 1523 |
+| Lemma | `map_seq_succ` | 1533 |
+| Lemma | `poly_eval_map_seq_S` | 1543 |
+| Lemma | `poly_eval_zeros_seq` | 1554 |
+| Lemma | `poly_eval_delta_seq` | 1563 |
+| Lemma | `poly_eval_from_scale` | 1594 |
+| Lemma | `poly_eval_from_0` | 1605 |
+| Lemma | `poly_eval_fold_from` | 1611 |
+| Lemma | `poly_eval_fold_mod` | 1662 |
+| Lemma | `pin_inv3_p_lt_pminus1` | 1675 |
+| Lemma | `invert_fold_p_diff_vanishes` | 1679 |
+| Theorem | `invert_all_units_fold_p` | 1713 |
+| Theorem | `invert_all_units_fold_p_is_local_monomial` | 1738 |
+| Lemma | `gcd_add_mul` | 1773 |
+| Lemma | `pin_fermat_extra_divides_N` | 1785 |
+| Theorem | `pin_fermat_root_poly_inverts_units` | 1808 |
+| Theorem | `pin_fermat_root_poly_degree` | 1825 |
+| Theorem | `pin_fermat_root_poly_splits` | 1829 |
+| Theorem | `pin_gcd_add_mul_N` | 1839 |
+| Lemma | `pin_inv3_q_lt_qminus1` | 1849 |
+| Lemma | `invert_fold_q_diff_vanishes` | 1853 |
+| Theorem | `invert_all_units_fold_q_eval` | 1889 |
+| Lemma | `poly_degree_below_if_high_zero` | 1922 |
+| Lemma | `pin_inv3_q_neq_qminus2` | 1937 |
+| Theorem | `invert_all_units_fold_q_top_zero` | 1941 |
+| Theorem | `invert_all_units_fold_q_is_local_monomial` | 2015 |
+| Theorem | `invert_all_units_monomial_degree_mod_lam` | 2050 |
+| Lemma | `poly_eval_cong` | 2071 |
+| Lemma | `poly_eval_app` | 2088 |
+| Lemma | `map_mul_length` | 2102 |
+| Lemma | `geo_kernel_length` | 2114 |
+| Lemma | `geo_kernel_identity` | 2123 |
+| Lemma | `geo_kernel_at_base` | 2145 |
+| Lemma | `p_plus_q_coprime` | 2171 |
+| Lemma | `p_plus_q_mod_q` | 2191 |
+| Lemma | `pin_p_plus_q_coprime` | 2198 |
+| Lemma | `pin_p_plus_q_mod_q` | 2206 |
+| Lemma | `pin_geo_kernel_vanishes` | 2215 |
+| Theorem | `pin_geo_kernel_at_p_nonzero` | 2256 |
+| Theorem | `pin_p_Kp_mod_q_nonzero` | 2260 |
+| Theorem | `pin_geo_kernel_at_2_mod_p` | 2264 |
+| Theorem | `pin_two_pow_qminus2_mod_p_nonzero` | 2268 |
+| Theorem | `pin_binomial_plus_kernel_misses_lift` | 2275 |
+| Lemma | `pin_Fq_units_or_p` | 2289 |
+| Lemma | `invert_fold_q_at_lift` | 2302 |
+| Lemma | `invert_fold_q_at_p` | 2367 |
+| Lemma | `invert_fold_q_diff_vanishes_all` | 2380 |
+| Theorem | `invert_all_units_fold_q` | 2397 |
+| Theorem | `invert_all_units_fold_q_classes` | 2422 |
+| Theorem | `invert_all_units_both_folds_are_local_monomials` | 2458 |
+| Theorem | `invert_all_units_fold_degrees_crt_d` | 2474 |
+| Lemma | `p_plus_k_q_mod_q` | 2489 |
+| Lemma | `p_plus_k_q_coprime` | 2497 |
+| Lemma | `pin_p_plus_2q_coprime` | 2519 |
+| Lemma | `pin_p_plus_2q_mod_q` | 2528 |
+| Lemma | `pin_p_plus_pq_shares_p` | 2534 |
+| Lemma | `invert_fold_q_at_2q` | 2538 |
+| Lemma | `geo_kernel_nth` | 2558 |
+| Theorem | `pin_geo_kernel_degree` | 2590 |
+| Theorem | `pin_geo_kernel_leading` | 2594 |
+| Theorem | `pin_geo_kernel_lower_div_p` | 2603 |
+| Theorem | `pin_geo_kernel_plus_q_cong` | 2616 |
+| Theorem | `pin_crt_binomial_both_folds` | 2634 |
+| Lemma | `poly_degree_gt_nth_zero` | 2653 |
+| Lemma | `leftover_kernel_span` | 2661 |
+| Theorem | `leftover_monic_is_kernel` | 2690 |
+| Theorem | `pin_geo_kernel_inv_mod` | 2723 |
+| Theorem | `leftover_kernel_exists_scalar` | 2727 |
+| Lemma | `pin_ck_agrees_canonical` | 2762 |
+| Lemma | `pin_ck_extra_at_lift` | 2780 |
+| Lemma | `pin_ck_extra_at_2_mod_p` | 2801 |
+| Theorem | `pin_binomial_plus_N_kernel_inverts` | 2827 |
+| Theorem | `pin_binomial_plus_p_kernel_misses_lift` | 2842 |
+| Theorem | `pin_binomial_plus_q_kernel_misses_2` | 2876 |
+| Lemma | `class_sum_from_add` | 2909 |
+| Lemma | `class_sum_from_map_mul` | 2923 |
+| Lemma | `class_sum_poly_sub` | 2933 |
+| Theorem | `invert_all_units_diff_fold_p_zero` | 2942 |
+| Theorem | `invert_all_units_diff_fold_q_zero` | 2959 |
+| Theorem | `pin_NX20_root_poly_inverts` | 2979 |
+| Theorem | `pin_crt_vs_NX20_diff_folds_zero` | 2993 |
+| Lemma | `pin_trapdoor_monomial_poly_inverts` | 3013 |
+| Theorem | `pin_crt_vs_monomial_diff_folds_zero` | 3025 |
 
 ## `SrsaWriteE.v`
 
@@ -3668,4 +3693,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2569 theorems/lemmas/corollaries/examples across 119 files._
+_2591 theorems/lemmas/corollaries/examples across 119 files._
