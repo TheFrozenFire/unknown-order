@@ -1,0 +1,24 @@
+claim_id: invert-all-units-folds
+headline: >
+  An invert-all-units polynomial has Fermat folds X^{d_p} (mod p)
+  and X^{d_q} (mod q); CRT of those degrees recovers d (mod λ).
+  Writing the invert poly writes the local inverse maps, hence d.
+  Not residual_solver_constructs_factor_open_named.
+source: notes/srsa-cuts.md
+theorem: invert_all_units_both_folds_are_local_monomials
+cas: 186_both_folds_crt.gp
+convert: SOURCE-MAPPED
+forward: PASS
+reverse: FOLLOWS
+confirming_tools: [rocq, cas]
+open_named:
+  - residual_solver_constructs_factor_open_named
+named_refuse: []
+accepted_primitives:
+  - invert_all_units_local_p
+  - invert_all_units_fold_p_is_local_monomial
+  - pin_p_plus_q_coprime
+  - invert_all_units_fold_q
+  - invert_all_units_fold_q_classes
+  - invert_all_units_fold_degrees_crt_d
+split_from: residual-solver-constructs-factor

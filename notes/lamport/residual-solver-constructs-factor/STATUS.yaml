@@ -1,0 +1,18 @@
+claim_id: residual-solver-constructs-factor
+headline: >
+  A residual solver (every unit y) constructs a factor of N.
+source: notes/srsa-cuts.md
+theorem: ~
+cas: ~
+convert: SOURCE-MAPPED
+forward: INCOMPLETE
+reverse: NOT ESTABLISHED BY THIS PROOF
+confirming_tools: []
+open_named:
+  - residual_solver_constructs_factor_open_named
+named_refuse: []
+accepted_primitives:
+  - srsa_residual_leaf
+  - residual_solver
+  - Problem_Factor
+split_from: ~

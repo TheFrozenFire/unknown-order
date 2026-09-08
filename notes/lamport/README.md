@@ -9,6 +9,13 @@ Rocq. Procedure: harness skill `lamport-audit`
 Existing theorems are **grandfathered**. Do not backfill one
 directory per lemma.
 
+Worked split (not a backfill of every lemma):
+
+| Directory | Reverse | What it is |
+|---|---|---|
+| `residual-solver-constructs-factor/` | `NOT ESTABLISHED BY THIS PROOF` | live target; `residual_solver_constructs_factor_open_named` unused |
+| `invert-all-units-folds/` | `FOLLOWS` | theorem `invert_all_units_both_folds_are_local_monomials`, CAS `186`; `split_from` the live target |
+
 `confirming_tools` is still Rocq + CAS. Do not list `lamport`.
 
 If reverse only supports a weaker sentence than `notes/hardness.md`
