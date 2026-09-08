@@ -142,6 +142,10 @@ Constructible torsion `H` is a family parameter
 | deg `< q−1` invert poly `+ N K` | same coeffs as CRT binomial mod `N` | `pin_binomial_plus_N_kernel_cong_mod_N` | leftover of deg `≥ q−1`; residual-solver ⇒ factor |
 | invert-all-units poly (any degree) | trapdoor map `y ↦ y^d`; Miller-from-`d` splits | `invert_all_units_poly_constructs_factor` | residual-solver ⇒ factor (a solver is not a polynomial) |
 | nodiv GRA that inverts every unit | denotes an invert-all-units poly; Miller/gcd splits | `nodiv_gra_invert_all_units_constructs_factor` | `GInv`; residual-solver ⇒ factor (a solver is not a nodiv tape) |
+| invert-all-units rational `P/Q` | trapdoor map `P/Q ≡ y^d`; Miller-from-`d` splits | `invert_all_units_rational_constructs_factor` / `invert_all_units_rational_Xd1_over_X` | residual-solver ⇒ factor (a solver is not a rational) |
+| unit-`GInv` GRA that inverts every unit | denotes a rational; Miller splits | `unit_ginv_gra_invert_all_units_constructs_factor` / `gra_unit_inv_denotes` | `GRoot`; residual-solver ⇒ factor (a solver is not a unit-`GInv` tape) |
+| `GInv` of a non-unit | `gcd(h,N)` is a proper factor | `gra_first_inv_gcd_factors` / `gra_inv_proper_gcd_factors` | `GInv` of a unit; residual-solver ⇒ factor |
+| `GRoot` of a `Z`-cube sharing a factor with `N` | integer cube-root is a proper factor | `gra_first_root_factor_factors` / `gra_root_p3_factors` | modular cube-root; residual-solver ⇒ factor |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

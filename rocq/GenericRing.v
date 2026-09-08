@@ -3,6 +3,7 @@ From Stdlib Require Import Znumtheory.
 From Stdlib Require Import Lia.
 From Stdlib Require Import List.
 From Stdlib Require Import PeanoNat.
+From Stdlib Require Import Bool.
 Import ListNotations.
 
 Require Import RocqProofs.NumberTheory.
@@ -53,6 +54,25 @@ Definition gra_inv (h N : Z) : Z :=
   let g := Z.gcd h N in
   if g =? 1 then (fst (egcd_uv 64%nat h N)) mod N else g.
 
+Theorem gra_inv_eq_gcd_if_nonunit :
+  forall h N, Z.gcd h N <> 1 -> gra_inv h N = Z.gcd h N.
+Proof.
+  intros h N Hne.
+  unfold gra_inv.
+  destruct (Z.eqb_spec (Z.gcd h N) 1); [lia | reflexivity].
+Qed.
+
+Theorem gra_inv_proper_gcd_factors :
+  forall h,
+    1 < Z.gcd h pin_N < pin_N ->
+    Problem_Factor pin_N (gra_inv h pin_N).
+Proof.
+  intros h [Hlo Hhi].
+  rewrite gra_inv_eq_gcd_if_nonunit by lia.
+  unfold Problem_Factor.
+  split; [lia | apply Z.gcd_divide_r].
+Qed.
+
 (** Integer cube root by bounded search.  Not a cube: identity. *)
 Fixpoint icbrt_up (k fuel : nat) (t : Z) : Z :=
   match fuel with
@@ -92,6 +112,55 @@ Definition gra_eval (N : Z) (ops : list GRAOp) (y : Z) (out : nat) : Z :=
 
 Definition gra_eval_Z (ops : list GRAOp) (y : Z) (out : nat) : Z :=
   gra_eval pin_N ops y out.
+
+(** Walk a tape for the first [GInv] of a handle with proper
+    [gcd(h,N)].  [Some f] is a factor.  [None] means every [GInv]
+    was of a unit (or of a multiple of [N]). *)
+Fixpoint gra_first_inv_gcd (N : Z) (ops : list GRAOp) (t : list Z)
+  : option Z :=
+  match ops with
+  | nil => None
+  | op :: rest =>
+      match op with
+      | GInv i =>
+          let g := Z.gcd (nth i t 0) N in
+          if (1 <? g) && (g <? N) then Some g
+          else gra_first_inv_gcd N rest (step N op t)
+      | _ => gra_first_inv_gcd N rest (step N op t)
+      end
+  end.
+
+Lemma gra_first_inv_gcd_some :
+  forall ops N t f,
+    gra_first_inv_gcd N ops t = Some f ->
+    1 < f < N /\ (f | N).
+Proof.
+  induction ops as [|op rest IH]; intros N t f Hf.
+  - discriminate.
+  - destruct op as [c | i j | i j | i j | i | i]; simpl in Hf.
+    + apply (IH N (step N (GConst c) t) f Hf).
+    + apply (IH N (step N (GAdd i j) t) f Hf).
+    + apply (IH N (step N (GSub i j) t) f Hf).
+    + apply (IH N (step N (GMul i j) t) f Hf).
+    + set (g := Z.gcd (nth i t 0) N) in *.
+      destruct ((1 <? g) && (g <? N)) eqn:Hb.
+      * inversion Hf; subst f.
+        apply andb_true_iff in Hb. destruct Hb as [H1 H2].
+        apply Z.ltb_lt in H1. apply Z.ltb_lt in H2.
+        split; [split; [exact H1 | exact H2] | apply Z.gcd_divide_r].
+      * apply (IH N (step N (GInv i) t) f Hf).
+    + apply (IH N (step N (GRoot i) t) f Hf).
+Qed.
+
+Theorem gra_first_inv_gcd_factors :
+  forall ops y f,
+    gra_first_inv_gcd pin_N ops (gra_init y) = Some f ->
+    Problem_Factor pin_N f.
+Proof.
+  intros ops y f Hf.
+  destruct (gra_first_inv_gcd_some ops pin_N (gra_init y) f Hf) as [Hrng Hdiv].
+  unfold Problem_Factor. split; [exact Hrng | exact Hdiv].
+Qed.
 
 Definition gra_eq_gcd (a b N : Z) : Z := Z.gcd (a - b) N.
 
@@ -338,6 +407,339 @@ Proof.
   apply Hagree.
 Qed.
 
+(** ** Unit-[GInv] tapes denote rationals
+
+    Nodiv handles are polynomials ([Q = 1]).  [GInv] of a unit
+    swaps numerator and denominator.  [GRoot] is excluded: an
+    integer cube-root is not a rational function.  Agreement is
+    only modulo [N] (a [GInv] reduces).  Fuel-64 [gra_inv] must
+    actually invert the handle; that is a hypothesis, proved on
+    reduced pin units by [pin_gra_inv_inverts_reduced_unit]. *)
+
+Definition gra_rat := (list Z * list Z)%type.
+
+Definition slp_init_rat : list gra_rat :=
+  [([0], [1]); ([1], [1]); (poly_X, [1])].
+
+Definition step_rat (op : GRAOp) (t : list gra_rat) : list gra_rat :=
+  match op with
+  | GConst c => t ++ [([c], [1])]
+  | GAdd i j =>
+      t ++ [(poly_add
+               (poly_mul (fst (nth i t ([], [1]))) (snd (nth j t ([], [1]))))
+               (poly_mul (fst (nth j t ([], [1]))) (snd (nth i t ([], [1])))),
+             poly_mul (snd (nth i t ([], [1]))) (snd (nth j t ([], [1]))))]
+  | GSub i j =>
+      t ++ [(poly_sub
+               (poly_mul (fst (nth i t ([], [1]))) (snd (nth j t ([], [1]))))
+               (poly_mul (fst (nth j t ([], [1]))) (snd (nth i t ([], [1])))),
+             poly_mul (snd (nth i t ([], [1]))) (snd (nth j t ([], [1]))))]
+  | GMul i j =>
+      t ++ [(poly_mul (fst (nth i t ([], [1]))) (fst (nth j t ([], [1]))),
+             poly_mul (snd (nth i t ([], [1]))) (snd (nth j t ([], [1]))))]
+  | GInv i =>
+      t ++ [(snd (nth i t ([], [1])), fst (nth i t ([], [1])))]
+  | GRoot i => t ++ [nth i t ([], [1])]
+  end.
+
+Fixpoint gra_run_rat (ops : list GRAOp) (t : list gra_rat) : list gra_rat :=
+  match ops with
+  | nil => t
+  | op :: rest => gra_run_rat rest (step_rat op t)
+  end.
+
+Fixpoint gra_unit_invs (N : Z) (ops : list GRAOp) (t : list Z) : Prop :=
+  match ops with
+  | nil => True
+  | op :: rest =>
+      match op with
+      | GInv i =>
+          Z.gcd (nth i t 0) N = 1 /\
+          (gra_inv (nth i t 0) N * nth i t 0) mod N = 1 /\
+          gra_unit_invs N rest (step N op t)
+      | GRoot _ => False
+      | _ => gra_unit_invs N rest (step N op t)
+      end
+  end.
+
+Definition rat_handle_agrees (N y h : Z) (pq : gra_rat) : Prop :=
+  Z.coprime (poly_eval (snd pq) y) N /\
+  (h * poly_eval (snd pq) y) mod N = poly_eval (fst pq) y mod N.
+
+Lemma nodiv_gra_unit_invs :
+  forall ops N t,
+    Forall is_nodiv ops ->
+    gra_unit_invs N ops t.
+Proof.
+  induction ops as [|op rest IH]; intros N t Hop.
+  - simpl. exact I.
+  - inversion Hop; subst.
+    destruct op; simpl; try (inversion H1); apply IH; exact H2.
+Qed.
+
+Lemma step_rat_length :
+  forall op t, length (step_rat op t) = S (length t).
+Proof. intros op t. destruct op; simpl; rewrite length_app; simpl; lia. Qed.
+
+Lemma rat_overflow_agrees :
+  forall N y, 1 < N -> rat_handle_agrees N y 0 ([], [1]).
+Proof.
+  intros N y HN. unfold rat_handle_agrees. cbn [fst snd poly_eval].
+  rewrite Z.mul_0_r, Z.add_0_r.
+  split; [unfold Z.coprime; apply Z.gcd_1_l | reflexivity].
+Qed.
+
+Lemma gra_init_rat_agrees :
+  forall N y,
+    1 < N ->
+    length (gra_init y) = length slp_init_rat /\
+    forall k,
+      rat_handle_agrees N y (nth k (gra_init y) 0)
+        (nth k slp_init_rat ([], [1])).
+Proof.
+  intros N y HN. split; [reflexivity|].
+  intros k.
+  destruct k as [|k]; [|destruct k as [|k]; [|destruct k as [|k]]].
+  - unfold gra_init, slp_init_rat, rat_handle_agrees.
+    cbn [nth fst snd poly_eval].
+    split; [rewrite Z.mul_0_r, Z.add_0_r; unfold Z.coprime; apply Z.gcd_1_l
+           | f_equal; ring].
+  - unfold gra_init, slp_init_rat, rat_handle_agrees.
+    cbn [nth fst snd poly_eval].
+    split; [rewrite Z.mul_0_r, Z.add_0_r; unfold Z.coprime; apply Z.gcd_1_l
+           | f_equal; ring].
+  - unfold gra_init, slp_init_rat, rat_handle_agrees, poly_X.
+    cbn [nth fst snd poly_eval].
+    split; [rewrite Z.mul_0_r, Z.add_0_r; unfold Z.coprime; apply Z.gcd_1_l
+           | f_equal; ring].
+  - unfold gra_init, slp_init_rat.
+    rewrite !nth_overflow by (cbn [length]; lia).
+    apply rat_overflow_agrees. exact HN.
+Qed.
+
+Lemma rat_add_cong :
+  forall N h1 h2 P1 P2 Q1 Q2,
+    N <> 0 ->
+    (h1 * Q1) mod N = P1 mod N ->
+    (h2 * Q2) mod N = P2 mod N ->
+    ((h1 + h2) * (Q1 * Q2)) mod N = (P1 * Q2 + P2 * Q1) mod N.
+Proof.
+  intros N h1 h2 P1 P2 Q1 Q2 HN H1 H2.
+  transitivity (((h1 * Q1) * Q2 + (h2 * Q2) * Q1) mod N).
+  { f_equal. ring. }
+  rewrite Z.add_mod by lia.
+  rewrite <- (Z.mul_mod_idemp_l (h1 * Q1) Q2 N) by lia.
+  rewrite <- (Z.mul_mod_idemp_l (h2 * Q2) Q1 N) by lia.
+  rewrite H1, H2.
+  rewrite !Z.mul_mod_idemp_l by lia.
+  rewrite <- Z.add_mod by lia. reflexivity.
+Qed.
+
+Lemma rat_sub_cong :
+  forall N h1 h2 P1 P2 Q1 Q2,
+    N <> 0 ->
+    (h1 * Q1) mod N = P1 mod N ->
+    (h2 * Q2) mod N = P2 mod N ->
+    ((h1 - h2) * (Q1 * Q2)) mod N = (P1 * Q2 - P2 * Q1) mod N.
+Proof.
+  intros N h1 h2 P1 P2 Q1 Q2 HN H1 H2.
+  transitivity (((h1 * Q1) * Q2 - (h2 * Q2) * Q1) mod N).
+  { f_equal. ring. }
+  rewrite Zminus_mod.
+  rewrite <- (Z.mul_mod_idemp_l (h1 * Q1) Q2 N) by lia.
+  rewrite <- (Z.mul_mod_idemp_l (h2 * Q2) Q1 N) by lia.
+  rewrite H1, H2.
+  rewrite !Z.mul_mod_idemp_l by lia.
+  rewrite <- Zminus_mod. reflexivity.
+Qed.
+
+Lemma rat_mul_cong :
+  forall N h1 h2 P1 P2 Q1 Q2,
+    N <> 0 ->
+    (h1 * Q1) mod N = P1 mod N ->
+    (h2 * Q2) mod N = P2 mod N ->
+    ((h1 * h2) * (Q1 * Q2)) mod N = (P1 * P2) mod N.
+Proof.
+  intros N h1 h2 P1 P2 Q1 Q2 HN H1 H2.
+  transitivity (((h1 * Q1) * (h2 * Q2)) mod N).
+  { f_equal. ring. }
+  rewrite Z.mul_mod by lia.
+  rewrite H1, H2.
+  rewrite <- Z.mul_mod by lia. reflexivity.
+Qed.
+
+Lemma rat_inv_cong :
+  forall N h P Q invh,
+    N <> 0 ->
+    (h * Q) mod N = P mod N ->
+    (invh * h) mod N = 1 ->
+    (invh * P) mod N = Q mod N.
+Proof.
+  intros N h P Q invh HN Hcong Hinv.
+  rewrite <- (Z.mul_mod_idemp_r invh P N) by lia.
+  rewrite <- Hcong.
+  rewrite Z.mul_mod_idemp_r by lia.
+  transitivity (((invh * h) * Q) mod N).
+  { f_equal. ring. }
+  rewrite <- (Z.mul_mod_idemp_l (invh * h) Q N) by lia.
+  rewrite Hinv. rewrite Z.mul_1_l. reflexivity.
+Qed.
+
+Lemma rat_inv_den_coprime :
+  forall N h P Q,
+    N <> 0 ->
+    (h * Q) mod N = P mod N ->
+    Z.coprime h N ->
+    Z.coprime Q N ->
+    Z.coprime P N.
+Proof.
+  intros N h P Q HN Hcong Hh Hq.
+  unfold Z.coprime.
+  rewrite <- Z.gcd_mod_l.
+  rewrite <- Hcong.
+  rewrite Z.gcd_mod_l.
+  apply Z.coprime_mul_l; assumption.
+Qed.
+
+Lemma step_unit_inv_agrees :
+  forall N y op t pt,
+    1 < N ->
+    length t = length pt ->
+    (forall k,
+        rat_handle_agrees N y (nth k t 0) (nth k pt ([], [1]))) ->
+    match op with
+    | GInv i =>
+        Z.gcd (nth i t 0) N = 1 /\
+        (gra_inv (nth i t 0) N * nth i t 0) mod N = 1
+    | GRoot _ => False
+    | _ => True
+    end ->
+    length (step N op t) = length (step_rat op pt) /\
+    forall k,
+      rat_handle_agrees N y (nth k (step N op t) 0)
+        (nth k (step_rat op pt) ([], [1])).
+Proof.
+  intros N y op t pt HN Hlen Hagree Hop.
+  split.
+  - rewrite step_length, step_rat_length, Hlen. reflexivity.
+  - intros k.
+    destruct (lt_dec k (length t)) as [Hlt | Hnlt].
+    + assert (nth k (step N op t) 0 = nth k t 0) as Ht.
+      { destruct op; simpl; apply nth_app_lt; exact Hlt. }
+      assert (nth k (step_rat op pt) ([], [1]) = nth k pt ([], [1])) as Hpt.
+      { destruct op; simpl; apply nth_app_lt; rewrite <- Hlen; exact Hlt. }
+      rewrite Ht, Hpt. apply Hagree.
+    + apply Nat.nlt_ge in Hnlt.
+      destruct (Nat.eq_dec k (length t)) as [Heq | Hne].
+      * subst k.
+        destruct op as [c | ia ja | ia ja | ia ja | ia | ia];
+          simpl; rewrite (nth_app_last _ t); rewrite Hlen; rewrite nth_app_last.
+        -- unfold rat_handle_agrees. cbn [fst snd].
+           replace (poly_eval [1] y) with 1.
+           2: { unfold poly_eval. rewrite Z.mul_0_r. lia. }
+           replace (poly_eval [c] y) with c.
+           2: { unfold poly_eval. rewrite Z.mul_0_r. lia. }
+           split; [unfold Z.coprime; apply Z.gcd_1_l | rewrite Z.mul_1_r; reflexivity].
+        -- unfold rat_handle_agrees. cbn [fst snd].
+           destruct (Hagree ia) as [Hc1 Hm1].
+           destruct (Hagree ja) as [Hc2 Hm2].
+           split.
+           ++ rewrite poly_eval_mul. apply Z.coprime_mul_l; [exact Hc1 | exact Hc2].
+           ++ rewrite poly_eval_add, !poly_eval_mul.
+              apply rat_add_cong; [lia | exact Hm1 | exact Hm2].
+        -- unfold rat_handle_agrees. cbn [fst snd].
+           destruct (Hagree ia) as [Hc1 Hm1].
+           destruct (Hagree ja) as [Hc2 Hm2].
+           split.
+           ++ rewrite poly_eval_mul. apply Z.coprime_mul_l; [exact Hc1 | exact Hc2].
+           ++ rewrite poly_eval_sub, !poly_eval_mul.
+              apply rat_sub_cong; [lia | exact Hm1 | exact Hm2].
+        -- unfold rat_handle_agrees. cbn [fst snd].
+           destruct (Hagree ia) as [Hc1 Hm1].
+           destruct (Hagree ja) as [Hc2 Hm2].
+           split.
+           ++ rewrite poly_eval_mul. apply Z.coprime_mul_l; [exact Hc1 | exact Hc2].
+           ++ rewrite !poly_eval_mul.
+              apply rat_mul_cong; [lia | exact Hm1 | exact Hm2].
+        -- unfold rat_handle_agrees. cbn [fst snd].
+           destruct Hop as [Hgcd Hinv].
+           destruct (Hagree ia) as [Hc Hm].
+           split.
+           ++ apply (rat_inv_den_coprime N (nth ia t 0)
+                       (poly_eval (fst (nth ia pt ([], [1]))) y)
+                       (poly_eval (snd (nth ia pt ([], [1]))) y));
+                [lia | exact Hm | exact Hgcd | exact Hc].
+           ++ apply (rat_inv_cong N (nth ia t 0)
+                       (poly_eval (fst (nth ia pt ([], [1]))) y)
+                       (poly_eval (snd (nth ia pt ([], [1]))) y)
+                       (gra_inv (nth ia t 0) N));
+                [lia | exact Hm | exact Hinv].
+        -- destruct Hop.
+      * assert (Hltk : (length t < k)%nat).
+        { apply Nat.le_neq. split; [exact Hnlt | intros Heq; apply Hne; symmetry; exact Heq]. }
+        assert (Hkstep : (length (step N op t) <= k)%nat).
+        { rewrite (step_length N op t). apply Nat.le_succ_l. exact Hltk. }
+        assert (Hkrat : (length (step_rat op pt) <= k)%nat).
+        { replace (length (step_rat op pt)) with (length (step N op t)).
+          2: { rewrite (step_length N op t), (step_rat_length op pt).
+               f_equal. exact Hlen. }
+          exact Hkstep. }
+        unfold rat_handle_agrees.
+        rewrite (nth_overflow (step N op t) 0 Hkstep).
+        rewrite (nth_overflow (step_rat op pt) ([], [1]) Hkrat).
+        apply rat_overflow_agrees. exact HN.
+Qed.
+
+Lemma gra_run_unit_inv_agree :
+  forall ops N y t pt,
+    1 < N ->
+    gra_unit_invs N ops t ->
+    length t = length pt ->
+    (forall k,
+        rat_handle_agrees N y (nth k t 0) (nth k pt ([], [1]))) ->
+    length (gra_run N ops t) = length (gra_run_rat ops pt) /\
+    forall k,
+      rat_handle_agrees N y (nth k (gra_run N ops t) 0)
+        (nth k (gra_run_rat ops pt) ([], [1])).
+Proof.
+  induction ops as [|op rest IH]; intros N y t pt HN Hu Hlen Hagree.
+  - simpl. split; [exact Hlen | exact Hagree].
+  - destruct op as [c | ia ja | ia ja | ia ja | ia | ia];
+      simpl in Hu |- *.
+    + destruct (step_unit_inv_agrees N y (GConst c) t pt HN Hlen Hagree I)
+        as [Hlen' Hagree'].
+      apply IH; [exact HN | exact Hu | exact Hlen' | exact Hagree'].
+    + destruct (step_unit_inv_agrees N y (GAdd ia ja) t pt HN Hlen Hagree I)
+        as [Hlen' Hagree'].
+      apply IH; [exact HN | exact Hu | exact Hlen' | exact Hagree'].
+    + destruct (step_unit_inv_agrees N y (GSub ia ja) t pt HN Hlen Hagree I)
+        as [Hlen' Hagree'].
+      apply IH; [exact HN | exact Hu | exact Hlen' | exact Hagree'].
+    + destruct (step_unit_inv_agrees N y (GMul ia ja) t pt HN Hlen Hagree I)
+        as [Hlen' Hagree'].
+      apply IH; [exact HN | exact Hu | exact Hlen' | exact Hagree'].
+    + destruct Hu as [Hgcd [Hinv Hu']].
+      destruct (step_unit_inv_agrees N y (GInv ia) t pt HN Hlen Hagree
+                  (conj Hgcd Hinv)) as [Hlen' Hagree'].
+      apply IH; [exact HN | exact Hu' | exact Hlen' | exact Hagree'].
+    + destruct Hu.
+Qed.
+
+Theorem gra_unit_inv_denotes :
+  forall ops N y out,
+    1 < N ->
+    gra_unit_invs N ops (gra_init y) ->
+    rat_handle_agrees N y (gra_eval N ops y out)
+      (nth out (gra_run_rat ops slp_init_rat) ([], [1])).
+Proof.
+  intros ops N y out HN Hu.
+  unfold gra_eval.
+  destruct (gra_init_rat_agrees N y HN) as [Hlen Hagree].
+  destruct (gra_run_unit_inv_agree ops N y (gra_init y) slp_init_rat
+              HN Hu Hlen Hagree) as [_ Hk].
+  apply Hk.
+Qed.
+
 (** ** Degree bound of a nodiv tape
 
     Init handles have degrees [0; 0; 1].  [GConst] is [0]; add/sub
@@ -547,6 +949,159 @@ Proof.
   unfold Problem_Factor. rewrite gra_inv_nonunit_pin.
   split; [lia|]. exists pin_q. reflexivity.
 Qed.
+
+Theorem pin_gra_inv11_first_gcd :
+  gra_first_inv_gcd pin_N gra_inv11_prog (gra_init pin_y) = Some pin_p.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_gra_inv36_first_gcd_none :
+  gra_first_inv_gcd pin_N gra_inv36_prog (gra_init pin_y) = None.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_gra_square_first_gcd_none :
+  gra_first_inv_gcd pin_N [GMul 2%nat 2%nat] (gra_init pin_y) = None.
+Proof. vm_compute. reflexivity. Qed.
+
+Fixpoint units_gra_inv_ok (k : nat) : bool :=
+  match k with
+  | O => true
+  | S k' =>
+      let h := Z.of_nat (S k') in
+      if Z.gcd h pin_N =? 1
+      then ((gra_inv h pin_N * h) mod pin_N =? 1) && units_gra_inv_ok k'
+      else units_gra_inv_ok k'
+  end.
+
+Theorem pin_units_gra_inv_ok :
+  units_gra_inv_ok (Z.to_nat (pin_N - 1)) = true.
+Proof. vm_compute. reflexivity. Qed.
+
+Lemma units_gra_inv_ok_spec :
+  forall k h,
+    units_gra_inv_ok k = true ->
+    0 < h <= Z.of_nat k ->
+    Z.gcd h pin_N = 1 ->
+    (gra_inv h pin_N * h) mod pin_N = 1.
+Proof.
+  induction k as [|k IH]; intros h Hok Hrng Hgcd.
+  - lia.
+  - cbn [units_gra_inv_ok] in Hok.
+    destruct (Z.le_gt_cases h (Z.of_nat k)) as [Hle | Hgt].
+    + destruct (Z.eqb_spec (Z.gcd (Z.of_nat (S k)) pin_N) 1).
+      * apply andb_true_iff in Hok. destruct Hok as [_ Hrest].
+        apply IH; [exact Hrest | lia | exact Hgcd].
+      * apply IH; [exact Hok | lia | exact Hgcd].
+    + assert (h = Z.of_nat (S k)) by lia. subst h.
+      destruct (Z.eqb_spec (Z.gcd (Z.of_nat (S k)) pin_N) 1) as [Heq | Hne].
+      * apply andb_true_iff in Hok. destruct Hok as [Hinv _].
+        apply Z.eqb_eq in Hinv. exact Hinv.
+      * congruence.
+Qed.
+
+Theorem pin_gra_inv_inverts_reduced_unit :
+  forall h,
+    0 < h < pin_N ->
+    Z.gcd h pin_N = 1 ->
+    (gra_inv h pin_N * h) mod pin_N = 1.
+Proof.
+  intros h Hrng Hgcd.
+  apply (units_gra_inv_ok_spec (Z.to_nat (pin_N - 1)));
+    [apply pin_units_gra_inv_ok | | exact Hgcd].
+  rewrite Z2Nat.id by lia. lia.
+Qed.
+
+Theorem pin_ginv_of_y_unit_invs :
+  forall y,
+    0 < y < pin_N ->
+    Z.coprime y pin_N ->
+    gra_unit_invs pin_N [GInv 2%nat] (gra_init y).
+Proof.
+  intros y Hrng Hy.
+  unfold gra_unit_invs, gra_init. cbn [nth].
+  split; [exact Hy|].
+  split; [|exact I].
+  apply pin_gra_inv_inverts_reduced_unit; [exact Hrng | exact Hy].
+Qed.
+
+(** [GRoot] of a [Z]-cube whose root shares a factor with [N]
+    leaks that factor.  This is integer cube-root, not a modular
+    cube-root: a residue cube that is not a [Z]-cube is a search
+    miss and returns the handle. *)
+
+Definition gra_root_p3_prog : list GRAOp :=
+  [GConst (pin_p * pin_p * pin_p); GRoot 3%nat].
+
+Theorem integer_cube_root_p3 :
+  integer_cube_root (pin_p * pin_p * pin_p) = pin_p.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem gra_root_p3_from_tape :
+  gra_eval_Z gra_root_p3_prog pin_y 4%nat = pin_p.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem gra_root_p3_factors :
+  Problem_Factor pin_N (gra_eval_Z gra_root_p3_prog pin_y 4%nat).
+Proof.
+  unfold Problem_Factor. rewrite gra_root_p3_from_tape.
+  split; [lia|]. exists pin_q. reflexivity.
+Qed.
+
+Fixpoint gra_first_root_factor (N : Z) (ops : list GRAOp) (t : list Z)
+  : option Z :=
+  match ops with
+  | nil => None
+  | op :: rest =>
+      match op with
+      | GRoot i =>
+          let r := integer_cube_root (nth i t 0) in
+          let g := Z.gcd r N in
+          if (1 <? g) && (g <? N) then Some g
+          else gra_first_root_factor N rest (step N op t)
+      | _ => gra_first_root_factor N rest (step N op t)
+      end
+  end.
+
+Lemma gra_first_root_factor_some :
+  forall ops N t f,
+    gra_first_root_factor N ops t = Some f ->
+    1 < f < N /\ (f | N).
+Proof.
+  induction ops as [|op rest IH]; intros N t f Hf.
+  - discriminate.
+  - destruct op as [c | i j | i j | i j | i | i]; simpl in Hf.
+    + apply (IH N (step N (GConst c) t) f Hf).
+    + apply (IH N (step N (GAdd i j) t) f Hf).
+    + apply (IH N (step N (GSub i j) t) f Hf).
+    + apply (IH N (step N (GMul i j) t) f Hf).
+    + apply (IH N (step N (GInv i) t) f Hf).
+    + set (r := integer_cube_root (nth i t 0)) in *.
+      set (g := Z.gcd r N) in *.
+      destruct ((1 <? g) && (g <? N)) eqn:Hb.
+      * inversion Hf; subst f.
+        apply andb_true_iff in Hb. destruct Hb as [H1 H2].
+        apply Z.ltb_lt in H1. apply Z.ltb_lt in H2.
+        split; [split; [exact H1 | exact H2] | apply Z.gcd_divide_r].
+      * apply (IH N (step N (GRoot i) t) f Hf).
+Qed.
+
+Theorem gra_first_root_factor_factors :
+  forall ops y f,
+    gra_first_root_factor pin_N ops (gra_init y) = Some f ->
+    Problem_Factor pin_N f.
+Proof.
+  intros ops y f Hf.
+  destruct (gra_first_root_factor_some ops pin_N (gra_init y) f Hf)
+    as [Hrng Hdiv].
+  unfold Problem_Factor. split; [exact Hrng | exact Hdiv].
+Qed.
+
+Theorem pin_gra_root_p3_first_factor :
+  gra_first_root_factor pin_N gra_root_p3_prog (gra_init pin_y) = Some pin_p.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_gra_root_8_first_none :
+  gra_first_root_factor pin_N [GConst 8; GRoot 3%nat] (gra_init pin_y) = None.
+Proof. vm_compute. reflexivity. Qed.
 
 Theorem gra_inv_22_from_tape :
   gra_eval_Z gra_inv22_prog pin_y 4%nat = pin_p.

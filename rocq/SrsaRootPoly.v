@@ -64,7 +64,10 @@ Open Scope Z_scope.
     [cas/183], [cas/184], [cas/185], [cas/186], [cas/187],
     [cas/188], [cas/189], [cas/190], [cas/191], [cas/192],
     [cas/193], [cas/194], [cas/195], [cas/196], [cas/197],
-    [cas/198], [cas/199], [cas/200], [cas/201], and [cas/202]. *)
+    [cas/198], [cas/199], [cas/200], [cas/201], [cas/202],
+    [cas/203], [cas/204], [cas/205], [cas/206], [cas/207],
+    [cas/208], [cas/209], [cas/210], [cas/211], [cas/212],
+    [cas/213], and [cas/214]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -3132,5 +3135,193 @@ Proof.
   - intros y Hy.
     rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
     apply Hall. exact Hy.
+  - exact Hex.
+Qed.
+
+(** ** Invert-all-units rational constructs a factor
+
+    [P/Q] inverts every unit iff [P^e ≡ y Q^e] on units with [Q(y)]
+    a unit.  Unique unit [e]-th root ⇒ [P/Q ≡ y^d].  Miller-from-[d]
+    then splits.  [GInv] of a non-unit is a different leak
+    ([gra_first_inv_gcd_factors]).  Not
+    [residual_solver_constructs_factor_open_named].  Cross-confirmed
+    by [cas/203]–[cas/208].  A unit-[GInv] tape denotes such a
+    pair ([gra_unit_inv_denotes]); [GRoot] is a different leak. *)
+
+Definition invert_all_units_rational (P Q : list Z) : Prop :=
+  forall y,
+    Z.coprime y pin_N ->
+    Z.coprime (poly_eval Q y) pin_N /\
+    powm (poly_eval P y) pin_e pin_N
+      = (y * powm (poly_eval Q y) pin_e pin_N) mod pin_N.
+
+Theorem invert_all_units_rational_is_trapdoor_map :
+  forall P Q y,
+    invert_all_units_rational P Q ->
+    Z.coprime y pin_N ->
+    exists invq,
+      (invq * poly_eval Q y) mod pin_N = 1 /\
+      (poly_eval P y * invq) mod pin_N = powm y pin_d pin_N.
+Proof.
+  intros P Q y Hall Hy.
+  destruct (Hall y Hy) as [HQcop HPe].
+  assert (Hg : Z.gcd (poly_eval Q y) pin_N = 1) by exact HQcop.
+  destruct (Z.gcd_bezout (poly_eval Q y) pin_N 1 Hg) as [s [t Hs]].
+  set (invq := s mod pin_N).
+  exists invq.
+  assert (Hinv : (invq * poly_eval Q y) mod pin_N = 1).
+  { unfold invq.
+    rewrite Z.mul_mod_idemp_l by lia.
+    transitivity ((s * poly_eval Q y + t * pin_N) mod pin_N).
+    - symmetry. apply Z.mod_add; lia.
+    - rewrite Hs, Z.mod_small by lia. reflexivity. }
+  split; [exact Hinv|].
+  assert (Hpow :
+    powm (poly_eval P y * invq) pin_e pin_N = y mod pin_N).
+  { transitivity
+      ((powm (poly_eval P y) pin_e pin_N * powm invq pin_e pin_N) mod pin_N).
+    { apply powm_mul_base; lia. }
+    rewrite HPe.
+    rewrite Z.mul_mod_idemp_l by lia.
+    transitivity
+      ((y * (powm (poly_eval Q y) pin_e pin_N * powm invq pin_e pin_N))
+         mod pin_N).
+    { f_equal. ring. }
+    rewrite <- (Z.mul_mod_idemp_r y
+                  (powm (poly_eval Q y) pin_e pin_N * powm invq pin_e pin_N)
+                  pin_N) by lia.
+    rewrite <- (powm_mul_base (poly_eval Q y) invq pin_e pin_N) by lia.
+    rewrite (Z.mul_comm (poly_eval Q y) invq).
+    replace (powm (invq * poly_eval Q y) pin_e pin_N)
+      with (powm ((invq * poly_eval Q y) mod pin_N) pin_e pin_N).
+    2: { pose proof (powm_mod_base (invq * poly_eval Q y) pin_e pin_N
+                      ltac:(lia)) as Hm.
+         exact Hm. }
+    rewrite Hinv.
+    rewrite powm_1_pow by lia.
+    rewrite Z.mul_mod_idemp_r by lia.
+    rewrite Z.mul_1_r. reflexivity. }
+  replace (powm y pin_d pin_N) with (powm y pin_d pin_N mod pin_N).
+  2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+  apply (pin_unique_unit_eth_root (poly_eval P y * invq)
+           (powm y pin_d pin_N)).
+  - apply (powm_unit_is_coprime (poly_eval P y * invq) pin_e pin_N);
+      [apply pin_N_gt_1 | lia |].
+    rewrite Hpow, Z.gcd_mod_l. exact Hy.
+  - unfold Z.coprime. unfold powm. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Hy].
+  - rewrite Hpow, (pin_powm_de y Hy). reflexivity.
+Qed.
+
+Theorem invert_all_units_rational_constructs_factor :
+  forall P Q,
+    invert_all_units_rational P Q ->
+    (forall y, Z.coprime y pin_N ->
+       exists invq,
+         (invq * poly_eval Q y) mod pin_N = 1 /\
+         (poly_eval P y * invq) mod pin_N = powm y pin_d pin_N) /\
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros P Q Hall.
+  split.
+  - intros y Hy.
+    apply invert_all_units_rational_is_trapdoor_map; assumption.
+  - eexists. apply pin_miller_from_d_factors.
+Qed.
+
+Theorem invert_all_units_rational_over_one :
+  forall P,
+    invert_all_units_rational P [1] <->
+    (forall y, Z.coprime y pin_N ->
+       powm (poly_eval P y) pin_e pin_N = y mod pin_N).
+Proof.
+  intros P. split.
+  - intros Hall y Hy.
+    destruct (Hall y Hy) as [_ HPe].
+    replace (poly_eval [1] y) with 1 in HPe by (unfold poly_eval; lia).
+    rewrite powm_1_pow in HPe by lia.
+    rewrite Z.mul_mod_idemp_r in HPe by lia.
+    rewrite Z.mul_1_r in HPe. exact HPe.
+  - intros Hall y Hy. split.
+    + replace (poly_eval [1] y) with 1 by (unfold poly_eval; lia).
+      unfold Z.coprime. apply Z.gcd_1_l.
+    + replace (poly_eval [1] y) with 1 by (unfold poly_eval; lia).
+      rewrite powm_1_pow by lia.
+      rewrite Z.mul_mod_idemp_r by lia.
+      rewrite Z.mul_1_r. apply Hall. exact Hy.
+Qed.
+
+Theorem invert_all_units_rational_monomial_over_one :
+  invert_all_units_rational pin_trapdoor_monomial [1].
+Proof.
+  apply invert_all_units_rational_over_one.
+  apply pin_trapdoor_monomial_poly_inverts.
+Qed.
+
+Definition pin_trapdoor_Xd1 : list Z := poly_Xn (Z.to_nat (pin_d + 1)).
+
+Theorem invert_all_units_rational_Xd1_over_X :
+  invert_all_units_rational pin_trapdoor_Xd1 poly_X.
+Proof.
+  intros y Hy. split.
+  - replace (poly_eval poly_X y) with y.
+    2: { unfold poly_X, poly_eval. lia. }
+    exact Hy.
+  - unfold pin_trapdoor_Xd1.
+    rewrite poly_eval_Xn, Z2Nat.id by lia.
+    replace (poly_eval poly_X y) with y.
+    2: { unfold poly_X, poly_eval. lia. }
+    replace (y ^ (pin_d + 1)) with (y * y ^ pin_d).
+    2: { rewrite Z.pow_add_r, Z.pow_1_r by lia. ring. }
+    rewrite powm_mul_base by lia.
+    rewrite <- pin_trapdoor_monomial_eval.
+    rewrite pin_trapdoor_monomial_poly_inverts by exact Hy.
+    rewrite Z.mul_mod_idemp_r by lia.
+    f_equal. ring.
+Qed.
+
+(** ** Unit-[GInv] GRA residual solver constructs a factor
+
+    A tape whose [GInv]s are of units (and actually invert) and
+    that never [GRoot]s denotes a rational [P/Q]
+    ([gra_unit_inv_denotes]).  Invert-all-units plus that
+    denotation is [invert_all_units_rational], so Miller splits.
+    Nodiv tapes inhabit the class ([nodiv_gra_unit_invs]).
+    [GRoot] of a [Z]-cube that shares a factor with [N] is a
+    different leak ([gra_first_root_factor_factors]).  Not
+    [residual_solver_constructs_factor_open_named]: a residual
+    solver is not given as a unit-[GInv] tape.  Cross-confirmed
+    by [cas/203]–[cas/214]. *)
+
+Theorem unit_ginv_gra_invert_all_units_constructs_factor :
+  forall ops out,
+    (forall y, Z.coprime y pin_N ->
+       gra_unit_invs pin_N ops (gra_init y)) ->
+    (forall y, Z.coprime y pin_N ->
+       powm (gra_eval pin_N ops y out) pin_e pin_N = y mod pin_N) ->
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros ops out Hunit Hall.
+  destruct (invert_all_units_rational_constructs_factor
+              (fst (nth out (gra_run_rat ops slp_init_rat) ([], [1])))
+              (snd (nth out (gra_run_rat ops slp_init_rat) ([], [1]))))
+    as [_ Hex].
+  - intros y Hy.
+    pose proof (gra_unit_inv_denotes ops pin_N y out
+                  ltac:(lia) (Hunit y Hy)) as Hrat.
+    unfold rat_handle_agrees in Hrat.
+    destruct Hrat as [HQcop Hcong].
+    split; [exact HQcop|].
+    pose proof (powm_mod_base
+                  (poly_eval
+                     (fst (nth out (gra_run_rat ops slp_init_rat) ([], [1])))
+                     y)
+                  pin_e pin_N ltac:(lia)) as Hbase.
+    rewrite <- Hbase.
+    rewrite <- Hcong.
+    rewrite powm_mod_base by lia.
+    rewrite powm_mul_base by lia.
+    rewrite (Hall y Hy).
+    rewrite Z.mul_mod_idemp_l by lia. reflexivity.
   - exact Hex.
 Qed.

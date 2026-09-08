@@ -389,9 +389,18 @@ map and Miller-from-`d` constructs a factor
 (`invert_all_units_poly_constructs_factor`, CAS `201`). A nodiv GRA
 that inverts every unit denotes that poly and factors
 (`nodiv_gra_invert_all_units_constructs_factor`, CAS `202`). `GInv`
-is outside the class. Writing the invert poly wrote `d`. Not
-`residual_solver_constructs_factor_open_named`. The polynomial class
-and the nodiv-GRA solver shape are closed.
+of a non-unit leaks `gcd` (`gra_first_inv_gcd_factors`, CAS `203`,
+`204`, `208`). Invert-all-units rationals `P/Q` are the trapdoor
+map and Miller-split (`invert_all_units_rational_constructs_factor`,
+`invert_all_units_rational_Xd1_over_X`, CAS `205`–`207`, `212`).
+A unit-`GInv` tape (no `GRoot`) denotes such a rational
+(`gra_unit_inv_denotes`, `unit_ginv_gra_invert_all_units_constructs_factor`,
+CAS `211`, `214`). `GRoot` of a `Z`-cube that shares a factor with
+`N` leaks (`gra_first_root_factor_factors`, CAS `209`, `210`,
+`213`). Not `residual_solver_constructs_factor_open_named`. The
+polynomial class, the nodiv-GRA shape, and the algebraic-GRA
+(`GInv` leak / rationals / unit-`GInv` denotation / `GRoot` leak)
+are closed. `GRoot` as a modular cube-root stays outside.
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -484,6 +493,10 @@ advice `N/17`: `PreprocessGRA.v`.
 | deg `< q−1` extra `N K` is the CRT binomial mod `N` | `pin_binomial_plus_N_kernel_cong_mod_N` / `pin_binomial_plus_N_kernel_deg_lt_qminus1` | `SrsaRootPoly.v` | `200` |
 | invert-all-units poly is the trapdoor map and Miller-factors | `invert_all_units_poly_constructs_factor` / `pin_miller_from_d_factors` | `SrsaRootPoly.v` | `201` |
 | nodiv GRA that inverts every unit denotes that poly and factors | `nodiv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | `202` |
+| `GInv` of a non-unit returns a proper `gcd` | `gra_inv_eq_gcd_if_nonunit` / `gra_first_inv_gcd_factors` | `GenericRing.v` | `203`, `204`, `208` |
+| invert-all-units rational is the trapdoor map and Miller-factors | `invert_all_units_rational_constructs_factor` / `invert_all_units_rational_Xd1_over_X` | `SrsaRootPoly.v` | `205`, `206`, `207` |
+| unit-`GInv` tape denotes a rational and factors | `gra_unit_inv_denotes` / `unit_ginv_gra_invert_all_units_constructs_factor` | `GenericRing.v`, `SrsaRootPoly.v` | `211`, `212`, `214` |
+| `GRoot` of a `Z`-cube sharing a factor with `N` leaks | `gra_root_p3_factors` / `gra_first_root_factor_factors` | `GenericRing.v` | `209`, `210`, `213` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

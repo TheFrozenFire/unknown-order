@@ -3,6 +3,7 @@ From Stdlib Require Import ZArith.
 Require Import Hardness.
 Require Import TranscriptOracle.
 Require Import StrongRSAPeel.
+Require Import GenericRing.
 Require Import SrsaRootPoly.
 
 Open Scope Z_scope.
@@ -30,3 +31,9 @@ Check leftover_mismatch_factors.
 Check invert_all_units_poly_constructs_factor.
 Check pin_binomial_plus_N_kernel_cong_mod_N.
 Check nodiv_gra_invert_all_units_constructs_factor.
+Check invert_all_units_rational_constructs_factor.
+Check invert_all_units_rational_Xd1_over_X.
+Check unit_ginv_gra_invert_all_units_constructs_factor.
+Check gra_first_inv_gcd_factors.
+Check gra_first_root_factor_factors.
+Check gra_unit_inv_denotes.
