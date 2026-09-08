@@ -241,7 +241,11 @@ Proof.
   split; [lia|]. exists pin_77_q. reflexivity.
 Qed.
 
-(** ** Residual leaf (open: solver ⇒ factor is the live target) *)
+(** ** Residual leaf (open: solver ⇒ factor is the live target)
+
+    Inhabiting the leaf is not a residual *solver*, and a leftover
+    pair is not [Problem_Factor].
+    Not [residual_solver_constructs_factor_open_named]. *)
 
 Definition srsa_residual_leaf (N lam y x e : Z) : Prop :=
   Z.coprime y N /\

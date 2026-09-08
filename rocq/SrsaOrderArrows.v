@@ -21,7 +21,11 @@ Open Scope Z_scope.
     [residual_solver_constructs_factor_open_named].
     Cross-confirmed by [cas/145]. *)
 
-(** ** Order of the pin challenge *)
+(** ** Order of the pin challenge
+
+    Invert in [⟨y⟩] from [ord(y)] inhabits the residual leaf.  That
+    is not a residual *solver* constructing a factor.
+    Not [residual_solver_constructs_factor_open_named]. *)
 
 Theorem is_order_pin_y_40 :
   is_order pin_N pin_y pin_y_ord.
@@ -76,7 +80,12 @@ Theorem order_invert_pin_is_cube_root :
   powm pin_x pin_e pin_N = pin_y.
 Proof. vm_compute. split; reflexivity. Qed.
 
-(** ** Mismatch ⇒ Factor; matching local orders do not *)
+(** ** Mismatch ⇒ Factor; matching local orders do not
+
+    A leftover *pair* factors only under KeyGen mismatch.  Matching
+    local orders do not.  Neither is a residual or Strong-RSA *solver*.
+    Not [residual_solver_constructs_factor_open_named].
+    Not [strong_rsa_solver_constructs_factor_open_named]. *)
 
 (** The residual leaf is unused: mismatch is the load-bearing
     hypothesis.  The leaf is in the type so the arrow is not

@@ -1261,44 +1261,45 @@ in the Rocq tree.  Do not edit by hand.
   - L28: Factoring as a relation
   - L33: RSA is a one-way permutation on units, not a predicate
   - L62: RSA vs strong RSA (relations)
-  - L136: Order divides the exponent
-  - L183: One-sided small exponent (the Type-B winning condition)
-  - L245: Order assumption and fractional root
-  - L459: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L137: Order divides the exponent
+  - L184: One-sided small exponent (the Type-B winning condition)
+  - L246: Order assumption and fractional root
+  - L460: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L507: Leftover mismatch splits; a pair is not a solver
 
 | Kind | Name | Line |
 |---|---|---:|
 | Theorem | `rsa_units_are_eth_powers` | 39 |
 | Theorem | `trapdoor_inverts_RSA` | 50 |
-| Theorem | `rsa_solution_is_strong_RSA` | 83 |
-| Theorem | `lambda_solves_strong_RSA` | 97 |
-| Lemma | `strong_RSA_trivial_at_one` | 121 |
-| Lemma | `rsa_trivial_at_one` | 129 |
-| Lemma | `order_divides_annihilator` | 138 |
-| Theorem | `order_divides_lambda` | 167 |
-| Theorem | `one_sided_low_order_factors` | 195 |
-| Theorem | `one_sided_low_order_is_factor` | 227 |
-| Lemma | `adaptive_root_is_strong_RSA` | 240 |
-| Theorem | `order_is_annihilator` | 251 |
-| Theorem | `low_order_is_annihilator` | 260 |
-| Theorem | `lambda_is_annihilator_on_units` | 269 |
-| Theorem | `annihilator_plus_one_is_strong_RSA` | 282 |
-| Theorem | `rsa_is_fractional_root` | 299 |
-| Theorem | `strong_RSA_is_fractional_root` | 315 |
-| Theorem | `annihilator_is_fractional_root_of_one` | 330 |
-| Theorem | `ar_C_implies_strong_RSA` | 359 |
-| Theorem | `ar_C_requires_C` | 368 |
-| Theorem | `strong_RSA_is_ar_C_iff` | 373 |
-| Theorem | `lambda_plus_one_11_17` | 384 |
-| Theorem | `lambda_plus_one_11_17_not_prime` | 388 |
-| Theorem | `lambda_solves_search_11_17` | 397 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 408 |
-| Theorem | `adaptive_root_known_product_breaks` | 426 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 442 |
-| Theorem | `order_inverts_in_cyclic` | 465 |
-| Theorem | `order_yields_strong_RSA` | 490 |
-| Lemma | `gcd_powm_minus_1` | 513 |
-| Theorem | `leftover_mismatch_factors` | 526 |
+| Theorem | `rsa_solution_is_strong_RSA` | 84 |
+| Theorem | `lambda_solves_strong_RSA` | 98 |
+| Lemma | `strong_RSA_trivial_at_one` | 122 |
+| Lemma | `rsa_trivial_at_one` | 130 |
+| Lemma | `order_divides_annihilator` | 139 |
+| Theorem | `order_divides_lambda` | 168 |
+| Theorem | `one_sided_low_order_factors` | 196 |
+| Theorem | `one_sided_low_order_is_factor` | 228 |
+| Lemma | `adaptive_root_is_strong_RSA` | 241 |
+| Theorem | `order_is_annihilator` | 252 |
+| Theorem | `low_order_is_annihilator` | 261 |
+| Theorem | `lambda_is_annihilator_on_units` | 270 |
+| Theorem | `annihilator_plus_one_is_strong_RSA` | 283 |
+| Theorem | `rsa_is_fractional_root` | 300 |
+| Theorem | `strong_RSA_is_fractional_root` | 316 |
+| Theorem | `annihilator_is_fractional_root_of_one` | 331 |
+| Theorem | `ar_C_implies_strong_RSA` | 360 |
+| Theorem | `ar_C_requires_C` | 369 |
+| Theorem | `strong_RSA_is_ar_C_iff` | 374 |
+| Theorem | `lambda_plus_one_11_17` | 385 |
+| Theorem | `lambda_plus_one_11_17_not_prime` | 389 |
+| Theorem | `lambda_solves_search_11_17` | 398 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 409 |
+| Theorem | `adaptive_root_known_product_breaks` | 427 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 443 |
+| Theorem | `order_inverts_in_cyclic` | 467 |
+| Theorem | `order_yields_strong_RSA` | 492 |
+| Lemma | `gcd_powm_minus_1` | 518 |
+| Theorem | `leftover_mismatch_factors` | 531 |
 
 ## `HashSlot.v`
 
@@ -2075,8 +2076,9 @@ in the Rocq tree.  Do not edit by hand.
   - L41: Prime shape
   - L107: Williams tweak: among [{±a, ±2a}] exactly one Legendre pair
   - L210: Rabin reduction: two non-associated square roots factor [N]
-  - L294: Verification shape: [s²] is one of the four tweaks of [H].
-  - L312: Keygen obligation on top of the RSA rulers: the mod-8 split.
+  - L263: Rabin [e=2] oracle factors; an RSA inverter does not
+  - L297: Verification shape: [s²] is one of the four tweaks of [H].
+  - L315: Keygen obligation on top of the RSA rulers: the mod-8 split.
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2095,10 +2097,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `williams_two_symbol_q` | 195 |
 | Theorem | `williams_neg1_on_blum` | 199 |
 | Theorem | `rabin_roots_split` | 218 |
-| Theorem | `rabin_oracle_nonassociate_factors` | 269 |
-| Lemma | `rw_verify_of_root` | 305 |
-| Lemma | `kg_rw_implies_blum` | 316 |
-| Lemma | `kg_rw_pminus1_almost_odd` | 324 |
+| Theorem | `rabin_oracle_nonassociate_factors` | 272 |
+| Lemma | `rw_verify_of_root` | 308 |
+| Lemma | `kg_rw_implies_blum` | 319 |
+| Lemma | `kg_rw_pminus1_almost_odd` | 327 |
 
 ## `Range2.v`
 
@@ -2113,7 +2115,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L8: Residual-solver route pin
+- L10: Live-target route pins
 
 ## `SAGM.v`
 
@@ -2611,25 +2613,25 @@ in the Rocq tree.  Do not edit by hand.
 
 - L14: Order / residual Strong RSA / Factor arrows
   - L24: Order of the pin challenge
-  - L79: Mismatch ⇒ Factor; matching local orders do not
+  - L83: Mismatch ⇒ Factor; matching local orders do not
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `is_order_pin_y_40` | 26 |
-| Theorem | `order_yields_residual_sRSA` | 36 |
-| Theorem | `order_yields_residual_pin` | 58 |
-| Theorem | `order_invert_pin_is_cube_root` | 74 |
-| Theorem | `residual_mismatch_factors` | 85 |
-| Theorem | `leftover_x_one_sided_pin` | 97 |
-| Theorem | `leftover_x_mismatch_factors_pin` | 106 |
-| Theorem | `residual_mismatch_factors_pin` | 115 |
-| Theorem | `leftover_y_one_sided_pin` | 127 |
-| Theorem | `order_mismatch_factors_pin` | 136 |
-| Theorem | `leftover_77_one_sided` | 145 |
-| Theorem | `leftover_77_mismatch_factors` | 154 |
-| Theorem | `matching_247_not_one_sided` | 167 |
-| Theorem | `matching_247_gcd_not_proper` | 175 |
-| Theorem | `matching_247_two_sided_gcd_is_N` | 185 |
+| Theorem | `is_order_pin_y_40` | 30 |
+| Theorem | `order_yields_residual_sRSA` | 40 |
+| Theorem | `order_yields_residual_pin` | 62 |
+| Theorem | `order_invert_pin_is_cube_root` | 78 |
+| Theorem | `residual_mismatch_factors` | 94 |
+| Theorem | `leftover_x_one_sided_pin` | 106 |
+| Theorem | `leftover_x_mismatch_factors_pin` | 115 |
+| Theorem | `residual_mismatch_factors_pin` | 124 |
+| Theorem | `leftover_y_one_sided_pin` | 136 |
+| Theorem | `order_mismatch_factors_pin` | 145 |
+| Theorem | `leftover_77_one_sided` | 154 |
+| Theorem | `leftover_77_mismatch_factors` | 163 |
+| Theorem | `matching_247_not_one_sided` | 176 |
+| Theorem | `matching_247_gcd_not_proper` | 184 |
+| Theorem | `matching_247_two_sided_gcd_is_N` | 194 |
 
 ## `SrsaPeriod.v`
 
@@ -3017,8 +3019,8 @@ in the Rocq tree.  Do not edit by hand.
   - L2551: Unique monic leftover kernel, and [K ≡ X^{q−2} (mod p)]
   - L2627: CRT binomial inhabitant writes both local inverse folds
   - L2646: Leftover kernel is 1-dimensional
-  - L2752: Binomial [+ c K]: leftover extra, invert iff [N | c]
-  - L2903: Difference of invert polys has both Fermat folds zero
+  - L2754: Binomial [+ c K]: leftover extra, invert iff [N | c]
+  - L2905: Difference of invert polys has both Fermat folds zero
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3187,26 +3189,26 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_geo_kernel_lower_div_p` | 2603 |
 | Theorem | `pin_geo_kernel_plus_q_cong` | 2616 |
 | Theorem | `pin_crt_binomial_both_folds` | 2634 |
-| Lemma | `poly_degree_gt_nth_zero` | 2653 |
-| Lemma | `leftover_kernel_span` | 2661 |
-| Theorem | `leftover_monic_is_kernel` | 2690 |
-| Theorem | `pin_geo_kernel_inv_mod` | 2723 |
-| Theorem | `leftover_kernel_exists_scalar` | 2727 |
-| Lemma | `pin_ck_agrees_canonical` | 2762 |
-| Lemma | `pin_ck_extra_at_lift` | 2780 |
-| Lemma | `pin_ck_extra_at_2_mod_p` | 2801 |
-| Theorem | `pin_binomial_plus_N_kernel_inverts` | 2827 |
-| Theorem | `pin_binomial_plus_p_kernel_misses_lift` | 2842 |
-| Theorem | `pin_binomial_plus_q_kernel_misses_2` | 2876 |
-| Lemma | `class_sum_from_add` | 2909 |
-| Lemma | `class_sum_from_map_mul` | 2923 |
-| Lemma | `class_sum_poly_sub` | 2933 |
-| Theorem | `invert_all_units_diff_fold_p_zero` | 2942 |
-| Theorem | `invert_all_units_diff_fold_q_zero` | 2959 |
-| Theorem | `pin_NX20_root_poly_inverts` | 2979 |
-| Theorem | `pin_crt_vs_NX20_diff_folds_zero` | 2993 |
-| Lemma | `pin_trapdoor_monomial_poly_inverts` | 3013 |
-| Theorem | `pin_crt_vs_monomial_diff_folds_zero` | 3025 |
+| Lemma | `poly_degree_gt_nth_zero` | 2655 |
+| Lemma | `leftover_kernel_span` | 2663 |
+| Theorem | `leftover_monic_is_kernel` | 2692 |
+| Theorem | `pin_geo_kernel_inv_mod` | 2725 |
+| Theorem | `leftover_kernel_exists_scalar` | 2729 |
+| Lemma | `pin_ck_agrees_canonical` | 2764 |
+| Lemma | `pin_ck_extra_at_lift` | 2782 |
+| Lemma | `pin_ck_extra_at_2_mod_p` | 2803 |
+| Theorem | `pin_binomial_plus_N_kernel_inverts` | 2829 |
+| Theorem | `pin_binomial_plus_p_kernel_misses_lift` | 2844 |
+| Theorem | `pin_binomial_plus_q_kernel_misses_2` | 2878 |
+| Lemma | `class_sum_from_add` | 2913 |
+| Lemma | `class_sum_from_map_mul` | 2927 |
+| Lemma | `class_sum_poly_sub` | 2937 |
+| Theorem | `invert_all_units_diff_fold_p_zero` | 2946 |
+| Theorem | `invert_all_units_diff_fold_q_zero` | 2963 |
+| Theorem | `pin_NX20_root_poly_inverts` | 2983 |
+| Theorem | `pin_crt_vs_NX20_diff_folds_zero` | 2997 |
+| Lemma | `pin_trapdoor_monomial_poly_inverts` | 3017 |
+| Theorem | `pin_crt_vs_monomial_diff_folds_zero` | 3029 |
 
 ## `SrsaWriteE.v`
 
@@ -3360,9 +3362,9 @@ in the Rocq tree.  Do not edit by hand.
   - L101: Even [e] is a square root
   - L149: [λ]-type: [x = y] is an annihilator
   - L244: Residual leaf (open: solver ⇒ factor is the live target)
-  - L289: Self-randomization and related queries
-  - L337: SAGM handle still peels
-  - L357: Four square roots of 1; mixed splits, [−1] does not
+  - L293: Self-randomization and related queries
+  - L341: SAGM handle still peels
+  - L361: Four square roots of 1; mixed splits, [−1] does not
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3387,21 +3389,21 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `srsa_safeprime_g0_square` | 229 |
 | Theorem | `srsa_safeprime_miller_gcd` | 233 |
 | Theorem | `srsa_safeprime_miller_factors` | 237 |
-| Theorem | `srsa_residual_pin` | 253 |
-| Theorem | `srsa_residual_pin187` | 264 |
-| Theorem | `srsa_fixed_e_rerand` | 291 |
-| Theorem | `srsa_fixed_e_rerand_pin` | 304 |
-| Theorem | `srsa_poly_e_not_rerand_invariant` | 311 |
-| Theorem | `srsa_related_y_square` | 317 |
-| Theorem | `srsa_related_pin` | 333 |
-| Theorem | `srsa_sagm_handle_unit` | 339 |
-| Theorem | `srsa_sagm_lambda_type_peel` | 344 |
-| Theorem | `srsa_sagm_product_reused` | 349 |
-| Theorem | `srsa_sqrt1_120_splits` | 359 |
-| Theorem | `srsa_minus1_no_split` | 365 |
-| Theorem | `srsa_120_plus_1` | 370 |
-| Theorem | `srsa_miller_66` | 374 |
-| Theorem | `srsa_four_sqrt1` | 378 |
+| Theorem | `srsa_residual_pin` | 257 |
+| Theorem | `srsa_residual_pin187` | 268 |
+| Theorem | `srsa_fixed_e_rerand` | 295 |
+| Theorem | `srsa_fixed_e_rerand_pin` | 308 |
+| Theorem | `srsa_poly_e_not_rerand_invariant` | 315 |
+| Theorem | `srsa_related_y_square` | 321 |
+| Theorem | `srsa_related_pin` | 337 |
+| Theorem | `srsa_sagm_handle_unit` | 343 |
+| Theorem | `srsa_sagm_lambda_type_peel` | 348 |
+| Theorem | `srsa_sagm_product_reused` | 353 |
+| Theorem | `srsa_sqrt1_120_splits` | 363 |
+| Theorem | `srsa_minus1_no_split` | 369 |
+| Theorem | `srsa_120_plus_1` | 374 |
+| Theorem | `srsa_miller_66` | 378 |
+| Theorem | `srsa_four_sqrt1` | 382 |
 
 ## `Succinct.v`
 
@@ -3509,11 +3511,11 @@ in the Rocq tree.  Do not edit by hand.
   - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
   - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
   - L574: RSA inverter vs Rabin inverter
-  - L617: T7 — finite products of raw signatures
-  - L689: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
-  - L768: Constructor slot vs K1
-  - L806: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
-  - L836: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
+  - L618: T7 — finite products of raw signatures
+  - L690: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
+  - L769: Constructor slot vs K1
+  - L807: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
+  - L837: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3550,22 +3552,22 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `non_williams_two_chars` | 535 |
 | Theorem | `sign_neg1_odd` | 547 |
 | Theorem | `odd_exp_preserves_minus1` | 559 |
-| Theorem | `rsa_inverter_recovers_message` | 591 |
-| Theorem | `sign_hom_3` | 623 |
-| Theorem | `sign_of_msg_product_one` | 639 |
-| Theorem | `sign_weighted_commute` | 656 |
-| Theorem | `sign_weighted_product` | 670 |
-| Lemma | `euler_sign_of_pm1` | 697 |
-| Lemma | `euler_sign_sq` | 714 |
-| Theorem | `other_legendre_from_product` | 725 |
-| Theorem | `cipher_jacobi_eq_message` | 738 |
-| Theorem | `onesided_plain_one_factors` | 773 |
-| Theorem | `ctor_slot_mod_r_need_not_factor` | 788 |
-| Theorem | `cube_below_N` | 808 |
-| Theorem | `e3_small_cube_verifies` | 823 |
-| Theorem | `bleiche_wrap_interval` | 838 |
-| Theorem | `pkcs15_prefix_is_type2` | 864 |
-| Theorem | `manger_is_stricter_than_type2` | 874 |
+| Theorem | `rsa_inverter_recovers_message` | 592 |
+| Theorem | `sign_hom_3` | 624 |
+| Theorem | `sign_of_msg_product_one` | 640 |
+| Theorem | `sign_weighted_commute` | 657 |
+| Theorem | `sign_weighted_product` | 671 |
+| Lemma | `euler_sign_of_pm1` | 698 |
+| Lemma | `euler_sign_sq` | 715 |
+| Theorem | `other_legendre_from_product` | 726 |
+| Theorem | `cipher_jacobi_eq_message` | 739 |
+| Theorem | `onesided_plain_one_factors` | 774 |
+| Theorem | `ctor_slot_mod_r_need_not_factor` | 789 |
+| Theorem | `cube_below_N` | 809 |
+| Theorem | `e3_small_cube_verifies` | 824 |
+| Theorem | `bleiche_wrap_interval` | 839 |
+| Theorem | `pkcs15_prefix_is_type2` | 865 |
+| Theorem | `manger_is_stricter_than_type2` | 875 |
 
 ## `TwoPartyPair.v`
 

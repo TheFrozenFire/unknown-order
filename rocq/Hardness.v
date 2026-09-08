@@ -65,7 +65,8 @@ Qed.
     The converse is false as a *relation*: strong RSA may choose [e].
     Whether a Strong-RSA *solver* constructs a factor is the live
     target [strong_rsa_solver_constructs_factor_open_named].  PPT
-    advantage is still out of model ([Refuse_PPT_advantage]). *)
+    advantage is still out of model ([Refuse_PPT_advantage]).
+    Not [strong_rsa_solver_constructs_factor_open_named]. *)
 
 (** A Strong-RSA solver for a fixed [N] returns some [(x,e)] for
     every challenge [y].  Whether that oracle constructs a factor
@@ -460,7 +461,8 @@ Qed.
 
     Given [ord(y)=k] and [e d ≡ 1 (mod k)], [x = y^d] is a Strong-RSA
     witness.  No [gcd(·−1,N)].  Not a claim that a Strong-RSA solver
-    finds orders, nor RSA ≡ factoring. *)
+    finds orders, nor RSA ≡ factoring.
+    Not [strong_rsa_solver_constructs_factor_open_named]. *)
 
 Theorem order_inverts_in_cyclic :
   forall N y k e d,
@@ -502,13 +504,16 @@ Proof.
   apply (order_inverts_in_cyclic N y k e d); [assumption | assumption | assumption | lia | assumption | assumption].
 Qed.
 
-(** Leftover [x] (or any unit) with a one-sided local annihilator
+(** ** Leftover mismatch splits; a pair is not a solver
+
+    Leftover [x] (or any unit) with a one-sided local annihilator
     factors [N].  The mismatch hypothesis is [one_sided_low_order]
     and is load-bearing: the public quantity is [gcd(x^k−1, N)],
     equal to [p] by [one_sided_low_order_factors].  Matching local
     orders fall outside that hypothesis.  A leftover *pair* is not
-    a Strong-RSA *solver*; the solver-to-factor implication is
-    [strong_rsa_solver_constructs_factor_open_named]. *)
+    a Strong-RSA *solver* or a residual *solver*.
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Not [residual_solver_constructs_factor_open_named]. *)
 
 Lemma gcd_powm_minus_1 :
   forall a k n,

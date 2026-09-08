@@ -13,9 +13,9 @@ Generated.  Do not edit by hand.
 
 | Name | File | Line | Status | Used at |
 |---|---|---:|---|---|
-| `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 79 | open | — |
-| `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 285 | open | — |
-| `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 587 | open | — |
+| `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 80 | open | — |
+| `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 289 | open | — |
+| `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 588 | open | — |
 | `compose_preserves_disc_named` | `BinForms.v` | 677 | refuse | — |
 | `compose_assoc_named` | `BinForms.v` | 803 | refuse | — |
 | `compose_left_compat_named` | `BinForms.v` | 812 | refuse | — |
@@ -82,6 +82,8 @@ comments; do not maintain this table by hand.
 | `inverse_unique_mod` | `CRTRSA.v` | 270 |
 | `local_inv_is_crt_dp` | `CRTRSA.v` | 297 |
 | `local_inv_is_crt_dq` | `CRTRSA.v` | 312 |
+| `gcd_powm_minus_1` | `Hardness.v` | 518 |
+| `leftover_mismatch_factors` | `Hardness.v` | 531 |
 | `miller_multiple_annihilates` | `MillerHeight.v` | 200 |
 | `miller_height_exists_multiple` | `MillerHeight.v` | 218 |
 | `miller_from_multiple` | `MillerHeight.v` | 256 |
@@ -89,6 +91,21 @@ comments; do not maintain this table by hand.
 | `trapdoor_exponent_divides_lambda` | `MillerHeight.v` | 302 |
 | `miller_from_trapdoor_exponent` | `MillerHeight.v` | 313 |
 | `miller_from_trapdoor_exponent_q` | `MillerHeight.v` | 330 |
+| `is_order_pin_y_40` | `SrsaOrderArrows.v` | 30 |
+| `order_yields_residual_sRSA` | `SrsaOrderArrows.v` | 40 |
+| `order_yields_residual_pin` | `SrsaOrderArrows.v` | 62 |
+| `order_invert_pin_is_cube_root` | `SrsaOrderArrows.v` | 78 |
+| `residual_mismatch_factors` | `SrsaOrderArrows.v` | 94 |
+| `leftover_x_one_sided_pin` | `SrsaOrderArrows.v` | 106 |
+| `leftover_x_mismatch_factors_pin` | `SrsaOrderArrows.v` | 115 |
+| `residual_mismatch_factors_pin` | `SrsaOrderArrows.v` | 124 |
+| `leftover_y_one_sided_pin` | `SrsaOrderArrows.v` | 136 |
+| `order_mismatch_factors_pin` | `SrsaOrderArrows.v` | 145 |
+| `leftover_77_one_sided` | `SrsaOrderArrows.v` | 154 |
+| `leftover_77_mismatch_factors` | `SrsaOrderArrows.v` | 163 |
+| `matching_247_not_one_sided` | `SrsaOrderArrows.v` | 176 |
+| `matching_247_gcd_not_proper` | `SrsaOrderArrows.v` | 184 |
+| `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 | `residual_square_denotes_X2` | `SrsaResidualGRA.v` | 751 |
 | `residual_square_degree_eq_bound` | `SrsaResidualGRA.v` | 756 |
 | `residual_square_eval` | `SrsaResidualGRA.v` | 766 |
@@ -131,5 +148,52 @@ comments; do not maintain this table by hand.
 | `invert_all_units_both_folds_are_local_monomials` | `SrsaRootPoly.v` | 2458 |
 | `invert_all_units_fold_degrees_crt_d` | `SrsaRootPoly.v` | 2474 |
 | `pin_crt_binomial_both_folds` | `SrsaRootPoly.v` | 2634 |
+| `poly_degree_gt_nth_zero` | `SrsaRootPoly.v` | 2655 |
+| `leftover_kernel_span` | `SrsaRootPoly.v` | 2663 |
+| `leftover_monic_is_kernel` | `SrsaRootPoly.v` | 2692 |
+| `pin_geo_kernel_inv_mod` | `SrsaRootPoly.v` | 2725 |
+| `leftover_kernel_exists_scalar` | `SrsaRootPoly.v` | 2729 |
+| `class_sum_from_add` | `SrsaRootPoly.v` | 2913 |
+| `class_sum_from_map_mul` | `SrsaRootPoly.v` | 2927 |
+| `class_sum_poly_sub` | `SrsaRootPoly.v` | 2937 |
+| `invert_all_units_diff_fold_p_zero` | `SrsaRootPoly.v` | 2946 |
+| `invert_all_units_diff_fold_q_zero` | `SrsaRootPoly.v` | 2963 |
+| `pin_NX20_root_poly_inverts` | `SrsaRootPoly.v` | 2983 |
+| `pin_crt_vs_NX20_diff_folds_zero` | `SrsaRootPoly.v` | 2997 |
+| `pin_trapdoor_monomial_poly_inverts` | `SrsaRootPoly.v` | 3017 |
+| `pin_crt_vs_monomial_diff_folds_zero` | `SrsaRootPoly.v` | 3029 |
+| `srsa_residual_pin` | `StrongRSAPeel.v` | 257 |
+| `srsa_residual_pin187` | `StrongRSAPeel.v` | 268 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 54 does-not-discharge rows._
+### `rsa_inverter_constructs_factor_open_named`
+
+| Closed result | File | Line |
+|---|---|---:|
+| `rabin_oracle_nonassociate_factors` | `RabinWilliams.v` | 272 |
+| `rsa_inverter_recovers_message` | `TranscriptOracle.v` | 592 |
+
+### `strong_rsa_solver_constructs_factor_open_named`
+
+| Closed result | File | Line |
+|---|---|---:|
+| `rsa_solution_is_strong_RSA` | `Hardness.v` | 84 |
+| `lambda_solves_strong_RSA` | `Hardness.v` | 98 |
+| `strong_RSA_trivial_at_one` | `Hardness.v` | 122 |
+| `rsa_trivial_at_one` | `Hardness.v` | 130 |
+| `order_inverts_in_cyclic` | `Hardness.v` | 467 |
+| `order_yields_strong_RSA` | `Hardness.v` | 492 |
+| `gcd_powm_minus_1` | `Hardness.v` | 518 |
+| `leftover_mismatch_factors` | `Hardness.v` | 531 |
+| `residual_mismatch_factors` | `SrsaOrderArrows.v` | 94 |
+| `leftover_x_one_sided_pin` | `SrsaOrderArrows.v` | 106 |
+| `leftover_x_mismatch_factors_pin` | `SrsaOrderArrows.v` | 115 |
+| `residual_mismatch_factors_pin` | `SrsaOrderArrows.v` | 124 |
+| `leftover_y_one_sided_pin` | `SrsaOrderArrows.v` | 136 |
+| `order_mismatch_factors_pin` | `SrsaOrderArrows.v` | 145 |
+| `leftover_77_one_sided` | `SrsaOrderArrows.v` | 154 |
+| `leftover_77_mismatch_factors` | `SrsaOrderArrows.v` | 163 |
+| `matching_247_not_one_sided` | `SrsaOrderArrows.v` | 176 |
+| `matching_247_gcd_not_proper` | `SrsaOrderArrows.v` | 184 |
+| `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
+
+_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 108 does-not-discharge rows._

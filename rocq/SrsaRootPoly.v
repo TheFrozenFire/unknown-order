@@ -2648,7 +2648,9 @@ Qed.
     Any [P] of degree [< q−1] vanishing on [𝔽_q* \ {p}] is a
     scalar multiple of [K] modulo [q]: the missing sample at [p]
     pins the scalar.  A monic such [P] of degree [q−2] is [K]
-    itself.  Cross-confirmed by [cas/192] and [cas/193]. *)
+    itself.  Uniqueness of a leftover kernel, not a residual
+    solver.  Not [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/192] and [cas/193]. *)
 
 Lemma poly_degree_gt_nth_zero :
   forall P i, (poly_degree P < i)%nat -> nth i P 0 = 0.
@@ -2904,6 +2906,8 @@ Qed.
 
     Any two all-units invert polys have the same local inverse
     folds, so their difference is Fermat-period on both sides.
+    Writing two invert maps wrote the same local inverses, hence
+    [d].  Not [residual_solver_constructs_factor_open_named].
     Cross-confirmed by [cas/198] and [cas/199]. *)
 
 Lemma class_sum_from_add :

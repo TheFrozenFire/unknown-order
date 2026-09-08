@@ -260,11 +260,14 @@ Proof.
   - apply Z.gcd_divide_r.
 Qed.
 
-(** An inversion oracle on [e = 2], queried at a planted square [r²]
+(** ** Rabin [e=2] oracle factors; an RSA inverter does not
+
+    An inversion oracle on [e = 2], queried at a planted square [r²]
     and returning a non-associate root, factors.  RSA has no such
     theorem for an [e]-th-root inverter
     ([rsa_inverter_constructs_factor_open_named] in [TranscriptOracle],
-    live unproved target). *)
+    live unproved target).
+    Not [rsa_inverter_constructs_factor_open_named]. *)
 
 Theorem rabin_oracle_nonassociate_factors :
   forall p q r x,

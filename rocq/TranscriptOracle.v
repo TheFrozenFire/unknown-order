@@ -577,6 +577,7 @@ Qed.
     constructs a factor is the live converse
     ([rsa_inverter_constructs_factor_open_named]).  Unused means
     unproved, not banned.  Do not inhabit by projecting [rsa_p].
+    Not [rsa_inverter_constructs_factor_open_named].
     The well-posed GRA fragment is
     [gra_nodiv_integer_eth_root_forbidden]: a division-free tape
     cannot be an integer polynomial identity [P(y)^e = y] for [e ≥ 2].
