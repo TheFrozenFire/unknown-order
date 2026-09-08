@@ -3326,45 +3326,61 @@ in the Rocq tree.  Do not edit by hand.
 ## `SrsaVaryingE.v`
 
 - L22: Varying-[e] residual and the Strong-RSA output negative
-  - L40: Strong-RSA [λ+1] outputs never a proper gcd
-  - L56: Residual [e + kλ] keeps the same [x]
-  - L134: Same [x] at two exponents annihilates; two-sided gcd is [N]
-  - L212: Miller from a known multiple of [λ]
-  - L310: Different residual [e] gives a different [x]
-  - L343: Residual solver with [e ≡ pin_e (mod λ)]
+  - L44: Strong-RSA [λ+1] outputs never a proper gcd
+  - L60: Residual [e + kλ] keeps the same [x]
+  - L138: Same [x] at two exponents annihilates; two-sided gcd is [N]
+  - L216: Miller from a known multiple of [λ]
+  - L314: Different residual [e] gives a different [x]
+  - L347: Residual solver with [e ≡ pin_e (mod λ)]
+  - L461: Fixed residual [e] with a known inverse
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `pin_lambda_strong_solver_outputs_never_proper_gcd` | 46 |
-| Lemma | `pin_lam_even` | 60 |
-| Theorem | `residual_shaped_e_plus_k_lam` | 63 |
-| Theorem | `unit_powm_plus_k_lam` | 87 |
-| Theorem | `residual_leaf_plus_k_lam` | 105 |
-| Theorem | `pin_e_plus_lam_residual` | 127 |
-| Lemma | `mul_cancel_mod_unit` | 141 |
-| Theorem | `same_unit_x_two_exponents_annihilates` | 158 |
-| Theorem | `powm_one_gcd_is_N` | 180 |
-| Theorem | `pin_x_lam_powm_one` | 193 |
-| Theorem | `pin_x_lam_gcd_is_N` | 197 |
-| Theorem | `pin_e7_minus_pin_e_does_not_miller` | 207 |
-| Lemma | `pin_base2_height_p_at_odd_part_of_lam_multiple` | 220 |
-| Lemma | `pin_base2_height_q_at_odd_part_of_lam_multiple` | 239 |
-| Theorem | `pin_miller_from_lambda_multiple` | 257 |
-| Theorem | `pin_miller_from_lam_factors` | 291 |
-| Theorem | `pin_miller_from_2lam_factors` | 298 |
-| Theorem | `pin_ed_minus_1_is_lam` | 306 |
-| Theorem | `pin_inv7_mod_lam` | 316 |
-| Theorem | `pin_y_to_23` | 320 |
-| Theorem | `pin_e7_residual` | 324 |
-| Theorem | `pin_e7_x_neq_pin_x` | 335 |
-| Theorem | `pin_e7_not_cong_pin_e` | 339 |
-| Lemma | `residual_e_cong_pin_e_ge` | 356 |
-| Theorem | `residual_solver_reduced_e_cong_x_is_trapdoor` | 365 |
-| Theorem | `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | 393 |
-| Theorem | `residual_solver_reduced_e_cong_constructs_factor` | 412 |
-| Theorem | `pin_e_plus_lam_solver_e_cong` | 434 |
-| Theorem | `pin_e_plus_lam_solver_nonminimal` | 440 |
-| Theorem | `pin_e_plus_lam_solver_millers` | 447 |
+| Theorem | `pin_lambda_strong_solver_outputs_never_proper_gcd` | 50 |
+| Lemma | `pin_lam_even` | 64 |
+| Theorem | `residual_shaped_e_plus_k_lam` | 67 |
+| Theorem | `unit_powm_plus_k_lam` | 91 |
+| Theorem | `residual_leaf_plus_k_lam` | 109 |
+| Theorem | `pin_e_plus_lam_residual` | 131 |
+| Lemma | `mul_cancel_mod_unit` | 145 |
+| Theorem | `same_unit_x_two_exponents_annihilates` | 162 |
+| Theorem | `powm_one_gcd_is_N` | 184 |
+| Theorem | `pin_x_lam_powm_one` | 197 |
+| Theorem | `pin_x_lam_gcd_is_N` | 201 |
+| Theorem | `pin_e7_minus_pin_e_does_not_miller` | 211 |
+| Lemma | `pin_base2_height_p_at_odd_part_of_lam_multiple` | 224 |
+| Lemma | `pin_base2_height_q_at_odd_part_of_lam_multiple` | 243 |
+| Theorem | `pin_miller_from_lambda_multiple` | 261 |
+| Theorem | `pin_miller_from_lam_factors` | 295 |
+| Theorem | `pin_miller_from_2lam_factors` | 302 |
+| Theorem | `pin_ed_minus_1_is_lam` | 310 |
+| Theorem | `pin_inv7_mod_lam` | 320 |
+| Theorem | `pin_y_to_23` | 324 |
+| Theorem | `pin_e7_residual` | 328 |
+| Theorem | `pin_e7_x_neq_pin_x` | 339 |
+| Theorem | `pin_e7_not_cong_pin_e` | 343 |
+| Lemma | `residual_e_cong_pin_e_ge` | 360 |
+| Theorem | `residual_solver_reduced_e_cong_x_is_trapdoor` | 369 |
+| Theorem | `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | 397 |
+| Theorem | `residual_solver_reduced_e_cong_constructs_factor` | 416 |
+| Theorem | `pin_e_plus_lam_solver_e_cong` | 438 |
+| Theorem | `pin_e_plus_lam_solver_nonminimal` | 444 |
+| Theorem | `pin_e_plus_lam_solver_millers` | 451 |
+| Lemma | `pin_ed_inv_divides_lam` | 471 |
+| Lemma | `pin_ed_inv_M_pos` | 481 |
+| Lemma | `pin_powm_mul_inv` | 502 |
+| Theorem | `unique_unit_eth_root_inv` | 528 |
+| Theorem | `trapdoor_inhabits_residual_leaf_at` | 544 |
+| Theorem | `residual_shaped_e_7` | 563 |
+| Theorem | `residual_solver_reduced_fixed_e_is_trapdoor` | 573 |
+| Theorem | `residual_solver_reduced_fixed_e_constructs_factor` | 599 |
+| Theorem | `pin_e7_solver_returns_e` | 638 |
+| Theorem | `pin_e7_solver_constructs_factor` | 642 |
+| Theorem | `pin_miller_from_e7_inv` | 653 |
+| Theorem | `residual_shaped_e_11` | 662 |
+| Theorem | `pin_inv11_mod_lam` | 672 |
+| Theorem | `pin_miller_from_e11_inv` | 676 |
+| Theorem | `residual_solver_reduced_pin_e_via_fixed_e` | 687 |
 
 ## `SrsaWriteE.v`
 
@@ -3855,4 +3871,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2705 theorems/lemmas/corollaries/examples across 122 files._
+_2720 theorems/lemmas/corollaries/examples across 122 files._

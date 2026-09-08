@@ -161,6 +161,7 @@ Constructible torsion `H` is a family parameter
 | a known multiple of `λ` | Miller base `2` splits on this pin | `pin_miller_from_lambda_multiple` | residual-solver ⇒ factor (writing `M` wrote `λ`) |
 | residual `e=7` on pin `y` | unique unit 7th root is `60 ≠ 42` | `pin_e7_residual` / `pin_e7_x_neq_pin_x` | residual-solver ⇒ factor (one pair is not a solver) |
 | residual solver with `e ≡ pin_e (mod λ)` | trapdoor on `x`; non-minimal `e` Millers from `e−pin_e` | `residual_solver_reduced_e_cong_constructs_factor` / `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | residual-solver ⇒ factor (unrestricted `e` may miss the class) |
+| residual solver at a fixed residual `e` with known inverse | trapdoor `y ↦ y^{d'}`; Miller-from-`e d'−1` | `residual_solver_reduced_fixed_e_constructs_factor` / `pin_e7_solver_constructs_factor` | residual-solver ⇒ factor (Miller uses `d'`; `e` may vary with `y`) |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

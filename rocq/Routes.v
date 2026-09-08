@@ -74,3 +74,12 @@ Check residual_solver_reduced_e_cong_nonminimal_constructs_factor.
 Check residual_solver_reduced_e_cong_constructs_factor.
 Check pin_e_plus_lam_residual_solver.
 Check pin_e_plus_lam_solver_millers.
+Check unique_unit_eth_root_inv.
+Check trapdoor_inhabits_residual_leaf_at.
+Check residual_solver_reduced_fixed_e_is_trapdoor.
+Check residual_solver_reduced_fixed_e_constructs_factor.
+Check pin_e7_residual_solver.
+Check pin_e7_solver_constructs_factor.
+Check pin_miller_from_e7_inv.
+Check pin_miller_from_e11_inv.
+Check residual_solver_reduced_pin_e_via_fixed_e.
