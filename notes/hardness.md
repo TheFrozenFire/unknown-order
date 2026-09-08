@@ -141,6 +141,7 @@ Constructible torsion `H` is a family parameter
 | two invert-all-units polys | both Fermat folds of the difference are `0` | `invert_all_units_diff_fold_p_zero`, `pin_crt_vs_monomial_diff_folds_zero` | residual-solver ⇒ factor |
 | deg `< q−1` invert poly `+ N K` | same coeffs as CRT binomial mod `N` | `pin_binomial_plus_N_kernel_cong_mod_N` | leftover of deg `≥ q−1`; residual-solver ⇒ factor |
 | invert-all-units poly (any degree) | trapdoor map `y ↦ y^d`; Miller-from-`d` splits | `invert_all_units_poly_constructs_factor` | residual-solver ⇒ factor (a solver is not a polynomial) |
+| nodiv GRA that inverts every unit | denotes an invert-all-units poly; Miller/gcd splits | `nodiv_gra_invert_all_units_constructs_factor` | `GInv`; residual-solver ⇒ factor (a solver is not a nodiv tape) |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

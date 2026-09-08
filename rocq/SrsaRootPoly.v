@@ -64,7 +64,7 @@ Open Scope Z_scope.
     [cas/183], [cas/184], [cas/185], [cas/186], [cas/187],
     [cas/188], [cas/189], [cas/190], [cas/191], [cas/192],
     [cas/193], [cas/194], [cas/195], [cas/196], [cas/197],
-    [cas/198], [cas/199], [cas/200], and [cas/201]. *)
+    [cas/198], [cas/199], [cas/200], [cas/201], and [cas/202]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -3105,4 +3105,32 @@ Proof.
     apply all_units_root_poly_is_trapdoor_map; assumption.
   - eexists.
     apply pin_miller_from_d_factors.
+Qed.
+
+(** ** Nodiv GRA residual solver constructs a factor
+
+    A division-free tape that inverts every unit denotes an
+    invert-all-units polynomial ([gra_nodiv_denotes]), so
+    [invert_all_units_poly_constructs_factor] applies.  Short
+    tapes already split ([nodiv_gra_short_dq_splits]); high-degree
+    [X^d] tapes wrote [d] and Miller-split.  [GInv] is outside
+    this class.  Not
+    [residual_solver_constructs_factor_open_named]: a residual
+    solver is not given as a nodiv tape.  Cross-confirmed by
+    [cas/202]. *)
+
+Theorem nodiv_gra_invert_all_units_constructs_factor :
+  forall ops out,
+    Forall is_nodiv ops ->
+    (forall y, Z.coprime y pin_N ->
+       powm (gra_eval pin_N ops y out) pin_e pin_N = y mod pin_N) ->
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros ops out Hop Hall.
+  destruct (invert_all_units_poly_constructs_factor
+              (nth out (gra_run_poly ops slp_init_poly) [])) as [_ Hex].
+  - intros y Hy.
+    rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
+    apply Hall. exact Hy.
+  - exact Hex.
 Qed.

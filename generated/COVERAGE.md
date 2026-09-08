@@ -3022,6 +3022,7 @@ in the Rocq tree.  Do not edit by hand.
   - L2754: Binomial [+ c K]: leftover extra, invert iff [N | c]
   - L2905: Difference of invert polys has both Fermat folds zero
   - L3049: Invert-all-units polynomial constructs a factor
+  - L3110: Nodiv GRA residual solver constructs a factor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3214,6 +3215,7 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 3072 |
 | Theorem | `pin_miller_from_d_factors` | 3076 |
 | Theorem | `invert_all_units_poly_constructs_factor` | 3094 |
+| Theorem | `nodiv_gra_invert_all_units_constructs_factor` | 3122 |
 
 ## `SrsaWriteE.v`
 
@@ -3704,4 +3706,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2595 theorems/lemmas/corollaries/examples across 119 files._
+_2596 theorems/lemmas/corollaries/examples across 119 files._
