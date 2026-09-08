@@ -155,6 +155,12 @@ Constructible torsion `H` is a family parameter
 | reduced-units public-`e` inverter | trapdoor map; Miller-from-`d` splits | `rsa_inverter_reduced_units_constructs_factor` | inverter ⇒ factor (Miller uses `d`) |
 | Strong-RSA solver on units via `λ+1` | inhabits, `gcd(λ+1,N)=1`, not a residual leaf | `pin_lambda_strong_solver` / `pin_lambda_plus_one_does_not_split` | Strong-RSA solver ⇒ factor |
 | Strong-RSA solver that returns public `e` | is the public-`e` inverter; Miller splits | `strong_rsa_solver_pin_e_constructs_factor` | Strong-RSA solver ⇒ factor (varying `e`; `λ+1` does not miller) |
+| `λ+1` solver outputs | never a proper gcd (challenge and `λ+1` are units) | `pin_lambda_strong_solver_outputs_never_proper_gcd` | Strong-RSA solver ⇒ factor (`exists f` still holds via Miller-from-`d`) |
+| residual `e+kλ` | same `x`, residual shape preserved | `residual_leaf_plus_k_lam` / `pin_e_plus_lam_residual` | residual-solver ⇒ factor (one pair is not a solver) |
+| same leftover `x` at two exponents | annihilates `x^{e'−e}`; `λ`-multiple gcd is `N` | `same_unit_x_two_exponents_annihilates` / `pin_x_lam_gcd_is_N` | leftover always factors; residual-solver ⇒ factor |
+| a known multiple of `λ` | Miller base `2` splits on this pin | `pin_miller_from_lambda_multiple` | residual-solver ⇒ factor (writing `M` wrote `λ`) |
+| residual `e=7` on pin `y` | unique unit 7th root is `60 ≠ 42` | `pin_e7_residual` / `pin_e7_x_neq_pin_x` | residual-solver ⇒ factor (one pair is not a solver) |
+| residual solver with `e ≡ pin_e (mod λ)` | trapdoor on `x`; non-minimal `e` Millers from `e−pin_e` | `residual_solver_reduced_e_cong_constructs_factor` / `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | residual-solver ⇒ factor (unrestricted `e` may miss the class) |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

@@ -178,6 +178,35 @@ comments; do not maintain this table by hand.
 | `invert_all_units_rational_monomial_over_one` | `SrsaRootPoly.v` | 3254 |
 | `invert_all_units_rational_Xd1_over_X` | `SrsaRootPoly.v` | 3263 |
 | `unit_ginv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | 3296 |
+| `pin_lam_even` | `SrsaVaryingE.v` | 60 |
+| `residual_shaped_e_plus_k_lam` | `SrsaVaryingE.v` | 63 |
+| `unit_powm_plus_k_lam` | `SrsaVaryingE.v` | 87 |
+| `residual_leaf_plus_k_lam` | `SrsaVaryingE.v` | 105 |
+| `pin_e_plus_lam_residual` | `SrsaVaryingE.v` | 127 |
+| `mul_cancel_mod_unit` | `SrsaVaryingE.v` | 141 |
+| `same_unit_x_two_exponents_annihilates` | `SrsaVaryingE.v` | 158 |
+| `powm_one_gcd_is_N` | `SrsaVaryingE.v` | 180 |
+| `pin_x_lam_powm_one` | `SrsaVaryingE.v` | 193 |
+| `pin_x_lam_gcd_is_N` | `SrsaVaryingE.v` | 197 |
+| `pin_e7_minus_pin_e_does_not_miller` | `SrsaVaryingE.v` | 207 |
+| `pin_base2_height_p_at_odd_part_of_lam_multiple` | `SrsaVaryingE.v` | 220 |
+| `pin_base2_height_q_at_odd_part_of_lam_multiple` | `SrsaVaryingE.v` | 239 |
+| `pin_miller_from_lambda_multiple` | `SrsaVaryingE.v` | 257 |
+| `pin_miller_from_lam_factors` | `SrsaVaryingE.v` | 291 |
+| `pin_miller_from_2lam_factors` | `SrsaVaryingE.v` | 298 |
+| `pin_ed_minus_1_is_lam` | `SrsaVaryingE.v` | 306 |
+| `pin_inv7_mod_lam` | `SrsaVaryingE.v` | 316 |
+| `pin_y_to_23` | `SrsaVaryingE.v` | 320 |
+| `pin_e7_residual` | `SrsaVaryingE.v` | 324 |
+| `pin_e7_x_neq_pin_x` | `SrsaVaryingE.v` | 335 |
+| `pin_e7_not_cong_pin_e` | `SrsaVaryingE.v` | 339 |
+| `residual_e_cong_pin_e_ge` | `SrsaVaryingE.v` | 356 |
+| `residual_solver_reduced_e_cong_x_is_trapdoor` | `SrsaVaryingE.v` | 365 |
+| `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | `SrsaVaryingE.v` | 393 |
+| `residual_solver_reduced_e_cong_constructs_factor` | `SrsaVaryingE.v` | 412 |
+| `pin_e_plus_lam_solver_e_cong` | `SrsaVaryingE.v` | 434 |
+| `pin_e_plus_lam_solver_nonminimal` | `SrsaVaryingE.v` | 440 |
+| `pin_e_plus_lam_solver_millers` | `SrsaVaryingE.v` | 447 |
 | `srsa_residual_pin` | `StrongRSAPeel.v` | 257 |
 | `srsa_residual_pin187` | `StrongRSAPeel.v` | 268 |
 
@@ -220,5 +249,6 @@ comments; do not maintain this table by hand.
 | `matching_247_not_one_sided` | `SrsaOrderArrows.v` | 176 |
 | `matching_247_gcd_not_proper` | `SrsaOrderArrows.v` | 184 |
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
+| `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | 46 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 133 does-not-discharge rows._
+_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 163 does-not-discharge rows._

@@ -416,7 +416,23 @@ reduced-units public-`e` inverter is the trapdoor map
 `227`). A Strong-RSA solver on units is inhabited by `λ+1` and
 does not split (`pin_lambda_strong_solver`, CAS `225`, `226`).
 That solver returning public `e` is the inverter
-(`strong_rsa_solver_pin_e_constructs_factor`). Not
+(`strong_rsa_solver_pin_e_constructs_factor`). A `λ+1` solver's
+outputs never a proper gcd
+(`pin_lambda_strong_solver_outputs_never_proper_gcd`, CAS `228`);
+Miller-from-`d` still splits independently. Residual `e+kλ` keeps
+the same `x` (`residual_leaf_plus_k_lam`, CAS `229`); pin
+`(42, 83)` for `y=36`. Same `x` at two exponents annihilates
+`x^{e'−e}`; a `λ`-multiple is two-sided (`gcd=N`), and `e'−e=4`
+does not Miller (`pin_x_lam_gcd_is_N`, CAS `230`). A known
+multiple of `λ` Millers (`pin_miller_from_lambda_multiple`, CAS
+`231`). Residual `e=7` writes a different `x=60`
+(`pin_e7_residual`, CAS `232`). A residual solver whose `e` stays
+in the public class `e ≡ pin_e (mod λ)` writes the trapdoor map
+on `x`; a non-minimal such `e` Millers from `e−pin_e` recovered
+from the solver
+(`residual_solver_reduced_e_cong_constructs_factor`,
+`residual_solver_reduced_e_cong_nonminimal_constructs_factor`,
+CAS `233`). Not
 `rsa_inverter_constructs_factor_open_named`. Not
 `strong_rsa_solver_constructs_factor_open_named`. Not
 `residual_solver_constructs_factor_open_named`.
@@ -526,6 +542,13 @@ advice `N/17`: `PreprocessGRA.v`.
 | `N+1` is not an RSA / Strong-RSA problem | `pin_N_plus_1_not_rsa_problem` / `pin_N_plus_1_not_strong_RSA` | `SrsaInverter.v` | `224` |
 | Strong-RSA solver on units via `λ+1` does not split | `pin_lambda_strong_solver` / `pin_lambda_plus_one_does_not_split` | `SrsaInverter.v` | `225`, `226` |
 | Strong-RSA solver returning public `e` is the inverter | `strong_solver_as_inverter` / `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | `227` |
+| varying `e` / `λ+1` output gcds | `residual_solver_reduced_e_cong_*` / `pin_miller_from_lambda_multiple` | `SrsaVaryingE.v` | `228`–`233` |
+| `λ+1` solver outputs never a proper gcd | `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | `228` |
+| residual `e+kλ` keeps the same `x` | `residual_leaf_plus_k_lam` / `pin_e_plus_lam_residual` | `SrsaVaryingE.v` | `229` |
+| same `x` at two exponents annihilates; `λ`-multiple gcd is `N` | `same_unit_x_two_exponents_annihilates` / `pin_x_lam_gcd_is_N` | `SrsaVaryingE.v` | `230` |
+| Miller from a known multiple of `λ` | `pin_miller_from_lambda_multiple` / `pin_miller_from_lam_factors` | `SrsaVaryingE.v` | `231` |
+| residual `e=7` writes a different `x` | `pin_e7_residual` / `pin_e7_x_neq_pin_x` | `SrsaVaryingE.v` | `232` |
+| residual solver with `e ≡ pin_e (mod λ)` is the trapdoor; non-minimal Millers from `e−pin_e` | `residual_solver_reduced_e_cong_constructs_factor` / `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | `SrsaVaryingE.v` | `233` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

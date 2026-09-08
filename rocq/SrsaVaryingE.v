@@ -1,0 +1,455 @@
+From Stdlib Require Import ZArith.
+From Stdlib Require Import Znumtheory.
+From Stdlib Require Import Lia.
+From Stdlib Require Import Bool.
+
+Require Import RocqProofs.NumberTheory.
+Require Import RSA.
+Require Import UnknownOrder.
+Require Import Hardness.
+Require Import StrongRSAPeel.
+Require Import Order.
+Require Import TwoPrimary.
+Require Import Miller.
+Require Import MillerHeight.
+Require Import SrsaResidualGRA.
+Require Import SrsaRootPoly.
+Require Import SrsaModCbrt.
+Require Import SrsaInverter.
+
+Open Scope Z_scope.
+
+(** * Varying-[e] residual and the Strong-RSA output negative
+
+    A [λ+1] Strong-RSA solver on units never returns a proper gcd
+    (the outputs are the challenge and [λ+1]).  That is not a
+    refutation of [exists f]: Miller-from-[d] still splits.
+    Residual [e + kλ] keeps the same [x] and the residual shape.
+    Same [x] at two exponents annihilates [x^{e'−e}]; a [λ]-multiple
+    annihilator is two-sided ([gcd = N]).  A known multiple of [λ]
+    Millers (base [2] on this pin).  A residual solver whose [e]
+    stays in the public class [e ≡ pin_e (mod λ)] writes the
+    trapdoor map on [x]; a non-minimal such [e] Millers from
+    [e − pin_e] recovered from the solver.  [e = 7] is outside
+    that class and writes a different [x].
+    Not [residual_solver_constructs_factor_open_named].
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Not [rsa_inverter_constructs_factor_open_named].
+    Cross-confirmed by [cas/228]–[cas/233]. *)
+
+(** ** Strong-RSA [λ+1] outputs never a proper gcd
+
+    The solver inhabits; its pair [(y, λ+1)] has [gcd = 1] on both
+    coordinates.  Miller-from-[d] still splits, independently.
+    Not [strong_rsa_solver_constructs_factor_open_named]. *)
+
+Theorem pin_lambda_strong_solver_outputs_never_proper_gcd :
+  forall y Hrng Hy,
+    let xe := proj1_sig (pin_lambda_strong_solver y Hrng Hy) in
+    Z.gcd (fst xe) pin_N = 1 /\ Z.gcd (snd xe) pin_N = 1.
+Proof.
+  intros y Hrng Hy.
+  cbn.
+  split; [exact Hy | apply pin_lambda_plus_one_does_not_split].
+Qed.
+
+(** ** Residual [e + kλ] keeps the same [x]
+
+    Not [residual_solver_constructs_factor_open_named]. *)
+
+Lemma pin_lam_even : Z.Even pin_lam.
+Proof. exists 40. reflexivity. Qed.
+
+Theorem residual_shaped_e_plus_k_lam :
+  forall e k,
+    0 <= k ->
+    residual_shaped_e e pin_lam ->
+    residual_shaped_e (e + k * pin_lam) pin_lam.
+Proof.
+  intros e k Hk [He [Hodd [Hgcd Hnd]]].
+  unfold residual_shaped_e.
+  split; [nia|].
+  split.
+  - apply Z.odd_spec.
+    rewrite Z.odd_add, Z.odd_mul.
+    change (Z.odd pin_lam) with false.
+    rewrite andb_false_r, xorb_false_r.
+    apply Z.odd_spec. exact Hodd.
+  - split.
+    + rewrite Z.gcd_comm, (Z.gcd_add_mult_diag_r pin_lam e k), Z.gcd_comm.
+      exact Hgcd.
+    + intros Hdiv.
+      apply Hnd.
+      replace (e - 1) with ((e + k * pin_lam - 1) - k * pin_lam) by ring.
+      apply Z.divide_sub_r; [exact Hdiv | exists k; ring].
+Qed.
+
+Theorem unit_powm_plus_k_lam :
+  forall x e k,
+    0 <= e ->
+    0 <= k ->
+    Z.coprime x pin_N ->
+    powm x (e + k * pin_lam) pin_N = powm x e pin_N.
+Proof.
+  intros x e k He Hk Hx.
+  rewrite powm_add_r by lia.
+  rewrite (Z.mul_comm k pin_lam).
+  rewrite powm_mul_r by lia.
+  rewrite rsa_test_annihilator by exact Hx.
+  rewrite powm_1_pow by lia.
+  rewrite Z.mod_1_l by lia.
+  rewrite Z.mul_1_r.
+  unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Theorem residual_leaf_plus_k_lam :
+  forall y x e k,
+    0 <= k ->
+    srsa_residual_leaf pin_N pin_lam y x e ->
+    srsa_residual_leaf pin_N pin_lam y x (e + k * pin_lam).
+Proof.
+  intros y x e k Hk Hleaf.
+  destruct Hleaf as [Hy [[He Hpow] [Hodd [Hgcd Hnd]]]].
+  unfold srsa_residual_leaf, Problem_StrongRSA.
+  split; [exact Hy|].
+  split.
+  - split; [nia|].
+    pose proof (srsa_unit_y_forces_unit_x pin_N y x e
+                  ltac:(lia) ltac:(lia) Hy Hpow) as Hx.
+    rewrite (unit_powm_plus_k_lam x e k ltac:(lia) Hk Hx).
+    exact Hpow.
+  - pose proof (residual_shaped_e_plus_k_lam e k Hk
+                  (conj He (conj Hodd (conj Hgcd Hnd)))) as Hs.
+    destruct Hs as [_ [Hodd' [Hgcd' Hnd']]].
+    split; [exact Hodd' | split; [exact Hgcd' | exact Hnd']].
+Qed.
+
+Theorem pin_e_plus_lam_residual :
+  srsa_residual_leaf pin_N pin_lam pin_y pin_x (pin_e + pin_lam).
+Proof.
+  apply (residual_leaf_plus_k_lam pin_y pin_x pin_e 1); [lia |].
+  apply srsa_residual_pin.
+Qed.
+
+(** ** Same [x] at two exponents annihilates; two-sided gcd is [N]
+
+    [e' − e = kλ] is two-sided: [gcd(x^{kλ}−1, N) = N], not a
+    proper factor.  [e' − e = 4] (public [3] vs [7]) does not
+    Miller.  Leftover [k = 5] does split ([leftover_x_mismatch_factors_pin]).
+    Not [residual_solver_constructs_factor_open_named]. *)
+
+Lemma mul_cancel_mod_unit :
+  forall y a n,
+    1 < n ->
+    Z.coprime y n ->
+    (y * a) mod n = y mod n ->
+    a mod n = 1.
+Proof.
+  intros y a n Hn Hcop Heq.
+  transitivity (1 mod n).
+  2: apply Z.mod_1_l; lia.
+  apply mods_eq_iff_divides; [lia|].
+  apply (Z.gauss n y (a - 1)).
+  - replace (y * (a - 1)) with (y * a - y) by ring.
+    apply mods_eq_iff_divides; [lia | exact Heq].
+  - rewrite Z.gcd_comm. exact Hcop.
+Qed.
+
+Theorem same_unit_x_two_exponents_annihilates :
+  forall x e e' y,
+    0 <= e ->
+    0 <= e' ->
+    e <= e' ->
+    Z.coprime y pin_N ->
+    powm x e pin_N = y ->
+    powm x e' pin_N = y ->
+    powm x (e' - e) pin_N = 1.
+Proof.
+  intros x e e' y He He' Hle Hcop Hy Hy'.
+  assert (Hy_mod : y = y mod pin_N).
+  { rewrite <- Hy. unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+  replace e' with (e + (e' - e)) in Hy' by lia.
+  rewrite powm_add_r in Hy' by lia.
+  rewrite Hy in Hy'.
+  rewrite Hy_mod in Hy' at 2.
+  pose proof (mul_cancel_mod_unit y (powm x (e' - e) pin_N) pin_N
+                ltac:(lia) Hcop Hy') as Hone.
+  unfold powm in Hone |- *. rewrite Z.mod_mod in Hone by lia. exact Hone.
+Qed.
+
+Theorem powm_one_gcd_is_N :
+  forall a M n,
+    1 < n ->
+    powm a M n = 1 ->
+    Z.gcd (a ^ M - 1) n = n.
+Proof.
+  intros a M n Hn Hpow.
+  apply gcd_eq_n_of_div; [lia|].
+  apply mods_eq_iff_divides; [lia|].
+  unfold powm in Hpow.
+  rewrite Hpow, Z.mod_1_l by lia. reflexivity.
+Qed.
+
+Theorem pin_x_lam_powm_one :
+  powm pin_x pin_lam pin_N = 1.
+Proof. apply rsa_test_annihilator. vm_compute. reflexivity. Qed.
+
+Theorem pin_x_lam_gcd_is_N :
+  Z.gcd (pin_x ^ pin_lam - 1) pin_N = pin_N /\
+  ~ Problem_Factor pin_N (Z.gcd (pin_x ^ pin_lam - 1) pin_N).
+Proof.
+  assert (Hg : Z.gcd (pin_x ^ pin_lam - 1) pin_N = pin_N).
+  { apply powm_one_gcd_is_N; [lia | apply pin_x_lam_powm_one]. }
+  split; [exact Hg|].
+  intros [Hlt _]. rewrite Hg in Hlt. lia.
+Qed.
+
+Theorem pin_e7_minus_pin_e_does_not_miller :
+  Z.gcd (pin_x ^ 4 - 1) pin_N = 1 /\
+  Z.gcd (60 ^ 4 - 1) pin_N = 1.
+Proof. vm_compute. split; reflexivity. Qed.
+
+(** ** Miller from a known multiple of [λ]
+
+    Base-[2] heights on this pin stay [v₂(ord_p(2))] vs
+    [v₂(ord_q(2))] at [odd_part(M)] for any positive multiple [M]
+    of [λ].  On this pin [ed − 1 = λ], so Miller-from-[d] is
+    Miller-from-[λ].  Writing [M] wrote a multiple of [λ].
+    Not [residual_solver_constructs_factor_open_named]. *)
+
+Lemma pin_base2_height_p_at_odd_part_of_lam_multiple :
+  forall M,
+    0 < M ->
+    Z.divide pin_lam M ->
+    two_height 2 (odd_part M) pin_p (val2 pin_ord2_p).
+Proof.
+  intros M HM Hdiv.
+  assert (Hdivt : Z.divide (odd_part pin_ord2_p) (odd_part M)).
+  { replace (odd_part pin_ord2_p) with (odd_part pin_lam)
+      by (vm_compute; reflexivity).
+    apply odd_part_of_divisor; [lia | lia | exact Hdiv]. }
+  apply (proj2 (two_height_is_val2_ord pin_p 2 pin_ord2_p (odd_part M)
+                  (val2 pin_ord2_p) pin_p_prime order_2_mod_11
+                  ltac:(apply odd_part_pos; exact HM)
+                  ltac:(apply odd_part_odd; exact HM)
+                  Hdivt)).
+  reflexivity.
+Qed.
+
+Lemma pin_base2_height_q_at_odd_part_of_lam_multiple :
+  forall M,
+    0 < M ->
+    Z.divide pin_lam M ->
+    two_height 2 (odd_part M) pin_q (val2 pin_ord2_q).
+Proof.
+  intros M HM Hdiv.
+  assert (Hdivt : Z.divide (odd_part pin_ord2_q) (odd_part M)).
+  { replace (odd_part pin_ord2_q) with 1 by (vm_compute; reflexivity).
+    apply Z.divide_1_l. }
+  apply (proj2 (two_height_is_val2_ord pin_q 2 pin_ord2_q (odd_part M)
+                  (val2 pin_ord2_q) pin_q_prime order_2_mod_17
+                  ltac:(apply odd_part_pos; exact HM)
+                  ltac:(apply odd_part_odd; exact HM)
+                  Hdivt)).
+  reflexivity.
+Qed.
+
+Theorem pin_miller_from_lambda_multiple :
+  forall M,
+    0 < M ->
+    Z.divide pin_lam M ->
+    Z.gcd (2 ^ (odd_part M * pow2n (val2 pin_ord2_p)) - 1) pin_N = pin_p /\
+    Problem_Factor pin_N
+      (Z.gcd (2 ^ (odd_part M * pow2n (val2 pin_ord2_p)) - 1) pin_N).
+Proof.
+  intros M HM Hdiv.
+  assert (Hg :
+    Z.gcd (2 ^ (odd_part M * pow2n (val2 pin_ord2_p)) - 1)
+          (rsa_N rsa_test) = rsa_p rsa_test).
+  { apply (miller_from_multiple rsa_test M 2
+             (val2 pin_ord2_p) (val2 pin_ord2_q)).
+    - exact HM.
+    - unfold rsa_lambda.
+      change (rsa_p rsa_test) with pin_p.
+      change (rsa_q rsa_test) with pin_q.
+      rewrite rsa_test_lambda. exact Hdiv.
+    - vm_compute. reflexivity.
+    - change (rsa_p rsa_test) with pin_p.
+      apply pin_base2_height_p_at_odd_part_of_lam_multiple; assumption.
+    - change (rsa_q rsa_test) with pin_q.
+      apply pin_base2_height_q_at_odd_part_of_lam_multiple; assumption.
+    - vm_compute. lia. }
+  change pin_N with (rsa_N rsa_test).
+  rewrite Hg.
+  unfold rsa_N, Problem_Factor.
+  change (rsa_p rsa_test) with pin_p.
+  change (rsa_q rsa_test) with pin_q.
+  split; [reflexivity|].
+  split; [lia | exists pin_q; reflexivity].
+Qed.
+
+Theorem pin_miller_from_lam_factors :
+  Problem_Factor pin_N
+    (Z.gcd (2 ^ (odd_part pin_lam * pow2n (val2 pin_ord2_p)) - 1) pin_N).
+Proof.
+  apply (proj2 (pin_miller_from_lambda_multiple pin_lam ltac:(lia) ltac:(exists 1; lia))).
+Qed.
+
+Theorem pin_miller_from_2lam_factors :
+  Problem_Factor pin_N
+    (Z.gcd (2 ^ (odd_part (2 * pin_lam) * pow2n (val2 pin_ord2_p)) - 1) pin_N).
+Proof.
+  apply (proj2 (pin_miller_from_lambda_multiple (2 * pin_lam)
+                  ltac:(lia) ltac:(exists 2; lia))).
+Qed.
+
+Theorem pin_ed_minus_1_is_lam :
+  pin_e * pin_d - 1 = pin_lam.
+Proof. vm_compute. reflexivity. Qed.
+
+(** ** Different residual [e] gives a different [x]
+
+    [e = 7] is residual, [7^{-1} ≡ 23 (mod λ)], unique unit 7th
+    root of [36] is [60 ≠ 42].  Outside the public congruence
+    class.  Not [residual_solver_constructs_factor_open_named]. *)
+
+Theorem pin_inv7_mod_lam :
+  (7 * 23) mod pin_lam = 1.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_y_to_23 :
+  powm pin_y 23 pin_N = 60.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_e7_residual :
+  srsa_residual_leaf pin_N pin_lam pin_y 60 7.
+Proof.
+  unfold srsa_residual_leaf, Problem_StrongRSA.
+  split; [vm_compute; reflexivity|].
+  split; [split; [lia|]; vm_compute; reflexivity|].
+  split; [exists 3; lia|].
+  split; [vm_compute; reflexivity|].
+  intros [k Hk]. nia.
+Qed.
+
+Theorem pin_e7_x_neq_pin_x :
+  60 <> pin_x.
+Proof. discriminate. Qed.
+
+Theorem pin_e7_not_cong_pin_e :
+  ~ Z.divide pin_lam (7 - pin_e).
+Proof. intros [k Hk]. nia. Qed.
+
+(** ** Residual solver with [e ≡ pin_e (mod λ)]
+
+    Writes the trapdoor map on [x].  A non-minimal such [e]
+    Millers from [e − pin_e] recovered from the solver (no extra
+    [d]).  The unrestricted residual solver may choose [e] outside
+    this class ([pin_e7_residual]).
+    Not [residual_solver_constructs_factor_open_named]. *)
+
+Definition residual_solver_reduced_e_cong
+    (Solve : residual_solver_reduced pin_N pin_lam) (e0 : Z) : Prop :=
+  forall y Hrng Hy,
+    Z.divide pin_lam (snd (proj1_sig (Solve y Hrng Hy)) - e0).
+
+Lemma residual_e_cong_pin_e_ge :
+  forall e,
+    1 < e ->
+    Z.divide pin_lam (e - pin_e) ->
+    pin_e <= e.
+Proof.
+  intros e He [k Hk]. nia.
+Qed.
+
+Theorem residual_solver_reduced_e_cong_x_is_trapdoor :
+  forall (Solve : residual_solver_reduced pin_N pin_lam) y Hrng Hy,
+    residual_solver_reduced_e_cong Solve pin_e ->
+    fst (proj1_sig (Solve y Hrng Hy)) mod pin_N = powm y pin_d pin_N.
+Proof.
+  intros Solve y Hrng Hy Hcong.
+  pose proof (Hcong y Hrng Hy) as Hdiv.
+  destruct (proj1_sig (Solve y Hrng Hy)) as [x e] eqn:Hxe.
+  cbn [fst snd] in Hdiv |- *.
+  pose proof (proj2_sig (Solve y Hrng Hy)) as Hleaf.
+  rewrite Hxe in Hleaf.
+  destruct Hleaf as [Hycop [[He Hpow] _]].
+  pose proof (srsa_unit_y_forces_unit_x pin_N y x e
+                ltac:(lia) ltac:(lia) Hycop Hpow) as Hx.
+  destruct Hdiv as [k Hk].
+  assert (Heq : e = pin_e + k * pin_lam) by lia.
+  assert (Hk0 : 0 <= k) by nia.
+  rewrite Heq in Hpow.
+  rewrite (unit_powm_plus_k_lam x pin_e k ltac:(lia) Hk0 Hx) in Hpow.
+  replace (powm y pin_d pin_N) with (powm y pin_d pin_N mod pin_N).
+  2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+  apply (pin_unique_unit_eth_root x (powm y pin_d pin_N)).
+  - exact Hx.
+  - unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Hycop].
+  - rewrite Hpow, (pin_powm_de y Hycop). rewrite Z.mod_small; lia.
+Qed.
+
+Theorem residual_solver_reduced_e_cong_nonminimal_constructs_factor :
+  forall (Solve : residual_solver_reduced pin_N pin_lam) y Hrng Hy,
+    residual_solver_reduced_e_cong Solve pin_e ->
+    snd (proj1_sig (Solve y Hrng Hy)) <> pin_e ->
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros Solve y Hrng Hy Hcong Hne.
+  pose proof (Hcong y Hrng Hy) as Hdiv.
+  destruct (proj1_sig (Solve y Hrng Hy)) as [x e] eqn:Hxe.
+  cbn [fst snd] in Hne, Hdiv.
+  pose proof (proj2_sig (Solve y Hrng Hy)) as Hleaf.
+  rewrite Hxe in Hleaf.
+  destruct Hleaf as [_ [[He _] _]].
+  assert (Hpos : 0 < e - pin_e).
+  { destruct Hdiv as [k Hk]. nia. }
+  destruct (pin_miller_from_lambda_multiple (e - pin_e) Hpos Hdiv) as [_ Hf].
+  eexists. exact Hf.
+Qed.
+
+Theorem residual_solver_reduced_e_cong_constructs_factor :
+  forall (Solve : residual_solver_reduced pin_N pin_lam),
+    residual_solver_reduced_e_cong Solve pin_e ->
+    (forall y Hrng Hy,
+       fst (proj1_sig (Solve y Hrng Hy)) mod pin_N = powm y pin_d pin_N) /\
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros Solve Hcong.
+  split.
+  - intros y Hrng Hy.
+    apply residual_solver_reduced_e_cong_x_is_trapdoor; assumption.
+  - eexists. apply pin_miller_from_d_factors.
+Qed.
+
+Definition pin_e_plus_lam_residual_solver : residual_solver_reduced pin_N pin_lam.
+Proof.
+  intros y Hrng Hy.
+  refine (exist _ (powm y pin_d pin_N, pin_e + pin_lam) _).
+  apply (residual_leaf_plus_k_lam y (powm y pin_d pin_N) pin_e 1);
+    [lia | apply trapdoor_inhabits_residual_leaf; assumption].
+Defined.
+
+Theorem pin_e_plus_lam_solver_e_cong :
+  residual_solver_reduced_e_cong pin_e_plus_lam_residual_solver pin_e.
+Proof.
+  intros y Hrng Hy. cbn. exists 1. lia.
+Qed.
+
+Theorem pin_e_plus_lam_solver_nonminimal :
+  forall y Hrng Hy,
+    snd (proj1_sig (pin_e_plus_lam_residual_solver y Hrng Hy)) <> pin_e.
+Proof.
+  intros y Hrng Hy. cbn. lia.
+Qed.
+
+Theorem pin_e_plus_lam_solver_millers :
+  exists f, Problem_Factor pin_N f.
+Proof.
+  apply (residual_solver_reduced_e_cong_nonminimal_constructs_factor
+           pin_e_plus_lam_residual_solver pin_y
+           ltac:(lia) ltac:(vm_compute; reflexivity)).
+  - apply pin_e_plus_lam_solver_e_cong.
+  - apply pin_e_plus_lam_solver_nonminimal.
+Qed.

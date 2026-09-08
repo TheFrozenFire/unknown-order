@@ -7,6 +7,7 @@ Require Import GenericRing.
 Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
 Require Import SrsaInverter.
+Require Import SrsaVaryingE.
 
 Open Scope Z_scope.
 
@@ -59,3 +60,17 @@ Check pin_lambda_strong_solver_not_residual.
 Check strong_rsa_solver_pin_e_constructs_factor.
 Check pin_N_plus_1_not_rsa_problem.
 Check pin_N_plus_1_not_strong_RSA.
+Check pin_lambda_strong_solver_outputs_never_proper_gcd.
+Check residual_leaf_plus_k_lam.
+Check pin_e_plus_lam_residual.
+Check same_unit_x_two_exponents_annihilates.
+Check pin_x_lam_gcd_is_N.
+Check pin_miller_from_lambda_multiple.
+Check pin_miller_from_lam_factors.
+Check pin_e7_residual.
+Check pin_e7_x_neq_pin_x.
+Check residual_solver_reduced_e_cong_x_is_trapdoor.
+Check residual_solver_reduced_e_cong_nonminimal_constructs_factor.
+Check residual_solver_reduced_e_cong_constructs_factor.
+Check pin_e_plus_lam_residual_solver.
+Check pin_e_plus_lam_solver_millers.
