@@ -13,6 +13,7 @@ This file is **not** the theory.  The theory is the Rocq tree.
 | Directed sixth-type hunt | [`notes/sixth-type-plan.md`](notes/sixth-type-plan.md) |
 | Transcripts / oracles | [`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md) |
 | Autonomous runway | [`notes/autonomous-runway.md`](notes/autonomous-runway.md) |
+| Strong RSA next slices (after the C-class campaign) | [`notes/srsa-next.md`](notes/srsa-next.md) |
 | Route split (live target vs closed sentence) | [`generated/NAMED_SKIPS.md`](generated/NAMED_SKIPS.md) “Does not discharge”; pin `rocq/Routes.v` |
 | RSA-land catalog | [`notes/rsa-land.md`](notes/rsa-land.md) |
 

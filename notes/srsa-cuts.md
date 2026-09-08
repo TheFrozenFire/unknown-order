@@ -1,5 +1,9 @@
 # Strong RSA cuts — by question, not by batch
 
+Next slices after this catalog (do not re-refuse the live
+targets; do not resume fold/K identities) live in
+[`srsa-next.md`](srsa-next.md).
+
 Rocq IDs are semantic: `residual_*`, `primary_*`, `dict_*`, `period_*`,
 `xmap_*`, `emap_*`, `extra_*`, `engine_*`, `modulus_*`, plus already-
 named `srsa_*` / `dozen_*` / `shape_*` / `filter_*` / `arith_*`. Files
