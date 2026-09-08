@@ -166,6 +166,9 @@ Constructible torsion `H` is a family parameter
 | Bézout inverse of residual `e` | fixed-`e` solver Millers with no `d'` hyp | `residual_inv_mod_lam` / `residual_solver_reduced_fixed_e_constructs_factor_from_e` | residual-solver ⇒ factor (Miller uses `(e,λ)`) |
 | invert-all-units poly at residual `e` | trapdoor `y ↦ y^{d'}`; Miller-from-`e d'−1` | `invert_all_units_poly_at_e` / `pin_X23_poly_at_7_constructs_factor` | residual-solver ⇒ factor (a solver is not a polynomial) |
 | dlog of a fixed-`e` solver at a generator | recovers `d'`; Miller from the recovered inverse | `residual_solver_reduced_fixed_e_extracts_and_factors` | residual-solver ⇒ factor (`e` is still fixed) |
+| residual leaf at a unit of order `λ` | dlog recovers `d'`; Miller-from-`e d'−1` on this pin | `residual_leaf_at_g_extracts_and_factors` / `residual_solver_reduced_constructs_factor_pin` | forall-`RSAInstance` residual-solver ⇒ factor (heights are pin-specific) |
+| homomorphic residual `x`-map | trapdoor is a hom; mixed cube/7th-root table is not | `pin_trapdoor_solver_x_homomorphic` / `residual_x_homomorphic_constructs_factor` | residual-solver ⇒ factor (hom is a restriction; pin theorem already covers all residual solvers) |
+| Strong-RSA solver with `λ \| e−1` | Miller-from-`(e−1)` | `strong_rsa_solver_annihilator_e_constructs_factor` | Strong-RSA solver ⇒ factor (residual excludes this class; `λ+1` inhabits it) |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

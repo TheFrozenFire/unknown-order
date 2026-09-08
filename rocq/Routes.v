@@ -9,6 +9,7 @@ Require Import SrsaModCbrt.
 Require Import SrsaInverter.
 Require Import SrsaVaryingE.
 Require Import SrsaExtractD.
+Require Import SrsaHom.
 
 Open Scope Z_scope.
 
@@ -92,3 +93,12 @@ Check invert_all_units_poly_at_e.
 Check pin_X23_poly_at_7_constructs_factor.
 Check residual_solver_reduced_fixed_e_extracts_and_factors.
 Check pin_e7_solver_extracts_and_factors.
+Check residual_leaf_at_g_extracts_and_factors.
+Check residual_solver_reduced_constructs_factor_pin.
+Check residual_x_homomorphic.
+Check pin_trapdoor_solver_x_homomorphic.
+Check residual_x_homomorphic_constructs_factor.
+Check rsa_inverter_reduced_units_constructs_factor_pin.
+Check strong_rsa_solver_annihilator_e_constructs_factor.
+Check pin_lambda_strong_solver_annihilator_e.
+Check residual_solver_not_annihilator_e.

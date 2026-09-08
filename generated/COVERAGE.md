@@ -2146,7 +2146,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L15: Live-target route pins
+- L16: Live-target route pins
 
 ## `SAGM.v`
 
@@ -2619,6 +2619,7 @@ in the Rocq tree.  Do not edit by hand.
 
 - L22: Recover [d'] from a fixed-[e] solver's [x]-values
   - L32: Discrete log of a fixed-[e] solver at a generator
+  - L250: Residual leaf at the generator extracts [d']
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2632,6 +2633,27 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `pin_g_coprime` | 190 |
 | Theorem | `residual_solver_reduced_fixed_e_extracts_and_factors` | 193 |
 | Theorem | `pin_e7_solver_extracts_and_factors` | 233 |
+| Theorem | `residual_leaf_at_g_extracts_and_factors` | 261 |
+| Theorem | `residual_solver_reduced_constructs_factor_pin` | 305 |
+
+## `SrsaHom.v`
+
+- L18: Homomorphic residual solvers, and annihilator-[e] Strong RSA
+  - L30: Homomorphism of the [x]-map
+  - L90: Strong-RSA solver with [λ | e − 1] Millers from [e − 1]
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `pin_mul_mod_range` | 34 |
+| Lemma | `pin_mul_mod_coprime` | 38 |
+| Theorem | `pin_trapdoor_solver_x_homomorphic` | 61 |
+| Theorem | `residual_x_homomorphic_constructs_factor` | 72 |
+| Theorem | `rsa_inverter_reduced_units_constructs_factor_pin` | 81 |
+| Theorem | `strong_rsa_solver_annihilator_e_constructs_factor` | 100 |
+| Theorem | `pin_lambda_strong_solver_annihilator_e` | 117 |
+| Theorem | `pin_lambda_strong_solver_millers_from_e_minus_1` | 123 |
+| Theorem | `residual_leaf_not_annihilator_e` | 131 |
+| Theorem | `residual_solver_not_annihilator_e` | 139 |
 
 ## `SrsaInverter.v`
 
@@ -3903,4 +3925,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2741 theorems/lemmas/corollaries/examples across 123 files._
+_2753 theorems/lemmas/corollaries/examples across 124 files._

@@ -246,3 +246,71 @@ Proof.
            pin_e7_residual_solver 7);
     [apply residual_shaped_e_7 | apply pin_e7_solver_returns_e].
 Qed.
+
+(** ** Residual leaf at the generator extracts [d']
+
+    [x^e = g] with [gcd(e,λ)=1]: Bézout plus uniqueness give
+    [x ≡ g^{d'}]; discrete log reads [d']; Miller-from-[e d' − 1]
+    splits on this pin.  Any residual solver supplies such a leaf
+    at [g], so every reduced residual solver on this pin constructs
+    a factor.  Not
+    [residual_solver_constructs_factor_open_named]: that quantifies
+    over every [RSAInstance], not this pin's height mismatch.
+    Cross-confirmed by [cas/241]. *)
+
+Theorem residual_leaf_at_g_extracts_and_factors :
+  forall x e,
+    srsa_residual_leaf pin_N pin_lam pin_g x e ->
+    exists d',
+      pin_dlog_mod_lam pin_g x = Some d' /\
+      0 <= d' < pin_lam /\
+      (e * d') mod pin_lam = 1 /\
+      exists f, Problem_Factor pin_N f.
+Proof.
+  intros x e Hleaf.
+  destruct Hleaf as [Hgcop [[He Hpow] [_ [Hgcd _]]]].
+  destruct (residual_inv_mod_lam e Hgcd) as [d' [[Hdlo Hdhi] Hinv]].
+  pose proof (srsa_unit_y_forces_unit_x pin_N pin_g x e
+                ltac:(lia) ltac:(lia) Hgcop Hpow) as Hx.
+  assert (Hxg : x mod pin_N = powm pin_g d' pin_N).
+  { replace (powm pin_g d' pin_N) with (powm pin_g d' pin_N mod pin_N).
+    2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+    apply (unique_unit_eth_root_from_coprime_e e x (powm pin_g d' pin_N));
+      [lia | exact Hgcd | exact Hx | |].
+    - unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+      apply Z.coprime_pow_l; [lia | exact Hgcop].
+    - rewrite Hpow.
+      rewrite (proj2 (pin_powm_mul_inv e d' pin_g He Hdlo Hinv Hgcop)).
+      rewrite Z.mod_small; [reflexivity | exact pin_g_range]. }
+  assert (Hdlog : pin_dlog_mod_lam pin_g x = Some d').
+  { unfold pin_dlog_mod_lam.
+    rewrite (dlog_search_mod pin_g x pin_N 0%nat (Z.to_nat pin_lam)
+               ltac:(lia)).
+    rewrite Hxg.
+    change (dlog_search pin_g (powm pin_g d' pin_N) pin_N 0%nat
+              (Z.to_nat pin_lam))
+      with (pin_dlog_mod_lam pin_g (powm pin_g d' pin_N)).
+    apply pin_dlog_mod_lam_of_power. lia. }
+  exists d'.
+  split; [exact Hdlog|].
+  split; [lia|].
+  split; [exact Hinv|].
+  pose proof (pin_ed_inv_M_pos e d' He Hdlo Hinv) as HMpos.
+  pose proof (pin_ed_inv_divides_lam e d' Hinv) as Hdiv.
+  destruct (pin_miller_from_lambda_multiple (e * d' - 1) HMpos Hdiv)
+    as [_ Hf].
+  eexists. exact Hf.
+Qed.
+
+Theorem residual_solver_reduced_constructs_factor_pin :
+  forall Solve : residual_solver_reduced pin_N pin_lam,
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros Solve.
+  destruct (Solve pin_g pin_g_range pin_g_coprime) as [xe Hleaf].
+  destruct xe as [x e].
+  cbn in Hleaf.
+  destruct (residual_leaf_at_g_extracts_and_factors x e Hleaf)
+    as [d' [_ [_ [_ Hex]]]].
+  exact Hex.
+Qed.

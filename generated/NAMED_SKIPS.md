@@ -101,6 +101,13 @@ comments; do not maintain this table by hand.
 | `pin_g_coprime` | `SrsaExtractD.v` | 190 |
 | `residual_solver_reduced_fixed_e_extracts_and_factors` | `SrsaExtractD.v` | 193 |
 | `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | 233 |
+| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 261 |
+| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 305 |
+| `pin_mul_mod_range` | `SrsaHom.v` | 34 |
+| `pin_mul_mod_coprime` | `SrsaHom.v` | 38 |
+| `pin_trapdoor_solver_x_homomorphic` | `SrsaHom.v` | 61 |
+| `residual_x_homomorphic_constructs_factor` | `SrsaHom.v` | 72 |
+| `rsa_inverter_reduced_units_constructs_factor_pin` | `SrsaHom.v` | 81 |
 | `mod_cbrt_nonunit_factors` | `SrsaModCbrt.v` | 160 |
 | `pin_trapdoor_solver_returns_e` | `SrsaModCbrt.v` | 378 |
 | `residual_solver_reduced_pin_e_is_mod_cbrt` | `SrsaModCbrt.v` | 382 |
@@ -280,6 +287,11 @@ comments; do not maintain this table by hand.
 | `order_yields_strong_RSA` | `Hardness.v` | 492 |
 | `gcd_powm_minus_1` | `Hardness.v` | 518 |
 | `leftover_mismatch_factors` | `Hardness.v` | 531 |
+| `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 100 |
+| `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 117 |
+| `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 123 |
+| `residual_leaf_not_annihilator_e` | `SrsaHom.v` | 131 |
+| `residual_solver_not_annihilator_e` | `SrsaHom.v` | 139 |
 | `pin_lambda_strong_solver_output_is_unit` | `SrsaInverter.v` | 257 |
 | `pin_lambda_plus_one_does_not_split` | `SrsaInverter.v` | 265 |
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 269 |
@@ -297,4 +309,4 @@ comments; do not maintain this table by hand.
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 | `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | 55 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 209 does-not-discharge rows._
+_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 221 does-not-discharge rows._
