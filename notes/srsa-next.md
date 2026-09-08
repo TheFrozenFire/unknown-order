@@ -16,6 +16,11 @@ Baseline when this plan was written: unknown-order `9087aae`,
 CAS `01`–`236`, campaign pin 187 (`pin_p=11`, `pin_q=17`,
 `pin_e=3`, `pin_d=27`, `pin_lam=80`). Working tree was clean.
 
+P1–P4 landed in the follow-up commit (CAS `237`–`240`). P3 is
+the uniqueness+Bézout path, not Fermat folds at a general `e`.
+P4 dlog uses Bézout for existence of `d'` and reads it off
+`Solve(g)`. Three `*_open_named` still unused.
+
 ---
 
 ## Status (update the cell when a slice lands)
@@ -23,10 +28,10 @@ CAS `01`–`236`, campaign pin 187 (`pin_p=11`, `pin_q=17`,
 | ID | Slice | Status | Depends |
 |---|---|---|---|
 | P0 | Framing: do not re-refuse live targets; comments on vacuity of the nameds as written | pending | — |
-| P1 | Uniqueness of unit `e`-th roots from `gcd(e,λ)=1`, no handed inverse | pending | — |
-| P2 | Bézout `d'` from `(e,λ)`; drop `d'` hyp from the fixed-`e` theorem | pending | P1 |
-| P3 | Generalize Win B off `pin_e` (folds recover local inverses of *that* `e`) | pending | P1 |
-| P4 | Recover `d` / `d'` from the solver’s `x`-values (local dlog or interpolant), then Miller | pending | P1, P3 |
+| P1 | Uniqueness of unit `e`-th roots from `gcd(e,λ)=1`, no handed inverse | done | — |
+| P2 | Bézout `d'` from `(e,λ)`; drop `d'` hyp from the fixed-`e` theorem | done | P1 |
+| P3 | Generalize Win B off `pin_e` (uniqueness + Bézout; folds of that `e` still open) | done | P1 |
+| P4 | Recover `d` / `d'` from the solver’s `x`-values (local dlog or interpolant), then Miller | done | P1, P3 |
 | P5 | Homomorphic residual solver ⇒ factor | pending | P1, P3 |
 | P6 | Lattice arrows among the three nameds; `λ \| e−1` Miller-from-`(e−1)` class | pending | P2 or P4 |
 | P7 | Re-type / re-comment the live targets so `exists f` is not instance-vacuous | pending | P0 |

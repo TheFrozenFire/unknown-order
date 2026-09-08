@@ -8,6 +8,7 @@ Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
 Require Import SrsaInverter.
 Require Import SrsaVaryingE.
+Require Import SrsaExtractD.
 
 Open Scope Z_scope.
 
@@ -83,3 +84,11 @@ Check pin_e7_solver_constructs_factor.
 Check pin_miller_from_e7_inv.
 Check pin_miller_from_e11_inv.
 Check residual_solver_reduced_pin_e_via_fixed_e.
+Check unique_unit_eth_root_from_coprime_e.
+Check pin_e5_fifth_roots_not_unique.
+Check residual_inv_mod_lam.
+Check residual_solver_reduced_fixed_e_constructs_factor_from_e.
+Check invert_all_units_poly_at_e.
+Check pin_X23_poly_at_7_constructs_factor.
+Check residual_solver_reduced_fixed_e_extracts_and_factors.
+Check pin_e7_solver_extracts_and_factors.

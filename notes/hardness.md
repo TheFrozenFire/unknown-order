@@ -162,6 +162,10 @@ Constructible torsion `H` is a family parameter
 | residual `e=7` on pin `y` | unique unit 7th root is `60 ≠ 42` | `pin_e7_residual` / `pin_e7_x_neq_pin_x` | residual-solver ⇒ factor (one pair is not a solver) |
 | residual solver with `e ≡ pin_e (mod λ)` | trapdoor on `x`; non-minimal `e` Millers from `e−pin_e` | `residual_solver_reduced_e_cong_constructs_factor` / `residual_solver_reduced_e_cong_nonminimal_constructs_factor` | residual-solver ⇒ factor (unrestricted `e` may miss the class) |
 | residual solver at a fixed residual `e` with known inverse | trapdoor `y ↦ y^{d'}`; Miller-from-`e d'−1` | `residual_solver_reduced_fixed_e_constructs_factor` / `pin_e7_solver_constructs_factor` | residual-solver ⇒ factor (Miller uses `d'`; `e` may vary with `y`) |
+| `gcd(e,λ)=1` on units | unique unit `e`-th root (kernel); `e=5` is not unique | `unique_unit_eth_root_from_coprime_e` / `pin_e5_fifth_roots_not_unique` | residual-solver ⇒ factor |
+| Bézout inverse of residual `e` | fixed-`e` solver Millers with no `d'` hyp | `residual_inv_mod_lam` / `residual_solver_reduced_fixed_e_constructs_factor_from_e` | residual-solver ⇒ factor (Miller uses `(e,λ)`) |
+| invert-all-units poly at residual `e` | trapdoor `y ↦ y^{d'}`; Miller-from-`e d'−1` | `invert_all_units_poly_at_e` / `pin_X23_poly_at_7_constructs_factor` | residual-solver ⇒ factor (a solver is not a polynomial) |
+| dlog of a fixed-`e` solver at a generator | recovers `d'`; Miller from the recovered inverse | `residual_solver_reduced_fixed_e_extracts_and_factors` | residual-solver ⇒ factor (`e` is still fixed) |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

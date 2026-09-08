@@ -78,6 +78,7 @@ SrsaRootPoly.v
 SrsaModCbrt.v
 SrsaInverter.v
 SrsaVaryingE.v
+SrsaExtractD.v
 Routes.v
 SolverRestrict.v
 DozenInroads.v

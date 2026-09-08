@@ -16,6 +16,7 @@ Require Import SrsaResidualGRA.
 Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
 Require Import SrsaInverter.
+Require Import RocqProofs.ZPoly.
 
 Open Scope Z_scope.
 
@@ -38,8 +39,12 @@ Open Scope Z_scope.
     A residual solver that always returns one residual-shaped [e],
     given a known inverse of that [e] modulo [λ], is the trapdoor
     map [y ↦ y^{e^{-1}}]; Miller-from-[e d' − 1] splits.  Miller
-    uses the inverse, not the solver.  Cross-confirmed by
-    [cas/228]–[cas/236]. *)
+    uses the inverse, not the solver.  Unique unit [e]-th roots
+    from [gcd(e,λ)=1] (kernel of the [e]-power map, no handed
+    inverse).  Bézout produces [d'] from [(e,λ)]; a fixed-[e]
+    residual solver then Millers without a [d'] hypothesis.
+    An invert-all-units polynomial at a residual [e] is
+    [y ↦ y^{d'}].  Cross-confirmed by [cas/228]–[cas/239]. *)
 
 (** ** Strong-RSA [λ+1] outputs never a proper gcd
 
@@ -695,4 +700,259 @@ Proof.
   apply (residual_solver_reduced_fixed_e_constructs_factor
            Solve pin_e pin_d);
     [lia | apply rsa_test_inv | exact Hfix].
+Qed.
+
+(** ** Unique unit [e]-th roots from [gcd(e,λ)=1]
+
+    Kernel of the [e]-power map on units is trivial when
+    [gcd(e,λ)=1]: [ord(x z⁻¹) | gcd(e,λ)].  No inverse of [e] is
+    handed over.  [e = 5] shares [λ], so [1] and [g^{16}] are
+    distinct 5th roots of [1].  Not
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/237]. *)
+
+Lemma powm_mul_l_mod :
+  forall a b e n,
+    n <> 0 ->
+    0 <= e ->
+    powm (a * b) e n = (powm a e n * powm b e n) mod n.
+Proof.
+  intros a b e n Hn He.
+  unfold powm. rewrite Z.pow_mul_l by lia. apply Z.mul_mod; lia.
+Qed.
+
+Lemma pin_unit_inverse :
+  forall a,
+    Z.coprime a pin_N ->
+    exists w, (a * w) mod pin_N = 1 /\ Z.coprime w pin_N.
+Proof.
+  intros a Ha.
+  exists (powm a (pin_lam - 1) pin_N).
+  split.
+  - transitivity (powm a pin_lam pin_N).
+    + rewrite <- Z.mul_mod_idemp_l by lia.
+      replace pin_lam with (1 + (pin_lam - 1)) by lia.
+      rewrite powm_add_r by lia.
+      rewrite powm_1_r by lia. reflexivity.
+    + rewrite <- rsa_test_lambda.
+      apply (carmichael_semiprime pin_p pin_q a
+               pin_p_prime pin_q_prime pin_p_neq_q Ha).
+  - unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Ha].
+Qed.
+
+Theorem unique_unit_eth_root_from_coprime_e :
+  forall e x z,
+    0 < e ->
+    Z.gcd e pin_lam = 1 ->
+    Z.coprime x pin_N ->
+    Z.coprime z pin_N ->
+    powm x e pin_N = powm z e pin_N ->
+    x mod pin_N = z mod pin_N.
+Proof.
+  intros e x z He Hgcd Hx Hz Heq.
+  destruct (pin_unit_inverse z Hz) as [w [Hw Hwc]].
+  set (u := (x * w) mod pin_N).
+  assert (Hu1 : powm u e pin_N = 1).
+  { unfold u.
+    rewrite powm_mod_base by lia.
+    rewrite powm_mul_l_mod by lia.
+    assert (Hzw : powm (z * w) e pin_N = 1).
+    { rewrite <- powm_mod_base with (a := z * w) by lia.
+      rewrite Hw. unfold powm. rewrite Z.pow_1_l by lia.
+      apply Z.mod_1_l. lia. }
+    rewrite powm_mul_l_mod in Hzw by lia.
+    rewrite Heq.
+    exact Hzw. }
+  assert (Huc : Z.coprime u pin_N).
+  { unfold u, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_mul_l; [exact Hx | exact Hwc]. }
+  destruct (order_exists_from_annihilator u pin_N e
+              ltac:(lia) He Hu1) as [k [Hord Hk_e]].
+  assert (Hk_lam : (k | pin_lam)).
+  { rewrite <- rsa_test_lambda.
+    apply (order_divides_lambda pin_p pin_q u k
+             pin_p_prime pin_q_prime pin_p_neq_q Huc Hord). }
+  assert (Hk1 : (k | 1)).
+  { destruct (Z.gcd_bezout e pin_lam 1 Hgcd) as [s [t Hst]].
+    rewrite <- Hst.
+    apply Z.divide_add_r.
+    - destruct Hk_e as [q Hq]. exists (s * q). rewrite Hq. lia.
+    - destruct Hk_lam as [r Hr]. exists (t * r). rewrite Hr. lia. }
+  assert (k = 1).
+  { apply Z.divide_1_r in Hk1.
+    destruct Hk1 as [Hk1 | Hk1]; [exact Hk1|].
+    destruct Hord as [Hkpos _]. lia. }
+  subst k.
+  assert (Hu_one : u mod pin_N = 1).
+  { destruct Hord as [_ [Hank _]].
+    rewrite powm_1_r in Hank by lia.
+    exact Hank. }
+  unfold u in Hu_one.
+  rewrite Z.mod_mod in Hu_one by lia.
+  apply (mul_cancel_unit_mod pin_N w x z).
+  - apply pin_N_gt_1.
+  - exact Hwc.
+  - rewrite (Z.mul_comm w x), (Z.mul_comm w z).
+    rewrite Hw, Hu_one. reflexivity.
+Qed.
+
+Theorem pin_e5_fifth_roots_not_unique :
+  let u := powm pin_g 16 pin_N in
+  powm 1 5 pin_N = powm u 5 pin_N /\
+  Z.coprime 1 pin_N /\
+  Z.coprime u pin_N /\
+  1 mod pin_N <> u mod pin_N /\
+  Z.gcd 5 pin_lam = 5.
+Proof. vm_compute. repeat split; congruence. Qed.
+
+Theorem pin_unique_unit_cube_from_coprime :
+  forall x z,
+    Z.coprime x pin_N ->
+    Z.coprime z pin_N ->
+    powm x pin_e pin_N = powm z pin_e pin_N ->
+    x mod pin_N = z mod pin_N.
+Proof.
+  intros x z Hx Hz Heq.
+  apply (unique_unit_eth_root_from_coprime_e pin_e x z);
+    [lia | vm_compute; reflexivity | exact Hx | exact Hz | exact Heq].
+Qed.
+
+(** ** Bézout inverse of residual [e] modulo [λ]
+
+    [gcd(e,λ)=1] produces [d'] with [e d' ≡ 1 (mod λ)].  A fixed-[e]
+    residual solver then Millers with no [d'] hypothesis.  Miller
+    uses [(e,λ)], not the solver's [x]-values.  Not
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/238]. *)
+
+Theorem residual_inv_mod_lam :
+  forall e,
+    Z.gcd e pin_lam = 1 ->
+    exists d', 0 <= d' < pin_lam /\ (e * d') mod pin_lam = 1.
+Proof.
+  intros e Hgcd.
+  destruct (Z.gcd_bezout e pin_lam 1 Hgcd) as [u [v Hs]].
+  exists (u mod pin_lam).
+  split.
+  - apply Z.mod_pos_bound. lia.
+  - rewrite Z.mul_mod_idemp_r by lia.
+    rewrite (Z.mul_comm e u).
+    replace (u * e) with (1 + (- v) * pin_lam) by lia.
+    rewrite Z.mod_add by lia.
+    apply Z.mod_1_l. lia.
+Qed.
+
+Theorem residual_solver_reduced_fixed_e_constructs_factor_from_e :
+  forall (Solve : residual_solver_reduced pin_N pin_lam) e,
+    residual_shaped_e e pin_lam ->
+    residual_solver_reduced_returns_e Solve e ->
+    exists d',
+      0 <= d' < pin_lam /\
+      (e * d') mod pin_lam = 1 /\
+      (forall y Hrng Hy,
+         fst (proj1_sig (Solve y Hrng Hy)) mod pin_N = powm y d' pin_N) /\
+      exists f, Problem_Factor pin_N f.
+Proof.
+  intros Solve e [He [Hodd [Hgcd Hnd]]] Hfix.
+  destruct (residual_inv_mod_lam e Hgcd) as [d' [[Hdlo Hdhi] Hinv]].
+  exists d'.
+  split; [lia|].
+  split; [exact Hinv|].
+  destruct (residual_solver_reduced_fixed_e_constructs_factor
+              Solve e d' Hdlo Hinv Hfix) as [Hmap Hex].
+  split; [exact Hmap | exact Hex].
+Qed.
+
+Theorem pin_e7_solver_constructs_factor_from_e :
+  exists d',
+    0 <= d' < pin_lam /\
+    (7 * d') mod pin_lam = 1 /\
+    (forall y Hrng Hy,
+       fst (proj1_sig (pin_e7_residual_solver y Hrng Hy)) mod pin_N
+         = powm y d' pin_N) /\
+    exists f, Problem_Factor pin_N f.
+Proof.
+  apply (residual_solver_reduced_fixed_e_constructs_factor_from_e
+           pin_e7_residual_solver 7);
+    [apply residual_shaped_e_7 | apply pin_e7_solver_returns_e].
+Qed.
+
+(** ** Invert-all-units polynomial at a residual [e]
+
+    Uniqueness (kernel) plus Bézout [d'] : a polynomial that inverts
+    every unit at residual [e] is the trapdoor map [y ↦ y^{d'}].
+    Miller-from-[e d' − 1] splits.  Inhabitant [X^{23}] at [e = 7].
+    Not [residual_solver_constructs_factor_open_named]: a solver is
+    not a polynomial.  Cross-confirmed by [cas/239]. *)
+
+Theorem invert_all_units_poly_at_e :
+  forall P e,
+    residual_shaped_e e pin_lam ->
+    (forall y, Z.coprime y pin_N ->
+       powm (poly_eval P y) e pin_N = y mod pin_N) ->
+    exists d',
+      0 <= d' < pin_lam /\
+      (e * d') mod pin_lam = 1 /\
+      (forall y, Z.coprime y pin_N ->
+         poly_eval P y mod pin_N = powm y d' pin_N) /\
+      exists f, Problem_Factor pin_N f.
+Proof.
+  intros P e [He [Hodd [Hgcd Hnd]]] Hall.
+  destruct (residual_inv_mod_lam e Hgcd) as [d' [[Hdlo Hdhi] Hinv]].
+  exists d'.
+  split; [lia|].
+  split; [exact Hinv|].
+  assert (Hmap : forall y, Z.coprime y pin_N ->
+                    poly_eval P y mod pin_N = powm y d' pin_N).
+  { intros y Hy.
+    assert (Hx : Z.coprime (poly_eval P y) pin_N).
+    { apply (powm_unit_is_coprime (poly_eval P y) e pin_N);
+        [apply pin_N_gt_1 | lia |].
+      rewrite (Hall y Hy). rewrite Z.gcd_mod_l. exact Hy. }
+    assert (Hz : Z.coprime (powm y d' pin_N) pin_N).
+    { unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+      apply Z.coprime_pow_l; [lia | exact Hy]. }
+    replace (powm y d' pin_N) with (powm y d' pin_N mod pin_N).
+    2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+    apply (unique_unit_eth_root_from_coprime_e e (poly_eval P y)
+             (powm y d' pin_N));
+      [lia | exact Hgcd | exact Hx | exact Hz |].
+    rewrite (Hall y Hy).
+    rewrite (proj2 (pin_powm_mul_inv e d' y He Hdlo Hinv Hy)).
+    reflexivity. }
+  split; [exact Hmap|].
+  pose proof (pin_ed_inv_M_pos e d' He Hdlo Hinv) as HMpos.
+  pose proof (pin_ed_inv_divides_lam e d' Hinv) as Hdiv.
+  destruct (pin_miller_from_lambda_multiple (e * d' - 1) HMpos Hdiv)
+    as [_ Hf].
+  eexists. exact Hf.
+Qed.
+
+Definition pin_e7_monomial : list Z := poly_Xn (Z.to_nat 23).
+
+Theorem pin_X23_inverts_at_7 :
+  forall y,
+    Z.coprime y pin_N ->
+    powm (poly_eval pin_e7_monomial y) 7 pin_N = y mod pin_N.
+Proof.
+  intros y Hy.
+  unfold pin_e7_monomial.
+  rewrite poly_eval_Xn, Z2Nat.id by lia.
+  transitivity (powm (powm y 23 pin_N) 7 pin_N).
+  - unfold powm at 2. rewrite <- powm_mod_base by lia. reflexivity.
+  - apply (proj2 (pin_powm_mul_inv 7 23 y ltac:(lia) ltac:(lia)
+                    pin_inv7_mod_lam Hy)).
+Qed.
+
+Theorem pin_X23_poly_at_7_constructs_factor :
+  exists d',
+    0 <= d' < pin_lam /\
+    (7 * d') mod pin_lam = 1 /\
+    (forall y, Z.coprime y pin_N ->
+       poly_eval pin_e7_monomial y mod pin_N = powm y d' pin_N) /\
+    exists f, Problem_Factor pin_N f.
+Proof.
+  apply (invert_all_units_poly_at_e pin_e7_monomial 7);
+    [apply residual_shaped_e_7 | apply pin_X23_inverts_at_7].
 Qed.
