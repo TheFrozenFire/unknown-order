@@ -64,7 +64,7 @@ Open Scope Z_scope.
     [cas/183], [cas/184], [cas/185], [cas/186], [cas/187],
     [cas/188], [cas/189], [cas/190], [cas/191], [cas/192],
     [cas/193], [cas/194], [cas/195], [cas/196], [cas/197],
-    [cas/198], and [cas/199]. *)
+    [cas/198], [cas/199], [cas/200], and [cas/201]. *)
 
 (** ** Coefficient of a mixed CRT monomial splits *)
 
@@ -3044,4 +3044,65 @@ Proof.
     apply invert_all_units_diff_fold_q_zero;
       [exact Hr | apply pin_crt_binomial_inverts_units
        | apply pin_trapdoor_monomial_poly_inverts].
+Qed.
+
+(** ** Invert-all-units polynomial constructs a factor
+
+    Any all-units invert poly is the trapdoor map [y ↦ y^d]
+    ([all_units_root_poly_is_trapdoor_map]).  Miller-from-[d] then
+    splits ([rsa_test_miller_from_d]).  Low-degree extra [N K] has
+    the same coefficients modulo [N] as the CRT binomial, whose
+    coefficients already split.  Not
+    [residual_solver_constructs_factor_open_named]: a residual
+    solver is not given as a polynomial.  Cross-confirmed by
+    [cas/200] and [cas/201]. *)
+
+Theorem pin_binomial_plus_N_kernel_cong_mod_N :
+  forall i,
+    nth i pin_binomial_plus_N_kernel 0 mod pin_N
+      = nth i pin_crt_root_poly 0 mod pin_N.
+Proof.
+  intros i.
+  unfold pin_binomial_plus_N_kernel.
+  rewrite nth_poly_add, nth_map_mul.
+  rewrite Z.add_mod, Z.mul_mod, Z.mod_same, Z.mul_0_l, Z.add_0_r, Z.mod_mod;
+    lia.
+Qed.
+
+Theorem pin_binomial_plus_N_kernel_deg_lt_qminus1 :
+  (poly_degree pin_binomial_plus_N_kernel < Z.to_nat (pin_q - 1))%nat.
+Proof. vm_compute. lia. Qed.
+
+Theorem pin_miller_from_d_factors :
+  Problem_Factor pin_N
+    (Z.gcd (2 ^ (miller_t rsa_test * pow2n (val2 pin_ord2_p)) - 1) pin_N).
+Proof.
+  assert (Hg :
+    Z.gcd (2 ^ (miller_t rsa_test * pow2n (val2 pin_ord2_p)) - 1)
+          (rsa_N rsa_test) = rsa_p rsa_test).
+  { apply (miller_from_d rsa_test 2 (val2 pin_ord2_p) (val2 pin_ord2_q));
+      [vm_compute; reflexivity | apply rsa_test_base2_heights
+       | apply rsa_test_base2_heights | vm_compute; lia]. }
+  change pin_N with (rsa_N rsa_test).
+  rewrite Hg.
+  unfold rsa_N, Problem_Factor.
+  change (rsa_p rsa_test) with pin_p.
+  change (rsa_q rsa_test) with pin_q.
+  split; [lia | exists pin_q; reflexivity].
+Qed.
+
+Theorem invert_all_units_poly_constructs_factor :
+  forall P,
+    (forall y, Z.coprime y pin_N ->
+       powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
+    (forall y, Z.coprime y pin_N ->
+       poly_eval P y mod pin_N = powm y pin_d pin_N) /\
+    exists f, Problem_Factor pin_N f.
+Proof.
+  intros P Hall.
+  split.
+  - intros y Hy.
+    apply all_units_root_poly_is_trapdoor_map; assumption.
+  - eexists.
+    apply pin_miller_from_d_factors.
 Qed.

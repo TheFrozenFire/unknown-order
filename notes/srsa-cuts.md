@@ -383,9 +383,13 @@ needs `N | c`: `p K` misses the lift, `q K` misses unit `2`,
 CAS `197`). Any two invert-all-units polys have both Fermat folds
 of their difference zero (`invert_all_units_diff_fold_p_zero`,
 `pin_crt_vs_NX20_diff_folds_zero`, `pin_crt_vs_monomial_diff_folds_zero`,
-CAS `198`, `199`). Writing the invert poly wrote the local inverse
-maps, hence wrote `d`. Not
-`residual_solver_constructs_factor_open_named`.
+CAS `198`, `199`). Deg `< q−1` extra `N K` is the CRT binomial
+modulo `N` (CAS `200`). Any invert-all-units poly is the trapdoor
+map and Miller-from-`d` constructs a factor
+(`invert_all_units_poly_constructs_factor`, CAS `201`). Writing the
+invert poly wrote `d`. Not
+`residual_solver_constructs_factor_open_named`. The polynomial class
+is closed.
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -475,6 +479,8 @@ advice `N/17`: `PreprocessGRA.v`.
 | binomial `+ c K` inverts all units iff `N \| c` | `pin_binomial_plus_p_kernel_misses_lift` / `pin_binomial_plus_q_kernel_misses_2` / `pin_binomial_plus_N_kernel_inverts` | `SrsaRootPoly.v` | `197` |
 | invert-poly difference has both Fermat folds zero (`+ N X^{20}`) | `invert_all_units_diff_fold_p_zero` / `pin_crt_vs_NX20_diff_folds_zero` | `SrsaRootPoly.v` | `198` |
 | CRT binomial vs `X^d` have both Fermat folds of the difference zero | `pin_crt_vs_monomial_diff_folds_zero` | `SrsaRootPoly.v` | `199` |
+| deg `< q−1` extra `N K` is the CRT binomial mod `N` | `pin_binomial_plus_N_kernel_cong_mod_N` / `pin_binomial_plus_N_kernel_deg_lt_qminus1` | `SrsaRootPoly.v` | `200` |
+| invert-all-units poly is the trapdoor map and Miller-factors | `invert_all_units_poly_constructs_factor` / `pin_miller_from_d_factors` | `SrsaRootPoly.v` | `201` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

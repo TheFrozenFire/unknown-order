@@ -3021,6 +3021,7 @@ in the Rocq tree.  Do not edit by hand.
   - L2646: Leftover kernel is 1-dimensional
   - L2754: Binomial [+ c K]: leftover extra, invert iff [N | c]
   - L2905: Difference of invert polys has both Fermat folds zero
+  - L3049: Invert-all-units polynomial constructs a factor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3209,6 +3210,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_crt_vs_NX20_diff_folds_zero` | 2997 |
 | Lemma | `pin_trapdoor_monomial_poly_inverts` | 3017 |
 | Theorem | `pin_crt_vs_monomial_diff_folds_zero` | 3029 |
+| Theorem | `pin_binomial_plus_N_kernel_cong_mod_N` | 3060 |
+| Theorem | `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 3072 |
+| Theorem | `pin_miller_from_d_factors` | 3076 |
+| Theorem | `invert_all_units_poly_constructs_factor` | 3094 |
 
 ## `SrsaWriteE.v`
 
@@ -3699,4 +3704,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2591 theorems/lemmas/corollaries/examples across 119 files._
+_2595 theorems/lemmas/corollaries/examples across 119 files._

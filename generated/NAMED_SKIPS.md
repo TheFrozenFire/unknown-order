@@ -162,6 +162,10 @@ comments; do not maintain this table by hand.
 | `pin_crt_vs_NX20_diff_folds_zero` | `SrsaRootPoly.v` | 2997 |
 | `pin_trapdoor_monomial_poly_inverts` | `SrsaRootPoly.v` | 3017 |
 | `pin_crt_vs_monomial_diff_folds_zero` | `SrsaRootPoly.v` | 3029 |
+| `pin_binomial_plus_N_kernel_cong_mod_N` | `SrsaRootPoly.v` | 3060 |
+| `pin_binomial_plus_N_kernel_deg_lt_qminus1` | `SrsaRootPoly.v` | 3072 |
+| `pin_miller_from_d_factors` | `SrsaRootPoly.v` | 3076 |
+| `invert_all_units_poly_constructs_factor` | `SrsaRootPoly.v` | 3094 |
 | `srsa_residual_pin` | `StrongRSAPeel.v` | 257 |
 | `srsa_residual_pin187` | `StrongRSAPeel.v` | 268 |
 
@@ -196,4 +200,4 @@ comments; do not maintain this table by hand.
 | `matching_247_gcd_not_proper` | `SrsaOrderArrows.v` | 184 |
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 108 does-not-discharge rows._
+_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 112 does-not-discharge rows._

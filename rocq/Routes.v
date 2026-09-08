@@ -27,3 +27,5 @@ Check rsa_inverter_recovers_message.
 Check strong_rsa_solver_constructs_factor_open_named.
 Check rsa_solution_is_strong_RSA.
 Check leftover_mismatch_factors.
+Check invert_all_units_poly_constructs_factor.
+Check pin_binomial_plus_N_kernel_cong_mod_N.
