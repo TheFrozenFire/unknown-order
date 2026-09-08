@@ -56,12 +56,14 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
    does **not** forbid proving a precise reduction (an inverter or Strong-RSA
    solver constructs a factor).  Those are `*_open_named` live targets.
    `NamedRefuse` is out of *model* (no PPT, hash, NFS) — not a ban on nearby algebra.
-   A **new** paper/plan/cut freezes its route with the harness `lamport-audit`
-   skill before CAS/Rocq: convert without repair, forward hierarchy, reverse from
-   the *headline*. Reverse `FOLLOWS` on a weaker sentence ⇒ that weaker sentence
-   is the theorem; the strong name stays `*_open_named` or “not a claim of.”
-   Lamport is not a confirming tool and not a kernel. Existing theorems are
-   grandfathered. Artifacts: `notes/lamport/<claim-id>/`.
+   A **new** paper/plan/cut still runs harness `lamport-audit` as a
+   *review* (convert / forward / reverse). Do not check those writeups
+   into `notes/`. The durable split is Rocq: an unused `*_open_named`
+   for the strong sentence, the weaker theorem, a `(** **` comment
+   `Not [that_open_named]`, harvested by `named-skips` into
+   `generated/NAMED_SKIPS.md`. `rocq/Routes.v` `Check`s the residual-
+   solver pair so a rename fails the build. Lamport is not a confirming
+   tool and not a kernel.
 
 6. **Record why a tier was skipped.** Certora, Halmos, and the Rocq equivalence (Gallina ↔ solc-Yul)
    tiers are EVM-bound and skipped-by-construction. CAS + Rocq-SIM are the two differently-failing
@@ -93,7 +95,8 @@ This is a **dedicated theory repo**, not a contract target. Work lives at the re
   `formal-verification/.agents/skills/cas-witness/reference/pari-objects.md`.
   Do not add OSCAR / Julia to this gate.
 - `bash run-check.sh` runs both; each track SKIPs cleanly if its tool is absent.
-  It also runs `lamport-gate` when `notes/lamport/` contains `STATUS.yaml`.
+  `lamport-gate` SKIPs unless a STATUS.yaml still exists (do not add
+  one under `notes/`).
 
 The one local Rocq toolchain is the opam `rocq-lsp` switch (same one `rocq-mcp` / pet uses).
 `rocq/run-check.sh` selects `opam exec --switch=rocq-lsp -- rocq compile` so `.vo` artifacts stay

@@ -1,23 +1,18 @@
-# Lamport route freeze
+# Lamport review is not the map
 
-New paper/plan/cut headlines freeze a **route** here before CAS or
-Rocq. Procedure: harness skill `lamport-audit`
-(`formal-verification/.agents/skills/lamport-audit/`). Schema:
-`reference/artifact.md`. Gate (from the repo root): `bash ../formal-verification/tooling/lamport-gate --root .`
-(also via `run-check.sh`).
+Do not check convert/forward/reverse/STATUS into this directory.
+Notes are working scratch.
 
-Existing theorems are **grandfathered**. Do not backfill one
-directory per lemma.
+The residual-solver split is load-bearing in Rocq:
 
-Worked split (not a backfill of every lemma):
+- live target: `residual_solver_constructs_factor_open_named`
+  (unused `*_open_named`)
+- reverse-closed sentence:
+  `invert_all_units_both_folds_are_local_monomials`
+- join: subsection comments `Not [residual_solver_constructs_factor_open_named]`,
+  harvested into `generated/NAMED_SKIPS.md`
+- compile-time names: `rocq/Routes.v`
 
-| Directory | Reverse | What it is |
-|---|---|---|
-| `residual-solver-constructs-factor/` | `NOT ESTABLISHED BY THIS PROOF` | live target; `residual_solver_constructs_factor_open_named` unused |
-| `invert-all-units-folds/` | `FOLLOWS` | theorem `invert_all_units_both_folds_are_local_monomials`, CAS `186`; `split_from` the live target |
-
-`confirming_tools` is still Rocq + CAS. Do not list `lamport`.
-
-If reverse only supports a weaker sentence than `notes/hardness.md`
-or `notes/srsa-cuts.md`, prove the weaker sentence and leave the
-strong name `*_open_named` unused.
+A new paper/plan/cut still runs `lamport-audit` (harness skill) as a
+review. After the theorem lands, write `Not [foo_open_named]` on the
+`(** **` comment and leave the open named unused.

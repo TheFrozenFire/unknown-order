@@ -2111,6 +2111,10 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `range2_encoding` | 51 |
 | Theorem | `range2_eval_commit` | 67 |
 
+## `Routes.v`
+
+- L8: Residual-solver route pin
+
 ## `SAGM.v`
 
 - L10: Strong algebraic group model (representation)
