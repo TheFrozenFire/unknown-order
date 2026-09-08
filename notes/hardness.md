@@ -146,6 +146,11 @@ Constructible torsion `H` is a family parameter
 | unit-`GInv` GRA that inverts every unit | denotes a rational; Miller splits | `unit_ginv_gra_invert_all_units_constructs_factor` / `gra_unit_inv_denotes` | `GRoot`; residual-solver ⇒ factor (a solver is not a unit-`GInv` tape) |
 | `GInv` of a non-unit | `gcd(h,N)` is a proper factor | `gra_first_inv_gcd_factors` / `gra_inv_proper_gcd_factors` | `GInv` of a unit; residual-solver ⇒ factor |
 | `GRoot` of a `Z`-cube sharing a factor with `N` | integer cube-root is a proper factor | `gra_first_root_factor_factors` / `gra_root_p3_factors` | modular cube-root; residual-solver ⇒ factor |
+| modular cube-root of a non-unit | output gcd equals input gcd, a proper factor | `mod_cbrt_nonunit_factors` / `pin_cbrt_p_factors` | residual-solver ⇒ factor (a solver is not a non-unit cube-root) |
+| integer vs modular cube-root of `p` | integer miss returns `p`; modular hit is `165` | `integer_cbrt_p_neq_mod_cbrt_p` | treating integer `GRoot` as modular |
+| modular cube-root of a reduced unit | residual leaf at public `e=3` | `mod_cbrt_unit_is_residual_leaf` | leftover pair is a solver |
+| reduced residual solver at public `e` | trapdoor map `y ↦ y^d`; Miller-from-`d` splits | `residual_solver_reduced_pin_e_constructs_factor` | residual-solver ⇒ factor (varying `e`; Miller uses `d`) |
+| `N+1` as a Strong-RSA challenge | coprime but not a residue, so not a leaf | `pin_N_plus_1_not_a_leaf` / `residual_leaf_y_is_residue` | vacuous `Solve (N+1)` inhabiting the open named |
 | 1-query integer-cube `GRoot` | drop the gate, still a factor | `bv_few_query_low_e_drops_oracle` | RSA ≢ factoring |
 | SLP `X^d` on units | functional cube-root map | `slp_carmichael_is_functional` | polynomial identity in `F_p[X]` |
 | Jacobi on residues | two values; not a constant polynomial | `jacobi_two_values` | GRA-hard ⇒ standard-hard |

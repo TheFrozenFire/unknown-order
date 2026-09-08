@@ -91,6 +91,11 @@ comments; do not maintain this table by hand.
 | `trapdoor_exponent_divides_lambda` | `MillerHeight.v` | 302 |
 | `miller_from_trapdoor_exponent` | `MillerHeight.v` | 313 |
 | `miller_from_trapdoor_exponent_q` | `MillerHeight.v` | 330 |
+| `mod_cbrt_nonunit_factors` | `SrsaModCbrt.v` | 160 |
+| `pin_trapdoor_solver_returns_e` | `SrsaModCbrt.v` | 378 |
+| `residual_solver_reduced_pin_e_is_mod_cbrt` | `SrsaModCbrt.v` | 382 |
+| `residual_solver_reduced_pin_e_is_trapdoor` | `SrsaModCbrt.v` | 398 |
+| `residual_solver_reduced_pin_e_constructs_factor` | `SrsaModCbrt.v` | 420 |
 | `is_order_pin_y_40` | `SrsaOrderArrows.v` | 30 |
 | `order_yields_residual_sRSA` | `SrsaOrderArrows.v` | 40 |
 | `order_yields_residual_pin` | `SrsaOrderArrows.v` | 62 |
@@ -207,4 +212,4 @@ comments; do not maintain this table by hand.
 | `matching_247_gcd_not_proper` | `SrsaOrderArrows.v` | 184 |
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 
-_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 119 does-not-discharge rows._
+_43 refuses, 3 open targets, 0 used-as-hypothesis weaknesses, 124 does-not-discharge rows._

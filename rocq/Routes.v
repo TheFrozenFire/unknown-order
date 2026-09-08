@@ -5,6 +5,7 @@ Require Import TranscriptOracle.
 Require Import StrongRSAPeel.
 Require Import GenericRing.
 Require Import SrsaRootPoly.
+Require Import SrsaModCbrt.
 
 Open Scope Z_scope.
 
@@ -37,3 +38,13 @@ Check unit_ginv_gra_invert_all_units_constructs_factor.
 Check gra_first_inv_gcd_factors.
 Check gra_first_root_factor_factors.
 Check gra_unit_inv_denotes.
+Check mod_cbrt_nonunit_factors.
+Check pin_cbrt_p_factors.
+Check integer_cbrt_p_neq_mod_cbrt_p.
+Check mod_cbrt_unit_is_residual_leaf.
+Check residual_leaf_y_is_residue.
+Check pin_N_plus_1_not_a_leaf.
+Check trapdoor_inhabits_residual_leaf.
+Check pin_trapdoor_residual_solver.
+Check residual_solver_reduced_pin_e_is_trapdoor.
+Check residual_solver_reduced_pin_e_constructs_factor.

@@ -400,7 +400,17 @@ CAS `211`, `214`). `GRoot` of a `Z`-cube that shares a factor with
 `213`). Not `residual_solver_constructs_factor_open_named`. The
 polynomial class, the nodiv-GRA shape, and the algebraic-GRA
 (`GInv` leak / rationals / unit-`GInv` denotation / `GRoot` leak)
-are closed. `GRoot` as a modular cube-root stays outside.
+are closed. Modular cube-root of a non-unit carries the same
+proper gcd (`mod_cbrt_nonunit_factors`, CAS `215`, `218`). Integer
+`GRoot` of `p` misses; the modular root is `165`
+(`integer_cbrt_p_neq_mod_cbrt_p`, CAS `216`). A modular cube-root
+of a reduced unit is a residual leaf at public `e`
+(`mod_cbrt_unit_is_residual_leaf`, CAS `217`). A residual solver
+on reduced residues that always returns that `e` is the trapdoor
+map (`residual_solver_reduced_pin_e_constructs_factor`, CAS `220`,
+`221`). `N+1` is coprime but not a leaf
+(`pin_N_plus_1_not_a_leaf`). Not
+`residual_solver_constructs_factor_open_named`.
 Pin unit `3` has order `λ` (`orders_generate_lambda_pin`).
 A primitive root exists in `𝔽_p*` (`primitive_root_exists`); CRT of
 local generators is a unit of order `λ` (`exists_unit_order_lambda`).
@@ -497,6 +507,11 @@ advice `N/17`: `PreprocessGRA.v`.
 | invert-all-units rational is the trapdoor map and Miller-factors | `invert_all_units_rational_constructs_factor` / `invert_all_units_rational_Xd1_over_X` | `SrsaRootPoly.v` | `205`, `206`, `207` |
 | unit-`GInv` tape denotes a rational and factors | `gra_unit_inv_denotes` / `unit_ginv_gra_invert_all_units_constructs_factor` | `GenericRing.v`, `SrsaRootPoly.v` | `211`, `212`, `214` |
 | `GRoot` of a `Z`-cube sharing a factor with `N` leaks | `gra_root_p3_factors` / `gra_first_root_factor_factors` | `GenericRing.v` | `209`, `210`, `213` |
+| modular cube-root of a non-unit carries the input gcd | `mod_cbrt_nonunit_factors` / `pin_cbrt_p_factors` | `SrsaModCbrt.v` | `215`, `218` |
+| integer `GRoot` of `p` misses; modular hit is `165` | `integer_cbrt_p_neq_mod_cbrt_p` | `SrsaModCbrt.v` | `216` |
+| modular cube-root of a reduced unit is a residual leaf | `mod_cbrt_unit_is_residual_leaf` / `trapdoor_inhabits_residual_leaf` | `SrsaModCbrt.v` | `217`, `221` |
+| reduced residual solver at public `e` is the trapdoor map | `residual_solver_reduced_pin_e_is_trapdoor` / `residual_solver_reduced_pin_e_constructs_factor` | `SrsaModCbrt.v` | `220`, `221` |
+| leftover `y` is a residue; `N+1` is not a leaf | `residual_leaf_y_is_residue` / `pin_N_plus_1_not_a_leaf` | `SrsaModCbrt.v` | `221` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

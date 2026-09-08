@@ -2146,7 +2146,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L11: Live-target route pins
+- L12: Live-target route pins
 
 ## `SAGM.v`
 
@@ -2614,6 +2614,48 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `extra_edq_minus_1` | 284 |
 | Theorem | `extra_shamir_3_7` | 288 |
 | Theorem | `extra_rerand_fixed_e` | 292 |
+
+## `SrsaModCbrt.v`
+
+- L15: Modular cube-root versus integer [GRoot], and a reduced residual solver
+  - L27: Modular cube-root as a relation
+  - L153: Modular cube-root of a non-unit
+  - L225: Pin inhabitants: integer miss versus modular hit
+  - L281: Unit modular cube-root is a residual leaf at public [e]
+  - L354: Reduced residual solver at public [e] is the trapdoor map
+
+| Kind | Name | Line |
+|---|---|---:|
+| Lemma | `Z_pow_3_mul` | 32 |
+| Lemma | `prime_divides_cube` | 40 |
+| Lemma | `gcd_prime_is_1_or_p` | 55 |
+| Lemma | `divide_eq_pos` | 73 |
+| Lemma | `gcd_eq_n_of_div` | 85 |
+| Lemma | `pin_divide_N_cases` | 96 |
+| Lemma | `pin_proper_gcd_is_p_or_q` | 138 |
+| Theorem | `mod_cbrt_nonunit_factors` | 160 |
+| Theorem | `pin_cbrt_p_rel` | 229 |
+| Theorem | `pin_cbrt_p_gcd` | 233 |
+| Theorem | `pin_cbrt_p_factors` | 237 |
+| Theorem | `pin_cbrt_p_neq_p` | 244 |
+| Theorem | `integer_cube_root_p_miss` | 248 |
+| Theorem | `integer_cbrt_p_neq_mod_cbrt_p` | 252 |
+| Theorem | `pin_cbrt_2p_rel` | 256 |
+| Theorem | `pin_cbrt_2p_factors` | 260 |
+| Theorem | `pin_cbrt_0_rel` | 265 |
+| Theorem | `pin_cbrt_0_gcd_is_N` | 269 |
+| Theorem | `pin_cbrt_y_is_x` | 273 |
+| Theorem | `pin_cbrt_y_unit` | 277 |
+| Lemma | `mod_cbrt_unit_coprime` | 283 |
+| Theorem | `residual_leaf_y_is_residue` | 295 |
+| Theorem | `pin_N_plus_1_not_a_leaf` | 307 |
+| Theorem | `mod_cbrt_unit_is_residual_leaf` | 315 |
+| Theorem | `pin_x_is_residual_leaf_of_y` | 333 |
+| Theorem | `trapdoor_inhabits_residual_leaf` | 342 |
+| Theorem | `pin_trapdoor_solver_returns_e` | 378 |
+| Theorem | `residual_solver_reduced_pin_e_is_mod_cbrt` | 382 |
+| Theorem | `residual_solver_reduced_pin_e_is_trapdoor` | 398 |
+| Theorem | `residual_solver_reduced_pin_e_constructs_factor` | 420 |
 
 ## `SrsaModulus.v`
 
@@ -3745,4 +3787,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2632 theorems/lemmas/corollaries/examples across 119 files._
+_2662 theorems/lemmas/corollaries/examples across 120 files._
