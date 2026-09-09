@@ -1,16 +1,11 @@
-# Strong RSA cuts — by question, not by batch
+# Strong RSA — residual leaf, solver cuts, live targets
 
-Next slices after this catalog (do not re-refuse the live
-targets; do not resume fold/K identities) live in
-[`srsa-after.md`](srsa-after.md) (P0–P8 of
-[`srsa-next.md`](srsa-next.md) are done).
-
-Rocq IDs are semantic: `residual_*`, `primary_*`, `dict_*`, `period_*`,
-`xmap_*`, `emap_*`, `extra_*`, `engine_*`, `modulus_*`, plus already-
-named `srsa_*` / `dozen_*` / `shape_*` / `filter_*` / `arith_*`. Files
-are the same cuts. CAS numbered `01`–`138` stay as witnesses; probe
-classes 1–500 are a crosswalk in `notes/hundred.md` … `hundred5.md`,
-not theorem IDs.
+Companion to [`hardness.md`](hardness.md). Rocq IDs are semantic:
+`residual_*`, `primary_*`, `dict_*`, `period_*`, `xmap_*`, `emap_*`,
+`extra_*`, `engine_*`, `modulus_*`, plus already-named `srsa_*` /
+`dozen_*` / `shape_*` / `filter_*` / `arith_*`. CAS numbered files
+stay as witnesses. Probe classes 1–500 (`cas/133`–`138`) are a
+crosswalk, not theorem IDs.
 
 Pin unless noted: `N=11·17=187`, `λ=80`, `(y,x,e)=(36,42,3)`,
 `ord(y)=40`, `⟨y⟩≅C₈×C₅`. Residual means
@@ -18,6 +13,15 @@ Pin unless noted: `N=11·17=187`, `λ=80`, `(y,x,e)=(36,42,3)`,
 `x^e≡y`. Cuts of the writer classify which TMs inhabit that leaf,
 split, peel, or miss. They do not settle whether a residual *solver*
 constructs a factor (`residual_solver_constructs_factor_open_named`).
+
+On this pin every reduced residual solver factors
+(`residual_solver_reduced_constructs_factor_pin`, miller step is
+`miller_walk` at `e d'−1`). Invert-all-units polynomials, Fermat
+folds, leftover kernel, and the sharp degree window are theorems
+for distinct odd primes `p < q < 2p`. Unique unit `e`-th roots are
+general (`unique_unit_eth_root_coprime`). None of that inhabits
+the extraction nameds: those have no `λ` in the type, or quantify
+over every `N`.
 
 A **fate** is one of: splits `N`; peels (already-named easy witness);
 does not inhabit; leftover (inverts, does not factor); other sentence

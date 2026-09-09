@@ -1,6 +1,6 @@
 \\ Fifth hundred: leftover x is a Pohlig oracle; cubing 4-cycles;
 \\ unit-group orders leak; two subgroups' cube roots split.
-\\ CAS↔Rocq crosswalk: notes/hundred5.md.
+\\ Grouping: notes/srsa.md.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));

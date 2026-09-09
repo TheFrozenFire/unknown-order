@@ -1,4 +1,4 @@
-\\ Second hundred Strong-RSA algorithm-class pins.  CAS↔Rocq crosswalk: notes/hundred2.md.
+\\ Second hundred Strong-RSA algorithm-class pins.  Grouping: notes/srsa.md.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));

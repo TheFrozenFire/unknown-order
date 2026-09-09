@@ -17,7 +17,8 @@ Open Scope Z_scope.
     runs the cheap bit-extraction battery.  Outcome: the only cheap
     readings of [s] are facts already functions of [N] ([s] even;
     [s mod 4] from [N mod 4]) and Fermat-in-the-exponent on close
-    primes (Type A).  See [notes/sixth-type-plan.md] Method 2. *)
+    primes (Type A).  Sixth-type hunt exhausted:
+    [notes/keygen-weaknesses.md]. *)
 
 (** ** Reduction of [powm] along a factor *)
 

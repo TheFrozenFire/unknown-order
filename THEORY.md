@@ -9,13 +9,13 @@ This file is **not** the theory.  The theory is the Rocq tree.
 | Math/SIM lint | [`generated/LINT.md`](generated/LINT.md) |
 | Paper-check overlaps | [`notes/paper-overlaps.md`](notes/paper-overlaps.md) |
 | Relation table | [`notes/hardness.md`](notes/hardness.md) |
-| Working rules | [`AGENTS.md`](AGENTS.md) |
-| Directed sixth-type hunt | [`notes/sixth-type-plan.md`](notes/sixth-type-plan.md) |
-| Transcripts / oracles | [`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md) |
-| Autonomous runway | [`notes/autonomous-runway.md`](notes/autonomous-runway.md) |
-| Strong RSA next slices (after the C-class campaign) | [`notes/srsa-next.md`](notes/srsa-next.md) (P0–P8 done); next: [`notes/srsa-after.md`](notes/srsa-after.md) |
-| Route split (live target vs closed sentence) | [`generated/NAMED_SKIPS.md`](generated/NAMED_SKIPS.md) “Does not discharge”; pin `rocq/Routes.v` |
+| Strong RSA residual / solver cuts | [`notes/srsa.md`](notes/srsa.md) |
+| KeyGen Types A–E | [`notes/keygen-weaknesses.md`](notes/keygen-weaknesses.md) |
+| Transcripts / oracles | [`notes/transcripts.md`](notes/transcripts.md) |
 | RSA-land catalog | [`notes/rsa-land.md`](notes/rsa-land.md) |
+| Notes index | [`notes/README.md`](notes/README.md) |
+| Working rules | [`AGENTS.md`](AGENTS.md) |
+| Route split (live target vs closed sentence) | [`generated/NAMED_SKIPS.md`](generated/NAMED_SKIPS.md) “Does not discharge”; pin `rocq/Routes.v` |
 
 Regenerate the first three with `bash rocq/gen-coverage.sh` (also run from `run-check.sh`).  The harness emitters are `formal-verification/tooling/{coverage-toc,named-skips,rocq-math-lint}`.
 

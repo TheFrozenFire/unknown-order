@@ -11,7 +11,7 @@ Open Scope Z_scope.
 
     Cheap public objects built from [N] that are not polynomials
     and not the Euler quotient.  Each method's CAS lives under
-    [cas/46]–[cas/51].  See [notes/sixth-type-plan.md]. *)
+    [cas/46]–[cas/51].  Exhausted: [notes/keygen-weaknesses.md]. *)
 
 (** ** Method 3: [(N, 0, 1)] of disc [−4N] is the principal class *)
 

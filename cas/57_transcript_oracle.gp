@@ -1,4 +1,4 @@
-\\ Transcript / oracle algebra (notes/transcript-oracle-plan.md).
+\\ Transcript / oracle algebra (notes/transcripts.md).
 \\ Mirrors TranscriptOracle.v.  Not a TLS padding-oracle.
 
 ok = 0; fail = 0;

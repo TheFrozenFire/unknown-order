@@ -182,7 +182,7 @@ constructs a factor is a live Gallina target
 
 Strong RSA solver-class cuts (peel, leftover subgroup, gcd vs
 multiply, public maps of `x` and `e`) are grouped by *question* in
-[`notes/srsa-cuts.md`](notes/srsa-cuts.md). Rocq IDs are semantic
+[`notes/srsa.md`](notes/srsa.md). Rocq IDs are semantic
 (`residual_*`, `period_*`, `xmap_*`, …); CAS numbered files stay.
 
 ## Run it
@@ -194,7 +194,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 253 witnesses, `cas/01`–`253`. PARI is the gated CAS; do not add OSCAR.
+CAS is 254 witnesses, `cas/01`–`254`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -270,16 +270,13 @@ CAS `32`–`38`.
 ## What is left
 
 The sixth-type hunt on public `N` is exhausted
-([`notes/sixth-type-plan.md`](notes/sixth-type-plan.md)).
-Transcripts and oracles are catalogued and the cheap algebra
-is closed
-([`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md)).
+([`notes/keygen-weaknesses.md`](notes/keygen-weaknesses.md)).
+Transcripts and oracles are catalogued
+([`notes/transcripts.md`](notes/transcripts.md)).
 `Refuse_undirected_611_hunt` still names “wander through
-KeyGen samplers.” The Strong RSA C-class campaign’s P0–P8
-slices are done ([`notes/srsa-next.md`](notes/srsa-next.md)).
-On this pin every reduced residual solver factors. Q0–Q8 and R1 of
-[`notes/srsa-after.md`](notes/srsa-after.md) are done. The
-`*_open_named` stay live: unused means unproved,
-on-goal, not refused. Other deepen/widen/refine work:
-[`notes/autonomous-runway.md`](notes/autonomous-runway.md).
-Gaps that stay named are `generated/NAMED_SKIPS.md`.
+KeyGen samplers.” On this pin every reduced residual solver
+factors. Invert-all-units structure theorems hold for
+`p < q < 2p`. The `*_open_named` stay live: unused means
+unproved, on-goal, not refused. Gaps that stay named are
+`generated/NAMED_SKIPS.md`. Notes index:
+[`notes/README.md`](notes/README.md).

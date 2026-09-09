@@ -7,8 +7,9 @@ when it has a winning condition, a homomorphism, a CRT identity,
 or a named refuse. Protocol, ROM, PPT, and “the hash is random”
 stay named.
 
-Companion to `notes/paper-overlaps.md`, `notes/hardness.md`,
-`notes/accumulators-zk.md`, `notes/transcript-oracle-plan.md`.
+Companion to [`paper-overlaps.md`](paper-overlaps.md),
+[`hardness.md`](hardness.md), [`accumulators-zk.md`](accumulators-zk.md),
+[`transcripts.md`](transcripts.md).
 
 ## How to read a row
 
@@ -30,7 +31,7 @@ Do not treat “RSA-FDH is EUF-CMA” as a theorem of this corpus.
 | Miller / enum from `(e,d)` | **Have** |
 | `(N,e,d)` ⇒ factor | **Have** (not the converse) |
 | RSA inverter recovers `m` | **Have** `rsa_inverter_recovers_message` |
-| RSA inverter constructs a factor | **Open** `rsa_inverter_constructs_factor_open_named`. Pin reduced-units inverter factors (`rsa_inverter_reduced_units_constructs_factor_pin`, uses `pin_lam`). Next slices: [`srsa-after.md`](srsa-after.md) |
+| RSA inverter constructs a factor | **Open** `rsa_inverter_constructs_factor_open_named`. Pin reduced-units inverter factors (`rsa_inverter_reduced_units_constructs_factor_pin`, uses `pin_lam`). Scope: [`srsa.md`](srsa.md) |
 | Decisional RSA on units | vacuous (`rsa_units_are_eth_powers`) |
 
 ## 2. Blinding and homomorphism

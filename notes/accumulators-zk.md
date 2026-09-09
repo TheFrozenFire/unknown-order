@@ -5,8 +5,8 @@ Pivot catalog. Accumulators: constructions besides 2024/505 whose
 including ones that failed. Completeness and extraction are in
 scope. Simulation / ROM / PPT stay named.
 
-Companion to `Accumulator.v`, `notes/paper-overlaps.md`,
-`notes/arxiv-corpus.md`.
+Companion to `Accumulator.v`, [`paper-overlaps.md`](paper-overlaps.md),
+[`arxiv-corpus.md`](arxiv-corpus.md).
 
 ## 1. RSA accumulators
 
@@ -28,9 +28,7 @@ unless noted. What changes is the *member encoding*, the
 | Camacho–Hevia 2010 | any secure dynamic | — | `Ω(m)` update communication | Interface theorem, not a group problem |
 | Sander / Goodrich–Tamassia–Hasic | RSA + trees | logarithmic | hybrid | Skip trees |
 
-**Done this sitting.** LLX completeness / extract / Peng–Bao, and trapdoor add. Next, if we keep going on accumulators: Lipmaa on `Cl` (same map, `H` from the family; membership is `P_Root`; no `λ` to delete with). Mashatan–Vaudenay is LLX + updates.
-
-Not RSA accumulators (out of this pivot): Nguyen pairings, Merkle, bilinear Braavos variants.
+Lipmaa on `Cl` is the same map on `cl_presentation_H` (`lipmaa_cl_membership_is_P_Root`). Mashatan–Vaudenay is LLX + updates. Not RSA accumulators: Nguyen pairings, Merkle, bilinear Braavos variants.
 
 ## 2. ZK built on RSA / hidden order
 
@@ -71,11 +69,5 @@ Three layers. Only the first is this repo’s style.
 - Groth 2005: cryptography in subgroups of `(ℤ/nℤ)*`.
 - Maurer 2009: GQ and Schnorr as one template (special soundness).
 - DARK (Bünz–Fisch–Szepieniec): polynomial commitments from UO groups (order / AR / fractional-root assumptions). We named those relations; the PCS is a scheme.
-
-## 3. What to formalize if this pivot is real work
-
-**Accumulators (this sitting):** `llx_complete`, `llx_extract_root`, `llx_lambda_forges_nonmem`, `peng_bao_member_still_forges`, `rsa_trapdoor_add`. CAS `42`. Lipmaa-on-`Cl` is the same map on `cl_presentation_H` (not started).
-
-**ZK (this sitting):** `gq_complete`, `gq_extract`, `gq_on_one_with_mixed_sqrt_is_factorization`. Simulation / ROM stay named. Do **not** start FO/DF simulation or Camenisch–Michels.
 
 Refuse: ROM NIZK, ZK simulators, pairing accumulators, “prove RSA ≡ factoring.”

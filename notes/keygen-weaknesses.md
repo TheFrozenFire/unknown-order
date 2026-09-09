@@ -47,15 +47,15 @@ unknown other than `(k,d)`); a new Type-D collision (shared algebraic
 structure without a shared prime); or a new Type-E key-side small root
 (a hidden polynomial the keygen implicitly satisfies).
 
-A **directed** attempt to break that partition — named public
-functions of `N`, chance model, collapse tests — is
-[`sixth-type-plan.md`](sixth-type-plan.md). That plan is not an
-undirected KeyGen pass.
+A directed hunt for a sixth letter on public `N` (named public
+functions, chance model, collapse tests) is exhausted:
+`rocq/SixthType.v`, `EulerQuotient.v`, CAS `43`–`56`. No sixth
+type. `Refuse_undirected_611_hunt` still names wandering through
+KeyGen samplers.
 
 Handles that appear only after the key is *used* (ciphertext,
-signature, decrypt/sign oracle) are a different catalog:
-[`transcript-oracle-plan.md`](transcript-oracle-plan.md). They
-do not add a sixth letter to A–E; they name extra inputs.
+signature, decrypt/sign oracle) are [`transcripts.md`](transcripts.md).
+They do not add a sixth letter to A–E; they name extra inputs.
 
 **Avenues already closed this wave.**
 

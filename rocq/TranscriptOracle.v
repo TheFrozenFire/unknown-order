@@ -12,7 +12,7 @@ Open Scope Z_scope.
 
 (** * Transcripts and oracles (bit leakage after the key is used)
 
-    Catalog: [notes/transcript-oracle-plan.md].  CAS [57].
+    Catalog: [notes/transcripts.md].  CAS [57].
     Each lemma is a named interface, not a PPT game. *)
 
 (** ** Shared algebra *)

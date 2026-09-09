@@ -219,7 +219,7 @@ The residual leaf *is* standard-model RSA with a `y`-dependent exponent coprime 
 ### Cuts of the solver (taxonomy)
 
 Rocq IDs are semantic (`residual_*`, `period_*`, `xmap_*`, …). The map
-by *question* is [`notes/srsa-cuts.md`](srsa-cuts.md):
+by *question* is [`notes/srsa.md`](srsa.md):
 
 1. Peel a witness you already have.
 2. What leftover `(x,e)` is allowed to be (`⟨y⟩`, `C₈×C₅`, 16 generators).
@@ -228,17 +228,17 @@ by *question* is [`notes/srsa-cuts.md`](srsa-cuts.md):
 6. Extra tapes and related `y`. 7. Engines that ignore `y`.
 8. Different group or modulus. 9. GRA / GGM / SAGM / SLP.
 
-CAS probe classes 1–500 are a crosswalk in `notes/hundred.md` …
-`hundred5.md`, not theorem IDs. Joined first-hundred CAS: `134`.
+CAS probe classes 1–500 (`cas/133`–`138`) are a crosswalk, not
+theorem IDs. Joined first-hundred CAS: `134`.
 A residual *pair* is not by itself `Problem_Factor`. Whether a residual
 *solver* constructs a factor is `residual_solver_constructs_factor_open_named`.
 
 ## Live algebraic targets
 
 These are `*_open_named`: unused means unproved, on-goal.
-P0–P8 of [`srsa-next.md`](srsa-next.md) are done (on this pin
-every reduced residual solver factors). Next slices:
-[`srsa-after.md`](srsa-after.md). Do not read unused as refused.
+On this pin every reduced residual solver factors. Do not
+read unused as refused. Scope of pin theorems vs extraction
+nameds: [`notes/srsa.md`](srsa.md).
 
 - An `rsa_inverter` constructs a factor:
   `rsa_inverter_constructs_factor_open_named` / extraction
@@ -282,8 +282,8 @@ See `notes/keygen-weaknesses.md`. A hardness claim that does not name
 refute RSA on a restricted challenge distribution without factoring.
 Predicate oracles that recover `m` (LSB, interval, padding) are
 the same kind of restricted inversion; they are catalogued in
-`notes/transcript-oracle-plan.md`. They are not the inverter-only
-reduction (`rsa_inverter_constructs_factor_open_named`).
+[`notes/transcripts.md`](transcripts.md). They are not the
+inverter-only reduction (`rsa_inverter_constructs_factor_open_named`).
 
 ## Design overlaps (paper-check)
 

@@ -1,6 +1,6 @@
 \\ Predicates of m_p vs recombined m vs public (N,c).
 \\ Also pins T16, T8, constructor-slot negative, Rabin oracle split.
-\\ Catalog: notes/transcript-oracle-plan.md.  Chance: 1/2 for a random bit.
+\\ Catalog: notes/transcripts.md.  Chance: 1/2 for a random bit.
 
 ok = 0; fail = 0;
 check(cond, name) = if(cond, ok++; printf("  ok  %s\n", name), fail++; printf(" FAIL %s\n", name));
