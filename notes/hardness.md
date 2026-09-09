@@ -238,7 +238,8 @@ A residual *pair* is not by itself `Problem_Factor`. Whether a residual
 These are `*_open_named`: unused means unproved, on-goal.
 On this pin every reduced residual solver factors. Do not
 read unused as refused. Scope of pin theorems vs extraction
-nameds: [`notes/srsa.md`](srsa.md).
+nameds: [`notes/srsa.md`](srsa.md). Next slices:
+[`notes/srsa-lift.md`](srsa-lift.md).
 
 - An `rsa_inverter` constructs a factor:
   `rsa_inverter_constructs_factor_open_named` / extraction

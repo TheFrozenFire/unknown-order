@@ -197,3 +197,99 @@ Proof.
     as [d' [_ [_ [_ [f [_ Hf]]]]]].
   exists f. exact Hf.
 Qed.
+
+(** ** Residual leaf at a unit of order [λ], off pin 187
+
+    Uniqueness plus Bézout give [x ≡ g^{d'}]; [dlog_search] reads
+    [d']; [miller_search] at [e d'−1] hits because mixed [√1]
+    exist for even [M].  [g] of order [λ] is a hypothesis (or
+    [exists_unit_order_lambda], which uses [p,q]).  Not
+    [residual_solver_extracts_factor_open_named].  Not
+    [residual_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/255]. *)
+
+Theorem residual_leaf_order_lambda_extracts_and_factors :
+  forall p q g x e,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    p <> 2 ->
+    q <> 2 ->
+    is_order (p * q) g (lambda_semiprime p q) ->
+    Z.coprime g (p * q) ->
+    srsa_residual_leaf (p * q) (lambda_semiprime p q) g x e ->
+    exists d' a f,
+      dlog_search g x (p * q) 0%nat
+        (Z.to_nat (lambda_semiprime p q)) = Some d' /\
+      0 <= d' < lambda_semiprime p q /\
+      (e * d') mod (lambda_semiprime p q) = 1 /\
+      miller_search (p * q) (e * d' - 1) = Some (a, f) /\
+      Problem_Factor (p * q) f.
+Proof.
+  intros p q g x e Hp Hq Hneq Hp2 Hq2 Hor Hgcog Hleaf.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 1 < p * q) by nia.
+  pose proof (lambda_odd_primes_gt_1 p q Hp Hq Hp2 Hq2) as Hlam.
+  destruct Hleaf as [Hyg [[He Hpow] [_ [Hgcd _]]]].
+  destruct (residual_inv_mod_lambda e (lambda_semiprime p q) Hlam Hgcd)
+    as [d' [[Hdlo Hdhi] Hinv]].
+  pose proof (srsa_unit_y_forces_unit_x (p * q) g x e HN ltac:(lia) Hyg Hpow)
+    as Hxcop.
+  assert (Hg_red : 0 <= g < p * q).
+  { unfold powm in Hpow. rewrite <- Hpow. apply Z.mod_pos_bound. lia. }
+  assert (Hxg : x mod (p * q) = powm g d' (p * q)).
+  { replace (powm g d' (p * q)) with (powm g d' (p * q) mod (p * q)).
+    2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+    apply (unique_unit_eth_root_coprime p q e x (powm g d' (p * q)));
+      [exact Hp | exact Hq | exact Hneq | lia | exact Hgcd | exact Hxcop | |].
+    - unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+      apply Z.coprime_pow_l; [lia | exact Hyg].
+    - rewrite Hpow.
+      rewrite (proj2 (powm_mul_inv_semiprime p q e d' g
+                        Hp Hq Hneq He Hdlo Hinv Hyg)).
+      rewrite Z.mod_small by exact Hg_red. reflexivity. }
+  assert (Hdlog : dlog_search g x (p * q) 0%nat
+                    (Z.to_nat (lambda_semiprime p q)) = Some d').
+  { rewrite (dlog_search_mod g x (p * q) 0%nat
+               (Z.to_nat (lambda_semiprime p q)) ltac:(lia)).
+    rewrite Hxg.
+    apply dlog_search_of_power_order; [exact HN | exact Hor | lia]. }
+  pose proof (ed_inv_M_pos e d' (lambda_semiprime p q) He Hdlo ltac:(lia) Hinv)
+    as HMpos.
+  pose proof (ed_inv_divides_lam e d' (lambda_semiprime p q) ltac:(lia) Hinv)
+    as Hdiv.
+  pose proof (lambda_odd_primes_even p q Hp Hq Hp2 Hq2) as Hevlam.
+  pose proof (divide_even_even (lambda_semiprime p q) (e * d' - 1)
+                Hevlam Hdiv) as HevM.
+  destruct (miller_search_hits_semiprime p q (e * d' - 1)
+              Hp Hq Hneq Hp2 Hq2 HMpos HevM)
+    as [a [f [Hs [_ Hf]]]].
+  exists d', a, f.
+  split; [exact Hdlog|].
+  split; [lia|].
+  split; [exact Hinv|].
+  split; [exact Hs | exact Hf].
+Qed.
+
+Theorem residual_solver_reduced_constructs_factor_semiprime :
+  forall p q g (Solve : residual_solver_reduced (p * q) (lambda_semiprime p q)),
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    p <> 2 ->
+    q <> 2 ->
+    0 <= g < p * q ->
+    Z.coprime g (p * q) ->
+    is_order (p * q) g (lambda_semiprime p q) ->
+    exists f, Problem_Factor (p * q) f.
+Proof.
+  intros p q g Solve Hp Hq Hneq Hp2 Hq2 Hrng Hcop Hor.
+  destruct (Solve g Hrng Hcop) as [xe Hleaf].
+  destruct xe as [x e].
+  cbn in Hleaf.
+  destruct (residual_leaf_order_lambda_extracts_and_factors
+              p q g x e Hp Hq Hneq Hp2 Hq2 Hor Hcop Hleaf)
+    as [_ [_ [f [_ [_ [_ [_ Hf]]]]]]].
+  exists f. exact Hf.
+Qed.

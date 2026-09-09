@@ -7,6 +7,7 @@ Require Import RSA.
 Require Import UnknownOrder.
 Require Import Hardness.
 Require Import StrongRSAPeel.
+Require Import Miller.
 Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
 
@@ -15,7 +16,8 @@ Open Scope Z_scope.
 (** * Restricted RSA inverter and Strong-RSA solver shapes
 
     A public-[e] inverter on reduced units is the trapdoor map
-    ([unique] unit [e]-th root).  Miller-from-[d] still splits.
+    ([unique] unit [e]-th root).  Discrete log of [Inv(g)] recovers
+    [k]; [miller_walk] at [e k−1] splits.
     A Strong-RSA solver on units is inhabited by [λ+1] and does
     *not* split [N].  An [e]-th root of a non-unit carries the
     same proper gcd.  Not
@@ -205,13 +207,38 @@ Theorem rsa_inverter_reduced_units_constructs_factor :
   forall (Inv : rsa_inverter_reduced_units pin_N pin_e),
     (forall y Hrng Hy,
        proj1_sig (Inv y Hrng Hy) mod pin_N = powm y pin_d pin_N) /\
-    exists f, Problem_Factor pin_N f.
+    exists k f,
+      pin_dlog_mod_lam pin_g
+        (proj1_sig (Inv pin_g pin_g_range pin_g_coprime)) = Some k /\
+      miller_walk pin_N (pin_e * k - 1) 2 = Some f /\
+      Problem_Factor pin_N f.
 Proof.
   intros Inv.
   split.
   - intros y Hrng Hy.
     apply rsa_inverter_reduced_units_is_trapdoor.
-  - eexists. apply pin_miller_from_d_factors.
+  - pose proof (rsa_inverter_reduced_units_is_trapdoor
+                  Inv pin_g pin_g_range pin_g_coprime) as Hxg.
+    assert (Hdlog : pin_dlog_mod_lam pin_g
+                      (proj1_sig (Inv pin_g pin_g_range pin_g_coprime))
+                    = Some pin_d).
+    { unfold pin_dlog_mod_lam.
+      rewrite (dlog_search_mod pin_g
+                 (proj1_sig (Inv pin_g pin_g_range pin_g_coprime))
+                 pin_N 0%nat (Z.to_nat pin_lam) ltac:(lia)).
+      rewrite Hxg.
+      change (dlog_search pin_g (powm pin_g pin_d pin_N) pin_N 0%nat
+                (Z.to_nat pin_lam))
+        with (pin_dlog_mod_lam pin_g (powm pin_g pin_d pin_N)).
+      apply pin_dlog_mod_lam_of_power. lia. }
+    exists pin_d.
+    destruct pin_miller_walk_base2 as [Hwalk [Hf1 Hf2]].
+    assert (HM : pin_e * pin_d - 1 = pin_lam) by (vm_compute; reflexivity).
+    rewrite <- HM in Hwalk.
+    exists pin_p.
+    split; [exact Hdlog|].
+    split; [exact Hwalk|].
+    unfold Problem_Factor. split; [lia | exact Hf2].
 Qed.
 
 (** ** [inverter_as_residual] writes [pin_lam]
@@ -313,5 +340,6 @@ Proof.
   intros Solve Hfix.
   destruct (rsa_inverter_reduced_units_constructs_factor
               (strong_solver_as_inverter Solve Hfix)) as [_ Hex].
-  exact Hex.
+  destruct Hex as [_ [f [_ [_ Hf]]]].
+  exists f. exact Hf.
 Qed.

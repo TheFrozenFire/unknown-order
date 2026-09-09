@@ -221,6 +221,145 @@ Proof.
   rewrite H. reflexivity.
 Qed.
 
+Lemma miller_search_from_hits_le :
+  forall N M a0 f a fuel,
+    miller_walk N M a0 = Some f ->
+    a <= a0 ->
+    0 <= a ->
+    (Z.to_nat (a0 - a) < fuel)%nat ->
+    exists a' f',
+      miller_search_from N M a fuel = Some (a', f') /\
+      a <= a' <= a0.
+Proof.
+  intros N M a0 f a fuel.
+  revert a.
+  induction fuel as [|fuel IH]; intros a Hhit Hle Ha Hfuel.
+  - lia.
+  - destruct (miller_walk N M a) as [fa|] eqn:Hwa.
+    + exists a, fa.
+      split; [apply miller_search_from_hit; exact Hwa | lia].
+    + assert (a < a0) as Hlt.
+      { destruct (Z.eq_dec a a0) as [E | Ne]; [| lia].
+        subst a0. congruence. }
+      rewrite miller_search_from_miss by exact Hwa.
+      destruct (IH (a + 1) Hhit) as [a' [f' [Hs Hrng]]];
+        [lia | lia | |].
+      * replace (a0 - (a + 1)) with (a0 - a - 1) by lia.
+        rewrite Z2Nat.inj_sub by lia.
+        change (Z.to_nat 1) with 1%nat.
+        assert (1 <= Z.to_nat (a0 - a))%nat.
+        { change 1%nat with (Z.to_nat 1). apply Z2Nat.inj_le; lia. }
+        lia.
+      * exists a', f'. split; [exact Hs | lia].
+Qed.
+
+Lemma miller_search_hits_if :
+  forall N M a0 f,
+    miller_walk N M a0 = Some f ->
+    2 <= a0 <= N - 2 ->
+    3 < N ->
+    exists a' f',
+      miller_search N M = Some (a', f') /\
+      2 <= a' <= a0.
+Proof.
+  intros N M a0 f Hhit Hrng HN.
+  unfold miller_search.
+  apply (miller_search_from_hits_le N M a0 f 2 (Z.to_nat (N - 3))
+           Hhit ltac:(lia) ltac:(lia)).
+  apply Z2Nat.inj_lt; lia.
+Qed.
+
+Lemma miller_walk_from_inv :
+  forall N g fuel f,
+    0 < N ->
+    0 <= g < N ->
+    miller_walk_from N g fuel = Some f ->
+    exists g',
+      0 <= g' < N /\
+      powm g' 2 N = 1 /\
+      g' <> 1 /\
+      g' <> N - 1 /\
+      f = Z.gcd (g' - 1) N.
+Proof.
+  intros N g fuel f HN Hg Hsome.
+  revert g f HN Hg Hsome.
+  induction fuel as [|fuel IH]; intros g f HN Hg Hsome.
+  - discriminate.
+  - cbn [miller_walk_from] in Hsome.
+    destruct (powm g 2 N =? 1) eqn:Hng.
+    + apply Z.eqb_eq in Hng.
+      destruct (g =? 1) eqn:E1; [discriminate|].
+      destruct (g =? N - 1) eqn:E2; [discriminate|].
+      apply Z.eqb_neq in E1. apply Z.eqb_neq in E2.
+      exists g.
+      split; [lia|].
+      split; [exact Hng|].
+      split; [exact E1|].
+      split; [exact E2|].
+      inversion Hsome. reflexivity.
+    + apply IH with (g := powm g 2 N) in Hsome;
+        [exact Hsome | exact HN | apply Z.mod_pos_bound; lia].
+Qed.
+
+Lemma miller_search_from_some_walk :
+  forall N M a fuel a' f,
+    miller_search_from N M a fuel = Some (a', f) ->
+    miller_walk N M a' = Some f.
+Proof.
+  intros N M a fuel.
+  revert a.
+  induction fuel as [|fuel IH]; intros a a' f Hsome.
+  - discriminate.
+  - cbn [miller_search_from] in Hsome.
+    destruct (miller_walk N M a) as [fa|] eqn:Hwa.
+    + inversion Hsome. subst a' f. exact Hwa.
+    + apply IH in Hsome. exact Hsome.
+Qed.
+
+Lemma miller_walk_some_factors :
+  forall p q M a f,
+    Z.prime p -> Z.prime q -> p <> q ->
+    miller_walk (p * q) M a = Some f ->
+    1 < f /\ f < p * q /\ (f | p * q).
+Proof.
+  intros p q M a f Hp Hq Hneq Hsome.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 1 < p * q) by nia.
+  unfold miller_walk in Hsome.
+  destruct (M <=? 0) eqn:Hle; [discriminate|].
+  apply miller_walk_from_inv in Hsome;
+    [| lia | apply Z.mod_pos_bound; lia].
+  destruct Hsome as [g' [Hg' [Hsq [Hg1 [Hgn1 Hf]]]]].
+  subst f.
+  pose proof (nontrivial_sqrt1_splits p q g' Hp Hq Hneq Hsq) as Hfac.
+  destruct Hfac as [Hf1 [Hf2 Hfd]].
+  - rewrite Z.mod_small by lia. exact Hg1.
+  - rewrite Z.mod_small by lia. exact Hgn1.
+  - split; [lia | split; [exact Hf2 | exact Hfd]].
+Qed.
+
+Lemma powm_odd_of_square_one :
+  forall a t N,
+    1 < N ->
+    0 <= t ->
+    Z.Odd t ->
+    powm a 2 N = 1 ->
+    powm a t N = a mod N.
+Proof.
+  intros a t N HN Ht [k Hk] Hsq.
+  assert (0 <= k) by lia.
+  rewrite Hk.
+  rewrite powm_add_r by lia.
+  rewrite (powm_mul_r a 2 k N) by lia.
+  rewrite Hsq.
+  unfold powm at 1.
+  rewrite Z.pow_1_l, Z.mod_1_l by lia.
+  rewrite powm_1_r by lia.
+  rewrite Z.mul_1_l, Z.mod_mod by lia.
+  reflexivity.
+Qed.
+
 (** ** Blum extra [11×19]: base 2 is a miller liar, base 3 splits
 
     [v₂(p−1)=v₂(q−1)=1] and [v₂(ord 2)] matches, so [miller_walk]

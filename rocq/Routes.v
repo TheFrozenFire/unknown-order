@@ -158,9 +158,16 @@ Check residual_solver_reduced_pin_e_via_fixed_e.
 Check unique_unit_eth_root_from_coprime_e.
 Check unique_unit_eth_root_coprime.
 Check pin_e5_fifth_roots_not_unique.
+Check residual_inv_mod_lambda.
 Check residual_inv_mod_lam.
 Check residual_solver_reduced_fixed_e_constructs_factor_from_e.
 Check invert_all_units_poly_at_e.
+Check invert_all_units_poly_at_e_semiprime.
+Check miller_walk_factors_semiprime.
+Check miller_walk_mixed_sqrt1.
+Check miller_search_hits_semiprime.
+Check residual_leaf_order_lambda_extracts_and_factors.
+Check residual_solver_reduced_constructs_factor_semiprime.
 Check pin_X23_poly_at_7_constructs_factor.
 Check residual_solver_reduced_fixed_e_extracts_and_factors.
 Check pin_e7_solver_extracts_and_factors.

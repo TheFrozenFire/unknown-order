@@ -473,14 +473,84 @@ Qed.
     [d'], not the solver.  Not
     [residual_solver_constructs_factor_open_named]. *)
 
+Lemma ed_inv_divides_lam :
+  forall e d' lam,
+    0 < lam ->
+    (e * d') mod lam = 1 ->
+    Z.divide lam (e * d' - 1).
+Proof.
+  intros e d' lam Hlam Hinv.
+  pose proof (Z.mod_pos_bound (e * d') lam Hlam) as Hbd.
+  rewrite Hinv in Hbd.
+  apply mods_eq_iff_divides; [lia|].
+  rewrite Hinv. symmetry. apply Z.mod_1_l. lia.
+Qed.
+
+Lemma ed_inv_M_pos :
+  forall e d' lam,
+    1 < e ->
+    0 <= d' ->
+    0 < lam ->
+    (e * d') mod lam = 1 ->
+    0 < e * d' - 1.
+Proof.
+  intros e d' lam He Hd Hlam Hinv.
+  pose proof (ed_inv_divides_lam e d' lam Hlam Hinv) as [k Hk].
+  destruct (Z.lt_trichotomy k 0) as [Hkneg | [Hkz | Hkpos]].
+  - assert (e * d' - 1 < 0) by nia.
+    assert (e * d' = 0) by nia.
+    destruct (Z.eq_dec d' 0) as [Hz | Hnz]; [| nia].
+    subst d'. rewrite Z.mul_0_r, Z.mod_0_l in Hinv by lia. lia.
+  - subst k. rewrite Z.mul_0_l in Hk.
+    destruct (Z.eq_dec d' 0) as [Hz | Hnz].
+    + subst d'. rewrite Z.mul_0_r, Z.mod_0_l in Hinv by lia. lia.
+    + assert (2 <= e * d').
+      { replace 2 with (2 * 1) by lia.
+        apply Z.mul_le_mono_nonneg; lia. }
+      lia.
+  - nia.
+Qed.
+
+Lemma powm_mul_inv_semiprime :
+  forall p q e d' x,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    1 < e ->
+    0 <= d' ->
+    (e * d') mod (lambda_semiprime p q) = 1 ->
+    Z.coprime x (p * q) ->
+    powm (powm x e (p * q)) d' (p * q) = x mod (p * q) /\
+    powm (powm x d' (p * q)) e (p * q) = x mod (p * q).
+Proof.
+  intros p q e d' x Hp Hq Hneq He Hd Hinv Hx.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  pose proof (lambda_semiprime_pos p q Hp Hq) as Hlam.
+  assert (HMpos : 0 < e * d' - 1) by (apply (ed_inv_M_pos e d' (lambda_semiprime p q)); assumption).
+  assert (Hdiv : Z.divide (lambda_semiprime p q) (e * d' - 1)).
+  { apply ed_inv_divides_lam; [exact Hlam | exact Hinv]. }
+  assert (HN : 1 < p * q) by nia.
+  assert (Hround : powm x (e * d') (p * q) = x mod (p * q)).
+  { replace (e * d') with (e * d' - 1 + 1) by lia.
+    rewrite powm_add_r by lia.
+    rewrite powm_1_r by lia.
+    rewrite (annihilates_units p q x (e * d' - 1));
+      [ rewrite Z.mul_1_l, Z.mod_mod by lia; reflexivity
+      | exact Hp | exact Hq | exact Hneq
+      | exact Hx | lia | exact Hdiv ]. }
+  split.
+  - rewrite <- powm_mul_r by lia. exact Hround.
+  - rewrite <- powm_mul_r by lia. rewrite (Z.mul_comm d' e). exact Hround.
+Qed.
+
 Lemma pin_ed_inv_divides_lam :
   forall e d',
     (e * d') mod pin_lam = 1 ->
     Z.divide pin_lam (e * d' - 1).
 Proof.
   intros e d' Hinv.
-  apply mods_eq_iff_divides; [lia|].
-  rewrite Hinv. symmetry. apply Z.mod_1_l. lia.
+  apply ed_inv_divides_lam; [lia | exact Hinv].
 Qed.
 
 Lemma pin_ed_inv_M_pos :
@@ -491,17 +561,7 @@ Lemma pin_ed_inv_M_pos :
     0 < e * d' - 1.
 Proof.
   intros e d' He Hd Hinv.
-  pose proof (pin_ed_inv_divides_lam e d' Hinv) as [k Hk].
-  destruct (Z.lt_trichotomy k 0) as [Hkneg | [Hkz | Hkpos]].
-  - nia.
-  - subst k. rewrite Z.mul_0_l in Hk.
-    destruct (Z.eq_dec d' 0) as [Hz | Hnz].
-    + subst d'. lia.
-    + assert (2 <= e * d').
-      { replace 2 with (2 * 1) by lia.
-        apply Z.mul_le_mono_nonneg; lia. }
-      lia.
-  - nia.
+  apply (ed_inv_M_pos e d' pin_lam); [exact He | exact Hd | lia | exact Hinv].
 Qed.
 
 Lemma pin_powm_mul_inv :
@@ -514,20 +574,11 @@ Lemma pin_powm_mul_inv :
     powm (powm x d' pin_N) e pin_N = x mod pin_N.
 Proof.
   intros e d' x He Hd Hinv Hx.
-  assert (HMpos : 0 < e * d' - 1) by (apply pin_ed_inv_M_pos; assumption).
-  assert (Hdiv : Z.divide (lambda_semiprime pin_p pin_q) (e * d' - 1)).
-  { rewrite rsa_test_lambda. apply pin_ed_inv_divides_lam. exact Hinv. }
-  assert (Hround : powm x (e * d') pin_N = x mod pin_N).
-  { replace (e * d') with (e * d' - 1 + 1) by lia.
-    rewrite powm_add_r by lia.
-    rewrite powm_1_r by lia.
-    rewrite (annihilates_units pin_p pin_q x (e * d' - 1));
-      [ rewrite Z.mul_1_l, Z.mod_mod by lia; reflexivity
-      | apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q
-      | exact Hx | lia | exact Hdiv ]. }
-  split.
-  - rewrite <- powm_mul_r by lia. exact Hround.
-  - rewrite <- powm_mul_r by lia. rewrite (Z.mul_comm d' e). exact Hround.
+  change pin_N with (pin_p * pin_q) in Hx |- *.
+  rewrite <- rsa_test_lambda in Hinv.
+  apply (powm_mul_inv_semiprime pin_p pin_q e d' x);
+    [apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q
+     | exact He | exact Hd | exact Hinv | exact Hx].
 Qed.
 
 Theorem unique_unit_eth_root_inv :
@@ -857,11 +908,30 @@ Qed.
 
 (** ** Bézout inverse of residual [e] modulo [λ]
 
-    [gcd(e,λ)=1] produces [d'] with [e d' ≡ 1 (mod λ)].  A fixed-[e]
-    residual solver then Millers with no [d'] hypothesis.  Miller
-    uses [(e,λ)], not the solver's [x]-values.  Not
+    [gcd(e,λ)=1] produces [d'] with [e d' ≡ 1 (mod λ)], for any
+    positive [λ].  A fixed-[e] residual solver then Millers with no
+    [d'] hypothesis.  Miller uses [(e,λ)], not the solver's
+    [x]-values.  Not
     [residual_solver_constructs_factor_open_named].
-    Cross-confirmed by [cas/238]. *)
+    Cross-confirmed by [cas/238], [cas/255]. *)
+
+Theorem residual_inv_mod_lambda :
+  forall e lam,
+    1 < lam ->
+    Z.gcd e lam = 1 ->
+    exists d', 0 <= d' < lam /\ (e * d') mod lam = 1.
+Proof.
+  intros e lam Hlam Hgcd.
+  destruct (Z.gcd_bezout e lam 1 Hgcd) as [u [v Hs]].
+  exists (u mod lam).
+  split.
+  - apply Z.mod_pos_bound. lia.
+  - rewrite Z.mul_mod_idemp_r by lia.
+    rewrite (Z.mul_comm e u).
+    replace (u * e) with (1 + (- v) * lam) by lia.
+    rewrite Z.mod_add by lia.
+    apply Z.mod_1_l. lia.
+Qed.
 
 Theorem residual_inv_mod_lam :
   forall e,
@@ -869,15 +939,7 @@ Theorem residual_inv_mod_lam :
     exists d', 0 <= d' < pin_lam /\ (e * d') mod pin_lam = 1.
 Proof.
   intros e Hgcd.
-  destruct (Z.gcd_bezout e pin_lam 1 Hgcd) as [u [v Hs]].
-  exists (u mod pin_lam).
-  split.
-  - apply Z.mod_pos_bound. lia.
-  - rewrite Z.mul_mod_idemp_r by lia.
-    rewrite (Z.mul_comm e u).
-    replace (u * e) with (1 + (- v) * pin_lam) by lia.
-    rewrite Z.mod_add by lia.
-    apply Z.mod_1_l. lia.
+  apply residual_inv_mod_lambda; [lia | exact Hgcd].
 Qed.
 
 Theorem residual_solver_reduced_fixed_e_constructs_factor_from_e :
@@ -992,4 +1054,86 @@ Theorem pin_X23_poly_at_7_constructs_factor :
 Proof.
   apply (invert_all_units_poly_at_e pin_e7_monomial 7);
     [apply residual_shaped_e_7 | apply pin_X23_inverts_at_7].
+Qed.
+
+(** ** Invert-all-units polynomial at residual [e], off pin
+
+    Uniqueness plus Bézout: [P] is [y ↦ y^{d'}].  Discrete log of
+    [P(g)] at a unit of order [λ] recovers [d']; [miller_search]
+    at [e d'−1] splits.  Not
+    [residual_solver_constructs_factor_open_named]: a solver is
+    not a polynomial.  Cross-confirmed by [cas/255]. *)
+
+Theorem invert_all_units_poly_at_e_semiprime :
+  forall p q P e,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    p <> 2 ->
+    q <> 2 ->
+    residual_shaped_e e (lambda_semiprime p q) ->
+    (forall y, Z.coprime y (p * q) ->
+       powm (poly_eval P y) e (p * q) = y mod (p * q)) ->
+    exists g d' a f,
+      is_order (p * q) g (lambda_semiprime p q) /\
+      dlog_search g (poly_eval P g) (p * q) 0%nat
+        (Z.to_nat (lambda_semiprime p q)) = Some d' /\
+      0 <= d' < lambda_semiprime p q /\
+      (e * d') mod (lambda_semiprime p q) = 1 /\
+      (forall y, Z.coprime y (p * q) ->
+         poly_eval P y mod (p * q) = powm y d' (p * q)) /\
+      miller_search (p * q) (e * d' - 1) = Some (a, f) /\
+      Problem_Factor (p * q) f.
+Proof.
+  intros p q P e Hp Hq Hneq Hp2 Hq2 [He [Hodd [Hgcd Hnd]]] Hall.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 1 < p * q) by nia.
+  pose proof (lambda_odd_primes_gt_1 p q Hp Hq Hp2 Hq2) as Hlam.
+  destruct (residual_inv_mod_lambda e (lambda_semiprime p q) Hlam Hgcd)
+    as [d' [[Hdlo Hdhi] Hinv]].
+  assert (Hmap : forall y, Z.coprime y (p * q) ->
+                    poly_eval P y mod (p * q) = powm y d' (p * q)).
+  { intros y Hy.
+    assert (Hx : Z.coprime (poly_eval P y) (p * q)).
+    { apply (powm_unit_is_coprime (poly_eval P y) e (p * q));
+        [lia | lia |].
+      rewrite (Hall y Hy). rewrite Z.gcd_mod_l. exact Hy. }
+    assert (Hz : Z.coprime (powm y d' (p * q)) (p * q)).
+    { unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+      apply Z.coprime_pow_l; [lia | exact Hy]. }
+    replace (powm y d' (p * q)) with (powm y d' (p * q) mod (p * q)).
+    2: { unfold powm. rewrite Z.mod_mod by lia. reflexivity. }
+    apply (unique_unit_eth_root_coprime p q e (poly_eval P y)
+             (powm y d' (p * q)));
+      [exact Hp | exact Hq | exact Hneq | lia | exact Hgcd
+       | exact Hx | exact Hz |].
+    rewrite (Hall y Hy).
+    rewrite (proj2 (powm_mul_inv_semiprime p q e d' y
+                      Hp Hq Hneq He Hdlo Hinv Hy)).
+    reflexivity. }
+  destruct (exists_unit_order_lambda p q Hp Hq Hneq) as [g [Hgcog Hor]].
+  assert (Hdlog : dlog_search g (poly_eval P g) (p * q) 0%nat
+                    (Z.to_nat (lambda_semiprime p q)) = Some d').
+  { rewrite (dlog_search_mod g (poly_eval P g) (p * q) 0%nat
+               (Z.to_nat (lambda_semiprime p q)) ltac:(lia)).
+    rewrite (Hmap g Hgcog).
+    apply dlog_search_of_power_order; [exact HN | exact Hor | lia]. }
+  pose proof (ed_inv_M_pos e d' (lambda_semiprime p q) He Hdlo ltac:(lia) Hinv)
+    as HMpos.
+  pose proof (ed_inv_divides_lam e d' (lambda_semiprime p q) ltac:(lia) Hinv)
+    as Hdiv.
+  pose proof (lambda_odd_primes_even p q Hp Hq Hp2 Hq2) as Hevlam.
+  pose proof (divide_even_even (lambda_semiprime p q) (e * d' - 1)
+                Hevlam Hdiv) as HevM.
+  destruct (miller_search_hits_semiprime p q (e * d' - 1)
+              Hp Hq Hneq Hp2 Hq2 HMpos HevM)
+    as [a [f [Hs [_ Hf]]]].
+  exists g, d', a, f.
+  split; [exact Hor|].
+  split; [exact Hdlog|].
+  split; [lia|].
+  split; [exact Hinv|].
+  split; [exact Hmap|].
+  split; [exact Hs | exact Hf].
 Qed.

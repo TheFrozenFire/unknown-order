@@ -4277,6 +4277,99 @@ Proof.
     + lia.
 Qed.
 
+Lemma unique_exp_of_order :
+  forall N g k i j,
+    1 < N ->
+    is_order N g k ->
+    0 <= i < k ->
+    0 <= j < k ->
+    powm g i N = powm g j N ->
+    i = j.
+Proof.
+  intros N g k i j HN Hor Hi Hj Heq.
+  destruct Hor as [Hk [Hank Hmin]].
+  destruct (Z.eq_dec i j) as [E | Ne]; [exact E|].
+  assert (Z.coprime g N) as Hcop.
+  { apply (powm_unit_is_coprime g k N); [lia | lia |].
+    rewrite Hank. apply Z.gcd_1_l. }
+  destruct (Z.le_gt_cases i j) as [Hij | Hji].
+  - assert (0 < j - i) by lia.
+    assert (Hsum : powm g j N =
+                   (powm g i N * powm g (j - i) N) mod N).
+    { transitivity (powm g (i + (j - i)) N).
+      - f_equal. lia.
+      - apply powm_add_r; lia. }
+    assert (Hann : powm g (j - i) N = 1).
+    { assert (Heqmod : (powm g i N * powm g (j - i) N) mod N
+                       = powm g i N mod N).
+      { rewrite <- Hsum, <- Heq. unfold powm. rewrite Z.mod_mod by lia.
+        reflexivity. }
+      pose proof (mul_cancel_mod_unit_poly (powm g i N)
+                    (powm g (j - i) N) N HN) as Ha1.
+      assert (Z.coprime (powm g i N) N).
+      { unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+        apply Z.coprime_pow_l; [lia | exact Hcop]. }
+      specialize (Ha1 ltac:(assumption) Heqmod).
+      unfold powm in Ha1. rewrite Z.mod_mod in Ha1 by lia.
+      exact Ha1. }
+    pose proof (order_divides_annihilator N g k (j - i)
+                  HN ltac:(lia) (conj Hk (conj Hank Hmin)) Hann) as Hdiv.
+    pose proof (Z.divide_pos_le k (j - i) ltac:(lia) Hdiv).
+    lia.
+  - assert (0 < i - j) by lia.
+    assert (Hsum : powm g i N =
+                   (powm g j N * powm g (i - j) N) mod N).
+    { transitivity (powm g (j + (i - j)) N).
+      - f_equal. lia.
+      - apply powm_add_r; lia. }
+    assert (Hann : powm g (i - j) N = 1).
+    { assert (Heqmod : (powm g j N * powm g (i - j) N) mod N
+                       = powm g j N mod N).
+      { rewrite <- Hsum, Heq. unfold powm. rewrite Z.mod_mod by lia.
+        reflexivity. }
+      pose proof (mul_cancel_mod_unit_poly (powm g j N)
+                    (powm g (i - j) N) N HN) as Ha1.
+      assert (Z.coprime (powm g j N) N).
+      { unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+        apply Z.coprime_pow_l; [lia | exact Hcop]. }
+      specialize (Ha1 ltac:(assumption) Heqmod).
+      unfold powm in Ha1. rewrite Z.mod_mod in Ha1 by lia.
+      exact Ha1. }
+    pose proof (order_divides_annihilator N g k (i - j)
+                  HN ltac:(lia) (conj Hk (conj Hank Hmin)) Hann) as Hdiv.
+    pose proof (Z.divide_pos_le k (i - j) ltac:(lia) Hdiv).
+    lia.
+Qed.
+
+Lemma dlog_search_of_power_order :
+  forall g N k d,
+    1 < N ->
+    is_order N g k ->
+    0 <= d < k ->
+    dlog_search g (powm g d N) N 0%nat (Z.to_nat k) = Some d.
+Proof.
+  intros g N k d HN Hor Hd.
+  replace d with (Z.of_nat (Z.to_nat d)) at 2 by (rewrite Z2Nat.id; lia).
+  apply dlog_search_correct.
+  - lia.
+  - apply Nat2Z.inj_lt.
+    rewrite Z2Nat.id by lia.
+    rewrite Nat.add_0_l, Z2Nat.id by lia. lia.
+  - rewrite Z2Nat.id by lia.
+    unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+  - intros j Hj Hcoll.
+    unfold powm in Hcoll. rewrite Z.mod_mod in Hcoll by lia.
+    fold (powm g (Z.of_nat j) N) in Hcoll.
+    fold (powm g d N) in Hcoll.
+    apply (unique_exp_of_order N g k (Z.of_nat j) d HN Hor) in Hcoll.
+    + subst d. lia.
+    + split; [lia |].
+      destruct Hj as [_ Hjk0].
+      apply Nat2Z.inj_lt in Hjk0.
+      rewrite Z2Nat.id in Hjk0 by lia. lia.
+    + lia.
+Qed.
+
 Lemma pin_g_range : 0 <= pin_g < pin_N.
 Proof. lia. Qed.
 

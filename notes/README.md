@@ -9,6 +9,7 @@ Policy: [`THEORY.md`](../THEORY.md). Working rules: [`AGENTS.md`](../AGENTS.md).
 | [`paper-overlaps.md`](paper-overlaps.md) | Paper-check: known breaks by trigger |
 | [`hardness.md`](hardness.md) | Winning conditions and relation arrows |
 | [`srsa.md`](srsa.md) | Strong RSA residual leaf, solver cuts, live targets |
+| [`srsa-lift.md`](srsa-lift.md) | Next slices: lift extract-then-Miller headlines off pin 187 |
 | [`keygen-weaknesses.md`](keygen-weaknesses.md) | KeyGen Types A–E; no sixth type on public `N` |
 | [`transcripts.md`](transcripts.md) | Bit leakage after the key is used (oracles / faults) |
 | [`rsa-land.md`](rsa-land.md) | RSA-family constructions this tree owns |

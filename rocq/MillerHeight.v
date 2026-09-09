@@ -5,6 +5,8 @@ From Stdlib Require Import PeanoNat.
 
 Require Import RocqProofs.NumberTheory.
 Require Import RSA.
+Require Import UnknownOrder.
+Require Import Hardness.
 Require Import Miller.
 Require Import TwoPrimary.
 Require Import Order.
@@ -746,5 +748,267 @@ Proof.
               [pose proof (Z.prime_ge_2 _ (rsa_q_prime R)); lia
               | pose proof (Z.prime_ge_2 _ (rsa_p_prime R)); lia]. }
         lia.
+Qed.
+
+(** ** Miller for distinct odd primes, without an [RSAInstance]
+
+    [e = λ+1], [d = 1] is a dummy instance so [miller_walk_factors]
+    applies.  Mixed [√1] is a hitting miller base for every even
+    [M]: [g₀] is already mixed, so the first square splits.
+    [miller_search] therefore returns [Some] without hardcoding
+    base 2.  Not the extraction nameds: miller-from-[λ] still
+    ignores Solve.  Cross-confirmed by [cas/255]. *)
+
+Lemma odd_prime_pred_even :
+  forall p, Z.prime p -> p <> 2 -> Z.Even (p - 1).
+Proof.
+  intros p Hp Hp2.
+  pose proof (Z.prime_ge_2 p Hp).
+  destruct (Z.Even_or_Odd p) as [[k Hk] | [k Hk]].
+  - subst p.
+    pose proof Hp as Hpr. apply prime_alt in Hpr.
+    destruct Hpr as [_ Hn].
+    assert (1 < 2 < 2 * k) by lia.
+    specialize (Hn 2 ltac:(lia)).
+    apply rel_prime_iff_coprime in Hn.
+    unfold Z.coprime in Hn.
+    rewrite (Z.gcd_mul_diag_l 2 k) in Hn by lia.
+    lia.
+  - exists k. lia.
+Qed.
+
+Lemma lambda_odd_primes_even :
+  forall p q,
+    Z.prime p -> Z.prime q -> p <> 2 -> q <> 2 ->
+    Z.Even (lambda_semiprime p q).
+Proof.
+  intros p q Hp Hq Hp2 Hq2.
+  pose proof (odd_prime_pred_even p Hp Hp2) as [k Hk].
+  unfold lambda_semiprime.
+  assert (2 | p - 1) by (exists k; lia).
+  assert (2 | Z.lcm (p - 1) (q - 1)).
+  { apply Z.divide_trans with (p - 1); [exact H | apply Z.divide_lcm_l]. }
+  destruct H0 as [t Ht]. exists t. lia.
+Qed.
+
+Lemma divide_even_even :
+  forall lam M,
+    Z.Even lam ->
+    Z.divide lam M ->
+    Z.Even M.
+Proof.
+  intros lam M [k Hk] [t Ht].
+  subst lam. exists (t * k). lia.
+Qed.
+
+Lemma lambda_odd_primes_gt_1 :
+  forall p q,
+    Z.prime p -> Z.prime q -> p <> 2 -> q <> 2 ->
+    1 < lambda_semiprime p q.
+Proof.
+  intros p q Hp Hq Hp2 Hq2.
+  unfold lambda_semiprime.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (2 <= p - 1) by lia.
+  apply Z.lt_le_trans with (p - 1); [lia|].
+  apply Z.divide_pos_le.
+  - pose proof (lambda_semiprime_pos p q Hp Hq).
+    unfold lambda_semiprime in H2. lia.
+  - apply Z.divide_lcm_l.
+Qed.
+
+Lemma rsa_instance_of_odd_primes :
+  forall p q,
+    Z.prime p -> Z.prime q -> p <> q ->
+    p <> 2 -> q <> 2 ->
+    { R : RSAInstance | rsa_p R = p /\ rsa_q R = q }.
+Proof.
+  intros p q Hp Hq Hneq Hp2 Hq2.
+  pose proof (lambda_semiprime_pos p q Hp Hq) as Hlam.
+  pose proof (lambda_odd_primes_gt_1 p q Hp Hq Hp2 Hq2) as Hgt.
+  unshelve eexists.
+  - refine {| rsa_p := p; rsa_q := q;
+              rsa_e := lambda_semiprime p q + 1;
+              rsa_d := 1;
+              rsa_p_prime := Hp; rsa_q_prime := Hq;
+              rsa_distinct := Hneq |}.
+    + unfold Z.coprime.
+      rewrite Z.gcd_comm.
+      rewrite <- (Z.gcd_mod (lambda_semiprime p q + 1)
+                            (lambda_semiprime p q)) by lia.
+      replace (lambda_semiprime p q + 1)
+        with (1 + 1 * lambda_semiprime p q) by lia.
+      rewrite Z.mod_add, Z.mod_1_l by lia.
+      apply Z.gcd_1_l.
+    + rewrite Z.mul_1_r.
+      replace (lambda_semiprime p q + 1)
+        with (1 + 1 * lambda_semiprime p q) by lia.
+      rewrite Z.mod_add, Z.mod_1_l by lia.
+      reflexivity.
+    + lia.
+    + lia.
+  - split; reflexivity.
+Qed.
+
+Theorem miller_walk_factors_semiprime :
+  forall p q M a kp kq,
+    Z.prime p -> Z.prime q -> p <> q ->
+    p <> 2 -> q <> 2 ->
+    0 < M ->
+    Z.divide (lambda_semiprime p q) M ->
+    Z.coprime a (p * q) ->
+    two_height a (odd_part M) p kp ->
+    two_height a (odd_part M) q kq ->
+    kp <> kq ->
+    exists f,
+      miller_walk (p * q) M a = Some f /\
+      Problem_Factor (p * q) f.
+Proof.
+  intros p q M a kp kq Hp Hq Hneq Hp2 Hq2 HMpos Hdiv Hcop Hpht Hqht Hneqk.
+  destruct (rsa_instance_of_odd_primes p q Hp Hq Hneq Hp2 Hq2)
+    as [R [HRp HRq]].
+  assert (HlamR : rsa_lambda R = lambda_semiprime p q).
+  { unfold rsa_lambda. rewrite HRp, HRq. reflexivity. }
+  assert (HNR : rsa_N R = p * q).
+  { unfold rsa_N. rewrite HRp, HRq. reflexivity. }
+  destruct (miller_walk_factors R M a kp kq HMpos)
+    as [f [Hwalk [Hf1 [Hf2 Hfd]]]].
+  - rewrite HlamR. exact Hdiv.
+  - rewrite HNR. exact Hcop.
+  - rewrite HRp. exact Hp2.
+  - rewrite HRq. exact Hq2.
+  - rewrite HRp. exact Hpht.
+  - rewrite HRq. exact Hqht.
+  - exact Hneqk.
+  - exists f.
+    rewrite HNR in Hwalk, Hf2, Hfd.
+    split; [exact Hwalk|].
+    unfold Problem_Factor. split; [lia | exact Hfd].
+Qed.
+
+Lemma even_pos_val2_ge_1 :
+  forall M, 0 < M -> Z.Even M -> (1 <= val2 M)%nat.
+Proof.
+  intros M HM Hev.
+  destruct (val2 M) as [|s] eqn:Hs; [| lia].
+  pose proof (split2_of_reconstructs M ltac:(lia)) as Hr.
+  rewrite Hs, Z.pow_0_r, Z.mul_1_l in Hr.
+  pose proof (odd_part_odd_or_zero M ltac:(lia)) as [Hodd | Hz].
+  - rewrite <- Hr in Hodd.
+    pose proof (proj2 (Z.even_spec M) Hev) as He.
+    rewrite <- Z.negb_odd in He.
+    rewrite Hodd in He.
+    discriminate.
+  - rewrite <- Hr in Hz. lia.
+Qed.
+
+Lemma sqrt1_pm_mod_range :
+  forall p q,
+    Z.prime p -> Z.prime q -> p <> q ->
+    p <> 2 -> q <> 2 ->
+    let N := p * q in
+    let a := sqrt1_pm p q mod N in
+    2 <= a <= N - 2.
+Proof.
+  intros p q Hp Hq Hneq Hp2 Hq2 N a.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 1 < N) by (unfold N; nia).
+  unfold a, N.
+  pose proof (Z.mod_pos_bound (sqrt1_pm p q) (p * q) ltac:(nia)) as [Hlo Hhi].
+  pose proof (mixed_pm_not_one p q Hp Hq Hneq Hq2) as Hn1.
+  pose proof (mixed_pm_not_minus1 p q Hp Hq Hneq Hp2) as Hnm1.
+  assert (sqrt1_pm p q mod (p * q) <> 0) as Hnz.
+  { intro Hz.
+    pose proof (crt2_mod p q 1 (q - 1) Hp Hq Hneq) as [Hp1 _].
+    unfold sqrt1_pm in Hp1, Hz.
+    rewrite <- (mod_mod_of_factor (crt2 p q 1 (q - 1)) q p) in Hp1 by lia.
+    rewrite Z.mul_comm, Hz, Z.mod_0_l in Hp1 by lia.
+    rewrite Z.mod_1_l in Hp1 by lia. lia. }
+  lia.
+Qed.
+
+Theorem miller_walk_mixed_sqrt1 :
+  forall p q M,
+    Z.prime p -> Z.prime q -> p <> q ->
+    p <> 2 -> q <> 2 ->
+    0 < M ->
+    Z.Even M ->
+    let N := p * q in
+    let a := sqrt1_pm p q mod N in
+    exists f,
+      miller_walk N M a = Some f /\
+      Problem_Factor N f.
+Proof.
+  intros p q M Hp Hq Hneq Hp2 Hq2 HM Hev N a.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 1 < N) by (unfold N; nia).
+  pose proof (four_sqrt1 p q Hp Hq Hneq) as [_ [_ [Hsq _]]].
+  pose proof (odd_part_nonneg M ltac:(lia)) as Ht.
+  pose proof (odd_part_odd_or_zero M ltac:(lia)) as [Hodd | Hz].
+  2: { pose proof (odd_part_pos M HM). lia. }
+  pose proof (even_pos_val2_ge_1 M HM Hev) as Hs.
+  pose proof (sqrt1_pm_mod_range p q Hp Hq Hneq Hp2 Hq2) as Hrng.
+  unfold N, a in Hrng.
+  set (ar := sqrt1_pm p q mod (p * q)).
+  fold ar in Hrng.
+  assert (Hsqa : powm ar 2 (p * q) = 1).
+  { unfold ar. rewrite powm_mod_base by lia. exact Hsq. }
+  assert (Hg0 : powm ar (odd_part M) (p * q) = ar).
+  { transitivity (ar mod (p * q)).
+    - apply powm_odd_of_square_one;
+        [lia | exact Ht | apply (proj1 (Z.odd_spec _)); exact Hodd | exact Hsqa].
+    - apply Z.mod_small. unfold ar. apply Z.mod_pos_bound. lia. }
+  assert (Har1 : ar <> 1).
+  { unfold ar. apply mixed_pm_not_one; assumption. }
+  assert (Harn1 : ar <> p * q - 1).
+  { unfold ar. apply mixed_pm_not_minus1; assumption. }
+  assert (Hwalk : miller_walk (p * q) M ar =
+                    Some (Z.gcd (ar - 1) (p * q))).
+  { rewrite miller_walk_pos by exact HM.
+    rewrite Hg0.
+    destruct (val2 M) as [|s] eqn:Hsval; [lia|].
+    apply miller_walk_from_S_eq1; [exact Hsqa | exact Har1 | exact Harn1]. }
+  unfold N, a.
+  fold ar.
+  exists (Z.gcd (ar - 1) (p * q)).
+  split; [exact Hwalk|].
+  pose proof (miller_walk_some_factors p q M ar
+                (Z.gcd (ar - 1) (p * q)) Hp Hq Hneq Hwalk) as Hfac.
+  destruct Hfac as [H1 [H2 H3]].
+  unfold Problem_Factor. split; [lia | exact H3].
+Qed.
+
+Theorem miller_search_hits_semiprime :
+  forall p q M,
+    Z.prime p -> Z.prime q -> p <> q ->
+    p <> 2 -> q <> 2 ->
+    0 < M ->
+    Z.Even M ->
+    exists a f,
+      miller_search (p * q) M = Some (a, f) /\
+      2 <= a <= p * q - 2 /\
+      Problem_Factor (p * q) f.
+Proof.
+  intros p q M Hp Hq Hneq Hp2 Hq2 HM Hev.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 3 < p * q) by nia.
+  destruct (miller_walk_mixed_sqrt1 p q M Hp Hq Hneq Hp2 Hq2 HM Hev)
+    as [f [Hwalk _Hf]].
+  pose proof (sqrt1_pm_mod_range p q Hp Hq Hneq Hp2 Hq2) as Hrng.
+  destruct (miller_search_hits_if (p * q) M
+              (sqrt1_pm p q mod (p * q)) f Hwalk Hrng HN)
+    as [a [f' [Hs Hle]]].
+  exists a, f'.
+  split; [exact Hs|].
+  split; [destruct Hle; destruct Hrng; lia|].
+  unfold miller_search in Hs.
+  apply miller_search_from_some_walk in Hs.
+  pose proof (miller_walk_some_factors p q M a f' Hp Hq Hneq Hs) as Hfac.
+  destruct Hfac as [H1 [H2 H3]].
+  unfold Problem_Factor. split; [lia | exact H3].
 Qed.
 

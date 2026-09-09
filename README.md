@@ -194,7 +194,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 254 witnesses, `cas/01`–`254`. PARI is the gated CAS; do not add OSCAR.
+CAS is 255 witnesses, `cas/01`–`255`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -276,7 +276,10 @@ Transcripts and oracles are catalogued
 `Refuse_undirected_611_hunt` still names “wander through
 KeyGen samplers.” On this pin every reduced residual solver
 factors. Invert-all-units structure theorems hold for
-`p < q < 2p`. The `*_open_named` stay live: unused means
-unproved, on-goal, not refused. Gaps that stay named are
+`p < q < 2p`. Next slices lift the extract-then-Miller
+headlines off pin 187
+([`notes/srsa-lift.md`](notes/srsa-lift.md)). The
+`*_open_named` stay live: unused means unproved, on-goal,
+not refused. Gaps that stay named are
 `generated/NAMED_SKIPS.md`. Notes index:
 [`notes/README.md`](notes/README.md).

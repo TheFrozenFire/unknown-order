@@ -777,31 +777,31 @@ in the Rocq tree.  Do not edit by hand.
 ## `EulerQuotient.v`
 
 - L10: The Euler quotient: [a^{N+1} ≡ a^{p+q} (mod N)]
-  - L22: Reduction of [powm] along a factor
-  - L238: Bits of [s] that are functions of [N], not of the quotient
+  - L23: Reduction of [powm] along a factor
+  - L239: Bits of [s] that are functions of [N], not of the quotient
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `powm_mod_divisor` | 24 |
-| Lemma | `powm_mod_prime_factor` | 43 |
-| Lemma | `powm_multiple` | 53 |
-| Lemma | `not_coprime_prime_divides` | 69 |
-| Lemma | `fermat_powm` | 82 |
-| Lemma | `powm_Nplus1_mod_p` | 99 |
-| Lemma | `powm_s_mod_p` | 116 |
-| Lemma | `powm_Nplus1_eq_s_mod_p` | 131 |
-| Lemma | `phi_plus_sum` | 140 |
-| Theorem | `euler_quotient_units` | 144 |
-| Theorem | `euler_quotient` | 162 |
-| Lemma | `powm_reduce_to_qminus1` | 178 |
-| Lemma | `powm_Nminus1_mod_p` | 212 |
-| Theorem | `euler_quotient_pred` | 222 |
-| Lemma | `prime_2` | 240 |
-| Lemma | `odd_prime_mod2` | 247 |
-| Theorem | `odd_primes_sum_even` | 258 |
-| Lemma | `odd_prime_mod4` | 269 |
-| Theorem | `sum_mod4_of_N` | 286 |
-| Theorem | `euler_quotient_rsa` | 309 |
+| Lemma | `powm_mod_divisor` | 25 |
+| Lemma | `powm_mod_prime_factor` | 44 |
+| Lemma | `powm_multiple` | 54 |
+| Lemma | `not_coprime_prime_divides` | 70 |
+| Lemma | `fermat_powm` | 83 |
+| Lemma | `powm_Nplus1_mod_p` | 100 |
+| Lemma | `powm_s_mod_p` | 117 |
+| Lemma | `powm_Nplus1_eq_s_mod_p` | 132 |
+| Lemma | `phi_plus_sum` | 141 |
+| Theorem | `euler_quotient_units` | 145 |
+| Theorem | `euler_quotient` | 163 |
+| Lemma | `powm_reduce_to_qminus1` | 179 |
+| Lemma | `powm_Nminus1_mod_p` | 213 |
+| Theorem | `euler_quotient_pred` | 223 |
+| Lemma | `prime_2` | 241 |
+| Lemma | `odd_prime_mod2` | 248 |
+| Theorem | `odd_primes_sum_even` | 259 |
+| Lemma | `odd_prime_mod4` | 270 |
+| Theorem | `sum_mod4_of_N` | 287 |
+| Theorem | `euler_quotient_rsa` | 310 |
 
 ## `EvalPairing.v`
 
@@ -1552,7 +1552,7 @@ in the Rocq tree.  Do not edit by hand.
 - L12: Miller successive-squaring: factor [N] from a multiple of [λ(N)]
   - L106: Square-chain Miller from [(N, M, a)]
   - L147: Sequential-base search on this pin
-  - L224: Blum extra [11×19]: base 2 is a miller liar, base 3 splits
+  - L363: Blum extra [11×19]: base 2 is a miller liar, base 3 splits
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1570,53 +1570,70 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_miller_walk_liar_minus1` | 205 |
 | Theorem | `pin_miller_walk_liar_50` | 209 |
 | Lemma | `miller_search_from_miss` | 213 |
-| Theorem | `pin_209_is_blum` | 234 |
-| Theorem | `pin_209_miller_walk_base2_liar` | 238 |
-| Theorem | `pin_209_miller_walk_base3` | 242 |
-| Theorem | `pin_209_miller_search` | 250 |
-| Theorem | `pin_77_miller_walk_base2_hits` | 261 |
-| Theorem | `rsa_test_miller_split` | 266 |
-| Theorem | `rsa_test_miller_t` | 269 |
-| Theorem | `rsa_test_miller_s` | 272 |
-| Theorem | `rsa_test_base2_splits` | 276 |
+| Lemma | `miller_search_from_hits_le` | 224 |
+| Lemma | `miller_search_hits_if` | 256 |
+| Lemma | `miller_walk_from_inv` | 272 |
+| Lemma | `miller_search_from_some_walk` | 304 |
+| Lemma | `miller_walk_some_factors` | 319 |
+| Lemma | `powm_odd_of_square_one` | 342 |
+| Theorem | `pin_209_is_blum` | 373 |
+| Theorem | `pin_209_miller_walk_base2_liar` | 377 |
+| Theorem | `pin_209_miller_walk_base3` | 381 |
+| Theorem | `pin_209_miller_search` | 389 |
+| Theorem | `pin_77_miller_walk_base2_hits` | 400 |
+| Theorem | `rsa_test_miller_split` | 405 |
+| Theorem | `rsa_test_miller_t` | 408 |
+| Theorem | `rsa_test_miller_s` | 411 |
+| Theorem | `rsa_test_base2_splits` | 415 |
 
 ## `MillerHeight.v`
 
-- L14: Miller-from-[d] as 2-heights on an odd multiple of [odd_part(λ)]
-  - L190: Miller from any multiple of [λ], including [e k − 1]
-  - L348: Square-chain Miller: [miller_walk] does not take [kp]
+- L16: Miller-from-[d] as 2-heights on an odd multiple of [odd_part(λ)]
+  - L192: Miller from any multiple of [λ], including [e k − 1]
+  - L350: Square-chain Miller: [miller_walk] does not take [kp]
+  - L753: Miller for distinct odd primes, without an [RSAInstance]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `miller_t_pos` | 25 |
-| Lemma | `miller_t_odd` | 31 |
-| Lemma | `miller_t_multiple_of_lambda_odd` | 37 |
-| Lemma | `powm_one_mod_factor` | 55 |
-| Theorem | `miller_height_exists` | 68 |
-| Theorem | `miller_from_d` | 105 |
-| Theorem | `miller_from_d_q` | 126 |
-| Theorem | `rsa_test_base2_heights` | 149 |
-| Theorem | `rsa_test_miller_from_d` | 169 |
-| Theorem | `miller_multiple_annihilates` | 201 |
-| Theorem | `miller_height_exists_multiple` | 219 |
-| Theorem | `miller_from_multiple` | 257 |
-| Theorem | `miller_from_multiple_q` | 280 |
-| Lemma | `trapdoor_exponent_divides_lambda` | 303 |
-| Theorem | `miller_from_trapdoor_exponent` | 314 |
-| Theorem | `miller_from_trapdoor_exponent_q` | 331 |
-| Lemma | `miller_walk_from_S_eq1` | 359 |
-| Lemma | `miller_walk_from_S_neq1` | 377 |
-| Lemma | `pow2n_add` | 389 |
-| Lemma | `miller_walk_square_powm` | 397 |
-| Lemma | `miller_walk_powm_t0` | 411 |
-| Lemma | `miller_walk_pos` | 417 |
-| Lemma | `two_height_ge` | 430 |
-| Lemma | `powm_one_of_factors` | 449 |
-| Lemma | `miller_walk_from_at` | 491 |
-| Lemma | `miller_walk_powm_neq1_of_local` | 529 |
-| Lemma | `pq_minus_1_mod_p` | 541 |
-| Lemma | `miller_walk_from_mismatch` | 550 |
-| Theorem | `miller_walk_factors` | 602 |
+| Lemma | `miller_t_pos` | 27 |
+| Lemma | `miller_t_odd` | 33 |
+| Lemma | `miller_t_multiple_of_lambda_odd` | 39 |
+| Lemma | `powm_one_mod_factor` | 57 |
+| Theorem | `miller_height_exists` | 70 |
+| Theorem | `miller_from_d` | 107 |
+| Theorem | `miller_from_d_q` | 128 |
+| Theorem | `rsa_test_base2_heights` | 151 |
+| Theorem | `rsa_test_miller_from_d` | 171 |
+| Theorem | `miller_multiple_annihilates` | 203 |
+| Theorem | `miller_height_exists_multiple` | 221 |
+| Theorem | `miller_from_multiple` | 259 |
+| Theorem | `miller_from_multiple_q` | 282 |
+| Lemma | `trapdoor_exponent_divides_lambda` | 305 |
+| Theorem | `miller_from_trapdoor_exponent` | 316 |
+| Theorem | `miller_from_trapdoor_exponent_q` | 333 |
+| Lemma | `miller_walk_from_S_eq1` | 361 |
+| Lemma | `miller_walk_from_S_neq1` | 379 |
+| Lemma | `pow2n_add` | 391 |
+| Lemma | `miller_walk_square_powm` | 399 |
+| Lemma | `miller_walk_powm_t0` | 413 |
+| Lemma | `miller_walk_pos` | 419 |
+| Lemma | `two_height_ge` | 432 |
+| Lemma | `powm_one_of_factors` | 451 |
+| Lemma | `miller_walk_from_at` | 493 |
+| Lemma | `miller_walk_powm_neq1_of_local` | 531 |
+| Lemma | `pq_minus_1_mod_p` | 543 |
+| Lemma | `miller_walk_from_mismatch` | 552 |
+| Theorem | `miller_walk_factors` | 604 |
+| Lemma | `odd_prime_pred_even` | 762 |
+| Lemma | `lambda_odd_primes_even` | 780 |
+| Lemma | `divide_even_even` | 794 |
+| Lemma | `lambda_odd_primes_gt_1` | 804 |
+| Lemma | `rsa_instance_of_odd_primes` | 821 |
+| Theorem | `miller_walk_factors_semiprime` | 854 |
+| Lemma | `even_pos_val2_ge_1` | 890 |
+| Lemma | `sqrt1_pm_mod_range` | 906 |
+| Theorem | `miller_walk_mixed_sqrt1` | 932 |
+| Theorem | `miller_search_hits_semiprime` | 984 |
 
 ## `MillerRabin.v`
 
@@ -2702,6 +2719,7 @@ in the Rocq tree.  Do not edit by hand.
 - L22: Recover [d'] from a fixed-[e] solver's [x]-values
   - L32: Discrete log of a fixed-[e] solver at a generator
   - L96: Residual leaf at the generator extracts [d']
+  - L201: Residual leaf at a unit of order [λ], off pin 187
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2710,6 +2728,8 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_miller_walk_from_lambda_multiple` | 110 |
 | Theorem | `residual_leaf_at_g_extracts_and_factors` | 142 |
 | Theorem | `residual_solver_reduced_constructs_factor_pin` | 188 |
+| Theorem | `residual_leaf_order_lambda_extracts_and_factors` | 211 |
+| Theorem | `residual_solver_reduced_constructs_factor_semiprime` | 275 |
 
 ## `SrsaHom.v`
 
@@ -2733,29 +2753,29 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `SrsaInverter.v`
 
-- L15: Restricted RSA inverter and Strong-RSA solver shapes
-  - L28: [e]-th root of a non-unit
-  - L56: Non-unit [e]-th root carries the input gcd
-  - L138: RSA problem [y] is a residue
-  - L167: Reduced-units public-[e] inverter is the trapdoor map
-  - L217: [inverter_as_residual] writes [pin_lam]
-  - L241: Strong-RSA solver on units: [λ+1] inhabits, does not factor
+- L16: Restricted RSA inverter and Strong-RSA solver shapes
+  - L30: [e]-th root of a non-unit
+  - L58: Non-unit [e]-th root carries the input gcd
+  - L140: RSA problem [y] is a residue
+  - L169: Reduced-units public-[e] inverter is the trapdoor map
+  - L244: [inverter_as_residual] writes [pin_lam]
+  - L268: Strong-RSA solver on units: [λ+1] inhabits, does not factor
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `prime_divides_pow` | 33 |
-| Theorem | `eth_root_nonunit_factors` | 61 |
-| Theorem | `pin_eth_root_p_factors` | 129 |
-| Theorem | `rsa_problem_y_is_residue` | 140 |
-| Theorem | `pin_N_plus_1_not_rsa_problem` | 151 |
-| Theorem | `pin_N_plus_1_not_strong_RSA` | 159 |
-| Theorem | `rsa_inverter_reduced_units_is_trapdoor` | 187 |
-| Theorem | `rsa_inverter_reduced_units_constructs_factor` | 204 |
-| Theorem | `inverter_as_residual_returns_e` | 236 |
-| Theorem | `pin_lambda_strong_solver_output_is_unit` | 266 |
-| Theorem | `pin_lambda_plus_one_does_not_split` | 274 |
-| Theorem | `pin_lambda_strong_solver_not_residual` | 278 |
-| Theorem | `strong_rsa_solver_pin_e_constructs_factor` | 308 |
+| Lemma | `prime_divides_pow` | 35 |
+| Theorem | `eth_root_nonunit_factors` | 63 |
+| Theorem | `pin_eth_root_p_factors` | 131 |
+| Theorem | `rsa_problem_y_is_residue` | 142 |
+| Theorem | `pin_N_plus_1_not_rsa_problem` | 153 |
+| Theorem | `pin_N_plus_1_not_strong_RSA` | 161 |
+| Theorem | `rsa_inverter_reduced_units_is_trapdoor` | 189 |
+| Theorem | `rsa_inverter_reduced_units_constructs_factor` | 206 |
+| Theorem | `inverter_as_residual_returns_e` | 263 |
+| Theorem | `pin_lambda_strong_solver_output_is_unit` | 293 |
+| Theorem | `pin_lambda_plus_one_does_not_split` | 301 |
+| Theorem | `pin_lambda_strong_solver_not_residual` | 305 |
+| Theorem | `strong_rsa_solver_pin_e_constructs_factor` | 335 |
 
 ## `SrsaModCbrt.v`
 
@@ -3237,10 +3257,10 @@ in the Rocq tree.  Do not edit by hand.
   - L3677: Binomial [+ c K]: leftover extra, invert iff [N | c]
   - L3963: Difference of invert polys has both Fermat folds zero
   - L4107: Discrete log of [P(g)], used to read [k] off [P]
-  - L4286: Invert-all-units polynomial constructs a factor
-  - L4366: Nodiv GRA residual solver constructs a factor
-  - L4395: Invert-all-units rational constructs a factor
-  - L4537: Unit-[GInv] GRA residual solver constructs a factor
+  - L4379: Invert-all-units polynomial constructs a factor
+  - L4459: Nodiv GRA residual solver constructs a factor
+  - L4488: Invert-all-units rational constructs a factor
+  - L4630: Unit-[GInv] GRA residual solver constructs a factor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3469,19 +3489,21 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `pin_powm_already_mod` | 4197 |
 | Lemma | `pin_g_unique_exp` | 4204 |
 | Lemma | `pin_dlog_mod_lam_of_power` | 4252 |
-| Lemma | `pin_g_range` | 4280 |
-| Lemma | `pin_g_coprime` | 4283 |
-| Theorem | `pin_binomial_plus_N_kernel_cong_mod_N` | 4296 |
-| Theorem | `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 4308 |
-| Theorem | `pin_miller_from_d_factors` | 4312 |
-| Theorem | `invert_all_units_poly_constructs_factor` | 4330 |
-| Theorem | `nodiv_gra_invert_all_units_constructs_factor` | 4378 |
-| Theorem | `invert_all_units_rational_is_trapdoor_map` | 4412 |
-| Theorem | `invert_all_units_rational_constructs_factor` | 4470 |
-| Theorem | `invert_all_units_rational_over_one` | 4486 |
-| Theorem | `invert_all_units_rational_monomial_over_one` | 4508 |
-| Theorem | `invert_all_units_rational_Xd1_over_X` | 4517 |
-| Theorem | `unit_ginv_gra_invert_all_units_constructs_factor` | 4550 |
+| Lemma | `unique_exp_of_order` | 4280 |
+| Lemma | `dlog_search_of_power_order` | 4344 |
+| Lemma | `pin_g_range` | 4373 |
+| Lemma | `pin_g_coprime` | 4376 |
+| Theorem | `pin_binomial_plus_N_kernel_cong_mod_N` | 4389 |
+| Theorem | `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 4401 |
+| Theorem | `pin_miller_from_d_factors` | 4405 |
+| Theorem | `invert_all_units_poly_constructs_factor` | 4423 |
+| Theorem | `nodiv_gra_invert_all_units_constructs_factor` | 4471 |
+| Theorem | `invert_all_units_rational_is_trapdoor_map` | 4505 |
+| Theorem | `invert_all_units_rational_constructs_factor` | 4563 |
+| Theorem | `invert_all_units_rational_over_one` | 4579 |
+| Theorem | `invert_all_units_rational_monomial_over_one` | 4601 |
+| Theorem | `invert_all_units_rational_Xd1_over_X` | 4610 |
+| Theorem | `unit_ginv_gra_invert_all_units_constructs_factor` | 4643 |
 
 ## `SrsaVaryingE.v`
 
@@ -3493,9 +3515,10 @@ in the Rocq tree.  Do not edit by hand.
   - L319: Different residual [e] gives a different [x]
   - L352: Residual solver with [e ≡ pin_e (mod λ)]
   - L466: Fixed residual [e] with a known inverse
-  - L705: Unique unit [e]-th roots from [gcd(e,λ)=1]
-  - L858: Bézout inverse of residual [e] modulo [λ]
-  - L918: Invert-all-units polynomial at a residual [e]
+  - L756: Unique unit [e]-th roots from [gcd(e,λ)=1]
+  - L909: Bézout inverse of residual [e] modulo [λ]
+  - L980: Invert-all-units polynomial at a residual [e]
+  - L1059: Invert-all-units polynomial at residual [e], off pin
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3529,34 +3552,39 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_e_plus_lam_solver_e_cong` | 443 |
 | Theorem | `pin_e_plus_lam_solver_nonminimal` | 449 |
 | Theorem | `pin_e_plus_lam_solver_millers` | 456 |
-| Lemma | `pin_ed_inv_divides_lam` | 476 |
-| Lemma | `pin_ed_inv_M_pos` | 486 |
-| Lemma | `pin_powm_mul_inv` | 507 |
-| Theorem | `unique_unit_eth_root_inv` | 533 |
-| Theorem | `trapdoor_inhabits_residual_leaf_at` | 549 |
-| Theorem | `residual_shaped_e_7` | 568 |
-| Theorem | `residual_solver_reduced_fixed_e_is_trapdoor` | 578 |
-| Theorem | `residual_solver_reduced_fixed_e_constructs_factor` | 604 |
-| Theorem | `pin_e7_solver_returns_e` | 643 |
-| Theorem | `pin_e7_solver_constructs_factor` | 647 |
-| Theorem | `pin_miller_from_e7_inv` | 658 |
-| Theorem | `residual_shaped_e_11` | 667 |
-| Theorem | `pin_inv11_mod_lam` | 677 |
-| Theorem | `pin_miller_from_e11_inv` | 681 |
-| Theorem | `residual_solver_reduced_pin_e_via_fixed_e` | 692 |
-| Lemma | `powm_mul_l_mod` | 716 |
-| Lemma | `unit_inverse_semiprime` | 726 |
-| Lemma | `pin_unit_inverse` | 750 |
-| Theorem | `unique_unit_eth_root_coprime` | 760 |
-| Theorem | `unique_unit_eth_root_from_coprime_e` | 820 |
-| Theorem | `pin_e5_fifth_roots_not_unique` | 837 |
-| Theorem | `pin_unique_unit_cube_from_coprime` | 846 |
-| Theorem | `residual_inv_mod_lam` | 866 |
-| Theorem | `residual_solver_reduced_fixed_e_constructs_factor_from_e` | 883 |
-| Theorem | `pin_e7_solver_constructs_factor_from_e` | 904 |
-| Theorem | `invert_all_units_poly_at_e` | 926 |
-| Theorem | `pin_X23_inverts_at_7` | 971 |
-| Theorem | `pin_X23_poly_at_7_constructs_factor` | 985 |
+| Lemma | `ed_inv_divides_lam` | 476 |
+| Lemma | `ed_inv_M_pos` | 489 |
+| Lemma | `powm_mul_inv_semiprime` | 514 |
+| Lemma | `pin_ed_inv_divides_lam` | 547 |
+| Lemma | `pin_ed_inv_M_pos` | 556 |
+| Lemma | `pin_powm_mul_inv` | 567 |
+| Theorem | `unique_unit_eth_root_inv` | 584 |
+| Theorem | `trapdoor_inhabits_residual_leaf_at` | 600 |
+| Theorem | `residual_shaped_e_7` | 619 |
+| Theorem | `residual_solver_reduced_fixed_e_is_trapdoor` | 629 |
+| Theorem | `residual_solver_reduced_fixed_e_constructs_factor` | 655 |
+| Theorem | `pin_e7_solver_returns_e` | 694 |
+| Theorem | `pin_e7_solver_constructs_factor` | 698 |
+| Theorem | `pin_miller_from_e7_inv` | 709 |
+| Theorem | `residual_shaped_e_11` | 718 |
+| Theorem | `pin_inv11_mod_lam` | 728 |
+| Theorem | `pin_miller_from_e11_inv` | 732 |
+| Theorem | `residual_solver_reduced_pin_e_via_fixed_e` | 743 |
+| Lemma | `powm_mul_l_mod` | 767 |
+| Lemma | `unit_inverse_semiprime` | 777 |
+| Lemma | `pin_unit_inverse` | 801 |
+| Theorem | `unique_unit_eth_root_coprime` | 811 |
+| Theorem | `unique_unit_eth_root_from_coprime_e` | 871 |
+| Theorem | `pin_e5_fifth_roots_not_unique` | 888 |
+| Theorem | `pin_unique_unit_cube_from_coprime` | 897 |
+| Theorem | `residual_inv_mod_lambda` | 918 |
+| Theorem | `residual_inv_mod_lam` | 936 |
+| Theorem | `residual_solver_reduced_fixed_e_constructs_factor_from_e` | 945 |
+| Theorem | `pin_e7_solver_constructs_factor_from_e` | 966 |
+| Theorem | `invert_all_units_poly_at_e` | 988 |
+| Theorem | `pin_X23_inverts_at_7` | 1033 |
+| Theorem | `pin_X23_poly_at_7_constructs_factor` | 1047 |
+| Theorem | `invert_all_units_poly_at_e_semiprime` | 1067 |
 
 ## `SrsaWriteE.v`
 
@@ -4047,4 +4075,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2863 theorems/lemmas/corollaries/examples across 124 files._
+_2888 theorems/lemmas/corollaries/examples across 124 files._

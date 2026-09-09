@@ -1,8 +1,8 @@
 # Print Assumptions snapshot — UnknownOrder
 
-**Headline:** all 2863 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
+**Headline:** all 2888 named results are **Closed under the global context** — **0 load-bearing axioms** across the whole corpus.
 
-Captured for 2863 results across 124 files.
+Captured for 2888 results across 124 files.
 
 Counts:
 
@@ -668,26 +668,26 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `powm_mod_divisor` | 24 | 0 | 0 | OK |
-| `powm_mod_prime_factor` | 43 | 0 | 0 | OK |
-| `powm_multiple` | 53 | 0 | 0 | OK |
-| `not_coprime_prime_divides` | 69 | 0 | 0 | OK |
-| `fermat_powm` | 82 | 0 | 0 | OK |
-| `powm_Nplus1_mod_p` | 99 | 0 | 0 | OK |
-| `powm_s_mod_p` | 116 | 0 | 0 | OK |
-| `powm_Nplus1_eq_s_mod_p` | 131 | 0 | 0 | OK |
-| `phi_plus_sum` | 140 | 0 | 0 | OK |
-| `euler_quotient_units` | 144 | 0 | 0 | OK |
-| `euler_quotient` | 162 | 0 | 0 | OK |
-| `powm_reduce_to_qminus1` | 178 | 0 | 0 | OK |
-| `powm_Nminus1_mod_p` | 212 | 0 | 0 | OK |
-| `euler_quotient_pred` | 222 | 0 | 0 | OK |
-| `prime_2` | 240 | 0 | 0 | OK |
-| `odd_prime_mod2` | 247 | 0 | 0 | OK |
-| `odd_primes_sum_even` | 258 | 0 | 0 | OK |
-| `odd_prime_mod4` | 269 | 0 | 0 | OK |
-| `sum_mod4_of_N` | 286 | 0 | 0 | OK |
-| `euler_quotient_rsa` | 309 | 0 | 0 | OK |
+| `powm_mod_divisor` | 25 | 0 | 0 | OK |
+| `powm_mod_prime_factor` | 44 | 0 | 0 | OK |
+| `powm_multiple` | 54 | 0 | 0 | OK |
+| `not_coprime_prime_divides` | 70 | 0 | 0 | OK |
+| `fermat_powm` | 83 | 0 | 0 | OK |
+| `powm_Nplus1_mod_p` | 100 | 0 | 0 | OK |
+| `powm_s_mod_p` | 117 | 0 | 0 | OK |
+| `powm_Nplus1_eq_s_mod_p` | 132 | 0 | 0 | OK |
+| `phi_plus_sum` | 141 | 0 | 0 | OK |
+| `euler_quotient_units` | 145 | 0 | 0 | OK |
+| `euler_quotient` | 163 | 0 | 0 | OK |
+| `powm_reduce_to_qminus1` | 179 | 0 | 0 | OK |
+| `powm_Nminus1_mod_p` | 213 | 0 | 0 | OK |
+| `euler_quotient_pred` | 223 | 0 | 0 | OK |
+| `prime_2` | 241 | 0 | 0 | OK |
+| `odd_prime_mod2` | 248 | 0 | 0 | OK |
+| `odd_primes_sum_even` | 259 | 0 | 0 | OK |
+| `odd_prime_mod4` | 270 | 0 | 0 | OK |
+| `sum_mod4_of_N` | 287 | 0 | 0 | OK |
+| `euler_quotient_rsa` | 310 | 0 | 0 | OK |
 
 ## EvalPairing.v
 
@@ -1351,49 +1351,65 @@ Counts:
 | `pin_miller_walk_liar_minus1` | 205 | 0 | 0 | OK |
 | `pin_miller_walk_liar_50` | 209 | 0 | 0 | OK |
 | `miller_search_from_miss` | 213 | 0 | 0 | OK |
-| `pin_209_is_blum` | 234 | 0 | 0 | OK |
-| `pin_209_miller_walk_base2_liar` | 238 | 0 | 0 | OK |
-| `pin_209_miller_walk_base3` | 242 | 0 | 0 | OK |
-| `pin_209_miller_search` | 250 | 0 | 0 | OK |
-| `pin_77_miller_walk_base2_hits` | 261 | 0 | 0 | OK |
-| `rsa_test_miller_split` | 266 | 0 | 0 | OK |
-| `rsa_test_miller_t` | 269 | 0 | 0 | OK |
-| `rsa_test_miller_s` | 272 | 0 | 0 | OK |
-| `rsa_test_base2_splits` | 276 | 0 | 0 | OK |
+| `miller_search_from_hits_le` | 224 | 0 | 0 | OK |
+| `miller_search_hits_if` | 256 | 0 | 0 | OK |
+| `miller_walk_from_inv` | 272 | 0 | 0 | OK |
+| `miller_search_from_some_walk` | 304 | 0 | 0 | OK |
+| `miller_walk_some_factors` | 319 | 0 | 0 | OK |
+| `powm_odd_of_square_one` | 342 | 0 | 0 | OK |
+| `pin_209_is_blum` | 373 | 0 | 0 | OK |
+| `pin_209_miller_walk_base2_liar` | 377 | 0 | 0 | OK |
+| `pin_209_miller_walk_base3` | 381 | 0 | 0 | OK |
+| `pin_209_miller_search` | 389 | 0 | 0 | OK |
+| `pin_77_miller_walk_base2_hits` | 400 | 0 | 0 | OK |
+| `rsa_test_miller_split` | 405 | 0 | 0 | OK |
+| `rsa_test_miller_t` | 408 | 0 | 0 | OK |
+| `rsa_test_miller_s` | 411 | 0 | 0 | OK |
+| `rsa_test_base2_splits` | 415 | 0 | 0 | OK |
 
 ## MillerHeight.v
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `miller_t_pos` | 25 | 0 | 0 | OK |
-| `miller_t_odd` | 31 | 0 | 0 | OK |
-| `miller_t_multiple_of_lambda_odd` | 37 | 0 | 0 | OK |
-| `powm_one_mod_factor` | 55 | 0 | 0 | OK |
-| `miller_height_exists` | 68 | 0 | 0 | OK |
-| `miller_from_d` | 105 | 0 | 0 | OK |
-| `miller_from_d_q` | 126 | 0 | 0 | OK |
-| `rsa_test_base2_heights` | 149 | 0 | 0 | OK |
-| `rsa_test_miller_from_d` | 169 | 0 | 0 | OK |
-| `miller_multiple_annihilates` | 201 | 0 | 0 | OK |
-| `miller_height_exists_multiple` | 219 | 0 | 0 | OK |
-| `miller_from_multiple` | 257 | 0 | 0 | OK |
-| `miller_from_multiple_q` | 280 | 0 | 0 | OK |
-| `trapdoor_exponent_divides_lambda` | 303 | 0 | 0 | OK |
-| `miller_from_trapdoor_exponent` | 314 | 0 | 0 | OK |
-| `miller_from_trapdoor_exponent_q` | 331 | 0 | 0 | OK |
-| `miller_walk_from_S_eq1` | 359 | 0 | 0 | OK |
-| `miller_walk_from_S_neq1` | 377 | 0 | 0 | OK |
-| `pow2n_add` | 389 | 0 | 0 | OK |
-| `miller_walk_square_powm` | 397 | 0 | 0 | OK |
-| `miller_walk_powm_t0` | 411 | 0 | 0 | OK |
-| `miller_walk_pos` | 417 | 0 | 0 | OK |
-| `two_height_ge` | 430 | 0 | 0 | OK |
-| `powm_one_of_factors` | 449 | 0 | 0 | OK |
-| `miller_walk_from_at` | 491 | 0 | 0 | OK |
-| `miller_walk_powm_neq1_of_local` | 529 | 0 | 0 | OK |
-| `pq_minus_1_mod_p` | 541 | 0 | 0 | OK |
-| `miller_walk_from_mismatch` | 550 | 0 | 0 | OK |
-| `miller_walk_factors` | 602 | 0 | 0 | OK |
+| `miller_t_pos` | 27 | 0 | 0 | OK |
+| `miller_t_odd` | 33 | 0 | 0 | OK |
+| `miller_t_multiple_of_lambda_odd` | 39 | 0 | 0 | OK |
+| `powm_one_mod_factor` | 57 | 0 | 0 | OK |
+| `miller_height_exists` | 70 | 0 | 0 | OK |
+| `miller_from_d` | 107 | 0 | 0 | OK |
+| `miller_from_d_q` | 128 | 0 | 0 | OK |
+| `rsa_test_base2_heights` | 151 | 0 | 0 | OK |
+| `rsa_test_miller_from_d` | 171 | 0 | 0 | OK |
+| `miller_multiple_annihilates` | 203 | 0 | 0 | OK |
+| `miller_height_exists_multiple` | 221 | 0 | 0 | OK |
+| `miller_from_multiple` | 259 | 0 | 0 | OK |
+| `miller_from_multiple_q` | 282 | 0 | 0 | OK |
+| `trapdoor_exponent_divides_lambda` | 305 | 0 | 0 | OK |
+| `miller_from_trapdoor_exponent` | 316 | 0 | 0 | OK |
+| `miller_from_trapdoor_exponent_q` | 333 | 0 | 0 | OK |
+| `miller_walk_from_S_eq1` | 361 | 0 | 0 | OK |
+| `miller_walk_from_S_neq1` | 379 | 0 | 0 | OK |
+| `pow2n_add` | 391 | 0 | 0 | OK |
+| `miller_walk_square_powm` | 399 | 0 | 0 | OK |
+| `miller_walk_powm_t0` | 413 | 0 | 0 | OK |
+| `miller_walk_pos` | 419 | 0 | 0 | OK |
+| `two_height_ge` | 432 | 0 | 0 | OK |
+| `powm_one_of_factors` | 451 | 0 | 0 | OK |
+| `miller_walk_from_at` | 493 | 0 | 0 | OK |
+| `miller_walk_powm_neq1_of_local` | 531 | 0 | 0 | OK |
+| `pq_minus_1_mod_p` | 543 | 0 | 0 | OK |
+| `miller_walk_from_mismatch` | 552 | 0 | 0 | OK |
+| `miller_walk_factors` | 604 | 0 | 0 | OK |
+| `odd_prime_pred_even` | 762 | 0 | 0 | OK |
+| `lambda_odd_primes_even` | 780 | 0 | 0 | OK |
+| `divide_even_even` | 794 | 0 | 0 | OK |
+| `lambda_odd_primes_gt_1` | 804 | 0 | 0 | OK |
+| `rsa_instance_of_odd_primes` | 821 | 0 | 0 | OK |
+| `miller_walk_factors_semiprime` | 854 | 0 | 0 | OK |
+| `even_pos_val2_ge_1` | 890 | 0 | 0 | OK |
+| `sqrt1_pm_mod_range` | 906 | 0 | 0 | OK |
+| `miller_walk_mixed_sqrt1` | 932 | 0 | 0 | OK |
+| `miller_search_hits_semiprime` | 984 | 0 | 0 | OK |
 
 ## MillerRabin.v
 
@@ -2321,6 +2337,8 @@ Counts:
 | `pin_miller_walk_from_lambda_multiple` | 110 | 0 | 0 | OK |
 | `residual_leaf_at_g_extracts_and_factors` | 142 | 0 | 0 | OK |
 | `residual_solver_reduced_constructs_factor_pin` | 188 | 0 | 0 | OK |
+| `residual_leaf_order_lambda_extracts_and_factors` | 211 | 0 | 0 | OK |
+| `residual_solver_reduced_constructs_factor_semiprime` | 275 | 0 | 0 | OK |
 
 ## SrsaHom.v
 
@@ -2341,19 +2359,19 @@ Counts:
 
 | Theorem | Line | total | load-bearing | status |
 |---|---:|---:|---:|---|
-| `prime_divides_pow` | 33 | 0 | 0 | OK |
-| `eth_root_nonunit_factors` | 61 | 0 | 0 | OK |
-| `pin_eth_root_p_factors` | 129 | 0 | 0 | OK |
-| `rsa_problem_y_is_residue` | 140 | 0 | 0 | OK |
-| `pin_N_plus_1_not_rsa_problem` | 151 | 0 | 0 | OK |
-| `pin_N_plus_1_not_strong_RSA` | 159 | 0 | 0 | OK |
-| `rsa_inverter_reduced_units_is_trapdoor` | 187 | 0 | 0 | OK |
-| `rsa_inverter_reduced_units_constructs_factor` | 204 | 0 | 0 | OK |
-| `inverter_as_residual_returns_e` | 236 | 0 | 0 | OK |
-| `pin_lambda_strong_solver_output_is_unit` | 266 | 0 | 0 | OK |
-| `pin_lambda_plus_one_does_not_split` | 274 | 0 | 0 | OK |
-| `pin_lambda_strong_solver_not_residual` | 278 | 0 | 0 | OK |
-| `strong_rsa_solver_pin_e_constructs_factor` | 308 | 0 | 0 | OK |
+| `prime_divides_pow` | 35 | 0 | 0 | OK |
+| `eth_root_nonunit_factors` | 63 | 0 | 0 | OK |
+| `pin_eth_root_p_factors` | 131 | 0 | 0 | OK |
+| `rsa_problem_y_is_residue` | 142 | 0 | 0 | OK |
+| `pin_N_plus_1_not_rsa_problem` | 153 | 0 | 0 | OK |
+| `pin_N_plus_1_not_strong_RSA` | 161 | 0 | 0 | OK |
+| `rsa_inverter_reduced_units_is_trapdoor` | 189 | 0 | 0 | OK |
+| `rsa_inverter_reduced_units_constructs_factor` | 206 | 0 | 0 | OK |
+| `inverter_as_residual_returns_e` | 263 | 0 | 0 | OK |
+| `pin_lambda_strong_solver_output_is_unit` | 293 | 0 | 0 | OK |
+| `pin_lambda_plus_one_does_not_split` | 301 | 0 | 0 | OK |
+| `pin_lambda_strong_solver_not_residual` | 305 | 0 | 0 | OK |
+| `strong_rsa_solver_pin_e_constructs_factor` | 335 | 0 | 0 | OK |
 
 ## SrsaModCbrt.v
 
@@ -2997,19 +3015,21 @@ Counts:
 | `pin_powm_already_mod` | 4197 | 0 | 0 | OK |
 | `pin_g_unique_exp` | 4204 | 0 | 0 | OK |
 | `pin_dlog_mod_lam_of_power` | 4252 | 0 | 0 | OK |
-| `pin_g_range` | 4280 | 0 | 0 | OK |
-| `pin_g_coprime` | 4283 | 0 | 0 | OK |
-| `pin_binomial_plus_N_kernel_cong_mod_N` | 4296 | 0 | 0 | OK |
-| `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 4308 | 0 | 0 | OK |
-| `pin_miller_from_d_factors` | 4312 | 0 | 0 | OK |
-| `invert_all_units_poly_constructs_factor` | 4330 | 0 | 0 | OK |
-| `nodiv_gra_invert_all_units_constructs_factor` | 4378 | 0 | 0 | OK |
-| `invert_all_units_rational_is_trapdoor_map` | 4412 | 0 | 0 | OK |
-| `invert_all_units_rational_constructs_factor` | 4470 | 0 | 0 | OK |
-| `invert_all_units_rational_over_one` | 4486 | 0 | 0 | OK |
-| `invert_all_units_rational_monomial_over_one` | 4508 | 0 | 0 | OK |
-| `invert_all_units_rational_Xd1_over_X` | 4517 | 0 | 0 | OK |
-| `unit_ginv_gra_invert_all_units_constructs_factor` | 4550 | 0 | 0 | OK |
+| `unique_exp_of_order` | 4280 | 0 | 0 | OK |
+| `dlog_search_of_power_order` | 4344 | 0 | 0 | OK |
+| `pin_g_range` | 4373 | 0 | 0 | OK |
+| `pin_g_coprime` | 4376 | 0 | 0 | OK |
+| `pin_binomial_plus_N_kernel_cong_mod_N` | 4389 | 0 | 0 | OK |
+| `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 4401 | 0 | 0 | OK |
+| `pin_miller_from_d_factors` | 4405 | 0 | 0 | OK |
+| `invert_all_units_poly_constructs_factor` | 4423 | 0 | 0 | OK |
+| `nodiv_gra_invert_all_units_constructs_factor` | 4471 | 0 | 0 | OK |
+| `invert_all_units_rational_is_trapdoor_map` | 4505 | 0 | 0 | OK |
+| `invert_all_units_rational_constructs_factor` | 4563 | 0 | 0 | OK |
+| `invert_all_units_rational_over_one` | 4579 | 0 | 0 | OK |
+| `invert_all_units_rational_monomial_over_one` | 4601 | 0 | 0 | OK |
+| `invert_all_units_rational_Xd1_over_X` | 4610 | 0 | 0 | OK |
+| `unit_ginv_gra_invert_all_units_constructs_factor` | 4643 | 0 | 0 | OK |
 
 ## SrsaVaryingE.v
 
@@ -3045,34 +3065,39 @@ Counts:
 | `pin_e_plus_lam_solver_e_cong` | 443 | 0 | 0 | OK |
 | `pin_e_plus_lam_solver_nonminimal` | 449 | 0 | 0 | OK |
 | `pin_e_plus_lam_solver_millers` | 456 | 0 | 0 | OK |
-| `pin_ed_inv_divides_lam` | 476 | 0 | 0 | OK |
-| `pin_ed_inv_M_pos` | 486 | 0 | 0 | OK |
-| `pin_powm_mul_inv` | 507 | 0 | 0 | OK |
-| `unique_unit_eth_root_inv` | 533 | 0 | 0 | OK |
-| `trapdoor_inhabits_residual_leaf_at` | 549 | 0 | 0 | OK |
-| `residual_shaped_e_7` | 568 | 0 | 0 | OK |
-| `residual_solver_reduced_fixed_e_is_trapdoor` | 578 | 0 | 0 | OK |
-| `residual_solver_reduced_fixed_e_constructs_factor` | 604 | 0 | 0 | OK |
-| `pin_e7_solver_returns_e` | 643 | 0 | 0 | OK |
-| `pin_e7_solver_constructs_factor` | 647 | 0 | 0 | OK |
-| `pin_miller_from_e7_inv` | 658 | 0 | 0 | OK |
-| `residual_shaped_e_11` | 667 | 0 | 0 | OK |
-| `pin_inv11_mod_lam` | 677 | 0 | 0 | OK |
-| `pin_miller_from_e11_inv` | 681 | 0 | 0 | OK |
-| `residual_solver_reduced_pin_e_via_fixed_e` | 692 | 0 | 0 | OK |
-| `powm_mul_l_mod` | 716 | 0 | 0 | OK |
-| `unit_inverse_semiprime` | 726 | 0 | 0 | OK |
-| `pin_unit_inverse` | 750 | 0 | 0 | OK |
-| `unique_unit_eth_root_coprime` | 760 | 0 | 0 | OK |
-| `unique_unit_eth_root_from_coprime_e` | 820 | 0 | 0 | OK |
-| `pin_e5_fifth_roots_not_unique` | 837 | 0 | 0 | OK |
-| `pin_unique_unit_cube_from_coprime` | 846 | 0 | 0 | OK |
-| `residual_inv_mod_lam` | 866 | 0 | 0 | OK |
-| `residual_solver_reduced_fixed_e_constructs_factor_from_e` | 883 | 0 | 0 | OK |
-| `pin_e7_solver_constructs_factor_from_e` | 904 | 0 | 0 | OK |
-| `invert_all_units_poly_at_e` | 926 | 0 | 0 | OK |
-| `pin_X23_inverts_at_7` | 971 | 0 | 0 | OK |
-| `pin_X23_poly_at_7_constructs_factor` | 985 | 0 | 0 | OK |
+| `ed_inv_divides_lam` | 476 | 0 | 0 | OK |
+| `ed_inv_M_pos` | 489 | 0 | 0 | OK |
+| `powm_mul_inv_semiprime` | 514 | 0 | 0 | OK |
+| `pin_ed_inv_divides_lam` | 547 | 0 | 0 | OK |
+| `pin_ed_inv_M_pos` | 556 | 0 | 0 | OK |
+| `pin_powm_mul_inv` | 567 | 0 | 0 | OK |
+| `unique_unit_eth_root_inv` | 584 | 0 | 0 | OK |
+| `trapdoor_inhabits_residual_leaf_at` | 600 | 0 | 0 | OK |
+| `residual_shaped_e_7` | 619 | 0 | 0 | OK |
+| `residual_solver_reduced_fixed_e_is_trapdoor` | 629 | 0 | 0 | OK |
+| `residual_solver_reduced_fixed_e_constructs_factor` | 655 | 0 | 0 | OK |
+| `pin_e7_solver_returns_e` | 694 | 0 | 0 | OK |
+| `pin_e7_solver_constructs_factor` | 698 | 0 | 0 | OK |
+| `pin_miller_from_e7_inv` | 709 | 0 | 0 | OK |
+| `residual_shaped_e_11` | 718 | 0 | 0 | OK |
+| `pin_inv11_mod_lam` | 728 | 0 | 0 | OK |
+| `pin_miller_from_e11_inv` | 732 | 0 | 0 | OK |
+| `residual_solver_reduced_pin_e_via_fixed_e` | 743 | 0 | 0 | OK |
+| `powm_mul_l_mod` | 767 | 0 | 0 | OK |
+| `unit_inverse_semiprime` | 777 | 0 | 0 | OK |
+| `pin_unit_inverse` | 801 | 0 | 0 | OK |
+| `unique_unit_eth_root_coprime` | 811 | 0 | 0 | OK |
+| `unique_unit_eth_root_from_coprime_e` | 871 | 0 | 0 | OK |
+| `pin_e5_fifth_roots_not_unique` | 888 | 0 | 0 | OK |
+| `pin_unique_unit_cube_from_coprime` | 897 | 0 | 0 | OK |
+| `residual_inv_mod_lambda` | 918 | 0 | 0 | OK |
+| `residual_inv_mod_lam` | 936 | 0 | 0 | OK |
+| `residual_solver_reduced_fixed_e_constructs_factor_from_e` | 945 | 0 | 0 | OK |
+| `pin_e7_solver_constructs_factor_from_e` | 966 | 0 | 0 | OK |
+| `invert_all_units_poly_at_e` | 988 | 0 | 0 | OK |
+| `pin_X23_inverts_at_7` | 1033 | 0 | 0 | OK |
+| `pin_X23_poly_at_7_constructs_factor` | 1047 | 0 | 0 | OK |
+| `invert_all_units_poly_at_e_semiprime` | 1067 | 0 | 0 | OK |
 
 ## SrsaWriteE.v
 

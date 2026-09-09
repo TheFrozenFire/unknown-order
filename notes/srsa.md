@@ -21,7 +21,9 @@ folds, leftover kernel, and the sharp degree window are theorems
 for distinct odd primes `p < q < 2p`. Unique unit `e`-th roots are
 general (`unique_unit_eth_root_coprime`). None of that inhabits
 the extraction nameds: those have no `λ` in the type, or quantify
-over every `N`.
+over every `N`. S0–S4 of [`srsa-lift.md`](srsa-lift.md) are done: Bézout, leaf-at-`g`,
+miller search, poly Miller, and inverter honesty, all off pin 187.
+None of them inhabits the extraction nameds.
 
 A **fate** is one of: splits `N`; peels (already-named easy witness);
 does not inhabit; leftover (inverts, does not factor); other sentence
@@ -570,11 +572,15 @@ advice `N/17`: `PreprocessGRA.v`.
 | Fermat folds off pin 187: `fold_p ≡ X^{d_p}`, `fold_q ≡ X^{d_q}` | `invert_all_units_folds_local_monomials` / `invert_all_units_both_folds_are_local_monomials` | `SrsaRootPoly.v` | `186`, `254` |
 | leftover kernel off pin 187: monic deg `q−2` vanishing on `𝔽_q* \ {p}` is `K`; span is 1-dimensional | `leftover_monic_is_geo_kernel` / `leftover_kernel_span_mod_q` | `SrsaRootPoly.v` | `192`, `193`, `254` |
 | binomial `+ c K` inverts every unit iff `N \| c` | `invert_all_units_plus_c_kernel_iff` / `poly_eval_plus_N_mul_inverts` | `SrsaRootPoly.v` | `197`, `254` |
-| Bézout inverse of residual `e` mod `λ`; fixed-`e` solver without a `d'` hyp | `residual_inv_mod_lam` / `residual_solver_reduced_fixed_e_constructs_factor_from_e` | `SrsaVaryingE.v` | `238` |
+| Bézout inverse of residual `e` mod `λ` for any `1 < λ`; pin 187 is a wrapper | `residual_inv_mod_lambda` / `residual_inv_mod_lam` | `SrsaVaryingE.v` | `238`, `255` |
 | invert-all-units poly at residual `e=7` is `y ↦ y^{23}` | `invert_all_units_poly_at_e` / `pin_X23_poly_at_7_constructs_factor` | `SrsaVaryingE.v` | `239` |
 | dlog of `Solve(g)` recovers `d'`; Miller from the recovered inverse | `residual_solver_reduced_fixed_e_extracts_and_factors` / `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | `240` |
 | residual leaf at generator `g` extracts `d'` and Millers; every reduced residual solver on this pin factors | `residual_leaf_at_g_extracts_and_factors` / `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | `241` |
 | miller step of that leaf is `miller_walk` at `e d'−1`, not `2^{t 2^{kp}}` | `pin_miller_walk_from_lambda_multiple` / `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | `248` |
+| residual leaf at a unit of order `λ` extracts `d'` and `miller_search`es, for distinct odd primes | `residual_leaf_order_lambda_extracts_and_factors` / `residual_solver_reduced_constructs_factor_semiprime` | `SrsaExtractD.v` | `255` |
+| `miller_search` hits because mixed `√1` exist, for even `M` | `miller_walk_mixed_sqrt1` / `miller_search_hits_semiprime` | `MillerHeight.v` | `255` |
+| invert-all-units poly at residual `e` off pin: trapdoor `y ↦ y^{d'}`, dlog of `P(g)`, search splits | `invert_all_units_poly_at_e_semiprime` | `SrsaVaryingE.v` | `255` |
+| reduced-units inverter Millers from dlog of `Inv(g)`, not from a hyp `pin_d` | `rsa_inverter_reduced_units_constructs_factor` | `SrsaInverter.v` | `255` |
 | pin inverter uses `pin_lam` via residual; extraction named has no `λ`; Rabin `e=2` is separate | `rsa_inverter_reduced_units_constructs_factor_pin` / `inverter_as_residual` | `SrsaHom.v` | |
 | `λ+1` inhabits Strong RSA without gcd-split; annihilator-`e` Millers; do not prove `~ forall` | `pin_lambda_strong_solver` / `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaInverter.v`, `SrsaHom.v` | `225`, `243` |
 | trapdoor is a hom on units; mixed cube/7th-root table is not | `pin_trapdoor_solver_x_homomorphic` / `residual_x_homomorphic_constructs_factor` | `SrsaHom.v` | `242` |

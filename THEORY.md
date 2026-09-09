@@ -10,6 +10,7 @@ This file is **not** the theory.  The theory is the Rocq tree.
 | Paper-check overlaps | [`notes/paper-overlaps.md`](notes/paper-overlaps.md) |
 | Relation table | [`notes/hardness.md`](notes/hardness.md) |
 | Strong RSA residual / solver cuts | [`notes/srsa.md`](notes/srsa.md) |
+| Strong RSA next slices (off pin) | [`notes/srsa-lift.md`](notes/srsa-lift.md) |
 | KeyGen Types A–E | [`notes/keygen-weaknesses.md`](notes/keygen-weaknesses.md) |
 | Transcripts / oracles | [`notes/transcripts.md`](notes/transcripts.md) |
 | RSA-land catalog | [`notes/rsa-land.md`](notes/rsa-land.md) |
