@@ -153,10 +153,11 @@ in the Rocq tree.  Do not edit by hand.
   - L166: SL2 action and proper equivalence
   - L335: Represented values: a reduced form with [a > 1] is not principal
   - L419: Dirichlet composition
-  - L845: Ambiguous forms from a divisor of [Δ]
-  - L896: Catalog: [Δ ∈ {−23, −47, −87, −403, −455}]
-  - L1050: Remaining two-form branch, pin
-  - L1082: Catalog LowOrder on [Cl(Δ)]
+  - L846: Assoc [{id, f, f}]
+  - L865: Ambiguous forms from a divisor of [Δ]
+  - L916: Catalog: [Δ ∈ {−23, −47, −87, −403, −455}]
+  - L1070: Remaining two-form branch, pin
+  - L1102: Catalog LowOrder on [Cl(Δ)]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -220,48 +221,49 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `four_divides_b2_minus_disc` | 770 |
 | Theorem | `compose_self_of_disc` | 777 |
 | Theorem | `compose_self_ambiguous_equiv_id` | 799 |
-| Theorem | `compose_assoc_id_inv` | 831 |
-| Lemma | `amb_from_div_ambiguous` | 853 |
-| Lemma | `amb_from_div_disc_mod0` | 861 |
-| Lemma | `amb_from_div_disc_mod1` | 879 |
-| Lemma | `iq_neg23` | 919 |
-| Lemma | `iq_neg47` | 922 |
-| Lemma | `iq_neg87` | 925 |
-| Lemma | `iq_neg403` | 928 |
-| Lemma | `iq_neg455` | 931 |
-| Theorem | `form_neg87_amb_of_disc` | 934 |
-| Theorem | `form_neg403_amb_of_disc` | 937 |
-| Theorem | `form_neg403_amb_red_of_disc` | 940 |
-| Theorem | `form_neg455_5_of_disc` | 943 |
-| Theorem | `form_neg455_7_of_disc` | 946 |
-| Theorem | `form_neg455_13_red_of_disc` | 949 |
-| Theorem | `form_neg87_amb_reduced` | 952 |
-| Theorem | `form_neg403_amb_red_reduced` | 955 |
-| Theorem | `form_neg455_5_reduced` | 958 |
-| Theorem | `form_neg455_7_reduced` | 961 |
-| Theorem | `form_neg455_13_red_reduced` | 964 |
-| Theorem | `form_neg87_amb_is_ambiguous` | 967 |
-| Theorem | `form_neg403_amb_is_ambiguous` | 970 |
-| Theorem | `form_neg403_amb_red_is_ambiguous` | 973 |
-| Theorem | `form_neg455_5_is_ambiguous` | 976 |
-| Theorem | `form_neg455_7_is_ambiguous` | 979 |
-| Theorem | `form_neg455_13_red_is_ambiguous` | 982 |
-| Theorem | `form_neg87_not_principal` | 985 |
-| Theorem | `form_neg403_not_principal` | 994 |
-| Theorem | `form_neg455_5_not_principal` | 1003 |
-| Theorem | `form_neg455_7_not_principal` | 1012 |
-| Theorem | `form_neg455_13_not_principal` | 1021 |
-| Theorem | `catalog_compose_inv_is_principal` | 1039 |
-| Theorem | `compose_id_right_neg87` | 1058 |
-| Theorem | `compose_id_right_neg455_5` | 1062 |
-| Theorem | `compose_neg455_5_7_of_disc` | 1066 |
-| Theorem | `compose_neg455_5_7_leading` | 1073 |
-| Theorem | `compose_neg455_5_7_not_units` | 1077 |
-| Theorem | `catalog_wins_LowOrder_B2` | 1084 |
-| Lemma | `bqf_exp_0` | 1117 |
-| Lemma | `bqf_exp_1` | 1120 |
-| Lemma | `bqf_exp_2` | 1130 |
-| Theorem | `bqf_exp_2_ambiguous_div` | 1140 |
+| Theorem | `compose_assoc_id_inv` | 832 |
+| Theorem | `compose_assoc_id_ff` | 851 |
+| Lemma | `amb_from_div_ambiguous` | 873 |
+| Lemma | `amb_from_div_disc_mod0` | 881 |
+| Lemma | `amb_from_div_disc_mod1` | 899 |
+| Lemma | `iq_neg23` | 939 |
+| Lemma | `iq_neg47` | 942 |
+| Lemma | `iq_neg87` | 945 |
+| Lemma | `iq_neg403` | 948 |
+| Lemma | `iq_neg455` | 951 |
+| Theorem | `form_neg87_amb_of_disc` | 954 |
+| Theorem | `form_neg403_amb_of_disc` | 957 |
+| Theorem | `form_neg403_amb_red_of_disc` | 960 |
+| Theorem | `form_neg455_5_of_disc` | 963 |
+| Theorem | `form_neg455_7_of_disc` | 966 |
+| Theorem | `form_neg455_13_red_of_disc` | 969 |
+| Theorem | `form_neg87_amb_reduced` | 972 |
+| Theorem | `form_neg403_amb_red_reduced` | 975 |
+| Theorem | `form_neg455_5_reduced` | 978 |
+| Theorem | `form_neg455_7_reduced` | 981 |
+| Theorem | `form_neg455_13_red_reduced` | 984 |
+| Theorem | `form_neg87_amb_is_ambiguous` | 987 |
+| Theorem | `form_neg403_amb_is_ambiguous` | 990 |
+| Theorem | `form_neg403_amb_red_is_ambiguous` | 993 |
+| Theorem | `form_neg455_5_is_ambiguous` | 996 |
+| Theorem | `form_neg455_7_is_ambiguous` | 999 |
+| Theorem | `form_neg455_13_red_is_ambiguous` | 1002 |
+| Theorem | `form_neg87_not_principal` | 1005 |
+| Theorem | `form_neg403_not_principal` | 1014 |
+| Theorem | `form_neg455_5_not_principal` | 1023 |
+| Theorem | `form_neg455_7_not_principal` | 1032 |
+| Theorem | `form_neg455_13_not_principal` | 1041 |
+| Theorem | `catalog_compose_inv_is_principal` | 1059 |
+| Theorem | `compose_id_right_neg87` | 1078 |
+| Theorem | `compose_id_right_neg455_5` | 1082 |
+| Theorem | `compose_neg455_5_7_of_disc` | 1086 |
+| Theorem | `compose_neg455_5_7_leading` | 1093 |
+| Theorem | `compose_neg455_5_7_not_units` | 1097 |
+| Theorem | `catalog_wins_LowOrder_B2` | 1104 |
+| Lemma | `bqf_exp_0` | 1137 |
+| Lemma | `bqf_exp_1` | 1140 |
+| Lemma | `bqf_exp_2` | 1150 |
+| Theorem | `bqf_exp_2_ambiguous_div` | 1160 |
 
 ## `BitLeak.v`
 
@@ -427,8 +429,9 @@ in the Rocq tree.  Do not edit by hand.
 - L13: The wall between Type B and adaptive root
   - L85: Restricted low-order
   - L162: Restricted low-order after excluding [Cl[2]]
-  - L328: Families: constructible torsion is not always [Cl[2]]
-  - L428: Class number is an AR-search trapdoor
+  - L214: Assoc pin on the order-3 form of [Cl(−31)]
+  - L361: Families: constructible torsion is not always [Cl[2]]
+  - L461: Class number is an AR-search trapdoor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -451,39 +454,42 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `form_neg31_ord3_not_principal` | 197 |
 | Theorem | `form_neg31_sq_compute` | 206 |
 | Theorem | `form_neg31_cube_compute` | 210 |
-| Theorem | `form_neg31_exp2` | 214 |
-| Theorem | `form_neg31_exp3` | 221 |
-| Theorem | `form_neg31_sq_equiv_inv` | 230 |
-| Theorem | `form_neg31_inv_reduced` | 237 |
-| Theorem | `form_neg31_inv_of_disc` | 240 |
-| Theorem | `form_neg31_inv_not_principal` | 247 |
-| Theorem | `form_neg31_actS_inv_is_sq` | 256 |
-| Theorem | `form_neg31_sq_not_principal` | 260 |
-| Theorem | `sl2_reduce_cube_ok` | 274 |
-| Theorem | `form_neg31_cube_equiv_id` | 277 |
-| Theorem | `form_neg31_exp3_equiv_id` | 284 |
-| Theorem | `form_neg31_exp1` | 288 |
-| Theorem | `mersenne31_wins_restricted_LowOrder` | 307 |
-| Theorem | `mersenne31_is_odd_order` | 324 |
-| Theorem | `shanks_disc_2` | 340 |
-| Theorem | `shanks_form_2` | 343 |
-| Theorem | `shanks_form_disc` | 346 |
-| Theorem | `shanks_disc_3` | 356 |
-| Theorem | `iq_neg107` | 359 |
-| Theorem | `shanks_u3_of_disc` | 362 |
-| Theorem | `shanks_u3_not_ambiguous` | 369 |
-| Theorem | `shanks_u3_exp3_compute` | 380 |
-| Theorem | `shanks_u3_cube_equiv_id` | 388 |
-| Theorem | `shanks_u3_exp3_equiv_id` | 395 |
-| Theorem | `shanks_family_has_3` | 399 |
-| Theorem | `mersenne31_shanks_in_family_H` | 417 |
-| Theorem | `mersenne31_shanks_not_ordinary_H` | 424 |
-| Theorem | `bqf_exp_id` | 437 |
-| Theorem | `neg31_id_annihilated_by_h` | 448 |
-| Theorem | `form_neg31_inv_exp2` | 455 |
-| Theorem | `form_neg31_inv_sq_equiv_f` | 462 |
-| Theorem | `shanks_inv_square_is_shanks` | 469 |
-| Theorem | `shanks_annihilated_by_h` | 477 |
+| Theorem | `form_neg31_sq_of_disc` | 219 |
+| Theorem | `compose_assoc_id_ff_neg31` | 225 |
+| Theorem | `compose_assoc_neg31_ord3` | 235 |
+| Theorem | `form_neg31_exp2` | 247 |
+| Theorem | `form_neg31_exp3` | 254 |
+| Theorem | `form_neg31_sq_equiv_inv` | 263 |
+| Theorem | `form_neg31_inv_reduced` | 270 |
+| Theorem | `form_neg31_inv_of_disc` | 273 |
+| Theorem | `form_neg31_inv_not_principal` | 280 |
+| Theorem | `form_neg31_actS_inv_is_sq` | 289 |
+| Theorem | `form_neg31_sq_not_principal` | 293 |
+| Theorem | `sl2_reduce_cube_ok` | 307 |
+| Theorem | `form_neg31_cube_equiv_id` | 310 |
+| Theorem | `form_neg31_exp3_equiv_id` | 317 |
+| Theorem | `form_neg31_exp1` | 321 |
+| Theorem | `mersenne31_wins_restricted_LowOrder` | 340 |
+| Theorem | `mersenne31_is_odd_order` | 357 |
+| Theorem | `shanks_disc_2` | 373 |
+| Theorem | `shanks_form_2` | 376 |
+| Theorem | `shanks_form_disc` | 379 |
+| Theorem | `shanks_disc_3` | 389 |
+| Theorem | `iq_neg107` | 392 |
+| Theorem | `shanks_u3_of_disc` | 395 |
+| Theorem | `shanks_u3_not_ambiguous` | 402 |
+| Theorem | `shanks_u3_exp3_compute` | 413 |
+| Theorem | `shanks_u3_cube_equiv_id` | 421 |
+| Theorem | `shanks_u3_exp3_equiv_id` | 428 |
+| Theorem | `shanks_family_has_3` | 432 |
+| Theorem | `mersenne31_shanks_in_family_H` | 450 |
+| Theorem | `mersenne31_shanks_not_ordinary_H` | 457 |
+| Theorem | `bqf_exp_id` | 470 |
+| Theorem | `neg31_id_annihilated_by_h` | 481 |
+| Theorem | `form_neg31_inv_exp2` | 488 |
+| Theorem | `form_neg31_inv_sq_equiv_f` | 495 |
+| Theorem | `shanks_inv_square_is_shanks` | 502 |
+| Theorem | `shanks_annihilated_by_h` | 510 |
 
 ## `Cocks.v`
 
@@ -2222,7 +2228,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L21: Live-target route pins
+- L22: Live-target route pins
 
 ## `SAGM.v`
 
@@ -4004,4 +4010,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2823 theorems/lemmas/corollaries/examples across 124 files._
+_2827 theorems/lemmas/corollaries/examples across 124 files._

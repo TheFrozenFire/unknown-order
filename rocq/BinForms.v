@@ -810,8 +810,9 @@ Proof.
 Qed.
 
 (** Associativity of Dirichlet composition.  The triple
-    [{id, f, f⁻¹}] is a theorem ([compose_assoc_id_inv]).
-    Unused means unproved, on-goal. *)
+    [{id, f, f⁻¹}] is a theorem ([compose_assoc_id_inv]);
+    [{id, f, f}] is [compose_assoc_id_ff].  Unused means
+    unproved, on-goal. *)
 Definition compose_assoc_open_named (D : Z) : Prop :=
   forall f g h,
     of_disc f D -> of_disc g D -> of_disc h D ->
@@ -840,6 +841,25 @@ Proof.
   rewrite (compose_id_left D (bqf_compose f (bqf_inv f)) Hiq).
   - reflexivity.
   - apply compose_inv_of_disc; assumption.
+Qed.
+
+(** ** Assoc [{id, f, f}]
+
+    Third argument is [f∘f], of_disc as a hyp.  Not
+    [compose_assoc_open_named].  Cross-confirmed by [cas/251]. *)
+
+Theorem compose_assoc_id_ff :
+  forall D f,
+    iq_disc D ->
+    of_disc f D ->
+    of_disc (bqf_compose f f) D ->
+    bqf_compose (bqf_compose (bqf_id D) f) f =
+      bqf_compose (bqf_id D) (bqf_compose f f).
+Proof.
+  intros D f Hiq Hof Hoff.
+  rewrite (compose_id_left D f Hiq Hof).
+  rewrite (compose_id_left D (bqf_compose f f) Hiq Hoff).
+  reflexivity.
 Qed.
 
 (** ** Ambiguous forms from a divisor of [Δ] *)

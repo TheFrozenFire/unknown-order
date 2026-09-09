@@ -31,6 +31,11 @@ of Rocq/CAS edits.
 | Q6 | Strong-RSA remainder: `λ+1` inhabits without splitting; do not prove `~ forall` | done | Q0 |
 | Q7 | Pratt completeness as given-factorization verifier, not `forall p` construction | done | — |
 | Q8 | Dirichlet compose remaining branch (not RSA) | done | — |
+| R1 | Dirichlet assoc remaining case: `{id,f,f}` and the order-3 pin on `Cl(−31)` | done | Q8 |
+
+Q0–Q8 are done. Default next is **R1**, then stop inventing
+Dirichlet pins; the RSA / Pratt / forall-compose nameds stay
+live. Do not resume kernel folds.
 
 Pick **one slice per turn** unless the user says otherwise.
 Do not skip a “Depends” cell. Do not invent a new leftover/fold/`K`
@@ -200,10 +205,10 @@ Strong RSA. Precise reductions stay the `*_open_named`s.
   factoring `p−1`. A verifier given `(g, qs)` is nearby and
   not the named.
 - **Dirichlet compose.** Inverse pairs, unit leading coeff,
-  `{id,f,f⁻¹}` are theorems. Remaining two-form branch is
-  `compose_preserves_disc_open_named` /
-  `compose_assoc_open_named` /
-  `compose_left_compat_open_named`.
+  `{id,f,f⁻¹}`, `{id,f,f}`, and the `Cl(−31)` order-3 pin are
+  theorems. Remaining: forall two-form disc
+  (`compose_preserves_disc_open_named`), forall-triple assoc,
+  left-compat.
 
 P4 interpolating polynomial (option B) is redundant on this
 pin: leaf-at-`g` already factors every reduced residual
@@ -415,6 +420,8 @@ Default if the user says “go” without a slice id:
 3. **Q5** and **Q6** when touching the nameds; comments
    may ride with Q4.
 4. **Q7** / **Q8** when not on the RSA nameds.
+5. **R1** after Q8 — Dirichlet assoc remaining case. Then
+   stop inventing compose pins.
 
 If the user names a slice, do that slice, not this default.
 
@@ -462,11 +469,11 @@ If the user names a slice, do that slice, not this default.
 ## Compaction: read this first
 
 You are in the unknown-order Strong RSA campaign. P0–P8 of
-`notes/srsa-next.md` are done. On pin 187 every reduced
-residual solver factors via a leaf at `g`. The leftover is
-**not** “varying-`e` non-hom.” Next work is the status
-table at the top of **this** file, in the pick order above,
-under the hard constraints above. Pin 187. CAS 244+ as
-landed. Do not inhabit the nameds. Do not resume kernel
-folds. Do not treat GRA as standard-model hardness.
-Do not prove `~ forall Solve, exists f`.
+`notes/srsa-next.md` are done. Q0–Q8 of this file are done.
+On pin 187 every reduced residual solver factors via a leaf
+at `g`. The leftover is **not** “varying-`e` non-hom.” Next
+work is the status table at the top of **this** file (R1
+after Q8), under the hard constraints above. Pin 187.
+CAS 250+ as landed. Do not inhabit the nameds. Do not
+resume kernel folds. Do not treat GRA as standard-model
+hardness. Do not prove `~ forall Solve, exists f`.

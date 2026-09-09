@@ -211,6 +211,39 @@ Theorem form_neg31_cube_compute :
   bqf_compose form_neg31_sq form_neg31_ord3 = form_neg31_cube.
 Proof. vm_compute. reflexivity. Qed.
 
+(** ** Assoc pin on the order-3 form of [Cl(−31)]
+
+    [(f∘f)∘f = f∘(f∘f)] as representatives.  Not
+    [compose_assoc_open_named].  Cross-confirmed by [cas/251]. *)
+
+Theorem form_neg31_sq_of_disc : of_disc form_neg31_sq (-31).
+Proof.
+  unfold of_disc, form_neg31_sq, bqf_disc, bqf_primitive.
+  simpl. split; vm_compute; reflexivity.
+Qed.
+
+Theorem compose_assoc_id_ff_neg31 :
+  bqf_compose (bqf_compose (bqf_id (-31)) form_neg31_ord3) form_neg31_ord3 =
+    bqf_compose (bqf_id (-31)) (bqf_compose form_neg31_ord3 form_neg31_ord3).
+Proof.
+  apply compose_assoc_id_ff.
+  - apply iq_neg31.
+  - apply form_neg31_ord3_of_disc.
+  - rewrite form_neg31_sq_compute. apply form_neg31_sq_of_disc.
+Qed.
+
+Theorem compose_assoc_neg31_ord3 :
+  bqf_compose (bqf_compose form_neg31_ord3 form_neg31_ord3)
+              form_neg31_ord3 =
+  bqf_compose form_neg31_ord3
+              (bqf_compose form_neg31_ord3 form_neg31_ord3).
+Proof.
+  rewrite form_neg31_sq_compute.
+  transitivity form_neg31_cube.
+  - apply form_neg31_cube_compute.
+  - vm_compute. reflexivity.
+Qed.
+
 Theorem form_neg31_exp2 :
   bqf_exp (-31) form_neg31_ord3 2%nat = form_neg31_sq.
 Proof.

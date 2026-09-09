@@ -6,6 +6,7 @@ Require Import StrongRSAPeel.
 Require Import Pratt.
 Require Import Order.
 Require Import BinForms.
+Require Import ClassGroupWall.
 Require Import GenericRing.
 Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
@@ -59,7 +60,9 @@ Open Scope Z_scope.
     [compose_neg455_5_7_of_disc] is coprime non-unit leading
     coefficients, not an inverse pair; [solve_cong] is Bézout
     ([Z.extgcd]).  Right identity on a non-unit [a] is
-    [compose_id_right_neg87].  Not the compose opens. *)
+    [compose_id_right_neg87].  Assoc [{id,f,f}] is
+    [compose_assoc_id_ff]; the order-3 pin is
+    [compose_assoc_neg31_ord3].  Not the compose opens. *)
 
 Check residual_solver_constructs_factor_open_named.
 Check residual_solver_extracts_factor_open_named.
@@ -177,3 +180,6 @@ Check compose_id_right_neg87.
 Check compose_id_right_neg455_5.
 Check compose_neg455_5_7_of_disc.
 Check compose_neg455_5_7_leading.
+Check compose_assoc_id_ff.
+Check compose_assoc_id_ff_neg31.
+Check compose_assoc_neg31_ord3.

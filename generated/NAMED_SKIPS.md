@@ -14,8 +14,8 @@ Generated.  Do not edit by hand.
 | Name | File | Line | Status | Used at |
 |---|---|---:|---|---|
 | `compose_preserves_disc_open_named` | `BinForms.v` | 688 | open | — |
-| `compose_assoc_open_named` | `BinForms.v` | 815 | open | — |
-| `compose_left_compat_open_named` | `BinForms.v` | 825 | open | — |
+| `compose_assoc_open_named` | `BinForms.v` | 816 | open | — |
+| `compose_left_compat_open_named` | `BinForms.v` | 826 | open | — |
 | `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 86 | open | — |
 | `strong_rsa_solver_extracts_factor_open_named` | `Hardness.v` | 98 | open | — |
 | `pratt_complete_open_named` | `Pratt.v` | 117 | open | — |
@@ -76,15 +76,38 @@ Theorem/Lemma/Corollary until the next section comment. Those
 results do not inhabit the live target. Generated from `.v`
 comments; do not maintain this table by hand.
 
+### `compose_assoc_open_named`
+
+| Closed result | File | Line |
+|---|---|---:|
+| `compose_assoc_id_ff` | `BinForms.v` | 851 |
+| `form_neg31_sq_of_disc` | `ClassGroupWall.v` | 219 |
+| `compose_assoc_id_ff_neg31` | `ClassGroupWall.v` | 225 |
+| `compose_assoc_neg31_ord3` | `ClassGroupWall.v` | 235 |
+| `form_neg31_exp2` | `ClassGroupWall.v` | 247 |
+| `form_neg31_exp3` | `ClassGroupWall.v` | 254 |
+| `form_neg31_sq_equiv_inv` | `ClassGroupWall.v` | 263 |
+| `form_neg31_inv_reduced` | `ClassGroupWall.v` | 270 |
+| `form_neg31_inv_of_disc` | `ClassGroupWall.v` | 273 |
+| `form_neg31_inv_not_principal` | `ClassGroupWall.v` | 280 |
+| `form_neg31_actS_inv_is_sq` | `ClassGroupWall.v` | 289 |
+| `form_neg31_sq_not_principal` | `ClassGroupWall.v` | 293 |
+| `sl2_reduce_cube_ok` | `ClassGroupWall.v` | 307 |
+| `form_neg31_cube_equiv_id` | `ClassGroupWall.v` | 310 |
+| `form_neg31_exp3_equiv_id` | `ClassGroupWall.v` | 317 |
+| `form_neg31_exp1` | `ClassGroupWall.v` | 321 |
+| `mersenne31_wins_restricted_LowOrder` | `ClassGroupWall.v` | 340 |
+| `mersenne31_is_odd_order` | `ClassGroupWall.v` | 357 |
+
 ### `compose_preserves_disc_open_named`
 
 | Closed result | File | Line |
 |---|---|---:|
-| `compose_id_right_neg87` | `BinForms.v` | 1058 |
-| `compose_id_right_neg455_5` | `BinForms.v` | 1062 |
-| `compose_neg455_5_7_of_disc` | `BinForms.v` | 1066 |
-| `compose_neg455_5_7_leading` | `BinForms.v` | 1073 |
-| `compose_neg455_5_7_not_units` | `BinForms.v` | 1077 |
+| `compose_id_right_neg87` | `BinForms.v` | 1078 |
+| `compose_id_right_neg455_5` | `BinForms.v` | 1082 |
+| `compose_neg455_5_7_of_disc` | `BinForms.v` | 1086 |
+| `compose_neg455_5_7_leading` | `BinForms.v` | 1093 |
+| `compose_neg455_5_7_not_units` | `BinForms.v` | 1097 |
 
 ### `pratt_complete_open_named`
 
@@ -480,4 +503,4 @@ comments; do not maintain this table by hand.
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 278 |
 | `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | 308 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 364 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 382 does-not-discharge rows._
