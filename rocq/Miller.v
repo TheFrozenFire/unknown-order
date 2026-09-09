@@ -144,6 +144,72 @@ Theorem pin_miller_walk_not_at_g0 :
   Z.gcd (powm 2 (odd_part pin_lam) pin_N - 1) pin_N = 1.
 Proof. vm_compute. reflexivity. Qed.
 
+(** ** Sequential-base search on this pin
+
+    Try [a = 2, 3, …] until [miller_walk] returns [Some f].
+    Fuel [N−3] is the length of [2 .. N−2].  On this pin the
+    first hit is 2.  [±1] are miller liars; so is the interior
+    unit 50.  Sequential-base Miller; ERH runtime unclaimed.
+    Not [residual_solver_constructs_factor_open_named].
+    Not [rsa_inverter_constructs_factor_open_named].
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/246]. *)
+
+Fixpoint miller_search_from (N M a : Z) (fuel : nat) : option (Z * Z) :=
+  match fuel with
+  | O => None
+  | S fuel' =>
+      match miller_walk N M a with
+      | Some f => Some (a, f)
+      | None => miller_search_from N M (a + 1) fuel'
+      end
+  end.
+
+Definition miller_search (N M : Z) : option (Z * Z) :=
+  miller_search_from N M 2 (Z.to_nat (N - 3)).
+
+Lemma miller_search_from_hit :
+  forall N M a f fuel,
+    miller_walk N M a = Some f ->
+    miller_search_from N M a (S fuel) = Some (a, f).
+Proof.
+  intros N M a f fuel H.
+  cbn [miller_search_from].
+  rewrite H. reflexivity.
+Qed.
+
+Theorem pin_miller_search :
+  miller_search pin_N pin_lam = Some (2, pin_p).
+Proof.
+  unfold miller_search.
+  change (Z.to_nat (pin_N - 3)) with (S (Z.to_nat (pin_N - 4))).
+  apply miller_search_from_hit.
+  apply (proj1 pin_miller_walk_base2).
+Qed.
+
+Theorem pin_miller_search_in_range :
+  exists a f,
+    2 <= a <= pin_N - 2 /\
+    miller_walk pin_N pin_lam a = Some f /\
+    1 < f < pin_N /\ (f | pin_N).
+Proof.
+  exists 2, pin_p.
+  split; [lia|].
+  exact pin_miller_walk_base2.
+Qed.
+
+Theorem pin_miller_walk_liar_1 :
+  miller_walk pin_N pin_lam 1 = None.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_miller_walk_liar_minus1 :
+  miller_walk pin_N pin_lam (pin_N - 1) = None.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_miller_walk_liar_50 :
+  miller_walk pin_N pin_lam 50 = None.
+Proof. vm_compute. reflexivity. Qed.
+
 (** On the pin, [M = λ], so [s = v₂(λ)] and [t] is the odd part. *)
 Theorem rsa_test_miller_split : miller_M rsa_test = pin_lam.
 Proof. vm_compute. reflexivity. Qed.

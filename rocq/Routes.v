@@ -84,6 +84,12 @@ Check miller_walk.
 Check pin_miller_walk_base2.
 Check pin_miller_walk_not_at_g0.
 Check miller_walk_factors.
+Check miller_search.
+Check pin_miller_search.
+Check pin_miller_search_in_range.
+Check pin_miller_walk_liar_1.
+Check pin_miller_walk_liar_minus1.
+Check pin_miller_walk_liar_50.
 Check pin_miller_from_lambda_multiple.
 Check pin_miller_from_lam_factors.
 Check pin_e7_residual.

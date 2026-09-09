@@ -1537,6 +1537,7 @@ in the Rocq tree.  Do not edit by hand.
 
 - L12: Miller successive-squaring: factor [N] from a multiple of [λ(N)]
   - L106: Square-chain Miller from [(N, M, a)]
+  - L147: Sequential-base search on this pin
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1547,10 +1548,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `miller_witness_factors` | 73 |
 | Theorem | `pin_miller_walk_base2` | 135 |
 | Theorem | `pin_miller_walk_not_at_g0` | 143 |
-| Theorem | `rsa_test_miller_split` | 148 |
-| Theorem | `rsa_test_miller_t` | 151 |
-| Theorem | `rsa_test_miller_s` | 154 |
-| Theorem | `rsa_test_base2_splits` | 158 |
+| Lemma | `miller_search_from_hit` | 171 |
+| Theorem | `pin_miller_search` | 181 |
+| Theorem | `pin_miller_search_in_range` | 190 |
+| Theorem | `pin_miller_walk_liar_1` | 201 |
+| Theorem | `pin_miller_walk_liar_minus1` | 205 |
+| Theorem | `pin_miller_walk_liar_50` | 209 |
+| Theorem | `rsa_test_miller_split` | 214 |
+| Theorem | `rsa_test_miller_t` | 217 |
+| Theorem | `rsa_test_miller_s` | 220 |
+| Theorem | `rsa_test_base2_splits` | 224 |
 
 ## `MillerHeight.v`
 
@@ -3947,4 +3954,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2773 theorems/lemmas/corollaries/examples across 124 files._
+_2779 theorems/lemmas/corollaries/examples across 124 files._
