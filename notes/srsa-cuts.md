@@ -565,6 +565,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | invert-all-units poly at residual `e=7` is `y ↦ y^{23}` | `invert_all_units_poly_at_e` / `pin_X23_poly_at_7_constructs_factor` | `SrsaVaryingE.v` | `239` |
 | dlog of `Solve(g)` recovers `d'`; Miller from the recovered inverse | `residual_solver_reduced_fixed_e_extracts_and_factors` / `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | `240` |
 | residual leaf at generator `g` extracts `d'` and Millers; every reduced residual solver on this pin factors | `residual_leaf_at_g_extracts_and_factors` / `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | `241` |
+| miller step of that leaf is `miller_walk` at `e d'−1`, not `2^{t 2^{kp}}` | `pin_miller_walk_from_lambda_multiple` / `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | `248` |
 | trapdoor is a hom on units; mixed cube/7th-root table is not | `pin_trapdoor_solver_x_homomorphic` / `residual_x_homomorphic_constructs_factor` | `SrsaHom.v` | `242` |
 | Strong-RSA with `λ \| e−1` Millers from `e−1`; residual forbids the class | `strong_rsa_solver_annihilator_e_constructs_factor` / `residual_solver_not_annihilator_e` | `SrsaHom.v` | `243` |
 | attained unit orders generate `λ` for general distinct primes | `orders_attained_generate_lambda` | `Order.v` | `25`, `153` |

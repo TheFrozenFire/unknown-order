@@ -26,7 +26,7 @@ of Rocq/CAS edits.
 | Q1 | Miller square-chain from `(N,M,a)` without a `kp` hyp from `p` | done | Q0 |
 | Q2 | Finite miller-base search on this pin (`2..N−2`) | done | Q1 |
 | Q3 | Blum / miller-liar named extra (`11×19`): matching-height base does not split; a different base does | done | Q1 |
-| Q4 | Residual solver ⇒ factor under “this `(M,a)` millers,” not only pin-187 base 2 | pending | Q1, Q2 |
+| Q4 | Residual solver ⇒ factor under “this `(M,a)` millers,” not only pin-187 base 2 | done | Q1, Q2 |
 | Q5 | Inverter remainder: `λ` is not in the type; pin theorem uses `pin_lam` | pending | Q0 |
 | Q6 | Strong-RSA remainder: `λ+1` inhabits without splitting; do not prove `~ forall` | pending | Q0 |
 | Q7 | Pratt completeness as given-factorization verifier, not `forall p` construction | pending | — |

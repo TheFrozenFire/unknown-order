@@ -2670,8 +2670,9 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `pin_g_coprime` | 190 |
 | Theorem | `residual_solver_reduced_fixed_e_extracts_and_factors` | 193 |
 | Theorem | `pin_e7_solver_extracts_and_factors` | 233 |
-| Theorem | `residual_leaf_at_g_extracts_and_factors` | 261 |
-| Theorem | `residual_solver_reduced_constructs_factor_pin` | 305 |
+| Theorem | `pin_miller_walk_from_lambda_multiple` | 264 |
+| Theorem | `residual_leaf_at_g_extracts_and_factors` | 296 |
+| Theorem | `residual_solver_reduced_constructs_factor_pin` | 342 |
 
 ## `SrsaHom.v`
 
@@ -3962,4 +3963,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2786 theorems/lemmas/corollaries/examples across 124 files._
+_2787 theorems/lemmas/corollaries/examples across 124 files._

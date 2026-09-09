@@ -135,8 +135,9 @@ comments; do not maintain this table by hand.
 | `pin_g_coprime` | `SrsaExtractD.v` | 190 |
 | `residual_solver_reduced_fixed_e_extracts_and_factors` | `SrsaExtractD.v` | 193 |
 | `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | 233 |
-| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 261 |
-| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 305 |
+| `pin_miller_walk_from_lambda_multiple` | `SrsaExtractD.v` | 264 |
+| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 296 |
+| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 342 |
 | `pin_mul_mod_range` | `SrsaHom.v` | 34 |
 | `pin_mul_mod_coprime` | `SrsaHom.v` | 38 |
 | `pin_trapdoor_solver_x_homomorphic` | `SrsaHom.v` | 61 |
@@ -287,6 +288,14 @@ comments; do not maintain this table by hand.
 | `srsa_residual_pin` | `StrongRSAPeel.v` | 257 |
 | `srsa_residual_pin187` | `StrongRSAPeel.v` | 268 |
 
+### `residual_solver_extracts_factor_open_named`
+
+| Closed result | File | Line |
+|---|---|---:|
+| `pin_miller_walk_from_lambda_multiple` | `SrsaExtractD.v` | 264 |
+| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 296 |
+| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 342 |
+
 ### `rsa_inverter_constructs_factor_open_named`
 
 | Closed result | File | Line |
@@ -405,4 +414,4 @@ comments; do not maintain this table by hand.
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 | `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | 55 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 314 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 318 does-not-discharge rows._
