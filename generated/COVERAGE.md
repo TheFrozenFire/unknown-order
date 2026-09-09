@@ -1923,17 +1923,48 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Pratt.v`
 
-- L11: Pratt certificates, dual to Miller-from-[λ]
+- L13: Pratt certificates, dual to Miller-from-[λ]
+  - L155: Verifier given a factorization of [p−1]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Theorem | `pratt_2_prime` | 51 |
-| Theorem | `pratt_fermat_side` | 56 |
-| Theorem | `duality_unique_order_2_on_prime` | 69 |
-| Lemma | `prime_5` | 123 |
-| Theorem | `pratt_generator_ok_11` | 131 |
-| Theorem | `pratt_factors_ok_11` | 141 |
-| Theorem | `pratt_qs_prime_11` | 145 |
+| Theorem | `pratt_2_prime` | 53 |
+| Theorem | `pratt_fermat_side` | 58 |
+| Theorem | `duality_unique_order_2_on_prime` | 71 |
+| Lemma | `prime_5` | 125 |
+| Theorem | `pratt_generator_ok_11` | 133 |
+| Theorem | `pratt_factors_ok_11` | 143 |
+| Theorem | `pratt_qs_prime_11` | 147 |
+| Lemma | `fold_left_mul_mul_acc` | 164 |
+| Lemma | `fold_left_mul_acc` | 173 |
+| Lemma | `fold_left_mul_cons` | 183 |
+| Lemma | `prime_divides_fold_mul` | 194 |
+| Lemma | `pratt_factors_cover_prime` | 212 |
+| Theorem | `pratt_11_inhabited` | 259 |
+| Theorem | `pratt_11_verified` | 262 |
+| Lemma | `prime_3` | 274 |
+| Lemma | `prime_31` | 282 |
+| Theorem | `pratt_generator_ok_31` | 292 |
+| Theorem | `pratt_factors_ok_31` | 301 |
+| Theorem | `pratt_qs_prime_31` | 305 |
+| Theorem | `pratt_31_inhabited` | 326 |
+| Theorem | `pratt_31_verified` | 329 |
+| Lemma | `pratt_gcd_ok_of_prime` | 347 |
+| Theorem | `pratt_gcd_ok_11` | 374 |
+| Theorem | `pratt_gcd_ok_31` | 380 |
+| Lemma | `reduced_minus1_mod` | 392 |
+| Lemma | `powm_one_of_divisor` | 407 |
+| Lemma | `pratt_coprime_of_fermat` | 431 |
+| Lemma | `divide_le_pos` | 469 |
+| Lemma | `coprime_of_divisor` | 481 |
+| Lemma | `powm_one_of_multiple` | 498 |
+| Lemma | `powm_gcd_exp` | 519 |
+| Lemma | `pratt_gcd_ok_not_one_mod_factor` | 561 |
+| Theorem | `pratt_verified_implies_prime` | 596 |
+| Theorem | `pratt_inhabit_of_certs` | 660 |
+| Theorem | `pratt_verifier` | 670 |
+| Theorem | `pratt_11_sound` | 686 |
+| Theorem | `pratt_31_sound` | 693 |
 
 ## `PreprocessGRA.v`
 
@@ -3965,4 +3996,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2787 theorems/lemmas/corollaries/examples across 124 files._
+_2817 theorems/lemmas/corollaries/examples across 124 files._

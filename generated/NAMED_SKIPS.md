@@ -18,7 +18,7 @@ Generated.  Do not edit by hand.
 | `compose_left_compat_open_named` | `BinForms.v` | 816 | open | — |
 | `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 86 | open | — |
 | `strong_rsa_solver_extracts_factor_open_named` | `Hardness.v` | 98 | open | — |
-| `pratt_complete_open_named` | `Pratt.v` | 115 | open | — |
+| `pratt_complete_open_named` | `Pratt.v` | 117 | open | — |
 | `residual_solver_constructs_factor_open_named` | `StrongRSAPeel.v` | 297 | open | — |
 | `residual_solver_extracts_factor_open_named` | `StrongRSAPeel.v` | 305 | open | — |
 | `rsa_inverter_constructs_factor_open_named` | `TranscriptOracle.v` | 595 | open | — |
@@ -75,6 +75,41 @@ A `(** **` subsection whose comment says `Not [foo_open_named]`
 Theorem/Lemma/Corollary until the next section comment. Those
 results do not inhabit the live target. Generated from `.v`
 comments; do not maintain this table by hand.
+
+### `pratt_complete_open_named`
+
+| Closed result | File | Line |
+|---|---|---:|
+| `fold_left_mul_mul_acc` | `Pratt.v` | 164 |
+| `fold_left_mul_acc` | `Pratt.v` | 173 |
+| `fold_left_mul_cons` | `Pratt.v` | 183 |
+| `prime_divides_fold_mul` | `Pratt.v` | 194 |
+| `pratt_factors_cover_prime` | `Pratt.v` | 212 |
+| `pratt_11_inhabited` | `Pratt.v` | 259 |
+| `pratt_11_verified` | `Pratt.v` | 262 |
+| `prime_3` | `Pratt.v` | 274 |
+| `prime_31` | `Pratt.v` | 282 |
+| `pratt_generator_ok_31` | `Pratt.v` | 292 |
+| `pratt_factors_ok_31` | `Pratt.v` | 301 |
+| `pratt_qs_prime_31` | `Pratt.v` | 305 |
+| `pratt_31_inhabited` | `Pratt.v` | 326 |
+| `pratt_31_verified` | `Pratt.v` | 329 |
+| `pratt_gcd_ok_of_prime` | `Pratt.v` | 347 |
+| `pratt_gcd_ok_11` | `Pratt.v` | 374 |
+| `pratt_gcd_ok_31` | `Pratt.v` | 380 |
+| `reduced_minus1_mod` | `Pratt.v` | 392 |
+| `powm_one_of_divisor` | `Pratt.v` | 407 |
+| `pratt_coprime_of_fermat` | `Pratt.v` | 431 |
+| `divide_le_pos` | `Pratt.v` | 469 |
+| `coprime_of_divisor` | `Pratt.v` | 481 |
+| `powm_one_of_multiple` | `Pratt.v` | 498 |
+| `powm_gcd_exp` | `Pratt.v` | 519 |
+| `pratt_gcd_ok_not_one_mod_factor` | `Pratt.v` | 561 |
+| `pratt_verified_implies_prime` | `Pratt.v` | 596 |
+| `pratt_inhabit_of_certs` | `Pratt.v` | 660 |
+| `pratt_verifier` | `Pratt.v` | 670 |
+| `pratt_11_sound` | `Pratt.v` | 686 |
+| `pratt_31_sound` | `Pratt.v` | 693 |
 
 ### `residual_solver_constructs_factor_open_named`
 
@@ -435,4 +470,4 @@ comments; do not maintain this table by hand.
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 278 |
 | `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | 308 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 329 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 359 does-not-discharge rows._

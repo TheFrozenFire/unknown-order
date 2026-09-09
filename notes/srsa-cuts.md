@@ -572,6 +572,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | Strong-RSA with `λ \| e−1` Millers from `e−1`; residual forbids the class | `strong_rsa_solver_annihilator_e_constructs_factor` / `residual_solver_not_annihilator_e` | `SrsaHom.v` | `243` |
 | attained unit orders generate `λ` for general distinct primes | `orders_attained_generate_lambda` | `Order.v` | `25`, `153` |
 | Pratt check on `p=11`: `g=2`, `p−1=2·5` | `pratt_generator_ok_11` / `pratt_factors_ok_11` | `Pratt.v` | `244` |
+| Pratt verifier given `(g,qs)`: inhabit from recursive certs; gcd-form soundness; pin 11 and 31 | `pratt_verifier` / `pratt_verified_implies_prime` / `pratt_11_verified` / `pratt_31_verified` | `Pratt.v` | `249` |
 | Miller square-chain from `(N,M,a)` without a `kp` from `p`; base 2 on this pin splits, not at `g₀` | `miller_walk` / `pin_miller_walk_base2` / `miller_walk_factors` | `Miller.v`, `MillerHeight.v` | `245` |
 | Sequential miller-base search on this pin hits at 2; `1`, `−1`, and unit 50 are liars | `miller_search` / `pin_miller_search` / `pin_miller_walk_liar_50` | `Miller.v` | `246` |
 | Blum extra `11×19`: base 2 is a miller liar, base 3 splits; `pin_77` base 2 still hits | `pin_209_miller_walk_base2_liar` / `pin_209_miller_walk_base3` / `pin_77_miller_walk_base2_hits` | `Miller.v` | `247` |

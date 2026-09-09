@@ -104,6 +104,7 @@ Constructible torsion `H` is a family parameter
 | lcm of two unit orders | a unit of that lcm order | `order_lcm_attained`, `order_mul_coprime` | arbitrary-`ks` sampling (`orders_generate_lambda_named`) |
 | prime `p` | a generator of `𝔽_p*` | `primitive_root_exists` | verified Pratt completeness (`pratt_complete_open_named`) |
 | primitive root `g` of `𝔽_p*` | every unit is `g^k` | `primitive_root_generates` | verified Pratt completeness (`pratt_complete_open_named`) |
+| generator check plus prime factors of `p−1` | `p` is prime | `pratt_verified_implies_prime` / `pratt_verifier` | forall-`p` construction of the factor list (`pratt_complete_open_named`) |
 | `3 \| p−1`, unit `a` | `a` is a cube iff `a^{(p−1)/3} ≡ 1` | `cube_euler_one_direction`, `cube_euler_converse`, `cube_euler_iff` | cubic residuosity of `N=pq` (CRT of local cubes) |
 | distinct primes `p≠q` | cube mod `pq` iff cube mod `p` and mod `q` | `cube_N_iff_both`, `pin_units_are_cubes` | a cubic Jacobi pairing into cube roots of 1 |
 | `3 \| λ`, cube mod `N` | `a^{λ/3} ≡ 1` | `cube_euler_lambda_necessary` | `a^{λ/3}≡1` ⇒ cube (false: `cube_euler_lambda_not_sufficient_247`) |

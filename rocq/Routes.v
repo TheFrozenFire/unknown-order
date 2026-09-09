@@ -45,7 +45,14 @@ Open Scope Z_scope.
     is [forall N Solve], no [λ].  [λ+1] inhabits and does not gcd-split
     ([pin_lambda_strong_solver], [pin_lambda_plus_one_does_not_split]).
     Annihilator-[e] Millers from [e−1]; residual excludes that class.
-    Do not prove [~ forall Solve, exists f].  Do not inhabit. *)
+    Do not prove [~ forall Solve, exists f].  Do not inhabit.
+
+    Pratt remainder: [pratt_complete_open_named] existentially
+    factorizes [p−1] for every prime.  [pratt_verifier] takes the
+    factor list and recursive certificates as hyps; soundness is
+    [pratt_verified_implies_prime] (gcd form, Euclid on exponents).
+    Pin packages [pratt_11_verified] / [pratt_31_verified].
+    Not [pratt_complete_open_named]. *)
 
 Check residual_solver_constructs_factor_open_named.
 Check residual_solver_extracts_factor_open_named.
@@ -148,6 +155,13 @@ Check residual_solver_not_annihilator_e.
 Check pratt_complete_open_named.
 Check pratt_generator_ok_11.
 Check pratt_factors_ok_11.
+Check pratt_gcd_ok_11.
+Check pratt_11_verified.
+Check pratt_31_verified.
+Check pratt_verified_implies_prime.
+Check pratt_verifier.
+Check pratt_11_sound.
+Check pratt_31_sound.
 Check orders_attained_generate_lambda.
 Check compose_preserves_disc_open_named.
 Check compose_assoc_open_named.

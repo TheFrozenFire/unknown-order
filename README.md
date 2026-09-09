@@ -194,7 +194,7 @@ bash rocq/print-assumptions.sh    # Closed / 0 axioms; count in the snapshot sum
 ```
 
 Needs PARI/GP (`gp`) and Rocq 9.1. The Rocq track builds `../rocq-proofs` first.
-CAS is 248 witnesses, `cas/01`–`248`. PARI is the gated CAS; do not add OSCAR.
+CAS is 249 witnesses, `cas/01`–`249`. PARI is the gated CAS; do not add OSCAR.
 
 RSA constructions beyond textbook inversion (Chaum blinding, threshold /
 mediated shares, Shoup extract, shared-modulus DKG, CRT decrypt, RSW
@@ -277,10 +277,9 @@ is closed
 `Refuse_undirected_611_hunt` still names “wander through
 KeyGen samplers.” The Strong RSA C-class campaign’s P0–P8
 slices are done ([`notes/srsa-next.md`](notes/srsa-next.md)).
-On this pin every reduced residual solver factors. Next
-slices (Miller square-chain, miller-liar extra, λ-free
-inverter / Strong RSA) are
-[`notes/srsa-after.md`](notes/srsa-after.md).
+On this pin every reduced residual solver factors. Q0–Q7 of
+[`notes/srsa-after.md`](notes/srsa-after.md) are done. Remaining:
+Dirichlet compose (Q8).
 The `*_open_named` stay live: unused means unproved,
 on-goal, not refused. Other deepen/widen/refine work:
 [`notes/autonomous-runway.md`](notes/autonomous-runway.md).
