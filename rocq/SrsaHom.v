@@ -78,6 +78,16 @@ Proof.
   exact (residual_solver_reduced_constructs_factor_pin Solve).
 Qed.
 
+(** ** Reduced-units inverter on this pin uses [pin_lam]
+
+    Goes through [inverter_as_residual], which writes [pin_lam]
+    into a residual solver.  [rsa_inverter_extracts_factor_open_named]
+    is [forall N e Inv] with no [λ].  Uniqueness of unit [e]-th
+    roots needs [gcd(e,λ)=1].  Rabin [e=2] is
+    [rabin_oracle_nonassociate_factors].
+    Not [rsa_inverter_extracts_factor_open_named].
+    Not [rsa_inverter_constructs_factor_open_named]. *)
+
 Theorem rsa_inverter_reduced_units_constructs_factor_pin :
   forall Inv : rsa_inverter_reduced_units pin_N pin_e,
     exists f, Problem_Factor pin_N f.
@@ -90,7 +100,11 @@ Qed.
 (** ** Strong-RSA solver with [λ | e − 1] Millers from [e − 1]
 
     Inhabitant: [λ+1].  Residual leaves exclude this class.
-    Not [strong_rsa_solver_constructs_factor_open_named]. *)
+    [strong_rsa_solver_extracts_factor_open_named] has no [λ] in
+    the type; [λ+1] inhabits it without gcd-splitting.
+    Do not prove [~ forall Solve, exists f].
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Not [strong_rsa_solver_extracts_factor_open_named]. *)
 
 Definition strong_rsa_solver_annihilator_e
     (Solve : strong_rsa_solver_units pin_N) : Prop :=

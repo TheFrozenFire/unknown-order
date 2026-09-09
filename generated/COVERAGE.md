@@ -1292,45 +1292,45 @@ in the Rocq tree.  Do not edit by hand.
   - L28: Factoring as a relation
   - L33: RSA is a one-way permutation on units, not a predicate
   - L62: RSA vs strong RSA (relations)
-  - L149: Order divides the exponent
-  - L196: One-sided small exponent (the Type-B winning condition)
-  - L258: Order assumption and fractional root
-  - L472: Order → Strong RSA by invert in the cyclic (equality / multiply)
-  - L519: Leftover mismatch splits; a pair is not a solver
+  - L155: Order divides the exponent
+  - L202: One-sided small exponent (the Type-B winning condition)
+  - L264: Order assumption and fractional root
+  - L478: Order → Strong RSA by invert in the cyclic (equality / multiply)
+  - L525: Leftover mismatch splits; a pair is not a solver
 
 | Kind | Name | Line |
 |---|---|---:|
 | Theorem | `rsa_units_are_eth_powers` | 39 |
 | Theorem | `trapdoor_inverts_RSA` | 50 |
-| Theorem | `rsa_solution_is_strong_RSA` | 96 |
-| Theorem | `lambda_solves_strong_RSA` | 110 |
-| Lemma | `strong_RSA_trivial_at_one` | 134 |
-| Lemma | `rsa_trivial_at_one` | 142 |
-| Lemma | `order_divides_annihilator` | 151 |
-| Theorem | `order_divides_lambda` | 180 |
-| Theorem | `one_sided_low_order_factors` | 208 |
-| Theorem | `one_sided_low_order_is_factor` | 240 |
-| Lemma | `adaptive_root_is_strong_RSA` | 253 |
-| Theorem | `order_is_annihilator` | 264 |
-| Theorem | `low_order_is_annihilator` | 273 |
-| Theorem | `lambda_is_annihilator_on_units` | 282 |
-| Theorem | `annihilator_plus_one_is_strong_RSA` | 295 |
-| Theorem | `rsa_is_fractional_root` | 312 |
-| Theorem | `strong_RSA_is_fractional_root` | 328 |
-| Theorem | `annihilator_is_fractional_root_of_one` | 343 |
-| Theorem | `ar_C_implies_strong_RSA` | 372 |
-| Theorem | `ar_C_requires_C` | 381 |
-| Theorem | `strong_RSA_is_ar_C_iff` | 386 |
-| Theorem | `lambda_plus_one_11_17` | 397 |
-| Theorem | `lambda_plus_one_11_17_not_prime` | 401 |
-| Theorem | `lambda_solves_search_11_17` | 410 |
-| Theorem | `search_lambda_plus_one_misses_prime_AR` | 421 |
-| Theorem | `adaptive_root_known_product_breaks` | 439 |
-| Theorem | `adaptive_root_smooth_power_breaks` | 455 |
-| Theorem | `order_inverts_in_cyclic` | 479 |
-| Theorem | `order_yields_strong_RSA` | 504 |
-| Lemma | `gcd_powm_minus_1` | 530 |
-| Theorem | `leftover_mismatch_factors` | 543 |
+| Theorem | `rsa_solution_is_strong_RSA` | 102 |
+| Theorem | `lambda_solves_strong_RSA` | 116 |
+| Lemma | `strong_RSA_trivial_at_one` | 140 |
+| Lemma | `rsa_trivial_at_one` | 148 |
+| Lemma | `order_divides_annihilator` | 157 |
+| Theorem | `order_divides_lambda` | 186 |
+| Theorem | `one_sided_low_order_factors` | 214 |
+| Theorem | `one_sided_low_order_is_factor` | 246 |
+| Lemma | `adaptive_root_is_strong_RSA` | 259 |
+| Theorem | `order_is_annihilator` | 270 |
+| Theorem | `low_order_is_annihilator` | 279 |
+| Theorem | `lambda_is_annihilator_on_units` | 288 |
+| Theorem | `annihilator_plus_one_is_strong_RSA` | 301 |
+| Theorem | `rsa_is_fractional_root` | 318 |
+| Theorem | `strong_RSA_is_fractional_root` | 334 |
+| Theorem | `annihilator_is_fractional_root_of_one` | 349 |
+| Theorem | `ar_C_implies_strong_RSA` | 378 |
+| Theorem | `ar_C_requires_C` | 387 |
+| Theorem | `strong_RSA_is_ar_C_iff` | 392 |
+| Theorem | `lambda_plus_one_11_17` | 403 |
+| Theorem | `lambda_plus_one_11_17_not_prime` | 407 |
+| Theorem | `lambda_solves_search_11_17` | 416 |
+| Theorem | `search_lambda_plus_one_misses_prime_AR` | 427 |
+| Theorem | `adaptive_root_known_product_breaks` | 445 |
+| Theorem | `adaptive_root_smooth_power_breaks` | 461 |
+| Theorem | `order_inverts_in_cyclic` | 485 |
+| Theorem | `order_yields_strong_RSA` | 510 |
+| Lemma | `gcd_powm_minus_1` | 536 |
+| Theorem | `leftover_mismatch_factors` | 549 |
 
 ## `HashSlot.v`
 
@@ -2678,7 +2678,8 @@ in the Rocq tree.  Do not edit by hand.
 
 - L18: Homomorphic residual solvers, and annihilator-[e] Strong RSA
   - L30: Homomorphism of the [x]-map
-  - L90: Strong-RSA solver with [λ | e − 1] Millers from [e − 1]
+  - L81: Reduced-units inverter on this pin uses [pin_lam]
+  - L100: Strong-RSA solver with [λ | e − 1] Millers from [e − 1]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2686,12 +2687,12 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `pin_mul_mod_coprime` | 38 |
 | Theorem | `pin_trapdoor_solver_x_homomorphic` | 61 |
 | Theorem | `residual_x_homomorphic_constructs_factor` | 72 |
-| Theorem | `rsa_inverter_reduced_units_constructs_factor_pin` | 81 |
-| Theorem | `strong_rsa_solver_annihilator_e_constructs_factor` | 100 |
-| Theorem | `pin_lambda_strong_solver_annihilator_e` | 117 |
-| Theorem | `pin_lambda_strong_solver_millers_from_e_minus_1` | 123 |
-| Theorem | `residual_leaf_not_annihilator_e` | 131 |
-| Theorem | `residual_solver_not_annihilator_e` | 139 |
+| Theorem | `rsa_inverter_reduced_units_constructs_factor_pin` | 91 |
+| Theorem | `strong_rsa_solver_annihilator_e_constructs_factor` | 114 |
+| Theorem | `pin_lambda_strong_solver_annihilator_e` | 131 |
+| Theorem | `pin_lambda_strong_solver_millers_from_e_minus_1` | 137 |
+| Theorem | `residual_leaf_not_annihilator_e` | 145 |
+| Theorem | `residual_solver_not_annihilator_e` | 153 |
 
 ## `SrsaInverter.v`
 
@@ -2700,7 +2701,8 @@ in the Rocq tree.  Do not edit by hand.
   - L56: Non-unit [e]-th root carries the input gcd
   - L138: RSA problem [y] is a residue
   - L167: Reduced-units public-[e] inverter is the trapdoor map
-  - L235: Strong-RSA solver on units: [λ+1] inhabits, does not factor
+  - L217: [inverter_as_residual] writes [pin_lam]
+  - L241: Strong-RSA solver on units: [λ+1] inhabits, does not factor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -2712,11 +2714,11 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_N_plus_1_not_strong_RSA` | 159 |
 | Theorem | `rsa_inverter_reduced_units_is_trapdoor` | 187 |
 | Theorem | `rsa_inverter_reduced_units_constructs_factor` | 204 |
-| Theorem | `inverter_as_residual_returns_e` | 230 |
-| Theorem | `pin_lambda_strong_solver_output_is_unit` | 257 |
-| Theorem | `pin_lambda_plus_one_does_not_split` | 265 |
-| Theorem | `pin_lambda_strong_solver_not_residual` | 269 |
-| Theorem | `strong_rsa_solver_pin_e_constructs_factor` | 299 |
+| Theorem | `inverter_as_residual_returns_e` | 236 |
+| Theorem | `pin_lambda_strong_solver_output_is_unit` | 266 |
+| Theorem | `pin_lambda_plus_one_does_not_split` | 274 |
+| Theorem | `pin_lambda_strong_solver_not_residual` | 278 |
+| Theorem | `strong_rsa_solver_pin_e_constructs_factor` | 308 |
 
 ## `SrsaModCbrt.v`
 
@@ -3775,11 +3777,11 @@ in the Rocq tree.  Do not edit by hand.
   - L493: K5 — Williams [(2/p)] is the KeyGen shape, not a transcript bit
   - L545: K13 / T6 — odd [d] sends [−1] to [−1]; no extra 2-height
   - L574: RSA inverter vs Rabin inverter
-  - L631: T7 — finite products of raw signatures
-  - L703: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
-  - L782: Constructor slot vs K1
-  - L820: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
-  - L850: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
+  - L637: T7 — finite products of raw signatures
+  - L709: T16 — a [(·/p)] oracle plus the public product is [(·/q)]
+  - L788: Constructor slot vs K1
+  - L826: T8 — [e=3], a cube below [N] *is* a raw signature of that cube
+  - L856: T10 — Bleichenbacher wrap: a residue in [0, B) pins an interval
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3816,22 +3818,22 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `non_williams_two_chars` | 535 |
 | Theorem | `sign_neg1_odd` | 547 |
 | Theorem | `odd_exp_preserves_minus1` | 559 |
-| Theorem | `rsa_inverter_recovers_message` | 605 |
-| Theorem | `sign_hom_3` | 637 |
-| Theorem | `sign_of_msg_product_one` | 653 |
-| Theorem | `sign_weighted_commute` | 670 |
-| Theorem | `sign_weighted_product` | 684 |
-| Lemma | `euler_sign_of_pm1` | 711 |
-| Lemma | `euler_sign_sq` | 728 |
-| Theorem | `other_legendre_from_product` | 739 |
-| Theorem | `cipher_jacobi_eq_message` | 752 |
-| Theorem | `onesided_plain_one_factors` | 787 |
-| Theorem | `ctor_slot_mod_r_need_not_factor` | 802 |
-| Theorem | `cube_below_N` | 822 |
-| Theorem | `e3_small_cube_verifies` | 837 |
-| Theorem | `bleiche_wrap_interval` | 852 |
-| Theorem | `pkcs15_prefix_is_type2` | 878 |
-| Theorem | `manger_is_stricter_than_type2` | 888 |
+| Theorem | `rsa_inverter_recovers_message` | 611 |
+| Theorem | `sign_hom_3` | 643 |
+| Theorem | `sign_of_msg_product_one` | 659 |
+| Theorem | `sign_weighted_commute` | 676 |
+| Theorem | `sign_weighted_product` | 690 |
+| Lemma | `euler_sign_of_pm1` | 717 |
+| Lemma | `euler_sign_sq` | 734 |
+| Theorem | `other_legendre_from_product` | 745 |
+| Theorem | `cipher_jacobi_eq_message` | 758 |
+| Theorem | `onesided_plain_one_factors` | 793 |
+| Theorem | `ctor_slot_mod_r_need_not_factor` | 808 |
+| Theorem | `cube_below_N` | 828 |
+| Theorem | `e3_small_cube_verifies` | 843 |
+| Theorem | `bleiche_wrap_interval` | 858 |
+| Theorem | `pkcs15_prefix_is_type2` | 884 |
+| Theorem | `manger_is_stricter_than_type2` | 894 |
 
 ## `TwoPartyPair.v`
 

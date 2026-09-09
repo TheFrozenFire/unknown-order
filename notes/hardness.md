@@ -240,11 +240,17 @@ every reduced residual solver factors). Next slices:
 [`srsa-after.md`](srsa-after.md). Do not read unused as refused.
 
 - An `rsa_inverter` constructs a factor:
-  `rsa_inverter_constructs_factor_open_named`. The inverter recovers
-  `m` (`rsa_inverter_recovers_message`). Rabin `e=2` already factors
-  from a non-associate root (`rabin_oracle_nonassociate_factors`).
+  `rsa_inverter_constructs_factor_open_named` / extraction
+  `rsa_inverter_extracts_factor_open_named` (no `λ` in the type).
+  The inverter recovers `m` (`rsa_inverter_recovers_message`).
+  The pin reduced-units theorem uses `pin_lam` via
+  `inverter_as_residual`. Rabin `e=2` already factors from a
+  non-associate root (`rabin_oracle_nonassociate_factors`).
 - A Strong-RSA solver constructs a factor:
-  `strong_rsa_solver_constructs_factor_open_named`.
+  `strong_rsa_solver_constructs_factor_open_named` / extraction
+  `strong_rsa_solver_extracts_factor_open_named` (no `λ`).
+  `λ+1` inhabits without gcd-splitting
+  (`pin_lambda_strong_solver`). Do not prove `~ forall Solve, exists f`.
 - A residual solver (leftover leaf, every unit `y`) constructs a
   factor: `residual_solver_constructs_factor_open_named`. A single
   leftover pair does not always split (`matching_247_*`); invert from

@@ -596,8 +596,14 @@ Definition rsa_inverter_constructs_factor_open_named : Prop :=
   forall (R : RSAInstance) (Inv : rsa_inverter (rsa_N R) (rsa_e R)),
     exists f, 1 < f < rsa_N R /\ (f | rsa_N R).
 
-(** From [N], [e], and the graph of [Inv] — no [RSAInstance].
-    Unused means unproved, on-goal.  Do not inhabit. *)
+(** From [N], [e], and the graph of [Inv] — no [RSAInstance],
+    no [λ] in the type.  Uniqueness of unit [e]-th roots needs
+    [gcd(e,λ)=1].  The pin theorem
+    [rsa_inverter_reduced_units_constructs_factor_pin] uses
+    [inverter_as_residual], which writes [pin_lam] into a residual
+    solver; that is not this named.  Rabin [e=2] is
+    [rabin_oracle_nonassociate_factors].  Unused means unproved,
+    on-goal.  Do not inhabit. *)
 Definition rsa_inverter_extracts_factor_open_named : Prop :=
   forall (N e : Z) (Inv : rsa_inverter N e),
     exists f, 1 < f < N /\ (f | N).

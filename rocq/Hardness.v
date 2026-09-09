@@ -88,7 +88,13 @@ Definition strong_rsa_solver_constructs_factor_open_named : Prop :=
     exists f, Problem_Factor (rsa_N R) f.
 
 (** From [N] and the graph of [Solve] — no [RSAInstance], no [λ]
-    in the type.  Unused means unproved, on-goal.  Do not inhabit. *)
+    in the type.  [λ+1] inhabits the solver type when [λ] is known
+    and does not gcd-split ([pin_lambda_strong_solver],
+    [pin_lambda_plus_one_does_not_split]).  Annihilator-[e]
+    ([λ | e−1]) Millers from [e−1]; residual excludes that class.
+    Do not prove [~ forall Solve, exists f]: Miller-from-[d] makes
+    [exists f] true independently of Solve.  Unused means unproved,
+    on-goal.  Do not inhabit. *)
 Definition strong_rsa_solver_extracts_factor_open_named : Prop :=
   forall (N : Z) (Solve : strong_rsa_solver N),
     exists f, Problem_Factor N f.

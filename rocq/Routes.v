@@ -31,7 +31,21 @@ Open Scope Z_scope.
     and [rsa_p] inhabits them.  Do not inhabit.  The extraction forms
     ([residual_solver_extracts_factor_open_named] and siblings) quantify
     over [N] and the solver graph, with no [RSAInstance].  Unused means
-    unproved, on-goal.  [Check] is not a hypothesis. *)
+    unproved, on-goal.  [Check] is not a hypothesis.
+
+    Inverter remainder: [rsa_inverter_extracts_factor_open_named] is
+    [forall N e Inv], no [λ].  Uniqueness of unit [e]-th roots needs
+    [gcd(e,λ)=1].  The pin theorem
+    [rsa_inverter_reduced_units_constructs_factor_pin] uses
+    [inverter_as_residual], which writes [pin_lam] into a residual
+    solver.  Rabin [e=2] is [rabin_oracle_nonassociate_factors].
+    Do not inhabit.
+
+    Strong-RSA remainder: [strong_rsa_solver_extracts_factor_open_named]
+    is [forall N Solve], no [λ].  [λ+1] inhabits and does not gcd-split
+    ([pin_lambda_strong_solver], [pin_lambda_plus_one_does_not_split]).
+    Annihilator-[e] Millers from [e−1]; residual excludes that class.
+    Do not prove [~ forall Solve, exists f].  Do not inhabit. *)
 
 Check residual_solver_constructs_factor_open_named.
 Check residual_solver_extracts_factor_open_named.

@@ -214,6 +214,12 @@ Proof.
   - eexists. apply pin_miller_from_d_factors.
 Qed.
 
+(** ** [inverter_as_residual] writes [pin_lam]
+
+    [inverter_as_residual] writes [pin_e] and [pin_lam] into a
+    residual solver.  That is why the pin inverter theorem is not
+    [rsa_inverter_extracts_factor_open_named] (no [λ] in that type).
+    Not [rsa_inverter_extracts_factor_open_named]. *)
 Definition inverter_as_residual
     (Inv : rsa_inverter_reduced_units pin_N pin_e)
     : residual_solver_reduced pin_N pin_lam.
@@ -238,7 +244,10 @@ Proof. intros Inv y Hrng Hy. reflexivity. Qed.
     ([lambda_solves_strong_RSA]).  That solver's output is the
     challenge itself, a unit, so [gcd] is 1.  The same witness is
     not a residual leaf ([lambda_plus_one_witness_not_residual]).
-    Not [strong_rsa_solver_constructs_factor_open_named]. *)
+    [strong_rsa_solver_extracts_factor_open_named] has no [λ]; this
+    inhabitant uses [pin_lam].  Do not prove [~ forall Solve, exists f].
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Not [strong_rsa_solver_extracts_factor_open_named]. *)
 
 Definition strong_rsa_solver_units (N : Z) : Type :=
   forall y, 0 <= y < N -> Z.coprime y N ->
