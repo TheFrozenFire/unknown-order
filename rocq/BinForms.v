@@ -420,14 +420,15 @@ Qed.
 
     Special-cased on a unit leading coefficient so [id ∘ f = f]
     holds on representatives, not just classes.  The general branch
-    is the Bézout formula; [f ∘ f⁻¹] has leading coefficient 1 and
+    is the Bézout formula ([solve_cong] uses [Z.extgcd], not
+    [Z.ggcd] divisors); [f ∘ f⁻¹] has leading coefficient 1 and
     is therefore equivalent to the identity. *)
 
 Definition bqf_comp_gcd (f g : bqf) : Z :=
   Z.gcd (Z.gcd (bqf_a f) (bqf_a g)) ((bqf_b f + bqf_b g) / 2).
 
 Definition solve_cong (a m target : Z) : Z :=
-  let '(d, (u, _)) := Z.ggcd a m in
+  let '(u, _, d) := Z.extgcd a m in
   u * (target / d).
 
 Definition dirichlet_B (f g : bqf) : Z :=
@@ -450,6 +451,13 @@ Lemma compose_gcd_id_l :
   forall D f, bqf_comp_gcd (bqf_id D) f = 1.
 Proof.
   intros D f. unfold bqf_comp_gcd. rewrite bqf_id_a, Z.gcd_1_l, Z.gcd_1_l.
+  reflexivity.
+Qed.
+
+Lemma compose_gcd_id_r :
+  forall D f, bqf_comp_gcd f (bqf_id D) = 1.
+Proof.
+  intros D f. unfold bqf_comp_gcd. rewrite bqf_id_a, Z.gcd_1_r, Z.gcd_1_l.
   reflexivity.
 Qed.
 
@@ -675,7 +683,8 @@ Qed.
     (neither leading coefficient a unit, not an inverse pair) is
     [compose_preserves_disc_open_named].  Inverse pairs, unit
     leading coefficient, and ambiguous self-composition are
-    theorems.  Unused means unproved, on-goal. *)
+    theorems.  A pin of the remaining branch is
+    [compose_neg455_5_7_of_disc].  Unused means unproved, on-goal. *)
 Definition compose_preserves_disc_open_named (f g : bqf) : Prop :=
   bqf_disc (bqf_compose f g) = bqf_disc f /\
   bqf_primitive (bqf_compose f g).
@@ -691,7 +700,7 @@ Lemma solve_cong_target_0 :
   forall a m, solve_cong a m 0 = 0.
 Proof.
   intros a m. unfold solve_cong.
-  destruct (Z.ggcd a m) as [d [u _]].
+  destruct (Z.extgcd a m) as [[u v] d].
   assert (0 / d = 0) as Hz.
   { destruct (Z.eq_dec d 0) as [Hd|Hd]; [subst; reflexivity|].
     apply Z.div_0_l. exact Hd. }
@@ -1037,6 +1046,40 @@ Proof.
   - apply compose_inv_equiv_id; [apply iq_neg403 | apply form_neg403_amb_red_of_disc].
   - apply compose_inv_equiv_id; [apply iq_neg455 | apply form_neg455_5_of_disc].
 Qed.
+
+(** ** Remaining two-form branch, pin
+
+    Neither leading coefficient a unit, not an inverse pair:
+    [form_neg455_5 ∘ form_neg455_7] on [Δ = −455].  Right identity
+    on a non-unit leading coefficient.  [solve_cong] is Bézout.
+    Not [compose_preserves_disc_open_named].
+    Cross-confirmed by [cas/250]. *)
+
+Theorem compose_id_right_neg87 :
+  bqf_compose form_neg87_amb (bqf_id (-87)) = form_neg87_amb.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem compose_id_right_neg455_5 :
+  bqf_compose form_neg455_5 (bqf_id (-455)) = form_neg455_5.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem compose_neg455_5_7_of_disc :
+  of_disc (bqf_compose form_neg455_5 form_neg455_7) (-455).
+Proof.
+  unfold of_disc, bqf_disc, bqf_primitive.
+  split; vm_compute; reflexivity.
+Qed.
+
+Theorem compose_neg455_5_7_leading :
+  bqf_a (bqf_compose form_neg455_5 form_neg455_7) = 35.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem compose_neg455_5_7_not_units :
+  1 < Z.abs (bqf_a form_neg455_5) /\
+  1 < Z.abs (bqf_a form_neg455_7).
+Proof. unfold form_neg455_5, form_neg455_7. simpl. lia. Qed.
+
+(** ** Catalog LowOrder on [Cl(Δ)] *)
 
 Theorem catalog_wins_LowOrder_B2 :
   Problem_LowOrder_Cl (-87) 2 form_neg87_amb /\

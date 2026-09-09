@@ -13,9 +13,9 @@ Generated.  Do not edit by hand.
 
 | Name | File | Line | Status | Used at |
 |---|---|---:|---|---|
-| `compose_preserves_disc_open_named` | `BinForms.v` | 679 | open | — |
-| `compose_assoc_open_named` | `BinForms.v` | 806 | open | — |
-| `compose_left_compat_open_named` | `BinForms.v` | 816 | open | — |
+| `compose_preserves_disc_open_named` | `BinForms.v` | 688 | open | — |
+| `compose_assoc_open_named` | `BinForms.v` | 815 | open | — |
+| `compose_left_compat_open_named` | `BinForms.v` | 825 | open | — |
 | `strong_rsa_solver_constructs_factor_open_named` | `Hardness.v` | 86 | open | — |
 | `strong_rsa_solver_extracts_factor_open_named` | `Hardness.v` | 98 | open | — |
 | `pratt_complete_open_named` | `Pratt.v` | 117 | open | — |
@@ -75,6 +75,16 @@ A `(** **` subsection whose comment says `Not [foo_open_named]`
 Theorem/Lemma/Corollary until the next section comment. Those
 results do not inhabit the live target. Generated from `.v`
 comments; do not maintain this table by hand.
+
+### `compose_preserves_disc_open_named`
+
+| Closed result | File | Line |
+|---|---|---:|
+| `compose_id_right_neg87` | `BinForms.v` | 1058 |
+| `compose_id_right_neg455_5` | `BinForms.v` | 1062 |
+| `compose_neg455_5_7_of_disc` | `BinForms.v` | 1066 |
+| `compose_neg455_5_7_leading` | `BinForms.v` | 1073 |
+| `compose_neg455_5_7_not_units` | `BinForms.v` | 1077 |
 
 ### `pratt_complete_open_named`
 
@@ -470,4 +480,4 @@ comments; do not maintain this table by hand.
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 278 |
 | `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | 308 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 359 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 364 does-not-discharge rows._

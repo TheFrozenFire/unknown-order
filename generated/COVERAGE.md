@@ -153,8 +153,10 @@ in the Rocq tree.  Do not edit by hand.
   - L166: SL2 action and proper equivalence
   - L335: Represented values: a reduced form with [a > 1] is not principal
   - L419: Dirichlet composition
-  - L836: Ambiguous forms from a divisor of [Δ]
-  - L887: Catalog: [Δ ∈ {−23, −47, −87, −403, −455}]
+  - L845: Ambiguous forms from a divisor of [Δ]
+  - L896: Catalog: [Δ ∈ {−23, −47, −87, −403, −455}]
+  - L1050: Remaining two-form branch, pin
+  - L1082: Catalog LowOrder on [Cl(Δ)]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -194,66 +196,72 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `z_le_abs` | 357 |
 | Lemma | `reduced_eval_ge_a` | 360 |
 | Theorem | `reduced_a_gt_1_not_principal` | 399 |
-| Lemma | `compose_gcd_id_l` | 449 |
-| Lemma | `dirichlet_B_id_l` | 456 |
-| Theorem | `compose_id_left` | 463 |
-| Lemma | `compose_inv_gcd` | 489 |
-| Theorem | `compose_inv_leading_one` | 497 |
-| Lemma | `dirichlet_B_inv_plus_2` | 507 |
-| Lemma | `four_divides_B2_minus_disc_inv` | 520 |
-| Lemma | `reconstruct_disc_div4` | 530 |
-| Lemma | `compose_inv_c` | 537 |
-| Lemma | `compose_inv_primitive` | 550 |
-| Theorem | `compose_inv_of_disc` | 561 |
-| Theorem | `form_a_one_equiv_id` | 581 |
-| Theorem | `compose_inv_equiv_id` | 658 |
-| Lemma | `ambiguous_div_is_ambiguous` | 686 |
-| Lemma | `solve_cong_target_0` | 690 |
-| Lemma | `compose_self_gcd_div` | 701 |
-| Lemma | `dirichlet_B_self_div` | 718 |
-| Theorem | `compose_self_leading_one` | 727 |
-| Lemma | `compose_self_b` | 739 |
-| Lemma | `compose_self_c` | 745 |
-| Lemma | `four_divides_b2_minus_disc` | 761 |
-| Theorem | `compose_self_of_disc` | 768 |
-| Theorem | `compose_self_ambiguous_equiv_id` | 790 |
-| Theorem | `compose_assoc_id_inv` | 822 |
-| Lemma | `amb_from_div_ambiguous` | 844 |
-| Lemma | `amb_from_div_disc_mod0` | 852 |
-| Lemma | `amb_from_div_disc_mod1` | 870 |
-| Lemma | `iq_neg23` | 910 |
-| Lemma | `iq_neg47` | 913 |
-| Lemma | `iq_neg87` | 916 |
-| Lemma | `iq_neg403` | 919 |
-| Lemma | `iq_neg455` | 922 |
-| Theorem | `form_neg87_amb_of_disc` | 925 |
-| Theorem | `form_neg403_amb_of_disc` | 928 |
-| Theorem | `form_neg403_amb_red_of_disc` | 931 |
-| Theorem | `form_neg455_5_of_disc` | 934 |
-| Theorem | `form_neg455_7_of_disc` | 937 |
-| Theorem | `form_neg455_13_red_of_disc` | 940 |
-| Theorem | `form_neg87_amb_reduced` | 943 |
-| Theorem | `form_neg403_amb_red_reduced` | 946 |
-| Theorem | `form_neg455_5_reduced` | 949 |
-| Theorem | `form_neg455_7_reduced` | 952 |
-| Theorem | `form_neg455_13_red_reduced` | 955 |
-| Theorem | `form_neg87_amb_is_ambiguous` | 958 |
-| Theorem | `form_neg403_amb_is_ambiguous` | 961 |
-| Theorem | `form_neg403_amb_red_is_ambiguous` | 964 |
-| Theorem | `form_neg455_5_is_ambiguous` | 967 |
-| Theorem | `form_neg455_7_is_ambiguous` | 970 |
-| Theorem | `form_neg455_13_red_is_ambiguous` | 973 |
-| Theorem | `form_neg87_not_principal` | 976 |
-| Theorem | `form_neg403_not_principal` | 985 |
-| Theorem | `form_neg455_5_not_principal` | 994 |
-| Theorem | `form_neg455_7_not_principal` | 1003 |
-| Theorem | `form_neg455_13_not_principal` | 1012 |
-| Theorem | `catalog_compose_inv_is_principal` | 1030 |
-| Theorem | `catalog_wins_LowOrder_B2` | 1041 |
-| Lemma | `bqf_exp_0` | 1074 |
-| Lemma | `bqf_exp_1` | 1077 |
-| Lemma | `bqf_exp_2` | 1087 |
-| Theorem | `bqf_exp_2_ambiguous_div` | 1097 |
+| Lemma | `compose_gcd_id_l` | 450 |
+| Lemma | `compose_gcd_id_r` | 457 |
+| Lemma | `dirichlet_B_id_l` | 464 |
+| Theorem | `compose_id_left` | 471 |
+| Lemma | `compose_inv_gcd` | 497 |
+| Theorem | `compose_inv_leading_one` | 505 |
+| Lemma | `dirichlet_B_inv_plus_2` | 515 |
+| Lemma | `four_divides_B2_minus_disc_inv` | 528 |
+| Lemma | `reconstruct_disc_div4` | 538 |
+| Lemma | `compose_inv_c` | 545 |
+| Lemma | `compose_inv_primitive` | 558 |
+| Theorem | `compose_inv_of_disc` | 569 |
+| Theorem | `form_a_one_equiv_id` | 589 |
+| Theorem | `compose_inv_equiv_id` | 666 |
+| Lemma | `ambiguous_div_is_ambiguous` | 695 |
+| Lemma | `solve_cong_target_0` | 699 |
+| Lemma | `compose_self_gcd_div` | 710 |
+| Lemma | `dirichlet_B_self_div` | 727 |
+| Theorem | `compose_self_leading_one` | 736 |
+| Lemma | `compose_self_b` | 748 |
+| Lemma | `compose_self_c` | 754 |
+| Lemma | `four_divides_b2_minus_disc` | 770 |
+| Theorem | `compose_self_of_disc` | 777 |
+| Theorem | `compose_self_ambiguous_equiv_id` | 799 |
+| Theorem | `compose_assoc_id_inv` | 831 |
+| Lemma | `amb_from_div_ambiguous` | 853 |
+| Lemma | `amb_from_div_disc_mod0` | 861 |
+| Lemma | `amb_from_div_disc_mod1` | 879 |
+| Lemma | `iq_neg23` | 919 |
+| Lemma | `iq_neg47` | 922 |
+| Lemma | `iq_neg87` | 925 |
+| Lemma | `iq_neg403` | 928 |
+| Lemma | `iq_neg455` | 931 |
+| Theorem | `form_neg87_amb_of_disc` | 934 |
+| Theorem | `form_neg403_amb_of_disc` | 937 |
+| Theorem | `form_neg403_amb_red_of_disc` | 940 |
+| Theorem | `form_neg455_5_of_disc` | 943 |
+| Theorem | `form_neg455_7_of_disc` | 946 |
+| Theorem | `form_neg455_13_red_of_disc` | 949 |
+| Theorem | `form_neg87_amb_reduced` | 952 |
+| Theorem | `form_neg403_amb_red_reduced` | 955 |
+| Theorem | `form_neg455_5_reduced` | 958 |
+| Theorem | `form_neg455_7_reduced` | 961 |
+| Theorem | `form_neg455_13_red_reduced` | 964 |
+| Theorem | `form_neg87_amb_is_ambiguous` | 967 |
+| Theorem | `form_neg403_amb_is_ambiguous` | 970 |
+| Theorem | `form_neg403_amb_red_is_ambiguous` | 973 |
+| Theorem | `form_neg455_5_is_ambiguous` | 976 |
+| Theorem | `form_neg455_7_is_ambiguous` | 979 |
+| Theorem | `form_neg455_13_red_is_ambiguous` | 982 |
+| Theorem | `form_neg87_not_principal` | 985 |
+| Theorem | `form_neg403_not_principal` | 994 |
+| Theorem | `form_neg455_5_not_principal` | 1003 |
+| Theorem | `form_neg455_7_not_principal` | 1012 |
+| Theorem | `form_neg455_13_not_principal` | 1021 |
+| Theorem | `catalog_compose_inv_is_principal` | 1039 |
+| Theorem | `compose_id_right_neg87` | 1058 |
+| Theorem | `compose_id_right_neg455_5` | 1062 |
+| Theorem | `compose_neg455_5_7_of_disc` | 1066 |
+| Theorem | `compose_neg455_5_7_leading` | 1073 |
+| Theorem | `compose_neg455_5_7_not_units` | 1077 |
+| Theorem | `catalog_wins_LowOrder_B2` | 1084 |
+| Lemma | `bqf_exp_0` | 1117 |
+| Lemma | `bqf_exp_1` | 1120 |
+| Lemma | `bqf_exp_2` | 1130 |
+| Theorem | `bqf_exp_2_ambiguous_div` | 1140 |
 
 ## `BitLeak.v`
 
@@ -3996,4 +4004,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2817 theorems/lemmas/corollaries/examples across 124 files._
+_2823 theorems/lemmas/corollaries/examples across 124 files._

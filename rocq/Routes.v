@@ -52,7 +52,14 @@ Open Scope Z_scope.
     factor list and recursive certificates as hyps; soundness is
     [pratt_verified_implies_prime] (gcd form, Euclid on exponents).
     Pin packages [pratt_11_verified] / [pratt_31_verified].
-    Not [pratt_complete_open_named]. *)
+    Not [pratt_complete_open_named].
+
+    Dirichlet remainder: [compose_preserves_disc_open_named] is
+    forall two-form.  The pin
+    [compose_neg455_5_7_of_disc] is coprime non-unit leading
+    coefficients, not an inverse pair; [solve_cong] is Bézout
+    ([Z.extgcd]).  Right identity on a non-unit [a] is
+    [compose_id_right_neg87].  Not the compose opens. *)
 
 Check residual_solver_constructs_factor_open_named.
 Check residual_solver_extracts_factor_open_named.
@@ -166,3 +173,7 @@ Check orders_attained_generate_lambda.
 Check compose_preserves_disc_open_named.
 Check compose_assoc_open_named.
 Check compose_left_compat_open_named.
+Check compose_id_right_neg87.
+Check compose_id_right_neg455_5.
+Check compose_neg455_5_7_of_disc.
+Check compose_neg455_5_7_leading.

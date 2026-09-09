@@ -30,7 +30,7 @@ of Rocq/CAS edits.
 | Q5 | Inverter remainder: `λ` is not in the type; pin theorem uses `pin_lam` | done | Q0 |
 | Q6 | Strong-RSA remainder: `λ+1` inhabits without splitting; do not prove `~ forall` | done | Q0 |
 | Q7 | Pratt completeness as given-factorization verifier, not `forall p` construction | done | — |
-| Q8 | Dirichlet compose remaining branch (not RSA) | pending | — |
+| Q8 | Dirichlet compose remaining branch (not RSA) | done | — |
 
 Pick **one slice per turn** unless the user says otherwise.
 Do not skip a “Depends” cell. Do not invent a new leftover/fold/`K`
