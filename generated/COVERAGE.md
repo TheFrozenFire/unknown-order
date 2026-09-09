@@ -3461,8 +3461,8 @@ in the Rocq tree.  Do not edit by hand.
   - L352: Residual solver with [e ≡ pin_e (mod λ)]
   - L466: Fixed residual [e] with a known inverse
   - L705: Unique unit [e]-th roots from [gcd(e,λ)=1]
-  - L821: Bézout inverse of residual [e] modulo [λ]
-  - L881: Invert-all-units polynomial at a residual [e]
+  - L858: Bézout inverse of residual [e] modulo [λ]
+  - L918: Invert-all-units polynomial at a residual [e]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3511,17 +3511,19 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_inv11_mod_lam` | 677 |
 | Theorem | `pin_miller_from_e11_inv` | 681 |
 | Theorem | `residual_solver_reduced_pin_e_via_fixed_e` | 692 |
-| Lemma | `powm_mul_l_mod` | 714 |
-| Lemma | `pin_unit_inverse` | 724 |
-| Theorem | `unique_unit_eth_root_from_coprime_e` | 744 |
-| Theorem | `pin_e5_fifth_roots_not_unique` | 800 |
-| Theorem | `pin_unique_unit_cube_from_coprime` | 809 |
-| Theorem | `residual_inv_mod_lam` | 829 |
-| Theorem | `residual_solver_reduced_fixed_e_constructs_factor_from_e` | 846 |
-| Theorem | `pin_e7_solver_constructs_factor_from_e` | 867 |
-| Theorem | `invert_all_units_poly_at_e` | 889 |
-| Theorem | `pin_X23_inverts_at_7` | 934 |
-| Theorem | `pin_X23_poly_at_7_constructs_factor` | 948 |
+| Lemma | `powm_mul_l_mod` | 716 |
+| Lemma | `unit_inverse_semiprime` | 726 |
+| Lemma | `pin_unit_inverse` | 750 |
+| Theorem | `unique_unit_eth_root_coprime` | 760 |
+| Theorem | `unique_unit_eth_root_from_coprime_e` | 820 |
+| Theorem | `pin_e5_fifth_roots_not_unique` | 837 |
+| Theorem | `pin_unique_unit_cube_from_coprime` | 846 |
+| Theorem | `residual_inv_mod_lam` | 866 |
+| Theorem | `residual_solver_reduced_fixed_e_constructs_factor_from_e` | 883 |
+| Theorem | `pin_e7_solver_constructs_factor_from_e` | 904 |
+| Theorem | `invert_all_units_poly_at_e` | 926 |
+| Theorem | `pin_X23_inverts_at_7` | 971 |
+| Theorem | `pin_X23_poly_at_7_constructs_factor` | 985 |
 
 ## `SrsaWriteE.v`
 
@@ -4012,4 +4014,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2828 theorems/lemmas/corollaries/examples across 124 files._
+_2830 theorems/lemmas/corollaries/examples across 124 files._

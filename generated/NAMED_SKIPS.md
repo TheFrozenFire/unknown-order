@@ -333,17 +333,19 @@ comments; do not maintain this table by hand.
 | `pin_inv11_mod_lam` | `SrsaVaryingE.v` | 677 |
 | `pin_miller_from_e11_inv` | `SrsaVaryingE.v` | 681 |
 | `residual_solver_reduced_pin_e_via_fixed_e` | `SrsaVaryingE.v` | 692 |
-| `powm_mul_l_mod` | `SrsaVaryingE.v` | 714 |
-| `pin_unit_inverse` | `SrsaVaryingE.v` | 724 |
-| `unique_unit_eth_root_from_coprime_e` | `SrsaVaryingE.v` | 744 |
-| `pin_e5_fifth_roots_not_unique` | `SrsaVaryingE.v` | 800 |
-| `pin_unique_unit_cube_from_coprime` | `SrsaVaryingE.v` | 809 |
-| `residual_inv_mod_lam` | `SrsaVaryingE.v` | 829 |
-| `residual_solver_reduced_fixed_e_constructs_factor_from_e` | `SrsaVaryingE.v` | 846 |
-| `pin_e7_solver_constructs_factor_from_e` | `SrsaVaryingE.v` | 867 |
-| `invert_all_units_poly_at_e` | `SrsaVaryingE.v` | 889 |
-| `pin_X23_inverts_at_7` | `SrsaVaryingE.v` | 934 |
-| `pin_X23_poly_at_7_constructs_factor` | `SrsaVaryingE.v` | 948 |
+| `powm_mul_l_mod` | `SrsaVaryingE.v` | 716 |
+| `unit_inverse_semiprime` | `SrsaVaryingE.v` | 726 |
+| `pin_unit_inverse` | `SrsaVaryingE.v` | 750 |
+| `unique_unit_eth_root_coprime` | `SrsaVaryingE.v` | 760 |
+| `unique_unit_eth_root_from_coprime_e` | `SrsaVaryingE.v` | 820 |
+| `pin_e5_fifth_roots_not_unique` | `SrsaVaryingE.v` | 837 |
+| `pin_unique_unit_cube_from_coprime` | `SrsaVaryingE.v` | 846 |
+| `residual_inv_mod_lam` | `SrsaVaryingE.v` | 866 |
+| `residual_solver_reduced_fixed_e_constructs_factor_from_e` | `SrsaVaryingE.v` | 883 |
+| `pin_e7_solver_constructs_factor_from_e` | `SrsaVaryingE.v` | 904 |
+| `invert_all_units_poly_at_e` | `SrsaVaryingE.v` | 926 |
+| `pin_X23_inverts_at_7` | `SrsaVaryingE.v` | 971 |
+| `pin_X23_poly_at_7_constructs_factor` | `SrsaVaryingE.v` | 985 |
 | `srsa_residual_pin` | `StrongRSAPeel.v` | 257 |
 | `srsa_residual_pin187` | `StrongRSAPeel.v` | 268 |
 
@@ -487,4 +489,4 @@ comments; do not maintain this table by hand.
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 278 |
 | `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | 308 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 366 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 368 does-not-discharge rows._

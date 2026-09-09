@@ -704,12 +704,14 @@ Qed.
 
 (** ** Unique unit [e]-th roots from [gcd(e,λ)=1]
 
+    General for distinct primes ([unique_unit_eth_root_coprime]);
+    the pin wrapper is [unique_unit_eth_root_from_coprime_e].
     Kernel of the [e]-power map on units is trivial when
     [gcd(e,λ)=1]: [ord(x z⁻¹) | gcd(e,λ)].  No inverse of [e] is
     handed over.  [e = 5] shares [λ], so [1] and [g^{16}] are
     distinct 5th roots of [1].  Not
     [residual_solver_constructs_factor_open_named].
-    Cross-confirmed by [cas/237]. *)
+    Cross-confirmed by [cas/237], [cas/253]. *)
 
 Lemma powm_mul_l_mod :
   forall a b e n,
@@ -721,24 +723,98 @@ Proof.
   unfold powm. rewrite Z.pow_mul_l by lia. apply Z.mul_mod; lia.
 Qed.
 
+Lemma unit_inverse_semiprime :
+  forall p q a,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    Z.coprime a (p * q) ->
+    exists w, (a * w) mod (p * q) = 1 /\ Z.coprime w (p * q).
+Proof.
+  intros p q a Hp Hq Hneq Ha.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  pose proof (lambda_semiprime_pos p q Hp Hq) as Hlam.
+  exists (powm a (lambda_semiprime p q - 1) (p * q)).
+  split.
+  - transitivity (powm a (lambda_semiprime p q) (p * q)).
+    + rewrite <- Z.mul_mod_idemp_l by nia.
+      rewrite <- (powm_1_r a (p * q)) by nia.
+      rewrite <- powm_add_r by nia.
+      f_equal. lia.
+    + apply carmichael_semiprime; assumption.
+  - unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_pow_l; [lia | exact Ha].
+Qed.
+
 Lemma pin_unit_inverse :
   forall a,
     Z.coprime a pin_N ->
     exists w, (a * w) mod pin_N = 1 /\ Z.coprime w pin_N.
 Proof.
-  intros a Ha.
-  exists (powm a (pin_lam - 1) pin_N).
-  split.
-  - transitivity (powm a pin_lam pin_N).
-    + rewrite <- Z.mul_mod_idemp_l by lia.
-      replace pin_lam with (1 + (pin_lam - 1)) by lia.
-      rewrite powm_add_r by lia.
-      rewrite powm_1_r by lia. reflexivity.
-    + rewrite <- rsa_test_lambda.
-      apply (carmichael_semiprime pin_p pin_q a
-               pin_p_prime pin_q_prime pin_p_neq_q Ha).
-  - unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
-    apply Z.coprime_pow_l; [lia | exact Ha].
+  intros a Ha. change pin_N with (pin_p * pin_q).
+  apply unit_inverse_semiprime;
+    [apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q | exact Ha].
+Qed.
+
+Theorem unique_unit_eth_root_coprime :
+  forall p q e x z,
+    Z.prime p ->
+    Z.prime q ->
+    p <> q ->
+    0 < e ->
+    Z.gcd e (lambda_semiprime p q) = 1 ->
+    Z.coprime x (p * q) ->
+    Z.coprime z (p * q) ->
+    powm x e (p * q) = powm z e (p * q) ->
+    x mod (p * q) = z mod (p * q).
+Proof.
+  intros p q e x z Hp Hq Hneq He Hgcd Hx Hz Heq.
+  pose proof (Z.prime_ge_2 p Hp).
+  pose proof (Z.prime_ge_2 q Hq).
+  assert (HN : 1 < p * q) by nia.
+  destruct (unit_inverse_semiprime p q z Hp Hq Hneq Hz) as [w [Hw Hwc]].
+  set (u := (x * w) mod (p * q)).
+  assert (Hu1 : powm u e (p * q) = 1).
+  { unfold u.
+    rewrite powm_mod_base by lia.
+    rewrite powm_mul_l_mod by lia.
+    assert (Hzw : powm (z * w) e (p * q) = 1).
+    { rewrite <- powm_mod_base with (a := z * w) by lia.
+      rewrite Hw. unfold powm. rewrite Z.pow_1_l by lia.
+      apply Z.mod_1_l. lia. }
+    rewrite powm_mul_l_mod in Hzw by lia.
+    rewrite Heq.
+    exact Hzw. }
+  assert (Huc : Z.coprime u (p * q)).
+  { unfold u, Z.coprime. rewrite Z.gcd_mod_l.
+    apply Z.coprime_mul_l; [exact Hx | exact Hwc]. }
+  destruct (order_exists_from_annihilator u (p * q) e
+              HN He Hu1) as [k [Hord Hk_e]].
+  assert (Hk_lam : (k | lambda_semiprime p q)).
+  { apply (order_divides_lambda p q u k Hp Hq Hneq Huc Hord). }
+  assert (Hk1 : (k | 1)).
+  { destruct (Z.gcd_bezout e (lambda_semiprime p q) 1 Hgcd) as [s [t Hst]].
+    rewrite <- Hst.
+    apply Z.divide_add_r.
+    - destruct Hk_e as [qe Hqe]. exists (s * qe). rewrite Hqe. lia.
+    - destruct Hk_lam as [r Hr]. exists (t * r). rewrite Hr. lia. }
+  assert (k = 1).
+  { apply Z.divide_1_r in Hk1.
+    destruct Hk1 as [Hk1 | Hk1]; [exact Hk1|].
+    destruct Hord as [Hkpos _]. lia. }
+  subst k.
+  assert (Hu_one : u mod (p * q) = 1).
+  { destruct Hord as [_ [Hank _]].
+    rewrite powm_1_r in Hank by lia.
+    exact Hank. }
+  unfold u in Hu_one.
+  rewrite Z.mod_mod in Hu_one by lia.
+  apply (mul_cancel_unit_mod (p * q) w x z).
+  - exact HN.
+  - exact Hwc.
+  - rewrite (Z.mul_comm w x), (Z.mul_comm w z).
+    rewrite Hw, Hu_one. reflexivity.
 Qed.
 
 Theorem unique_unit_eth_root_from_coprime_e :
@@ -751,50 +827,11 @@ Theorem unique_unit_eth_root_from_coprime_e :
     x mod pin_N = z mod pin_N.
 Proof.
   intros e x z He Hgcd Hx Hz Heq.
-  destruct (pin_unit_inverse z Hz) as [w [Hw Hwc]].
-  set (u := (x * w) mod pin_N).
-  assert (Hu1 : powm u e pin_N = 1).
-  { unfold u.
-    rewrite powm_mod_base by lia.
-    rewrite powm_mul_l_mod by lia.
-    assert (Hzw : powm (z * w) e pin_N = 1).
-    { rewrite <- powm_mod_base with (a := z * w) by lia.
-      rewrite Hw. unfold powm. rewrite Z.pow_1_l by lia.
-      apply Z.mod_1_l. lia. }
-    rewrite powm_mul_l_mod in Hzw by lia.
-    rewrite Heq.
-    exact Hzw. }
-  assert (Huc : Z.coprime u pin_N).
-  { unfold u, Z.coprime. rewrite Z.gcd_mod_l.
-    apply Z.coprime_mul_l; [exact Hx | exact Hwc]. }
-  destruct (order_exists_from_annihilator u pin_N e
-              ltac:(lia) He Hu1) as [k [Hord Hk_e]].
-  assert (Hk_lam : (k | pin_lam)).
-  { rewrite <- rsa_test_lambda.
-    apply (order_divides_lambda pin_p pin_q u k
-             pin_p_prime pin_q_prime pin_p_neq_q Huc Hord). }
-  assert (Hk1 : (k | 1)).
-  { destruct (Z.gcd_bezout e pin_lam 1 Hgcd) as [s [t Hst]].
-    rewrite <- Hst.
-    apply Z.divide_add_r.
-    - destruct Hk_e as [q Hq]. exists (s * q). rewrite Hq. lia.
-    - destruct Hk_lam as [r Hr]. exists (t * r). rewrite Hr. lia. }
-  assert (k = 1).
-  { apply Z.divide_1_r in Hk1.
-    destruct Hk1 as [Hk1 | Hk1]; [exact Hk1|].
-    destruct Hord as [Hkpos _]. lia. }
-  subst k.
-  assert (Hu_one : u mod pin_N = 1).
-  { destruct Hord as [_ [Hank _]].
-    rewrite powm_1_r in Hank by lia.
-    exact Hank. }
-  unfold u in Hu_one.
-  rewrite Z.mod_mod in Hu_one by lia.
-  apply (mul_cancel_unit_mod pin_N w x z).
-  - apply pin_N_gt_1.
-  - exact Hwc.
-  - rewrite (Z.mul_comm w x), (Z.mul_comm w z).
-    rewrite Hw, Hu_one. reflexivity.
+  change pin_N with (pin_p * pin_q) in Hx, Hz, Heq |- *.
+  rewrite <- rsa_test_lambda in Hgcd.
+  apply (unique_unit_eth_root_coprime pin_p pin_q e x z);
+    [apply pin_p_prime | apply pin_q_prime | apply pin_p_neq_q
+     | exact He | exact Hgcd | exact Hx | exact Hz | exact Heq].
 Qed.
 
 Theorem pin_e5_fifth_roots_not_unique :

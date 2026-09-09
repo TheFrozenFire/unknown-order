@@ -149,6 +149,7 @@ Check pin_miller_from_e7_inv.
 Check pin_miller_from_e11_inv.
 Check residual_solver_reduced_pin_e_via_fixed_e.
 Check unique_unit_eth_root_from_coprime_e.
+Check unique_unit_eth_root_coprime.
 Check pin_e5_fifth_roots_not_unique.
 Check residual_inv_mod_lam.
 Check residual_solver_reduced_fixed_e_constructs_factor_from_e.
