@@ -33,9 +33,11 @@ of Rocq/CAS edits.
 | Q8 | Dirichlet compose remaining branch (not RSA) | done | — |
 | R1 | Dirichlet assoc remaining case: `{id,f,f}` and the order-3 pin on `Cl(−31)` | done | Q8 |
 
-Q0–Q8 are done. Default next is **R1**, then stop inventing
-Dirichlet pins; the RSA / Pratt / forall-compose nameds stay
-live. Do not resume kernel folds.
+Q0–Q8 are done. Issue #4 remaining invert-all-units clusters
+(window, folds, leftover kernel, N|c) are lifted off pin 187.
+Default next is **R1**, then stop inventing Dirichlet pins; the
+RSA / Pratt / forall-compose nameds stay live. Do not resume
+kernel folds.
 
 Pick **one slice per turn** unless the user says otherwise.
 Do not skip a “Depends” cell. Do not invent a new leftover/fold/`K`

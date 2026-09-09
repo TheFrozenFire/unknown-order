@@ -72,6 +72,13 @@ Check residual_solver_constructs_factor_open_named.
 Check residual_solver_extracts_factor_open_named.
 Check invert_all_units_both_folds_are_local_monomials.
 Check leftover_kernel_span.
+Check short_root_poly_coeff_splits.
+Check no_root_poly_below_dq.
+Check invert_all_units_folds_local_monomials.
+Check leftover_monic_is_geo_kernel.
+Check leftover_kernel_span_mod_q.
+Check invert_all_units_plus_c_kernel_iff.
+Check poly_eval_plus_N_mul_inverts.
 
 Check rsa_inverter_constructs_factor_open_named.
 Check rsa_inverter_extracts_factor_open_named.

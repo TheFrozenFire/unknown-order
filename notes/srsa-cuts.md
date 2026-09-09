@@ -562,6 +562,10 @@ advice `N/17`: `PreprocessGRA.v`.
 | fixed residual `e` with a known inverse is the trapdoor; Miller-from-`e d'−1` | `residual_solver_reduced_fixed_e_constructs_factor` / `pin_e7_solver_constructs_factor` | `SrsaVaryingE.v` | `234`–`236` |
 | unique unit `e`-th roots from `gcd(e,λ)=1` (kernel); `e=5` is not unique | `unique_unit_eth_root_from_coprime_e` / `pin_e5_fifth_roots_not_unique` | `SrsaVaryingE.v` | `237` |
 | unique unit `e`-th roots for general distinct primes; pin 187 is a wrapper | `unique_unit_eth_root_coprime` / `unique_unit_eth_root_from_coprime_e` | `SrsaVaryingE.v` | `237`, `253` |
+| sharp window off pin 187: deg `< q−2` invert-all-units poly has a splitting coeff; no invert poly of deg `< d_q`; needs `p < q < 2p` | `short_root_poly_coeff_splits` / `no_root_poly_below_dq` | `SrsaRootPoly.v` | `165`, `166`, `254` |
+| Fermat folds off pin 187: `fold_p ≡ X^{d_p}`, `fold_q ≡ X^{d_q}` | `invert_all_units_folds_local_monomials` / `invert_all_units_both_folds_are_local_monomials` | `SrsaRootPoly.v` | `186`, `254` |
+| leftover kernel off pin 187: monic deg `q−2` vanishing on `𝔽_q* \ {p}` is `K`; span is 1-dimensional | `leftover_monic_is_geo_kernel` / `leftover_kernel_span_mod_q` | `SrsaRootPoly.v` | `192`, `193`, `254` |
+| binomial `+ c K` inverts every unit iff `N \| c` | `invert_all_units_plus_c_kernel_iff` / `poly_eval_plus_N_mul_inverts` | `SrsaRootPoly.v` | `197`, `254` |
 | Bézout inverse of residual `e` mod `λ`; fixed-`e` solver without a `d'` hyp | `residual_inv_mod_lam` / `residual_solver_reduced_fixed_e_constructs_factor_from_e` | `SrsaVaryingE.v` | `238` |
 | invert-all-units poly at residual `e=7` is `y ↦ y^{23}` | `invert_all_units_poly_at_e` / `pin_X23_poly_at_7_constructs_factor` | `SrsaVaryingE.v` | `239` |
 | dlog of `Solve(g)` recovers `d'`; Miller from the recovered inverse | `residual_solver_reduced_fixed_e_extracts_and_factors` / `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | `240` |
