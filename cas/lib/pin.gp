@@ -131,6 +131,7 @@ pin_253_p = 11; pin_253_q = 23; pin_253 = pin_253_p*pin_253_q; pin_253_lam = 110
 pin_45_p = 3; pin_45_q = 5; pin_45 = pin_45_p^2*pin_45_q; pin_45_lam = 12;
 pin_105_p = 3; pin_105_q = 5; pin_105_r = 7;
 pin_105 = pin_105_p*pin_105_q*pin_105_r; pin_105_lam = 12;
+pin_209_p = 11; pin_209_q = 19; pin_209 = pin_209_p*pin_209_q; pin_209_lam = 90;
 
 init_pin() = {
   p = pin_p; q = pin_q;

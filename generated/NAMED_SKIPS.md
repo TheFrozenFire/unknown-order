@@ -95,10 +95,16 @@ comments; do not maintain this table by hand.
 | `pin_miller_walk_liar_1` | `Miller.v` | 201 |
 | `pin_miller_walk_liar_minus1` | `Miller.v` | 205 |
 | `pin_miller_walk_liar_50` | `Miller.v` | 209 |
-| `rsa_test_miller_split` | `Miller.v` | 214 |
-| `rsa_test_miller_t` | `Miller.v` | 217 |
-| `rsa_test_miller_s` | `Miller.v` | 220 |
-| `rsa_test_base2_splits` | `Miller.v` | 224 |
+| `miller_search_from_miss` | `Miller.v` | 213 |
+| `pin_209_is_blum` | `Miller.v` | 234 |
+| `pin_209_miller_walk_base2_liar` | `Miller.v` | 238 |
+| `pin_209_miller_walk_base3` | `Miller.v` | 242 |
+| `pin_209_miller_search` | `Miller.v` | 250 |
+| `pin_77_miller_walk_base2_hits` | `Miller.v` | 261 |
+| `rsa_test_miller_split` | `Miller.v` | 266 |
+| `rsa_test_miller_t` | `Miller.v` | 269 |
+| `rsa_test_miller_s` | `Miller.v` | 272 |
+| `rsa_test_base2_splits` | `Miller.v` | 276 |
 | `miller_multiple_annihilates` | `MillerHeight.v` | 201 |
 | `miller_height_exists_multiple` | `MillerHeight.v` | 219 |
 | `miller_from_multiple` | `MillerHeight.v` | 257 |
@@ -293,10 +299,16 @@ comments; do not maintain this table by hand.
 | `pin_miller_walk_liar_1` | `Miller.v` | 201 |
 | `pin_miller_walk_liar_minus1` | `Miller.v` | 205 |
 | `pin_miller_walk_liar_50` | `Miller.v` | 209 |
-| `rsa_test_miller_split` | `Miller.v` | 214 |
-| `rsa_test_miller_t` | `Miller.v` | 217 |
-| `rsa_test_miller_s` | `Miller.v` | 220 |
-| `rsa_test_base2_splits` | `Miller.v` | 224 |
+| `miller_search_from_miss` | `Miller.v` | 213 |
+| `pin_209_is_blum` | `Miller.v` | 234 |
+| `pin_209_miller_walk_base2_liar` | `Miller.v` | 238 |
+| `pin_209_miller_walk_base3` | `Miller.v` | 242 |
+| `pin_209_miller_search` | `Miller.v` | 250 |
+| `pin_77_miller_walk_base2_hits` | `Miller.v` | 261 |
+| `rsa_test_miller_split` | `Miller.v` | 266 |
+| `rsa_test_miller_t` | `Miller.v` | 269 |
+| `rsa_test_miller_s` | `Miller.v` | 272 |
+| `rsa_test_base2_splits` | `Miller.v` | 276 |
 | `miller_walk_from_S_eq1` | `MillerHeight.v` | 359 |
 | `miller_walk_from_S_neq1` | `MillerHeight.v` | 377 |
 | `pow2n_add` | `MillerHeight.v` | 389 |
@@ -348,10 +360,16 @@ comments; do not maintain this table by hand.
 | `pin_miller_walk_liar_1` | `Miller.v` | 201 |
 | `pin_miller_walk_liar_minus1` | `Miller.v` | 205 |
 | `pin_miller_walk_liar_50` | `Miller.v` | 209 |
-| `rsa_test_miller_split` | `Miller.v` | 214 |
-| `rsa_test_miller_t` | `Miller.v` | 217 |
-| `rsa_test_miller_s` | `Miller.v` | 220 |
-| `rsa_test_base2_splits` | `Miller.v` | 224 |
+| `miller_search_from_miss` | `Miller.v` | 213 |
+| `pin_209_is_blum` | `Miller.v` | 234 |
+| `pin_209_miller_walk_base2_liar` | `Miller.v` | 238 |
+| `pin_209_miller_walk_base3` | `Miller.v` | 242 |
+| `pin_209_miller_search` | `Miller.v` | 250 |
+| `pin_77_miller_walk_base2_hits` | `Miller.v` | 261 |
+| `rsa_test_miller_split` | `Miller.v` | 266 |
+| `rsa_test_miller_t` | `Miller.v` | 269 |
+| `rsa_test_miller_s` | `Miller.v` | 272 |
+| `rsa_test_base2_splits` | `Miller.v` | 276 |
 | `miller_walk_from_S_eq1` | `MillerHeight.v` | 359 |
 | `miller_walk_from_S_neq1` | `MillerHeight.v` | 377 |
 | `pow2n_add` | `MillerHeight.v` | 389 |
@@ -387,4 +405,4 @@ comments; do not maintain this table by hand.
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 | `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | 55 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 296 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 314 does-not-discharge rows._

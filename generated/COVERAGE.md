@@ -1538,6 +1538,7 @@ in the Rocq tree.  Do not edit by hand.
 - L12: Miller successive-squaring: factor [N] from a multiple of [λ(N)]
   - L106: Square-chain Miller from [(N, M, a)]
   - L147: Sequential-base search on this pin
+  - L224: Blum extra [11×19]: base 2 is a miller liar, base 3 splits
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1554,10 +1555,16 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_miller_walk_liar_1` | 201 |
 | Theorem | `pin_miller_walk_liar_minus1` | 205 |
 | Theorem | `pin_miller_walk_liar_50` | 209 |
-| Theorem | `rsa_test_miller_split` | 214 |
-| Theorem | `rsa_test_miller_t` | 217 |
-| Theorem | `rsa_test_miller_s` | 220 |
-| Theorem | `rsa_test_base2_splits` | 224 |
+| Lemma | `miller_search_from_miss` | 213 |
+| Theorem | `pin_209_is_blum` | 234 |
+| Theorem | `pin_209_miller_walk_base2_liar` | 238 |
+| Theorem | `pin_209_miller_walk_base3` | 242 |
+| Theorem | `pin_209_miller_search` | 250 |
+| Theorem | `pin_77_miller_walk_base2_hits` | 261 |
+| Theorem | `rsa_test_miller_split` | 266 |
+| Theorem | `rsa_test_miller_t` | 269 |
+| Theorem | `rsa_test_miller_s` | 272 |
+| Theorem | `rsa_test_base2_splits` | 276 |
 
 ## `MillerHeight.v`
 
@@ -1786,40 +1793,41 @@ in the Rocq tree.  Do not edit by hand.
 ## `Pin.v`
 
 - L42: Pins
-  - L63: pin187 — textbook inhabitant [11·17=187]
-  - L153: pin1363 — swap-test [29·47=1363]
-  - L243: pin2491 — swap-test [47·53=2491]
-  - L333: Named extra moduli
-  - L378: Campaign alias
-  - L457: Residual pair on the campaign pin
+  - L64: pin187 — textbook inhabitant [11·17=187]
+  - L154: pin1363 — swap-test [29·47=1363]
+  - L244: pin2491 — swap-test [47·53=2491]
+  - L334: Named extra moduli
+  - L397: Campaign alias
+  - L476: Residual pair on the campaign pin
 
 | Kind | Name | Line |
 |---|---|---:|
 | Lemma | `Zprime_sqrt` | 11 |
-| Lemma | `pin187_N_pos` | 120 |
-| Lemma | `pin187_N_gt_1` | 123 |
-| Lemma | `pin187_p_neq_q` | 126 |
-| Lemma | `pin187_p_lt_q` | 129 |
-| Lemma | `pin187_p_prime` | 132 |
-| Lemma | `pin187_q_prime` | 142 |
-| Lemma | `pin1363_N_pos` | 210 |
-| Lemma | `pin1363_N_gt_1` | 213 |
-| Lemma | `pin1363_p_neq_q` | 216 |
-| Lemma | `pin1363_p_lt_q` | 219 |
-| Lemma | `pin1363_p_prime` | 222 |
-| Lemma | `pin1363_q_prime` | 232 |
-| Lemma | `pin2491_N_pos` | 300 |
-| Lemma | `pin2491_N_gt_1` | 303 |
-| Lemma | `pin2491_p_neq_q` | 306 |
-| Lemma | `pin2491_p_lt_q` | 309 |
-| Lemma | `pin2491_p_prime` | 312 |
-| Lemma | `pin2491_q_prime` | 322 |
-| Lemma | `pin_p_prime` | 439 |
-| Lemma | `pin_q_prime` | 442 |
-| Lemma | `pin_N_pos` | 445 |
-| Lemma | `pin_N_gt_1` | 448 |
-| Lemma | `pin_p_neq_q` | 451 |
-| Lemma | `pin_p_lt_q` | 454 |
+| Lemma | `pin187_N_pos` | 121 |
+| Lemma | `pin187_N_gt_1` | 124 |
+| Lemma | `pin187_p_neq_q` | 127 |
+| Lemma | `pin187_p_lt_q` | 130 |
+| Lemma | `pin187_p_prime` | 133 |
+| Lemma | `pin187_q_prime` | 143 |
+| Lemma | `pin1363_N_pos` | 211 |
+| Lemma | `pin1363_N_gt_1` | 214 |
+| Lemma | `pin1363_p_neq_q` | 217 |
+| Lemma | `pin1363_p_lt_q` | 220 |
+| Lemma | `pin1363_p_prime` | 223 |
+| Lemma | `pin1363_q_prime` | 233 |
+| Lemma | `pin2491_N_pos` | 301 |
+| Lemma | `pin2491_N_gt_1` | 304 |
+| Lemma | `pin2491_p_neq_q` | 307 |
+| Lemma | `pin2491_p_lt_q` | 310 |
+| Lemma | `pin2491_p_prime` | 313 |
+| Lemma | `pin2491_q_prime` | 323 |
+| Lemma | `pin_209_q_prime` | 387 |
+| Lemma | `pin_p_prime` | 458 |
+| Lemma | `pin_q_prime` | 461 |
+| Lemma | `pin_N_pos` | 464 |
+| Lemma | `pin_N_gt_1` | 467 |
+| Lemma | `pin_p_neq_q` | 470 |
+| Lemma | `pin_p_lt_q` | 473 |
 
 ## `PollardP1.v`
 
@@ -3954,4 +3962,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2779 theorems/lemmas/corollaries/examples across 124 files._
+_2786 theorems/lemmas/corollaries/examples across 124 files._

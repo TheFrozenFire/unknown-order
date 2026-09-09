@@ -210,6 +210,58 @@ Theorem pin_miller_walk_liar_50 :
   miller_walk pin_N pin_lam 50 = None.
 Proof. vm_compute. reflexivity. Qed.
 
+Lemma miller_search_from_miss :
+  forall N M a fuel,
+    miller_walk N M a = None ->
+    miller_search_from N M a (S fuel) =
+      miller_search_from N M (a + 1) fuel.
+Proof.
+  intros N M a fuel H.
+  cbn [miller_search_from].
+  rewrite H. reflexivity.
+Qed.
+
+(** ** Blum extra [11×19]: base 2 is a miller liar, base 3 splits
+
+    [v₂(p−1)=v₂(q−1)=1] and [v₂(ord 2)] matches, so [miller_walk]
+    at 2 returns [None] ([g₀ ≡ −1]).  Base 3 splits.  [pin_77] is
+    the wrong extra: base 2 still hits there.  Campaign alias
+    stays 187.  Not [residual_solver_constructs_factor_open_named].
+    Not [rsa_inverter_constructs_factor_open_named].
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/247]. *)
+
+Theorem pin_209_is_blum :
+  val2 (pin_209_p - 1) = 1%nat /\ val2 (pin_209_q - 1) = 1%nat.
+Proof. vm_compute. split; reflexivity. Qed.
+
+Theorem pin_209_miller_walk_base2_liar :
+  miller_walk pin_209 pin_209_lam 2 = None.
+Proof. vm_compute. reflexivity. Qed.
+
+Theorem pin_209_miller_walk_base3 :
+  miller_walk pin_209 pin_209_lam 3 = Some pin_209_p /\
+  1 < pin_209_p < pin_209 /\ (pin_209_p | pin_209).
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [lia | exists pin_209_q; reflexivity].
+Qed.
+
+Theorem pin_209_miller_search :
+  miller_search pin_209 pin_209_lam = Some (3, pin_209_p).
+Proof.
+  unfold miller_search.
+  change (Z.to_nat (pin_209 - 3)) with (S (S (Z.to_nat (pin_209 - 5)))).
+  rewrite miller_search_from_miss
+    by (apply pin_209_miller_walk_base2_liar).
+  apply miller_search_from_hit.
+  apply (proj1 pin_209_miller_walk_base3).
+Qed.
+
+Theorem pin_77_miller_walk_base2_hits :
+  miller_walk pin_77 pin_77_lam 2 = Some pin_77_p.
+Proof. vm_compute. reflexivity. Qed.
+
 (** On the pin, [M = λ], so [s = v₂(λ)] and [t] is the odd part. *)
 Theorem rsa_test_miller_split : miller_M rsa_test = pin_lam.
 Proof. vm_compute. reflexivity. Qed.

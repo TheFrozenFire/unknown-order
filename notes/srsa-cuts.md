@@ -571,6 +571,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | Pratt check on `p=11`: `g=2`, `p−1=2·5` | `pratt_generator_ok_11` / `pratt_factors_ok_11` | `Pratt.v` | `244` |
 | Miller square-chain from `(N,M,a)` without a `kp` from `p`; base 2 on this pin splits, not at `g₀` | `miller_walk` / `pin_miller_walk_base2` / `miller_walk_factors` | `Miller.v`, `MillerHeight.v` | `245` |
 | Sequential miller-base search on this pin hits at 2; `1`, `−1`, and unit 50 are liars | `miller_search` / `pin_miller_search` / `pin_miller_walk_liar_50` | `Miller.v` | `246` |
+| Blum extra `11×19`: base 2 is a miller liar, base 3 splits; `pin_77` base 2 still hits | `pin_209_miller_walk_base2_liar` / `pin_209_miller_walk_base3` / `pin_77_miller_walk_base2_hits` | `Miller.v` | `247` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |

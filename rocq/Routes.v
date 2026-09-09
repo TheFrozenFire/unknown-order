@@ -90,6 +90,11 @@ Check pin_miller_search_in_range.
 Check pin_miller_walk_liar_1.
 Check pin_miller_walk_liar_minus1.
 Check pin_miller_walk_liar_50.
+Check pin_209_is_blum.
+Check pin_209_miller_walk_base2_liar.
+Check pin_209_miller_walk_base3.
+Check pin_209_miller_search.
+Check pin_77_miller_walk_base2_hits.
 Check pin_miller_from_lambda_multiple.
 Check pin_miller_from_lam_factors.
 Check pin_e7_residual.

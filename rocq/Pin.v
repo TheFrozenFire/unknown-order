@@ -58,7 +58,8 @@ Qed.
     Named extras (same file, not a campaign default): [pin_77]
     (safeprime-shaped), [pin_91] (cubic kernel), [pin_247]
     (matching orders), [pin_253] (Williams), [pin_45] (Takagi
-    [p²q]), [pin_105] (triprime), [pin_Nsq] (Paillier carrier). *)
+    [p²q]), [pin_105] (triprime), [pin_Nsq] (Paillier carrier),
+    [pin_209] (Blum miller-liar: base 2 does not split). *)
 
 (** ** pin187 — textbook inhabitant [11·17=187] *)
 
@@ -375,6 +376,24 @@ Notation pin_105_r := 7.
 Notation pin_105 := (pin_105_p * pin_105_q * pin_105_r).
 Notation pin_105_lam := 12.
 
+(** Blum miller-liar extra: [11·19=209], [λ=90], [v₂=(1,1)].
+    Base 2 has matching local 2-heights and does not split.
+    Base 3 does.  Not a campaign retarget. *)
+Notation pin_209_p := 11.
+Notation pin_209_q := 19.
+Notation pin_209 := (pin_209_p * pin_209_q).
+Notation pin_209_lam := 90.
+
+Lemma pin_209_q_prime : Z.prime pin_209_q.
+Proof.
+  apply Zprime_sqrt; [lia|].
+  intros d Hd Hdiv.
+  apply Z.mod_divide in Hdiv; [|lia].
+  change (Z.sqrt pin_209_q) with 4 in Hd.
+  assert (d = 2 \/ d = 3 \/ d = 4) by lia.
+  intuition subst; vm_compute in Hdiv; discriminate.
+Qed.
+
 (** ** Campaign alias
 
     [swap_pin.py] rewrites only the block between
@@ -469,3 +488,4 @@ Definition pin_extra_253 : Z := pin_253.
 Definition pin_extra_45 : Z := pin_45.
 Definition pin_extra_105 : Z := pin_105.
 Definition pin_extra_Nsq : Z := pin_Nsq.
+Definition pin_extra_209 : Z := pin_209.
