@@ -193,23 +193,15 @@ comments; do not maintain this table by hand.
 | `pq_minus_1_mod_p` | `MillerHeight.v` | 541 |
 | `miller_walk_from_mismatch` | `MillerHeight.v` | 550 |
 | `miller_walk_factors` | `MillerHeight.v` | 602 |
-| `dlog_search_correct` | `SrsaExtractD.v` | 49 |
-| `dlog_search_mod` | `SrsaExtractD.v` | 80 |
-| `pin_g_powm_coprime` | `SrsaExtractD.v` | 94 |
-| `pin_powm_already_mod` | `SrsaExtractD.v` | 104 |
-| `pin_g_unique_exp` | `SrsaExtractD.v` | 111 |
-| `pin_dlog_mod_lam_of_power` | `SrsaExtractD.v` | 159 |
-| `pin_g_range` | `SrsaExtractD.v` | 187 |
-| `pin_g_coprime` | `SrsaExtractD.v` | 190 |
-| `residual_solver_reduced_fixed_e_extracts_and_factors` | `SrsaExtractD.v` | 193 |
-| `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | 233 |
-| `pin_miller_walk_from_lambda_multiple` | `SrsaExtractD.v` | 264 |
-| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 296 |
-| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 342 |
-| `pin_mul_mod_range` | `SrsaHom.v` | 34 |
-| `pin_mul_mod_coprime` | `SrsaHom.v` | 38 |
-| `pin_trapdoor_solver_x_homomorphic` | `SrsaHom.v` | 61 |
-| `residual_x_homomorphic_constructs_factor` | `SrsaHom.v` | 72 |
+| `residual_solver_reduced_fixed_e_extracts_and_factors` | `SrsaExtractD.v` | 39 |
+| `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | 79 |
+| `pin_miller_walk_from_lambda_multiple` | `SrsaExtractD.v` | 110 |
+| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 142 |
+| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 188 |
+| `pin_mul_mod_range` | `SrsaHom.v` | 35 |
+| `pin_mul_mod_coprime` | `SrsaHom.v` | 39 |
+| `pin_trapdoor_solver_x_homomorphic` | `SrsaHom.v` | 62 |
+| `residual_x_homomorphic_constructs_factor` | `SrsaHom.v` | 76 |
 | `mod_cbrt_nonunit_factors` | `SrsaModCbrt.v` | 160 |
 | `pin_trapdoor_solver_returns_e` | `SrsaModCbrt.v` | 378 |
 | `residual_solver_reduced_pin_e_is_mod_cbrt` | `SrsaModCbrt.v` | 382 |
@@ -286,17 +278,17 @@ comments; do not maintain this table by hand.
 | `pin_crt_vs_NX20_diff_folds_zero` | `SrsaRootPoly.v` | 3000 |
 | `pin_trapdoor_monomial_poly_inverts` | `SrsaRootPoly.v` | 3020 |
 | `pin_crt_vs_monomial_diff_folds_zero` | `SrsaRootPoly.v` | 3032 |
-| `pin_binomial_plus_N_kernel_cong_mod_N` | `SrsaRootPoly.v` | 3063 |
-| `pin_binomial_plus_N_kernel_deg_lt_qminus1` | `SrsaRootPoly.v` | 3075 |
-| `pin_miller_from_d_factors` | `SrsaRootPoly.v` | 3079 |
-| `invert_all_units_poly_constructs_factor` | `SrsaRootPoly.v` | 3097 |
-| `nodiv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | 3125 |
-| `invert_all_units_rational_is_trapdoor_map` | `SrsaRootPoly.v` | 3158 |
-| `invert_all_units_rational_constructs_factor` | `SrsaRootPoly.v` | 3216 |
-| `invert_all_units_rational_over_one` | `SrsaRootPoly.v` | 3232 |
-| `invert_all_units_rational_monomial_over_one` | `SrsaRootPoly.v` | 3254 |
-| `invert_all_units_rational_Xd1_over_X` | `SrsaRootPoly.v` | 3263 |
-| `unit_ginv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | 3296 |
+| `pin_binomial_plus_N_kernel_cong_mod_N` | `SrsaRootPoly.v` | 3241 |
+| `pin_binomial_plus_N_kernel_deg_lt_qminus1` | `SrsaRootPoly.v` | 3253 |
+| `pin_miller_from_d_factors` | `SrsaRootPoly.v` | 3257 |
+| `invert_all_units_poly_constructs_factor` | `SrsaRootPoly.v` | 3275 |
+| `nodiv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | 3323 |
+| `invert_all_units_rational_is_trapdoor_map` | `SrsaRootPoly.v` | 3357 |
+| `invert_all_units_rational_constructs_factor` | `SrsaRootPoly.v` | 3415 |
+| `invert_all_units_rational_over_one` | `SrsaRootPoly.v` | 3431 |
+| `invert_all_units_rational_monomial_over_one` | `SrsaRootPoly.v` | 3453 |
+| `invert_all_units_rational_Xd1_over_X` | `SrsaRootPoly.v` | 3462 |
+| `unit_ginv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | 3495 |
 | `pin_lam_even` | `SrsaVaryingE.v` | 69 |
 | `residual_shaped_e_plus_k_lam` | `SrsaVaryingE.v` | 72 |
 | `unit_powm_plus_k_lam` | `SrsaVaryingE.v` | 96 |
@@ -359,9 +351,9 @@ comments; do not maintain this table by hand.
 
 | Closed result | File | Line |
 |---|---|---:|
-| `pin_miller_walk_from_lambda_multiple` | `SrsaExtractD.v` | 264 |
-| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 296 |
-| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 342 |
+| `pin_miller_walk_from_lambda_multiple` | `SrsaExtractD.v` | 110 |
+| `residual_leaf_at_g_extracts_and_factors` | `SrsaExtractD.v` | 142 |
+| `residual_solver_reduced_constructs_factor_pin` | `SrsaExtractD.v` | 188 |
 
 ### `rsa_inverter_constructs_factor_open_named`
 
@@ -399,17 +391,9 @@ comments; do not maintain this table by hand.
 | `miller_walk_from_mismatch` | `MillerHeight.v` | 550 |
 | `miller_walk_factors` | `MillerHeight.v` | 602 |
 | `rabin_oracle_nonassociate_factors` | `RabinWilliams.v` | 272 |
-| `dlog_search_correct` | `SrsaExtractD.v` | 49 |
-| `dlog_search_mod` | `SrsaExtractD.v` | 80 |
-| `pin_g_powm_coprime` | `SrsaExtractD.v` | 94 |
-| `pin_powm_already_mod` | `SrsaExtractD.v` | 104 |
-| `pin_g_unique_exp` | `SrsaExtractD.v` | 111 |
-| `pin_dlog_mod_lam_of_power` | `SrsaExtractD.v` | 159 |
-| `pin_g_range` | `SrsaExtractD.v` | 187 |
-| `pin_g_coprime` | `SrsaExtractD.v` | 190 |
-| `residual_solver_reduced_fixed_e_extracts_and_factors` | `SrsaExtractD.v` | 193 |
-| `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | 233 |
-| `rsa_inverter_reduced_units_constructs_factor_pin` | `SrsaHom.v` | 91 |
+| `residual_solver_reduced_fixed_e_extracts_and_factors` | `SrsaExtractD.v` | 39 |
+| `pin_e7_solver_extracts_and_factors` | `SrsaExtractD.v` | 79 |
+| `rsa_inverter_reduced_units_constructs_factor_pin` | `SrsaHom.v` | 95 |
 | `eth_root_nonunit_factors` | `SrsaInverter.v` | 61 |
 | `pin_eth_root_p_factors` | `SrsaInverter.v` | 129 |
 | `rsa_inverter_reduced_units_is_trapdoor` | `SrsaInverter.v` | 187 |
@@ -420,7 +404,7 @@ comments; do not maintain this table by hand.
 
 | Closed result | File | Line |
 |---|---|---:|
-| `rsa_inverter_reduced_units_constructs_factor_pin` | `SrsaHom.v` | 91 |
+| `rsa_inverter_reduced_units_constructs_factor_pin` | `SrsaHom.v` | 95 |
 | `inverter_as_residual_returns_e` | `SrsaInverter.v` | 236 |
 | `inverter_as_residual_returns_e` | `SrsaInverter.v` | 236 |
 
@@ -467,11 +451,11 @@ comments; do not maintain this table by hand.
 | `pq_minus_1_mod_p` | `MillerHeight.v` | 541 |
 | `miller_walk_from_mismatch` | `MillerHeight.v` | 550 |
 | `miller_walk_factors` | `MillerHeight.v` | 602 |
-| `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 114 |
-| `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 131 |
-| `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 137 |
-| `residual_leaf_not_annihilator_e` | `SrsaHom.v` | 145 |
-| `residual_solver_not_annihilator_e` | `SrsaHom.v` | 153 |
+| `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 118 |
+| `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 135 |
+| `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 141 |
+| `residual_leaf_not_annihilator_e` | `SrsaHom.v` | 149 |
+| `residual_solver_not_annihilator_e` | `SrsaHom.v` | 157 |
 | `pin_lambda_strong_solver_output_is_unit` | `SrsaInverter.v` | 266 |
 | `pin_lambda_plus_one_does_not_split` | `SrsaInverter.v` | 274 |
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 278 |
@@ -493,14 +477,14 @@ comments; do not maintain this table by hand.
 
 | Closed result | File | Line |
 |---|---|---:|
-| `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 114 |
-| `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 131 |
-| `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 137 |
-| `residual_leaf_not_annihilator_e` | `SrsaHom.v` | 145 |
-| `residual_solver_not_annihilator_e` | `SrsaHom.v` | 153 |
+| `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 118 |
+| `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 135 |
+| `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 141 |
+| `residual_leaf_not_annihilator_e` | `SrsaHom.v` | 149 |
+| `residual_solver_not_annihilator_e` | `SrsaHom.v` | 157 |
 | `pin_lambda_strong_solver_output_is_unit` | `SrsaInverter.v` | 266 |
 | `pin_lambda_plus_one_does_not_split` | `SrsaInverter.v` | 274 |
 | `pin_lambda_strong_solver_not_residual` | `SrsaInverter.v` | 278 |
 | `strong_rsa_solver_pin_e_constructs_factor` | `SrsaInverter.v` | 308 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 382 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 366 does-not-discharge rows._

@@ -141,7 +141,7 @@ Constructible torsion `H` is a family parameter
 | binomial `+ c K` | extra `c K(p)` at the lift, `c X^{q−2}` on `𝔽_p*`; inverts iff `N \| c` | `pin_ck_extra_at_lift`, `pin_binomial_plus_N_kernel_inverts` | binomial `+ p K` as invert-all-units (misses the lift) |
 | two invert-all-units polys | both Fermat folds of the difference are `0` | `invert_all_units_diff_fold_p_zero`, `pin_crt_vs_monomial_diff_folds_zero` | residual-solver ⇒ factor |
 | deg `< q−1` invert poly `+ N K` | same coeffs as CRT binomial mod `N` | `pin_binomial_plus_N_kernel_cong_mod_N` | leftover of deg `≥ q−1`; residual-solver ⇒ factor |
-| invert-all-units poly (any degree) | trapdoor map `y ↦ y^d`; Miller-from-`d` splits | `invert_all_units_poly_constructs_factor` | residual-solver ⇒ factor (a solver is not a polynomial) |
+| invert-all-units poly (any degree) | trapdoor map `y ↦ y^d`; dlog of `P(g)` recovers `k`; miller_walk at `e k−1` splits | `invert_all_units_poly_constructs_factor` | residual-solver ⇒ factor (a solver is not a polynomial) |
 | nodiv GRA that inverts every unit | denotes an invert-all-units poly; Miller/gcd splits | `nodiv_gra_invert_all_units_constructs_factor` | `GInv`; residual-solver ⇒ factor (a solver is not a nodiv tape) |
 | invert-all-units rational `P/Q` | trapdoor map `P/Q ≡ y^d`; Miller-from-`d` splits | `invert_all_units_rational_constructs_factor` / `invert_all_units_rational_Xd1_over_X` | residual-solver ⇒ factor (a solver is not a rational) |
 | unit-`GInv` GRA that inverts every unit | denotes a rational; Miller splits | `unit_ginv_gra_invert_all_units_constructs_factor` / `gra_unit_inv_denotes` | `GRoot`; residual-solver ⇒ factor (a solver is not a unit-`GInv` tape) |

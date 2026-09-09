@@ -3049,16 +3049,194 @@ Proof.
        | apply pin_trapdoor_monomial_poly_inverts].
 Qed.
 
+(** ** Discrete log of [P(g)], used to read [k] off [P]
+
+    Copied into this file so an invert-all-units poly can miller
+    from [e k − 1] with [k] constructed from [P], not from
+    [pin_d] as a module constant. *)
+
+Lemma mul_cancel_mod_unit_poly :
+  forall y a n,
+    1 < n ->
+    Z.coprime y n ->
+    (y * a) mod n = y mod n ->
+    a mod n = 1.
+Proof.
+  intros y a n Hn Hcop Heq.
+  transitivity (1 mod n).
+  2: apply Z.mod_1_l; lia.
+  apply mods_eq_iff_divides; [lia|].
+  apply (Z.gauss n y (a - 1)).
+  - replace (y * (a - 1)) with (y * a - y) by ring.
+    apply mods_eq_iff_divides; [lia | exact Heq].
+  - rewrite Z.gcd_comm. exact Hcop.
+Qed.
+
+Fixpoint dlog_search (g t N : Z) (k fuel : nat) : option Z :=
+  match fuel with
+  | O => None
+  | S fuel' =>
+      if powm g (Z.of_nat k) N =? t mod N
+      then Some (Z.of_nat k)
+      else dlog_search g t N (S k) fuel'
+  end.
+
+Definition pin_dlog_mod_lam (g t : Z) : option Z :=
+  dlog_search g t pin_N 0%nat (Z.to_nat pin_lam).
+
+Lemma dlog_search_correct :
+  forall g t N k fuel k0,
+    (k <= k0)%nat ->
+    (k0 < k + fuel)%nat ->
+    powm g (Z.of_nat k0) N = t mod N ->
+    (forall j, (k <= j < k0)%nat ->
+       powm g (Z.of_nat j) N <> t mod N) ->
+    dlog_search g t N k fuel = Some (Z.of_nat k0).
+Proof.
+  intros g t N k fuel.
+  revert k.
+  induction fuel as [|fuel IH]; intros k k0 Hle Hlt Hit Hmiss.
+  - lia.
+  - cbn [dlog_search].
+    destruct (powm g (Z.of_nat k) N =? t mod N) eqn:Heq.
+    + apply Z.eqb_eq in Heq.
+      assert (k = k0).
+      { destruct (Nat.eq_dec k k0) as [E | Ne]; [exact E|].
+        exfalso. apply (Hmiss k); [lia | exact Heq]. }
+      subst k0. reflexivity.
+    + apply Z.eqb_neq in Heq.
+      assert (k < k0)%nat.
+      { destruct (Nat.eq_dec k k0) as [E | Ne]; [| lia].
+        subst k0. congruence. }
+      apply IH.
+      * lia.
+      * lia.
+      * exact Hit.
+      * intros j Hj. apply Hmiss. lia.
+Qed.
+
+Lemma dlog_search_mod :
+  forall g t N k fuel,
+    N <> 0 ->
+    dlog_search g t N k fuel = dlog_search g (t mod N) N k fuel.
+Proof.
+  intros g t N k fuel HN.
+  revert k.
+  induction fuel as [|fuel IH]; intros k.
+  - reflexivity.
+  - cbn [dlog_search].
+    rewrite Z.mod_mod by lia.
+    destruct (powm g (Z.of_nat k) N =? t mod N); [reflexivity | apply IH].
+Qed.
+
+Lemma pin_g_powm_coprime :
+  forall i,
+    0 <= i ->
+    Z.coprime (powm pin_g i pin_N) pin_N.
+Proof.
+  intros i Hi.
+  unfold powm, Z.coprime. rewrite Z.gcd_mod_l.
+  apply Z.coprime_pow_l; [lia | apply pin_unit_3_coprime].
+Qed.
+
+Lemma pin_powm_already_mod :
+  forall a e,
+    powm a e pin_N mod pin_N = powm a e pin_N.
+Proof.
+  intros a e. unfold powm. rewrite Z.mod_mod by lia. reflexivity.
+Qed.
+
+Lemma pin_g_unique_exp :
+  forall i j,
+    0 <= i < pin_lam ->
+    0 <= j < pin_lam ->
+    powm pin_g i pin_N = powm pin_g j pin_N ->
+    i = j.
+Proof.
+  intros i j Hi Hj Heq.
+  destruct (Z.eq_dec i j) as [E | Ne]; [exact E|].
+  destruct (Z.le_gt_cases i j) as [Hij | Hji].
+  - assert (0 < j - i) by lia.
+    assert (Hsum : powm pin_g j pin_N =
+                   (powm pin_g i pin_N * powm pin_g (j - i) pin_N) mod pin_N).
+    { transitivity (powm pin_g (i + (j - i)) pin_N).
+      - f_equal. lia.
+      - apply (powm_add_r pin_g i (j - i) pin_N); lia. }
+    assert (Hann : powm pin_g (j - i) pin_N = 1).
+    { assert (Heqmod : (powm pin_g i pin_N * powm pin_g (j - i) pin_N) mod pin_N
+                       = powm pin_g i pin_N mod pin_N).
+      { rewrite <- Hsum, <- Heq. symmetry. apply pin_powm_already_mod. }
+      pose proof (mul_cancel_mod_unit_poly (powm pin_g i pin_N)
+                    (powm pin_g (j - i) pin_N) pin_N
+                    pin_N_gt_1 (pin_g_powm_coprime i ltac:(lia)) Heqmod) as Ha1.
+      rewrite pin_powm_already_mod in Ha1. exact Ha1. }
+    pose proof (order_divides_annihilator pin_N pin_g pin_lam (j - i)
+                  pin_N_gt_1 ltac:(lia) is_order_pin_3_80 Hann) as Hdiv.
+    pose proof (Z.divide_pos_le pin_lam (j - i) ltac:(lia) Hdiv).
+    lia.
+  - assert (0 < i - j) by lia.
+    assert (Hsum : powm pin_g i pin_N =
+                   (powm pin_g j pin_N * powm pin_g (i - j) pin_N) mod pin_N).
+    { transitivity (powm pin_g (j + (i - j)) pin_N).
+      - f_equal. lia.
+      - apply (powm_add_r pin_g j (i - j) pin_N); lia. }
+    assert (Hann : powm pin_g (i - j) pin_N = 1).
+    { assert (Heqmod : (powm pin_g j pin_N * powm pin_g (i - j) pin_N) mod pin_N
+                       = powm pin_g j pin_N mod pin_N).
+      { rewrite <- Hsum, Heq. symmetry. apply pin_powm_already_mod. }
+      pose proof (mul_cancel_mod_unit_poly (powm pin_g j pin_N)
+                    (powm pin_g (i - j) pin_N) pin_N
+                    pin_N_gt_1 (pin_g_powm_coprime j ltac:(lia)) Heqmod) as Ha1.
+      rewrite pin_powm_already_mod in Ha1. exact Ha1. }
+    pose proof (order_divides_annihilator pin_N pin_g pin_lam (i - j)
+                  pin_N_gt_1 ltac:(lia) is_order_pin_3_80 Hann) as Hdiv.
+    pose proof (Z.divide_pos_le pin_lam (i - j) ltac:(lia) Hdiv).
+    lia.
+Qed.
+
+Lemma pin_dlog_mod_lam_of_power :
+  forall d,
+    0 <= d < pin_lam ->
+    pin_dlog_mod_lam pin_g (powm pin_g d pin_N) = Some d.
+Proof.
+  intros d Hd.
+  unfold pin_dlog_mod_lam.
+  replace d with (Z.of_nat (Z.to_nat d)) at 2 by (rewrite Z2Nat.id; lia).
+  apply dlog_search_correct.
+  - lia.
+  - apply Nat2Z.inj_lt.
+    rewrite Z2Nat.id by lia.
+    rewrite Nat.add_0_l, Z2Nat.id by lia.
+    lia.
+  - rewrite Z2Nat.id by lia.
+    symmetry. apply pin_powm_already_mod.
+  - intros j Hj Hcoll.
+    rewrite pin_powm_already_mod in Hcoll.
+    apply (pin_g_unique_exp (Z.of_nat j) d) in Hcoll.
+    + subst d. lia.
+    + split; [lia |].
+      destruct Hj as [_ Hjk0].
+      apply Nat2Z.inj_lt in Hjk0.
+      rewrite Z2Nat.id in Hjk0 by lia.
+      lia.
+    + lia.
+Qed.
+
+Lemma pin_g_range : 0 <= pin_g < pin_N.
+Proof. lia. Qed.
+
+Lemma pin_g_coprime : Z.coprime pin_g pin_N.
+Proof. apply pin_unit_3_coprime. Qed.
+
 (** ** Invert-all-units polynomial constructs a factor
 
     Any all-units invert poly is the trapdoor map [y ↦ y^d]
-    ([all_units_root_poly_is_trapdoor_map]).  Miller-from-[d] then
-    splits ([rsa_test_miller_from_d]).  Low-degree extra [N K] has
-    the same coefficients modulo [N] as the CRT binomial, whose
-    coefficients already split.  Not
-    [residual_solver_constructs_factor_open_named]: a residual
+    ([all_units_root_poly_is_trapdoor_map]).  Discrete log of
+    [P(g)] recovers [k]; [miller_walk] at [e k − 1] splits.
+    The multiple is read off [P], not [pin_miller_from_d_factors].
+    Not [residual_solver_constructs_factor_open_named]: a residual
     solver is not given as a polynomial.  Cross-confirmed by
-    [cas/200] and [cas/201]. *)
+    [cas/252]. *)
 
 Theorem pin_binomial_plus_N_kernel_cong_mod_N :
   forall i,
@@ -3100,14 +3278,34 @@ Theorem invert_all_units_poly_constructs_factor :
        powm (poly_eval P y) pin_e pin_N = y mod pin_N) ->
     (forall y, Z.coprime y pin_N ->
        poly_eval P y mod pin_N = powm y pin_d pin_N) /\
-    exists f, Problem_Factor pin_N f.
+    exists k f,
+      pin_dlog_mod_lam pin_g (poly_eval P pin_g) = Some k /\
+      miller_walk pin_N (pin_e * k - 1) 2 = Some f /\
+      Problem_Factor pin_N f.
 Proof.
   intros P Hall.
   split.
   - intros y Hy.
     apply all_units_root_poly_is_trapdoor_map; assumption.
-  - eexists.
-    apply pin_miller_from_d_factors.
+  - assert (Hev : poly_eval P pin_g mod pin_N = powm pin_g pin_d pin_N).
+    { apply all_units_root_poly_eval_g. exact Hall. }
+    assert (Hdlog : pin_dlog_mod_lam pin_g (poly_eval P pin_g) = Some pin_d).
+    { unfold pin_dlog_mod_lam.
+      rewrite (dlog_search_mod pin_g (poly_eval P pin_g) pin_N 0%nat
+                 (Z.to_nat pin_lam) ltac:(lia)).
+      rewrite Hev.
+      change (dlog_search pin_g (powm pin_g pin_d pin_N) pin_N 0%nat
+                (Z.to_nat pin_lam))
+        with (pin_dlog_mod_lam pin_g (powm pin_g pin_d pin_N)).
+      apply pin_dlog_mod_lam_of_power. lia. }
+    exists pin_d.
+    assert (HM : pin_e * pin_d - 1 = pin_lam) by (vm_compute; reflexivity).
+    destruct pin_miller_walk_base2 as [Hwalk [Hf1 Hf2]].
+    rewrite <- HM in Hwalk.
+    exists pin_p.
+    split; [exact Hdlog|].
+    split; [exact Hwalk|].
+    unfold Problem_Factor. split; [lia | exact Hf2].
 Qed.
 
 (** ** Nodiv GRA residual solver constructs a factor
@@ -3135,7 +3333,8 @@ Proof.
   - intros y Hy.
     rewrite <- (gra_nodiv_denotes ops pin_N y out Hop).
     apply Hall. exact Hy.
-  - exact Hex.
+  - destruct Hex as [_k [_f [_ [_ Hf]]]].
+    exists _f. exact Hf.
 Qed.
 
 (** ** Invert-all-units rational constructs a factor

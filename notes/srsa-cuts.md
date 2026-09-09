@@ -536,7 +536,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | invert-poly difference has both Fermat folds zero (`+ N X^{20}`) | `invert_all_units_diff_fold_p_zero` / `pin_crt_vs_NX20_diff_folds_zero` | `SrsaRootPoly.v` | `198` |
 | CRT binomial vs `X^d` have both Fermat folds of the difference zero | `pin_crt_vs_monomial_diff_folds_zero` | `SrsaRootPoly.v` | `199` |
 | deg `< q−1` extra `N K` is the CRT binomial mod `N` | `pin_binomial_plus_N_kernel_cong_mod_N` / `pin_binomial_plus_N_kernel_deg_lt_qminus1` | `SrsaRootPoly.v` | `200` |
-| invert-all-units poly is the trapdoor map and Miller-factors | `invert_all_units_poly_constructs_factor` / `pin_miller_from_d_factors` | `SrsaRootPoly.v` | `201` |
+| invert-all-units poly is the trapdoor map; dlog of `P(g)` recovers `k`; miller_walk at `e k−1` splits | `invert_all_units_poly_constructs_factor` | `SrsaRootPoly.v` | `201`, `252` |
 | nodiv GRA that inverts every unit denotes that poly and factors | `nodiv_gra_invert_all_units_constructs_factor` | `SrsaRootPoly.v` | `202` |
 | `GInv` of a non-unit returns a proper `gcd` | `gra_inv_eq_gcd_if_nonunit` / `gra_first_inv_gcd_factors` | `GenericRing.v` | `203`, `204`, `208` |
 | invert-all-units rational is the trapdoor map and Miller-factors | `invert_all_units_rational_constructs_factor` / `invert_all_units_rational_Xd1_over_X` | `SrsaRootPoly.v` | `205`, `206`, `207` |

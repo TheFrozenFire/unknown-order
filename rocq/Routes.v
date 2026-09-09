@@ -48,6 +48,10 @@ Open Scope Z_scope.
     Annihilator-[e] Millers from [e−1]; residual excludes that class.
     Do not prove [~ forall Solve, exists f].  Do not inhabit.
 
+    [residual_x_homomorphic_constructs_factor]: the hom hyp is
+    unused after P5; every reduced residual solver on this pin
+    factors.  Not a homomorphic reduction.
+
     Pratt remainder: [pratt_complete_open_named] existentially
     factorizes [p−1] for every prime.  [pratt_verifier] takes the
     factor list and recursive certificates as hyps; soundness is

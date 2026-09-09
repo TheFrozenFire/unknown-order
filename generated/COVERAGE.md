@@ -2701,43 +2701,35 @@ in the Rocq tree.  Do not edit by hand.
 
 - L22: Recover [d'] from a fixed-[e] solver's [x]-values
   - L32: Discrete log of a fixed-[e] solver at a generator
-  - L250: Residual leaf at the generator extracts [d']
+  - L96: Residual leaf at the generator extracts [d']
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `dlog_search_correct` | 49 |
-| Lemma | `dlog_search_mod` | 80 |
-| Lemma | `pin_g_powm_coprime` | 94 |
-| Lemma | `pin_powm_already_mod` | 104 |
-| Lemma | `pin_g_unique_exp` | 111 |
-| Lemma | `pin_dlog_mod_lam_of_power` | 159 |
-| Lemma | `pin_g_range` | 187 |
-| Lemma | `pin_g_coprime` | 190 |
-| Theorem | `residual_solver_reduced_fixed_e_extracts_and_factors` | 193 |
-| Theorem | `pin_e7_solver_extracts_and_factors` | 233 |
-| Theorem | `pin_miller_walk_from_lambda_multiple` | 264 |
-| Theorem | `residual_leaf_at_g_extracts_and_factors` | 296 |
-| Theorem | `residual_solver_reduced_constructs_factor_pin` | 342 |
+| Theorem | `residual_solver_reduced_fixed_e_extracts_and_factors` | 39 |
+| Theorem | `pin_e7_solver_extracts_and_factors` | 79 |
+| Theorem | `pin_miller_walk_from_lambda_multiple` | 110 |
+| Theorem | `residual_leaf_at_g_extracts_and_factors` | 142 |
+| Theorem | `residual_solver_reduced_constructs_factor_pin` | 188 |
 
 ## `SrsaHom.v`
 
-- L18: Homomorphic residual solvers, and annihilator-[e] Strong RSA
-  - L30: Homomorphism of the [x]-map
-  - L81: Reduced-units inverter on this pin uses [pin_lam]
-  - L100: Strong-RSA solver with [λ | e − 1] Millers from [e − 1]
+- L19: Homomorphic residual solvers, and annihilator-[e] Strong RSA
+  - L31: Homomorphism of the [x]-map
+  - L85: Reduced-units inverter on this pin uses [pin_lam]
+  - L104: Strong-RSA solver with [λ | e − 1] Millers from [e − 1]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `pin_mul_mod_range` | 34 |
-| Lemma | `pin_mul_mod_coprime` | 38 |
-| Theorem | `pin_trapdoor_solver_x_homomorphic` | 61 |
-| Theorem | `residual_x_homomorphic_constructs_factor` | 72 |
-| Theorem | `rsa_inverter_reduced_units_constructs_factor_pin` | 91 |
-| Theorem | `strong_rsa_solver_annihilator_e_constructs_factor` | 114 |
-| Theorem | `pin_lambda_strong_solver_annihilator_e` | 131 |
-| Theorem | `pin_lambda_strong_solver_millers_from_e_minus_1` | 137 |
-| Theorem | `residual_leaf_not_annihilator_e` | 145 |
-| Theorem | `residual_solver_not_annihilator_e` | 153 |
+| Lemma | `pin_mul_mod_range` | 35 |
+| Lemma | `pin_mul_mod_coprime` | 39 |
+| Theorem | `pin_trapdoor_solver_x_homomorphic` | 62 |
+| Theorem | `residual_x_homomorphic_constructs_factor` | 76 |
+| Theorem | `rsa_inverter_reduced_units_constructs_factor_pin` | 95 |
+| Theorem | `strong_rsa_solver_annihilator_e_constructs_factor` | 118 |
+| Theorem | `pin_lambda_strong_solver_annihilator_e` | 135 |
+| Theorem | `pin_lambda_strong_solver_millers_from_e_minus_1` | 141 |
+| Theorem | `residual_leaf_not_annihilator_e` | 149 |
+| Theorem | `residual_solver_not_annihilator_e` | 157 |
 
 ## `SrsaInverter.v`
 
@@ -3244,10 +3236,11 @@ in the Rocq tree.  Do not edit by hand.
   - L2649: Leftover kernel is 1-dimensional
   - L2757: Binomial [+ c K]: leftover extra, invert iff [N | c]
   - L2908: Difference of invert polys has both Fermat folds zero
-  - L3052: Invert-all-units polynomial constructs a factor
-  - L3113: Nodiv GRA residual solver constructs a factor
-  - L3141: Invert-all-units rational constructs a factor
-  - L3283: Unit-[GInv] GRA residual solver constructs a factor
+  - L3052: Discrete log of [P(g)], used to read [k] off [P]
+  - L3231: Invert-all-units polynomial constructs a factor
+  - L3311: Nodiv GRA residual solver constructs a factor
+  - L3340: Invert-all-units rational constructs a factor
+  - L3482: Unit-[GInv] GRA residual solver constructs a factor
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -3436,17 +3429,26 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `pin_crt_vs_NX20_diff_folds_zero` | 3000 |
 | Lemma | `pin_trapdoor_monomial_poly_inverts` | 3020 |
 | Theorem | `pin_crt_vs_monomial_diff_folds_zero` | 3032 |
-| Theorem | `pin_binomial_plus_N_kernel_cong_mod_N` | 3063 |
-| Theorem | `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 3075 |
-| Theorem | `pin_miller_from_d_factors` | 3079 |
-| Theorem | `invert_all_units_poly_constructs_factor` | 3097 |
-| Theorem | `nodiv_gra_invert_all_units_constructs_factor` | 3125 |
-| Theorem | `invert_all_units_rational_is_trapdoor_map` | 3158 |
-| Theorem | `invert_all_units_rational_constructs_factor` | 3216 |
-| Theorem | `invert_all_units_rational_over_one` | 3232 |
-| Theorem | `invert_all_units_rational_monomial_over_one` | 3254 |
-| Theorem | `invert_all_units_rational_Xd1_over_X` | 3263 |
-| Theorem | `unit_ginv_gra_invert_all_units_constructs_factor` | 3296 |
+| Lemma | `mul_cancel_mod_unit_poly` | 3058 |
+| Lemma | `dlog_search_correct` | 3087 |
+| Lemma | `dlog_search_mod` | 3118 |
+| Lemma | `pin_g_powm_coprime` | 3132 |
+| Lemma | `pin_powm_already_mod` | 3142 |
+| Lemma | `pin_g_unique_exp` | 3149 |
+| Lemma | `pin_dlog_mod_lam_of_power` | 3197 |
+| Lemma | `pin_g_range` | 3225 |
+| Lemma | `pin_g_coprime` | 3228 |
+| Theorem | `pin_binomial_plus_N_kernel_cong_mod_N` | 3241 |
+| Theorem | `pin_binomial_plus_N_kernel_deg_lt_qminus1` | 3253 |
+| Theorem | `pin_miller_from_d_factors` | 3257 |
+| Theorem | `invert_all_units_poly_constructs_factor` | 3275 |
+| Theorem | `nodiv_gra_invert_all_units_constructs_factor` | 3323 |
+| Theorem | `invert_all_units_rational_is_trapdoor_map` | 3357 |
+| Theorem | `invert_all_units_rational_constructs_factor` | 3415 |
+| Theorem | `invert_all_units_rational_over_one` | 3431 |
+| Theorem | `invert_all_units_rational_monomial_over_one` | 3453 |
+| Theorem | `invert_all_units_rational_Xd1_over_X` | 3462 |
+| Theorem | `unit_ginv_gra_invert_all_units_constructs_factor` | 3495 |
 
 ## `SrsaVaryingE.v`
 
@@ -4010,4 +4012,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2827 theorems/lemmas/corollaries/examples across 124 files._
+_2828 theorems/lemmas/corollaries/examples across 124 files._

@@ -11,6 +11,7 @@ Require Import SrsaResidualGRA.
 Require Import SrsaModCbrt.
 Require Import SrsaInverter.
 Require Import SrsaVaryingE.
+Require Import SrsaRootPoly.
 Require Import SrsaExtractD.
 
 Open Scope Z_scope.
@@ -69,6 +70,9 @@ Proof.
   reflexivity.
 Qed.
 
+(** The hom hypothesis is unused after P5: every reduced residual
+    solver on this pin already factors.  The name is a class
+    inclusion, not a homomorphic reduction. *)
 Theorem residual_x_homomorphic_constructs_factor :
   forall Solve : residual_solver_reduced pin_N pin_lam,
     residual_x_homomorphic Solve ->
