@@ -235,8 +235,9 @@ A residual *pair* is not by itself `Problem_Factor`. Whether a residual
 ## Live algebraic targets
 
 These are `*_open_named`: unused means unproved, on-goal.
-Next slices: [`srsa-next.md`](srsa-next.md). Do not read
-unused as refused.
+P0–P8 of [`srsa-next.md`](srsa-next.md) are done (on this pin
+every reduced residual solver factors). Next slices:
+[`srsa-after.md`](srsa-after.md). Do not read unused as refused.
 
 - An `rsa_inverter` constructs a factor:
   `rsa_inverter_constructs_factor_open_named`. The inverter recovers

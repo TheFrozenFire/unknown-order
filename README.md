@@ -275,12 +275,13 @@ Transcripts and oracles are catalogued and the cheap algebra
 is closed
 ([`notes/transcript-oracle-plan.md`](notes/transcript-oracle-plan.md)).
 `Refuse_undirected_611_hunt` still names “wander through
-KeyGen samplers.” The Strong RSA C-class campaign’s next
-slices (uniqueness without a handed inverse, extract `d`
-from a solver, homomorphic residual solver, re-typing the
-live targets, stale `*_named` algebra) are
-[`notes/srsa-next.md`](notes/srsa-next.md).
-The three `*_open_named` stay live: unused means unproved,
+KeyGen samplers.” The Strong RSA C-class campaign’s P0–P8
+slices are done ([`notes/srsa-next.md`](notes/srsa-next.md)).
+On this pin every reduced residual solver factors. Next
+slices (Miller square-chain, miller-liar extra, λ-free
+inverter / Strong RSA) are
+[`notes/srsa-after.md`](notes/srsa-after.md).
+The `*_open_named` stay live: unused means unproved,
 on-goal, not refused. Other deepen/widen/refine work:
 [`notes/autonomous-runway.md`](notes/autonomous-runway.md).
 Gaps that stay named are `generated/NAMED_SKIPS.md`.

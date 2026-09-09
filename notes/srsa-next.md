@@ -1,5 +1,14 @@
 # Strong RSA — next work after the C-class campaign
 
+**P0–P8 are done.** The leftover sentence in “What is still
+actually open” below is **stale after P5**: on this pin every
+reduced residual solver factors, including varying-`e`
+non-homomorphic ones
+(`residual_solver_reduced_constructs_factor_pin`). Next
+campaign: [`notes/srsa-after.md`](srsa-after.md) (Miller
+construction, other `N`, λ-free types). Do not re-learn
+“varying-`e` remains.”
+
 Durable plan so a later session can pick slices without
 re-deriving the lattice or regressing into “cannot prove.”
 Companion to `notes/srsa-cuts.md` (what closed),
@@ -191,10 +200,17 @@ that explicit. Congruence is the mathematical statement.
 
 ## What is still actually open (not a refuse)
 
-After P1–P6, the remainder of the residual named is a solver
-that **varies `e` with `y` and is not a homomorphism**. Nothing
-in the tree shows that is impossible. Nothing constructs a
-factor from it. Live target.
+**Superseded after P5.** A solver that varies `e` with `y` and
+is not a homomorphism *does* factor on this pin, because a
+single residual leaf at `g` extracts `d'` and Millers. The
+live remainder is Miller’s construction (hardcoded `kp`),
+other `N` / miller-liar bases, and the λ-free inverter /
+Strong-RSA extraction nameds. See [`srsa-after.md`](srsa-after.md).
+
+After P1–P6, the remainder of the residual named *was described
+as* a solver that **varies `e` with `y` and is not a homomorphism**.
+That class closed on this pin. Nothing in the tree shows the
+forall-`N` extraction named is proved. Live target.
 
 The unrestricted inverter (odd residual `e`, no `d` in the
 construction) is the standard-model RSA ≡ factoring question.

@@ -2,7 +2,8 @@
 
 Next slices after this catalog (do not re-refuse the live
 targets; do not resume fold/K identities) live in
-[`srsa-next.md`](srsa-next.md).
+[`srsa-after.md`](srsa-after.md) (P0–P8 of
+[`srsa-next.md`](srsa-next.md) are done).
 
 Rocq IDs are semantic: `residual_*`, `primary_*`, `dict_*`, `period_*`,
 `xmap_*`, `emap_*`, `extra_*`, `engine_*`, `modulus_*`, plus already-
