@@ -11,6 +11,8 @@ Require Import SrsaRootPoly.
 Require Import SrsaModCbrt.
 Require Import SrsaInverter.
 Require Import SrsaVaryingE.
+Require Import Miller.
+Require Import MillerHeight.
 Require Import SrsaExtractD.
 Require Import SrsaHom.
 
@@ -78,6 +80,10 @@ Check residual_leaf_plus_k_lam.
 Check pin_e_plus_lam_residual.
 Check same_unit_x_two_exponents_annihilates.
 Check pin_x_lam_gcd_is_N.
+Check miller_walk.
+Check pin_miller_walk_base2.
+Check pin_miller_walk_not_at_g0.
+Check miller_walk_factors.
 Check pin_miller_from_lambda_multiple.
 Check pin_miller_from_lam_factors.
 Check pin_e7_residual.

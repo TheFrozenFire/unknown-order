@@ -1536,6 +1536,7 @@ in the Rocq tree.  Do not edit by hand.
 ## `Miller.v`
 
 - L12: Miller successive-squaring: factor [N] from a multiple of [λ(N)]
+  - L106: Square-chain Miller from [(N, M, a)]
 
 | Kind | Name | Line |
 |---|---|---:|
@@ -1544,34 +1545,50 @@ in the Rocq tree.  Do not edit by hand.
 | Lemma | `miller_t_nonneg` | 36 |
 | Lemma | `miller_M_annihilates` | 42 |
 | Theorem | `miller_witness_factors` | 73 |
-| Theorem | `rsa_test_miller_split` | 104 |
-| Theorem | `rsa_test_miller_t` | 107 |
-| Theorem | `rsa_test_miller_s` | 110 |
-| Theorem | `rsa_test_base2_splits` | 114 |
+| Theorem | `pin_miller_walk_base2` | 135 |
+| Theorem | `pin_miller_walk_not_at_g0` | 143 |
+| Theorem | `rsa_test_miller_split` | 148 |
+| Theorem | `rsa_test_miller_t` | 151 |
+| Theorem | `rsa_test_miller_s` | 154 |
+| Theorem | `rsa_test_base2_splits` | 158 |
 
 ## `MillerHeight.v`
 
-- L13: Miller-from-[d] as 2-heights on an odd multiple of [odd_part(λ)]
-  - L189: Miller from any multiple of [λ], including [e k − 1]
+- L14: Miller-from-[d] as 2-heights on an odd multiple of [odd_part(λ)]
+  - L190: Miller from any multiple of [λ], including [e k − 1]
+  - L348: Square-chain Miller: [miller_walk] does not take [kp]
 
 | Kind | Name | Line |
 |---|---|---:|
-| Lemma | `miller_t_pos` | 24 |
-| Lemma | `miller_t_odd` | 30 |
-| Lemma | `miller_t_multiple_of_lambda_odd` | 36 |
-| Lemma | `powm_one_mod_factor` | 54 |
-| Theorem | `miller_height_exists` | 67 |
-| Theorem | `miller_from_d` | 104 |
-| Theorem | `miller_from_d_q` | 125 |
-| Theorem | `rsa_test_base2_heights` | 148 |
-| Theorem | `rsa_test_miller_from_d` | 168 |
-| Theorem | `miller_multiple_annihilates` | 200 |
-| Theorem | `miller_height_exists_multiple` | 218 |
-| Theorem | `miller_from_multiple` | 256 |
-| Theorem | `miller_from_multiple_q` | 279 |
-| Lemma | `trapdoor_exponent_divides_lambda` | 302 |
-| Theorem | `miller_from_trapdoor_exponent` | 313 |
-| Theorem | `miller_from_trapdoor_exponent_q` | 330 |
+| Lemma | `miller_t_pos` | 25 |
+| Lemma | `miller_t_odd` | 31 |
+| Lemma | `miller_t_multiple_of_lambda_odd` | 37 |
+| Lemma | `powm_one_mod_factor` | 55 |
+| Theorem | `miller_height_exists` | 68 |
+| Theorem | `miller_from_d` | 105 |
+| Theorem | `miller_from_d_q` | 126 |
+| Theorem | `rsa_test_base2_heights` | 149 |
+| Theorem | `rsa_test_miller_from_d` | 169 |
+| Theorem | `miller_multiple_annihilates` | 201 |
+| Theorem | `miller_height_exists_multiple` | 219 |
+| Theorem | `miller_from_multiple` | 257 |
+| Theorem | `miller_from_multiple_q` | 280 |
+| Lemma | `trapdoor_exponent_divides_lambda` | 303 |
+| Theorem | `miller_from_trapdoor_exponent` | 314 |
+| Theorem | `miller_from_trapdoor_exponent_q` | 331 |
+| Lemma | `miller_walk_from_S_eq1` | 359 |
+| Lemma | `miller_walk_from_S_neq1` | 377 |
+| Lemma | `pow2n_add` | 389 |
+| Lemma | `miller_walk_square_powm` | 397 |
+| Lemma | `miller_walk_powm_t0` | 411 |
+| Lemma | `miller_walk_pos` | 417 |
+| Lemma | `two_height_ge` | 430 |
+| Lemma | `powm_one_of_factors` | 449 |
+| Lemma | `miller_walk_from_at` | 491 |
+| Lemma | `miller_walk_powm_neq1_of_local` | 529 |
+| Lemma | `pq_minus_1_mod_p` | 541 |
+| Lemma | `miller_walk_from_mismatch` | 550 |
+| Theorem | `miller_walk_factors` | 602 |
 
 ## `MillerRabin.v`
 
@@ -2151,7 +2168,7 @@ in the Rocq tree.  Do not edit by hand.
 
 ## `Routes.v`
 
-- L19: Live-target route pins
+- L21: Live-target route pins
 
 ## `SAGM.v`
 
@@ -3930,4 +3947,4 @@ in the Rocq tree.  Do not edit by hand.
 | Theorem | `wire_slot_extracts` | 71 |
 | Theorem | `three_wire_assemble` | 93 |
 
-_2758 theorems/lemmas/corollaries/examples across 124 files._
+_2773 theorems/lemmas/corollaries/examples across 124 files._

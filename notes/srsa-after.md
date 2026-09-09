@@ -23,7 +23,7 @@ of Rocq/CAS edits.
 | ID | Slice | Status | Depends |
 |---|---|---|---|
 | Q0 | Framing: P0–P8 leftover sentence is stale; remainder is Miller construction / other `N` / λ-free types | done | — |
-| Q1 | Miller square-chain from `(N,M,a)` without a `kp` hyp from `p` | pending | Q0 |
+| Q1 | Miller square-chain from `(N,M,a)` without a `kp` hyp from `p` | done | Q0 |
 | Q2 | Finite miller-base search on this pin (`2..N−2`) | pending | Q1 |
 | Q3 | Blum / miller-liar named extra (`11×19`): matching-height base does not split; a different base does | pending | Q1 |
 | Q4 | Residual solver ⇒ factor under “this `(M,a)` millers,” not only pin-187 base 2 | pending | Q1, Q2 |

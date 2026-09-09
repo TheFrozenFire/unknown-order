@@ -97,8 +97,52 @@ Fixpoint first_n_bases (n : nat) : list Z :=
   | S n' => first_n_bases n' ++ [Z.of_nat (S n')]
   end.
 
+(** [g₀]-only special case: [gcd(a^t − 1, N)].  The square-chain is
+    [miller_walk].  On this pin that [g₀] gcd is 1 for base 2
+    ([pin_miller_walk_not_at_g0]). *)
 Definition miller_try_base (R : RSAInstance) (a : Z) : Z :=
   Z.gcd (powm a (miller_t R) (rsa_N R) - 1) (rsa_N R).
+
+(** ** Square-chain Miller from [(N, M, a)]
+
+    Walk [g₀ = a^{odd_part(M)}], then successive squares, for
+    [val2(M)] steps.  Return [gcd(g−1, N)] at the first mixed [√1],
+    or [None].  The construction does not take a height [kp] from
+    [p].  Not [residual_solver_constructs_factor_open_named].
+    Not [rsa_inverter_constructs_factor_open_named].
+    Not [strong_rsa_solver_constructs_factor_open_named].
+    Cross-confirmed by [cas/245]. *)
+
+Fixpoint miller_walk_from (N g : Z) (fuel : nat) : option Z :=
+  match fuel with
+  | O => None
+  | S fuel' =>
+      let ng := powm g 2 N in
+      if ng =? 1 then
+        if g =? 1 then None
+        else if g =? N - 1 then None
+        else Some (Z.gcd (g - 1) N)
+      else miller_walk_from N ng fuel'
+  end.
+
+Definition miller_walk (N M a : Z) : option Z :=
+  if M <=? 0 then None
+  else miller_walk_from N (powm a (odd_part M) N) (val2 M).
+
+(** On this pin the walk at base 2 hits mixed [√1] and gcd-splits.
+    No [kp] in the statement.  Not
+    [residual_solver_constructs_factor_open_named]. *)
+Theorem pin_miller_walk_base2 :
+  miller_walk pin_N pin_lam 2 = Some pin_p /\
+  1 < pin_p < pin_N /\ (pin_p | pin_N).
+Proof.
+  split; [vm_compute; reflexivity|].
+  split; [lia | exists pin_q; reflexivity].
+Qed.
+
+Theorem pin_miller_walk_not_at_g0 :
+  Z.gcd (powm 2 (odd_part pin_lam) pin_N - 1) pin_N = 1.
+Proof. vm_compute. reflexivity. Qed.
 
 (** On the pin, [M = λ], so [s = v₂(λ)] and [t] is the odd part. *)
 Theorem rsa_test_miller_split : miller_M rsa_test = pin_lam.

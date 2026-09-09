@@ -87,13 +87,32 @@ comments; do not maintain this table by hand.
 | `local_inv_is_crt_dq` | `CRTRSA.v` | 312 |
 | `gcd_powm_minus_1` | `Hardness.v` | 530 |
 | `leftover_mismatch_factors` | `Hardness.v` | 543 |
-| `miller_multiple_annihilates` | `MillerHeight.v` | 200 |
-| `miller_height_exists_multiple` | `MillerHeight.v` | 218 |
-| `miller_from_multiple` | `MillerHeight.v` | 256 |
-| `miller_from_multiple_q` | `MillerHeight.v` | 279 |
-| `trapdoor_exponent_divides_lambda` | `MillerHeight.v` | 302 |
-| `miller_from_trapdoor_exponent` | `MillerHeight.v` | 313 |
-| `miller_from_trapdoor_exponent_q` | `MillerHeight.v` | 330 |
+| `pin_miller_walk_base2` | `Miller.v` | 135 |
+| `pin_miller_walk_not_at_g0` | `Miller.v` | 143 |
+| `rsa_test_miller_split` | `Miller.v` | 148 |
+| `rsa_test_miller_t` | `Miller.v` | 151 |
+| `rsa_test_miller_s` | `Miller.v` | 154 |
+| `rsa_test_base2_splits` | `Miller.v` | 158 |
+| `miller_multiple_annihilates` | `MillerHeight.v` | 201 |
+| `miller_height_exists_multiple` | `MillerHeight.v` | 219 |
+| `miller_from_multiple` | `MillerHeight.v` | 257 |
+| `miller_from_multiple_q` | `MillerHeight.v` | 280 |
+| `trapdoor_exponent_divides_lambda` | `MillerHeight.v` | 303 |
+| `miller_from_trapdoor_exponent` | `MillerHeight.v` | 314 |
+| `miller_from_trapdoor_exponent_q` | `MillerHeight.v` | 331 |
+| `miller_walk_from_S_eq1` | `MillerHeight.v` | 359 |
+| `miller_walk_from_S_neq1` | `MillerHeight.v` | 377 |
+| `pow2n_add` | `MillerHeight.v` | 389 |
+| `miller_walk_square_powm` | `MillerHeight.v` | 397 |
+| `miller_walk_powm_t0` | `MillerHeight.v` | 411 |
+| `miller_walk_pos` | `MillerHeight.v` | 417 |
+| `two_height_ge` | `MillerHeight.v` | 430 |
+| `powm_one_of_factors` | `MillerHeight.v` | 449 |
+| `miller_walk_from_at` | `MillerHeight.v` | 491 |
+| `miller_walk_powm_neq1_of_local` | `MillerHeight.v` | 529 |
+| `pq_minus_1_mod_p` | `MillerHeight.v` | 541 |
+| `miller_walk_from_mismatch` | `MillerHeight.v` | 550 |
+| `miller_walk_factors` | `MillerHeight.v` | 602 |
 | `dlog_search_correct` | `SrsaExtractD.v` | 49 |
 | `dlog_search_mod` | `SrsaExtractD.v` | 80 |
 | `pin_g_powm_coprime` | `SrsaExtractD.v` | 94 |
@@ -260,6 +279,25 @@ comments; do not maintain this table by hand.
 
 | Closed result | File | Line |
 |---|---|---:|
+| `pin_miller_walk_base2` | `Miller.v` | 135 |
+| `pin_miller_walk_not_at_g0` | `Miller.v` | 143 |
+| `rsa_test_miller_split` | `Miller.v` | 148 |
+| `rsa_test_miller_t` | `Miller.v` | 151 |
+| `rsa_test_miller_s` | `Miller.v` | 154 |
+| `rsa_test_base2_splits` | `Miller.v` | 158 |
+| `miller_walk_from_S_eq1` | `MillerHeight.v` | 359 |
+| `miller_walk_from_S_neq1` | `MillerHeight.v` | 377 |
+| `pow2n_add` | `MillerHeight.v` | 389 |
+| `miller_walk_square_powm` | `MillerHeight.v` | 397 |
+| `miller_walk_powm_t0` | `MillerHeight.v` | 411 |
+| `miller_walk_pos` | `MillerHeight.v` | 417 |
+| `two_height_ge` | `MillerHeight.v` | 430 |
+| `powm_one_of_factors` | `MillerHeight.v` | 449 |
+| `miller_walk_from_at` | `MillerHeight.v` | 491 |
+| `miller_walk_powm_neq1_of_local` | `MillerHeight.v` | 529 |
+| `pq_minus_1_mod_p` | `MillerHeight.v` | 541 |
+| `miller_walk_from_mismatch` | `MillerHeight.v` | 550 |
+| `miller_walk_factors` | `MillerHeight.v` | 602 |
 | `rabin_oracle_nonassociate_factors` | `RabinWilliams.v` | 272 |
 | `dlog_search_correct` | `SrsaExtractD.v` | 49 |
 | `dlog_search_mod` | `SrsaExtractD.v` | 80 |
@@ -290,6 +328,25 @@ comments; do not maintain this table by hand.
 | `order_yields_strong_RSA` | `Hardness.v` | 504 |
 | `gcd_powm_minus_1` | `Hardness.v` | 530 |
 | `leftover_mismatch_factors` | `Hardness.v` | 543 |
+| `pin_miller_walk_base2` | `Miller.v` | 135 |
+| `pin_miller_walk_not_at_g0` | `Miller.v` | 143 |
+| `rsa_test_miller_split` | `Miller.v` | 148 |
+| `rsa_test_miller_t` | `Miller.v` | 151 |
+| `rsa_test_miller_s` | `Miller.v` | 154 |
+| `rsa_test_base2_splits` | `Miller.v` | 158 |
+| `miller_walk_from_S_eq1` | `MillerHeight.v` | 359 |
+| `miller_walk_from_S_neq1` | `MillerHeight.v` | 377 |
+| `pow2n_add` | `MillerHeight.v` | 389 |
+| `miller_walk_square_powm` | `MillerHeight.v` | 397 |
+| `miller_walk_powm_t0` | `MillerHeight.v` | 411 |
+| `miller_walk_pos` | `MillerHeight.v` | 417 |
+| `two_height_ge` | `MillerHeight.v` | 430 |
+| `powm_one_of_factors` | `MillerHeight.v` | 449 |
+| `miller_walk_from_at` | `MillerHeight.v` | 491 |
+| `miller_walk_powm_neq1_of_local` | `MillerHeight.v` | 529 |
+| `pq_minus_1_mod_p` | `MillerHeight.v` | 541 |
+| `miller_walk_from_mismatch` | `MillerHeight.v` | 550 |
+| `miller_walk_factors` | `MillerHeight.v` | 602 |
 | `strong_rsa_solver_annihilator_e_constructs_factor` | `SrsaHom.v` | 100 |
 | `pin_lambda_strong_solver_annihilator_e` | `SrsaHom.v` | 117 |
 | `pin_lambda_strong_solver_millers_from_e_minus_1` | `SrsaHom.v` | 123 |
@@ -312,4 +369,4 @@ comments; do not maintain this table by hand.
 | `matching_247_two_sided_gcd_is_N` | `SrsaOrderArrows.v` | 194 |
 | `pin_lambda_strong_solver_outputs_never_proper_gcd` | `SrsaVaryingE.v` | 55 |
 
-_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 221 does-not-discharge rows._
+_39 refuses, 10 open targets, 0 used-as-hypothesis weaknesses, 278 does-not-discharge rows._

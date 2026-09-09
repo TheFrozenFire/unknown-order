@@ -569,6 +569,7 @@ advice `N/17`: `PreprocessGRA.v`.
 | Strong-RSA with `λ \| e−1` Millers from `e−1`; residual forbids the class | `strong_rsa_solver_annihilator_e_constructs_factor` / `residual_solver_not_annihilator_e` | `SrsaHom.v` | `243` |
 | attained unit orders generate `λ` for general distinct primes | `orders_attained_generate_lambda` | `Order.v` | `25`, `153` |
 | Pratt check on `p=11`: `g=2`, `p−1=2·5` | `pratt_generator_ok_11` / `pratt_factors_ok_11` | `Pratt.v` | `244` |
+| Miller square-chain from `(N,M,a)` without a `kp` from `p`; base 2 on this pin splits, not at `g₀` | `miller_walk` / `pin_miller_walk_base2` / `miller_walk_factors` | `Miller.v`, `MillerHeight.v` | `245` |
 | lcm of unit orders; primitive root; unit of order `λ` | `order_lcm_attained` / `primitive_root_exists` / `exists_unit_order_lambda` | `Order.v` | `153` |
 | generator covers `𝔽_p*`; Euler converse for cubes | `primitive_root_generates` / `cube_euler_converse` / `cube_euler_iff` | `Order.v`, `CubicResidue.v` | `154` |
 | cube mod `N=pq` is CRT; Euler-on-`N` not sufficient | `cube_N_iff_both` / `cube_euler_lambda_necessary` / `cube_euler_lambda_not_sufficient_247` / `pin_units_are_cubes` | `CubicResidue.v` | `155` |
